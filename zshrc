@@ -88,8 +88,8 @@ if [ "$TERM" = "cygwin" ]; then
 	alias man='LANG= man'
 fi
 
-if [ -f $(/usr/bin/dirname $0)/z/z.sh ]; then
-  source $(/usr/bin/dirname $0)/z/z.sh
+if [ -f ~/.dotfiles/z/z.sh ]; then
+  source ~/.dotfiles/z/z.sh
 fi
 
 if [ -f ~/.zshrc.local ]; then
