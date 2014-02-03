@@ -1,0 +1,29 @@
+set visualbell
+highlight Bell display:none;
+set hinttimeout=1000
+set hc=hjklasdfg
+set focuscontent
+set noanimations
+set complete=l
+
+noremap e :set toolbars=invnavigation,invbookmarks<CR>
+noremap <BS> H
+noremap j <down><down><down>
+noremap k <up><up><up>
+noremap J <C-d><up><up><up><up><up><C-d>
+noremap h <c-pageup>
+noremap l <c-pagedown>
+noremap ! :set invum<CR>
+noremap = 2zI
+noremap <F1> <ESC>
+
+style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
+
+js <<EOS
+var vacuum = function() {
+	Components.classes["@mozilla.org/browser/nav-history-service;1"].getService(Components.interfaces.nsPIPlacesDatabase).DBConnection.executeSimpleSQL("VACUUM");
+	alert('DB Vacuumed');
+}
+EOS
+
+" vim:ft=vimperator:

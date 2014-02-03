@@ -1,0 +1,20 @@
+[core]
+	filemode = false
+	pager = lv -c
+	editor = vim
+[alias]
+	st = status
+	br = branch
+	ci = commit
+	co = checkout
+	df = !sh -c 'git diff --stat -p -w --color $* | lv -c' -
+	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | less -c' -
+	l  = !git log --graph --color | lv -c
+	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
+[color]
+	ui = true
+[user]
+	name = tosh shimayama
+	emal = 2sm@csc.jp
+[include]
+	path="~/.gitconfig.local"

@@ -1,0 +1,194 @@
+" vimrc
+
+" load bundled extentions and their setting
+" {{{
+language C
+source ~/.dotconfig/init_bundles.vim
+set nocompatible | filetype indent plugin on | syn on
+" }}}
+
+" GUI Settings
+" {{{
+if has("gui_running")
+  colorscheme darkblue
+  set guioptions=grL
+  set guifont=Inconsolata\ Medium\ 12,Consolas:h12:cANSI
+  set guifontwide=VL\ Gothic\ 12,TakaoGothic:h12:cSHIFTJIS,VL_Gothic:h12:cSHIFTJIS,MS_Gothic:h12:cSHIFTJIS
+endif
+if has("gui_win32")
+  set shellslash
+endif "}}}
+
+" general options
+" {{{
+set hidden autoread
+set history=1000
+set noswapfile nobackup
+runtime macros/matchit.vim
+set grepprg=internal
+"set grepprg=grep\ -H\ -n\ $*
+set autoindent smartindent
+set nowrap linebreak textwidth=0 colorcolumn=80
+set expandtab tabstop=2 shiftwidth=2
+set backspace=indent,eol,start
+set foldmethod=syntax foldlevelstart=9
+set nobackup writebackup
+set hlsearch incsearch magic
+set ignorecase smartcase infercase
+set virtualedit+=block
+set switchbuf=usetab
+set shortmess=atI
+set clipboard=unnamed,autoselect
+set modeline modelines=2
+set ambiwidth=double
+set encoding=utf-8 fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp
+set fileformat=unix fileformats=unix,dos,mac
+set formatoptions=lmoq
+set wildmenu wildmode=list:longest wildignore=*.o,*.obj,*.a,*.gif,*.jpg,*.so,*.svn
+set showmatch
+set showcmd
+set diffopt=filler,iwhite
+set scrolloff=2
+set laststatus=2
+set statusline=[%n]%f%m%r%h%w\ [%Y/%{&ff}/%{&fenc}]\ (%l/%L=%p%%,%v)
+set virtualedit+=block
+set relativenumber
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:<
+set directory+=,$TMP
+
+set imsearch=0 iminsert=0
+highlight CursorIM guifg=NONE guibg=Red
+set tags+=../tags,../../tags,../../../tags
+set path=.,include,../include,../../include,../../../include,
+set ssop-=options
+set ssop-=folds
+" }}}
+
+" keymaps
+" {{{
+" normal keymaps
+noremap c "_c
+noremap <F1> <ESC>
+noremap ; :
+noremap ;; ;
+nmap <silent> <C-l> gt
+nmap <silent> <C-h> gT
+nnoremap <space><space> :up<CR>
+" inc / decl
+nnoremap + <c-a>
+nnoremap - <c-x>
+"nmap : q:
+
+" Commandline keymaps
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+cnoremap <c-h> <s-left>
+cnoremap <c-l> <s-right>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+" }}}
+
+" autocommands
+" {{{
+augroup textfile
+  autocmd BufRead *.txt  set ft=asciidoc expandtab
+  autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:>
+  "autocmd BufRead *htm?  set foldmethod=indent
+  "autocmd FocusLost *    up
+augroup END
+
+augroup autocommnd
+  autocmd CmdwinEnter * call s:init_cmdwin()
+augroup END
+function! s:init_cmdwin()
+  nnoremap <buffer> q :<C-u>quit<CR>
+  nnoremap <buffer> <TAB> :<C-u>quit<CR>
+  inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+  inoremap <buffer><expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
+  inoremap <buffer><expr><BS> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
+  " Completion.
+  inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  startinsert!
+endfunction
+" }}}
+
+" Makefile
+" {{{
+nnoremap <F3>  :up<CR>:make %:r<CR><CR>:cw<CR>
+function! Eval_vsplit()
+  silent execute ":pedit! output.log"
+  wincmd P
+  setlocal buftype=nofile
+  setlocal noswapfile
+  setlocal syntax=none
+  setlocal bufhidden=delete
+  silent execute ":%!make #:r 2>&1 "
+  wincmd p
+endfunction 
+map <F7> :up<CR>:call Eval_vsplit()<CR>
+" }}}
+
+" Misc
+" {{{
+au BufRead,BufNewFile *.scala set filetype=scala
+noremap ,c :cscope find  <C-R>=expand("<cword>")<CR><C-Left><Left>
+let g:changelog_dateformat="%Y-%m-%d"
+let g:changelog_username="tshm <2sm@csc.jp>"
+let g:load_doxygen_syntax=1
+" }}}
+
+" cscope
+" {{{
+"set csto=0
+"set nocsverb
+" add any database in current directory
+"if filereadable("cscope.out")
+  "cscope add cscope.out
+  "set cst
+"endif
+"set csverb
+"set cscopequickfix=s-,c-,d-,i-,t-,e-
+" }}}
+
+" Tab/Space detection
+" {{{
+function! AutoTabConfig()
+  let [ntab, nspc, shift] = [0,0,4]
+  for line in getbufline(winbufnr(0), 1, "$")
+    if -1 != match(line, '^\t')
+      let ntab += 1
+    elseif -1 != match(line, '^ ')
+      let nspc += 1
+      let spcs = match(line, '[^ ]') / 2 * 2
+      if shift > spcs && spcs > 0
+        let shift = spcs
+      endif
+    endif
+  endfor
+  if l:ntab > l:nspc
+    setlocal noexpandtab
+  else
+    exe "setlocal expandtab tabstop=" . shift . " shiftwidth=" . shift
+  endif
+endfunction
+autocmd BufReadPost * call AutoTabConfig()
+" }}}
+
+" Load vimrc / Session.vim from local folder
+" {{{
+try
+  source ./.local.vim
+catch
+endtry
+
+if !argc()
+  try
+    silent source ./.session.vim
+    autocmd VimLeave * execute "mks! " . v:this_session
+    nnoremap <F2> :exec "mksession! " . v:this_session<CR>
+  catch
+  endtry
+endif
+" }}}
+
+" vim: foldmethod=marker
