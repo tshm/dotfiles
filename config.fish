@@ -1,7 +1,8 @@
 set -x SHELL /usr/bin/fish
 
 if status --is-login
-  screen -xRR -U >/dev/null; and exit
+  cd $HOME
+  test -f .local.fish; and source .local.fish
 end
 
 if status --is-interactive
@@ -10,6 +11,7 @@ if status --is-interactive
   set -x PATH ~/bin $PATH
 
   alias dir "ls -lh"
+  alias rm "rm -i"
 
   function fish_user_key_bindings
     bind \ek history-token-search-backward
