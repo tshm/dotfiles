@@ -16,15 +16,16 @@ if status --is-interactive
   alias rm "rm -i"
   alias vim "env SHELL=sh vim"
 
-  set __QQ
-  function queuecommand
-    if test -z "$argv" -a -n "$__QQ"
-      set -l n (count $__QQ)
-      commandline -i $__QQ[$n]
-      set -e __QQ[$n]
-    else
-      set __QQ $__QQ "$argv"
-    end
+  set __CMD_STACK
+  function push_cmd
+    set __CMD_STACK $__CMD_STACK "$argv"
+  end
+
+  function pop_cmd
+    test -z "$__CMD_STACK"; and return
+    set -l n (count $__CMD_STACK)
+    commandline -i $__CMD_STACK[$n]
+    set -e __CMD_STACK[$n]
   end
 
   function fish_user_key_bindings
@@ -34,16 +35,18 @@ if status --is-interactive
     bind \e\; 'commandline -f execute accept-autosuggestion'
     # invoking manual
     bind \eh 'man (commandline -po)[1]; commandline -f repaint'
-    # command queueing
-    bind \eq 'queuecommand (commandline); commandline -f backward-kill-line'
+    # command stack
+    bind \eq 'push_cmd (commandline); commandline -f kill-whole-line'
+    # quoting whole line
+    bind \e\' 'push_cmd \"(commandline)\"; commandline -f repaint kill-whole-line'
   end
 
   function fish_right_prompt
     set_color yellow
     printf '(%s) ' (date +%H:%M)
-    queuecommand
+    pop_cmd
     set_color normal
   end
 end
 
-# vi: ft=sh
+# vi: ft=vb

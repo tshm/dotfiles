@@ -7,12 +7,7 @@ cd ~
 # create symlinks
 for i in \
   "gitconfig" \
-  "screenrc" \
-  "zprofile" \
-  "zlogin" \
-  "zlogout" \
-  "zshrc" \
-  "zshenv" \
+  "tmux.conf" \
   ; do
   ln -s $SRC/$i .$i
 done
