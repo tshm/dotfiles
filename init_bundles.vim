@@ -3,6 +3,7 @@
 fun SetupVAM()
   let vam_plugins = [
     \ "unite",
+    \ "github:Shougo/unite-session",
     \ "neocomplcache",
     \ "Syntastic",
     \ "vcscommand"
@@ -92,12 +93,12 @@ nnoremap <silent> ,y  :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,g  :<C-u>Unite change<CR>
 nnoremap <silent> ,j  :<C-u>Unite jump<CR>
 nnoremap <silent> ,/  :<C-u>UniteWithCursorWord line<CR>
-"nnoremap <silent> ,s  :<C-u>Unite session<CR>
+nnoremap <silent> ,s  :<C-u>Unite session<CR>
 nnoremap <silent> ,S  :<C-u>Unite source<CR>
-nnoremap <silent> ,s
-        \ :<C-u>Unite -buffer-name=files -no-split
-        \ jump_point file_point buffer_tab
-        \ file_rec:! file file/new file_mru<CR>
+"nnoremap <silent> ,s
+"        \ :<C-u>Unite -buffer-name=files -no-split
+"        \ jump_point file_point buffer_tab
+"        \ file_rec:! file file/new file_mru<CR>
 let g:unite_enable_start_insert = 1
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_mru_limit = 100
