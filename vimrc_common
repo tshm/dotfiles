@@ -3,6 +3,7 @@
 " load bundled extentions and their setting
 " {{{
 language C
+set shell=/bin/sh
 source ~/.dotfiles/init_bundles.vim
 set nocompatible | filetype indent plugin on | syn on
 " }}}

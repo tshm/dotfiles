@@ -3,6 +3,7 @@
 fun SetupVAM()
   let vam_plugins = [
     \ "unite",
+    \ "github:tshm/unite-gitlsfiles",
     \ "github:Shougo/unite-session",
     \ "neocomplcache",
     \ "Syntastic",
@@ -95,6 +96,7 @@ nnoremap <silent> ,j  :<C-u>Unite jump<CR>
 nnoremap <silent> ,/  :<C-u>UniteWithCursorWord line<CR>
 nnoremap <silent> ,s  :<C-u>Unite session<CR>
 nnoremap <silent> ,S  :<C-u>Unite source<CR>
+nnoremap <silent> ,v  :<C-u>Unite gitlsfiles<CR>
 "nnoremap <silent> ,s
 "        \ :<C-u>Unite -buffer-name=files -no-split
 "        \ jump_point file_point buffer_tab
