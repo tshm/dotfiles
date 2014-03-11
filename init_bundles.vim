@@ -83,12 +83,12 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 " Unite setting
 " {{{
 "nnoremap <silent> ,f  :<C-u>UniteWithCurrentDir -buffer-name=files file <CR>
-nnoremap <silent> ,f  :<C-u>Unite -buffer-name=files file<CR>
+nnoremap <silent> ,f  :<C-u>Unite -buffer-name=files file file/new<CR>
 nnoremap <silent> ,h  :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
 nnoremap <silent> ,b  :<C-u>Unite -buffer-name=files buffer_tab<CR>
 nnoremap <silent> ,B  :<C-u>Unite -buffer-name=files bookmark<CR>
 nnoremap <silent> ,R  :<C-u>Unite -buffer-name=file_rec file_rec<CR>
-nnoremap <silent> ,r  :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,r  :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
 nnoremap <silent> ,R  :<C-u>Unite file_rec<CR>
 nnoremap <silent> ,y  :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,g  :<C-u>Unite change<CR>
