@@ -2,10 +2,11 @@
 
 " load bundled extentions and their setting
 " {{{
-language C
 set shell=/bin/sh
-source ~/.dotfiles/init_bundles.vim
+language C
 set nocompatible | filetype indent plugin on | syn on
+let mapleader = "\<Space>"
+source ~/.dotfiles/init_bundles.vim
 " }}}
 
 " GUI Settings
@@ -53,7 +54,7 @@ set scrolloff=2
 set laststatus=2
 set statusline=[%n]%f%m%r%h%w\ [%Y/%{&ff}/%{&fenc}]\ (%l/%L=%p%%,%v)
 set virtualedit+=block
-set relativenumber
+set relativenumber number
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:<
 set directory+=,$TMP
 
@@ -70,15 +71,14 @@ set ssop-=folds
 " normal keymaps
 noremap c "_c
 noremap <F1> <ESC>
-noremap ; :
-noremap ;; ;
 nmap <silent> <C-l> gt
 nmap <silent> <C-h> gT
-nnoremap <space><space> :up<CR>
+nnoremap <Leader><space> :up<CR>
 " inc / decl
 nnoremap + <c-a>
 nnoremap - <c-x>
 "nmap : q:
+vnoremap <silent> p "zdP
 
 " Commandline keymaps
 cnoremap <c-a> <home>
@@ -185,8 +185,7 @@ endtry
 if !argc()
   try
     silent source ./.session.vim
-    autocmd VimLeave * execute "mks! " . v:this_session
-    nnoremap <F2> :exec "mksession! " . v:this_session<CR>
+    autocmd VimLeave * exec "mks! " . v:this_session
   catch
   endtry
 endif

@@ -28,16 +28,15 @@ call SetupVAM()
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_enable_smart_case = 1
-nmap <F2> <Plug>(vimshell_switch)
+"nmap <F2> <Plug>(vimshell_switch)
 " }}}
 
 " neocomplcache setting
 " {{{
-let g:acp_enableAtStartup = 0
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
 " No autocomplete
-let g:neocomplcache_disable_auto_complete = 1
+"let g:neocomplcache_disable_auto_complete = 1
 " Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
 " Define dictionary.
@@ -82,22 +81,22 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
 " Unite setting
 " {{{
-"nnoremap <silent> ,f  :<C-u>UniteWithCurrentDir -buffer-name=files file <CR>
-nnoremap <silent> ,f  :<C-u>Unite -buffer-name=files file file/new<CR>
-nnoremap <silent> ,h  :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
-nnoremap <silent> ,b  :<C-u>Unite -buffer-name=files buffer_tab<CR>
-nnoremap <silent> ,B  :<C-u>Unite -buffer-name=files bookmark<CR>
-nnoremap <silent> ,R  :<C-u>Unite -buffer-name=file_rec file_rec<CR>
-nnoremap <silent> ,r  :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
-nnoremap <silent> ,R  :<C-u>Unite file_rec<CR>
-nnoremap <silent> ,y  :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,g  :<C-u>Unite change<CR>
-nnoremap <silent> ,j  :<C-u>Unite jump<CR>
-nnoremap <silent> ,/  :<C-u>UniteWithCursorWord line<CR>
-nnoremap <silent> ,s  :<C-u>Unite session<CR>
-nnoremap <silent> ,S  :<C-u>Unite source<CR>
-nnoremap <silent> ,v  :<C-u>Unite gitlsfiles<CR>
-"nnoremap <silent> ,s
+"nnoremap <silent> <Leader>f  :<C-u>UniteWithCurrentDir -buffer-name=files file <CR>
+nnoremap <silent> <Leader>f  :<C-u>Unite -buffer-name=files file file/new<CR>
+nnoremap <silent> <Leader>h  :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
+nnoremap <silent> <Leader>b  :<C-u>Unite -buffer-name=files buffer_tab<CR>
+nnoremap <silent> <Leader>B  :<C-u>Unite -buffer-name=files bookmark<CR>
+nnoremap <silent> <Leader>R  :<C-u>Unite -buffer-name=file_rec file_rec<CR>
+nnoremap <silent> <Leader>r  :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
+nnoremap <silent> <Leader>R  :<C-u>Unite file_rec<CR>
+nnoremap <silent> <Leader>y  :<C-u>Unite history/yank<CR>
+nnoremap <silent> <Leader>g  :<C-u>Unite change<CR>
+nnoremap <silent> <Leader>j  :<C-u>Unite jump<CR>
+nnoremap <silent> <Leader>/  :<C-u>UniteWithCursorWord line<CR>
+nnoremap <silent> <Leader>s  :<C-u>exec "mks! ".v:this_session<CR>:<C-u>Unite session<CR>
+nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
+nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
+"nnoremap <silent> <Leader>s
 "        \ :<C-u>Unite -buffer-name=files -no-split
 "        \ jump_point file_point buffer_tab
 "        \ file_rec:! file file/new file_mru<CR>
