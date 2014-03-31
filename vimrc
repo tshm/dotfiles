@@ -3,7 +3,7 @@
 "	set shell=c:\Windows\system32\cmd.exe
 "endif
 
-source ~/.dotconfig/vimrc_common
+source ~/.dotfiles/vimrc_common
 
 "if has("gui_running")
 "	set columns=95 lines=50
