@@ -7,6 +7,7 @@ fun SetupVAM()
     \ "github:Shougo/unite-session",
     \ "neocomplcache",
     \ "Syntastic",
+    \ "tComment",
     \ "vcscommand"
     \ ]
   let c = get(g:, 'vim_addon_manager', {})
@@ -84,7 +85,7 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 "nnoremap <silent> <Leader>f  :<C-u>UniteWithCurrentDir -buffer-name=files file <CR>
 nnoremap <silent> <Leader>f  :<C-u>Unite -buffer-name=files file file/new<CR>
 nnoremap <silent> <Leader>h  :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
-nnoremap <silent> <Leader>b  :<C-u>Unite -buffer-name=files buffer_tab<CR>
+nnoremap <silent> <Leader>b  :<C-u>Unite -buffer-name=files buffer<CR>
 nnoremap <silent> <Leader>B  :<C-u>Unite -buffer-name=files bookmark<CR>
 nnoremap <silent> <Leader>R  :<C-u>Unite -buffer-name=file_rec file_rec<CR>
 nnoremap <silent> <Leader>r  :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
