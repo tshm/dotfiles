@@ -4,6 +4,7 @@ fun SetupVAM()
   let vam_plugins = [
     \ "unite",
     \ "github:tshm/unite-gitlsfiles",
+    \ "github:Shougo/neomru.vim",
     \ "github:Shougo/unite-session",
     \ "neocomplcache",
     \ "Syntastic",

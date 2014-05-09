@@ -7,7 +7,7 @@ import Control.Monad
 import qualified XMonad.StackSet as W
 import System.IO
 
-myWorkspaces = ["main","vim","web","media","dev"]
+myWorkspaces = ["main","snd","web","media","dev"]
 
 myManageHook = composeAll . concat $
 	[ -- Applications that go to web
@@ -21,7 +21,7 @@ myManageHook = composeAll . concat $
 		myClassMediaShifts = ["MPlayer", "mplayer2", "smplayer2"]
 
 main = do
-	xmproc <- spawnPipe "/usr/bin/xmobar /home/tshm/.xmobarrc"
+	xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
 	xmonad $ defaultConfig
 		{ manageHook = manageDocks <+> myManageHook
 		, workspaces  = myWorkspaces
