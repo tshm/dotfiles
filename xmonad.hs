@@ -2,7 +2,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.EZConfig(additionalKeysP)
 import Control.Monad
 import qualified XMonad.StackSet as W
 import System.IO
@@ -33,6 +33,8 @@ main = do
 		, borderWidth = 2
 		, terminal    = "urxvt"
 		, modMask     = mod4Mask
-		} `additionalKeys`
-		[ ((mod4Mask, xK_comma), spawn "~/bin/dmenu.sh")
+		} `additionalKeysP`
+		[ ("M-,", spawn "~/bin/dmenu.sh"),
+		  ("<XF86AudioMedia>", spawn "systemctl hibernate"),
+		  ("<XF86Suspend>", spawn "systemctl hibernate")
 		]
