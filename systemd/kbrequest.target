@@ -1,0 +1,10 @@
+[Unit]
+Description=Response to the Alt + Up key combination
+Requires=startx.service
+After=startx.service
+Conflicts=rescue.target
+# Wants=display-manager.service
+AllowIsolate=yes
+
+[Install]
+# Alias=default.target
