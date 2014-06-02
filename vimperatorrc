@@ -5,8 +5,9 @@ set hc=hjklasdfg
 set focuscontent
 set noanimations
 set complete=l
+set gui=none,tabs
 
-noremap e :set toolbars=invnavigation,invbookmarks<CR>
+noremap e :set gui=invnavigation,invbookmarks<CR>
 noremap <BS> H
 noremap j <down><down><down>
 noremap k <up><up><up>
