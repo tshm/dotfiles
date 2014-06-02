@@ -2,11 +2,11 @@
 
 " load bundled extentions and their setting
 " {{{
-set shell=/bin/sh
+"set shell=/bin/sh
 language C
 set nocompatible | filetype indent plugin on | syn on
 let mapleader = "\<Space>"
-source ~/.dotfiles/init_bundles.vim
+source init_bundles.vim
 " }}}
 
 " GUI Settings
