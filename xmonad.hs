@@ -14,6 +14,8 @@ myManageHook = composeAll . concat $
 	  [ className =? b --> doF (W.shift "web") | b <- myClassWebShifts ]
 	  -- Applications that go to media
 	, [ className =? c --> viewShift "media" | c <- myClassMediaShifts ]
+	--   -- Applications that go float
+	-- , [ className =? "Tilda" --> doFloat ]
 	]
 	where
 		viewShift = doF . liftM2 (.) W.greedyView W.shift

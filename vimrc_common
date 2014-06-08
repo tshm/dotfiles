@@ -6,7 +6,7 @@
 language C
 set nocompatible | filetype indent plugin on | syn on
 let mapleader = "\<Space>"
-source init_bundles.vim
+runtime init_bundles.vim
 " }}}
 
 " GUI Settings

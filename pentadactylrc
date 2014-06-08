@@ -1,0 +1,14 @@
+loadplugins '\.(js|penta)$'
+group user
+map w -builtin 10h
+map e -builtin 10l
+map h -builtin <count><C-p>
+map j -builtin <count>3<Down>
+map k -builtin <count>3<Up>
+map l -builtin <count><C-n>
+map e -ex set go!=TB
+map ! -ex set usermode!
+set hlfind
+set passkeys=mail.google.com:jk<CR>,gi
+
+" vim: set ft=vim:
