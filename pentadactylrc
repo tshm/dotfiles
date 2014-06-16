@@ -8,7 +8,19 @@ map k -builtin <count>3<Up>
 map l -builtin <count><C-n>
 map e -ex set go!=TB
 map ! -ex set usermode!
+set go=bCrs
 set hlfind
 set passkeys=mail.google.com:jk<CR>,gi
+set nextpattern+='^次'
+set previouspattern+='^前'
+set followhints=1
+
+style -name=cmd-ime chrome://*
+    \ #dactyl-commandline-command input,
+    \ #dactyl-statusline-field-commandline-command input {
+    \     ime-mode: inactive;
+    \ }
+
+"cmap <A-i> -js styles.user.get("cmd-ime").enabled ^= true; dactyl.focusedElement.blur();
 
 " vim: set ft=vim:
