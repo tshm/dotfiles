@@ -7,21 +7,24 @@ import Control.Monad
 import qualified XMonad.StackSet as W
 import System.IO
 
+myWorkspaces :: [String]
 myWorkspaces = ["main","snd","web","media","dev"]
 
+myManageHook :: ManageHook
 myManageHook = composeAll . concat $
 	[ -- Applications that go to web
 	  [ className =? b --> doF (W.shift "web") | b <- myClassWebShifts ]
 	  -- Applications that go to media
 	, [ className =? c --> viewShift "media" | c <- myClassMediaShifts ]
 	--   -- Applications that go float
-	-- , [ className =? "Tilda" --> doFloat ]
+	, [ className =? "Tilda" --> doFloat ]
 	]
 	where
 		viewShift = doF . liftM2 (.) W.greedyView W.shift
 		myClassWebShifts  = ["Iceweasel"]
 		myClassMediaShifts = ["MPlayer", "mplayer2", "smplayer2"]
 
+main :: IO ()
 main = do
 	xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
 	xmonad $ defaultConfig
