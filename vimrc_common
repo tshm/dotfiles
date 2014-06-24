@@ -29,7 +29,7 @@ runtime macros/matchit.vim
 set grepprg=internal
 "set grepprg=grep\ -H\ -n\ $*
 set autoindent smartindent
-set nowrap linebreak textwidth=0 colorcolumn=80
+set wrap linebreak textwidth=0 colorcolumn=80
 set expandtab tabstop=2 shiftwidth=2
 set backspace=indent,eol,start
 set foldmethod=syntax foldlevelstart=9
