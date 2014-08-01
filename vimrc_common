@@ -72,7 +72,7 @@ noremap c "_c
 noremap <F1> <ESC>
 nmap <silent> <C-l> gt
 nmap <silent> <C-h> gT
-nnoremap <Leader><space> :up<CR>
+nnoremap <Leader><space> :e #<CR>
 " inc / decl
 nnoremap + <c-a>
 nnoremap - <c-x>
