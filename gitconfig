@@ -11,6 +11,7 @@
 	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | less -c' -
 	l  = !git log --graph --color | lv -c
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
+	ghpage = subtree push --prefix dist origin gh-pages
 [color]
 	ui = true
 [user]
