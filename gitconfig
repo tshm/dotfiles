@@ -11,11 +11,12 @@
 	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | less -c' -
 	l  = !git log --graph --color | lv -c
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
+	export = archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
 [color]
 	ui = true
 [user]
 	name = tosh shimayama
 	emal = 2sm@csc.jp
-[include]
-	path="~/.gitconfig.local"
+
+# vim: ft=gitconfig
