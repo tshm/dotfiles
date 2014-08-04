@@ -3,6 +3,7 @@
 fun SetupVAM()
   let vam_plugins = [
     \ "unite",
+    \ "surround",
     \ "github:tshm/unite-gitlsfiles",
     \ "github:Shougo/neomru.vim",
     \ "github:Shougo/unite-session",
