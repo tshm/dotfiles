@@ -40,6 +40,5 @@ main = do
 		, modMask     = mod4Mask
 		} `additionalKeysP`
 		[ ("M-,", spawn "~/bin/dmenu.sh"),
-		  ("<XF86AudioMedia>", spawn "systemctl hibernate"),
-		  ("<XF86Suspend>", spawn "systemctl hibernate")
+		  ("<XF86AudioMedia>", spawn "sudo systemctl hibernate")
 		]
