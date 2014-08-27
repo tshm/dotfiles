@@ -10,7 +10,7 @@ map e -ex set go!=TB
 map ! -ex set usermode!
 set go=bCrs
 set hlfind
-set passkeys+=mail.google.com:j,k,<CR>,s
+set passkeys+=mail.google.com:j,k,<SPACE>,x,e,I,?,<CR>,s
 set nextpattern+='^次'
 set previouspattern+='^前'
 set followhints=1
