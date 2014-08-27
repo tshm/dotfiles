@@ -96,9 +96,23 @@ nnoremap <silent> <Leader>y  :<C-u>Unite history/yank<CR>
 nnoremap <silent> <Leader>g  :<C-u>Unite change<CR>
 nnoremap <silent> <Leader>j  :<C-u>Unite jump<CR>
 nnoremap <silent> <Leader>/  :<C-u>UniteWithCursorWord line<CR>
-nnoremap <silent> <Leader>s  :<C-u>exec "mks! ".v:this_session<CR>:<C-u>Unite session<CR>
+nnoremap <silent> <Leader>s  :<C-u>call Unite_save_prevsession()<CR>
 nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
 nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
+" makes it easier to go back to the last session.
+" session name is "0prev"
+function! Unite_save_prevsession() "{{{
+  let g:prev_session = v:this_session
+  exec "mksession! " . v:this_session
+  UniteSessionSave .0prev
+  Unite session
+endfunction "}}}
+autocmd SessionLoadPost * call s:unite_bkup_session()
+function! s:unite_bkup_session() "{{{
+  let v:this_session = g:prev_session
+  let l:path = g:unite_data_directory . "/session/"
+  call rename(l:path . ".0prev.vim", l:path . "0prev.vim")
+endfunction "}}}
 "nnoremap <silent> <Leader>s
 "        \ :<C-u>Unite -buffer-name=files -no-split
 "        \ jump_point file_point buffer_tab
@@ -109,9 +123,9 @@ let g:unite_source_file_mru_limit = 100
 let g:unite_source_file_mru_filename_format = ''
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings() "{{{
-  nmap <buffer> <ESC>      <Plug>(unite_exit)
-  imap <buffer> jj      <Plug>(unite_insert_leave)
-  inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
+  nmap     <buffer> <ESC> <Plug>(unite_exit)
+  imap     <buffer> jj    <Plug>(unite_insert_leave)
+  inoremap <buffer> <C-l> <C-x><C-u><C-p><Down>
 endfunction"}}}
 " }}}
 

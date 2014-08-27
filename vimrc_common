@@ -176,17 +176,13 @@ autocmd BufReadPost * call AutoTabConfig()
 
 " Load vimrc / Session.vim from local folder
 " {{{
-try
-  source ./.local.vim
-catch
-endtry
-
 if !argc()
   try
     silent source ./.session.vim
-    autocmd VimLeave * exec "mks! " . v:this_session
   catch
+    let this_session = "./.session.vim"
   endtry
+  autocmd VimLeave * exec "mks! " . v:this_session
 endif
 " }}}
 

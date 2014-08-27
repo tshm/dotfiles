@@ -2,6 +2,7 @@
 	filemode = false
 	pager = lv -c
 	editor = vim
+	ignorecase = false
 [alias]
 	st = status
 	br = branch
