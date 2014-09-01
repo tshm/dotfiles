@@ -68,10 +68,10 @@ set ssop-=folds
 " keymaps
 " {{{
 " normal keymaps
-noremap c "_c
-noremap <F1> <ESC>
-nmap <silent> <C-l> gt
-nmap <silent> <C-h> gT
+nnoremap c "_c
+nnoremap <F1> <ESC>
+nnoremap <silent> <C-l> gt
+nnoremap <silent> <C-h> gT
 nnoremap <Leader><space> :e #<CR>
 " inc / decl
 nnoremap + <c-a>
@@ -125,7 +125,7 @@ function! Eval_vsplit()
   silent execute ":%!make #:r 2>&1 "
   wincmd p
 endfunction 
-map <F7> :up<CR>:call Eval_vsplit()<CR>
+nnoremap <F7> :up<CR>:call Eval_vsplit()<CR>
 " }}}
 
 " Misc
