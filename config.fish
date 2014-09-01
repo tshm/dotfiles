@@ -1,4 +1,5 @@
 set -x SHELL /usr/bin/fish
+set -x PAGER "lv -c"
 
 if status --is-login
   cd $HOME
