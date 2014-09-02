@@ -39,8 +39,9 @@ if status --is-interactive
     # command stack
     bind \eq 'push_cmd (commandline); commandline -f kill-whole-line'
     # quoting whole line
-    bind \e\' 'push_cmd \"(commandline)\"; commandline -f repaint kill-whole-line'
     bind \e7 "commandline -i \'\'; commandline -f backward-char"
+    # backward-kill-word
+    bind \e\b backward-kill-word
   end
 
   function fish_right_prompt
