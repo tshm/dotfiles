@@ -1,11 +1,12 @@
 set visualbell
 highlight Bell display:none;
-set hinttimeout=1000
-set hc=hjklasdfg
+set hinttimeout=0
+"set hc=hjklasdfg
 set focuscontent
 set noanimations
 set complete=l
 set gui=none,tabs
+set followhints=1
 
 noremap e :set gui=invnavigation,invbookmarks<CR>
 noremap <BS> H
@@ -17,6 +18,8 @@ noremap l <c-pagedown>
 noremap ! :set invum<CR>
 noremap = 2zI
 noremap <F1> <ESC>
+
+ignorekeys add mail\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 
 style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
 
