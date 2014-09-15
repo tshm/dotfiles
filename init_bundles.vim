@@ -87,7 +87,7 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 "nnoremap <silent> <Leader>f  :<C-u>UniteWithCurrentDir -buffer-name=files file <CR>
 nnoremap <silent> <Leader>f  :<C-u>Unite -buffer-name=files file file/new<CR>
 nnoremap <silent> <Leader>h  :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
-nnoremap <silent> <Leader>b  :<C-u>Unite -buffer-name=files buffer<CR>
+nnoremap <silent> <Leader>b  :<C-u>Unite -quick-match -buffer-name=files buffer<CR>
 nnoremap <silent> <Leader>B  :<C-u>Unite -buffer-name=files bookmark<CR>
 nnoremap <silent> <Leader>F  :<C-u>Unite -buffer-name=file_rec file_rec<CR>
 nnoremap <silent> <Leader>R  :<C-u>UniteWithBufferDir -buffer-name=file_rec file_rec<CR>
@@ -95,7 +95,9 @@ nnoremap <silent> <Leader>r  :<C-u>UniteWithBufferDir -buffer-name=files file fi
 nnoremap <silent> <Leader>y  :<C-u>Unite history/yank<CR>
 nnoremap <silent> <Leader>g  :<C-u>Unite change<CR>
 nnoremap <silent> <Leader>j  :<C-u>Unite jump<CR>
-nnoremap <silent> <Leader>/  :<C-u>UniteWithCursorWord line<CR>
+nnoremap <silent> <Leader>/  :<C-u>Unite line<CR>
+nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
+nnoremap <silent> <Leader>?  :<C-u>Unite vimgrep<CR>
 nnoremap <silent> <Leader>s  :<C-u>call Unite_save_prevsession()<CR>
 nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
 nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
