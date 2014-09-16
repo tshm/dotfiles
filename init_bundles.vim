@@ -93,7 +93,7 @@ nnoremap <silent> <Leader>F  :<C-u>Unite -buffer-name=file_rec file_rec<CR>
 nnoremap <silent> <Leader>R  :<C-u>UniteWithBufferDir -buffer-name=file_rec file_rec<CR>
 nnoremap <silent> <Leader>r  :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
 nnoremap <silent> <Leader>y  :<C-u>Unite history/yank<CR>
-nnoremap <silent> <Leader>g  :<C-u>Unite change<CR>
+nnoremap <silent> <Leader>c  :<C-u>Unite change<CR>
 nnoremap <silent> <Leader>j  :<C-u>Unite jump<CR>
 nnoremap <silent> <Leader>/  :<C-u>Unite line<CR>
 nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
