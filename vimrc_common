@@ -1,15 +1,14 @@
 " vimrc
 
-" load bundled extentions and their setting
-" {{{
+" load bundled extentions and their setting {{{
 "set shell=/bin/sh
 language C
 set nocompatible | filetype indent plugin on | syn on
 let mapleader = "\<Space>"
 execute 'source ' . expand('<sfile>:h') . '/init_bundles.vim'
+" }}}
 
-" GUI Settings
-" {{{
+" GUI Settings {{{
 if has("gui_running")
   colorscheme darkblue
   set guioptions=grL
@@ -20,8 +19,7 @@ if has("gui_win32")
   set shellslash
 endif "}}}
 
-" general options
-" {{{
+" general options {{{
 set hidden autoread
 set history=1000
 set noswapfile nobackup
@@ -65,8 +63,7 @@ set ssop-=options
 set ssop-=folds
 " }}}
 
-" keymaps
-" {{{
+" keymaps {{{
 " normal keymaps
 nnoremap c "_c
 nnoremap <F1> <ESC>
@@ -78,6 +75,7 @@ nnoremap + <c-a>
 nnoremap - <c-x>
 "nmap : q:
 vnoremap <silent> p "zdP
+inoremap ;; <ESC>
 
 " Commandline keymaps
 cnoremap <c-a> <home>
@@ -88,8 +86,7 @@ cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 " }}}
 
-" autocommands
-" {{{
+" autocommands {{{
 augroup textfile
   autocmd BufRead *.txt  set ft=asciidoc expandtab
   autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:>
@@ -112,8 +109,7 @@ function! s:init_cmdwin()
 endfunction
 " }}}
 
-" Makefile
-" {{{
+" Makefile {{{
 nnoremap <F3>  :up<CR>:make %:r<CR><CR>:cw<CR>
 function! Eval_vsplit()
   silent execute ":pedit! output.log"
@@ -128,8 +124,7 @@ endfunction
 nnoremap <F7> :up<CR>:call Eval_vsplit()<CR>
 " }}}
 
-" Misc
-" {{{
+" Misc {{{
 au BufRead,BufNewFile *.scala set filetype=scala
 noremap ,c :cscope find  <C-R>=expand("<cword>")<CR><C-Left><Left>
 let g:changelog_dateformat="%Y-%m-%d"
@@ -137,8 +132,7 @@ let g:changelog_username="tshm <2sm@csc.jp>"
 let g:load_doxygen_syntax=1
 " }}}
 
-" cscope
-" {{{
+" cscope {{{
 "set csto=0
 "set nocsverb
 " add any database in current directory
@@ -150,8 +144,7 @@ let g:load_doxygen_syntax=1
 "set cscopequickfix=s-,c-,d-,i-,t-,e-
 " }}}
 
-" Tab/Space detection
-" {{{
+" Tab/Space detection {{{
 function! AutoTabConfig()
   let [ntab, nspc, shift] = [0,0,4]
   for line in getbufline(winbufnr(0), 1, "$")
@@ -174,8 +167,7 @@ endfunction
 autocmd BufReadPost * call AutoTabConfig()
 " }}}
 
-" Load vimrc / Session.vim from local folder
-" {{{
+" Load vimrc / .session.vim from local folder {{{
 if !argc()
   try
     silent source ./.session.vim

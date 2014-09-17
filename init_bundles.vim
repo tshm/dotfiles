@@ -1,5 +1,4 @@
-" VAM setup.
-" {{{
+" VAM setup. {{{
 fun SetupVAM()
   let vam_plugins = [
     \ "unite",
@@ -26,16 +25,14 @@ endfun
 call SetupVAM()
 " }}}
 
-" VimShell
-" {{{
+" VimShell {{{
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_enable_smart_case = 1
 "nmap <F2> <Plug>(vimshell_switch)
 " }}}
 
-" neocomplcache setting
-" {{{
+" neocomplcache setting {{{
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
 " No autocomplete
@@ -82,8 +79,7 @@ let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 " }}}
 
-" Unite setting
-" {{{
+" Unite setting {{{
 "nnoremap <silent> <Leader>f  :<C-u>UniteWithCurrentDir -buffer-name=files file <CR>
 nnoremap <silent> <Leader>f  :<C-u>Unite -buffer-name=files file file/new<CR>
 nnoremap <silent> <Leader>h  :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
@@ -131,19 +127,16 @@ function! s:unite_my_settings() "{{{
 endfunction"}}}
 " }}}
 
-" TagBar
-" {{{
+" TagBar {{{
 nnoremap <silent> <F8> :TagbarToggle<CR>
 " }}}
 
-" GtagsCScope
-" {{{
+" GtagsCScope {{{
 set cscopetag
 let GtagsCscope_Auto_Load=0
 " }}}
 
-" Syntastic
-" {{{
+" Syntastic {{{
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 " }}}
