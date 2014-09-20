@@ -8,6 +8,7 @@ map k -builtin <count>3<Up>
 map l -builtin <count><C-n>
 map e -ex set go!=TB
 map ! -ex set usermode!
+map <BS> H
 set go=bCrs
 set hlfind
 set passkeys+=mail.google.com:j,k,<SPACE>,x,I,?,<CR>,s,y
