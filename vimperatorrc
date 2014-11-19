@@ -1,23 +1,25 @@
 set visualbell
 highlight Bell display:none;
-set hinttimeout=0
 "set hc=hjklasdfg
 set focuscontent
-set noanimations
 set complete=l
 set gui=none,tabs
 set followhints=1
 
 noremap e :set gui=invnavigation,invbookmarks<CR>
 noremap <BS> H
-noremap j <down><down><down>
-noremap k <up><up><up>
-noremap J <C-d><up><up><up><up><up><C-d>
-noremap h <c-pageup>
-noremap l <c-pagedown>
+noremap j <down>
+noremap k <up>
+noremap J 20<C-y>
+noremap K 20<C-e>
+noremap h <C-p>
+noremap l <C-n>
 noremap ! :set invum<CR>
 noremap = 2zI
 noremap <F1> <ESC>
+
+"set nextpattern+='^次'
+"set previouspattern+='^前'
 
 ignorekeys add mail\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 
