@@ -5,6 +5,7 @@ set focuscontent
 set complete=l
 set gui=none,tabs
 set followhints=1
+set hintmatching=fuzzy
 
 noremap e :set gui=invnavigation,invbookmarks<CR>
 noremap <BS> H
@@ -22,6 +23,8 @@ noremap <F1> <ESC>
 "set previouspattern+='^前'
 
 ignorekeys add mail\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
+ignorekeys add inbox\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
+ignorekeys add getpocket\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 
 style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
 
