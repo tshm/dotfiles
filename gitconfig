@@ -3,6 +3,7 @@
 	pager = lv -c
 	editor = vim
 	ignorecase = false
+	autocrlf = input
 [alias]
 	st = status
 	br = branch
