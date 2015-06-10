@@ -98,16 +98,19 @@ nnoremap <silent> <Leader>s  :<C-u>call Unite_save_prevsession()<CR>
 nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
 nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
 " makes it easier to go back to the last session.
-" session name is "0prev"
+" this special session name is "0prev"
 function! Unite_save_prevsession() "{{{
-  let g:prev_session = v:this_session
+  let g:Prev_session = v:this_session
   exec "mksession! " . v:this_session
   UniteSessionSave .0prev
   Unite session
 endfunction "}}}
+"let g:unite_source_session_enable_auto_save = 1
 autocmd SessionLoadPost * call s:unite_bkup_session()
 function! s:unite_bkup_session() "{{{
-  let v:this_session = g:prev_session
+  if -1 != match(v:this_session, '0prev')
+    let v:this_session = g:Prev_session
+  endif
   let l:path = g:unite_data_directory . "/session/"
   call rename(l:path . ".0prev.vim", l:path . "0prev.vim")
 endfunction "}}}
