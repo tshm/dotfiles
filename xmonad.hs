@@ -16,7 +16,7 @@ myManageHook = composeAll . concat $
 	  [ className =? b --> doF (W.shift "web") | b <- myClassWebShifts ]
 	  -- Applications that go to media
 	, [ className =? c --> viewShift "media" | c <- myClassMediaShifts ]
-	--   -- Applications that go float
+		-- Applications that go float
 	, [ className =? "Tilda" --> doFloat ]
 	]
 	where
@@ -40,5 +40,6 @@ main = do
 		, modMask     = mod4Mask
 		} `additionalKeysP`
 		[ ("M-,", spawn "~/bin/dmenu.sh"),
+		  -- ex=`cat ~/.dmenu | dmenu` && exec $ex
 		  ("<XF86AudioMedia>", spawn "sudo systemctl hibernate")
 		]
