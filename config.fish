@@ -31,8 +31,8 @@ if status --is-interactive
   function fish_user_key_bindings
     bind \ek  history-token-search-backward
     bind \ej  history-token-search-forward
-    # commandline seems to eval from right to left...
-    bind \e\; 'commandline -f execute accept-autosuggestion'
+    # accept and run
+    bind \e\; 'commandline -f accept-autosuggestion execute'
     # invoking manual
     bind \eh 'echo get help;man (commandline -po)[1]; commandline -f repaint'
     # command stack
