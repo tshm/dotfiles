@@ -6,7 +6,10 @@ set complete=l
 set gui=none,tabs
 set followhints=1
 set hintmatching=fuzzy
+let mapleader=","
 
+noremap a <nop>
+noremap A <nop>
 noremap e :set gui=invnavigation,invbookmarks<CR>
 noremap <BS> H
 noremap j <down>
@@ -19,12 +22,14 @@ noremap ! :set invum<CR>
 noremap = 2zI
 noremap <F1> <ESC>
 
+inoremap <leader>s :echo 2sm@csc.jp
+
 "set nextpattern+='^次'
 "set previouspattern+='^前'
 
 ignorekeys add mail\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 ignorekeys add inbox\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
-ignorekeys add getpocket\\.com -except <C-p>,<C-n>,d,h,l,P,t,o,T,r,:
+ignorekeys add getpocket\\.com -except <space>,<C-p>,<C-n>,d,h,l,P,t,T,r,:
 
 style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
 
