@@ -18,7 +18,9 @@
 [color]
 	ui = true
 [user]
-	name = tosh shimayama
-	emal = 2sm@csc.jp
+	name = Tosh Satake
+	email = 2sm@csc.jp
 
 # vim: ft=gitconfig
+[push]
+	default = simple
