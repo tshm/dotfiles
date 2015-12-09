@@ -11,11 +11,13 @@ let mapleader=","
 noremap a <nop>
 noremap A <nop>
 noremap e :set gui=invnavigation,invbookmarks<CR>
+noremap x :bd<CR>
+noremap X u
 noremap <BS> H
 noremap j <down>
 noremap k <up>
-noremap J 20<C-y>
-noremap K 20<C-e>
+noremap J 20<C-e>
+noremap K 20<C-y>
 noremap h <C-p>
 noremap l <C-n>
 noremap ! :set invum<CR>
