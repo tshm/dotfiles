@@ -3,7 +3,6 @@ set -x PAGER "lv -c"
 
 if status --is-login
   cd $HOME
-  which tmux; and tmux attach -t root; or tmux new -s root
   test -f .login.fish; and source .login.fish
 end
 
