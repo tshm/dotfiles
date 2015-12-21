@@ -3,7 +3,7 @@ set -x PAGER "lv -c"
 
 if status --is-login
   cd $HOME
-  # which tmux; and tmux attach -t root; or tmux new -s root
+  which tmux; and tmux attach -t root; or tmux new -s root
   test -f .login.fish; and source .login.fish
 end
 
@@ -29,10 +29,6 @@ if status --is-interactive
     set -e __CMD_STACK[$n]
   end
 
-  function _custom_execute
-    execute
-  end
-
   function _quote
     set -l tok (commandline -t)
     commandline -t \"$tok\"
@@ -44,38 +40,34 @@ if status --is-interactive
     commandline -f kill-whole-line
   end
 
-  function _help
-    echo -- get help
-    man (commandline -po)[1]
-    commandline -f repaint
-  end
-
   function _fzf_pane
-    [ -z "$TMPDIR" ]; and set -g TMPDIR /tmp
-    tmux capture-pane -pS -30 | eval "fzf-tmux -d40%" > $TMPDIR/fzf.result
-    set -l __FZF (cat $TMPDIR/fzf.result)
-    cat $TMPDIR/fzf.result
-    [ -z "$__FZF" ]; and return
-    commandline -i $__FZF
-    commandline -o
-    commandline -f repaint
+    _fzf_ "tmux capture-pane -pS -30"
   end
 
   function _fzf_file
+    _fzf_ "ls"
+  end
+
+  function _fzf_
     [ -z "$TMPDIR" ]; and set -g TMPDIR /tmp
-    ls | eval "fzf-tmux -d40%" > $TMPDIR/fzf.result
+    eval $argv | eval "fzf-tmux -d40%" > $TMPDIR/fzf.result
     set -l __FZF (cat $TMPDIR/fzf.result)
     cat $TMPDIR/fzf.result
     [ -z "$__FZF" ]; and return
     commandline -i $__FZF
     commandline -o
     commandline -f repaint
+  end
+
+  function _custom_execute
+    eval "ls"
+    #commandline -f execute
   end
 
   function fish_user_key_bindings
     # enable vi mode
     fish_vi_mode
-    fish_vi_key_bindings
+    bind -M insert \e5  _custom_execute
     # delete exit shortcut
     bind -e \cd
     bind -e \ed
@@ -84,16 +76,11 @@ if status --is-interactive
     bind -M insert \e9  _fzf_pane
     bind -M insert \ek  history-token-search-backward
     bind -M insert \ej  history-token-search-forward
-    # accept and run
     bind -M insert \e\; 'commandline -f accept-autosuggestion execute'
-    # invoking manual
-    bind -M insert \eh _help
-    # command stack
-    bind -M insert \eq _stack
-    # backward-kill-word
-    bind -M insert \e\b backward-kill-word
-    # quote token
-    bind -M insert \e7 _quote
+    bind -M insert \eq  _stack
+    bind -M insert \e7  _quote
+    bind -M insert \eh  __fish_man_page
+    bind -M insert \ep  '__fish_paginate; commandline -f execute'
   end
 
   function fish_right_prompt
