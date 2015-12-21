@@ -22,7 +22,7 @@ if status --is-interactive
     set __CMD_STACK $__CMD_STACK "$argv"
   end
 
-  function _pop_cmd
+  function _pop_cmd -e fish_postexec
     [ -z "$__CMD_STACK" ]; and return
     set -l n (count $__CMD_STACK)
     commandline -i $__CMD_STACK[$n]
@@ -99,9 +99,9 @@ if status --is-interactive
   function fish_right_prompt
     set_color -u yellow
     printf '(%s) ' (date +%H:%M)
-    _pop_cmd
     set_color normal
   end
+
 end
 
 # vi: ft=zsh
