@@ -1,0 +1,11 @@
+[Unit]
+Description=update ddns every 1 hour
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=60min
+Unit=ddns.service
+
+[Install]
+WantedBy=timers.target
+

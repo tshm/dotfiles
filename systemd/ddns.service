@@ -1,0 +1,11 @@
+[Unit]
+Description=DDNS updater
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/bin/sh /home/tshm/.dotfiles/systemd/ddns.sh
+
+[Install]
+WantedBy=default.target
+
