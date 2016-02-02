@@ -1,3 +1,5 @@
+" source ~/.dotfiles/config.fish
+"
 set -x SHELL /usr/bin/fish
 set -x PAGER "lv -c"
 

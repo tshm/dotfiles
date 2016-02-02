@@ -1,3 +1,4 @@
+## [include] path = ~/.dotfiles/gitconfig
 [core]
 	filemode = false
 	pager = lv -c
