@@ -1,7 +1,6 @@
 ## [include] path = ~/.dotfiles/gitconfig
 [core]
 	filemode = false
-	pager = lv -c
 	editor = vim
 	ignorecase = false
 	autocrlf = input
@@ -10,9 +9,9 @@
 	br = branch
 	ci = commit
 	co = checkout
-	df = !sh -c 'git diff --stat -p -w --color $* | lv -c' -
-	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | less -c' -
-	l  = !git log --graph --color | lv -c
+	df = !sh -c 'git diff --stat -p -w --color $* | $PAGER' -
+	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | $PAGER' -
+	l  = !git log --graph --color | $PAGER
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	export = archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
