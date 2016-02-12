@@ -1,3 +1,5 @@
+! #include "~/.dotfiles/x/Xresources"
+!
 urxvt.reverseVideo: true
 urxvt.font: xft:Monospace:pixelsize=14
 !urxvt.font:     -efont-fixed-medium-r-normal--16-160-75-75-c-80-iso10646-1
