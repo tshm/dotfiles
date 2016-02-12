@@ -177,5 +177,5 @@ if !argc()
   autocmd VimLeave * exec "mks! " . v:this_session
 endif
 " }}}
-
+let g:syntastic_javascript_checkers = ['eslint'] 
 " vim: foldmethod=marker
