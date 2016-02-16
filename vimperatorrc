@@ -6,7 +6,8 @@ set complete=l
 set gui=none,tabs
 set followhints=1
 set hintmatching=fuzzy
-let mapleader=","
+hi Hint z-index:5000; font-family:Menlo; font-size:14px; color:white; background-color:red; border-color:ButtonShadow; border-width:0px; border-style:solid; padding:0px 2px 0px 2px; position:absolute;
+"let mapleader=","
 
 noremap a <nop>
 noremap A <nop>
