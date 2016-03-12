@@ -26,6 +26,8 @@ set noswapfile nobackup
 runtime macros/matchit.vim
 set grepprg=internal
 "set grepprg=grep\ -H\ -n\ $*
+set pumheight=10
+set display=lastline
 set autoindent smartindent
 set wrap linebreak textwidth=0 colorcolumn=80
 set expandtab tabstop=2 shiftwidth=2
@@ -44,7 +46,7 @@ set encoding=utf-8 fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp
 set fileformat=unix fileformats=unix,dos,mac
 set formatoptions=lmoq
 set wildmenu wildmode=list:longest wildignore=*.o,*.obj,*.a,*.gif,*.jpg,*.so,*.svn
-set showmatch
+set showmatch matchtime=1
 set showcmd
 set diffopt=filler,iwhite
 set scrolloff=2
