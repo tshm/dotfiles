@@ -2,10 +2,8 @@ Debug := true
 If (Debug)
 {
   Traytip , AHK Restart, restarting %A_ScriptFullPath%
-
-  ; Ctrl - Alt - r  will reload script.
-  ^!r::Reload
 }
+return
 
 ; Get the monitor dimension which holds the current window
 GetCurrentMonitor()
@@ -52,4 +50,5 @@ TileWin(-1)
 Traytip , Ctrl+Alt+Right triggered, id, 3
 return
 
-
+; Ctrl - Alt - r  will reload script.
+^!r::Reload
