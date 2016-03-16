@@ -1,5 +1,5 @@
 ;#### wheelctrl.ahk
-#NoTrayIcon
+;#NoTrayIcon
 ; Scale for converting Y-motion -> NumWheel
 Scale := 5
 
@@ -11,20 +11,19 @@ return
 ;---------------------------------------------------------------
 MButton::
   MouseGetPos,, Y0
-  SetTimer, SendWheelEvent, 100
+  fn := Func("SendWheelEvent").bind(Y0, Scale)
+  SetTimer, % fn, 100
 return
 
 MButton Up::
   MouseGetPos,, Y1
-  SetTimer, SendWheelEvent, Off
+  SetTimer, % fn, Off
   if (Y1 - Y0 == 0)  ; trigger middle click if cursor is not moved.
     MouseClick, Middle
 return
 
-SendWheelEvent()
+SendWheelEvent(Y0, Scale)
 {
-  global Y0
-  global Scale
   MouseGetPos,, NewY
   Delta := NewY - Y0
   NumWheel := abs(Delta // Scale)
