@@ -1,7 +1,12 @@
-Debug := true
-If (Debug)
+;#### layout.ahk
+EnvGet, DebugP, DEBUG
+If (DebugP)
 {
-  Traytip , AHK Restart, restarting %A_ScriptFullPath%
+  TrayTip, Loading %A_ScriptName% , Debug Mode On
+}
+Else
+{
+  Menu, Tray, NoIcon
 }
 return
 
@@ -42,13 +47,17 @@ TileWin(Direction = -1, WidthRatio = 0.75)
 ; Key bindings
 ^!Right::
 TileWin(1)
-Traytip , Ctrl+Alt+Right triggered, id, 3
 return
 
 ^!Left::
 TileWin(-1)
-Traytip , Ctrl+Alt+Right triggered, id, 3
 return
 
-; Ctrl - Alt - r  will reload script.
-^!r::Reload
+f1::
+WinGetPos, , , Width, Height, A
+MouseMove, (width/2), (height/2)
+return
+
+#If DebugP
+!^r::Reload
+
