@@ -1,15 +1,19 @@
 ;#### wheelctrl.ahk
-;#NoTrayIcon
-; Scale for converting Y-motion -> NumWheel
-Scale := 5
-
-CoordMode, Mouse, Screen
-Traytip, AHK Restart, restarting %A_ScriptFullPath%
+EnvGet, DebugP, DEBUG
+If (DebugP)
+{
+  TrayTip, Loading %A_ScriptName% , Debug Mode On
+}
+Else
+{
+  Menu, Tray, NoIcon
+}
 return
 
 #Persistent
 ;---------------------------------------------------------------
 MButton::
+  Scale := 5
   MouseGetPos,, Y0
   fn := Func("SendWheelEvent").bind(Y0, Scale)
   SetTimer, % fn, 100
@@ -40,6 +44,6 @@ SendWheelEvent(Y0, Scale)
   return
 }
 
-; Ctrl - Alt - r  will reload script.
-^!r::Reload
+#If DebugP
+!^r::Reload
 
