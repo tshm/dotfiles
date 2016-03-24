@@ -1,3 +1,4 @@
+-- ~/.xmonad/xmonad.hs
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks

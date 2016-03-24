@@ -5,10 +5,11 @@ SRC=`cd $SRC0; pwd`
 cd ~
 
 # config.fish
+mkdir -p ~/.config/fish/
 echo "source $SRC/config.fish" > ~/.config/fish/config.fish
 
 # gitconfig
-echo "[include]"                 > ~/.gitconfig
+echo "[include]"              > ~/.gitconfig
 echo "path = $SRC/gitconfig" >> ~/.gitconfig
 
 # tmux
