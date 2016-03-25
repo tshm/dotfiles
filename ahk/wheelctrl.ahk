@@ -45,6 +45,10 @@ SendWheelEvent(Y0, Scale)
   return
 }
 
+;--- some general key-bindings ---
+#PgUp::Send {Volume_Up 2}
+#PgDn::Send {Volume_Down 2}
+
 #If DebugP
 !^r::Reload
 
