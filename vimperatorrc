@@ -35,6 +35,7 @@ ignorekeys add mail\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 ignorekeys add inbox\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 ignorekeys add getpocket\\.com -except <space>,<C-p>,<C-n>,d,h,l,P,t,T,r,:
 ignorekeys add mindmup\\.com -except <C-p>,<C-n>,h,l,t,:
+ignorekeys add outlook\\.office\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 
 style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
 

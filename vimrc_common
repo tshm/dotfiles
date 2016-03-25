@@ -78,7 +78,8 @@ nnoremap + <c-a>
 nnoremap - <c-x>
 "nmap : q:
 vnoremap <silent> p "zdP
-inoremap ;; <ESC>
+nnoremap ; :
+nnoremap ;; ;
 
 " Commandline keymaps
 cnoremap <c-a> <home>
