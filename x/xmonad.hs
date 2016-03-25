@@ -22,8 +22,8 @@ myManageHook = composeAll . concat $
 	]
 	where
 		viewShift = doF . liftM2 (.) W.greedyView W.shift
-		myClassWebShifts  = ["Iceweasel"]
-		myClassMediaShifts = ["MPlayer", "mplayer2", "smplayer2"]
+		myClassWebShifts  = ["Iceweasel", "firefox", "Chromium"]
+		myClassMediaShifts = ["MPlayer", "mplayer2", "smplayer2", "mpv"]
 
 main :: IO ()
 main = do
@@ -44,3 +44,4 @@ main = do
 		  -- ex=`cat ~/.dmenu | dmenu` && exec $ex
 		  ("<XF86AudioMedia>", spawn "sudo systemctl hibernate")
 		]
+
