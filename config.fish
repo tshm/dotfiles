@@ -68,6 +68,13 @@ if status --is-interactive
   function fish_user_key_bindings
     # enable vi mode
     fish_vi_mode
+    bind --erase -M insert \cd
+    bind -M insert \e\b backward-kill-word
+    bind -M insert \eb  backward-word
+    bind -M insert \ef  forward-word
+    bind -M insert \cb  backward-char
+    bind -M insert \cf  forward-char
+
     bind -M insert \e5  _custom_execute
     # delete exit shortcut
     bind -e \cd
