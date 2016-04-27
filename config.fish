@@ -87,6 +87,7 @@ if status --is-interactive
     bind -M insert \e\; 'commandline -f accept-autosuggestion execute'
     bind -M insert \eq  _stack
     bind -M insert \e7  _quote
+    bind -M insert \e\' _quote
     bind -M insert \eh  __fish_man_page
     bind -M insert \ep  '__fish_paginate; commandline -f execute'
   end
