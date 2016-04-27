@@ -8,9 +8,10 @@ Else
 {
   Menu, Tray, NoIcon
 }
-return
 
 #Persistent
+SetCapsLockState, AlwaysOff
+return
 ;---------------------------------------------------------------
 MButton::
   Scale := 10
@@ -45,9 +46,22 @@ SendWheelEvent(Y0, Scale)
   return
 }
 
-;--- some general key-bindings ---
+;--- sound volume control
 #PgUp::Send {Volume_Up 2}
 #PgDn::Send {Volume_Down 2}
+
+;--- keyboard mouse
+;; CapsLock & k::MouseMove, 0, -10, 0, R
+;; CapsLock & j::MouseMove, 0, 10, 0, R
+;; CapsLock & h::MouseMove, -10, 0, 0, R
+;; CapsLock & l::MouseMove, 10, 0, 0, R
+;; VKF0 & k::MouseMove, 0, -10, 0, R
+;; VKF0 & j::MouseMove, 0, 10, 0, R
+;; VKF0 & h::MouseMove, -10, 0, 0, R
+;; VKF0 & l::MouseMove, 10, 0, 0, R
+
+;--- IME switch
+;; SC029::Send {vkF3sc029}
 
 #If DebugP
 !^r::Reload
