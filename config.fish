@@ -74,6 +74,9 @@ if status --is-interactive
     bind -M insert \ef  forward-word
     bind -M insert \cb  backward-char
     bind -M insert \cf  forward-char
+    bind -M insert \cl  'clear; commandline -f repaint'
+    type -q getclip; and bind -M insert \ey 'commandline -i ( getclip; echo )[1]'
+    type -q xsel;    and bind -M insert \ey 'commandline -i ( xsel -p; echo )[1]'
 
     bind -M insert \e5  _custom_execute
     # delete exit shortcut
