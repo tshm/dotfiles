@@ -3,7 +3,7 @@
 "	set shell=c:\Windows\system32\cmd.exe
 "endif
 
-set runtimepath+=~/.dotfiles/
+set runtimepath+=~/.dotfiles/,~/.vim/
 set shell=/bin/sh
 runtime vimrc_common
 

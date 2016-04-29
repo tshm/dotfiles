@@ -16,7 +16,6 @@ if has("gui_running")
   set guifontwide=Ricty\ Diminished\ 12,TakaoGothic:h12:cSHIFTJIS,VL_Gothic:h12:cSHIFTJIS,MS_Gothic:h12:cSHIFTJIS
 endif
 if has("gui_win32")
-  set shellslash
 endif "}}}
 
 " general options {{{

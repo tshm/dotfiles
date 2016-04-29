@@ -1,28 +1,28 @@
-" VAM setup. {{{
-fun SetupVAM()
-  let vam_plugins = [
-    \ "unite",
-    \ "surround",
-    \ "github:tshm/unite-gitlsfiles",
-    \ "github:Shougo/neomru.vim",
-    \ "github:Shougo/unite-session",
-    \ "github:Shougo/neocomplete",
-    \ "Syntastic",
-    \ "tComment",
-    \ "vcscommand"
-    \ ]
-  let c = get(g:, 'vim_addon_manager', {})
-  let g:vim_addon_manager = c
-  let c.plugin_root_dir = expand('$HOME') . '/.vim/vim-addons'
-  let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-  " let g:vim_addon_manager = {}
-  if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
-    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
-           \ shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
+" VimPlug setup. {{{
+fun SetupVimPlug()
+  let autoload_dir = expand('$HOME') . '/.vim/autoload/'
+  let vimplugurl = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  if !filereadable(autoload_dir.'plug.vim')
+    execute '!curl -fLo '.autoload_dir.'plug.vim --create-dirs '.vimplugurl
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
   endif
-  call vam#ActivateAddons(vam_plugins, {'auto_install' : 0})
 endfun
-call SetupVAM()
+call SetupVimPlug()
+
+call plug#begin('~/.vim/plugged')
+Plug 'Shougo/unite.vim'
+Plug 'tshm/unite-gitlsfiles'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/unite-session'
+Plug 'Shougo/neocomplete'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/syntastic'
+Plug 'vim-scripts/vcscommand.vim'
+Plug 'sukima/xmledit', {'for': 'xml'}
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'ElmCast/elm-vim', {'for': 'elm'}
+call plug#end()
 " }}}
 
 " VimShell {{{
@@ -162,7 +162,14 @@ let GtagsCscope_Auto_Load=0
 
 " Syntastic {{{
 let g:syntastic_enable_signs=1
+let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
+" }}}
+
+" Elm {{{
+let g:elm_setup_keybindings = 0
+let g:elm_syntastic_show_warnings = 1
+let g:elm_make_output_file = '.tmp.js'
 " }}}
 
 " vim: foldmethod=marker
