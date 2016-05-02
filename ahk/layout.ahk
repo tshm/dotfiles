@@ -11,15 +11,15 @@ Else
 return
 
 ; Get the monitor dimension which holds the current window
-GetCurrentMonitor()
+GetCurrentMonitor(m)
 {
   WinGetPos, x, y, , , A
   SysGet, MonitorCount, MonitorCount
   Loop, %MonitorCount%
   {
     SysGet, Monitor, Monitor, %A_Index%
-    If ((MonitorBottom > y && y >= MonitorTop)
-      && (MonitorLeft <= x && x < MonitorRight))
+    If ((MonitorBottom - m > y && y >= MonitorTop - m)
+      && (MonitorLeft - m <= x && x < MonitorRight - m))
     {
       SysGet, WorkArea, MonitorWorkArea, %A_Index%
       return { Top: WorkAreaTop, Bottom: WorkAreaBottom
@@ -31,7 +31,7 @@ GetCurrentMonitor()
 ; Tile Left(-1) or Right(1) the current window.
 TileWin(Direction = -1, WidthRatio = 0.75)
 {
-  WorkArea := GetCurrentMonitor()
+  WorkArea := GetCurrentMonitor(50)
   ScreenWidth := WorkArea["Right"] - WorkArea["Left"]
   ScreenHeight := WorkArea["Bottom"] - WorkArea["Top"]
   w := round(ScreenWidth * WidthRatio)
