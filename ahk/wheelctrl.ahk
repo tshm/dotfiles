@@ -10,7 +10,6 @@ Else
 }
 
 #Persistent
-SetCapsLockState, AlwaysOff
 return
 ;---------------------------------------------------------------
 MButton::
@@ -46,19 +45,49 @@ SendWheelEvent(Y0, Scale)
   return
 }
 
+MouseOperation(op, acc:=1)
+{
+  step := 15 * acc
+  if (op == "UP") {
+    MouseMove, 0, -step, 0, R
+  } else if (op == "DOWN") {
+    MouseMove, 0,  step, 0, R
+  } else if (op == "LEFT") {
+    MouseMove, -step, 0, 0, R
+  } else if (op == "RIGHT") {
+    MouseMove,  step, 0, 0, R
+  } else if (op == "LCLICK") {
+    Click 
+  } else if (op == "RCLICK") {
+    Click, right
+  } else if (op == "WHEELUP") {
+    Click, WheelUp
+  } else if (op == "WHEELDOWN") {
+    Click, WheelDown
+  }
+}
+
+;---------------------------------------------------------------
 ;--- sound volume control
 #PgUp::Send {Volume_Up 2}
 #PgDn::Send {Volume_Down 2}
 
 ;--- keyboard mouse
-;; CapsLock & k::MouseMove, 0, -10, 0, R
-;; CapsLock & j::MouseMove, 0, 10, 0, R
-;; CapsLock & h::MouseMove, -10, 0, 0, R
-;; CapsLock & l::MouseMove, 10, 0, 0, R
-;; VKF0 & k::MouseMove, 0, -10, 0, R
-;; VKF0 & j::MouseMove, 0, 10, 0, R
-;; VKF0 & h::MouseMove, -10, 0, 0, R
-;; VKF0 & l::MouseMove, 10, 0, 0, R
+#If GetKeyState("CapsLock", "T")
+k::MouseOperation("UP")
+j::MouseOperation("DOWN")
+h::MouseOperation("LEFT")
+l::MouseOperation("RIGHT")
+d::MouseOperation("LCLICK")
+f::MouseOperation("RCLICK")
+^k::MouseOperation("WHEELUP")
+^j::MouseOperation("WHEELDOWN")
+;-- accelerated --
++k::MouseOperation("UP", 5)
++j::MouseOperation("DOWN", 5)
++h::MouseOperation("LEFT", 5)
++l::MouseOperation("RIGHT", 5)
+#If ;GetKeyState("CapsLock", "T")
 
 ;--- IME switch
 ;; SC029::Send {vkF3sc029}
