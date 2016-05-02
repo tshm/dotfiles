@@ -29,7 +29,7 @@ set pumheight=10
 set display=lastline
 set autoindent smartindent
 set wrap linebreak textwidth=0 colorcolumn=80
-set expandtab tabstop=2 shiftwidth=2
+set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set backspace=indent,eol,start
 set foldmethod=syntax foldlevelstart=9
 set nobackup writebackup
