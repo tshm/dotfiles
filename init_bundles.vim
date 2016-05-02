@@ -18,7 +18,7 @@ Plug 'Shougo/neocomplete'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
-Plug 'vim-scripts/vcscommand.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'sukima/xmledit', {'for': 'xml'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'ElmCast/elm-vim', {'for': 'elm'}
