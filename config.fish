@@ -41,28 +41,18 @@ if status --is-interactive
     commandline -f kill-whole-line
   end
 
+  # fzf connectors
+  set __FZF "fzf-tmux -d40%"
   function _fzf_pane
-    _fzf_ "tmux capture-pane -pS -30"
+    commandline -i (eval "tmux capture-pane -pS -30 | $__FZF") ""
   end
 
   function _fzf_file
-    _fzf_ "ls"
+    commandline -i (eval $__FZF) ""
   end
 
-  function _fzf_
-    [ -z "$TMPDIR" ]; and set -g TMPDIR /tmp
-    eval $argv | eval "fzf-tmux -d40%" > $TMPDIR/fzf.result
-    set -l __FZF (cat $TMPDIR/fzf.result)
-    cat $TMPDIR/fzf.result
-    [ -z "$__FZF" ]; and return
-    commandline -i $__FZF
-    commandline -o
-    commandline -f repaint
-  end
-
-  function _custom_execute
-    eval "ls"
-    #commandline -f execute
+  function _fzf_history
+    commandline (eval "history | $__FZF -q (commandline)")
   end
 
   function fish_user_key_bindings
@@ -78,13 +68,13 @@ if status --is-interactive
     type -q getclip; and bind -M insert \ey 'commandline -i ( getclip; echo )[1]'
     type -q xsel;    and bind -M insert \ey 'commandline -i ( xsel -p; echo )[1]'
 
-    bind -M insert \e5  _custom_execute
     # delete exit shortcut
     bind -e \cd
     bind -e \ed
     # find filename via fzf
     bind -M insert \e8  _fzf_file
     bind -M insert \e9  _fzf_pane
+    bind -M insert \e\/  _fzf_history
     bind -M insert \ek  history-token-search-backward
     bind -M insert \ej  history-token-search-forward
     bind -M insert \e\; 'commandline -f accept-autosuggestion execute'
