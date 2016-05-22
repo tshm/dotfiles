@@ -59,7 +59,7 @@ if status --is-interactive
     # enable vi mode
     fish_vi_mode
     bind --erase -M insert \cd
-    bind -M insert \e\b backward-kill-word
+    bind -M insert \e\x7f backward-kill-word
     bind -M insert \eb  backward-word
     bind -M insert \ef  forward-word
     bind -M insert \cb  backward-char
