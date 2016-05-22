@@ -53,7 +53,7 @@ return
 TileWin(-1)
 return
 
-f1::
+f2::
 WinGetPos, , , Width, Height, A
 MouseMove, (width/2), (height/2)
 return
