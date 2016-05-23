@@ -44,18 +44,20 @@ if status --is-interactive
   # fzf connectors
   set __FZF "fzf-tmux -d40%"
   function _fzf_pane
-    eval "tmux capture-pane -pS -30 | $__FZF" | read -l fzfoutput
-    commandline -i $fzfoutput
+    _expand_fzf -t -r "tmux capture-pane -pS -30 | $__FZF -q (commandline -t)"
   end
 
   function _fzf_file
-    eval $__FZF | read -l fzfoutput
-    commandline -i $fzfoutput
+    _expand_fzf -t -r "$__FZF -q (commandline -t)"
   end
 
   function _fzf_history
-    eval "history | $__FZF -q (commandline)" | read -l fzfoutput
-    commandline $fzfoutput
+    _expand_fzf "history | $__FZF -q (commandline)"
+  end
+
+  function _expand_fzf
+    eval $argv[-1] | read -l fzfout
+    and eval "commandline $argv[1..-2] $fzfout"
   end
 
   function fish_user_key_bindings
