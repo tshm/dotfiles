@@ -56,8 +56,9 @@ if status --is-interactive
   end
 
   function _expand_fzf
-    eval $argv[-1] | read -l fzfout
-    and eval "commandline $argv[1..-2] $fzfout"
+    set -l cmd $argv[-1]; and set -e argv[-1]
+    and eval $cmd | read -l fzfout
+    and eval "commandline $argv \"$fzfout\""
   end
 
   function fish_user_key_bindings
