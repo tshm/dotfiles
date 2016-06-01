@@ -63,7 +63,7 @@ if status --is-interactive
 
   function fish_user_key_bindings
     # enable vi mode
-    fish_vi_mode
+    fish_vi_key_bindings
     bind --erase -M insert \cd
     bind -M insert \e\x7f backward-kill-word
     bind -M insert \eb  backward-word
