@@ -75,9 +75,9 @@ MouseOperation(op, acc:=1)
 ;--- keyboard mouse
 #If GetKeyState("CapsLock", "T")
 ~Space::Shift
-i::MouseOperation("UP")
-k::MouseOperation("DOWN")
-j::MouseOperation("LEFT")
+k::MouseOperation("UP")
+j::MouseOperation("DOWN")
+h::MouseOperation("LEFT")
 l::MouseOperation("RIGHT")
 f::MouseOperation("LCLICK")
 s::MouseOperation("RCLICK")
