@@ -16,6 +16,7 @@ if status --is-interactive
 
   alias rm "rm -i"
   alias vim "env SHELL=sh vim"
+  alias fd "ranger"
 
   # helper functions
   set __CMD_STACK
