@@ -14,9 +14,9 @@ if status --is-interactive
   set -x LS_COLORS "di=32:ln=36:pi=31:so=33:bd=44;37:cd=44;37:ex=35"
   set -x PATH ~/bin $PATH
 
-  alias rm "rm -i"
-  alias vim "env SHELL=sh vim"
-  alias fd "ranger"
+  function rm; rm -i $argv; end
+  function vim; env SHELL=sh vim $argv; end
+  function ff; ranger $argv; end
 
   # helper functions
   set __CMD_STACK
