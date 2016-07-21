@@ -67,27 +67,36 @@ MouseOperation(op, acc:=1)
   }
 }
 
+MouseIsOver(WinTitle) {
+  MouseGetPos,,, Win
+  Return WinExist(WinTitle . " ahk_id " . Win)
+}
+
 ;---------------------------------------------------------------
+
 ;--- sound volume control
 #PgUp::Send {Volume_Up 2}
 #PgDn::Send {Volume_Down 2}
+#If MouseIsOver("ahk_class Shell_TrayWnd")
+WheelUp::Send {Volume_Up 2}
+WheelDown::Send {Volume_Down 2}
+#If
 
 ;--- keyboard mouse
 #If GetKeyState("CapsLock", "T")
 ~Space::Shift
 k::MouseOperation("UP")
++k::MouseOperation("UP", 5)
 j::MouseOperation("DOWN")
++j::MouseOperation("DOWN", 5)
 h::MouseOperation("LEFT")
++h::MouseOperation("LEFT", 5)
 l::MouseOperation("RIGHT")
++l::MouseOperation("RIGHT", 5)
 f::MouseOperation("LCLICK")
 s::MouseOperation("RCLICK")
 r::MouseOperation("WHEELUP")
 e::MouseOperation("WHEELDOWN")
-;-- accelerated --
-+i::MouseOperation("UP", 5)
-+k::MouseOperation("DOWN", 5)
-+j::MouseOperation("LEFT", 5)
-+l::MouseOperation("RIGHT", 5)
 #If ;GetKeyState("CapsLock", "T")
 
 ;--- IME switch
