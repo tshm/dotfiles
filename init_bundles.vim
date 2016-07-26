@@ -46,9 +46,7 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-  \ 'default' : ''
-  \ }
+let g:neocomplete#sources#dictionary#dictionaries = { 'default' : '' }
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
@@ -64,9 +62,7 @@ inoremap <expr><C-l> neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
+  return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -74,7 +70,7 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 " Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " AutoComplPop like behavior.
 "let g:neocomplete#enable_auto_select = 1
@@ -102,7 +98,7 @@ endif
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 " }}}
 
 " Unite setting {{{
@@ -158,11 +154,9 @@ function! s:unite_my_settings() "{{{
 endfunction"}}}
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
-  " let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
   let g:unite_source_grep_default_opts = '-i --vimgrep --nocolor --nogroup --hidden '
-  " let g:unite_source_grep_recursive_opt = ''
 endif
-"{{{
+"{{{ menu definition
 let g:unite_source_menu_menus = get(g:,'unite_source_menu_menus',{})
 let g:unite_source_menu_menus.main = {'description' : 'shortcuts'}
 let g:unite_source_menu_menus.main.command_candidates = [
