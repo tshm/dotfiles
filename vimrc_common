@@ -8,16 +8,6 @@ let mapleader = "\<Space>"
 execute 'source ' . expand('<sfile>:h') . '/init_bundles.vim'
 " }}}
 
-" GUI Settings {{{
-if has("gui_running")
-  colorscheme darkblue
-  set guioptions=grL
-  set guifont=Inconsolata\ Medium\ 12,Consolas:h12:cANSI
-  set guifontwide=Ricty\ Diminished\ 12,TakaoGothic:h12:cSHIFTJIS,VL_Gothic:h12:cSHIFTJIS,MS_Gothic:h12:cSHIFTJIS
-endif
-if has("gui_win32")
-endif "}}}
-
 " general options {{{
 set hidden autoread
 set history=1000
@@ -57,7 +47,6 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:<
 set directory+=,$TMP
 
 set imsearch=0 iminsert=0
-highlight CursorIM guifg=NONE guibg=Red
 set tags+=../tags,../../tags,../../../tags
 set path=.,include,../include,../../include,../../../include,
 set ssop-=options
