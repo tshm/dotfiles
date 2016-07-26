@@ -165,9 +165,12 @@ let g:unite_source_menu_menus.main.command_candidates = [
   \['git commit'                , 'Gcommit'],
   \['git log'                   , 'exe "silent Glog | Unite quickfix"'],
   \['git blame'                 , 'Gblame'],
+  \['git ls-files'              , 'Unite file_rec/git'],
+  \['git grep'                  , 'Unite grep/git'],
   \['paste'                     , 'normal "+gP'],
   \['vdiffsplit'                , 'vert diffs #'],
   \['toggle wrap'               , 'set !wrap'],
+  \['comment block'             , 'TCommentBlock'],
   \] " }}}
 " }}}
 
