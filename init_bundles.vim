@@ -26,7 +26,7 @@ Plug 'leafgarland/typescript-vim'
 "let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
 "Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 "Plug 'Konfekt/FastFold'
-"Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim' ", {'do' : 'make'}
 call plug#end()
 " }}}
 
@@ -107,7 +107,7 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " Unite setting {{{
 "nnoremap <silent> <Leader>f  :<C-u>UniteWithCurrentDir -buffer-name=files file <CR>
-nnoremap <silent> <Leader>f  :<C-u>Unite -buffer-name=files file file/new<CR>
+nnoremap <silent> <Leader>f  :<C-u>Unite -buffer-name=files file_point file file/new<CR>
 nnoremap <silent> <Leader>h  :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
 nnoremap <silent> <Leader>b  :<C-u>Unite -buffer-name=files buffer<CR>
 nnoremap <silent> <Leader>B  :<C-u>Unite -buffer-name=files bookmark<CR>
@@ -118,8 +118,10 @@ nnoremap <silent> <Leader>y  :<C-u>Unite history/yank<CR>
 nnoremap <silent> <Leader>c  :<C-u>Unite change<CR>
 nnoremap <silent> <Leader>j  :<C-u>Unite jump<CR>
 nnoremap <silent> <Leader>/  :<C-u>Unite line<CR>
+nnoremap <silent> <Leader>m  :<C-u>Unite -silent -start-insert menu:main<CR>
 nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
 nnoremap <silent> <Leader>?  :<C-u>Unite vimgrep<CR>
+nnoremap <silent> <Leader>g  :<C-u>Unite grep:.<CR>
 nnoremap <silent> <Leader>s  :<C-u>call Unite_save_prevsession()<CR>
 nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
 nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
@@ -154,10 +156,25 @@ function! s:unite_my_settings() "{{{
   imap     <buffer> jj    <Plug>(unite_insert_leave)
   inoremap <buffer> <C-l> <C-x><C-u><C-p><Down>
 endfunction"}}}
-" }}}
-
-" TagBar {{{
-nnoremap <silent> <F8> :TagbarToggle<CR>
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  " let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_default_opts = '-i --vimgrep --nocolor --nogroup --hidden '
+  " let g:unite_source_grep_recursive_opt = ''
+endif
+"{{{
+let g:unite_source_menu_menus = get(g:,'unite_source_menu_menus',{})
+let g:unite_source_menu_menus.main = {'description' : 'shortcuts'}
+let g:unite_source_menu_menus.main.command_candidates = [
+  \['git status'                , 'Gstatus'],
+  \['git diff'                  , 'Gvdiff'],
+  \['git commit'                , 'Gcommit'],
+  \['git log'                   , 'exe "silent Glog | Unite quickfix"'],
+  \['git blame'                 , 'Gblame'],
+  \['paste'                     , 'normal "+gP'],
+  \['vdiffsplit'                , 'vert diffs #'],
+  \['toggle wrap'               , 'set !wrap'],
+  \] " }}}
 " }}}
 
 " GtagsCScope {{{
