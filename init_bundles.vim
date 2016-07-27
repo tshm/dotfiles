@@ -121,30 +121,10 @@ vnoremap <silent> <Leader>m  :<C-u>Unite -silent -start-insert menu:vmain<CR>
 nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
 nnoremap <silent> <Leader>?  :<C-u>Unite vimgrep<CR>
 nnoremap <silent> <Leader>g  :<C-u>Unite grep:.<CR>
-nnoremap <silent> <Leader>s  :<C-u>call Unite_save_prevsession()<CR>
+nnoremap <silent> <Leader>s  :<C-u>Unite -select=1 session<CR>
 nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
 nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
-" makes it easier to go back to the last session.
-" this special session name is "0prev"
-function! Unite_save_prevsession() "{{{
-  let g:Prev_session = v:this_session
-  exec "mksession! " . v:this_session
-  UniteSessionSave .0prev
-  Unite session
-endfunction "}}}
-"let g:unite_source_session_enable_auto_save = 1
-autocmd SessionLoadPost * call s:unite_bkup_session()
-function! s:unite_bkup_session() "{{{
-  if -1 != match(v:this_session, '0prev')
-    let v:this_session = g:Prev_session
-  endif
-  let l:path = g:unite_data_directory . "/session/"
-  call rename(l:path . ".0prev.vim", l:path . "0prev.vim")
-endfunction "}}}
-"nnoremap <silent> <Leader>s
-"        \ :<C-u>Unite -buffer-name=files -no-split
-"        \ jump_point file_point buffer_tab
-"        \ file_rec:! file file/new file_mru<CR>
+let g:unite_source_session_enable_auto_save = 1
 let g:unite_enable_start_insert = 1
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_mru_limit = 100
