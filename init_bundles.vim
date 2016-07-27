@@ -117,7 +117,7 @@ nnoremap <silent> <Leader>c  :<C-u>Unite change<CR>
 nnoremap <silent> <Leader>j  :<C-u>Unite jump<CR>
 nnoremap <silent> <Leader>/  :<C-u>Unite line<CR>
 nnoremap <silent> <Leader>m  :<C-u>Unite -silent -start-insert menu:main<CR>
-vnoremap <silent> <Leader>m  :<C-u>Unite -silent -start-insert menu:vmain<CR>
+vnoremap <silent> <Leader>m  "zy:<C-u>Unite -silent -start-insert menu:vmain<CR>
 nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
 nnoremap <silent> <Leader>?  :<C-u>Unite vimgrep<CR>
 nnoremap <silent> <Leader>g  :<C-u>Unite grep:.<CR>
@@ -158,7 +158,7 @@ let g:unite_source_menu_menus.vmain = {'description' : 'shortcuts for visual'}
 let g:unite_source_menu_menus.vmain.command_candidates = [
   \['git log current-block'     , "'<,'>Glog | copen"],
   \['comment block'             , "'<,'>TCommentBlock"],
-  \['copy to clipboard'         , 'normal "+y'],
+  \['copy to clipboard'         , "call setreg('+',@z)"],
   \] " }}}
 " }}}
 
