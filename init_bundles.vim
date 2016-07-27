@@ -125,6 +125,7 @@ nnoremap <silent> <Leader>s  :<C-u>Unite -select=1 session<CR>
 nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
 nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
 let g:unite_source_session_enable_auto_save = 1
+call unite#custom#source('session', 'matchers', ['sorter_ftime', 'sorter_reverse'])
 let g:unite_enable_start_insert = 1
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_mru_limit = 100
