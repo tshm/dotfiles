@@ -19,6 +19,8 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
+"Plug 'kmnk/vim-unite-giti'
+"Plug 'junegunn/gv.vim'
 Plug 'sukima/xmledit', {'for': 'xml'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'ElmCast/elm-vim', {'for': 'elm'}
@@ -70,7 +72,7 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 " Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " AutoComplPop like behavior.
 "let g:neocomplete#enable_auto_select = 1
@@ -115,6 +117,7 @@ nnoremap <silent> <Leader>c  :<C-u>Unite change<CR>
 nnoremap <silent> <Leader>j  :<C-u>Unite jump<CR>
 nnoremap <silent> <Leader>/  :<C-u>Unite line<CR>
 nnoremap <silent> <Leader>m  :<C-u>Unite -silent -start-insert menu:main<CR>
+vnoremap <silent> <Leader>m  :<C-u>Unite -silent -start-insert menu:vmain<CR>
 nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
 nnoremap <silent> <Leader>?  :<C-u>Unite vimgrep<CR>
 nnoremap <silent> <Leader>g  :<C-u>Unite grep:.<CR>
@@ -163,14 +166,19 @@ let g:unite_source_menu_menus.main.command_candidates = [
   \['git status'                , 'Gstatus'],
   \['git diff'                  , 'Gvdiff'],
   \['git commit'                , 'Gcommit'],
-  \['git log'                   , 'exe "silent Glog | Unite quickfix"'],
+  \['git log current-file'      , 'Glog | copen'],
   \['git blame'                 , 'Gblame'],
   \['git ls-files'              , 'Unite file_rec/git'],
   \['git grep'                  , 'Unite grep/git'],
-  \['paste'                     , 'normal "+gP'],
+  \['paste from clipboard'      , 'normal "+gP'],
   \['vdiffsplit'                , 'vert diffs #'],
   \['toggle wrap'               , 'set !wrap'],
-  \['comment block'             , 'TCommentBlock'],
+  \]
+let g:unite_source_menu_menus.vmain = {'description' : 'shortcuts for visual'}
+let g:unite_source_menu_menus.vmain.command_candidates = [
+  \['git log current-block'     , "'<,'>Glog | copen"],
+  \['comment block'             , "'<,'>TCommentBlock"],
+  \['copy to clipboard'         , 'normal "+y'],
   \] " }}}
 " }}}
 
