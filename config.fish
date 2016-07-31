@@ -1,7 +1,11 @@
 # source ~/.dotfiles/config.fish
 #
 set -x SHELL /usr/bin/fish
-set -x PAGER "lv -c"
+set -x EDITOR "vim"
+set -x PAGER "less"
+if [ -x "lv" ]
+  set -x PAGER "lv -c"
+end
 
 if status --is-login
   cd $HOME
@@ -15,7 +19,7 @@ if status --is-interactive
   set -x PATH ~/bin $PATH
 
   function rm; command rm -i $argv; end
-  function vim; env SHELL=sh command vim $argv; end
+  function vi; command vim $argv; end
   function ff; command ranger $argv; end
 
   # helper functions

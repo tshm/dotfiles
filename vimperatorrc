@@ -12,8 +12,6 @@ let mapleader=","
 noremap a <nop>
 noremap A <nop>
 noremap e :set gui=invnavigation,invbookmarks<CR>
-noremap x :bd<CR>
-noremap X u
 noremap <BS> H
 noremap j <down>
 noremap k <up>
@@ -32,6 +30,7 @@ noremap <leader>r :source ~/.vimperatorrc<CR>
 "set previouspattern+='^前'
 
 ignorekeys add mail\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
+ignorekeys add youtube\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 ignorekeys add inbox\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 ignorekeys add getpocket\\.com -except <space>,<C-p>,<C-n>,d,h,l,P,t,T,r,:
 ignorekeys add mindmup\\.com -except <C-p>,<C-n>,h,l,t,:
