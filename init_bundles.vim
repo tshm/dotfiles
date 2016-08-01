@@ -121,7 +121,7 @@ vnoremap <silent> <Leader>m  "zy:<C-u>Unite -silent -start-insert menu:vmain<CR>
 nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
 nnoremap <silent> <Leader>?  :<C-u>Unite vimgrep<CR>
 nnoremap <silent> <Leader>g  :<C-u>Unite grep:.<CR>
-nnoremap <silent> <Leader>s  :<C-u>Unite -select=1 session<CR>
+nnoremap <silent> <Leader>s  :<C-u>Unite -select=1 -no-start-insert session<CR>
 nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
 nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
 let g:unite_source_session_enable_auto_save = 1
