@@ -22,7 +22,7 @@ set wrap linebreak textwidth=0 colorcolumn=80
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set backspace=indent,eol,start
 set foldmethod=syntax foldlevelstart=9
-set nobackup writebackup
+set nobackup writebackup noundofile
 set hlsearch incsearch magic
 set ignorecase smartcase infercase
 set virtualedit+=block
