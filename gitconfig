@@ -3,7 +3,7 @@
 	filemode = false
 	editor = vim
 	ignorecase = false
-	autocrlf = input
+	autocrlf = false
 [alias]
 	st = status
 	br = branch
