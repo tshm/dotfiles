@@ -121,11 +121,11 @@ vnoremap <silent> <Leader>m  "zy:<C-u>Unite -silent -start-insert menu:vmain<CR>
 nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
 nnoremap <silent> <Leader>?  :<C-u>Unite vimgrep<CR>
 nnoremap <silent> <Leader>g  :<C-u>Unite grep:.<CR>
-nnoremap <silent> <Leader>s  :<C-u>Unite -select=1 -no-start-insert session<CR>
+nnoremap <silent> <Leader>s  :<C-u>Unite -select=1 session<CR>
 nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
 nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
 let g:unite_source_session_enable_auto_save = 1
-call unite#custom#source('session', 'matchers', ['sorter_ftime', 'sorter_reverse'])
+call unite#custom#source('session', 'matchers', ['sorter_ftime', 'sorter_reverse', 'matcher_regexp'])
 let g:unite_enable_start_insert = 1
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_mru_limit = 100
