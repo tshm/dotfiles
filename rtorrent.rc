@@ -27,9 +27,19 @@ session = ~/.rtorrent.session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
-schedule = watch_directory,5,5,load_start=~/tmp/yt/*.torrent
+schedule = watch_directory_1,10,10,"load_start=~/sync/yt/*.torrent,d.set_custom1=~/sync/srv/tor"
+schedule = watch_directory_2,10,10,"load_start=~/sync/yt/Video/*.torrent,d.set_custom1=~/sync/yt/Video"
+schedule = watch_directory_3,10,10,"load_start=~/sync/yt/ebk/*.torrent,d.set_custom1=~/sync/yt/ebk"
+schedule = watch_directory_4,10,10,"load_start=~/sync/yt/cin/*.torrent,d.set_custom1=~/sync/srv/media"
 schedule = untied_directory,7,5,stop_untied=
 schedule = tied_directory,6,5,start_tied=
+
+# Move files when download completes
+system.method.set_key = event.download.finished,move_complete,"d.set_directory=$d.get_custom1= ;execute=mv,-u,$d.get_base_path=,$d.get_custom1="
+system.method.set_key = event.download.finished,notify_me,"execute=~/bin/torend.sh,$d.get_name="
+
+# When seeding ratio is reached close the torrent
+system.method.set = group.seeding.ratio.command, d.close=
 
 # Close torrents when diskspace is low.
 schedule = low_diskspace,5,60,close_low_diskspace=256M
@@ -46,13 +56,6 @@ ratio.min.set=400
 ratio.max.set=2000
 # Upload a minimum of 250 MB
 ratio.upload.set=250M
-
-# When seeding ratio is reached close the torrent
-system.method.set = group.seeding.ratio.command, d.close=
-
-# Move files when download completes
-system.method.set_key = event.download.finished,move_complete,"execute=mv,-n,$d.get_base_path=,~/tmp/srv/tor/;d.set_directory=~/tmp/srv/tor/"
-#system.method.set_key = event.download.finished,move_complete,"execute=mv,-n,$d.get_base_path=,./unsorted/;d.set_directory=./unsorted/"
 
 # Port range to use for listening.
 port_range = 49164-49164
