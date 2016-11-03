@@ -74,6 +74,9 @@ if status --is-interactive
     bind -M insert \e\x7f backward-kill-word
     bind -M insert \eb  backward-word
     bind -M insert \ef  forward-word
+    bind -M insert \ca  beginning-of-line
+    bind -M insert \ce  end-of-line
+    bind -M insert \ck  kill-line
     bind -M insert \cb  backward-char
     bind -M insert \cf  forward-char
     bind -M insert \cl  'clear; commandline -f repaint'
