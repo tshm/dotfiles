@@ -153,7 +153,8 @@ let g:unite_source_menu_menus.main.command_candidates = [
   \['git grep'                  , 'Unite grep/git'],
   \['paste from clipboard'      , 'normal "+gP'],
   \['vdiffsplit'                , 'vert diffs #'],
-  \['toggle wrap'               , 'set !wrap'],
+  \['toggle wrap'               , 'set wrap!'],
+  \['toggle list'               , 'set list!'],
   \]
 let g:unite_source_menu_menus.vmain = {'description' : 'shortcuts for visual'}
 let g:unite_source_menu_menus.vmain.command_candidates = [
@@ -177,7 +178,8 @@ let g:syntastic_auto_loc_list=1
 " Elm {{{
 let g:elm_setup_keybindings = 0
 let g:elm_syntastic_show_warnings = 1
-let g:elm_make_output_file = '.tmp.js'
+let g:elm_make_output_file = '/tmp/tmp.js'
+let g:syntastic_elm_checkers=["elm_make"]
 " }}}
 
 " vim: foldmethod=marker
