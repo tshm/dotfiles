@@ -15,6 +15,7 @@
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	export = !git archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
+	prune = pull --prune
 [color]
 	ui = true
 [user]
