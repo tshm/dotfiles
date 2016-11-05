@@ -29,7 +29,7 @@ GetCurrentMonitor(m)
 }
 
 ; Tile Left(-1) or Right(1) the current window.
-TileWin(Direction = -1, WidthRatio = 0.65)
+TileWin(Direction = -1, WidthRatio = 0.60)
 {
   WorkArea := GetCurrentMonitor(50)
   ScreenWidth := WorkArea["Right"] - WorkArea["Left"]
