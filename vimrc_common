@@ -162,13 +162,22 @@ autocmd BufReadPost * call AutoTabConfig()
 " }}}
 
 " Load vimrc / .session.vim from local folder {{{
-if !argc()
-  try
-    silent source ./.session.vim
-  catch
-    let this_session = "./.session.vim"
-  endtry
-  autocmd VimLeave * exec "mks! " . v:this_session
+if argc() == 0
+  let v:this_session = getcwd() . '/.session.vim'
+  if filereadable(v:this_session)
+    fu! RestoreSession()
+      exec 'source ' . v:this_session
+      if bufexists(1)
+        for bf in range(1, bufnr('$'))
+          if bufwinnr(bf) == -1
+            exec 'badd ' . bf
+          endif
+        endfor
+      endif
+    endfunction
+    autocmd VimEnter * nested call RestoreSession()
+  endif
+  autocmd VimLeavePre * exec 'mks! ' . v:this_session
 endif
 " }}}
 let g:syntastic_javascript_checkers = ['eslint'] 

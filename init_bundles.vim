@@ -28,7 +28,7 @@ Plug 'leafgarland/typescript-vim'
 "let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
 "Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 "Plug 'Konfekt/FastFold'
-Plug 'Shougo/vimproc.vim' ", {'do' : 'make'}
+"Plug 'Shougo/vimproc.vim' ", {'do' : 'make'}
 call plug#end()
 " }}}
 

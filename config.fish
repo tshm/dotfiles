@@ -79,6 +79,8 @@ if status --is-interactive
     bind -M insert \ck  kill-line
     bind -M insert \cb  backward-char
     bind -M insert \cf  forward-char
+    bind -M insert \cp  up-or-search
+    bind -M insert \cn  down-or-search
     bind -M insert \cl  'clear; commandline -f repaint'
     type -q getclip; and bind -M insert \ey 'commandline -i ( getclip; echo )[1]'
     type -q xsel;    and bind -M insert \ey 'commandline -i ( xsel -p; echo )[1]'
