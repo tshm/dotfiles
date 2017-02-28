@@ -17,7 +17,7 @@ Plug 'Shougo/unite-session'
 Plug 'Shougo/neocomplete'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 "Plug 'kmnk/vim-unite-giti'
 "Plug 'junegunn/gv.vim'
@@ -25,7 +25,6 @@ Plug 'sukima/xmledit', {'for': 'xml'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'ElmCast/elm-vim', {'for': 'elm'}
 Plug 'leafgarland/typescript-vim'
-"let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
 "Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 "Plug 'Konfekt/FastFold'
 "Plug 'Shougo/vimproc.vim' ", {'do' : 'make'}
@@ -164,22 +163,20 @@ let g:unite_source_menu_menus.vmain.command_candidates = [
   \] " }}}
 " }}}
 
+" ale {{{
+"let g:ale_lint_on_save = 1
+"let g:ale_lint_on_text_changed = 0
+let g:ale_open_list = 1
+" }}}
+
 " GtagsCScope {{{
 set cscopetag
 let GtagsCscope_Auto_Load=0
 " }}}
 
-" Syntastic {{{
-let g:syntastic_enable_signs=1
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-" }}}
-
 " Elm {{{
 let g:elm_setup_keybindings = 0
-let g:elm_syntastic_show_warnings = 1
 let g:elm_make_output_file = '/tmp/tmp.js'
-let g:syntastic_elm_checkers=["elm_make"]
 " }}}
 
 " vim: foldmethod=marker
