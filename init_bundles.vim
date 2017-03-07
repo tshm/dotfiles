@@ -24,7 +24,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'sukima/xmledit', {'for': 'xml'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'ElmCast/elm-vim', {'for': 'elm'}
-Plug 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 "Plug 'Konfekt/FastFold'
 "Plug 'Shougo/vimproc.vim' ", {'do' : 'make'}
@@ -167,6 +168,7 @@ let g:unite_source_menu_menus.vmain.command_candidates = [
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_open_list = 1
+let g:indent_guides_enable_on_vim_startup = 1
 " }}}
 
 " GtagsCScope {{{
