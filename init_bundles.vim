@@ -167,7 +167,7 @@ let g:unite_source_menu_menus.vmain.command_candidates = [
 " ale {{{
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
-let g:ale_open_list = 1
+let g:ale_open_list = 0
 let g:indent_guides_enable_on_vim_startup = 1
 " }}}
 
