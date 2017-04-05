@@ -19,5 +19,5 @@ echo "source-file $SRC/tmux.conf" > ~/.tmux.conf
 cp $SRC/vimrc ~/.vimrc
 
 # vimperator
-echo "source $SRC/vimperatorrc" > ~/.vimperatorrc
+# echo "source $SRC/vimperatorrc" > ~/.vimperatorrc
 

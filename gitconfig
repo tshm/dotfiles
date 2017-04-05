@@ -4,6 +4,7 @@
 	editor = vim
 	ignorecase = false
 	autocrlf = false
+	excludesfile = ~/.dotfiles/gitignore
 [alias]
 	st = status
 	br = branch
