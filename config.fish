@@ -7,12 +7,12 @@ if [ -x "lv" ]
   set -x PAGER "lv -c"
 end
 
-if status --is-login
+if status is-login
   cd $HOME
   test -f .login.fish; and source .login.fish
 end
 
-if status --is-interactive
+if status is-interactive
   test -f .local.fish; and source .local.fish
   set -x LESS "--quit-if-one-screen -R -iMX"
   set -x LS_COLORS "di=32:ln=36:pi=31:so=33:bd=44;37:cd=44;37:ex=35"
@@ -98,7 +98,7 @@ if status --is-interactive
     bind -M insert \eq  _stack
     bind -M insert \e7  _quote
     bind -M insert \e\' _quote
-    bind -M insert \eh  __fish_man_page
+    # bind -M insert \eh  __fish_man_page
     bind -M insert \ep  '__fish_paginate; commandline -f execute'
   end
 
@@ -110,4 +110,4 @@ if status --is-interactive
 
 end
 
-# vi: ft=zsh
+# vi: ft=fish

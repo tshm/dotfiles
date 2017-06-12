@@ -39,34 +39,39 @@ preexec () {
   echo -ne "\ek${1%% *}\e\\"
 }
 
-setopt   notify globdots correct cdablevars automenu autolist
+setopt   notify globdots correct cdablevars auto_menu auto_list
 setopt   correctall noautocd recexact longlistjobs sharehistory
-setopt   autoresume histignoredups noclobber histfindnodups
+setopt   autoresume hist_ignore_dups noclobber histfindnodups
 setopt   extendedglob rcquotes hashcmds  histexpiredupsfirst
-setopt   globcomplete ignoreeof rmstarsilent histallowclobber
-setopt   autopushd pushdminus pushdignoredups printeightbit
+setopt   globcomplete ignore_eof rmstarsilent histallowclobber
+setopt   auto_pushd pushdminus pushd_ignore_dups print_eight_bit
+setopt   magic_equal_subst print_exit_value transient_rprompt
 unsetopt bgnice listbeep recexact listambiguous 
 
 bindkey -e               # emacs key bindings
 bindkey ' ' magic-space  # also do history expansino on space
 bindkey "\e[Z" reverse-menu-complete
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
 
-autoload -U edit-command-line
+autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '\ee' edit-command-line
 precmd() { jobs; }
 
 # The following lines were added by compinstall
-autoload -U compinit
-compinit -u
+autoload -Uz compinit && compinit -u
 
+autoload -Uz  vcs_info
+
+bindkey '^r' anyframe-widget-put-history
+
+zstyle ':completion:*' use-cache true
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' file-sort name
 zstyle ':completion:*' format 'Completing %d'
