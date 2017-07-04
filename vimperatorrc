@@ -27,7 +27,7 @@ noremap <F9> :js toggleProxy()<CR>
 noremap <leader>r :source ~/.vimperatorrc<CR>
 
 "set nextpattern+='^次'
-"set previouspattern+='^前'
+"set prevpattern+='^前'
 
 ignorekeys add mail\\.google\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
 ignorekeys add youtube\\.com -except <C-p>,<C-n>,h,l,P,t,o,T,r,:
