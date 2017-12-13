@@ -43,7 +43,7 @@ set laststatus=2
 set statusline=[%n]%f%m%r%h%w\ [%Y/%{&ff}/%{&fenc}]\ (%l/%L=%p%%,%v)
 set virtualedit+=block
 set relativenumber number
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:<
+set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:<
 set directory+=,$TMP
 
 set imsearch=0 iminsert=0
