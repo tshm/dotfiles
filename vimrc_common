@@ -61,8 +61,6 @@ nnoremap <silent> <C-l> gt
 nnoremap <silent> <C-h> gT
 nnoremap <Leader><space> :e #<CR>
 nnoremap <Leader>w :wall<CR>
-nnoremap <C-n> :cnext<bar>:cc<bar>:cw<CR>
-nnoremap <C-p> :cprev<bar>:cc<bar>:cw<CR>
 " inc / decl
 nnoremap + <c-a>
 nnoremap - <c-x>

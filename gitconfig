@@ -10,6 +10,16 @@
 	br = branch
 	ci = commit
 	co = checkout
+	pur = pull --rebase
+	prune = fetch --prune
+	abort = checkout -- .
+  wait = reset HEAD
+  undo = reset --soft HEAD^
+	amend = commit --amend --no-edit
+#
+  l = log --pretty=oneline --abbrev-commit --graph --decorate
+	changelog = "!sh -c \"git log --oneline --no-merges $1..HEAD\" -"
+#
 	df = !sh -c 'git diff --stat -p -w --color $* | $PAGER' -
 	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | $PAGER' -
 	l  = !git log --graph --color | $PAGER
@@ -22,7 +32,6 @@
 [user]
 	name = Tosh Satake
 	email = 2sm@csc.jp
-
-# vim: ft=gitconfig
 [push]
-	default = simple
+	default = current
+# vim: ft=gitconfig
