@@ -1,5 +1,6 @@
 #-*-shell-script-*-
 # vim: ft=zsh
+source ~/.dotfiles/zsh/plugins.zsh
 
 export RSYNC_RSH='ssh'
 export EDITOR=vim
