@@ -27,6 +27,8 @@
 	export = !git archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
 	prune = pull --prune
+[diff]
+	compactionHeuristic = true
 [color]
 	ui = true
 [user]
