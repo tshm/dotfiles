@@ -21,6 +21,7 @@ if status is-interactive
   function rm; command rm -i $argv; end
   function vi; command vim $argv; end
   function ff; command ranger $argv; end
+  function gf; command git flow $argv; end
 
   # helper functions
   set __CMD_STACK
