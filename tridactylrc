@@ -1,0 +1,31 @@
+" Tridactyl config script
+" run ':source' to reload this script
+
+bind ;c hint -c [class*="expand"],[class="togg"]
+
+bind h tabprev
+bind l tabnext
+bind j scrollline 5
+bind k scrollline -5
+bind J scrollline 20
+bind K scrollline -10
+
+set hintfiltermode vimperator-reflow
+set hintchars 4327895610
+
+set csp clobber
+fixamo_quiet
+
+" ignore some keys on certain sites
+alias ignore_some_keys composite unbind k | unbind j | unbind o | unbind a
+autocmd TabEnter mail.google.com ignore_some_keys
+autocmd TabLeft mail.google.com source
+autocmd DocStart mail.google.com source
+autocmd DocEnd mail.google.com source
+
+autocmd TabEnter getpocket.com ignore_some_keys
+autocmd TabLeft getpocket.com source
+autocmd DocStart getpocket.com source
+autocmd DocEnd getpocket.com source
+
+" vim: set ft=vim:

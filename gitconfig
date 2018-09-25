@@ -21,8 +21,8 @@
 	l = log --pretty=oneline --abbrev-commit --graph --decorate
 	changelog = "!sh -c \"git log --oneline --no-merges $1..HEAD\" -"
 #
-	df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $* | $PAGER' -
-	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | $PAGER' -
+	df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $* | diff-so-fancy | $PAGER' -
+	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | diff-so-fancy | $PAGER' -
 	l  = !git log --graph --color | $PAGER
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	export = !git archive --format=zip -v HEAD > archive.zip
