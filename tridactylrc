@@ -12,20 +12,23 @@ bind K scrollline -10
 
 set hintfiltermode vimperator-reflow
 set hintchars 4327895610
+set allowautofocus false
 
 set csp clobber
 fixamo_quiet
 
 " ignore some keys on certain sites
-alias ignore_some_keys composite unbind k | unbind j | unbind o | unbind a
+alias ignore_some_keys composite unbind k | unbind j | unbind o | unbind a | unbind x
+alias unignore_some_keys composite bind j scrollline 5 | bind k scrollline -5 | reset o a x
+
 autocmd TabEnter mail.google.com ignore_some_keys
-autocmd TabLeft mail.google.com source
-autocmd DocStart mail.google.com source
-autocmd DocEnd mail.google.com source
+autocmd DocStart mail.google.com ignore_some_keys
+autocmd TabLeft mail.google.com unignore_some_keys
+autocmd DocEnd mail.google.com unignore_some_keys
 
 autocmd TabEnter getpocket.com ignore_some_keys
-autocmd TabLeft getpocket.com source
-autocmd DocStart getpocket.com source
-autocmd DocEnd getpocket.com source
+autocmd DocStart getpocket.com ignore_some_keys
+autocmd TabLeft getpocket.com unignore_some_keys
+autocmd DocEnd getpocket.com unignore_some_keys
 
 " vim: set ft=vim:
