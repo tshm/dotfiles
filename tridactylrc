@@ -8,10 +8,7 @@ bind l tabnext
 bind j scrollline 5
 bind k scrollline -5
 bind J scrollline 20
-bind K scrollline -10
-
-alias tabclose_keyreset composite unignore_some_keys | tabclose
-bind d tabclose_keyreset
+bind K scrollline -20
 
 set hintfiltermode vimperator-reflow
 set hintchars 4327895610
@@ -32,7 +29,6 @@ unbindurl getpocket.com k
 unbindurl getpocket.com j
 unbindurl getpocket.com o
 unbindurl getpocket.com a
-unbindurl getpocket.com x
 unbindurl getpocket.com x
 
 " vim: set ft=vim:
