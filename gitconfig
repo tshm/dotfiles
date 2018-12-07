@@ -6,6 +6,8 @@
 	autocrlf = false
 	excludesfile = ~/.dotfiles/gitignore
 	whitespace = cr-at-eol
+[commit]
+	template = ~/.dotfiles/gitmessage.txt
 [alias]
 	st = status
 	br = branch
@@ -37,4 +39,7 @@
 	email = 2sm@csc.jp
 [push]
 	default = current
+[tig]
+	tab-size = 2
+	main-view-author = no
 # vim: ft=gitconfig
