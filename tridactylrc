@@ -9,6 +9,10 @@ bind j scrollline 5
 bind k scrollline -5
 bind J scrollline 20
 bind K scrollline -20
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
 
 set hintfiltermode vimperator-reflow
 set hintchars 4327895610
