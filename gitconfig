@@ -6,6 +6,7 @@
 	autocrlf = false
 	excludesfile = ~/.dotfiles/gitignore
 	whitespace = cr-at-eol
+	pager = diff-so-fancy | less -FXRi
 [commit]
 	template = ~/.dotfiles/gitmessage.txt
 [alias]
@@ -23,9 +24,9 @@
 	l = log --pretty=oneline --abbrev-commit --graph --decorate
 	changelog = "!sh -c \"git log --oneline --no-merges $1..HEAD\" -"
 #
-	df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $* | npx diff-so-fancy | $PAGER' -
-	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $* | npx diff-so-fancy | $PAGER' -
-	l  = !git log --graph --color | $PAGER
+	df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $*' -
+	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $*' -
+	l  = !git log --graph --color
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	export = !git archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
