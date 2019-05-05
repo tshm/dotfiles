@@ -1,23 +1,37 @@
-source ~/.zplug/init.zsh
 echo "handle plugins"
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-# Make sure to use double quotes
-zplug "zsh-users/zsh-history-substring-search"
+# init
+source ~/.zplugin/bin/zplugin.zsh
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-# Can manage everything e.g., other person's zshrc
-zplug "tcnksm/docker-alias", use:zshrc
+# plugin at load time
+zplugin light zdharma/fast-syntax-highlighting
+zplugin light zsh-users/zsh-autosuggestions
+zplugin light zsh-users/zsh-completions
 
-# Supports oh-my-zsh plugins and the like
-zplug "plugins/git",   from:oh-my-zsh
+zplugin ice as"program" pick"bin/git-dsf"
+zplugin light zdharma/zsh-diff-so-fancy
+zplugin light nocttuam/autodotenv
+
+# async loading
+zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
+zplugin ice wait'!0'; zplugin light zsh-users/zsh-history-substring-search
+zplugin ice wait'!0'; zplugin light vim/vim
+zplugin ice from"gh-r" as"program"; zplugin load junegunn/fzf-bin
+zplugin ice "rupa/z" pick"z.sh"; zplugin light "rupa/z"
+#zplugin load zpm-zsh/clipboard
+zplugin light zsh-users/zaw
+
+zplugin snippet 'OMZ::lib/completion.zsh'
+zplugin snippet 'OMZ::lib/compfix.zsh'
+
+# finalize
+autoload -U compinit
+compinit
 
 # Also prezto
-zplug "modules/prompt", from:prezto
+#zplug "modules/prompt", from:prezto
 
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "chrissicool/zsh-256color"
-
-zplug load --verbose
+#zplug "chrissicool/zsh-256color"
 
