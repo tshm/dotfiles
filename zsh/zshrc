@@ -20,9 +20,6 @@ fignore=('~' .bak)
 hash -d 'D=/usr/share/doc'
 
 alias pstree='pstree -A'
-alias aumix='LANG= aumix'
-alias sudo='LANG= sudo'
-alias octave='octave --traditional'
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'       # no spelling correction on cp
 alias ls='ls --color=auto -F'
@@ -30,8 +27,7 @@ alias ll='ls --color=auto -Fl'
 alias la='ls --color=auto -Fla'
 alias dir='ls -l -h'
 alias rm='rm -i'
-alias ww='w3m -B'
-alias scala='rlwrap scala -Xnojline'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 
 PROMPT_COLOR="green"
 PROMPT="%F{$PROMPT_COLOR}-[%m:%~]---------------------%f
@@ -82,7 +78,21 @@ function accept_and_pager() {
 }
 zle -N accept_and_pager
 bindkey '^[p' accept_and_pager
-bindkey '^[7' quote-region
+function auto_quote() {
+	if [ "$#LBUFFER" -eq 0 ]; then
+		zle quote-line
+	elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
+		RBUFFER="\"\""
+		zle forward-char
+	else
+		zle backward-word
+		RBUFFER="\"${RBUFFER}\""
+		zle end-of-line
+	fi
+}
+zle -N auto_quote
+bindkey '^[7' auto_quote
+bindkey '^[k' insert-last-word
 
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' auto-description 'specify: %d'
@@ -99,15 +109,7 @@ zstyle ':completion:*' verbose true
 zstyle :compinstall filename '/home/tshm/.zshrc'
 # End of lines added by compinstall
 
-if [ "$TERM" = "cygwin" ]; then
-	export CYGWIN=binmode
-	export SHELL=zsh
-	export LV="-Os"
-	unalias ls; alias ls='ls --color=auto -F --show-control-chars'
-	alias e='cygstart'
-	alias man='LANG= man'
-fi
-
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
+
