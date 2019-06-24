@@ -10,6 +10,7 @@ endfun
 call SetupVimPlug()
 
 call plug#begin('~/.vim/plugged')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'posva/vim-vue'
 Plug 'Shougo/unite.vim'
 Plug 'tshm/unite-gitlsfiles'

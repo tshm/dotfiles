@@ -9,6 +9,7 @@ zplugin light zdharma/fast-syntax-highlighting
 #zplugin ice wait'1' atload'_zsh_autosuggest_start'
 zplugin light zsh-users/zsh-autosuggestions
 zplugin light zsh-users/zsh-completions
+zplugin light mollifier/anyframe
 
 zplugin ice as"program" pick"bin/git-dsf"; zplugin load zdharma/zsh-diff-so-fancy
 zplugin light nocttuam/autodotenv
