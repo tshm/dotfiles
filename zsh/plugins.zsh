@@ -5,7 +5,7 @@ source ~/.zplugin/bin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-zplugin light zdharma/fast-syntax-highlighting
+#zplugin light zdharma/fast-syntax-highlighting
 #zplugin ice wait'1' atload'_zsh_autosuggest_start'
 zplugin light zsh-users/zsh-autosuggestions
 zplugin light zsh-users/zsh-completions

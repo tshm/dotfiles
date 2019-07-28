@@ -3,7 +3,7 @@
 	filemode = false
 	editor = vim
 	ignorecase = false
-	autocrlf = false
+	autocrlf = input
 	excludesfile = ~/.dotfiles/gitignore
 	whitespace = cr-at-eol
 	pager = diff-so-fancy | less -FXRi
