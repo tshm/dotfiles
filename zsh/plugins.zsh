@@ -16,7 +16,6 @@ zplugin light nocttuam/autodotenv
 
 zplugin ice pick"async.zsh" src"pure.zsh"; zplugin load sindresorhus/pure
 zplugin light zsh-users/zsh-history-substring-search
-zplugin light vim/vim
 zplugin ice from"gh-r" as"program"; zplugin load junegunn/fzf-bin
 zplugin ice "rupa/z" pick"z.sh"; zplugin load "rupa/z"
 #zplugin load zpm-zsh/clipboard
