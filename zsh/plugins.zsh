@@ -11,13 +11,13 @@ zplg light zsh-users/zsh-autosuggestions
 zplg light zsh-users/zsh-completions
 zplg light mollifier/anyframe
 
-zplg ice wait"0" as"program" pick"bin/git-dsf"; zplg load zdharma/zsh-diff-so-fancy
-zplg ice wait"0"; zplg light nocttuam/autodotenv
+zplg ice as"program" pick"bin/git-dsf"; zplg load zdharma/zsh-diff-so-fancy
+zplg light nocttuam/autodotenv
 
 zplg ice pick"async.zsh" src"pure.zsh"; zplg load sindresorhus/pure
-zplg ice wait"0"; zplg light zsh-users/zsh-history-substring-search
+zplg light zsh-users/zsh-history-substring-search
 
-if [ "$LOAD_FZF" -ne "0" ]; then
+if [ -z "$LOAD_FZF" -o "$LOAD_FZF" -ne "0" ]; then
     zplg ice from"gh-r" as"program"; zplg load junegunn/fzf-bin
 fi
 zplg ice "rupa/z" pick"z.sh"; zplg load "rupa/z"
