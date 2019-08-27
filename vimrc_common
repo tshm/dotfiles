@@ -28,7 +28,9 @@ set ignorecase smartcase infercase
 set virtualedit+=block
 set switchbuf=usetab
 set shortmess=atI
-set clipboard=unnamed,autoselect
+if !has('nvim')
+  set clipboard=unnamed,autoselect
+endif
 set modeline modelines=2
 set ambiwidth=double
 set encoding=utf-8 fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp
