@@ -13,6 +13,7 @@ bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
+bind gd tabdetach
 
 set hintfiltermode vimperator-reflow
 set hintchars 4327895610
@@ -21,6 +22,20 @@ set allowautofocus false
 set csp clobber
 fixamo_quiet
 
+" Only hint search results on Google
+bindurl www.google.com f hint -Jc .rc > .r > a
+bindurl www.google.com F hint -Jtc .rc>.r>a
+
+" outlook
+unbindurl outlook.office.com k
+unbindurl outlook.office.com j
+unbindurl outlook.office.com o
+unbindurl outlook.office.com a
+unbindurl outlook.office.com x
+unbindurl outlook.office.com e
+unbindurl outlook.office.com I
+
+" gmail
 unbindurl mail.google.com k
 unbindurl mail.google.com j
 unbindurl mail.google.com o
@@ -29,6 +44,7 @@ unbindurl mail.google.com x
 unbindurl mail.google.com e
 unbindurl mail.google.com I
 
+" pocket
 unbindurl getpocket.com k
 unbindurl getpocket.com j
 unbindurl getpocket.com o
