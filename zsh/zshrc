@@ -44,7 +44,7 @@ setopt   correctall noautocd recexact longlistjobs sharehistory
 setopt   autoresume extendedglob rcquotes hashcmds
 setopt   globcomplete ignore_eof rmstarsilent histallowclobber
 setopt   auto_pushd pushdminus print_eight_bit
-setopt   magic_equal_subst print_exit_value transient_rprompt
+setopt   magic_equal_subst transient_rprompt
 unsetopt bgnice listbeep recexact listambiguous 
 
 bindkey -e               # emacs key bindings
