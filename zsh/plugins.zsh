@@ -5,27 +5,31 @@ source ~/.zplugin/bin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-#zplg light zdharma/fast-syntax-highlighting
-#zplg ice wait'1' atload'_zsh_autosuggest_start'
-zplg light zsh-users/zsh-autosuggestions
-zplg light zsh-users/zsh-completions
-zplg light mollifier/anyframe
+zplugin load zdharma/history-search-multi-word
+#zplugin light zdharma/fast-syntax-highlighting
+zplugin light zsh-users/zsh-autosuggestions
+zplugin ice wait'1' atload'_zsh_autosuggest_start'
+zplugin light zsh-users/zsh-completions
+zplugin light mollifier/anyframe
 
-zplg ice as"program" pick"bin/git-dsf"; zplg load zdharma/zsh-diff-so-fancy
-zplg light nocttuam/autodotenv
+zplugin ice as"program" pick"bin/git-dsf"; zplugin load zdharma/zsh-diff-so-fancy
+zplugin light nocttuam/autodotenv
 
-zplg ice pick"async.zsh" src"pure.zsh"; zplg load sindresorhus/pure
-zplg light zsh-users/zsh-history-substring-search
+zplugin ice as"completion"
+zplugin snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
+zplugin ice pick"async.zsh" src"pure.zsh"; zplugin load sindresorhus/pure
+zplugin light zsh-users/zsh-history-substring-search
 
 if [ -z "$LOAD_FZF" -o "$LOAD_FZF" -ne "0" ]; then
-    zplg ice from"gh-r" as"program"; zplg load junegunn/fzf-bin
+    zplugin ice from"gh-r" as"program"; zplugin load junegunn/fzf-bin
 fi
-zplg ice "rupa/z" pick"z.sh"; zplg load "rupa/z"
-#zplg load zpm-zsh/clipboard
-#zplg light zsh-users/zaw
+zplugin ice "rupa/z" pick"z.sh"; zplugin load "rupa/z"
+#zplugin load zpm-zsh/clipboard
+zplugin ice wait atinit"zpcompinit; zpcdreplay"; zplugin load zsh-users/zaw
 
-zplg snippet 'OMZ::lib/completion.zsh'
-zplg snippet 'OMZ::lib/compfix.zsh'
+zplugin snippet 'OMZ::lib/completion.zsh'
+zplugin snippet 'OMZ::lib/compfix.zsh'
 
 # finalize
 autoload -U compinit

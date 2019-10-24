@@ -27,8 +27,8 @@ alias ll='ls --color=auto -Fl'
 alias la='ls --color=auto -Fla'
 alias dir='ls -l -h'
 alias rm='rm -i'
-alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias gf='git flow'
+alias dco='docker-compose'
 
 PROMPT_COLOR="green"
 PROMPT="%F{$PROMPT_COLOR}-[%m:%~]---------------------%f

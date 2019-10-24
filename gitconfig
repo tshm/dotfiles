@@ -10,7 +10,7 @@
 [commit]
 	template = ~/.dotfiles/gitmessage.txt
 [alias]
-	st = status
+	st = status -sb
 	br = branch
 	ci = commit
 	co = checkout
