@@ -14,7 +14,7 @@
 	br = branch
 	ci = commit
 	co = checkout
-	pur = pull --rebase
+	pur = pull --rebase --prune
 	prune = fetch --prune
 	abort = checkout -- .
 	wait = reset HEAD
@@ -22,6 +22,7 @@
 	amend = commit --amend --no-edit
 #
 	l = log --pretty=oneline --abbrev-commit --graph --decorate
+	ls = log --simplify-by-decoration --all
 	changelog = "!sh -c \"git log --oneline --no-merges $1..HEAD\" -"
 #
 	df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $*' -
