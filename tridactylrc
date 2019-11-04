@@ -1,5 +1,8 @@
 " Tridactyl config script
 " run ':source' to reload this script
+" autocmd TriStart source ../.dotfiles/tridactylrc
+
+sanitize tridactylsync
 
 bind ;c hint -c [class*="expand"],[class="togg"]
 
