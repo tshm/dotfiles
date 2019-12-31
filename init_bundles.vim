@@ -12,22 +12,20 @@ call SetupVimPlug()
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'itchyny/lightline.vim'
-Plug 'posva/vim-vue'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-surround'
-Plug 'w0rp/ale'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-sandwich'
+Plug 'dense-analysis/ale'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
-Plug 'sukima/xmledit', {'for': 'xml'}
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'ElmCast/elm-vim', {'for': 'elm'}
-Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'sheerun/vim-polyglot'
 Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 " }}}
 
-" VimPlug setup. {{{
+" COC setup. {{{
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
