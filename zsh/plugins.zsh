@@ -15,7 +15,7 @@ zplugin light mollifier/anyframe
 zplugin load lukechilds/zsh-nvm
 
 zplugin ice as"program" pick"bin/git-dsf"; zplugin load zdharma/zsh-diff-so-fancy
-zplugin light nocttuam/autodotenv
+#zplugin light nocttuam/autodotenv
 
 zplugin ice as"completion"
 zplugin snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
