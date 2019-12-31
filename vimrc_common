@@ -12,6 +12,7 @@ execute 'source ' . expand('<sfile>:h') . '/init_bundles.vim'
 set hidden autoread
 set history=1000
 set noswapfile nobackup
+set writebackup noundofile
 runtime macros/matchit.vim
 set grepprg=internal
 "set grepprg=grep\ -H\ -n\ $*
@@ -22,12 +23,12 @@ set wrap linebreak textwidth=0 colorcolumn=80
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set backspace=indent,eol,start
 set foldmethod=syntax foldlevelstart=9
-set nobackup writebackup noundofile
 set hlsearch incsearch magic
 set ignorecase smartcase infercase
 set virtualedit+=block
 set switchbuf=usetab
-set shortmess=atI
+set shortmess=atIc
+set signcolumn=yes
 if !has('nvim')
   set clipboard=unnamed,autoselect
 endif
@@ -39,6 +40,7 @@ set formatoptions=lmoq
 set wildmenu wildmode=list:longest wildignore=*.o,*.obj,*.a,*.gif,*.jpg,*.so,*.svn
 set showmatch matchtime=1
 set showcmd
+set cmdheight=2
 set diffopt=filler,iwhite
 set scrolloff=2
 set laststatus=2

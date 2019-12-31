@@ -11,27 +11,124 @@ call SetupVimPlug()
 
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'itchyny/lightline.vim'
 Plug 'posva/vim-vue'
-Plug 'Shougo/unite.vim'
-Plug 'tshm/unite-gitlsfiles'
-Plug 'Shougo/neomru.vim'
-Plug 'Shougo/unite-session'
-Plug 'Shougo/neocomplete'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
-"Plug 'kmnk/vim-unite-giti'
-"Plug 'junegunn/gv.vim'
 Plug 'sukima/xmledit', {'for': 'xml'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'ElmCast/elm-vim', {'for': 'elm'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
-"Plug 'Konfekt/FastFold'
-"Plug 'Shougo/vimproc.vim' ", {'do' : 'make'}
 call plug#end()
+" }}}
+
+" VimPlug setup. {{{
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " }}}
 
 " VimShell {{{
@@ -41,129 +138,64 @@ let g:vimshell_enable_smart_case = 1
 "nmap <F2> <Plug>(vimshell_switch)
 " }}}
 
-" neocomplete setting {{{
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = { 'default' : '' }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return pumvisible() ? "\<C-y>" : "\<CR>"
+" Denite {{{
+call denite#custom#option('_', 'statusline', v:false)
+call denite#custom#option('_', 'split', 'floating')
+call denite#custom#option('_', 'start_filter', v:true)
+nnoremap <silent> <Leader>f  :<C-u>Denite file/point file<CR>
+nnoremap <silent> <Leader>h  :<C-u>Denite file/old<CR>
+nnoremap <silent> <Leader>b  :<C-u>Denite buffer<CR>
+nnoremap <silent> <Leader>R  :<C-u>DeniteBufferDir file/rec<CR>
+nnoremap <silent> <Leader>r  :<C-u>DeniteBufferDir file<CR>
+nnoremap <silent> <Leader>y  :<C-u>Denite history/yank<CR>
+nnoremap <silent> <Leader>c  :<C-u>Denite change<CR>
+nnoremap <silent> <Leader>j  :<C-u>Denite jump<CR>
+nnoremap <silent> <Leader>/  :<C-u>Denite line<CR>
+nnoremap <silent> <Leader>*  :<C-u>Denite line<CR>
+nnoremap <silent> <Leader>g  :<C-u>Denite grep:.<CR>
+nnoremap <silent> <Leader>S  :<C-u>Denite source<CR>
+nnoremap <silent> <Leader>m  :<C-u>Denite menu:main<CR>
+vnoremap <silent> <Leader>m  "zy:<C-u>Denite menu:vmain<CR>
+autocmd FileType denite call s:denite_keys()
+function! s:denite_keys() abort
+  nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d       denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> <Esc>   denite#do_map('quit')
+  nnoremap <silent><buffer><expr> q       denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
 endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-" }}}
-
-" Unite setting {{{
-"nnoremap <silent> <Leader>f  :<C-u>UniteWithCurrentDir -buffer-name=files file <CR>
-nnoremap <silent> <Leader>f  :<C-u>Unite -buffer-name=files file_point file file/new<CR>
-nnoremap <silent> <Leader>h  :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
-nnoremap <silent> <Leader>b  :<C-u>Unite -buffer-name=files buffer<CR>
-nnoremap <silent> <Leader>B  :<C-u>Unite -buffer-name=files bookmark<CR>
-nnoremap <silent> <Leader>F  :<C-u>Unite -buffer-name=file_rec file_rec<CR>
-nnoremap <silent> <Leader>R  :<C-u>UniteWithBufferDir -buffer-name=file_rec file_rec<CR>
-nnoremap <silent> <Leader>r  :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
-nnoremap <silent> <Leader>y  :<C-u>Unite history/yank<CR>
-nnoremap <silent> <Leader>c  :<C-u>Unite change<CR>
-nnoremap <silent> <Leader>j  :<C-u>Unite jump<CR>
-nnoremap <silent> <Leader>/  :<C-u>Unite line<CR>
-nnoremap <silent> <Leader>m  :<C-u>Unite -silent -start-insert menu:main<CR>
-vnoremap <silent> <Leader>m  "zy:<C-u>Unite -silent -start-insert menu:vmain<CR>
-nnoremap <silent> <Leader>*  :<C-u>UniteWithCursorWord line<CR>
-nnoremap <silent> <Leader>?  :<C-u>Unite vimgrep<CR>
-nnoremap <silent> <Leader>g  :<C-u>Unite grep:.<CR>
-nnoremap <silent> <Leader>s  :<C-u>Unite -select=1 session<CR>
-nnoremap <silent> <Leader>S  :<C-u>Unite source<CR>
-nnoremap <silent> <Leader>v  :<C-u>Unite gitlsfiles<CR>
-let g:unite_source_session_enable_auto_save = 1
-call unite#custom#source('session', 'matchers', ['sorter_ftime', 'sorter_reverse', 'matcher_regexp'])
-let g:unite_enable_start_insert = 1
-let g:unite_source_history_yank_enable = 1
-let g:unite_source_file_mru_limit = 100
-let g:unite_source_file_mru_filename_format = ''
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings() "{{{
-  nmap     <buffer> <ESC> <Plug>(unite_exit)
-  imap     <buffer> jj    <Plug>(unite_insert_leave)
-  inoremap <buffer> <C-l> <C-x><C-u><C-p><Down>
-endfunction"}}}
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '-i --vimgrep --nocolor --nogroup --hidden '
-endif
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+  imap <silent><buffer> jj <Plug>(denite_filter_quit)
+  inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+  imap <silent><buffer><expr> <Esc> denite#do_map('quit')
+endfunction
+call denite#custom#option('default', 'prompt', '>>')
 "{{{ menu definition
-let g:unite_source_menu_menus = get(g:,'unite_source_menu_menus',{})
-let g:unite_source_menu_menus.main = {'description' : 'shortcuts'}
-let g:unite_source_menu_menus.main.command_candidates = [
+let s:menus = {}
+let s:menus.main = {'description' : 'shortcuts'}
+let s:menus.main.command_candidates = [
   \['git status'                , 'Gstatus'],
   \['git diff'                  , 'Gvdiff'],
   \['git commit'                , 'Gcommit'],
   \['git log current-file'      , 'Glog | copen'],
   \['git blame'                 , 'Gblame'],
-  \['git ls-files'              , 'Unite file_rec/git'],
-  \['git grep'                  , 'Unite grep/git'],
+  \['git ls-files'              , 'Denite file_rec/git'],
+  \['git grep'                  , 'Denite grep/git'],
   \['paste from clipboard'      , 'normal "+gP'],
   \['vdiffsplit'                , 'vert diffs #'],
   \['toggle wrap'               , 'set wrap!'],
   \['toggle list'               , 'set list!'],
   \]
-let g:unite_source_menu_menus.vmain = {'description' : 'shortcuts for visual'}
-let g:unite_source_menu_menus.vmain.command_candidates = [
+let s:menus.vmain = {'description' : 'shortcuts for visual'}
+let s:menus.vmain.command_candidates = [
   \['git log current-block'     , "'<,'>Glog | copen"],
   \['comment block'             , "'<,'>TCommentBlock"],
   \['copy to clipboard'         , "call setreg('+',@z)"],
   \] " }}}
+call denite#custom#var('menu', 'menus', s:menus)
 " }}}
 
 " ale {{{
