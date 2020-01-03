@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'itchyny/lightline.vim'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'rafi/vim-denite-session'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-commentary'
@@ -29,9 +30,9 @@ call plug#end()
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -137,20 +138,35 @@ let g:vimshell_enable_smart_case = 1
 " }}}
 
 " Denite {{{
+call denite#custom#var('session', 'path', '~/.vim-sessions')
 call denite#custom#option('_', 'statusline', v:false)
 call denite#custom#option('_', 'split', 'floating')
 call denite#custom#option('_', 'start_filter', v:true)
-nnoremap <silent> <Leader>f  :<C-u>Denite file/point file<CR>
+call denite#custom#var('file', 'command',
+\ ['rg', '--files', '--glob', '!.git'])
+call denite#custom#var('file/rec', 'command',
+\ ['rg', '--files', '--glob', '!.git'])
+" Ripgrep command on grep source {{{
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts',
+    \ ['-i', '--vimgrep', '--no-heading'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+" }}}
+nnoremap <silent> <Leader>f  :<C-u>Denite file<CR>
 nnoremap <silent> <Leader>h  :<C-u>Denite file/old<CR>
 nnoremap <silent> <Leader>b  :<C-u>Denite buffer<CR>
-nnoremap <silent> <Leader>R  :<C-u>DeniteBufferDir file/rec<CR>
+nnoremap <silent> <Leader>R  :<C-u>Denite file/rec<CR>
 nnoremap <silent> <Leader>r  :<C-u>DeniteBufferDir file<CR>
 nnoremap <silent> <Leader>y  :<C-u>Denite history/yank<CR>
 nnoremap <silent> <Leader>c  :<C-u>Denite change<CR>
 nnoremap <silent> <Leader>j  :<C-u>Denite jump<CR>
 nnoremap <silent> <Leader>/  :<C-u>Denite line<CR>
-nnoremap <silent> <Leader>*  :<C-u>Denite line<CR>
-nnoremap <silent> <Leader>g  :<C-u>Denite grep:.<CR>
+nnoremap <silent> <Leader>*  :<C-u>DeniteCursorWord line<CR>
+nnoremap <silent> <Leader>g  :<C-u>DeniteCursorWord grep:.<CR>
+nnoremap <silent> <Leader>s  :<C-u>Denite session<CR>
 nnoremap <silent> <Leader>S  :<C-u>Denite source<CR>
 nnoremap <silent> <Leader>m  :<C-u>Denite menu:main<CR>
 vnoremap <silent> <Leader>m  "zy:<C-u>Denite menu:vmain<CR>
@@ -159,6 +175,7 @@ function! s:denite_keys() abort
   nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
   nnoremap <silent><buffer><expr> d       denite#do_map('do_action', 'delete')
   nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> <Tab>   denite#do_map('choose_action')
   nnoremap <silent><buffer><expr> <Esc>   denite#do_map('quit')
   nnoremap <silent><buffer><expr> q       denite#do_map('quit')
   nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')

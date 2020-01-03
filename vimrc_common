@@ -128,51 +128,17 @@ let g:changelog_username="tshm <2sm@csc.jp>"
 let g:load_doxygen_syntax=1
 " }}}
 
-" cscope {{{
-"set csto=0
-"set nocsverb
-" add any database in current directory
-"if filereadable("cscope.out")
-  "cscope add cscope.out
-  "set cst
-"endif
-"set csverb
-"set cscopequickfix=s-,c-,d-,i-,t-,e-
-" }}}
-
-" Tab/Space detection {{{
-function! AutoTabConfig()
-  let [ntab, nspc, shift] = [0,0,4]
-  for line in getbufline(winbufnr(0), 1, "$")
-    if -1 != match(line, '^\t')
-      let ntab += 1
-    elseif -1 != match(line, '^ ')
-      let nspc += 1
-      let spcs = match(line, '[^ ]') / 2 * 2
-      if shift > spcs && spcs > 0
-        let shift = spcs
-      endif
-    endif
-  endfor
-  if l:ntab > l:nspc
-    setlocal noexpandtab
-  else
-    exe "setlocal expandtab tabstop=" . shift . " shiftwidth=" . shift
-  endif
-endfunction
-autocmd BufReadPost * call AutoTabConfig()
-" }}}
-
+let g:session_directory="~/.vim_session"
 " Load vimrc / .session.vim from local folder {{{
-if argc() == 0
-  if filereadable(getcwd() . '/.session.vim')
-    fu! RestoreSession()
-      exec 'source ' . getcwd() . '/.session.vim'
-    endfunction
-    autocmd VimEnter * nested call RestoreSession()
-  endif
-  autocmd VimLeavePre * exec 'mks! ' . getcwd() . '/.session.vim'
-endif
+" if argc() == 0
+"   if filereadable(getcwd() . '/.session.vim')
+"     fu! RestoreSession()
+"       exec 'source ' . getcwd() . '/.session.vim'
+"     endfunction
+"     autocmd VimEnter * nested call RestoreSession()
+"   endif
+"   autocmd VimLeavePre * exec 'mks! ' . getcwd() . '/.session.vim'
+" endif
 " }}}
 let g:syntastic_javascript_checkers = ['eslint'] 
 " vim: foldmethod=marker
