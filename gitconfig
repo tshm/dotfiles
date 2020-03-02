@@ -32,7 +32,7 @@
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	export = !git archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
-	prune = pull --prune
+  nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
 [diff]
 	compactionHeuristic = true
 [color]
@@ -45,4 +45,6 @@
 [tig]
 	tab-size = 2
 	main-view-author = no
+[tig "bind"]
+	main = T ?git tag %(prompt) %(commit)
 # vim: ft=gitconfig
