@@ -1,39 +1,45 @@
 # echo "handle plugins"
 
 # init
-source ~/.zplugin/bin/zplugin.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+source ~/.zinit/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-zplugin load zdharma/history-search-multi-word
-#zplugin light zdharma/fast-syntax-highlighting
-zplugin light zsh-users/zsh-autosuggestions
-zplugin ice wait'1' atload'_zsh_autosuggest_start'
-zplugin light zsh-users/zsh-completions
-zplugin light mollifier/anyframe
+# plugins
+zinit for \
+    light-mode zsh-users/zsh-autosuggestions \
+    light-mode zdharma/fast-syntax-highlighting \
+               zdharma/history-search-multi-word \
+    pick"async.zsh" src"pure.zsh" sindresorhus/pure
+zinit ice wait'1' atload'_zsh_autosuggest_start'
+zinit light zsh-users/zsh-completions
+zinit ice as"program" pick"bin/git-dsf"; zinit load zdharma/zsh-diff-so-fancy
 
-zplugin load lukechilds/zsh-nvm
+zinit ice wait
+zinit load lukechilds/zsh-nvm
 
-zplugin ice as"program" pick"bin/git-dsf"; zplugin load zdharma/zsh-diff-so-fancy
-#zplugin light nocttuam/autodotenv
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
 
-zplugin ice as"completion"
-zplugin snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+zinit light ogham/exa
 
-zplugin ice pick"async.zsh" src"pure.zsh"; zplugin load sindresorhus/pure
-zplugin light zsh-users/zsh-history-substring-search
+zinit ice from"gh-r" as"program" mv"direnv* -> direnv"
+zinit light direnv/direnv
 
+zinit ice as"completion"
+zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
+zinit light zsh-users/zsh-history-substring-search
 if [ -z "$LOAD_FZF" -o "$LOAD_FZF" -ne "0" ]; then
-    zplugin ice from"gh-r" as"program"; zplugin load junegunn/fzf-bin
+    zinit ice from"gh-r" as"program"; zinit load junegunn/fzf-bin
 fi
-zplugin ice "rupa/z" pick"z.sh"; zplugin load "rupa/z"
-#zplugin load zpm-zsh/clipboard
-zplugin ice wait atinit"zpcompinit; zpcdreplay"; zplugin load zsh-users/zaw
+zinit ice "rupa/z" pick"z.sh"; zinit load "rupa/z"
 
-zplugin snippet 'OMZ::lib/completion.zsh'
-zplugin snippet 'OMZ::lib/compfix.zsh'
+zinit ice wait atinit"zpcompinit; zpcdreplay"; zinit load zsh-users/zaw
+zinit snippet 'OMZ::lib/completion.zsh'
+zinit snippet 'OMZ::lib/compfix.zsh'
 
 # finalize
 autoload -U compinit
 compinit
-
