@@ -59,9 +59,7 @@ precmd() { jobs; }
 # The following lines were added by compinstall
 autoload -Uz compinit && compinit -u
 
-autoload -Uz  vcs_info
-
-bindkey '^r' anyframe-widget-put-history
+autoload -Uz vcs_info
 
 bindkey '^[;' autosuggest-execute
 # accept auto completion

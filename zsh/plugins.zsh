@@ -21,8 +21,9 @@ zinit load lukechilds/zsh-nvm
 zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 
-zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
-zinit light ogham/exa
+# zinit ice wait:2 lucid extract"" from"gh-r" as"program" mv"exa* -> exa"
+# zinit light ogham/exa
+# zinit light DarrinTisdale/zsh-aliases-exa
 
 zinit ice from"gh-r" as"program" mv"direnv* -> direnv"
 zinit light direnv/direnv
@@ -35,6 +36,9 @@ if [ -z "$LOAD_FZF" -o "$LOAD_FZF" -ne "0" ]; then
     zinit ice from"gh-r" as"program"; zinit load junegunn/fzf-bin
 fi
 zinit ice "rupa/z" pick"z.sh"; zinit load "rupa/z"
+zinit ice pick"deer"; zinit load "Vifon/deer"
+zle -N deer
+bindkey '\el' deer
 
 zinit ice wait atinit"zpcompinit; zpcdreplay"; zinit load zsh-users/zaw
 zinit snippet 'OMZ::lib/completion.zsh'

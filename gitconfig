@@ -15,7 +15,7 @@
 	ci = commit
 	co = checkout
 	pu = push -u origin HEAD
-	pur = pull --rebase --prune
+	pur = pull --rebase --prune --autostash
 	prune = fetch --prune
 	abort = checkout -- .
 	wait = reset HEAD
