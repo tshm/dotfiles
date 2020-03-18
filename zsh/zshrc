@@ -8,7 +8,7 @@ export VISUAL=vim
 #export NNTPSERVER=nntp.stanford.edu
 export PAGER='less'
 export LESS='--quit-if-one-screen -R -iMX'
-export LS_COLORS='di=32:ln=36:pi=31:so=33:bd=44;37:cd=44;37:ex=35'
+#export LS_COLORS='di=32:ln=36:pi=31:so=33:bd=44;37:cd=44;37:ex=35'
 export WORDCHARS=${WORDCHARS:s|/||}
 export PATH=~/bin/:$PATH
 
@@ -22,10 +22,10 @@ hash -d 'D=/usr/share/doc'
 alias pstree='pstree -A'
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'       # no spelling correction on cp
-alias ls='ls --color=auto -F'
-alias ll='ls --color=auto -Fl'
-alias la='ls --color=auto -Fla'
-alias dir='ls -l -h'
+# alias ls='ls --color=auto -F'
+# alias ll='ls --color=auto -Fl'
+# alias la='ls --color=auto -Fla'
+# alias dir='ls -l -h'
 alias rm='rm -i'
 alias gf='git flow'
 alias dco='docker-compose'

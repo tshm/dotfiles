@@ -21,6 +21,7 @@
 	wait = reset HEAD
 	undo = reset --soft HEAD^
 	amend = commit --amend --no-edit
+	sync = fetch . develop:master
 #
 	l = log --pretty=oneline --abbrev-commit --graph --decorate
 	ls = log --simplify-by-decoration --all --pretty=oneline --abbrev-commit --graph --decorate
@@ -28,7 +29,6 @@
 #
 	df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $*' -
 	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $*' -
-	l  = !git log --graph --color
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	export = !git archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
