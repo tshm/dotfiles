@@ -11,7 +11,7 @@
 	template = ~/.dotfiles/gitmessage.txt
 [alias]
 	st = status -sb
-	br = branch
+	br = branch -vv
 	ci = commit
 	co = checkout
 	pu = push -u origin HEAD
@@ -32,7 +32,8 @@
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	export = !git archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
-  nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
+	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
+	search = !sh -c 'git log --all --grep=$0'
 [diff]
 	compactionHeuristic = true
 [color]
