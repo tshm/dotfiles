@@ -37,9 +37,6 @@ zinit from"gh-r" as"program" mv"direnv* -> direnv" \
   atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
   pick"direnv" src="zhook.zsh" for direnv/direnv
 
-zinit ice wait:2 lucid from"gh-r" pick bpick"*.gz"
-zinit light starship/starship
-
 zinit ice as"completion"
 zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
