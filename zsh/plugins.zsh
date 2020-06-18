@@ -1,4 +1,5 @@
-# echo "handle plugins"
+# install
+## sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 # init
 source ~/.zinit/bin/zinit.zsh
@@ -8,12 +9,15 @@ autoload -Uz _zinit
 # plugins
 zinit for \
   light-mode zsh-users/zsh-autosuggestions \
-  light-mode zdharma/fast-syntax-highlighting \
-             zdharma/history-search-multi-word \
-  pick"async.zsh" src"pure.zsh" sindresorhus/pure
+  light-mode \
+    zdharma/fast-syntax-highlighting \
+    zdharma/history-search-multi-word \
+    pick"async.zsh" src"pure.zsh" sindresorhus/pure
 zinit ice wait'1' atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-completions
-zinit ice as"program" pick"bin/git-dsf"; zinit load zdharma/zsh-diff-so-fancy
+
+zinit ice as"command" extract"" pick"delta/delta" mv"delta* -> delta" from"gh-r"
+zinit load dandavison/delta
 
 zinit load lukechilds/zsh-nvm
 

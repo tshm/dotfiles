@@ -6,7 +6,7 @@
 	autocrlf = input
 	excludesfile = ~/.dotfiles/gitignore
 	whitespace = cr-at-eol
-	pager = diff-so-fancy | less -FXRi
+	pager = delta
 [commit]
 	template = ~/.dotfiles/gitmessage.txt
 [alias]
