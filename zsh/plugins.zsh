@@ -30,6 +30,9 @@ zinit ice wait:2 lucid extract"" from"gh-r" as"command" mv"exa* -> exa"
 zinit light ogham/exa
 zinit light DarrinTisdale/zsh-aliases-exa
 
+zinit ice wait:2
+zinit snippet OMZ::plugins/dotenv/dotenv.plugin.zsh
+
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
 
