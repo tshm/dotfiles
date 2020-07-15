@@ -37,6 +37,12 @@ unbindurl outlook.office.com a
 unbindurl outlook.office.com x
 unbindurl outlook.office.com e
 unbindurl outlook.office.com I
+unbindurl outlook.office.com C
+unbindurl outlook.office.com R
+unbindurl outlook.office.com A
+unbindurl outlook.office.com g
+unbindurl outlook.office.com i
+unbindurl outlook.office.com ?
 
 " gmail
 unbindurl mail.google.com k
