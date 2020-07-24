@@ -1,5 +1,6 @@
 #-*-shell-script-*-
 # vim: ft=zsh
+bindkey -e               # emacs key bindings
 source ~/.dotfiles/zsh/plugins.zsh
 
 export RSYNC_RSH='ssh'
@@ -61,7 +62,6 @@ setopt   auto_pushd pushdminus print_eight_bit
 setopt   magic_equal_subst transient_rprompt
 unsetopt bgnice listbeep recexact listambiguous 
 
-bindkey -e               # emacs key bindings
 bindkey ' ' magic-space  # also do history expansino on space
 bindkey "\e[Z" reverse-menu-complete
 
