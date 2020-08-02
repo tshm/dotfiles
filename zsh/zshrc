@@ -32,11 +32,11 @@ alias kc='kubectl'
 alias nixup='nix-channel --update && nix-env -u'
 (uname -a | grep Microsoft) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
-  function nvim() {
+  function gvim() {
     args2=()
     for i in $*; do
       echo file: $i
-      args2+="$(wslpath -w $i) "
+      args2+="$(wslpath -aw $i) "
     done
     nvim-qt.exe $args2 &
   }
@@ -44,9 +44,9 @@ alias nixup='nix-channel --update && nix-env -u'
     args2=()
     for i in $*; do
       echo file: $i
-      args2+="$(wslpath -w $i) "
+      args2+="$(wslpath -aw $i) "
     done
-    nvim.exe $args2
+    nvim $args2
   }
 }
 [ -d  /etc/apt ] && {
