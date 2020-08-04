@@ -16,7 +16,7 @@ zinit for \
 zinit ice wait'1' atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-completions
 
-zinit ice as"command" extract"" pick"delta/delta" mv"delta* -> delta" from"gh-r"
+zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
 zinit load dandavison/delta
 
 zinit load lukechilds/zsh-nvm
@@ -26,7 +26,7 @@ zinit light sharkdp/bat
 zinit ice wait:2 as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
 zinit light sharkdp/fd
 
-zinit ice wait:2 lucid extract"" from"gh-r" as"command" mv"exa* -> exa"
+zinit ice wait:2 as"command" lucid extract"" from"gh-r" mv"exa* -> exa"
 zinit light ogham/exa
 zinit light DarrinTisdale/zsh-aliases-exa
 
@@ -45,7 +45,7 @@ zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_
 
 zinit light zsh-users/zsh-history-substring-search
 if [ -z "$LOAD_FZF" -o "$LOAD_FZF" -ne "0" ]; then
-  zinit ice from"gh-r" as"command"
+  zinit ice as"command" from"gh-r"
   zinit load junegunn/fzf-bin
 fi
 zinit ice "rupa/z" pick"z.sh"; zinit load "rupa/z"
