@@ -4,9 +4,11 @@ SRC0=`dirname $0`
 SRC=`cd $SRC0; pwd`
 cd ~
 
-# nix
-curl -L https://nixos.org/nix/install | sh
-echo "source $HOME/.nix-profile/etc/profile.d/nix.sh" >> ~/.zshrc
+# zinit
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+
+# brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # zsh
 echo "source $SRC/zsh/zshrc" > ~/.zshrc
