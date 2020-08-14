@@ -29,6 +29,7 @@ alias rm='rm -i'
 alias gf='git flow'
 alias dco='docker-compose'
 alias kc='kubectl'
+alias nixup='nix-channel --update && nix-env -u'
 (uname -a | grep Microsoft) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   function gvim() {

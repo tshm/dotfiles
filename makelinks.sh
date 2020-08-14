@@ -7,8 +7,9 @@ cd ~
 # zinit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
-# brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# nix
+curl -L https://nixos.org/nix/install | sh
+echo "source $HOME/.nix-profile/etc/profile.d/nix.sh" >> ~/.zshrc
 
 # zsh
 echo "source $SRC/zsh/zshrc" > ~/.zshrc
