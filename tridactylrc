@@ -18,6 +18,8 @@ bind n findnext 1
 bind N findnext -1
 bind gd tabdetach
 
+set editorcmd "nvim-qt"
+
 set hintfiltermode vimperator-reflow
 set hintchars 4327895610
 set allowautofocus false
