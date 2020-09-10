@@ -32,8 +32,9 @@
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	export = !git archive --format=zip -v HEAD > archive.zip
 	ghpage = subtree push --prefix dist origin gh-pages
-	nuke = !sh -c 'git push origin :$1; git branch -D $1' -
+	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
 	search = !sh -c 'git log --all --grep=$0'
+	diffdump = "!f() { git show $1:$2 > new.$(basename $2); git show $1^:$2 > old.$(basename $2); }; f"
 [diff]
 	compactionHeuristic = true
 [color]
