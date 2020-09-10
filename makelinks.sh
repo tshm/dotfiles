@@ -15,8 +15,10 @@ echo "source $HOME/.nix-profile/etc/profile.d/nix.sh" >> ~/.zshrc
 echo "source $SRC/zsh/zshrc" > ~/.zshrc
 
 # gitconfig
-echo "[include]"              > ~/.gitconfig
-echo "path = $SRC/gitconfig" >> ~/.gitconfig
+mkdir ~/.config/git
+cp gitignore ~/.config/git/ignore
+echo "[include]"                > ~/.gitconfig
+echo "  path = $SRC/gitconfig" >> ~/.gitconfig
 
 # tmux
 echo "source-file $SRC/tmux.conf" > ~/.tmux.conf

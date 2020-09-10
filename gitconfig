@@ -4,7 +4,6 @@
 	editor = vim
 	ignorecase = false
 	autocrlf = input
-	excludesfile = ~/.dotfiles/gitignore
 	whitespace = cr-at-eol
 	pager = delta
 [commit]
