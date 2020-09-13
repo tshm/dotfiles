@@ -14,19 +14,19 @@ all: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc ~/.gitconfig ~/.tmux.conf ~/.v
 	echo "source ${HOME}/.nix-profile/etc/profile.d/nix.sh" >> ~/.zshrc
 
 ~/.zshrc:
-	echo "source ${SRC}/zsh/zshrc" > ~/.zshrc
+	echo "source ${SRC}/zsh/zshrc" > $@
 
 ~/.gitconfig:
 	mkdir -p ~/.config/git
 	cp gitignore ~/.config/git/ignore
-	echo "[include]"                  > ~/.gitconfig
-	echo "  path = ${SRC}/gitconfig" >> ~/.gitconfig
+	echo "[include]"                  > $@
+	echo "  path = ${SRC}/gitconfig" >> $@
 
 ~/.tmux.conf:
-	echo "source-file ${SRC}/tmux.conf" > ~/.tmux.conf
+	echo "source-file ${SRC}/tmux.conf" > $@
 
 ~/.vimrc:
-	cp ${SRC}/vimrc ~/.vimrc
+	cp ${SRC}/vimrc $@
 
 ~/.tridactylrc:
-	echo "source ${SRC}/tridactylrc" > ~/.tridactylrc
+	echo "source ${SRC}/tridactylrc" > $@
