@@ -33,7 +33,8 @@
 	ghpage = subtree push --prefix dist origin gh-pages
 	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
 	search = !sh -c 'git log --all --grep=$0'
-	diffdump = "!f() { git show $1:$2 > new.$(basename $2); git show $1^:$2 > old.$(basename $2); }; f"
+	diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
+	rebasex = rebase -Xignore-all-space	
 [diff]
 	compactionHeuristic = true
 [color]
