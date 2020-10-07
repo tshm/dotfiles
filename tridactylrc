@@ -1,7 +1,8 @@
 " Tridactyl config script
 " run ':source' to reload this script
-" autocmd TriStart source ../.dotfiles/tridactylrc
+bind ;q source tridactylrc
 
+fillcmdline_nofocus tridactylrc loaded
 sanitize tridactylsync
 
 bind ;c hint -c [class*="expand"],[class="togg"]
@@ -28,8 +29,8 @@ set csp clobber
 fixamo_quiet
 
 " Only hint search results on Google
-" bindurl www.google.com f hint -Jc .rc > .r > a
-" bindurl www.google.com F hint -Jtc .rc>.r>a
+bindurl www.google.com f hint -Jc .rc > div > a, .rc a.exp-r
+bindurl www.google.com F hint -Jtc .rc > div > a, .rc a.exp-r
 
 " outlook
 unbindurl outlook.office.com k
