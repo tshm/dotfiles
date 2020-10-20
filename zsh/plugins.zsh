@@ -56,6 +56,10 @@ zinit ice wait atinit"zpcompinit; zpcdreplay"; zinit load zsh-users/zaw
 zinit snippet 'OMZ::lib/completion.zsh'
 zinit snippet 'OMZ::lib/compfix.zsh'
 
+zinit load asdf-vm/asdf
+
 # finalize
 autoload -U compinit
 compinit
+zinit cdreplay -q 
+zinit cdlist 
