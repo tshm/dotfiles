@@ -22,8 +22,6 @@ zinit light tj/git-extras
 zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
 zinit load dandavison/delta
 
-zinit load lukechilds/zsh-nvm
-
 zinit ice wait:2 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 zinit ice wait:2 as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
