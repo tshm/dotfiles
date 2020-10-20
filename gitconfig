@@ -20,18 +20,13 @@
 	wait = reset HEAD
 	undo = reset --soft HEAD^
 	amend = commit --amend --no-edit
-	sync = fetch . develop:master
 #
 	l = log --pretty=oneline --abbrev-commit --graph --decorate
 	ls = log --simplify-by-decoration --all --pretty=oneline --abbrev-commit --graph --decorate
-	changelog = "!sh -c \"git log --oneline --no-merges $1..HEAD\" -"
 #
 	df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $*' -
 	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $*' -
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
-	export = !git archive --format=zip -v HEAD > archive.zip
-	ghpage = subtree push --prefix dist origin gh-pages
-	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
 	search = !sh -c 'git log --all --grep=$0'
 	diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
 	rebasex = rebase -Xignore-all-space	
