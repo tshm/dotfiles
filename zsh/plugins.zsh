@@ -37,6 +37,9 @@ zinit snippet OMZ::plugins/dotenv/dotenv.plugin.zsh
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
 
+zinit ice wait:2
+zinit light wfxr/forgit
+
 zinit ice as"completion"
 zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
