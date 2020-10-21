@@ -8,6 +8,7 @@ autoload -Uz _zinit
 
 # plugins
 zinit for \
+  light-mode Aloxaf/fzf-tab \
   light-mode zsh-users/zsh-autosuggestions \
   light-mode \
     zdharma/fast-syntax-highlighting \
