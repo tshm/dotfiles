@@ -1,8 +1,10 @@
 # install
-## sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+if [ ! -d "${HOME}/.zinit" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+fi
 
 # init
-source ~/.zinit/bin/zinit.zsh
+source "${HOME}/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -53,6 +55,8 @@ if [ -z "$LOAD_FZF" -o "$LOAD_FZF" -ne "0" ]; then
   zinit load junegunn/fzf-bin
 fi
 zinit ice "rupa/z" pick"z.sh"; zinit load "rupa/z"
+zinit ice wait lucid; zinit light changyuheng/fz
+
 zinit ice pick"deer"; zinit load "Vifon/deer"
 zle -N deer
 bindkey '\el' deer
