@@ -17,6 +17,9 @@ zinit for \
 zinit ice wait'1' atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-completions
 
+zinit ice lucit wait"0" as"program" from"gh-r" pick"bit"
+zinit light "chriswalz/bit"
+
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
