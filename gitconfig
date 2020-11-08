@@ -18,7 +18,6 @@
 	prune = fetch --prune
 	abort = checkout -- .
 	wait = reset HEAD
-	undo = reset --soft HEAD^
 	amend = commit --amend --no-edit
 #
 	l = log --pretty=oneline --abbrev-commit --graph --decorate
