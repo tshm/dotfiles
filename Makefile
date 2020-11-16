@@ -16,6 +16,9 @@ all: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc ~/.gitconfig ~/.tmux.conf ~/.v
 ~/.zshrc:
 	echo "source ${SRC}/zsh/zshrc" > $@
 
+~/.zlogin:
+	echo "source ${SRC}/zsh/zlogin" > $@
+
 ~/.gitconfig:
 	mkdir -p ~/.config/git
 	cp gitignore ~/.config/git/ignore
