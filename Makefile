@@ -14,7 +14,7 @@ all: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc ~/.gitconfig ~/.tmux.conf ~/.v
 	echo "source ${HOME}/.nix-profile/etc/profile.d/nix.sh" >> ~/.zshrc
 
 ~/.zshrc:
-	echo "source ${SRC}/zsh/zshrc" > $@
+	echo "source ${SRC}/zsh/zshrc" >> $@
 
 ~/.zlogin:
 	echo "source ${SRC}/zsh/zlogin" > $@
