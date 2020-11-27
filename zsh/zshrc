@@ -53,7 +53,10 @@ bindkey "^N" down-line-or-beginning-search
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '\ee' edit-command-line
-precmd() { jobs; }
+precmd() {
+	[ -n "$TMUX_PANE" ] && tmux rename-window $(basename $PWD)	
+	jobs;
+}
 
 # The following lines were added by compinstall
 autoload -Uz compinit && compinit -u
