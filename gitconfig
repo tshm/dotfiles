@@ -5,6 +5,7 @@
 	ignorecase = false
 	autocrlf = input
 	whitespace = cr-at-eol
+	excludesfile = ~/.dotfiles/gitignore
 	pager = delta
 [commit]
 	template = ~/.dotfiles/gitmessage.txt
