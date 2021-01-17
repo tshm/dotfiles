@@ -29,8 +29,8 @@ set csp clobber
 fixamo_quiet
 
 " Only hint search results on Google
-bindurl www.google.com f hint -Jc .rc > div > a, .rc a.exp-r
-bindurl www.google.com F hint -Jtc .rc > div > a, .rc a.exp-r
+bindurl www.google.com f hint -Jc div.g > div > div > a
+bindurl www.google.com F hint -Jbc div.g > div > div > a
 
 " outlook
 unbindurl outlook.office.com k
