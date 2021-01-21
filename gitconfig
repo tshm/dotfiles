@@ -28,6 +28,7 @@
 	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $*' -
 	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
 	search = !sh -c 'git log --all --grep=$0'
+	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
 	diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
 	rebasex = rebase -Xignore-all-space	
 [diff]
