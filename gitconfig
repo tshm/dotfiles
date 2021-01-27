@@ -30,7 +30,7 @@
 	search = !sh -c 'git log --all --grep=$0'
 	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
 	diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
-	rebasex = rebase -Xignore-all-space	
+	rebasex = rebase --strategy-option=ignore-all-space	
 [diff]
 	compactionHeuristic = true
 [color]
