@@ -4,6 +4,7 @@ bind ;q source tridactylrc
 
 fillcmdline_nofocus tridactylrc loaded
 sanitize tridactylsync
+sanitize tridactyllocal
 
 bind ;c hint -c [class*="expand"],[class="togg"]
 
