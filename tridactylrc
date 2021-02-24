@@ -1,11 +1,11 @@
 " Tridactyl config script
 " run ':source' to reload this script
-bind ;q source tridactylrc
 
 fillcmdline_nofocus tridactylrc loaded
 sanitize tridactylsync
 sanitize tridactyllocal
 
+bind ;q source tridactylrc
 bind ;c hint -c [class*="expand"],[class="togg"]
 
 bind h tabprev
@@ -56,6 +56,8 @@ unbindurl www.youtube.com f
 unbindurl www.youtube.com m
 unbindurl www.youtube.com j
 unbindurl www.youtube.com l
+unbindurl www.youtube.com <<
+unbindurl www.youtube.com >>
 
 " gmail
 unbindurl mail.google.com k
@@ -65,6 +67,7 @@ unbindurl mail.google.com a
 unbindurl mail.google.com x
 unbindurl mail.google.com e
 unbindurl mail.google.com I
+quickmark g https://mail.google.com
 
 " pocket
 unbindurl getpocket.com k
@@ -72,6 +75,7 @@ unbindurl getpocket.com j
 unbindurl getpocket.com o
 unbindurl getpocket.com a
 unbindurl getpocket.com x
+quickmark q https://getpocket.com
 
 " feedly
 unbindurl feedly.com p
@@ -79,5 +83,6 @@ unbindurl feedly.com n
 unbindurl feedly.com K
 unbindurl feedly.com J
 unbindurl feedly.com A
+quickmark r https://feedly.com
 
 " vim: set ft=vim:
