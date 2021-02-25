@@ -1,9 +1,11 @@
 unset MAILCHECK
-function dockerclean() {
-  docker system df
-  docker rm `docker ps -q`
-  docker volume rm `docker volume ls -q -f dangling=true`
-  docker system df
+( which docker > /dev/null ) && {
+  function dockerclean() {
+    docker system df
+    docker rm `docker ps -q`
+    docker volume rm `docker volume ls -q -f dangling=true`
+    docker system df
+  }
 }
 (uname -a | grep Microsoft) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
@@ -28,10 +30,24 @@ function dockerclean() {
   }
 }
 [ -d /etc/apt ] && {
-  alias aptup='sudo apt-get update && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove'
+  function aptup() {
+    sudo apt-get update
+    sudo apt-get -y dist-upgrade
+    sudo apt-get -y autoremove
+  }
 }
-
-#[ "$HOST" = "hit" ] && screen -xRR -U >/dev/null && exit
-if [ -f ~/.zlogin.local ]; then
-  source ~/.zlogin.local
-fi
+[ -d /nix ] && {
+  function nixup() {
+    nix-channel --update
+    nix-env -u
+    nix-store --optimise
+    nix-collect-garbage -d
+  }
+}
+[ -d ~/.zinit ] && {
+  function ziup() {
+    zinit self-update
+    zinit update
+    zcompile ~/.zshrc
+  }
+}
