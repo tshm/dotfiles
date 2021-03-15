@@ -30,8 +30,8 @@ set allowautofocus false
 " fixamo_quiet
 
 " Only hint search results on Google
-bindurl www.google.com f hint -Jc div.g h3 span, a.l
-bindurl www.google.com F hint -Jbc div.g h3 span, a.l
+bindurl www.google.com f hint -Jc div.g br + h3, h3.r
+bindurl www.google.com F hint -Jbc div.g br + h3, h3.r
 
 " outlook
 unbindurl outlook.office.com k
