@@ -20,7 +20,7 @@ zinit ice wait:2 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 zinit ice wait:2 as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
 zinit light sharkdp/fd
-zinit ice wait:2 as"command" lucid extract"" from"gh-r" mv"exa* -> exa"
+zinit ice wait:2 as"command" lucid extract"" from"gh-r" mv"exa* -> exa" pick"bin/exa"
 zinit light ogham/exa
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
