@@ -1,4 +1,6 @@
-" vimrc
+"vimrc
+scriptencoding utf-8
+set encoding=utf-8
 
 " load bundled extentions and their setting {{{
 "set shell=/bin/sh
@@ -31,13 +33,14 @@ set shortmess=atIc
 set signcolumn=yes
 if !has('nvim')
   set clipboard=unnamed,autoselect
+  set modeline modelines=2
+  set ambiwidth=double
 endif
-set modeline modelines=2
-set ambiwidth=double
-set encoding=utf-8 fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp
 set fileformat=unix fileformats=unix,dos,mac
 set formatoptions=lmoq
-set wildmenu wildmode=list:longest wildignore=*.o,*.obj,*.a,*.gif,*.jpg,*.so,*.svn
+set wildmenu wildmode=list:longest
+set wildignore=*.o,*.obj,*.a,*.gif,*.jpg,*.so,*.svn
 set showmatch matchtime=1
 set showcmd
 set cmdheight=2
@@ -47,7 +50,7 @@ set laststatus=2
 set statusline=[%n]%f%m%r%h%w\ [%Y/%{&ff}/%{&fenc}]\ (%l/%L=%p%%,%v)
 set virtualedit+=block
 set relativenumber number
-set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:<
+set list listchars=tab:->,trail:-,extends:>,precedes:<,nbsp:%,eol:<
 set directory+=,$TMP
 
 set imsearch=0 iminsert=0
