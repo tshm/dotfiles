@@ -1,29 +1,32 @@
-" VimPlug setup. {{{
-fun SetupVimPlug()
-  let autoload_dir = expand('$HOME') . '/.vim/autoload/'
-  let vimplugurl = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  if !filereadable(autoload_dir.'plug.vim')
-    execute '!curl -fLo '.autoload_dir.'plug.vim --create-dirs '.vimplugurl
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
-  endif
-endfun
-call SetupVimPlug()
+" Plugin setup. {{{
+if &compatible
+  set nocompatible
+endif
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-call plug#begin('~/.vim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'itchyny/lightline.vim'
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'rafi/vim-denite-session'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'tpope/vim-commentary'
-Plug 'machakann/vim-sandwich'
-Plug 'dense-analysis/ale'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-fugitive'
-Plug 'sheerun/vim-polyglot'
-" Plug 'nathanaelkane/vim-indent-guides'
-call plug#end()
+call dein#begin('~/.cache/dein')
+call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+call dein#add('neoclide/coc.nvim')
+call dein#add('itchyny/lightline.vim')
+call dein#add('Shougo/denite.nvim')
+call dein#add('rafi/vim-denite-session')
+call dein#add('SirVer/ultisnips')
+call dein#add('honza/vim-snippets')
+call dein#add('tpope/vim-commentary')
+call dein#add('machakann/vim-sandwich')
+call dein#add('dense-analysis/ale')
+call dein#add('tpope/vim-sleuth')
+call dein#add('tpope/vim-fugitive')
+call dein#add('sheerun/vim-polyglot')
+call dein#end()
+
+filetype plugin indent on
+syntax enable
+
+if dein#check_install()
+  call dein#install()
+endif
 " }}}
 
 " COC setup. {{{

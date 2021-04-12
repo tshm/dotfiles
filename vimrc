@@ -2,6 +2,7 @@
 "	let $PATH="C:/Program Files (x86)/Git/cmd;".$PATH.";c:/cygwin/bin/"
 "	set shell=c:\Windows\system32\cmd.exe
 "endif
+"
 
 set runtimepath+=~/.dotfiles/,~/.vim/
 set shell=/bin/sh

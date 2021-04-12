@@ -2,6 +2,11 @@
 scriptencoding utf-8
 set encoding=utf-8
 
+if executable('zenhan.exe')
+  autocmd InsertLeave * :call system('zenhan.exe 0')
+  autocmd CmdlineLeave * :call system('zenhan.exe 0')
+endif
+
 " load bundled extentions and their setting {{{
 "set shell=/bin/sh
 language C
@@ -143,5 +148,5 @@ let g:session_directory="~/.vim_session"
 "   autocmd VimLeavePre * exec 'mks! ' . getcwd() . '/.session.vim'
 " endif
 " }}}
-let g:syntastic_javascript_checkers = ['eslint'] 
+let g:syntastic_javascript_checkers = ['eslint']
 " vim: foldmethod=marker
