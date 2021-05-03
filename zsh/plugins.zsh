@@ -46,6 +46,9 @@ zinit for light-mode \
 zinit light zsh-users/zsh-history-substring-search
 zinit light DarrinTisdale/zsh-aliases-exa
 
+zinit ice wait:2 as"command" make pick"nnn"
+zinit light jarun/nnn
+
 zinit ice pick"deer"; zinit load "Vifon/deer"
 zle -N deer
 bindkey '\el' deer
