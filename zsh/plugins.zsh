@@ -15,6 +15,8 @@ zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta
 zinit load dandavison/delta
 zinit ice wait:2
 zinit light wfxr/forgit
+zinit ice wait:2 as"command" from"gh-r"  pick "ugit"
+zinit load Bhupesh-V/ugit
 
 zinit ice wait:2 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
