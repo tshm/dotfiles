@@ -31,10 +31,19 @@ if [ -z "$LOAD_FZF" -o "$LOAD_FZF" -ne "0" ]; then
   zinit ice as"command" from"gh-r"
   zinit load junegunn/fzf-bin
 fi
-zinit ice "rupa/z" pick"z.sh"; zinit load "rupa/z"
-zinit ice wait lucid; zinit light changyuheng/fz
 
 zinit load asdf-vm/asdf
+
+zinit ice wait:0 as"command" make pick"fasd"
+zinit light clvv/fasd
+zinit ice wait:2
+zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh
+zle -N fasd-complete
+zle -N fasd-complete-f
+zle -N fasd-complete-d
+bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
+bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
+bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 
 # plugins
 zinit for light-mode \
