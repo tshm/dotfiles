@@ -27,10 +27,8 @@ zinit light ogham/exa
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
 
-if [ -z "$LOAD_FZF" -o "$LOAD_FZF" -ne "0" ]; then
-  zinit ice as"command" from"gh-r"
-  zinit load junegunn/fzf-bin
-fi
+zinit ice as"command" from"gh-r"
+zinit load junegunn/fzf
 
 zinit load asdf-vm/asdf
 
@@ -47,7 +45,6 @@ bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directorie
 
 # plugins
 zinit for light-mode \
-  Aloxaf/fzf-tab \
   zsh-users/zsh-autosuggestions \
   zdharma/fast-syntax-highlighting \
   zdharma/history-search-multi-word \
@@ -80,5 +77,10 @@ zinit snippet 'OMZ::lib/compfix.zsh'
 # finalize
 autoload -U compinit
 compinit
+
+# fzf-tab has to be loaded after compinit
+zinit light Aloxaf/fzf-tab
+
 zinit cdreplay -q 
 zinit cdlist 
+
