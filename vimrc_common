@@ -80,6 +80,15 @@ nnoremap - <c-x>
 vnoremap <silent> p "zdP
 nnoremap ; :
 nnoremap ;; ;
+if exists('g:vscode')
+  nmap j gj
+  nmap k gk
+  nmap <Leader>w <Cmd>call VSCodeNotify('workbench.action.files.saveFiles')<CR>
+  nmap <Leader><tab> <C-w><C-w>
+  nmap zm <Cmd>call VSCodeNotify('editor.foldAll')<CR>
+  nmap zc <Cmd>call VSCodeNotify('editor.fold')<CR>
+  nmap zo <Cmd>call VSCodeNotify('editor.unfold')<CR>
+endif
 
 " Commandline keymaps
 cnoremap <c-a> <home>
