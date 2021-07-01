@@ -12,7 +12,14 @@ endif
 language C
 set nocompatible | filetype indent plugin on | syn on
 let mapleader = "\<Space>"
-execute 'source ' . expand('<sfile>:h') . '/init_bundles.vim'
+if !exists('g:vscode')
+  execute 'source ' . expand('<sfile>:h') . '/init_bundles.vim'
+else
+  xmap gc  <Plug>VSCodeCommentary
+  nmap gc  <Plug>VSCodeCommentary
+  omap gc  <Plug>VSCodeCommentary
+  nmap gcc <Plug>VSCodeCommentaryLine
+endif
 " }}}
 
 " general options {{{
@@ -68,10 +75,6 @@ set ssop-=folds
 " keymaps {{{
 " normal keymaps
 nnoremap c "_c
-nnoremap <F1> <ESC>
-nnoremap <silent> <C-l> gt
-nnoremap <silent> <C-h> gT
-nnoremap <Leader><space> :e #<CR>
 nnoremap <Leader>w :wall<CR>
 " inc / decl
 nnoremap + <c-a>
@@ -81,13 +84,30 @@ vnoremap <silent> p "zdP
 nnoremap ; :
 nnoremap ;; ;
 if exists('g:vscode')
+  " cursor
   nmap j gj
   nmap k gk
+  " vscode commands
+  nmap <C-r> <Cmd>call VSCodeNotify('workbench.action.openRecent')<CR>
+  nmap <Leader><Space> <Cmd>call VSCodeCall('workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup')<CR><CR>
+  " panes / tabs
   nmap <Leader>w <Cmd>call VSCodeNotify('workbench.action.files.saveFiles')<CR>
   nmap <Leader><tab> <C-w><C-w>
-  nmap zm <Cmd>call VSCodeNotify('editor.foldAll')<CR>
+  nmap <Leader>d <C-w>c
+  nmap <Leader>h <C-w>h
+  nmap <Leader>j <C-w>j
+  nmap <Leader>k <C-w>k
+  nmap <Leader>l <C-w>l
+  " folding
+  nmap zM <Cmd>call VSCodeNotify('editor.foldAll')<CR>
   nmap zc <Cmd>call VSCodeNotify('editor.fold')<CR>
   nmap zo <Cmd>call VSCodeNotify('editor.unfold')<CR>
+  nmap zO <Cmd>call VSCodeNotify('editor.unfoldAll')<CR>
+else
+  nnoremap <F1> <ESC>
+  nnoremap <silent> <C-l> gt
+  nnoremap <silent> <C-h> gT
+  nnoremap <Leader><space> :e #<CR>
 endif
 
 " Commandline keymaps
