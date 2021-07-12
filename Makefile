@@ -2,10 +2,14 @@
 
 SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-PHONY: all
+PHONY: all shell
 
-all: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
+all: shell tools
 
+shell: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc
+
+tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
+ 
 ~/.zinit:
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
@@ -33,3 +37,7 @@ all: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc ~/.gitconfig ~/.tmux.conf ~/.v
 
 ~/.tridactylrc:
 	echo "source ${SRC}/tridactylrc" > $@
+
+~/.config/i3/config:
+	mkdir -p ~/.config/i3
+	ln -s x/i3/config $@
