@@ -1,5 +1,13 @@
 unset MAILCHECK
-( which docker > /dev/null ) && {
+
+export NNN_PLUG='c:!code $nnn;e:!nvim $nnn*'
+(which nnn > /dev/null) && {
+  function n() {
+    env PAGER='less' nnn $*
+  }
+}
+
+(which docker > /dev/null) && {
   function dockerclean() {
     docker system df
     docker rm `docker ps -q`
@@ -10,7 +18,8 @@ unset MAILCHECK
 (uname -a | grep Microsoft) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   function e() {
-    cmd.exe /c start $(wslpath -w $*)
+    (which wsl-open > /dev/null) && wsl-open $* \
+    || cmd.exe /c start $(wslpath -w $*)
   }
   function gvim() {
     args2=()
