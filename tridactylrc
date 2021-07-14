@@ -20,6 +20,8 @@ bind n findnext 1
 bind N findnext -1
 bind gd tabdetach
 
+alias translate js let googleTranslateCallback = document.createElement('script'); googleTranslateCallback.innerHTML = "function googleTranslateElementInit(){ new google.translate.TranslateElement(); }"; document.body.insertBefore(googleTranslateCallback, document.body.firstChild); let googleTranslateScript = document.createElement('script'); googleTranslateScript.charset="UTF-8"; googleTranslateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&tl=&sl=&hl="; document.body.insertBefore(googleTranslateScript, document.body.firstChild);
+
 set editorcmd "nvim-qt"
 
 set hintfiltermode vimperator-reflow
@@ -57,6 +59,7 @@ unbindurl www.youtube.com m
 unbindurl www.youtube.com j
 unbindurl www.youtube.com <<
 unbindurl www.youtube.com >>
+quickmark y https://www.youtube.com
 
 " gmail
 unbindurl mail.google.com k

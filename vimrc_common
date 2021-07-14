@@ -98,6 +98,8 @@ if exists('g:vscode')
   nmap <Leader>j <C-w>j
   nmap <Leader>k <C-w>k
   nmap <Leader>l <C-w>l
+  nmap <Leader>b <Cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<CR>
+  nmap <C-j> <Cmd>call VSCodeNotify('workbench.action.togglePanel')<CR>
   " folding
   nmap zM <Cmd>call VSCodeNotify('editor.foldAll')<CR>
   nmap zc <Cmd>call VSCodeNotify('editor.fold')<CR>
