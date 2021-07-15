@@ -7,6 +7,21 @@ export NNN_PLUG='c:!code $nnn;e:!nvim $nnn*'
   }
 }
 
+read -d '' -r awks <<'EOF'
+NR>2 {
+  mem[$3]+=$2
+}
+END {
+  for(k in mem) printf "%0.1f\t%s\n", mem[k]/1024000, k
+};
+EOF
+function mem_info() {
+  ps -eo pmem,vsize,cmd \
+  | grep -v '\[' \
+  | awk "$awks" \
+  | sort -g
+}
+
 (which docker > /dev/null) && {
   function dockerclean() {
     docker system df
