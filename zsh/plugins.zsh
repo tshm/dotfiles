@@ -27,6 +27,9 @@ zinit light ogham/exa
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
 
+zinit ice wait:2 as"command" from"gh-r" mv"watchexec* -> watchexec" pick"watchexec/watchexec"
+zinit load "watchexec/watchexec"
+
 zinit ice as"command" from"gh-r"
 zinit load junegunn/fzf
 
