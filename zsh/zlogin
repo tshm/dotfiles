@@ -53,26 +53,3 @@ function mem_info() {
     nvim $args2
   }
 }
-[ -d /etc/apt ] && {
-  function aptup() {
-    sudo apt-get update
-    sudo apt-get -y dist-upgrade
-    sudo apt-get -y autoremove
-    sudo apt-get -y autoclean
-  }
-}
-[ -d /nix ] && {
-  function nixup() {
-    nix-channel --update
-    nix-env -u
-    nix-store --optimise
-    nix-collect-garbage -d
-  }
-}
-[ -d ~/.zinit ] && {
-  function ziup() {
-    zinit self-update
-    zinit update
-    zcompile ~/.zshrc
-  }
-}

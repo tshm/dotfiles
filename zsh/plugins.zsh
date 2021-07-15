@@ -31,6 +31,19 @@ zinit ice wait:2 as"command" from"gh-r" mv"watchexec* -> watchexec" pick"watchex
 zinit load "watchexec/watchexec"
 
 zinit ice as"command" from"gh-r"
+zinit load "cantino/mcfly"
+
+zinit ice wait:2 as"command" from"gh-r" mv"xh* -> xh" pick"xh/xh"
+zinit load "ducaale/xh"
+
+arc=$(uname -m | cut -c1-5)
+zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
+zinit load "Canop/broot"
+
+zinit ice wait:2 as"command" from"gh-r"
+zinit load "r-darwish/topgrade"
+
+zinit ice as"command" from"gh-r"
 zinit load junegunn/fzf
 
 zinit load asdf-vm/asdf
@@ -87,3 +100,6 @@ zinit light Aloxaf/fzf-tab
 zinit cdreplay -q 
 zinit cdlist 
 
+eval "$(mcfly init zsh)"
+
+alias b="broot --conf ~/.dotfiles/broot.hjson"
