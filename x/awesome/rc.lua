@@ -74,8 +74,11 @@ editor_cmd = terminal .. " -e " .. editor
 dmenu = "rofi -show run"
 
 -- {{{ startups
-awful.spawn.single_instance("fcitx-autostart")
 awful.spawn.single_instance(terminal, {fullscreen = false, focus = true})
+awful.spawn.single_instance("fcitx-autostart")
+awful.spawn.single_instance("nm-applet")
+awful.spawn.single_instance("blueman-tray")
+awful.spawn.single_instance("volumeicon")
 -- }}}
 
 -- Default modkey.
