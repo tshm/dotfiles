@@ -102,5 +102,6 @@ zinit cdreplay -q
 zinit cdlist 
 
 eval "$(mcfly init zsh)"
+export MCFLY_FUZZY=true
 
 alias b="broot --conf ~/.dotfiles/broot.hjson"
