@@ -7,6 +7,7 @@ fi
 source "${HOME}/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+arc=$(uname -m | cut -c1-5)
 
 # bins
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
@@ -27,7 +28,7 @@ zinit light ogham/exa
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
 
-zinit ice wait:2 as"command" from"gh-r" bpick"*x86_64*linux-gnu.tar.xz"\
+zinit ice wait:2 as"command" from"gh-r" bpick"*${arc}*linux-gnu*.tar.xz"\
   mv"watchexec* -> watchexec" pick"watchexec/watchexec"
 zinit load "watchexec/watchexec"
 
@@ -37,7 +38,6 @@ zinit load "cantino/mcfly"
 zinit ice wait:2 as"command" from"gh-r" mv"xh* -> xh" pick"xh/xh"
 zinit load "ducaale/xh"
 
-arc=$(uname -m | cut -c1-5)
 zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
 zinit load "Canop/broot"
 
