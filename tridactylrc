@@ -35,6 +35,9 @@ set allowautofocus false
 bindurl www.google.com f hint -Jc div.g br + h3, h3.r
 bindurl www.google.com F hint -Jbc div.g br + h3, h3.r
 
+" for Rakuten search
+bindurl websearch.rakuten.co.jp f hint -Jc .top-trend-word-wrapper:first-of-type input
+
 " outlook
 unbindurl outlook.office.com k
 unbindurl outlook.office.com j
