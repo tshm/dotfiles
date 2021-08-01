@@ -172,8 +172,12 @@
 		# A popular set of shortcuts for going up and down:
 		#
 		{
-			key: "alt-l"
+			key: "alt-space"
 			internal: ":toggle_stage"
+		}
+		{
+			key: "alt-l"
+			internal: ":open_stay"
 		}
 		{
 			key: "alt-h"
