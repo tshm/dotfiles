@@ -163,18 +163,17 @@
 			leave_broot: false
 		}
 
-		# Here's an example of a shortcut bringing you to your home directory
-		# {
-		# 	invocation: home
-		# 	key: ctrl-home
-		# 	internal: ":focus ~"
-		# }
+		{
+			invocation: home
+		 	key: ctrl-home
+		 	internal: ":focus ~"
+		}
 
 		# A popular set of shortcuts for going up and down:
 		#
 		{
 			key: "alt-l"
-			internal: ":focus"
+			internal: ":toggle_stage"
 		}
 		{
 			key: "alt-h"

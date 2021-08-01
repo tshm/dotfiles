@@ -19,9 +19,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 -- {{{ external widgets
--- local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
--- local logout_popup = require( "awesome-wm-widgets.logout-popup-widget.logout-popup")
 -- }}}
 
 -- {{{ Error handling
@@ -68,17 +66,20 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.master_width_factor = 0.65
 
 -- This is used later as the default terminal and editor to run.
-terminal = os.getenv("TERMINAL") or "xterm"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal .. " -e " .. editor
-dmenu = "rofi -show run"
+local terminal = os.getenv("TERMINAL") or "xterm"
+local editor = os.getenv("EDITOR") or "nvim"
+local editor_cmd = terminal .. " -e " .. editor
+local dmenu = "rofi -show run"
+local alttab = os.getenv("HOME") .. "/.dotfiles/x/windowswitcher.sh"
 
 -- {{{ startups
 awful.spawn.single_instance(terminal, {fullscreen = false, focus = true})
+awful.spawn.single_instance("autorandr horizontal")
 awful.spawn.single_instance("fcitx-autostart")
 awful.spawn.single_instance("nm-applet")
 awful.spawn.single_instance("blueman-tray")
 awful.spawn.single_instance("volumeicon")
+awful.spawn.single_instance("cbatticon")
 -- }}}
 
 -- Default modkey.
@@ -86,12 +87,12 @@ awful.spawn.single_instance("volumeicon")
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+local modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-  awful.layout.suit.tile.left, -- applied to 1st screen
-  awful.layout.suit.tile, -- applied to 2nd screen
+  awful.layout.suit.tile.left,
+  awful.layout.suit.tile,
   -- awful.layout.suit.tile.bottom,
   -- awful.layout.suit.tile.top,
   awful.layout.suit.fair,
@@ -111,7 +112,7 @@ awful.layout.layouts = {
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
+local myawesomemenu = {
   {
     "hotkeys",
     function()
@@ -129,7 +130,7 @@ myawesomemenu = {
   }
 }
 
-mymainmenu =
+local mymainmenu =
   awful.menu(
   {
     items = {
@@ -139,7 +140,7 @@ mymainmenu =
   }
 )
 
-mylauncher =
+local mylauncher =
   awful.widget.launcher(
   {
     image = beautiful.awesome_icon,
@@ -152,11 +153,11 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
 local taglist_buttons =
@@ -334,8 +335,6 @@ awful.screen.connect_for_each_screen(
         layout = wibox.layout.fixed.horizontal,
         mykeyboardlayout,
         wibox.widget.systray(),
-        -- battery_widget,
-        -- logout_popup.widget { },
         cpu_widget(
           {
             width = 70,
@@ -369,7 +368,7 @@ root.buttons(
 -- }}}
 
 -- {{{ Key bindings
-globalkeys =
+local globalkeys =
   gears.table.join(
   awful.key(
     {modkey},
@@ -442,13 +441,10 @@ globalkeys =
   ),
   awful.key({modkey}, "u", awful.client.urgent.jumpto, {description = "jump to urgent client", group = "client"}),
   awful.key(
-    {modkey},
+    {"Mod1"},
     "Tab",
     function()
-      awful.client.focus.history.previous()
-      if client.focus then
-        client.focus:raise()
-      end
+      awful.spawn(alttab)
     end,
     {description = "go back", group = "client"}
   ),
@@ -572,7 +568,7 @@ globalkeys =
   )
 )
 
-clientkeys =
+local clientkeys =
   gears.table.join(
   awful.key(
     {modkey},
@@ -591,12 +587,7 @@ clientkeys =
     end,
     {description = "close", group = "client"}
   ),
-  awful.key(
-    {modkey, "Control"},
-    "space",
-    awful.client.floating.toggle,
-    {description = "toggle floating", group = "client"}
-  ),
+  awful.key({modkey, "Shift"}, "f", awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
   awful.key(
     {modkey},
     "Return",
@@ -729,7 +720,7 @@ for i = 1, 5 do
   )
 end
 
-clientbuttons =
+local clientbuttons =
   gears.table.join(
   awful.button(
     {},
@@ -920,4 +911,3 @@ client.connect_signal(
   end
 )
 -- }}}
- 
