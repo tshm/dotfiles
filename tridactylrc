@@ -85,7 +85,6 @@ quickmark q https://getpocket.com
 " feedly
 unbindurl feedly.com p
 unbindurl feedly.com n
-unbindurl feedly.com s
 unbindurl feedly.com K
 unbindurl feedly.com J
 unbindurl feedly.com A
