@@ -5,7 +5,7 @@ fillcmdline_nofocus tridactylrc loaded
 sanitize tridactylsync
 sanitize tridactyllocal
 
-bind ;q source ~/.tridactylrc
+bind ;q source ~/.dotfiles/tridactylrc
 bind ;c hint -c [class*="expand"],[class="togg"]
 
 bind h tabprev
@@ -32,8 +32,8 @@ set allowautofocus false
 " fixamo_quiet
 
 " Only hint search results on Google
-bindurl www.google.com f hint -Jc div.g br + h3, h3.r, a.fl
-bindurl www.google.com F hint -Jbc div.g br + h3, h3.r, a.fl
+bindurl www.google.com f hint -Jc  div.g br + h3, h3.r, a.fl, .related-question-pair, .exp-c a, #bres a
+bindurl www.google.com F hint -Jbc div.g br + h3, h3.r, a.fl, .related-question-pair, .exp-c a, #bres a
 
 " for Rakuten search
 bindurl websearch.rakuten.co.jp f hint -Jc .top-trend-word-wrapper:first-of-type input

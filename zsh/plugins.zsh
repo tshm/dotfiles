@@ -10,6 +10,20 @@ autoload -Uz _zinit
 arc=$(uname -m | cut -c1-5)
 
 # bins
+zinit ice as"command" from"gh-r"
+zinit load junegunn/fzf
+
+zinit ice wait:0 as"command" make pick"fasd"
+zinit light clvv/fasd
+zinit ice wait:2
+zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh
+zle -N fasd-complete
+zle -N fasd-complete-f
+zle -N fasd-complete-d
+bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
+bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
+bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
+
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
@@ -44,21 +58,7 @@ zinit load "Canop/broot"
 zinit ice wait:2 as"command" from"gh-r"
 zinit load "r-darwish/topgrade"
 
-zinit ice as"command" from"gh-r"
-zinit load junegunn/fzf
-
 zinit load asdf-vm/asdf
-
-zinit ice wait:0 as"command" make pick"fasd"
-zinit light clvv/fasd
-zinit ice wait:2
-zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh
-zle -N fasd-complete
-zle -N fasd-complete-f
-zle -N fasd-complete-d
-bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
-bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
-bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 
 # plugins
 zinit for light-mode \
