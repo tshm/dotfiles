@@ -1,0 +1,10 @@
+#!/usr/bin/zsh
+
+if [ ! -p "$NNN_PIPE" ]; then
+    printf 'ERROR: NNN_PIPE is not set!'
+    read -r _
+    exit 2
+fi
+
+odir="$(fasd -dRl | fzf)"
+printf "%s" "0c$odir" > "$NNN_PIPE"

@@ -1,9 +1,11 @@
 unset MAILCHECK
 
-export NNN_PLUG='c:!code $nnn;e:!nvim $nnn*'
 (which nnn > /dev/null) && {
+  [ -f ~/.config/nnn/plugins/z ] || ln -s ~/.dotfiles/zsh/nnn_z ~/.config/nnn/plugins/z
+  export NNN_BMS='d:~/dl'
+  export NNN_PLUG='z:z;c:!code $nnn*;e:!nvim $nnn*'
   function n() {
-    env PAGER='less' nnn $*
+    env LESS= BAT_PAGER='less -R' VISUAL=bat nnn -e $*
   }
 }
 
