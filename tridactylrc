@@ -5,7 +5,7 @@ fillcmdline_nofocus tridactylrc loaded
 sanitize tridactylsync
 sanitize tridactyllocal
 
-bind ;q source tridactylrc
+bind ;q source ~/.tridactylrc
 bind ;c hint -c [class*="expand"],[class="togg"]
 
 bind h tabprev
@@ -83,6 +83,7 @@ unbindurl getpocket.com x
 quickmark q https://getpocket.com
 
 " feedly
+unbindurl feedly.com s
 unbindurl feedly.com p
 unbindurl feedly.com n
 unbindurl feedly.com K
