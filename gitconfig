@@ -1,7 +1,6 @@
 ## [include] path = ~/.dotfiles/gitconfig
 [core]
 	filemode = false
-	editor = vim
 	ignorecase = false
 	autocrlf = input
 	whitespace = cr-at-eol
