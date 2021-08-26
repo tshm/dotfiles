@@ -24,15 +24,6 @@ bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directo
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
 bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 
-zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zinit light tj/git-extras
-zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
-zinit load dandavison/delta
-zinit ice wait:2
-zinit light wfxr/forgit
-zinit ice wait:2 as"command" from"gh-r"  pick "ugit"
-zinit load Bhupesh-V/ugit
-
 zinit ice wait:2 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 zinit ice wait:2 as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
@@ -48,9 +39,6 @@ zinit load "watchexec/watchexec"
 
 zinit ice as"command" from"gh-r"
 zinit load "cantino/mcfly"
-
-zinit ice wait:2 as"command" from"gh-r" mv"xh* -> xh" pick"xh/xh"
-zinit load "ducaale/xh"
 
 zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
 zinit load "Canop/broot"
@@ -73,6 +61,16 @@ zinit light DarrinTisdale/zsh-aliases-exa
 
 zinit ice wait:2 as"command" make pick"nnn"
 zinit light jarun/nnn
+
+# git
+zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+zinit light tj/git-extras
+zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
+zinit load dandavison/delta
+zinit ice wait:2
+zinit light wfxr/forgit
+zinit ice wait:2 as"command" from"gh-r"  pick "ugit"
+zinit load Bhupesh-V/ugit
 
 zinit ice pick"deer"; zinit load "Vifon/deer"
 zle -N deer
