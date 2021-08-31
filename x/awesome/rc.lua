@@ -70,17 +70,8 @@ local terminal = os.getenv("TERMINAL") or "xterm"
 local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
 local dmenu = "rofi -show run"
-local alttab = os.getenv("HOME") .. "/.dotfiles/x/windowswitcher.sh"
 
--- {{{ startups
-awful.spawn.single_instance(terminal, {fullscreen = false, focus = true})
-awful.spawn.single_instance("autorandr horizontal")
-awful.spawn.single_instance("fcitx-autostart")
-awful.spawn.single_instance("nm-applet")
-awful.spawn.single_instance("blueman-tray")
-awful.spawn.single_instance("volumeicon")
-awful.spawn.single_instance("cbatticon")
--- }}}
+awful.spawn.with_shell("~/.dotfiles/x/autorun.sh")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -371,6 +362,24 @@ root.buttons(
 local globalkeys =
   gears.table.join(
   awful.key(
+    {},
+    "XF86MonBrightnessDown",
+    function()
+      awful.spawn("xbacklight -dec 10")
+      naughty.notify {text = "brightness down"}
+    end,
+    {description = "-10%", group = "hotkeys"}
+  ),
+  awful.key(
+    {},
+    "XF86MonBrightnessUp",
+    function()
+      awful.spawn("xbacklight -inc 10")
+      naughty.notify {text = "brightness up"}
+    end,
+    {description = "+10%", group = "hotkeys"}
+  ),
+  awful.key(
     {modkey},
     "comma",
     function()
@@ -440,14 +449,6 @@ local globalkeys =
     {description = "focus the previous screen", group = "screen"}
   ),
   awful.key({modkey}, "u", awful.client.urgent.jumpto, {description = "jump to urgent client", group = "client"}),
-  awful.key(
-    {"Mod1"},
-    "Tab",
-    function()
-      awful.spawn(alttab)
-    end,
-    {description = "go back", group = "client"}
-  ),
   -- Standard program
   awful.key(
     {modkey},
