@@ -7,6 +7,7 @@ sanitize tridactyllocal
 
 bind ;q source ~/.dotfiles/tridactylrc
 bind ;c hint -c [class*="expand"],[class="togg"]
+bind ;f hint -;
 
 bind h tabprev
 bind l tabnext
