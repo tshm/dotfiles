@@ -1,6 +1,6 @@
 unset MAILCHECK
 
-[ -f ~/.config/nnn/plugins/z ] || ln -s ~/.dotfiles/zsh/nnn_z ~/.config/nnn/plugins/z
+[ -f ~/.config/nnn/plugins/z ] || mkdir -p ~/.config/nnn/plugins/ || ln -s ~/.dotfiles/zsh/nnn_z ~/.config/nnn/plugins/z
 export NNN_BMS='d:~/dl'
 export NNN_PLUG='z:z;c:!code $nnn*;e:!nvim $nnn*'
 function n() {
@@ -20,6 +20,14 @@ function mem_info() {
   | grep -v '\[' \
   | awk "$awks" \
   | sort -g
+}
+[ -d /nix ] && {
+  function nixup() {
+    nix-channel --update
+    nix-env -u
+    nix-store --optimise
+    nix-collect-garbage -d
+  }
 }
 
 (which docker > /dev/null) && {

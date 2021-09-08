@@ -87,6 +87,7 @@ if exists('g:vscode')
   nmap <Leader><Space> <Cmd>call VSCodeCall('workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup')<CR><CR>
   " panes / tabs
   nmap <Leader>w <Cmd>call VSCodeNotify('workbench.action.files.saveFiles')<CR>
+  nmap <Leader>o <Cmd>call VSCodeNotify('workbench.action.compareEditor.focusOtherSide')<CR>
   nmap <Leader><tab> <C-w><C-w>
   nmap <Leader>d <C-w>c
   nmap <Leader>h <C-w>h

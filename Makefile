@@ -11,7 +11,7 @@ shell: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc
 tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
  
 ~/.zinit:
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 ~/.nix-profile/bin/nix-env:
 	curl -L https://nixos.org/nix/install | sh
@@ -44,3 +44,6 @@ tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
 
 ~/bin/wsl-open:
 	curl -o $@ https://raw.githubusercontent.com/4U6U57/wsl-open/master/wsl-open.sh
+	chmod +x $@
+	ln -s $@ ~/bin/e
+
