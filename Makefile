@@ -6,10 +6,14 @@ PHONY: all shell
 
 all: shell tools
 
-shell: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc
+shell: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc ~/.config/direnv/direnvrc
 
 tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
- 
+	
+~/.config/direnv/direnvrc: ~/.dotfiles/zsh/direnvrc
+	mkdir -p ~/.config/direnv
+	cp $< $@
+
 ~/.zinit:
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
@@ -19,6 +23,7 @@ tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
 
 ~/.zshrc:
 	echo "source ${SRC}/zsh/zshrc" >> $@
+	touch ~/.zshrc_local
 
 ~/.zlogin:
 	echo "source ${SRC}/zsh/zlogin" > $@

@@ -1,0 +1,2 @@
+source "$(asdf direnv hook asdf)"
+# export $(grep -v '^#' .env | xargs -d '\n')

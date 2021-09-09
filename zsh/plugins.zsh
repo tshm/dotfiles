@@ -24,6 +24,10 @@ bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directo
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
 bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 
+# # handle direnv with asdf
+# zinit ice as"program" from"gh-r" mv"direnv.* -> direnv" atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
+# zinit light direnv/direnv
+
 zinit ice wait:2 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 zinit ice wait:2 as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
@@ -39,9 +43,6 @@ zinit load "watchexec/watchexec"
 
 zinit ice as"command" from"gh-r"
 zinit load "cantino/mcfly"
-
-zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
-zinit load "Canop/broot"
 
 zinit ice wait:2 as"command" from"gh-r"
 zinit load "r-darwish/topgrade"
@@ -80,9 +81,6 @@ bindkey '\el' deer
 zinit ice wait'1' atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-completions
 
-zinit ice wait:2
-zinit snippet OMZ::plugins/dotenv/dotenv.plugin.zsh
-
 zinit ice as"completion"
 zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
@@ -102,4 +100,9 @@ zinit cdlist
 eval "$(mcfly init zsh)"
 export MCFLY_FUZZY=true
 
-alias b="broot --conf ~/.dotfiles/broot.hjson"
+( which direnv >/dev/null ) || {
+  asdf plugin-add direnv
+  asdf install direnv latest
+  asdf global direnv latest
+}
+eval "$(direnv hook zsh)"

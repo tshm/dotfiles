@@ -113,4 +113,3 @@ zstyle :compinstall filename '/home/tshm/.zshrc'
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
-
