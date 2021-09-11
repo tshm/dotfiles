@@ -362,24 +362,6 @@ root.buttons(
 local globalkeys =
   gears.table.join(
   awful.key(
-    {},
-    "XF86MonBrightnessDown",
-    function()
-      awful.spawn("xbacklight -dec 10")
-      naughty.notify {text = "brightness down"}
-    end,
-    {description = "-10%", group = "hotkeys"}
-  ),
-  awful.key(
-    {},
-    "XF86MonBrightnessUp",
-    function()
-      awful.spawn("xbacklight -inc 10")
-      naughty.notify {text = "brightness up"}
-    end,
-    {description = "+10%", group = "hotkeys"}
-  ),
-  awful.key(
     {modkey},
     "comma",
     function()
