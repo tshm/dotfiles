@@ -47,6 +47,9 @@ zinit load "cantino/mcfly"
 zinit ice wait:2 as"command" from"gh-r"
 zinit load "r-darwish/topgrade"
 
+zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
+zinit load "Canop/broot"
+
 zinit load asdf-vm/asdf
 
 # plugins
@@ -96,6 +99,21 @@ zinit light Aloxaf/fzf-tab
 
 zinit cdreplay -q 
 zinit cdlist 
+
+b () {
+  local cmd cmd_file code
+  cmd_file=$(mktemp)
+  if broot --outcmd "$cmd_file" "$@"
+  then
+    cmd=$(<"$cmd_file")
+    rm -i -f "$cmd_file"
+    eval "$cmd"
+  else
+    code=$?
+    rm -i -f "$cmd_file"
+    return "$code"
+  fi
+}
 
 eval "$(mcfly init zsh)"
 export MCFLY_FUZZY=true
