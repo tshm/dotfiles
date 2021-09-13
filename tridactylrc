@@ -38,9 +38,11 @@ bindurl www.google.com F hint -Jbc div.g br + h3, h3.r, a.fl, .related-question-
 
 " for Rakuten search
 bindurl websearch.rakuten.co.jp f hint -Jc .top-trend-word-wrapper:first-of-type input
+quickmark R https://websearch.rakuten.co.jp/SimpleTop?qt=Rakuten
 
 " for habitica.com
 bindurl habitica.com f hint -Jc .task-control
+quickmark h https://habitica.com/
 
 " outlook
 unbindurl outlook.office.com k
