@@ -41,9 +41,6 @@ zinit ice wait:2 as"command" from"gh-r" bpick"*${arc}*linux-gnu*.tar.xz"\
   mv"watchexec* -> watchexec" pick"watchexec/watchexec"
 zinit load "watchexec/watchexec"
 
-zinit ice as"command" from"gh-r"
-zinit load "cantino/mcfly"
-
 zinit ice wait:2 as"command" from"gh-r"
 zinit load "r-darwish/topgrade"
 
@@ -84,6 +81,9 @@ bindkey '\el' deer
 zinit ice wait'1' atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-completions
 
+zinit ice lucid nocompile wait'0e' nocompletions
+zinit load MenkeTechnologies/zsh-more-completions
+
 zinit ice as"completion"
 zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
@@ -114,9 +114,6 @@ b () {
     return "$code"
   fi
 }
-
-eval "$(mcfly init zsh)"
-export MCFLY_FUZZY=true
 
 ( which direnv >/dev/null ) || {
   asdf plugin-add direnv
