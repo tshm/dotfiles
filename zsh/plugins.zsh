@@ -28,6 +28,49 @@ bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directorie
 zinit ice wait lucid
 zinit load redxtech/zsh-asdf-direnv
 
+# plugins
+zinit for light-mode \
+  zsh-users/zsh-autosuggestions \
+  zdharma/fast-syntax-highlighting \
+  zdharma/history-search-multi-word \
+  hlissner/zsh-autopair \
+  pick"async.zsh" src"pure.zsh" sindresorhus/pure
+
+zinit light zsh-users/zsh-history-substring-search
+zinit light DarrinTisdale/zsh-aliases-exa
+
+# git
+zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+zinit light tj/git-extras
+zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
+zinit load dandavison/delta
+zinit ice wait:2
+zinit light wfxr/forgit
+zinit ice wait:2 as"command" from"gh-r" pick "ugit"
+zinit load Bhupesh-V/ugit
+
+zinit ice pick"deer"; zinit load "Vifon/deer"
+zle -N deer
+bindkey '\el' deer
+
+# completions & etc
+zinit ice wait'1' atload'_zsh_autosuggest_start'
+zinit light zsh-users/zsh-completions
+
+zinit ice lucid nocompile wait'0e' nocompletions
+zinit load MenkeTechnologies/zsh-more-completions
+
+zinit ice as"completion"
+zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
+zinit snippet 'OMZ::lib/completion.zsh'
+zinit snippet 'OMZ::lib/compfix.zsh'
+
+# additional commands
+zinit ice wait:2 as"command" from"gh-r" pick"smug"
+zinit light ivaaaan/smug
+zinit ice wait:2 as"command" make pick"nnn"
+zinit light jarun/nnn
 zinit ice wait:2 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 zinit ice wait:2 as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
@@ -47,46 +90,7 @@ zinit load "r-darwish/topgrade"
 zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
 zinit load "Canop/broot"
 
-# plugins
-zinit for light-mode \
-  zsh-users/zsh-autosuggestions \
-  zdharma/fast-syntax-highlighting \
-  zdharma/history-search-multi-word \
-  hlissner/zsh-autopair \
-  pick"async.zsh" src"pure.zsh" sindresorhus/pure
 
-zinit light zsh-users/zsh-history-substring-search
-zinit light DarrinTisdale/zsh-aliases-exa
-
-zinit ice wait:2 as"command" make pick"nnn"
-zinit light jarun/nnn
-
-# git
-zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zinit light tj/git-extras
-zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
-zinit load dandavison/delta
-zinit ice wait:2
-zinit light wfxr/forgit
-zinit ice wait:2 as"command" from"gh-r"  pick "ugit"
-zinit load Bhupesh-V/ugit
-
-zinit ice pick"deer"; zinit load "Vifon/deer"
-zle -N deer
-bindkey '\el' deer
-
-# completions & etc
-zinit ice wait'1' atload'_zsh_autosuggest_start'
-zinit light zsh-users/zsh-completions
-
-zinit ice lucid nocompile wait'0e' nocompletions
-zinit load MenkeTechnologies/zsh-more-completions
-
-zinit ice as"completion"
-zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
-
-zinit snippet 'OMZ::lib/completion.zsh'
-zinit snippet 'OMZ::lib/compfix.zsh'
 
 # finalize
 autoload -U compinit
