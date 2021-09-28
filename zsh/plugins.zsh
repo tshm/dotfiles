@@ -24,9 +24,9 @@ bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directo
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
 bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 
-# # handle direnv with asdf
-# zinit ice as"program" from"gh-r" mv"direnv.* -> direnv" atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
-# zinit light direnv/direnv
+# handle direnv with asdf
+zinit ice wait lucid
+zinit load redxtech/zsh-asdf-direnv
 
 zinit ice wait:2 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
@@ -46,8 +46,6 @@ zinit load "r-darwish/topgrade"
 
 zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
 zinit load "Canop/broot"
-
-zinit load asdf-vm/asdf
 
 # plugins
 zinit for light-mode \
@@ -114,10 +112,3 @@ b () {
     return "$code"
   fi
 }
-
-( which direnv >/dev/null ) || {
-  asdf plugin-add direnv
-  asdf install direnv latest
-  asdf global direnv latest
-}
-eval "$(direnv hook zsh)"
