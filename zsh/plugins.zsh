@@ -90,8 +90,6 @@ zinit load "r-darwish/topgrade"
 zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
 zinit load "Canop/broot"
 
-
-
 # finalize
 autoload -U compinit
 compinit
