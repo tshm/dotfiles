@@ -12,7 +12,7 @@ export WORDCHARS=${WORDCHARS:s|/||}
 export PATH=~/bin/:$PATH
 
 HISTSIZE=5100
-HISTFILE=~/.zsh_history
+export HISTFILE=~/.zsh_history
 SAVEHIST=5000
 DIRSTACKSIZE=15
 fignore=('~' .bak)

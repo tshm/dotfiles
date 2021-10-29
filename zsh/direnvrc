@@ -1,2 +1,8 @@
 source "$(asdf direnv hook asdf)"
+
+HIS=$(find_up .history)
+if [ -n "$HIS" ]; then
+  export HISTFILE=$HIS
+fi
+
 # export $(grep -v '^#' .env | xargs -d '\n')

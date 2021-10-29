@@ -12,7 +12,8 @@ tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
 	
 ~/.config/direnv/direnvrc: ~/.dotfiles/zsh/direnvrc
 	mkdir -p ~/.config/direnv
-	cp $< $@
+	cd ~/.config/direnv
+	ln -s $<
 
 ~/.zinit:
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
