@@ -1,6 +1,6 @@
 # install
 if [ ! -d "${HOME}/.zinit" ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"
 fi
 
 # init
@@ -31,8 +31,8 @@ zinit load redxtech/zsh-asdf-direnv
 # plugins
 zinit for light-mode \
   zsh-users/zsh-autosuggestions \
-  zdharma/fast-syntax-highlighting \
-  zdharma/history-search-multi-word \
+  zdharma-continuum/fast-syntax-highlighting \
+  zdharma-continuum/history-search-multi-word \
   hlissner/zsh-autopair \
   pick"async.zsh" src"pure.zsh" sindresorhus/pure
 
