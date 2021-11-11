@@ -111,6 +111,13 @@
 		# Example:
 		#  execution: nvim +{line} {file}
 		{
+			invocation: "execute {cmd}"
+			key: "alt-x"
+			shortcut: x
+			execution: "{cmd} {file}"
+			leave_broot: false
+		}
+		{
 			invocation: edit
 			key: "alt-e"
 			shortcut: e
