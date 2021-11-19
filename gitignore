@@ -1,7 +1,6 @@
 .*.vim
 .vscode
-.env
 *.favdoc
-.history
-.session
+.*.local
 .envrc
+.env
