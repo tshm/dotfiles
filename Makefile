@@ -9,6 +9,11 @@ all: shell tools
 shell: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc ~/.config/direnv/direnvrc
 
 tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
+
+$HOME/.config/lvim/config.lua: ~/.dotfiles/lvim.config.lua
+	mkdir -p ~/.config/lvim
+	cd ~/.config/lvim
+	ln -s $< config.lua
 	
 ~/.config/direnv/direnvrc: ~/.dotfiles/zsh/direnvrc
 	mkdir -p ~/.config/direnv
