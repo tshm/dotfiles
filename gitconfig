@@ -19,6 +19,7 @@
 	abort = checkout -- .
 	wait = reset HEAD
 	amend = commit --amend --no-edit
+	dt = difftool -d
 #
 	l = log --pretty=oneline --abbrev-commit --graph --decorate
 	ls = log --simplify-by-decoration --all --pretty=oneline --abbrev-commit --graph --decorate
@@ -32,6 +33,11 @@
 	rebasex = rebase --strategy-option=ignore-all-space	
 [diff]
 	compactionHeuristic = true
+  # tool = "vimdiff"
+[difftool "vimdiff"]
+	cmd = "nvim -R -d -c \"wincmd l\" -d \"$LOCAL\" \"$REMOTE\""
+[mergetool "vimdiff"]
+	cmd = "nvim -d -c \"4wincmd w | wincmd J\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"  \"$MERGED\""
 [color]
 	ui = true
 [user]
