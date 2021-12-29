@@ -21,7 +21,8 @@ $HOME/.config/lvim/config.lua: ~/.dotfiles/lvim.config.lua
 	ln -s $<
 
 ~/.zinit:
-	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"
+	sh -c "$$(curl -fsSL https://git.io/zinit-install)"
+	#sh -c "$$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"
 
 ~/.nix-profile/bin/nix-env:
 	curl -L https://nixos.org/nix/install | sh
