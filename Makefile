@@ -2,7 +2,7 @@
 
 SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-PHONY: all shell
+PHONY: all shell awesome
 
 all: shell tools
 
@@ -14,6 +14,11 @@ $HOME/.config/lvim/config.lua: ~/.dotfiles/lvim.config.lua
 	mkdir -p ~/.config/lvim
 	ln -s $< $@
 	
+awesome: ~/.config/awesome/rc.lua
+~/.config/awesome/rc.lua: ~/.dotfiles/x/awesome/rc.lua
+	mkdir -p ~/.config/awesome
+	ln -s $< $@
+
 ~/.config/direnv/direnvrc: ~/.dotfiles/zsh/direnvrc
 	mkdir -p ~/.config/direnv
 	ln -s $< $@
