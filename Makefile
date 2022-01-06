@@ -12,13 +12,11 @@ tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
 
 $HOME/.config/lvim/config.lua: ~/.dotfiles/lvim.config.lua
 	mkdir -p ~/.config/lvim
-	cd ~/.config/lvim
-	ln -s $< config.lua
+	ln -s $< $@
 	
 ~/.config/direnv/direnvrc: ~/.dotfiles/zsh/direnvrc
 	mkdir -p ~/.config/direnv
-	cd ~/.config/direnv
-	ln -s $<
+	ln -s $< $@
 
 ~/.zinit:
 	sh -c "$$(curl -fsSL https://git.io/zinit-install)"
