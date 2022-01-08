@@ -14,7 +14,8 @@ run alttab -w 1
 run fcitx-autostart
 run nm-applet
 run blueman-tray
-run volumeicon
+run pa-applet
+# run volumeicon
 # run cbatticon
 run xfce4-power-manager
 

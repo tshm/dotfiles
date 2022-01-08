@@ -10,7 +10,8 @@ shell: ~/.zinit ~/.nix-profile/bin/nix-env ~/.zshrc ~/.config/direnv/direnvrc
 
 tools: ~/.gitconfig ~/.tmux.conf ~/.vimrc ~/.tridactylrc
 
-$HOME/.config/lvim/config.lua: ~/.dotfiles/lvim.config.lua
+lvim: ~/.config/lvim/config.lua
+~/.config/lvim/config.lua: ~/.dotfiles/lvim.config.lua
 	mkdir -p ~/.config/lvim
 	ln -s $< $@
 	
@@ -34,9 +35,6 @@ awesome: ~/.config/awesome/rc.lua
 ~/.zshrc:
 	echo "source ${SRC}/zsh/zshrc" >> $@
 	touch ~/.zshrc_local
-
-~/.zlogin:
-	echo "source ${SRC}/zsh/zlogin" > $@
 
 ~/.gitconfig:
 	mkdir -p ~/.config/git

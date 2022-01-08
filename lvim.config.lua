@@ -163,27 +163,14 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- Additional Plugins
 lvim.plugins = {
   {
-
-      "ray-x/lsp_signature.nvim",
-
-        event = "BufRead",
-
-          config = function()
-
-                require "lsp_signature".setup()
-
-                  end
-
-                }
-
-
-  }
-    -- {"github/copilot.nvim"},
-    {"folke/tokyonight.nvim"},
-    {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
-    },
+    "ray-x/lsp_signature.nvim",
+    event = "BufRead",
+    config = function()
+        require "lsp_signature".setup()
+      end
+  },
+  -- {"github/copilot.nvim"},
+  {"folke/tokyonight.nvim"}
 }
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
