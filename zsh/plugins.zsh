@@ -81,6 +81,8 @@ zinit ice wait:2 as"command" lucid extract"" from"gh-r" mv"exa* -> exa" pick"bin
 zinit light ogham/exa
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
+zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"' 
+zinit light cantino/mcfly 
 
 zinit ice wait:2 as"command" from"gh-r" bpick"*${arc}*linux-gnu*.tar.xz"\
   mv"watchexec* -> watchexec" pick"watchexec/watchexec"
