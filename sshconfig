@@ -1,0 +1,8 @@
+Host test
+  HostName test.com
+  Port 1234
+  DynamicForward 9999
+  LocalForward 84321 0.0.0.0:4321
+  User myuser
+  ProxyJump dmz
+
