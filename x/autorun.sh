@@ -16,6 +16,6 @@ run nm-applet
 run blueman-tray
 run pa-applet
 # run volumeicon
-# run cbatticon
+which cbatticon && run cbatticon
 run xfce4-power-manager
 
