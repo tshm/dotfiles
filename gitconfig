@@ -1,7 +1,7 @@
 [core]
 	filemode = false
 	ignorecase = false
-	autocrlf = input
+	autocrlf = false
 	whitespace = cr-at-eol
 	excludesfile = ~/.dotfiles/gitignore
 	pager = delta
