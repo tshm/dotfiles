@@ -39,21 +39,6 @@ zinit for light-mode \
   pick"async.zsh" src"pure.zsh" sindresorhus/pure
 
 zinit light zsh-users/zsh-history-substring-search
-zinit light DarrinTisdale/zsh-aliases-exa
-
-# git
-zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zinit light tj/git-extras
-zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
-zinit load dandavison/delta
-zinit ice wait:2
-zinit light wfxr/forgit
-zinit ice wait:2 as"command" from"gh-r" pick "ugit"
-zinit load Bhupesh-V/ugit
-
-zinit ice pick"deer"; zinit load "Vifon/deer"
-zle -N deer
-bindkey '\el' deer
 
 # completions & etc
 zinit ice wait'1' atload'_zsh_autosuggest_start'
@@ -69,20 +54,38 @@ zinit snippet 'OMZ::lib/completion.zsh'
 zinit snippet 'OMZ::lib/compfix.zsh'
 
 # additional commands
-zinit ice wait:2 as"command" from"gh-r" pick"smug"
+zinit ice wait:1 as"command" from"gh-r" pick"smug"
 zinit light ivaaaan/smug
-zinit ice wait:2 as"command" make pick"nnn"
+zinit ice wait:1 as"command" make pick"nnn"
 zinit light jarun/nnn
-zinit ice wait:2 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit ice wait:1 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 zinit ice wait:2 as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
 zinit light sharkdp/fd
-zinit ice wait:2 as"command" lucid extract"" from"gh-r" mv"exa* -> exa" pick"bin/exa"
+zinit ice wait:1 as"command" lucid extract"" from"gh-r" mv"exa* -> exa" pick"bin/exa"
 zinit light ogham/exa
+zinit ice wait:1
+zinit light DarrinTisdale/zsh-aliases-exa
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
 zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"' 
 zinit light cantino/mcfly 
+export MCFLY_FUZZY=2
+
+# git
+zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+zinit light tj/git-extras
+zinit ice wait:2 as"command" extract"" from"gh-r" mv"delta* -> delta" pick"delta/delta"
+zinit load dandavison/delta
+zinit ice wait:2
+zinit light wfxr/forgit
+zinit ice wait:2 as"command" from"gh-r" pick "ugit"
+zinit load Bhupesh-V/ugit
+
+# tools
+zinit ice pick"deer"; zinit load "Vifon/deer"
+zle -N deer
+bindkey '\el' deer
 
 zinit ice wait:2 as"command" from"gh-r" bpick"*${arc}*linux-gnu*.tar.xz"\
   mv"watchexec* -> watchexec" pick"watchexec/watchexec"
@@ -93,6 +96,9 @@ zinit load "r-darwish/topgrade"
 
 zinit ice as"command" from"gh-r" pick"build/${arc}*linux*/broot"
 zinit load "Canop/broot"
+
+zinit ice wait:2
+zinit load "zpm-zsh/clipboard"
 
 # finalize
 autoload -U compinit
