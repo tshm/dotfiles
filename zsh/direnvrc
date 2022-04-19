@@ -1,4 +1,4 @@
-source "$(asdf direnv hook asdf)"
+# source "$(asdf direnv hook asdf)"
 
 HIS=$(find_up .history.local)
 if [ -n "$HIS" ]; then

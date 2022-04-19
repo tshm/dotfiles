@@ -56,6 +56,9 @@ zinit snippet 'OMZ::lib/compfix.zsh'
 # additional commands
 zinit ice wait:1 as"command" from"gh-r" pick"smug"
 zinit light ivaaaan/smug
+tm() {
+  smug start "$*" -a
+}
 zinit ice wait:1 as"command" make pick"nnn"
 zinit light jarun/nnn
 zinit ice wait:1 as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
@@ -68,9 +71,9 @@ zinit ice wait:1
 zinit light DarrinTisdale/zsh-aliases-exa
 zinit ice wait:2 as"command" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
 zinit light BurntSushi/ripgrep
-zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"' 
-zinit light cantino/mcfly 
-export MCFLY_FUZZY=2
+# zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"' 
+# zinit light cantino/mcfly 
+# export MCFLY_FUZZY=2
 
 # git
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"

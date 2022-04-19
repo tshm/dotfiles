@@ -33,7 +33,7 @@ function mem_info() {
 (which docker > /dev/null) && {
   function dockerclean() {
     docker system df
-    docker rm `docker ps -q`
+    docker rm `docker ps -aq`
     docker volume rm `docker volume ls -q -f dangling=true`
     docker system df
   }
