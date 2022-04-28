@@ -57,6 +57,7 @@ zinit snippet 'OMZ::lib/compfix.zsh'
 zinit ice wait:1 as"command" from"gh-r" pick"smug"
 zinit light ivaaaan/smug
 tm() {
+  smug start "$*"
   smug start "$*" -a
 }
 zinit ice wait:1 as"command" make pick"nnn"
