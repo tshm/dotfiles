@@ -3,17 +3,16 @@
       create: true
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
-    ~/.tmux.conf:
-    ~/.config/git/ignore: gitignore
-    ~/.gitconfig:
-    ~/.ssh/config: sshconfig
-    ~/.config/lvim/config.lua: lvim.config.lua
-    ~/.config/awesome/rc.lua: x/awesome/rc.lua
-    ~/.config/direnv/direnvrc: zsh/direnvrc
-    ~/.zshrc: zsh/zshrc
+  ~/.tmux.conf:
+  ~/.config/git/ignore: gitignore
+  ~/.gitconfig:
+  ~/.ssh/config: sshconfig
+  ~/.config/lvim/config.lua: lvim.config.lua
+  ~/.config/awesome/rc.lua: x/awesome/rc.lua
+  ~/.config/direnv/direnvrc: zsh/direnvrc
 
 - create:
     - ~/bin
@@ -25,12 +24,12 @@
     - ~/.config/direnv
 
 - create:
-    ~/.ssh:
-      mode: 0700
+  ~/.ssh:
+    mode: 0700
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-    -
-      - echo "[include]"                     > ~/.config/git/gitconfig
-      - echo "  path = .dotfiles/gitconfig" >> ~/.config/git/gitconfig
-
+    - description: create gitconfig
+      command: echo -e '[include]\npath = .dotfiles/gitconfig' > ~/.config/git/gitconfig
+    - description: create zshrc
+      command: echo 'source ~/.dotfiles/zsh/zshrc' > ~/.zshrc
