@@ -1,0 +1,11 @@
+env
+tmp
+**/.id_rsa
+.env
+.terraform
+.kubeconfig*
+terraform.tfstate
+*.tfstate*
+.terraform.lock*
+.*.kubeconfig
+.*.env

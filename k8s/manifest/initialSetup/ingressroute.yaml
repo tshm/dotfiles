@@ -1,0 +1,29 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: app-ingressroute
+  namespace: apps
+  labels:
+    environment: localk8s
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: app-svc
+          port: 3000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: stripprefix
+  namespace: apps
+  labels:
+    environment: localk8s
+spec:
+  stripPrefix:
+    prefixes:
+      - /api

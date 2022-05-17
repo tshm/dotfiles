@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app
+          image: app
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 1000Mi
+            limits:
+              memory: 1000Mi
+          envFrom:
+            - configMapRef:
+                name: env
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+      imagePullSecrets:
+        - name: regcred
+---
+# service intended to be exposed via ingress
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc
+  namespace: apps
+  labels:
+    environment: localk8s
+spec:
+  type: ClusterIP
+  selector:
+    app: app
+  ports:
+    - port: 3000

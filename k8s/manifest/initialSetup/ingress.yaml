@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: apps
+  labels:
+    environment: localk8s
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    # kubernetes.io/ingress.class: azure/application-gateway
+    # ingress.kubernetes.io/ssl-redirect: "false"
+    traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+    - hosts:
+        - $(HOSTNAME_APP).$(DOMAIN_APP)
+      secretName: tls-secret-prd
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-svc
+                port:
+                  number: 3000

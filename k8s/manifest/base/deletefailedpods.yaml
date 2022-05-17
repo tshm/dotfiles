@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: deletefailedpods
+spec:
+  schedule: "0 1,5,21 * * *"
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: kubectl-runner
+              image: bitnami/kubectl
+              command:
+                [
+                  "sh",
+                  "-c",
+                  "kubectl get pods -A --field-selector=status.phase=Failed -o json | kubectl delete -f -",
+                ]
+          restartPolicy: OnFailure

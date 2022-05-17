@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fluent-bit
+  namespace: logging
+spec:
+  type: ClusterIP
+  selector:
+    name: fluent-bit
+  ports:
+    - port: 3031
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluent-bit
+  namespace: logging
+  labels:
+    app.kubernetes.io/name: fluent-bit
+spec:
+  selector:
+    matchLabels:
+      name: fluent-bit
+  template:
+    metadata:
+      labels:
+        name: fluent-bit
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "2020"
+        prometheus.io/path: /api/v1/metrics/prometheus
+    spec:
+      containers:
+        - name: fluent-bit
+          image: fluent/fluent-bit:1.9.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 2020
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+            - name: varlogcontainers
+              mountPath: /var/log/containers
+              readOnly: true
+            - name: fluent-bit-config
+              mountPath: /fluent-bit/etc/
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: varlog
+          hostPath:
+            path: /var/log
+        - name: varlogcontainers
+          hostPath:
+            path: /var/log/containers
+        - name: fluent-bit-config
+          configMap:
+            name: fluent-bit-config
+      serviceAccountName: fluent-bit
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+        - operator: "Exists"
+          effect: "NoExecute"
+        - operator: "Exists"
+          effect: "NoSchedule"
