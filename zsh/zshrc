@@ -111,6 +111,9 @@ zstyle ':completion:*' verbose true
 zstyle :compinstall filename '/home/tshm/.zshrc'
 # End of lines added by compinstall
 
+NIX=~/.nix-profile/etc/profile.d/nix.sh
+[ -e $NIX ] && source $NIX
+
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
