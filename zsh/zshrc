@@ -18,6 +18,9 @@ DIRSTACKSIZE=15
 fignore=('~' .bak)
 hash -d 'D=/usr/share/doc'
 
+alias ls='exa --icons'
+alias l='exa --icons -l'
+alias la='exa --icons -la'
 alias pstree='pstree -A'
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'       # no spelling correction on cp

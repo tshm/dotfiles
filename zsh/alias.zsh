@@ -6,6 +6,24 @@ export NNN_PLUG='z:z;c:!code $nnn*;e:!nvim $nnn*'
 function n() {
   env LESS= BAT_PAGER='less -R' VISUAL=bat nnn -e $*
 }
+function b () {
+  local cmd cmd_file code
+  cmd_file=$(mktemp)
+  if broot --outcmd "$cmd_file" "$@"
+  then
+    cmd=$(<"$cmd_file")
+    rm -i -f "$cmd_file"
+    eval "$cmd"
+  else
+    code=$?
+    rm -i -f "$cmd_file"
+    return "$code"
+  fi
+}
+tm() {
+  smug start "$*"
+  smug start "$*" -a
+}
 
 read -d '' -r awks <<'EOF'
 NR>2 {
