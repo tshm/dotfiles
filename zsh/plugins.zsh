@@ -78,6 +78,7 @@ compinit
 
 # fzf-tab has to be loaded after compinit
 zinit light Aloxaf/fzf-tab
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-s:toggle+down' 'ctrl-a:toggle-all'
 
 zinit cdreplay -q 
 zinit cdlist 
