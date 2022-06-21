@@ -55,10 +55,17 @@ config: ${DIR}/initialSetup/*
 stable = https://charts.helm.sh/stable
 traefik = https://helm.traefik.io/traefik
 jetstack = https://charts.jetstack.io/
+crossplane = https://charts.crossplane.io/stable
 helm-%:
 	helm repo ls | grep $* || helm repo add stable $($*)
-helm: helm-stable helm-traefik helm-jetstack
+helm: helm-stable helm-traefik helm-jetstack helm-crossplane
 	helm repo update >/dev/null
+
+crossplane: NS := crossplane-system
+crossplane: helm
+	$K get ns ${NS} >|/dev/null 2>&1 || $K create ns ${NS}
+	helm upgrade --install crossplane crossplane-stable/crossplane \
+		--namespace ${NS}
 
 cert-manager: NS := cert-manager
 cert-manager: helm
