@@ -13,7 +13,9 @@
     fd
     exa
     ripgrep
+    ripgrep-all
     nnn
+    viddy
     smug
     delta
     broot
