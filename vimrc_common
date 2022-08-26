@@ -101,6 +101,7 @@ if exists('g:vscode')
   " folding
   nmap zM <Cmd>call VSCodeNotify('editor.foldAll')<CR>
   nmap zc <Cmd>call VSCodeNotify('editor.fold')<CR>
+  vnoremap zc <Cmd>call VSCodeNotifyRange('editor.createFoldingRangeFromSelection', line("v"), line("."), 0)<CR>
   nmap zo <Cmd>call VSCodeNotify('editor.unfold')<CR>
   nmap zO <Cmd>call VSCodeNotify('editor.unfoldAll')<CR>
 else

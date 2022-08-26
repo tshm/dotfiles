@@ -1,0 +1,19 @@
+#!/bin/sh
+export SN=home
+echo ============== start $SN ==============
+tmux has -t $SN || {
+  # 0:root
+  tmux new-session -s $SN -d
+  # 1:dotfiles
+  tmux neww -c ~/.dotfiles
+  tmux send-keys -t $SN:1 'git status' Enter
+  # 2:ssh
+	tmux neww 'autossh -M 20000 spi';
+  # tmux splitw -v -l 50% -t $SN:2 'autossh test';
+  # tmux select-pane -t 0
+  #
+  tmux select-window -t $SN:1
+  tmux select-pane -t 0
+}
+exec tmux attach -t $SN || exec tmux switch -t $SN
+

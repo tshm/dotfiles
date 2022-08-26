@@ -19,7 +19,6 @@
     viddy
     smug
     delta
-    broot
     watchexec
   ];
   programs.direnv.enable = true;
