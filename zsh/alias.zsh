@@ -21,8 +21,16 @@ function b () {
   fi
 }
 tm() {
-  smug start "$*"
-  smug start "$*" -a
+  SN=${1:-home}
+  echo -------- start $SN
+  tmux has -t $SN || {
+    source ~/.dotfiles/proj/${SN}.sh
+    #
+    tmux select-window -t $SN:0
+    tmux select-pane -t 0
+  }
+  [ -z $TMUX ] && tmux attach -t $SN || tmux switch -t $SN
+  # [ $SN = $(tmux list-panes -t "$TMUX_PANE" -F '#S' | head -n1) ]
 }
 
 read -d '' -r awks <<'EOF'

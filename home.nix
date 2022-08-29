@@ -17,7 +17,6 @@
     ripgrep-all
     nnn
     viddy
-    smug
     delta
     watchexec
   ];
