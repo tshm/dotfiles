@@ -1,12 +1,12 @@
 # initial setup
 
 SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-ISWSL := $(shell uname -a | grep Microsoft)
+ISWSL := $(shell uname -a | grep -i microsoft)
 
 PHONY: all shell tools git
 
 all: shell tools
-shell: ~/.nix-profile/bin/home-manager ~/bin/e ~/.zinit
+shell: ~/.zshrc ~/.nix-profile/bin/home-manager ~/bin/e
 tools: ~/.tmux.conf git
 
 ~/.tmux.conf:
@@ -26,7 +26,7 @@ git: ~/.config/git/ignore ~/.gitconfig
 	curl -L https://nixos.org/nix/install | sh
 	echo "source ${HOME}/.nix-profile/etc/profile.d/nix.sh"
 	mkdir -p  ~/.config/nixpkgs
-	ln -s home.nix ~/.config/nixpkgs/home.nix
+	[ -f ~/.config/nixpkgs/home.nix ] || ln -s home.nix ~/.config/nixpkgs/home.nix
 
 ~/.nix-profile/bin/home-manager: export NIX_PATH=${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 ~/.nix-profile/bin/home-manager: ~/.nix-profile/bin/nix-env
@@ -36,6 +36,7 @@ git: ~/.config/git/ignore ~/.gitconfig
 
 ~/.zshrc:
 	echo 'source ~/.dotfiles/zsh/zshrc' > $@
+	mkdir -p ~/bin/
 
 ifdef ISWSL
 ~/bin/e:
@@ -46,5 +47,3 @@ else
 	which xdg-open && ln -s $$(which xdg-open) $@
 endif
 
-~/.zinit:
-	sh -c "$$(curl -fsSL https://git.io/zinit-install)"

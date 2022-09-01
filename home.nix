@@ -7,6 +7,7 @@
   home.homeDirectory = builtins.getEnv "HOME";
   home.packages = with pkgs; [
     git-imerge
+    neovim
     tig
     tmux
     bat

@@ -64,6 +64,11 @@ function mem_info() {
     docker system df
   }
 }
+
+(which lvim >/dev/null) && {
+  alias vi=lvim
+}
+
 (uname -a | grep Microsoft) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   function e() {
