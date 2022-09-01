@@ -20,7 +20,7 @@ function b () {
     return "$code"
   fi
 }
-tm() {
+function tm () {
   SN=${1:-home}
   echo -------- start $SN
   tmux has -t $SN || {
@@ -29,7 +29,8 @@ tm() {
     tmux select-window -t $SN:0
     tmux select-pane -t 0
   }
-  [ -z $TMUX ] && tmux attach -t $SN || tmux switch -t $SN
+  tmux attach -t $SN
+  # [ -z $TMUX ] && tmux attach -t $SN || tmux switch -t $SN
   # [ $SN = $(tmux list-panes -t "$TMUX_PANE" -F '#S' | head -n1) ]
 }
 

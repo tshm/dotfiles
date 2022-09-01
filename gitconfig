@@ -4,7 +4,7 @@
 	autocrlf = false
 	whitespace = cr-at-eol
 	excludesfile = ~/.dotfiles/gitignore
-	pager = delta
+  pager = delta
 [commit]
 	template = ~/.dotfiles/gitmessage.txt
 [alias]
@@ -31,8 +31,13 @@
 	diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
 	rebasex = rebase --strategy-option=ignore-all-space	
 [diff]
-	compactionHeuristic = true
-  # tool = "vimdiff"
+  # external = difft
+  compactionHeuristic = true
+  tool = "difft"
+[difftool]
+  prompt = false
+[difftool "difft"]
+	cmd = difft "$LOCAL" "$REMOTE"
 [difftool "vimdiff"]
 	cmd = "nvim -R -d -c \"wincmd l\" -d \"$LOCAL\" \"$REMOTE\""
 [mergetool "vimdiff"]
