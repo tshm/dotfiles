@@ -7,7 +7,7 @@ PHONY: all shell tools git
 
 all: shell tools
 shell: ~/.zshrc ~/.nix-profile/bin/home-manager ~/bin/e
-tools: ~/.tmux.conf git /usr/bin/atuin
+tools: ~/.tmux.conf git
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
