@@ -7,7 +7,7 @@ PHONY: all shell tools git
 
 all: shell tools
 shell: ~/.zshrc ~/.nix-profile/bin/home-manager ~/bin/e
-tools: ~/.tmux.conf git
+tools: ~/.tmux.conf git /usr/bin/atuin
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
@@ -47,3 +47,6 @@ else
 	which xdg-open && ln -s $$(which xdg-open) $@
 endif
 
+/usr/bin/atuin:
+	curl https://raw.githubusercontent.com/ellie/atuin/main/install.sh | bash
+	# dpkg --purge atuin

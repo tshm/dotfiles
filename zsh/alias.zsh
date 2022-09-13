@@ -6,6 +6,7 @@ export NNN_PLUG='z:z;c:!code $nnn*;e:!nvim $nnn*'
 function n() {
   env LESS= BAT_PAGER='less -R' VISUAL=bat nnn -e $*
 }
+
 function b () {
   local cmd cmd_file code
   cmd_file=$(mktemp)
@@ -20,6 +21,7 @@ function b () {
     return "$code"
   fi
 }
+
 function tm () {
   SN=${1:-home}
   echo -------- start $SN
@@ -29,9 +31,7 @@ function tm () {
     tmux select-window -t $SN:0
     tmux select-pane -t 0
   }
-  tmux attach -t $SN
-  # [ -z $TMUX ] && tmux attach -t $SN || tmux switch -t $SN
-  # [ $SN = $(tmux list-panes -t "$TMUX_PANE" -F '#S' | head -n1) ]
+  tmux attach -t $SN || tmux switch -t $SN
 }
 
 read -d '' -r awks <<'EOF'
@@ -70,7 +70,7 @@ function mem_info() {
   alias vi=lvim
 }
 
-(uname -a | grep Microsoft) && {
+(uname -a | grep -i microsoft) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   function e() {
     (which wsl-open > /dev/null) && wsl-open $* \

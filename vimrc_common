@@ -7,7 +7,7 @@ set encoding=utf-8
 language C
 set nocompatible | filetype indent plugin on | syn on
 let mapleader = "\<Space>"
-if !exists('g:vscode')
+if !exists('g:vscode') && !has('nvim')
   execute 'source ' . expand('<sfile>:h') . '/init_bundles.vim'
 else
   xmap gc  <Plug>VSCodeCommentary
@@ -78,6 +78,11 @@ nnoremap - <c-x>
 vnoremap <silent> p "zdP
 nnoremap ; :
 nnoremap ;; ;
+if executable('zenhan')
+  autocmd InsertLeave * :call system('zenhan 0')
+  autocmd CmdlineLeave * :call system('zenhan 0')
+endif
+
 if exists('g:vscode')
   " cursor
   nmap j gj

@@ -34,7 +34,6 @@ zinit load redxtech/zsh-asdf-direnv
 zinit for light-mode \
   zsh-users/zsh-autosuggestions \
   zdharma-continuum/fast-syntax-highlighting \
-  zdharma-continuum/history-search-multi-word \
   hlissner/zsh-autopair \
   pick"async.zsh" src"pure.zsh" sindresorhus/pure
 
@@ -62,6 +61,8 @@ zinit ice wait:2 as"command" from"gh-r" pick "ugit"
 zinit load Bhupesh-V/ugit
 
 # tools
+zinit load ellie/atuin
+
 zinit ice pick"deer"; zinit load "Vifon/deer"
 zle -N deer
 bindkey '\el' deer
