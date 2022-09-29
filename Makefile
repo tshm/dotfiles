@@ -7,7 +7,7 @@ PHONY: all shell tools git
 
 all: shell tools
 shell: ~/.zshrc ~/.nix-profile/bin/home-manager ~/bin/e
-tools: ~/.tmux.conf git
+tools: ~/.tmux.conf git nvim
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
@@ -16,6 +16,15 @@ git: ~/.config/git/ignore ~/.gitconfig
 ~/.config/git/ignore:
 	mkdir -p ~/.config/git
 	ln -s gitignore $@
+
+nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
+~/.config/nvim:
+	git clone https://github.com/AstroNvim/AstroNvim $@
+	nvim +PackerSync
+
+~/.config/nvim/lua/user/init.lua:
+	mkdir -p ~/.config/nvim/lua/user
+	ln -s ./vim/astrovim.init.lua $@
 
 ~/.gitconfig:
 	echo "[include]\n  path = ~/.dotfiles/gitconfig" > $@
@@ -47,6 +56,3 @@ else
 	which xdg-open && ln -s $$(which xdg-open) $@
 endif
 
-/usr/bin/atuin:
-	curl https://raw.githubusercontent.com/ellie/atuin/main/install.sh | bash
-	# dpkg --purge atuin

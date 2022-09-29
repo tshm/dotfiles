@@ -4,8 +4,8 @@ bindkey -e               # emacs key bindings
 source ~/.dotfiles/zsh/plugins.zsh
 
 export RSYNC_RSH='ssh'
-export EDITOR=lvim
-export VISUAL=lvim
+export EDITOR=nvim
+export VISUAL=nvim
 export PAGER='less'
 export LESS='--quit-if-one-screen -R -iMX'
 export WORDCHARS=${WORDCHARS:s|/||}

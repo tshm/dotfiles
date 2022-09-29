@@ -66,8 +66,8 @@ function mem_info() {
   }
 }
 
-(which lvim >/dev/null) && {
-  alias vi=lvim
+(which nvim >/dev/null) && {
+  alias vi=nvim
 }
 
 (uname -a | grep -i microsoft) && {
@@ -77,16 +77,12 @@ function mem_info() {
     || cmd.exe /c start $(wslpath -w $*)
   }
   function gvim() {
-    h=`wslpath -w $HOME`
-    export LUNARVIM_RUNTIME_DIR="$h/.local/share/lunarvim"
-    export LUNARVIM_CONFIG_DIR="$h/.config/lvim"
-    export LUNARVIM_CACHE_DIR="$h/.cache/nvim"
     args2=()
     for i in $*; do
       echo file: $i
       args2+="$(wslpath -aw $i) "
     done
-    exec neovide.exe -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" $args2 &
+    neovide.exe --wsl $args2
     # neovide.exe $args2 &
     # exec neovide.exe -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
   }
