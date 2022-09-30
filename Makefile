@@ -33,7 +33,6 @@ nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
 
 ~/.nix-profile/bin/nix-env:
 	curl -L https://nixos.org/nix/install | sh
-	echo "source ${HOME}/.nix-profile/etc/profile.d/nix.sh"
 	mkdir -p  ~/.config/nixpkgs
 	[ -f ~/.config/nixpkgs/home.nix ] || ln -s home.nix ~/.config/nixpkgs/home.nix
 

@@ -35,8 +35,8 @@ local config = {
     -- },
     default_theme = function(highlights) -- or a function that returns a new table of colors to set
       local C = require "default_theme.colors"
-
       highlights.Normal = { fg = C.fg, bg = C.bg }
+      highlights.CursorLine = { fg = C.none, bg = C.grey_4 }
       return highlights
     end,
   },
@@ -59,15 +59,6 @@ local config = {
   --
   --   return local_vim
   -- end,
-
-  -- Set dashboard header
-  header = {
-    "    ███    ██ ██    ██ ██ ███    ███",
-    "    ████   ██ ██    ██ ██ ████  ████",
-    "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-    "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-    "    ██   ████   ████   ██ ██      ██",
-  },
 
   -- Default theme configuration
   default_theme = {
@@ -161,12 +152,28 @@ local config = {
       -- second key is the lefthand side of the map
       -- mappings seen under group name "Buffer"
       ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
+      ["<leader>gD"] = { "<cmd>DiffviewOpen<cr>", desc = "DiffviewOpen" },
+      ["<leader>gc"] = {
+        function()
+          require("telescope.builtin").git_commits {
+            attach_mappings = function(_, map)
+              map("n", "<C-o>", function()
+                local entry = require("telescope.actions.state").get_selected_entry()
+                local id = entry["value"]
+                vim.api.nvim_win_close(0, true)
+                vim.cmd("DiffviewOpen " .. id)
+              end)
+              return true
+            end,
+          }
+        end,
+        desc = "Git commits",
+      },
       ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
       ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
       ["<leader><space>"] = { ":e #<cr>", desc = "Switch to the last buffer" },
       ["<leader>."] = { "<cmd>cd %:p:h<cr>", desc = "Set CWD" },
-      ["<leader>sg"] = { "<cmd>Telescope live_grep<cr>", desc = "Telescope live_grep" },
       ["<leader>sr"] = {
         function() require("telescope.builtin").find_files { search_dirs = { "%:h" } } end,
         desc = "Search files from relative folder",
@@ -207,14 +214,34 @@ local config = {
       },
       -- You can disable default plugins as follows:
       -- ["goolord/alpha-nvim"] = { disable = true },
-      -- ["declancm/cinnamon.nvim"] = { disable = true },
+      ["declancm/cinnamon.nvim"] = { disable = true },
 
       -- You can also add new plugins here as well:
       -- Add plugins, the packer syntax without the "use"
-      { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
       { "mg979/vim-visual-multi" },
       { "tpope/vim-surround" },
       { "ggandor/lightspeed.nvim" },
+      -- ["petertriho/nvim-scrollbar"] = {
+      --   config = function() require("scrollbar").setup() end,
+      -- },
+      { "kevinhwang91/nvim-hlslens" },
+      {
+        "TimUntersberger/neogit",
+        requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
+        config = function() require("neogit").setup { integrations = { diffview = true } } end,
+      },
+      {
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+      },
+      -- ["JoosepAlviste/nvim-ts-context-commentstring"] = {
+      --   config = function() require("nvim-treesitter.configs").setup { context_commentstring = { enable = true } } end,
+      -- },
+      -- { "kkharji/sqlite.lua" },
+      -- ["nvim-telescope/telescope-frecency.nvim"] = {
+      --   requires = { "kkharji/sqlite.lua" },
+      --   config = function() require("telescope").load_extension "frecency" end,
+      -- },
       -- { "andweeb/presence.nvim" },
       -- {
       --   "ray-x/lsp_signature.nvim",
@@ -252,12 +279,13 @@ local config = {
       return config
     end,
     telescope = function(config)
-      local actions = require "telescope.actions"
       config.defaults.prompt_prefix = ">"
-      config.defaults.mappings.i["<C-n>"] = actions.move_selection_next
-      config.defaults.mappings.i["<C-p>"] = actions.move_selection_previous
+      config.defaults.mappings.i["<C-n>"] = "move_selection_next"
+      config.defaults.mappings.i["<C-p>"] = "move_selection_previous"
       config.defaults.mappings.i["<C-j>"] = false
       config.defaults.mappings.i["<C-k>"] = false
+      config.defaults.mappings.i["<C-u>"] =
+        { "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>", type = "command" }
       return config
     end,
     -- All other entries override the require("<key>").setup({...}) call for default plugins
