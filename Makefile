@@ -20,11 +20,11 @@ git: ~/.config/git/ignore ~/.gitconfig
 nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
 ~/.config/nvim:
 	git clone https://github.com/AstroNvim/AstroNvim $@
-	nvim +PackerSync
 
 ~/.config/nvim/lua/user/init.lua:
 	mkdir -p ~/.config/nvim/lua/user
-	ln -s ./vim/astrovim.init.lua $@
+	cd ~/.config/nvim/lua/user && ln -s ~/.dotfiles/vim/astrovim.init.lua $@
+	nvim +PackerSync
 
 ~/.gitconfig:
 	echo "[include]\n  path = ~/.dotfiles/gitconfig" > $@
