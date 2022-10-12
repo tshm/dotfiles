@@ -174,7 +174,7 @@ local config = {
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
       ["<leader><space>"] = { ":e #<cr>", desc = "Switch to the last buffer" },
       ["<leader>."] = { "<cmd>cd %:p:h<cr>", desc = "Set CWD" },
-      ["<leader>sr"] = {
+      ["<leader>fr"] = {
         function() require("telescope.builtin").find_files { search_dirs = { "%:h" } } end,
         desc = "Search files from relative folder",
       },

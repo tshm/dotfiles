@@ -8,6 +8,7 @@ export EDITOR=nvim
 export VISUAL=nvim
 export PAGER='less'
 export LESS='--quit-if-one-screen -R -iMX'
+export LESSOPEN=|~/.dotfiles/lessfilter %s
 export WORDCHARS=${WORDCHARS:s|/||}
 export PATH=~/bin/:~/.local/bin:$PATH
 
