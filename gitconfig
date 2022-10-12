@@ -49,6 +49,7 @@
 	email = 2sm@csc.jp
 [push]
 	default = current
+	followTags = true
 [tig]
 	tab-size = 2
 	main-view-author = no
