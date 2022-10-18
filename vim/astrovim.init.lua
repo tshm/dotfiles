@@ -36,12 +36,6 @@ local config = {
     -- duskfox = { -- a table of overrides/changes to the duskfox theme
     --   Normal = { bg = "#000000" },
     -- },
-    default_theme = function(highlights) -- or a function that returns a new table of colors to set
-      local C = require("default_theme.colors")
-      highlights.Normal = { fg = C.fg, bg = C.bg }
-      highlights.CursorLine = { fg = C.none, bg = C.grey_4 }
-      return highlights
-    end,
   },
 
   -- set vim options here (vim.<first_key>.<second_key> =  value)
@@ -53,9 +47,18 @@ local config = {
       spell = false, -- sets vim.opt.spell
       signcolumn = "auto", -- sets vim.opt.signcolumn to auto
       wrap = false, -- sets vim.opt.wrap
+      tabstop = 2,
+      shiftwidth = 2,
+      expandtab = true,
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
+      autoformat_enabled = false, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+      cmp_enabled = true, -- enable completion at start
+      autopairs_enabled = true, -- enable autopairs at start
+      diagnostics_enabled = true, -- enable diagnostics at start
+      status_diagnostics_enabled = true, -- enable diagnostics in statusline
+      icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
     },
   },
   -- If you need more control, you can use the function()...end notation
@@ -93,6 +96,7 @@ local config = {
       aerial = true,
       beacon = false,
       bufferline = true,
+      cmp = true,
       dashboard = true,
       highlighturl = true,
       hop = false,
@@ -105,6 +109,7 @@ local config = {
       rainbow = true,
       symbols_outline = false,
       telescope = true,
+      treesitter = true,
       vimwiki = false,
       ["which-key"] = true,
     },
@@ -123,10 +128,17 @@ local config = {
       -- "pyright"
     },
     formatting = {
-      format_on_save = false, -- enable or disable auto formatting on save
-      disabled = { -- disable formatting capabilities for the listed clients
+      -- control auto formatting on save
+      format_on_save = {
+        enabled = false, -- enable or disable format on save globally
+        disable_filetypes = { -- disable format on save for specified filetypes
+          -- "python",
+        },
+      },
+      disabled = { -- disable formatting capabilities for the listed language servers
         -- "sumneko_lua",
       },
+      timeout_ms = 1000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
       --   return true
       -- end
@@ -333,11 +345,11 @@ local config = {
       return config -- return final config table
     end,
     treesitter = { -- overrides `require("treesitter").setup(...)`
-      ensure_installed = { "lua" },
+      -- ensure_installed = { "lua" },
     },
     -- use mason-lspconfig to configure LSP installations
     ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
-      ensure_installed = { "sumneko_lua" },
+      -- ensure_installed = { "sumneko_lua" },
     },
     -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
     ["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
