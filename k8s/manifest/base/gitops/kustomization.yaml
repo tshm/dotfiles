@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: flux-system
 
 bases:
-  - https://github.com/fluxcd/flux2/manifests/install?ref=v0.28.5
+  - https://github.com/fluxcd/flux2/manifests/install?ref=v0.35.0
 
 resources:
   - gotk-sync.yaml

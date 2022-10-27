@@ -79,7 +79,7 @@ local config = {
       bg = "#1e222a",
     },
     highlights = function(hl) -- or a function that returns a new table of colors to set
-      local C = require("default_theme.colors")
+      local C = require "default_theme.colors"
 
       hl.Normal = { fg = C.fg, bg = C.bg }
 
@@ -131,7 +131,10 @@ local config = {
       -- control auto formatting on save
       format_on_save = {
         enabled = false, -- enable or disable format on save globally
-        disable_filetypes = { -- disable format on save for specified filetypes
+        allow_filetypes = { -- enable format on save for specified filetypes only
+          -- "go",
+        },
+        ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
         },
       },
@@ -160,6 +163,13 @@ local config = {
 
     -- Add overrides for LSP server settings, the keys are the name of the server
     ["server-settings"] = {
+      sumneko_lua = function(config) -- setup for awesomewm
+        for _, name in ipairs({ "awesome", "client", "root", "screen" }) do
+          table.insert(config.settings.Lua.diagnostics.globals, name)
+        end
+        config.settings.Lua.workspace.library['/usr/share/awesome/lib'] = true
+        return config
+      end,
       -- example for addings schemas to yamlls
       -- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
       --   settings = {
@@ -260,7 +270,13 @@ local config = {
       -- ["petertriho/nvim-scrollbar"] = {
       --   config = function() require("scrollbar").setup() end,
       -- },
-      { "kevinhwang91/nvim-hlslens" },
+      {
+        "kevinhwang91/nvim-hlslens",
+        event = "BufRead",
+        config = function()
+          require("hlslens").setup()
+        end,
+      },
       {
         "TimUntersberger/neogit",
         requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
@@ -301,21 +317,15 @@ local config = {
     },
     alpha = function(config)
       local alpha_button = astronvim.alpha_button
-      config.layout = {
-        {
-          type = "group",
-          val = {
-            alpha_button("LDR S .", "📁 Folder Session  "),
-            alpha_button("LDR S l", "  Last Session  "),
-            alpha_button("LDR S f", "☘  Find Session  "),
-            alpha_button("LDR f f", "  Find File  "),
-            alpha_button("LDR f o", "  Recents  "),
-            alpha_button("LDR f w", "  Find Word  "),
-            alpha_button("LDR f n", "  New File  "),
-            alpha_button("LDR f m", "  Bookmarks  "),
-          },
-          opts = { spacing = 1 },
-        },
+      config.layout[4].val = { -- 4th value is button list in default config
+        alpha_button("LDR S .", "📁 Folder Session  "),
+        alpha_button("LDR S l", "  Last Session  "),
+        alpha_button("LDR S f", "☘  Find Session  "),
+        alpha_button("LDR f f", "  Find File  "),
+        alpha_button("LDR f o", "  Recents  "),
+        alpha_button("LDR f w", "  Find Word  "),
+        alpha_button("LDR f n", "  New File  "),
+        alpha_button("LDR f m", "  Bookmarks  "),
       }
       return config
     end,
