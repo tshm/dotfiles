@@ -18,10 +18,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- {{{ external widgets
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
--- }}}
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -326,14 +322,6 @@ awful.screen.connect_for_each_screen(
         layout = wibox.layout.fixed.horizontal,
         mykeyboardlayout,
         wibox.widget.systray(),
-        cpu_widget(
-          {
-            width = 70,
-            step_width = 2,
-            step_spacing = 0,
-            color = "#434c5e"
-          }
-        ),
         mytextclock,
         s.mylayoutbox
       }
@@ -359,8 +347,7 @@ root.buttons(
 -- }}}
 
 -- {{{ Key bindings
-local globalkeys =
-  gears.table.join(
+local globalkeys = gears.table.join(
   awful.key(
     {modkey},
     "comma",
@@ -577,12 +564,25 @@ local clientkeys =
     function(c)
       local mc = awful.client.getmaster()
       if c == mc then
-        awful.client.focus.history.previous()
-      -- awful.client.focus.history.add(awful.client.getmaster())
+        local lc = awful.client.focus.history.list[2]
+        client.focus = lc
+        lc:swap(mc)
+      else
+        client.focus = mc
+        c:swap(mc)
       end
-      c:swap(awful.client.getmaster())
     end,
     {description = "swap to/from master", group = "client"}
+  ),
+  awful.key(
+    {modkey},
+    "Tab",
+    function(c)
+      local lc = awful.client.focus.history.list[2]
+      client.focus = lc
+      lc:raise()
+    end,
+    {description = "focus to the last client", group = "client"}
   ),
   awful.key(
     {modkey},
