@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
 function run {
-  if ! pgrep -f $1 ;
-  then
-    $@&
-  fi
+  which "$1" || return;
+  pgrep -f "$1" || "$@" &
 }
 
 run autorandr horizontal
@@ -16,6 +14,6 @@ run nm-applet
 run blueman-tray
 run pa-applet
 # run volumeicon
-which cbatticon && run cbatticon
+run cbatticon
 run xfce4-power-manager
 
