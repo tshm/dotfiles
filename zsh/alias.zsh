@@ -22,6 +22,10 @@ function b () {
   fi
 }
 
+which curl >/dev/null && function cheat () {
+  curl cheat.sh/$1 | bat
+}
+
 function tm () {
   SN=${1:-home}
   echo -------- start $SN
@@ -33,6 +37,10 @@ function tm () {
   }
   tmux attach -t $SN || tmux switch -t $SN
 }
+_tm() {
+  _values 'sessions' $(/bin/ls ~/.dotfiles/proj/ | sed 's/\.sh//')
+}
+compdef _tm tm
 
 read -d '' -r awks <<'EOF'
 NR>2 {
