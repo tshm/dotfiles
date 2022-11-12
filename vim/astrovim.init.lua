@@ -59,6 +59,7 @@ local config = {
       diagnostics_enabled = true, -- enable diagnostics at start
       status_diagnostics_enabled = true, -- enable diagnostics in statusline
       icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+      ui_notifications_enabled = true, -- disable notifications when toggling UI elements
     },
   },
   -- If you need more control, you can use the function()...end notation
@@ -266,10 +267,6 @@ local config = {
       -- Add plugins, the packer syntax without the "use"
       -- { "mg979/vim-visual-multi" },
       { "tpope/vim-surround" },
-      -- { "ggandor/lightspeed.nvim" },
-      -- ["petertriho/nvim-scrollbar"] = {
-      --   config = function() require("scrollbar").setup() end,
-      -- },
       {
         "kevinhwang91/nvim-hlslens",
         event = "BufRead",
@@ -277,13 +274,7 @@ local config = {
           require("hlslens").setup()
         end,
       },
-      {
-        "TimUntersberger/neogit",
-        requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
-        config = function()
-          require("neogit").setup({ integrations = { diffview = true } })
-        end,
-      },
+      { "tpope/vim-fugitive" },
       {
         "iamcco/markdown-preview.nvim",
         run = function()
@@ -369,11 +360,14 @@ local config = {
 
   -- LuaSnip Options
   luasnip = {
-    -- Add paths for including more VS Code style snippets in luasnip
-    vscode_snippet_paths = {},
     -- Extend filetypes
     filetype_extend = {
       -- javascript = { "javascriptreact" },
+    },
+    -- Configure luasnip loaders (vscode, lua, and/or snipmate)
+    vscode = {
+      -- Add paths for including more VS Code style snippets in luasnip
+      paths = {},
     },
   },
 

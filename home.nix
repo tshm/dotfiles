@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   # imports = [ ./base.nix ];
+  targets.genericLinux.enable = true;
   programs.home-manager.enable = true;
   home.stateVersion = "22.05";
   home.username = builtins.getEnv "USER";
