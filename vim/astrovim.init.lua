@@ -268,6 +268,15 @@ local config = {
       -- { "mg979/vim-visual-multi" },
       { "tpope/vim-surround" },
       {
+        "ggandor/leap.nvim",
+        config = function()
+          require("leap").add_default_mappings()
+        end,
+      },
+      -- ["petertriho/nvim-scrollbar"] = {
+      --   config = function() require("scrollbar").setup() end,
+      -- },
+      {
         "kevinhwang91/nvim-hlslens",
         event = "BufRead",
         config = function()

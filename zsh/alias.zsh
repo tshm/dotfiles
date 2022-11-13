@@ -81,8 +81,8 @@ function mem_info() {
 (uname -a | grep -i microsoft) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   function e() {
-    (which wsl-open > /dev/null) && wsl-open $* \
-    || cmd.exe /c start $(wslpath -w $*)
+    (which wsl-open > /dev/null) && wsl-open "$*" \
+    || cmd.exe /c start $(wslpath -w "$*")
   }
   function gvim() {
     args2=()
