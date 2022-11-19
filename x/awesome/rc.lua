@@ -1,6 +1,7 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
+local border_color = "#AAAA00"
 
 -- Standard awesome library
 local gears = require("gears")
@@ -53,7 +54,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.master_width_factor = 0.65
-beautiful.bg_systray = "#005533"
+beautiful.bg_systray = border_color
 
 -- This is used later as the default terminal and editor to run.
 local terminal = os.getenv("TERMINAL") or "xterm"
@@ -479,7 +480,7 @@ awful.rules.rules = {
 	{
 		rule = {},
 		properties = {
-			border_width = beautiful.border_width * 5,
+			border_width = beautiful.border_width * 3,
 			border_color = beautiful.border_normal,
 			focus = awful.client.focus.filter,
 			raise = true,
@@ -596,7 +597,7 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 client.connect_signal("focus", function(c)
-	c.border_color = beautiful.border_focus
+	c.border_color = border_color
 end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal

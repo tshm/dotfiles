@@ -242,6 +242,7 @@ local config = {
   plugins = {
     init = {
       ["tzachar/cmp-tabnine"] = {
+        cond = [[vim.fn.system'uname -m' == 'x86_64\n']],
         requires = "hrsh7th/nvim-cmp",
         run = "./install.sh",
         config = function()
