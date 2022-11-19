@@ -18,6 +18,16 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+local lain = require('lain')
+local quake = lain.util.quake {
+	app = "alacritty",
+	name = "quakeDD",
+	argname = "-t quakeDD",
+	extra = "--class quakeDD",
+	overlap = true,
+	-- height = 0.4,
+	following = true
+}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -272,6 +282,7 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey }, "comma", function()
 		awful.spawn(dmenu)
 	end, { description = "open dmenu", group = "launcher" }),
+	awful.key({ modkey }, "period", function () quake:toggle() end, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
