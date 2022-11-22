@@ -59,6 +59,7 @@ function mem_info() {
 [ -d /nix ] && {
   function nixup() {
     nix-channel --update
+    which home-manager && home-manager switch
     nix-env -u
     nix-store --optimise
     nix-collect-garbage -d
