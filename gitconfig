@@ -12,8 +12,9 @@
 	br = branch -vv
 	ci = commit
 	co = checkout
-	pu = push -u origin HEAD
-	pur = pull --rebase --prune --autostash
+	is = bug ls "status:open"
+	pu = !"[ -x git-bug ] && git-bug push; git push -u origin HEAD"
+	pur = !"[ -x git-bug ] && git-bug pull; git pull --rebase --prune --autostash"
 	prune = fetch --prune
 	abort = checkout -- .
 	wait = reset HEAD

@@ -8,7 +8,8 @@
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
   home.packages = [
-    (import (fetchTarball https://github.com/cachix/devenv/tarball/v0.3)).default
+    (import (fetchTarball https://github.com/cachix/devenv/tarball/v0.4)).default
+    pkgs.direnv
     pkgs.cachix
     pkgs.git-imerge
     pkgs.neovim
