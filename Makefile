@@ -7,7 +7,11 @@ PHONY: all shell tools git
 
 all: shell tools
 shell: ~/.zshrc ~/.nix-profile/bin/home-manager ~/bin/e
-tools: ~/.tmux.conf git nvim
+tools: ~/.tmux.conf git ../.config/direnv/direnvrc nvim
+
+../.config/direnv/direnvrc: ./direnvrc
+	mkdir -p ~/.config/direnv 
+	cd ~/.config/direnv && ln -sf ~/.dotfiles/direnvrc 
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
@@ -15,7 +19,7 @@ tools: ~/.tmux.conf git nvim
 git: ~/.config/git/ignore ~/.gitconfig
 ~/.config/git/ignore:
 	mkdir -p ~/.config/git
-	ln -s gitignore $@
+	ln -sf gitignore $@
 
 nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
 ~/.config/nvim:
@@ -23,7 +27,7 @@ nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
 
 ~/.config/nvim/lua/user/init.lua:
 	mkdir -p ~/.config/nvim/lua/user
-	cd ~/.config/nvim/lua/user && ln -s ~/.dotfiles/vim/astrovim.init.lua $@
+	cd ~/.config/nvim/lua/user && ln -sf ~/.dotfiles/vim/astrovim.init.lua $@
 	nvim +PackerSync
 
 ~/.gitconfig:
@@ -34,7 +38,7 @@ nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
 ~/.nix-profile/bin/nix-env:
 	curl -L https://nixos.org/nix/install | sh
 	mkdir -p  ~/.config/nixpkgs
-	[ -f ~/.config/nixpkgs/home.nix ] || ln -s home.nix ~/.config/nixpkgs/home.nix
+	[ -f ~/.config/nixpkgs/home.nix ] || ln -sf home.nix ~/.config/nixpkgs/home.nix
 
 ~/.nix-profile/bin/home-manager: export NIX_PATH=${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 ~/.nix-profile/bin/home-manager: ~/.nix-profile/bin/nix-env
