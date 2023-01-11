@@ -87,13 +87,13 @@ function auto_quote() {
 }
 zle -N auto_quote
 bindkey '^[7' auto_quote
-# fzf completion
-#  function auto_fzr() {
-#    TARGET=$(fd | fzf)
-#    BUFFER="${BUFFER} ${TARGET}"
-#  }
-#  zle -N auto_fzr
-#  bindkey '^[i' auto_fzr
+
+function pastebuf() {
+	TARGET=$(pbpaste | tr -d '\n')
+	BUFFER="${BUFFER} ${TARGET}"
+}
+zle -N pastebuf
+bindkey '^[i' pastebuf
 
 bindkey '^[k' history-substring-search-up
 bindkey '^[j' history-substring-search-down
