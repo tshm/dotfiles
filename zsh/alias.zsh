@@ -86,21 +86,6 @@ function mem_info() {
     || cmd.exe /c start $(wslpath -w "$*")
   }
   function gvim() {
-    args2=()
-    for i in $*; do
-      echo file: $i
-      args2+="$(wslpath -aw $i) "
-    done
-    neovide.exe --wsl $args2
-    # neovide.exe $args2 &
-    # exec neovide.exe -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
-  }
-  function vim() {
-    args2=()
-    for i in $*; do
-      echo file: $i
-      args2+="$(wslpath -aw $i) "
-    done
-    nvim $args2
+    neovide.exe --wsl $*
   }
 }

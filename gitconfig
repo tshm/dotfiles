@@ -31,10 +31,17 @@
 	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
 	diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
 	rebasex = rebase --strategy-option=ignore-all-space	
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
 [diff]
   # external = difft
+  colorMoved = default
   compactionHeuristic = true
   tool = "difft"
+[merge]
+	conflictstyle = diff3
 [difftool]
   prompt = false
 [difftool "difft"]
