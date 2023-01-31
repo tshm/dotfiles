@@ -229,10 +229,6 @@ local config = {
       },
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
-      ['[d'] = { "<cmd>vim.diagnostic.goto_prev", desc = "" },
-      [']d'] = { "<cmd>vim.diagnostic.goto_next", desc = "" },
-      ['<leader>e'] = { "<cmd>vim.diagnostic.open_float", desc = "" },
-      ['<leader>q'] = { "<cmd>vim.diagnostic.setloclist", desc = "" },
     },
     t = {
       -- setting a mapping to false will disable it
@@ -247,24 +243,8 @@ local config = {
   -- Configure plugins
   plugins = {
     init = {
-      ["tzachar/cmp-tabnine"] = {
-        cond = [[vim.fn.system'uname -m' == 'x86_64\n']],
-        requires = "hrsh7th/nvim-cmp",
-        run = "./install.sh",
-        config = function()
-          require("cmp_tabnine.config").setup({
-            max_lines = 1000,
-            max_num_results = 20,
-            sort = true,
-            run_on_every_keystroke = true,
-            snippet_placeholder = "..",
-            ignored_file_types = {
-              -- lua = true
-            },
-            show_prediction_strength = false,
-          })
-          require("core.utils").add_cmp_source({ name = "cmp_tabnine", priority = 1000, max_item_count = 7 })
-        end,
+      ["Exafunction/codeium.vim"] = {
+        -- cond = [[vim.fn.system'uname -m' == 'x86_64\n']],
       },
       -- You can disable default plugins as follows:
       -- ["goolord/alpha-nvim"] = { disable = true },
@@ -398,7 +378,6 @@ local config = {
   -- true == 1000
   cmp = {
     source_priority = {
-      cmp_tabnine = 1000,
       nvim_lsp = 900,
       luasnip = 750,
       buffer = 500,
