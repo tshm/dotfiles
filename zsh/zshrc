@@ -61,7 +61,7 @@ precmd() {
 }
 
 # The following lines were added by compinstall
-autoload -Uz compinit && compinit -u
+# autoload -Uz compinit && compinit -u
 
 autoload -Uz vcs_info
 

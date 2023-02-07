@@ -63,7 +63,10 @@ zinit load "zpm-zsh/clipboard"
 
 # finalize
 autoload -U compinit
-compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 # fzf-tab has to be loaded after compinit
 zinit light Aloxaf/fzf-tab
