@@ -25,6 +25,7 @@
     pkgs.viddy
     pkgs.delta
     pkgs.watchexec
+    pkgs.zoxide
   ];
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;

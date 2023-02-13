@@ -15,16 +15,6 @@ arc=$(uname -m | cut -c1-5)
 zinit ice as"command" from"gh-r"
 zinit load junegunn/fzf
 
-zinit ice as"command" make pick"fasd"
-zinit light clvv/fasd
-zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh
-zle -N fasd-complete
-zle -N fasd-complete-f
-zle -N fasd-complete-d
-bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
-bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
-bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
-
 # plugins
 zinit for light-mode \
   zsh-users/zsh-autosuggestions \

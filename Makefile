@@ -33,7 +33,8 @@ nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
 ~/.gitconfig:
 	echo "[include]\n  path = ~/.dotfiles/gitconfig" > $@
 
-# ~/.config/direnv/direnvrc: zsh/direnvrc
+/usr/local/bin/devbox:
+	curl -fsSL https://get.jetpack.io/devbox | bash
 
 ~/.nix-profile/bin/nix-env:
 	curl -L https://nixos.org/nix/install | sh
@@ -46,7 +47,6 @@ nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
 	home-manager switch
-	cachix use devenv
 
 ~/.zshrc:
 	echo 'source ~/.dotfiles/zsh/zshrc' > $@
