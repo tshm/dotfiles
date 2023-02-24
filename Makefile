@@ -6,8 +6,9 @@ ISWSL := $(shell uname -a | grep -i microsoft)
 PHONY: all shell tools git
 
 all: shell tools
-shell: ~/.zshrc ~/.nix-profile/bin/home-manager ~/bin/e
+shell: ~/.zshrc ~/bin/e
 tools: ~/.tmux.conf git ../.config/direnv/direnvrc nvim
+nix: /usr/local/bin/devbox ~/.nix-profile/bin/home-manager 
 
 ../.config/direnv/direnvrc: ./direnvrc
 	mkdir -p ~/.config/direnv 
@@ -21,14 +22,10 @@ git: ~/.config/git/ignore ~/.gitconfig
 	mkdir -p ~/.config/git
 	ln -sf gitignore $@
 
-nvim: ~/.config/nvim ~/.config/nvim/lua/user/init.lua
-~/.config/nvim:
-	git clone https://github.com/AstroNvim/AstroNvim $@
-
-~/.config/nvim/lua/user/init.lua:
-	mkdir -p ~/.config/nvim/lua/user
-	cd ~/.config/nvim/lua/user && ln -sf ~/.dotfiles/vim/astrovim.init.lua $@
-	nvim +PackerSync
+nvim: ~/.config/nvim
+~/.config/nvim: ./vim/nvim
+	mkdir -p ~/.config
+	ln -s ~/.dotfiles/vim/nvim $@
 
 ~/.gitconfig:
 	echo "[include]\n  path = ~/.dotfiles/gitconfig" > $@
