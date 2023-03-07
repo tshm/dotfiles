@@ -10,7 +10,6 @@
   home.packages = [
     pkgs.direnv
     pkgs.git-imerge
-    pkgs.neovim
     pkgs.tig
     pkgs.tmux
     pkgs.bat

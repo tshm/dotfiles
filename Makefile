@@ -22,7 +22,13 @@ git: ~/.config/git/ignore ~/.gitconfig
 	mkdir -p ~/.config/git
 	ln -sf gitignore $@
 
-nvim: ~/.config/nvim
+nvim: ~/.local/bin/nvim ~/.config/nvim
+~/.local/bin/nvim:
+	mkdir -p ~/.local/bin/
+	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+	chmod u+x nvim.appimage
+	mv nvim.appimage ~/.local/bin/nvim
+
 ~/.config/nvim: ./vim/nvim
 	mkdir -p ~/.config
 	ln -s ~/.dotfiles/vim/nvim $@
@@ -35,7 +41,7 @@ nvim: ~/.config/nvim
 
 ~/.nix-profile/bin/nix-env:
 	curl -L https://nixos.org/nix/install | sh
-	mkdir -p  ~/.config/nixpkgs
+	mkdir -p ~/.config/nixpkgs
 	[ -f ~/.config/nixpkgs/home.nix ] || ln -sf home.nix ~/.config/nixpkgs/home.nix
 
 ~/.nix-profile/bin/home-manager: export NIX_PATH=${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
