@@ -39,10 +39,13 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 /usr/local/bin/devbox:
 	curl -fsSL https://get.jetpack.io/devbox | bash
 
-~/.nix-profile/bin/nix-env:
+~/.nix-profile/bin/nix-env: ~/.config/nixpkgs
 	curl -L https://nixos.org/nix/install | sh
-	mkdir -p ~/.config/nixpkgs
-	[ -f ~/.config/nixpkgs/home.nix ] || ln -sf home.nix ~/.config/nixpkgs/home.nix
+
+~/.config/nixpkgs:
+	mkdir -p $@
+	cd $@ && { [ -f ./base.nix ] || ln -sf ~/.dotfiles/nix/base.nix; }
+	cd $@ && { [ -f ./home.nix ] || cp ~/.dotfiles/nix/home.nix .; }
 
 ~/.nix-profile/bin/home-manager: export NIX_PATH=${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 ~/.nix-profile/bin/home-manager: ~/.nix-profile/bin/nix-env
