@@ -118,8 +118,8 @@ source ~/.dotfiles/zsh/alias.zsh
 NIX=~/.nix-profile/etc/profile.d/nix.sh
 [ -e $NIX ] && {
 	source $NIX
-	which direnv && eval "$(direnv hook zsh)"
-	which zoxide && eval "$(zoxide init zsh)"
+	which direnv >/dev/null && eval "$(direnv hook zsh)"
+	which zoxide >/dev/null && eval "$(zoxide init zsh)"
 }
 
 if [ -f ~/.zshrc.local ]; then
