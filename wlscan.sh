@@ -4,15 +4,15 @@ set -e
 
 IF=$1
 logger "bring up $IF"
-/sbin/ifconfig $IF up
+/sbin/ifconfig "$IF" up
 A='No scan results'
-while [ "$A" == "No scan results" ]; do
+while [ "$A" = "No scan results" ]; do
 	sleep 1
-	A=`iwlist scan 2>/dev/null`
+	A=$(iwlist scan 2>/dev/null)
 done
-/sbin/ifconfig $IF down
+/sbin/ifconfig "$IF" down
 
-while read key name; do
-	echo $A | grep -q $key && logger "ESSID: $name" && echo $name && exit 0;
+while read -r key name; do
+	echo "$A" | grep -q "$key" && logger "ESSID: $name" && echo "$name" && exit 0
 done
 exit 1
