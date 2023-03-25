@@ -7,12 +7,8 @@ PHONY: all shell tools git
 
 all: shell tools
 shell: ~/.zshrc ~/bin/e
-tools: ~/.tmux.conf git ../.config/direnv/direnvrc nvim
+tools: ~/.tmux.conf git nvim
 nix: /usr/local/bin/devbox ~/.nix-profile/bin/home-manager 
-
-../.config/direnv/direnvrc: ./direnvrc
-	mkdir -p ~/.config/direnv 
-	cd ~/.config/direnv && ln -sf ~/.dotfiles/direnvrc 
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
