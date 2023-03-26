@@ -102,7 +102,7 @@ zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' file-sort name
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' ignore-parents parent
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' max-errors 4
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' prompt 'correct'

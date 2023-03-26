@@ -17,17 +17,9 @@ zinit ice as"command" from"gh-r"
 zinit load junegunn/fzf
 
 # plugins
-zinit for light-mode \
-  zsh-users/zsh-autosuggestions \
-  zdharma-continuum/fast-syntax-highlighting \
-  zdharma-continuum/history-search-multi-word \
-  hlissner/zsh-autopair \
-  pick"async.zsh" src"pure.zsh" sindresorhus/pure
-
 zinit light zsh-users/zsh-history-substring-search
 
 # completions & etc
-zinit ice atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-completions
 
 zinit ice lucid nocompile nocompletions
@@ -61,10 +53,16 @@ compinit -C
 
 # fzf-tab has to be loaded after compinit
 zinit light Aloxaf/fzf-tab
-zstyle ':fzf-tab:*' fzf-bindings \
-  'ctrl-s:toggle+down' \
-  'ctrl-a:toggle-all' \
-  'ctrl-y:y:execute-silent(echo {} | pbcopy)+abort'
+[ -n "$TMUX" ] && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+zinit for light-mode \
+  zsh-users/zsh-autosuggestions \
+  zdharma-continuum/fast-syntax-highlighting \
+  zdharma-continuum/history-search-multi-word \
+  hlissner/zsh-autopair \
+  pick"async.zsh" src"pure.zsh" sindresorhus/pure
+
+zinit ice atload'_zsh_autosuggest_start'
 
 zinit cdreplay -q 
 zinit cdlist 

@@ -45,6 +45,15 @@ _tm() {
 }
 compdef _tm tm
 
+_files 2>/dev/null
+functions[_files_orig]=$functions[_files]
+function _files() {
+  _files_orig
+  local files
+  grep '/' <<<${words[CURRENT]} || files=($(fd ${words[CURRENT]}))
+  _values 'files' ${files[@]}
+}
+
 read -d '' -r awks <<'EOF'
 NR>2 {
   mem[$3]+=$2
