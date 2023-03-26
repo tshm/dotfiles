@@ -1,4 +1,5 @@
 #-*-shell-script-*-
+# vim: ft=zsh
 unlimit
 limit -s
 umask 022

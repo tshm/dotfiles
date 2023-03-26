@@ -1,4 +1,7 @@
+#-*-shell-script-*-
+# vim: ft=zsh
 unset MAILCHECK
+uname=$(uname -a)
 
 [ -f ~/.config/nnn/plugins/z ] || mkdir -p ~/.config/nnn/plugins/ || ln -s ~/.dotfiles/zsh/nnn_z ~/.config/nnn/plugins/z
 export NNN_BMS='d:~/dl'
@@ -79,13 +82,17 @@ function mem_info() {
   alias vi=nvim
 }
 
-(uname -a | grep -i microsoft) && {
+(echo $uname | grep -i linux >/dev/null) && {
+  alias e=xdg-open
+}
+
+(echo $uname | grep -i microsoft >/dev/null) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   function e() {
     (which wsl-open > /dev/null) && wsl-open "$*" \
     || cmd.exe /c start $(wslpath -w "$*")
   }
   function gvim() {
-    neovide.exe --wsl $*
+    nvim-qt.exe --wsl $*
   }
 }

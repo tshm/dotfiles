@@ -55,11 +55,8 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 	mkdir -p ~/bin/
 
 ifdef ISWSL
-~/bin/e:
+~/.local/bin/wsl-open:
 	curl -o $@ https://raw.githubusercontent.com/4U6U57/wsl-open/master/wsl-open.sh
 	chmod +x $@
-else
-~/bin/e:
-	which xdg-open && ln -s $$(which xdg-open) $@
 endif
 

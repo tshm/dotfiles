@@ -14,9 +14,9 @@ export PATH=~/bin/:~/.local/bin:$PATH
 
 HISTSIZE=5100
 export HISTFILE=~/.zsh_history
-SAVEHIST=5000
-DIRSTACKSIZE=15
-fignore=('~' .bak)
+export SAVEHIST=5000
+export DIRSTACKSIZE=15
+export fignore=('~' .bak)
 hash -d 'D=/usr/share/doc'
 
 alias ls='exa --icons'
@@ -32,7 +32,6 @@ alias cp='nocorrect cp'       # no spelling correction on cp
 alias rm='rm -i'
 alias dco='docker-compose'
 alias kc='kubectl'
-RPROMPT=`print -n '%{\033[1;33m%}(%T)%b%{\033[0m%}'`
 
 setopt   notify globdots correct cdablevars auto_menu auto_list
 setopt   correctall noautocd recexact longlistjobs sharehistory

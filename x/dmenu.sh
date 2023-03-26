@@ -1,2 +1,2 @@
 #!/bin/sh
-ex=`cat ~/.dmenu | dmenu` && exec $ex
+ex=$(dmenu <~/.dmenu) && exec $ex
