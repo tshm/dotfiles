@@ -12,6 +12,13 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 arc=$(uname -m | cut -c1-5)
 
+zinit for light-mode \
+  zsh-users/zsh-autosuggestions \
+  zdharma-continuum/history-search-multi-word \
+  zdharma-continuum/fast-syntax-highlighting \
+  hlissner/zsh-autopair \
+  pick"async.zsh" src"pure.zsh" sindresorhus/pure
+
 # bins
 zinit ice as"command" from"gh-r"
 zinit load junegunn/fzf
@@ -54,13 +61,6 @@ compinit -C
 # fzf-tab has to be loaded after compinit
 zinit light Aloxaf/fzf-tab
 [ -n "$TMUX" ] && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-
-zinit for light-mode \
-  zsh-users/zsh-autosuggestions \
-  zdharma-continuum/fast-syntax-highlighting \
-  zdharma-continuum/history-search-multi-word \
-  hlissner/zsh-autopair \
-  pick"async.zsh" src"pure.zsh" sindresorhus/pure
 
 zinit ice atload'_zsh_autosuggest_start'
 
