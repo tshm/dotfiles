@@ -35,10 +35,10 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 /usr/local/bin/devbox:
 	curl -fsSL https://get.jetpack.io/devbox | bash
 
-~/.nix-profile/bin/nix-env: ~/.config/nixpkgs
+~/.nix-profile/bin/nix-env: ~/.config/home-manager
 	curl -L https://nixos.org/nix/install | sh
 
-~/.config/nixpkgs:
+~/.config/home-manager:
 	mkdir -p $@
 	cd $@ && { [ -f ./base.nix ] || ln -sf ~/.dotfiles/nix/base.nix; }
 	cd $@ && { [ -f ./home.nix ] || cp ~/.dotfiles/nix/home.nix .; }
