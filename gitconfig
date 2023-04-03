@@ -61,6 +61,8 @@
 [tig]
 	tab-size = 2
 	main-view-author = no
+  ignore-space = some
+  ignore-case = smart-case
 [tig "bind"]
 	main = T ?git tag %(prompt) %(commit)
 	main = ! ?git nuke %(branch)

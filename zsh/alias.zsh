@@ -91,7 +91,7 @@ function mem_info() {
   alias vi=nvim
 }
 
-(echo $uname | grep -i linux >/dev/null) && {
+(which xdg-open >/dev/null) && {
   alias e=xdg-open
 }
 
