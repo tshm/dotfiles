@@ -3,15 +3,17 @@
 SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 ISWSL := $(shell uname -a | grep -i microsoft)
 
-PHONY: all shell tools git
+PHONY: all shell tools git nix
 
 all: shell tools
 shell: ~/.zshrc ~/bin/e
 tools: ~/.tmux.conf git nvim
-nix: /usr/local/bin/devbox ~/.nix-profile/bin/home-manager 
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
+
+nix:
+	cd nix && make
 
 git: ~/.config/git/ignore ~/.gitconfig
 ~/.config/git/ignore:
@@ -31,24 +33,6 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 
 ~/.gitconfig:
 	echo "[include]\n  path = ~/.dotfiles/gitconfig" > $@
-
-/usr/local/bin/devbox:
-	curl -fsSL https://get.jetpack.io/devbox | bash
-
-~/.nix-profile/bin/nix-env: ~/.config/home-manager
-	curl -L https://nixos.org/nix/install | sh
-
-~/.config/home-manager:
-	mkdir -p $@
-	cd $@ && { [ -f ./base.nix ] || ln -sf ~/.dotfiles/nix/base.nix; }
-	cd $@ && { [ -f ./home.nix ] || cp ~/.dotfiles/nix/home.nix .; }
-
-~/.nix-profile/bin/home-manager: export NIX_PATH=${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
-~/.nix-profile/bin/home-manager: ~/.nix-profile/bin/nix-env
-	nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-	nix-channel --update
-	nix-shell '<home-manager>' -A install
-	home-manager switch
 
 ~/.zshrc:
 	echo 'source ~/.dotfiles/zsh/zshrc' > $@

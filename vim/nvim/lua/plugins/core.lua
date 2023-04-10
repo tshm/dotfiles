@@ -1,14 +1,21 @@
 return {
   {
-    "Exafunction/codeium.vim",
+    "jcdickinson/codeium.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
     config = function()
-      vim.g.codeium_disable_binding = 1
-      vim.keymap.set("i", "<M-;>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true })
-      vim.keymap.set("i", "<c-x>", function()
-        return vim.fn["codeium#Clear"]()
-      end, { expr = true })
+      require("codeium").setup({})
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = { "mvllow/modes.nvim" },
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      local cmp = require("cmp")
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "codeium" } }, 1, 1))
     end,
   },
   {
@@ -17,6 +24,23 @@ return {
     ft = { "markdown" },
     build = function()
       vim.fn["mkdp#util#install"]()
+    end,
+  },
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "<leader>gf", "<cmd>G<cr>", { desc = "fugitive", silent = true })
+    end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    config = function()
+      require("tokyonight").setup({
+        on_highlights = function(hl)
+          hl.WinSeparator = { fg = "orange" }
+          hl.Cursor = { bg = "orange" }
+        end,
+      })
     end,
   },
 }
