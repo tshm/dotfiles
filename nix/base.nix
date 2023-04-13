@@ -9,6 +9,7 @@
   home.homeDirectory = builtins.getEnv "HOME";
   home.packages = [
     pkgs.direnv
+    pkgs.ouch
     pkgs.git-imerge
     pkgs.tig
     pkgs.tmux

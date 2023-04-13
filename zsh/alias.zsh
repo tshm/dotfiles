@@ -50,8 +50,9 @@ functions[_files_orig]=$functions[_files]
 function _files() {
   _files_orig
   local files
-  grep '/' <<<${words[CURRENT]} || files=($(fd ${words[CURRENT]}))
-  _values 'files' ${files[@]}
+  rg '/' <<<${words[CURRENT]} || files=($(fd ${words[CURRENT]}))
+  xfiles=( "$(printf '%s\n' "${files[@]}" "${_files_orig[@]}" | sort | uniq)" )
+  _values 'files' ${xfiles[@]}
 }
 
 read -d '' -r awks <<'EOF'
@@ -62,9 +63,9 @@ END {
   for(k in mem) printf "%0.1f\t%s\n", mem[k]/1024000, k
 };
 EOF
-function mem_info() {
+function meminfo() {
   ps -eo pmem,vsize,cmd \
-  | grep -v '\[' \
+  | rg -v '\[' \
   | awk "$awks" \
   | sort -g
 }

@@ -88,7 +88,7 @@ zle -N auto_quote
 bindkey '^[7' auto_quote
 
 function pastebuf() {
-	TARGET=$(pbpaste | tr -d '\n')
+	TARGET=$(pbpaste | tr -d '\r\l\n')
 	BUFFER="${BUFFER} ${TARGET}"
 }
 zle -N pastebuf
