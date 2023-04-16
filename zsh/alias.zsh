@@ -29,6 +29,16 @@ which curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
+funciton zz () {
+  DIR="$(zoxide query --exclude "$(__zoxide_pwd)" -i -- $@)"
+  SN="$(basename $DIR)"
+  echo -------- start $SN
+  tmux has -t $SN || {
+    tmux new-session -s "$SN" -c "$DIR" -d
+  }
+  tmux attach -t $SN || tmux switch -t $SN
+}
+
 function tm () {
   SN=${1:-home}
   echo -------- start $SN
