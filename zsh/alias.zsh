@@ -10,37 +10,25 @@ function n() {
   env LESS= BAT_PAGER='less -R' VISUAL=bat nnn -e $*
 }
 
-function b () {
-  local cmd cmd_file code
-  cmd_file=$(mktemp)
-  if broot --outcmd "$cmd_file" "$@"
-  then
-    cmd=$(<"$cmd_file")
-    rm -i -f "$cmd_file"
-    eval "$cmd"
-  else
-    code=$?
-    rm -i -f "$cmd_file"
-    return "$code"
-  fi
-}
-
 which curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
 funciton zz () {
-  DIR="$(zoxide query --exclude "$(__zoxide_pwd)" -i -- $@)"
-  SN="$(basename $DIR)"
+  local DIR=$(zoxide query $@)
+  local SN="$(basename $DIR)"
+  # \builtin local SF=$(find ~/.dotfiles/proj -wholename "*${@}*")
+  # source ~/.dotfiles/proj/${SN}.sh
   echo -------- start $SN
   tmux has -t $SN || {
     tmux new-session -s "$SN" -c "$DIR" -d
   }
   tmux attach -t $SN || tmux switch -t $SN
 }
+compdef __zoxide_z_complete zz
 
 function tm () {
-  SN=${1:-home}
+  local SN=${1:-home}
   echo -------- start $SN
   tmux has -t $SN || {
     source ~/.dotfiles/proj/${SN}.sh
