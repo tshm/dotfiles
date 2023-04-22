@@ -39,6 +39,7 @@ return {
         on_highlights = function(hl)
           hl.WinSeparator = { fg = "orange" }
           hl.Cursor = { bg = "orange" }
+          hl.CursorLine = { bg = "#444444" }
         end,
       })
     end,
