@@ -67,7 +67,7 @@ autoload -Uz vcs_info
 bindkey '^[;' autosuggest-execute
 # accept auto completion
 function accept_and_pager() {
-	BUFFER="${BUFFER} | ${PAGER}"
+	BUFFER="${BUFFER}| ${PAGER}"
 	zle accept-line
 }
 zle -N accept_and_pager
@@ -87,9 +87,23 @@ function auto_quote() {
 zle -N auto_quote
 bindkey '^[7' auto_quote
 
+function fzf-fill() {
+	if [ "$#LBUFFER" -eq 0 ]; then
+    BUFFER="${BUFFER}$( fd -I . | fzf )"
+	elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
+    BUFFER="${BUFFER}$( fd -I . | fzf )"
+	else
+		zle backward-word
+    RBUFFER="$( fd -I . | fzf -q ${RBUFFER})"
+	fi
+  zle end-of-line
+}
+zle -N fzf-fill
+bindkey '^[r' fzf-fill
+
 function pastebuf() {
 	TARGET=$(pbpaste | tr -d '\r\l\n')
-	BUFFER="${BUFFER} ${TARGET}"
+	BUFFER="${BUFFER}${TARGET}"
 }
 zle -N pastebuf
 bindkey '^[i' pastebuf

@@ -17,8 +17,6 @@ which curl >/dev/null && function cheat () {
 funciton zz () {
   local DIR=$(zoxide query $@)
   local SN="$(basename $DIR)"
-  # \builtin local SF=$(find ~/.dotfiles/proj -wholename "*${@}*")
-  # source ~/.dotfiles/proj/${SN}.sh
   echo -------- start $SN
   tmux has -t $SN || {
     tmux new-session -s "$SN" -c "$DIR" -d
