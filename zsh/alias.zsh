@@ -15,18 +15,23 @@ which curl >/dev/null && function cheat () {
 }
 
 funciton zz () {
-  local DIR=$(zoxide query $@)
-  local SN="$(basename $DIR)"
+  \builtin local DIR SN
+  DIR="$(\command zoxide query -- "$@")" || return
+  SN="$(\command basename $DIR)" || return
   echo -------- start $SN
-  tmux has -t $SN || {
+  tmux has -t $SN 2>/dev/null || {
     tmux new-session -s "$SN" -c "$DIR" -d
   }
   tmux attach -t $SN || tmux switch -t $SN
 }
-compdef __zoxide_z_complete zz
+_zz() {
+  local dirs=$(zoxide query -l -- ${words[CURRENT]})
+  _arguments "1:path:($dirs)"
+}
+compdef _zz zz
 
 function tm () {
-  local SN=${1:-home}
+  \builtin local SN=${1:-home}
   echo -------- start $SN
   tmux has -t $SN || {
     source ~/.dotfiles/proj/${SN}.sh
@@ -37,7 +42,7 @@ function tm () {
   tmux attach -t $SN || tmux switch -t $SN
 }
 _tm() {
-  _values 'sessions' $(/bin/ls ~/.dotfiles/proj/ | sed 's/\.sh//')
+  _values 'sessions' $(/bin/ls ~/.dotfiles/proj | grep '\.sh' | sed 's/\.sh//')
 }
 compdef _tm tm
 
