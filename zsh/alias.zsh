@@ -25,8 +25,9 @@ funciton zz () {
   tmux attach -t $SN || tmux switch -t $SN
 }
 _zz() {
-  local dirs=$(zoxide query -l -- ${words[CURRENT]})
-  _arguments "1:path:($dirs)"
+  local -a dirs1=($(zoxide query -l -- ${words[CURRENT]}))
+  local -a dirs2=($(/bin/ls ~/.dotfiles/proj | grep '\.sh' | sed 's/\.sh//'))
+  _arguments "1:path:($dirs1 $dirs2)"
 }
 compdef _zz zz
 
@@ -70,6 +71,7 @@ function meminfo() {
 }
 [ -d /nix ] && {
   function nixup() {
+    nix-env --delete-generations 14d
     nix-channel --update
     which home-manager && home-manager switch
     nix-env -u
