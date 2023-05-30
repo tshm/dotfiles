@@ -1,12 +1,12 @@
 
 PHONY: conf nix
 conf: ~/.config/home-manager/base.nix ~/.config/home-manager/home.nix
-nix: /usr/local/bin/devbox ~/.nix-profile/bin/home-manager conf
+nix: ~/.nix-profile/bin/nix ~/.nix-profile/bin/home-manager conf
 
 HOME_MANAGER_DIR := ~/.config/home-manager
 
-/usr/local/bin/devbox:
-	(which devbox >/dev/null) || curl -fsSL https://get.jetpack.io/devbox | bash
+~/.nix-profile/bin/nix:
+	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
 ~/.config/home-manager/base.nix: base.nix
 	cd HOME_MANAGER_DIR && ln -sf ~/.dotfiles/nix/$<

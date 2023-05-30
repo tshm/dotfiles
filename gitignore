@@ -2,5 +2,4 @@
 .vscode
 *.favdoc
 .*.local
-.envrc
 .env

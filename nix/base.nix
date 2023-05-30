@@ -8,6 +8,7 @@
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
   home.packages = [
+    pkgs.devbox
     pkgs.direnv
     pkgs.ouch
     pkgs.git-imerge
