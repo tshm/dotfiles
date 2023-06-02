@@ -10,6 +10,7 @@
   home.packages = [
     pkgs.devbox
     pkgs.direnv
+    pkgs.topgrade
     pkgs.ouch
     pkgs.git-imerge
     pkgs.tig

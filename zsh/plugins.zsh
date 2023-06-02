@@ -46,9 +46,6 @@ zinit ice as"command" from"gh-r" pick "ugit"
 zinit load Bhupesh-V/ugit
 
 # tools
-zinit ice as"command" from"gh-r"
-zinit load "topgrade-rs/topgrade"
-
 zinit load "zpm-zsh/clipboard"
 
 # finalize
