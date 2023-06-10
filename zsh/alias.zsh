@@ -47,14 +47,6 @@ _tm() {
 }
 compdef _tm tm
 
-_files 2>/dev/null
-functions[_files_orig]=$functions[_files]
-function _files() {
-  _files_orig
-  local xfiles=($(fd --full-path ${words[CURRENT]}))
-  [ -z "$xfiles" ] || _values 'file' $xfiles
-}
-
 read -d '' -r awks <<'EOF'
 NR>2 {
   mem[$3]+=$2
