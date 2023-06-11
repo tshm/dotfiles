@@ -47,6 +47,9 @@ zinit load Bhupesh-V/ugit
 
 # tools
 zinit load "zpm-zsh/clipboard"
+zinit ice pick"deer"; zinit load "Vifon/deer"
+zle -N deer
+bindkey '\el' deer
 
 # finalize
 autoload -U compinit

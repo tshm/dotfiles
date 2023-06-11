@@ -67,6 +67,7 @@
 [tig "bind"]
 	main = T ?git tag %(prompt) %(commit)
 	main = ! ?git nuke %(branch)
+	status = i ?git ignore %(file)
 [include]
   path = .gitconfig.local
 # vim: ft=gitconfig
