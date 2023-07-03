@@ -3,7 +3,10 @@
 let
   base = (import ./base.nix) args;
   over = {
-    home.packages = base.home.packages ++ [ /* pkgs.nvim */ ];
+    home.packages = base.home.packages ++ [ /* pkgs.neovim */ ];
+    /*
+    programs.java = { enable = true; };
+    */
   };
 in lib.recursiveUpdate base over
 

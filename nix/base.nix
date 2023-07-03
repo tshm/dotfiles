@@ -11,7 +11,7 @@
     pkgs.devbox
     pkgs.direnv
     pkgs.topgrade
-    pkgs.ouch
+    pkgs.atool
     pkgs.git-imerge
     pkgs.tig
     pkgs.tmux

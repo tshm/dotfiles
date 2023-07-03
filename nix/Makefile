@@ -1,21 +1,25 @@
 
+HOME_MANAGER_DIR := ~/.config/home-manager
+
 PHONY: conf nix
-conf: ~/.config/home-manager/base.nix ~/.config/home-manager/home.nix
+conf: ${HOME_MANAGER_DIR}/base.nix ${HOME_MANAGER_DIR}/home.nix
 nix: ~/.nix-profile/bin/nix ~/.nix-profile/bin/home-manager conf
 
-HOME_MANAGER_DIR := ~/.config/home-manager
+xx:; echo ${HOME_MANAGER_DIR}
+
 
 ~/.nix-profile/bin/nix:
 	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
-~/.config/home-manager/base.nix: base.nix
-	cd HOME_MANAGER_DIR && ln -sf ~/.dotfiles/nix/$<
+${HOME_MANAGER_DIR}/base.nix: base.nix
+	cd ${HOME_MANAGER_DIR} && ln -sf ~/.dotfiles/nix/$<
 
-~/.config/home-manager/home.nix: home.nix
-	cd HOME_MANAGER_DIR && cp ~/.dotfiles/nix/$< .
+${HOME_MANAGER_DIR}/home.nix: home.nix
+	cd ${HOME_MANAGER_DIR} && cp ~/.dotfiles/nix/$< .
 
-~/.nix-profile/bin/home-manager: export NIX_PATH=${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
-~/.nix-profile/bin/home-manager: ~/.nix-profile/bin/nix-env
+BIN := ~/.nix-profile/bin/home-manager
+${BIN}: export NIX_PATH=${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+${BIN}: ~/.nix-profile/bin/nix-env
 	nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
