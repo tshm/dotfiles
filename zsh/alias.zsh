@@ -65,6 +65,7 @@ function meminfo() {
   function nixup() {
     nix-env --delete-generations 14d
     nix-channel --update
+    nix-env --install --attr nixpkgs.nix nixpkgs.cacert
     which home-manager && home-manager switch
     nix-env -u
     nix-store --optimise

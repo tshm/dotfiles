@@ -104,7 +104,7 @@ zle -N fzf-fill
 bindkey '^[r' fzf-fill
 
 function pastebuf() {
-	TARGET=$(pbpaste | tr -d '\r\l\n')
+	TARGET=$(pbpaste | tr -d '\r\n')
 	BUFFER="${BUFFER}${TARGET}"
 }
 zle -N pastebuf
