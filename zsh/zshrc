@@ -8,11 +8,9 @@ export EDITOR=nvim
 export VISUAL=nvim
 export PAGER='less'
 export LESS='--quit-if-one-screen -R -iMX'
-export LESSOPEN=|~/.dotfiles/lessfilter %s
-export WORDCHARS=${WORDCHARS:s|/||}
+export LESSOPEN="|~/.dotfiles/lessfilter %s"
+export WORDCHARS="*?_-.[]~&;=!#$%^(){}<>"
 export PATH=~/bin/:~/.local/bin:$PATH
-( which bat >/dev/null ) \
-   && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 HISTSIZE=5100
 export HISTFILE=~/.zsh_history
@@ -130,9 +128,10 @@ zstyle :compinstall filename '/home/tshm/.zshrc'
 
 source ~/.dotfiles/zsh/alias.zsh
 
-NIX=~/.nix-profile/etc/profile.d/nix.sh
-[ -e $NIX ] && {
-	source $NIX
+NIX_PROFILED=~/.nix-profile/etc/profile.d
+[ -e "${NIX_PROFILED}/nix.sh" ] && {
+	source "${NIX_PROFILED}/nix.sh"
+  [ -e "${NIX_PROFILED}/hm-session-vars.sh" ] && source "${NIX_PROFILED}/hm-session-vars.sh"
 	which direnv >/dev/null && eval "$(direnv hook zsh)"
 	which zoxide >/dev/null && eval "$(zoxide init zsh)"
 }

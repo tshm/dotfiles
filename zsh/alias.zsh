@@ -63,9 +63,10 @@ function meminfo() {
 }
 [ -d /nix ] && {
   function nixup() {
+    # nix-shell -p gcc --run "nvim -c 'TSUpdate all'"
     nix-env --delete-generations 14d
     nix-channel --update
-    nix-env --install --attr nixpkgs.nix nixpkgs.cacert
+    # nix-env --install --attr nixpkgs.nix nixpkgs.cacert
     which home-manager && home-manager switch
     nix-env -u
     nix-store --optimise
@@ -94,9 +95,9 @@ function meminfo() {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   function e() {
     (which wsl-open > /dev/null) && wsl-open "$*" \
-    || cmd.exe /c start $(wslpath -w "$*")
+      || cmd.exe /c start $(wslpath -w "$*")
+    }
+    function gvim() {
+      nvim-qt.exe --wsl $*
+    }
   }
-  function gvim() {
-    nvim-qt.exe --wsl $*
-  }
-}
