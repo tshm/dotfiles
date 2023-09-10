@@ -57,7 +57,7 @@ END {
 EOF
 function meminfo() {
   ps -eo pmem,vsize,cmd \
-  | rg -v '\[' \
+  | ug -v '\[' \
   | awk "$awks" \
   | sort -g
 }

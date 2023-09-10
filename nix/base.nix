@@ -20,9 +20,8 @@
     pkgs.fd
     pkgs.jc
     pkgs.jless
-    pkgs.exa
-    pkgs.ripgrep
-    pkgs.ripgrep-all
+    pkgs.eza
+    pkgs.ugrep
     pkgs.nnn
     pkgs.viddy
     pkgs.delta
