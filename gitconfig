@@ -43,6 +43,7 @@
   tool = "difft"
 [merge]
 	conflictstyle = diff3
+	renormalize = true
 [difftool]
   prompt = false
 [difftool "difft"]
@@ -56,6 +57,8 @@
 [user]
 	name = Tosh Satake
 	email = 2sm@csc.jp
+[pull]
+	rebase = true
 [push]
 	default = current
 	followTags = true

@@ -63,10 +63,9 @@ function meminfo() {
 }
 [ -d /nix ] && {
   function nixup() {
-    # nix-shell -p gcc --run "nvim -c 'TSUpdate all'"
+    nix-env --install --attr nixpkgs.nix nixpkgs.cacert
     nix-env --delete-generations 14d
     nix-channel --update
-    # nix-env --install --attr nixpkgs.nix nixpkgs.cacert
     which home-manager && home-manager switch
     nix-env -u
     nix-store --optimise
@@ -85,6 +84,7 @@ function meminfo() {
 
 (which nvim >/dev/null) && {
   alias vi=nvim
+  function viup() { nix-shell -p gcc --run "nvim -c 'TSUpdate all'" }
 }
 
 (which xdg-open >/dev/null) && {

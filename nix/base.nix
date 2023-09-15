@@ -10,6 +10,7 @@
   home.packages = [
     pkgs.devbox
     pkgs.direnv
+    pkgs.neovim
     pkgs.topgrade
     pkgs.atool
     pkgs.git-imerge
@@ -21,6 +22,7 @@
     pkgs.jc
     pkgs.jless
     pkgs.eza
+    pkgs.ripgrep
     pkgs.ugrep
     pkgs.nnn
     pkgs.viddy
