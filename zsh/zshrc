@@ -3,6 +3,13 @@
 bindkey -e               # emacs key bindings
 source ~/.dotfiles/zsh/plugins.zsh
 
+NIX_PROFILED=~/.nix-profile/etc/profile.d
+[ -e "${NIX_PROFILED}/hm-session-vars.sh" ] && {
+  source "${NIX_PROFILED}/hm-session-vars.sh"
+	which direnv >/dev/null && eval "$(direnv hook zsh)"
+	which zoxide >/dev/null && eval "$(zoxide init zsh)"
+}
+
 export RSYNC_RSH='ssh'
 export EDITOR=nvim
 export VISUAL=nvim
@@ -19,9 +26,12 @@ export DIRSTACKSIZE=15
 export fignore=('~' .bak)
 hash -d 'D=/usr/share/doc'
 
-alias ls='eza --icons'
-alias l='eza --icons -l'
-alias la='eza --icons -la'
+which eza >/dev/null && {
+  alias ls='eza --icons'
+  alias l='eza --icons -l'
+  alias la='eza --icons -la'
+}
+which ug >/dev/null && alias ugq='ug -Q -I -e'
 alias pstree='pstree -A'
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'       # no spelling correction on cp
@@ -127,14 +137,6 @@ zstyle :compinstall filename '/home/tshm/.zshrc'
 # End of lines added by compinstall
 
 source ~/.dotfiles/zsh/alias.zsh
-
-NIX_PROFILED=~/.nix-profile/etc/profile.d
-[ -e "${NIX_PROFILED}/nix.sh" ] && {
-	source "${NIX_PROFILED}/nix.sh"
-  [ -e "${NIX_PROFILED}/hm-session-vars.sh" ] && source "${NIX_PROFILED}/hm-session-vars.sh"
-	which direnv >/dev/null && eval "$(direnv hook zsh)"
-	which zoxide >/dev/null && eval "$(zoxide init zsh)"
-}
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local

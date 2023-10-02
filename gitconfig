@@ -31,7 +31,8 @@
 	search1 = !sh -c 'git log --all -S=$*'
 	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
 	diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
-	rebasex = rebase --strategy-option=ignore-all-space	
+	xrebase = rebase --strategy=recursive --strategy-option=renormalize
+  xcherry = cherry-pick --strategy=recursive --strategy-option=renormalize 
 [interactive]
 	diffFilter = delta --color-only
 [delta]
