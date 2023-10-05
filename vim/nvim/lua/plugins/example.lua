@@ -5,6 +5,7 @@ if true then
     { -- configure LSPs
       "neovim/nvim-lspconfig",
       opts = {
+        autoformat = false,
         servers = {
           yamlls = {
             settings = {
