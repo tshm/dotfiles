@@ -2,19 +2,6 @@
 -- stylua: ignore
 if true then
   return {
-    { -- configure LSPs
-      "neovim/nvim-lspconfig",
-      opts = {
-        autoformat = false,
-        servers = {
-          yamlls = {
-            settings = {
-              -- yaml = { keyOrdering = false },
-            },
-          }
-        },
-      }
-    }
     --   dependencies = "folke/neodev.nvim",
     --   init = function()
     --     -- require("neodev").setup({
