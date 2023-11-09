@@ -2,37 +2,33 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ns.yaml
-  - ingressroute.yaml
+- ns.yaml
+- ingressroute.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
 
 secretGenerator:
-  - name: regcred
-    type: kubernetes.io/dockerconfigjson
-    namespace: apps
-    files:
-      - .dockerconfigjson=.docker.config.json
+- files:
+  - .dockerconfigjson=.docker.config.json
+  name: regcred
+  namespace: apps
+  type: kubernetes.io/dockerconfigjson
 
 configMapGenerator:
-  - name: env
-    namespace: apps
-    envs:
-      - .app.env
+- envs:
+  - .app.env
+  name: env
+  namespace: apps
 
-vars:
-  - name: HOSTNAME_APP
-    fieldref:
-      fieldpath: data.HOSTNAME_APP
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: env
-  - name: DOMAIN_APP
-    fieldref:
-      fieldpath: data.DOMAIN_APP
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: env
+replacements:
+- source:
+    fieldPath: data.HOSTNAME_APP
+    kind: ConfigMap
+    name: env
+    version: v1
+- source:
+    fieldPath: data.DOMAIN_APP
+    kind: ConfigMap
+    name: env
+    version: v1

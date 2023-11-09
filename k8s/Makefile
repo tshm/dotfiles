@@ -8,8 +8,6 @@ K := kubectl
 DIR := manifest
 CONTEXT ?= production
 
-VALIDATE := kiwicom/kubeconform
-
 status:;
 	@echo showing k8s status for: ${CONTEXT}
 	$K cluster-info
@@ -39,11 +37,16 @@ install:
 	$(MAKE) config
 	$(MAKE) gitops
 
-check: check_base check_production
-check_%: manifest/%
-	@echo Validate manifests: $<
-	$(eval CMD := "rm -f /x && mkfifo /x && kubeconform -kubernetes-version 1.21.0 -output tap < /x & kubectl kustomize $< > /x")
-	docker run --rm -v ${PWD}:/app -w /app ${VALIDATE} sh -c ${CMD}
+# manifest validation
+KUSTOMIZE_DIRS := $(patsubst %/kustomization.yaml,%,$(shell find manifest -name kustomization.yaml))
+CRDS_SCHEMA_LOCATION := 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'
+
+check: ${KUSTOMIZE_DIRS}
+
+%: %/*.yaml
+	@echo Validate manifests: $@
+	@$K kustomize $@ | kubeconform -schema-location default \
+		-schema-location ${CRDS_SCHEMA_LOCATION} -skip CustomResourceDefinition -summary
 
 k3s:;
 	ssh ${K8S_HOST} 'curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=644 sh -'
@@ -136,3 +139,7 @@ cost:
 	helm repo add kubecost https://kubecost.github.io/cost-analyzer/
 	helm install kubecost kubecost/cost-analyzer --namespace kubecost --set kubecostToken="dHNobUBjc2MuanA=xm343yadf98"
 
+delete_namespace:
+	@if [ "${NS}" == "" ]; then echo 'usage: make delete_namespace -e NS=xxx'; exit 1; fi
+	$K get namespace ${NS} -o json | jq '(.spec.finalizers)=[]' > .tmp.json
+	$K replace --raw "/api/v1/namespaces/${NS}/finalize" -f .tmp.json

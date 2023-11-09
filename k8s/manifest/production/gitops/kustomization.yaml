@@ -3,10 +3,11 @@ kind: Kustomization
 namespace: flux-system
 
 resources:
-  - ../../base/gitops
+- ../../base/gitops
 
 generatorOptions:
   disableNameSuffixHash: true
 
-patchesStrategicMerge:
-  - gotk-sync.yaml
+patches:
+- path: gitrepository.yaml
+- path: appkustomization.yaml

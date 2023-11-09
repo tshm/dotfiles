@@ -1,0 +1,65 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "kubeconform@latest": {
+      "last_modified": "2023-10-25T20:49:13Z",
+      "resolved": "github:NixOS/nixpkgs/75a52265bda7fd25e06e3a67dee3f0354e73243c#kubeconform",
+      "source": "devbox-search",
+      "version": "0.6.3",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/654i411cqh20khvjrknss993xw3h79bw-kubeconform-0.6.3"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/5nm4b18vyn4b5vs46vcq4lm9n3b7vprl-kubeconform-0.6.3"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/gyy4bmqxyyk2kh5kzg0ilayf1g9nvg0g-kubeconform-0.6.3"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/qg8mh0zhp4gbr6ccy8ki1w26bxk2jg6a-kubeconform-0.6.3"
+        }
+      }
+    },
+    "kubectl@latest": {
+      "last_modified": "2023-10-25T20:49:13Z",
+      "resolved": "github:NixOS/nixpkgs/75a52265bda7fd25e06e3a67dee3f0354e73243c#kubectl",
+      "source": "devbox-search",
+      "version": "1.28.3",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/0sw7cwa3aizy1dak55cfahzrr148bbi3-kubectl-1.28.3"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/2w073a4fdvyk0m9izmnq63g4iwb8sx57-kubectl-1.28.3"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/x2czg9p0ns4f5jl26x609l5jlq2jj202-kubectl-1.28.3"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/k3bhqxjgpxzlb6i28cyaxp84p13ky5q8-kubectl-1.28.3"
+        }
+      }
+    },
+    "kustomize@latest": {
+      "last_modified": "2023-10-25T20:49:13Z",
+      "resolved": "github:NixOS/nixpkgs/75a52265bda7fd25e06e3a67dee3f0354e73243c#kustomize",
+      "source": "devbox-search",
+      "version": "5.2.1",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/m5nys4fdq2w3aak09hn69g33whlr3d06-kustomize-5.2.1"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/q304blvkrwpbw8knlffg6p9hax0sb6ya-kustomize-5.2.1"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/wdzxkafxjiprkk1ld7malkd5r8fyh5zq-kustomize-5.2.1"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/acpd3mkb4z1h3i0s1fmc82c8gqg18590-kustomize-5.2.1"
+        }
+      }
+    }
+  }
+}

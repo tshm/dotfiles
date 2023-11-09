@@ -1,18 +1,4 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: GitRepository
-metadata:
-  name: flux-system
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  url: https://github.com/tshm/dotfiles/k8s
-  ref:
-    branch: main
-  secretRef:
-    name: flux-system
-  timeout: 20s
----
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
