@@ -6,7 +6,7 @@ ISWSL := $(shell uname -a | grep -i microsoft)
 PHONY: all shell tools git nix
 
 all: shell tools
-shell: ~/.zshrc ~/bin/e
+shell: ~/.zshrc
 tools: ~/.tmux.conf git nvim
 
 ~/.tmux.conf:
