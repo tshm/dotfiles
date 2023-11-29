@@ -1,14 +1,14 @@
 
 HOME_MANAGER_DIR := ~/.config/home-manager
 HOME_MANAGER := ~/.nix-profile/bin/home-manager
-BIN_DIR := /nix/var/nix/profiles/default/bin/
+BIN_DIR := /nix/var/nix/profiles/default/bin
 
 PHONY: conf nix
 conf: ${HOME_MANAGER_DIR}/base.nix ${HOME_MANAGER_DIR}/home.nix
 nix: ${BIN_DIR}/nix ${HOME_MANAGER} conf
 
-/nix/var/nix/profiles/default/bin/nix:
-	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+${BIN_DIR}/nix:
+	sh <(curl -L https://nixos.org/nix/install) --daemon
 
 ${HOME_MANAGER_DIR}/base.nix: base.nix
 	cd ${HOME_MANAGER_DIR} && ln -sf ~/.dotfiles/nix/$<
