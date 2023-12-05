@@ -36,7 +36,6 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 
 ~/.zshrc:
 	echo 'source ~/.dotfiles/zsh/zshrc' > $@
-	mkdir -p ~/bin/
 
 ifdef ISWSL
 ~/.local/bin/wsl-open:

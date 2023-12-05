@@ -1,77 +1,78 @@
 [core]
-	filemode = false
-	ignorecase = false
-	autocrlf = false
-	whitespace = cr-at-eol
-	excludesfile = ~/.dotfiles/gitignore
+  filemode = false
+  ignorecase = false
+  autocrlf = false
+  whitespace = cr-at-eol
+  excludesfile = ~/.dotfiles/gitignore
   pager = delta
 [commit]
-	template = ~/.dotfiles/gitmessage.txt
+  template = ~/.dotfiles/gitmessage.txt
 [alias]
-	st = status -sb
-	br = branch -vv
-	ci = commit
-	co = checkout
-	is = bug ls "status:open"
-	pu = !"[ -x git-bug ] && git-bug push; git push -u origin HEAD"
-	pur = !"[ -x git-bug ] && git-bug pull; git pull --rebase --prune --autostash"
-	prune = fetch --prune
-	abort = checkout -- .
-	wait = reset HEAD
-	amend = commit --amend --no-edit
-	dt = difftool -d
+  st = status -sb
+  br = branch -vv
+  ci = commit
+  co = checkout
+  is = bug ls "status:open"
+  pu = !"[ -x git-bug ] && git-bug push; git push -u origin HEAD"
+  pur = !"[ -x git-bug ] && git-bug pull; git pull --rebase --prune --autostash"
+  prune = fetch --prune
+  stashu = stash push -k
+  abort = checkout -- .
+  wait = reset HEAD
+  amend = commit --amend --no-edit
+  dt = difftool -d
 #
-	l = log --pretty=oneline --abbrev-commit --graph --decorate
-	ls = log --simplify-by-decoration --all --pretty=oneline --abbrev-commit --graph --decorate
+  l = log --pretty=oneline --abbrev-commit --graph --decorate
+  ls = log --simplify-by-decoration --all --pretty=oneline --abbrev-commit --graph --decorate
 #
-	df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $*' -
-	wdf = !sh -c 'git diff --word-diff --stat -p -w --color $*' -
-	diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
-	search = !sh -c 'git log --all -G=$*'
-	search1 = !sh -c 'git log --all -S=$*'
-	nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
-	diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
-	xrebase = rebase --strategy=recursive --strategy-option=renormalize
+  df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $*' -
+  wdf = !sh -c 'git diff --word-diff --stat -p -w --color $*' -
+  diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
+  search = !sh -c 'git log --all -G=$*'
+  search1 = !sh -c 'git log --all -S=$*'
+  nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
+  diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
+  xrebase = rebase --strategy=recursive --strategy-option=renormalize
   xcherry = cherry-pick --strategy=recursive --strategy-option=renormalize 
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [delta]
-	navigate = true
+  navigate = true
 [diff]
   # external = difft
   colorMoved = default
   compactionHeuristic = true
   tool = "difft"
 [merge]
-	conflictstyle = diff3
-	renormalize = true
+  conflictstyle = diff3
+  renormalize = true
 [difftool]
   prompt = false
 [difftool "difft"]
-	cmd = difft "$LOCAL" "$REMOTE"
+  cmd = difft "$LOCAL" "$REMOTE"
 [difftool "vimdiff"]
-	cmd = "nvim -R -d -c \"wincmd l\" -d \"$LOCAL\" \"$REMOTE\""
+  cmd = "nvim -R -d -c \"wincmd l\" -d \"$LOCAL\" \"$REMOTE\""
 [mergetool "vimdiff"]
-	cmd = "nvim -d -c \"4wincmd w | wincmd J\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"  \"$MERGED\""
+  cmd = "nvim -d -c \"4wincmd w | wincmd J\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"  \"$MERGED\""
 [color]
-	ui = true
+  ui = true
 [user]
-	name = Tosh Satake
-	email = 2sm@csc.jp
+  name = Tosh Satake
+  email = 2sm@csc.jp
 [pull]
-	rebase = true
+  rebase = true
 [push]
-	default = current
-	followTags = true
+  default = current
+  followTags = true
 [tig]
-	tab-size = 2
-	main-view-author = no
+  tab-size = 2
+  main-view-author = no
   ignore-space = some
   ignore-case = smart-case
 [tig "bind"]
-	main = T ?git tag %(prompt) %(commit)
-	main = ! ?git nuke %(branch)
-	status = i ?git ignore %(file)
+  main = T ?git tag %(prompt) %(commit)
+  main = ! ?git nuke %(branch)
+  status = i ?git ignore %(file)
 [include]
   path = .gitconfig.local
-# vim: ft=gitconfig
+# vim: tabstop=2 expandtab ft=config

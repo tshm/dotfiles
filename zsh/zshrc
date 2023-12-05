@@ -2,6 +2,7 @@
 # vim: ft=zsh
 bindkey -e               # emacs key bindings
 source ~/.dotfiles/zsh/plugins.zsh
+export PATH=~/.local/bin:$PATH
 
 NIX_PROFILED=~/.nix-profile/etc/profile.d
 [ -e "${NIX_PROFILED}/hm-session-vars.sh" ] && {
@@ -17,7 +18,6 @@ export PAGER='less'
 export LESS='--quit-if-one-screen -R -iMX'
 export LESSOPEN="|~/.dotfiles/lessfilter %s"
 export WORDCHARS="*?_-.[]~&;=!#$%^(){}<>"
-export PATH=~/bin/:~/.local/bin:$PATH
 
 HISTSIZE=5100
 export HISTFILE=~/.zsh_history
