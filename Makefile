@@ -43,3 +43,8 @@ ifdef ISWSL
 	chmod +x $@
 endif
 
+resh:
+	curl -fsSL https://raw.githubusercontent.com/curusarn/resh/master/scripts/rawinstall.sh | bash
+
+hishtory:
+	curl https://hishtory.dev/install.py | python3 -
