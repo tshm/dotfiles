@@ -7,7 +7,7 @@ uname=$(uname -a)
 export NNN_BMS='d:~/dl'
 export NNN_PLUG='z:z;c:!code $nnn*;e:!nvim $nnn*'
 function n() {
-  env LESS= BAT_PAGER='less -R' VISUAL=bat nnn -e $*
+  env LESS= BAT_PAGER='less -R'  nnn -e $*
 }
 
 which curl >/dev/null && function cheat () {
