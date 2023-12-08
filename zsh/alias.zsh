@@ -14,6 +14,13 @@ which curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
+function zt () {
+  \builtin local DIR
+  DIR="$(\command zoxide query -- "$@")" || return
+  echo -------- open $DIR
+  tmux neww -c "$DIR"
+}
+
 funciton zz () {
   \builtin local DIR SN
   DIR="$(\command zoxide query -- "$@")" || return
