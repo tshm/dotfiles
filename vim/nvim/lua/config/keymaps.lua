@@ -16,3 +16,16 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "<leader><space>", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+
+if vim.g.vscode then
+  map("n", "zR", "<cmd>call VSCodeNotify('editor.unfoldAll')<CR>")
+  map("n", "zc", "<cmd>call VSCodeNotify('editor.fold')<CR>")
+  map("n", "zC", "<cmd>call VSCodeNotify('editor.foldRecursively')<CR>")
+  map("n", "zo", "<cmd>call VSCodeNotify('editor.unfold')<CR>")
+  map("n", "zO", "<cmd>call VSCodeNotify('editor.unfoldRecursively')<CR>")
+  map("n", "za", "<cmd>call VSCodeNotify('editor.toggleFold')<CR>")
+
+  map("n", "j", "<cmd>call VSCodeNotify('cursorDown')<CR>")
+  map("n", "k", "<cmd>call VSCodeNotify('cursorUp')<CR>")
+else
+end
