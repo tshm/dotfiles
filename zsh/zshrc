@@ -99,12 +99,12 @@ bindkey '^[7' auto_quote
 
 function fzf-fill() {
 	if [ "$#LBUFFER" -eq 0 ]; then
-    BUFFER="${BUFFER}$( fd -I . | fzf )"
+    BUFFER="${BUFFER}$( fd -I . | fzf --preview 'less {}')"
 	elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
-    BUFFER="${BUFFER}$( fd -I . | fzf )"
+    BUFFER="${BUFFER}$( fd -I . | fzf --preview 'less {}')"
 	else
 		zle backward-word
-    RBUFFER="$( fd -I . | fzf -q ${RBUFFER})"
+    RBUFFER="$( fd -I . | fzf -q ${RBUFFER} --preview 'less {}')"
 	fi
   zle end-of-line
 }

@@ -1,0 +1,46 @@
+# set drawbox
+set previewer pistol
+
+set ratios 1:2
+cmd edit-config ${{
+  $EDITOR ~/.config/lf/lfrc
+    lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+map C edit-config
+map . :set hidden!
+
+cmd toggle_preview %{{
+  if [ "$lf_preview" = "true" ]; then
+    lf -remote "send $id :set preview false; set ratios 1:2";
+  else
+    lf -remote "send $id :set preview true; set ratios 1:2";
+  fi
+}}
+map zp toggle_preview
+
+cmd on-select &{{
+  lf -remote "send $id set statfmt \"$(exa -ld --color=always "$f")\""
+}}
+
+cmd tab-open ${{
+  npane=$(tmux list-panes | wc -l)
+  if [ $npane = '1' ]; then
+    tmux split -v lf
+  else
+    tmux last-pane
+  fi
+}}
+map <tab> tab-open
+
+cmd paste %{{
+  load=$(cat ~/.local/share/lf/files)
+  mode=$(echo "$load" | sed -n '1p')
+  list=$(echo "$load" | sed '1d')
+  if [ $mode = 'copy' ]; then
+    cp -R $list .
+  elif [ $mode = 'move' ]; then
+    mv $list .
+    rm ~/.local/share/lf/files
+  fi
+  lf -remote 'send clear'
+}}

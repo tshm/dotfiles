@@ -7,7 +7,7 @@ PHONY: all shell tools git nix
 
 all: shell tools
 shell: ~/.zshrc
-tools: ~/.tmux.conf git nvim
+tools: ~/.tmux.conf git nvim ~/.config/lf/lfrc
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
@@ -26,6 +26,10 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 	chmod u+x nvim.appimage
 	mv nvim.appimage ~/.local/bin/nvim
+
+~/.config/lf/lfrc: lfrc
+	mkdir -p ~/.config/lf
+	ln -s ~/.dotfiles/lfrc $@
 
 ~/.config/nvim: ./vim/nvim
 	mkdir -p ~/.config
