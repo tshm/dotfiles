@@ -7,50 +7,51 @@ uname=$(uname -a)
 export NNN_BMS='d:~/dl'
 export NNN_PLUG='z:z;c:!code $nnn*;e:!nvim $nnn*'
 function n() {
-  env LESS= BAT_PAGER='less -R'  nnn -e $*
+  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn $*
 }
 
 which curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
-function zt () {
+function zz () {
   \builtin local DIR
-  DIR="$(\command zoxide query -- "$@")" || return
+  DIR="$(\command zoxide query -- "$@[-1]")" || return
   echo -------- open $DIR
   tmux neww -c "$DIR"
 }
-
-funciton zz () {
-  \builtin local DIR SN
-  DIR="$(\command zoxide query -- "$@")" || return
-  SN="$(\command basename $DIR)" || return
-  echo -------- start $SN
-  tmux has -t $SN 2>/dev/null || {
-    tmux new-session -s "$SN" -c "$DIR" -d
-  }
-  tmux attach -t $SN || tmux switch -t $SN
+function __zz_complete () {
+  \builtin local result
+  if result="$(\command zoxide query --exclude "$(__zoxide_pwd)" --interactive -- $@[-1])"
+  then
+    compadd "$@" "$result"
+  fi
 }
-_zz() {
-  local -a dirs1=($(zoxide query -l -- ${words[CURRENT]}))
-  local -a dirs2=($(/bin/ls ~/.dotfiles/proj | grep '\.sh' | sed 's/\.sh//'))
-  _arguments "1:path:($dirs1 $dirs2)"
-}
-compdef _zz zz
+compdef __zz_complete zz
 
 function tm () {
-  \builtin local SN=${1:-home}
+  \builtin local SN=${1:-home} DIR
+  [ -e ~/.dotfiles/proj/${SN}.sh ] || {
+    DIR="$(\command zoxide query -- "$@[-1]")" || return
+    SN="$(\command basename $DIR)" || return
+  }
   echo -------- start $SN
-  tmux has -t $SN || {
-    source ~/.dotfiles/proj/${SN}.sh
-    #
-    tmux select-window -t $SN:0
-    tmux select-pane -t 0
+  tmux has -t $SN 2>/dev/null || {
+    [ -d $DIR ] && {
+      tmux new-session -s "$SN" -c "$DIR" -d
+    } || {
+      tmux select-window -t $SN:0
+      tmux select-pane -t 0
+    }
   }
   tmux attach -t $SN || tmux switch -t $SN
 }
-_tm() {
-  _values 'sessions' $(/bin/ls ~/.dotfiles/proj | grep '\.sh' | sed 's/\.sh//')
+function _tm() {
+  \builtin local result
+  # result+=($(\command zoxide query --exclude "$(__zoxide_pwd)" -- $@[-1]))
+  result=($(\command zoxide query -l --exclude "$(__zoxide_pwd)" -- $@[-1]))
+  result+=($(/bin/ls ~/.dotfiles/proj | grep '\.sh' | sed 's/\.sh//'))
+  compadd -a result
 }
 compdef _tm tm
 

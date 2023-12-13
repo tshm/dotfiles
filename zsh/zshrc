@@ -122,6 +122,7 @@ bindkey '^[k' history-substring-search-up
 bindkey '^[j' history-substring-search-down
 
 zstyle ':completion:*' use-cache true
+# zstyle ':completion:*' matcher-list 'r:|?=**'
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' file-sort name
 zstyle ':completion:*' format 'Completing %d'
