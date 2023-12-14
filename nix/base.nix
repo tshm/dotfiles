@@ -25,6 +25,8 @@
     pkgs.ripgrep
     pkgs.ugrep
     pkgs.nnn
+    pkgs.lf
+    pkgs.ctpv
     pkgs.viddy
     pkgs.delta
     pkgs.watchexec

@@ -1,5 +1,8 @@
 # set drawbox
-set previewer pistol
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
 
 set ratios 1:2
 cmd edit-config ${{
@@ -8,12 +11,18 @@ cmd edit-config ${{
 }}
 map C edit-config
 map . :set hidden!
+map x :delete $f
+cmd open-with %{{
+  ff=$(echo $f | sed 's/ /<space>/g')
+  lf -remote "send $id push :!<space>\"$ff\"<c-a>"
+}}
+map o open-with
 
 cmd toggle_preview %{{
   if [ "$lf_preview" = "true" ]; then
-    lf -remote "send $id :set preview false; set ratios 1:2";
+    lf -remote "send $id :set nopreview; set ratios 1";
   else
-    lf -remote "send $id :set preview true; set ratios 1:2";
+    lf -remote "send $id :set ratios 1:2; set preview";
   fi
 }}
 map zp toggle_preview

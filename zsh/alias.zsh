@@ -3,13 +3,6 @@
 unset MAILCHECK
 uname=$(uname -a)
 
-[ -f ~/.config/nnn/plugins/z ] || mkdir -p ~/.config/nnn/plugins/ || ln -s ~/.dotfiles/zsh/nnn_z ~/.config/nnn/plugins/z
-export NNN_BMS='d:~/dl'
-export NNN_PLUG='z:z;c:!code $nnn*;e:!nvim $nnn*'
-function n() {
-  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn $*
-}
-
 which curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
@@ -37,9 +30,10 @@ function tm () {
   }
   echo -------- start $SN
   tmux has -t $SN 2>/dev/null || {
-    [ -d $DIR ] && {
+    [ $DIR ] && [ -d $DIR ] && {
       tmux new-session -s "$SN" -c "$DIR" -d
     } || {
+      source ~/.dotfiles/proj/${SN}.sh
       tmux select-window -t $SN:0
       tmux select-pane -t 0
     }
