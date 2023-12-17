@@ -2,6 +2,16 @@
 -- stylua: ignore
 if true then
   return {
+    {
+      "telescope.nvim",
+      dependencies = {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        config = function()
+          require("telescope").load_extension("fzf")
+        end,
+      },
+    },
     --   dependencies = "folke/neodev.nvim",
     --   init = function()
     --     -- require("neodev").setup({
