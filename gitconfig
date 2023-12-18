@@ -17,7 +17,6 @@
   pur = !"[ -x git-bug ] && git-bug pull; git pull --rebase --prune --autostash"
   prune = fetch --prune
   stashu = stash push -k
-  abort = checkout -- .
   wait = reset HEAD
   amend = commit --amend --no-edit
   dt = difftool -d
