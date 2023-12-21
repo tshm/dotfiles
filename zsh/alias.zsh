@@ -95,6 +95,7 @@ function meminfo() {
 
 (echo $uname | grep -i microsoft >/dev/null) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
+  unalias e
   function e() {
     (which wsl-open > /dev/null) && wsl-open "$*" \
       || cmd.exe /c start $(wslpath -w "$*")

@@ -16,6 +16,7 @@
     pkgs.git-imerge
     pkgs.tig
     pkgs.tmux
+    pkgs.fzf
     pkgs.bat
     pkgs.btop
     pkgs.fd

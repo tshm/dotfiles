@@ -19,10 +19,6 @@ zinit for light-mode \
   hlissner/zsh-autopair \
   pick"async.zsh" src"pure.zsh" sindresorhus/pure
 
-# bins
-zinit ice as"command" from"gh-r"
-zinit load junegunn/fzf
-
 # plugins
 zinit light zsh-users/zsh-history-substring-search
 
