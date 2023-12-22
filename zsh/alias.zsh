@@ -7,21 +7,6 @@ which curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
-function zz () {
-  \builtin local DIR
-  DIR="$(\command zoxide query -- "$@[-1]")" || return
-  echo -------- open $DIR
-  tmux neww -c "$DIR"
-}
-function __zz_complete () {
-  \builtin local result
-  if result="$(\command zoxide query --exclude "$(__zoxide_pwd)" --interactive -- $@[-1])"
-  then
-    compadd "$@" "$result"
-  fi
-}
-compdef __zz_complete zz
-
 function tm () {
   \builtin local SN=${1:-home} DIR
   [ -e ~/.dotfiles/proj/${SN}.sh ] || {
@@ -40,14 +25,6 @@ function tm () {
   }
   tmux attach -t $SN || tmux switch -t $SN
 }
-function _tm() {
-  \builtin local result
-  # result+=($(\command zoxide query --exclude "$(__zoxide_pwd)" -- $@[-1]))
-  result=($(\command zoxide query -l --exclude "$(__zoxide_pwd)" -- $@[-1]))
-  result+=($(/bin/ls ~/.dotfiles/proj | grep '\.sh' | sed 's/\.sh//'))
-  compadd -a result
-}
-compdef _tm tm
 
 read -d '' -r awks <<'EOF'
 NR>2 {
@@ -99,8 +76,8 @@ function meminfo() {
   function e() {
     (which wsl-open > /dev/null) && wsl-open "$*" \
       || cmd.exe /c start $(wslpath -w "$*")
-    }
-    function gvim() {
-      nvim-qt.exe --wsl $*
-    }
   }
+  function gvim() {
+    nvim-qt.exe --wsl $*
+  }
+}
