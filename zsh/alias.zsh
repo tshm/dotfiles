@@ -7,6 +7,10 @@ which curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
+which scr && {
+  alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
+}
+
 function tm () {
   \builtin local SN=${1:-home} DIR
   [ -e ~/.dotfiles/proj/${SN}.sh ] || {
