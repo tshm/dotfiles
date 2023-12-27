@@ -6,7 +6,7 @@ ISWSL := $(shell uname -a | grep -i microsoft)
 PHONY: all shell tools git nix
 
 all: shell tools
-shell: ~/.zshrc
+shell: ~/.zshrc wezterm.lua
 tools: ~/.tmux.conf git nvim ~/.config/lf/lfrc
 
 ~/.tmux.conf:
@@ -45,7 +45,16 @@ ifdef ISWSL
 ~/.local/bin/wsl-open:
 	curl -o $@ https://raw.githubusercontent.com/4U6U57/wsl-open/master/wsl-open.sh
 	chmod +x $@
+
+wezterm.lua: /u/.wezterm.lua
+else
+wezterm.lua: ~/.config/wezterm/wezterm.lua
 endif
+
+~/.config/wezterm/wezterm.lua:
+	cp ~/.dotfiles/wezterm/wezterm.lua $@
+/u/.wezterm.lua:
+	cp ~/.dotfiles/wezterm/wezterm.lua $@
 
 resh:
 	curl -fsSL https://raw.githubusercontent.com/curusarn/resh/master/scripts/rawinstall.sh | bash

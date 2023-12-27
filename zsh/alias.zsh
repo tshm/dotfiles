@@ -7,7 +7,7 @@ which curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
-which scr && {
+which scr >/dev/null && {
   alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
 }
 
