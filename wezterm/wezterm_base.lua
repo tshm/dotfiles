@@ -9,7 +9,7 @@ end
 config.window_close_confirmation = "NeverPrompt"
 config.hide_tab_bar_if_only_one_tab = true
 -- config.color_scheme = "Earthsong"
-config.color_scheme = "zenwritten_dark"
+config.color_scheme = "Bamboo"
 
 -- config.font = wezterm.font("FiraMono Nerd Font")
 -- config.default_prog = { "/usr/bin/zsh", "-l" }
