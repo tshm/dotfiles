@@ -52,6 +52,7 @@ wezterm.lua: ~/.config/wezterm/wezterm.lua
 endif
 
 ~/.config/wezterm/wezterm.lua:
+	mkdir -p ~/.config/wezterm
 	cp ~/.dotfiles/wezterm/wezterm.lua $@
 /u/.wezterm.lua:
 	cp ~/.dotfiles/wezterm/wezterm.lua $@
