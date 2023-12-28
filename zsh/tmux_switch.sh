@@ -5,7 +5,7 @@
   tmux neww -c "$DIR"
   return
 }
-DIR=$({/bin/ls ~/.dotfiles/proj | egrep -v "sample|$1"| grep '\.sh'; zoxide query --list} | fzf) || return
+DIR=$({/bin/ls ~/.dotfiles/proj | egrep -v "sample|$1"| grep '\.sh' | sed 's/\.sh//'; zoxide query --list} | fzf) || return
 SN="$(basename $DIR)"
 echo -------- start $SN
 tmux has -t $SN 2>/dev/null || {

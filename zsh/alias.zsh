@@ -11,6 +11,13 @@ which scr >/dev/null && {
   alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
 }
 
+export NNN_BMS='d:~/dl'
+export NNN_SPLITSIZE=75
+export NNN_PLUG='p:-preview-tui;c:!code $nnn*;e:!nvim $nnn*'
+function n() {
+  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn -S -a $*
+}
+
 function tm () {
   \builtin local SN=${1:-home} DIR
   [ -e ~/.dotfiles/proj/${SN}.sh ] || {
