@@ -72,6 +72,7 @@
   main = T ?git tag %(prompt) %(commit)
   main = ! ?git nuke %(branch)
   status = i ?git ignore %(file)
+  generic = d >git show %(commit)
 [include]
   path = .gitconfig.local
 # vim: tabstop=2 expandtab ft=config
