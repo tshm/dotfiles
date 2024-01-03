@@ -15,7 +15,7 @@ export NNN_BMS='d:~/dl'
 export NNN_SPLITSIZE=75
 export NNN_PLUG='p:-preview-tui;c:!code $nnn*;e:!nvim $nnn*'
 function n() {
-  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn -S -a $*
+  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn -a $*
 }
 
 function tm () {
