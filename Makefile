@@ -7,7 +7,7 @@ PHONY: all shell tools git nix
 
 all: shell tools
 shell: ~/.zshrc wezterm.lua
-tools: ~/.tmux.conf git nvim ~/.config/lf/lfrc
+tools: ~/.tmux.conf git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
@@ -62,3 +62,8 @@ resh:
 
 hishtory:
 	curl https://hishtory.dev/install.py | python3 -
+
+~/.config/nnn/plugins:
+	mkdir -p ~/.config/nnn/plugins
+	sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+

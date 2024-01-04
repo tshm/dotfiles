@@ -11,11 +11,13 @@ which scr >/dev/null && {
   alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
 }
 
+# export NNN_OPENER='~/.config/nnn/plugins/nuke'
 export NNN_BMS='d:~/dl'
 export NNN_SPLITSIZE=75
+export NNN_BATSTYLE=plain
 export NNN_PLUG='p:-preview-tui;c:!code $nnn*;e:!nvim $nnn*'
 function n() {
-  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn -a $*
+  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn -a -e $*
 }
 
 function tm () {
