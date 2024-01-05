@@ -65,5 +65,5 @@ hishtory:
 
 ~/.config/nnn/plugins:
 	mkdir -p ~/.config/nnn/plugins
-	sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+	sh -c "$$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 

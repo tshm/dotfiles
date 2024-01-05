@@ -15,9 +15,10 @@ which scr >/dev/null && {
 export NNN_BMS='d:~/dl'
 export NNN_SPLITSIZE=75
 export NNN_BATSTYLE=plain
-export NNN_PLUG='p:-preview-tui;c:!code $nnn*;e:!nvim $nnn*'
+export NNN_PLUG='p:-preview-tui;c:!code $nnn*;e:!nvim $nnn*;g:!xdg-open .'
+export NNN_OPTS='Aae'
 function n() {
-  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn -a -e $*
+  env LESS='-R -iMX' EDITOR=less VISUAL=less BAT_PAGER='less -R' nnn $*
 }
 
 function tm () {
