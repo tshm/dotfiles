@@ -1,14 +1,14 @@
 #-*-shell-script-*-
 # vim: ft=zsh
-bindkey -e               # emacs key bindings
+bindkey -e # emacs key bindings
 source ~/.dotfiles/zsh/plugins.zsh
 export PATH=~/.local/bin:$PATH
 
 NIX_PROFILED=~/.nix-profile/etc/profile.d
 [ -e "${NIX_PROFILED}/hm-session-vars.sh" ] && {
   source "${NIX_PROFILED}/hm-session-vars.sh"
-	which direnv >/dev/null && eval "$(direnv hook zsh)"
-	which zoxide >/dev/null && eval "$(zoxide init zsh)"
+  which direnv >/dev/null && eval "$(direnv hook zsh)"
+  which zoxide >/dev/null && eval "$(zoxide init zsh)"
 }
 
 export RSYNC_RSH='ssh'
@@ -65,8 +65,8 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '\ee' edit-command-line
 precmd() {
-	[ -n "$TMUX_PANE" ] && tmux rename-window $(basename $PWD)	
-	jobs;
+  [ -n "$TMUX_PANE" ] && tmux rename-window $(basename $PWD)
+  jobs;
 }
 
 # The following lines were added by compinstall
@@ -77,46 +77,55 @@ autoload -Uz vcs_info
 bindkey '^[;' autosuggest-execute
 # accept auto completion
 function accept_and_pager() {
-	BUFFER="${BUFFER}| ${PAGER}"
-	zle accept-line
+  BUFFER="${BUFFER}| ${PAGER}"
+  zle accept-line
 }
 zle -N accept_and_pager
 bindkey '^[p' accept_and_pager
 function auto_quote() {
-	if [ "$#LBUFFER" -eq 0 ]; then
-		zle quote-line
-	elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
-		RBUFFER="\"\""
-		zle forward-char
-	else
-		zle backward-word
-		RBUFFER="\"${RBUFFER}\""
-		zle end-of-line
-	fi
+  if [ "$#LBUFFER" -eq 0 ]; then
+    zle quote-line
+  elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
+    RBUFFER="\"\""
+    zle forward-char
+  else
+    zle backward-word
+    RBUFFER="\"${RBUFFER}\""
+    zle end-of-line
+  fi
 }
 zle -N auto_quote
 bindkey '^[7' auto_quote
 
 function fzf-fill() {
-	if [ "$#LBUFFER" -eq 0 ]; then
+  if [ "$#LBUFFER" -eq 0 ]; then
     BUFFER="${BUFFER}$( fd -I . | fzf --preview 'ctpv {}')"
-	elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
+  elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
     BUFFER="${BUFFER}$( fd -I . | fzf --preview 'ctpv {}')"
-	else
-		zle backward-word
-    RBUFFER="$( fd -I . | fzf -q ${RBUFFER} --preview 'ctpv {}')"
-	fi
+  else
+  zle backward-word
+    local DIR="" Q=${RBUFFER}
+    if [ "${LBUFFER:$#LBUFFER-1}" = "/" ]; then
+      zle backward-delete-char
+      RBUFFER=""
+      zle vi-backward-blank-word
+      DIR=${RBUFFER}
+    fi
+    # echo DIR:$DIR Q:$Q > ./tmp.txt
+    RBUFFER="$( fd -I . ${DIR} | fzf -q ${Q} --preview 'ctpv {}')"
+  fi
   zle end-of-line
 }
 zle -N fzf-fill
 bindkey '^[r' fzf-fill
 
 function pastebuf() {
-	TARGET=$(pbpaste | tr -d '\r\n')
-	BUFFER="${BUFFER}${TARGET}"
+  TARGET=$(pbpaste | tr -d '\r\n')
+  BUFFER="${BUFFER}${TARGET}"
 }
 zle -N pastebuf
 bindkey '^[i' pastebuf
+bindkey '^[B' vi-backward-blank-word
 
 bindkey '^[k' history-substring-search-up
 bindkey '^[j' history-substring-search-down
@@ -134,11 +143,10 @@ zstyle ':completion:*' prompt 'correct'
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' substitute 1
 zstyle ':completion:*' verbose true
-zstyle :compinstall filename '/home/tshm/.zshrc'
-# End of lines added by compinstall
+zstyle :compinstall filename "$HOME/.zshrc"
 
 source ~/.dotfiles/zsh/alias.zsh
 
 if [ -f ~/.zshrc.local ]; then
-    source ~/.zshrc.local
+  source ~/.zshrc.local
 fi
