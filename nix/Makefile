@@ -11,7 +11,8 @@ conf: ${HOME_MANAGER_DIR}/base.nix ${HOME_MANAGER_DIR}/home.nix
 nix: ${BIN_DIR}/nix ${HOME_MANAGER} conf
 
 ${BIN_DIR}/nix:
-	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+	curl --proto '=https' --tlsv1.2 -sSf \
+		-L https://install.determinate.systems/nix | sh -s -- install
 
 ${HOME_MANAGER_DIR}/base.nix: base.nix
 	cd ${HOME_MANAGER_DIR} && ln -sf ~/.dotfiles/nix/$<
@@ -20,11 +21,14 @@ ${HOME_MANAGER_DIR}/home.nix: home.nix
 	cd ${HOME_MANAGER_DIR} && cp ~/.dotfiles/nix/$< .
 
 ${HOME_MANAGER}: ${BIN_DIR}/nix
-	. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-	nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-	nix-channel --update
-	nix-shell '<home-manager>' -A install
-	home-manager switch
+	. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && { \
+		nix-channel --add \
+		  https://github.com/nix-community/home-manager/archive/master.tar.gz \
+			home-manager; \
+		nix-channel --update; \
+		nix-shell '<home-manager>' -A install; \
+		home-manager switch; \
+	}
 
 ${DIRENV}:
 	mkdir -p ~/.config/direnv/lib
