@@ -1,0 +1,12 @@
+# %USERPROFILE%/.wslconfig
+[wsl2]
+guiApplications=true
+memory=16GB
+
+[experimental]
+autoMemoryReclaim=gradual
+# networkingMode=mirrored
+# dnsTunneling=true
+# firewall=true
+# autoProxy=true
+
