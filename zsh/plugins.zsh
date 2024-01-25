@@ -47,6 +47,9 @@ zinit load "zpm-zsh/clipboard"
 # set fpath += ~/.local/share/zinit/plugins/zpm-zsh---clipboard/functions/
 # autoload -Uz open pbcopy pbpaste clip
 
+zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"'
+zinit light cantino/mcfly
+
 zinit ice pick"deer"; zinit load "Vifon/deer"
 zle -N deer
 bindkey '\el' deer
