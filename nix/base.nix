@@ -24,8 +24,8 @@
     pkgs.jless
     pkgs.eza
     pkgs.ripgrep
-    pkgs.ugrep
     pkgs.nnn
+    pkgs.ctpv
     pkgs.viddy
     pkgs.delta
     pkgs.watchexec

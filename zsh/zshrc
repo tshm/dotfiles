@@ -18,6 +18,10 @@ export PAGER='less'
 export LESS='--quit-if-one-screen -R -iMX'
 export LESSOPEN="|~/.dotfiles/lessfilter %s"
 export WORDCHARS="*?_-.[]~&;=!#$%^(){}<>"
+export FZF_DEFAULT_OPTS="-m --ansi --preview 'ctpv {}' \
+  --bind 'alt-a:toggle-all' \
+  --bind 'alt-p:toggle-preview' \
+  --bind 'alt-e:become($EDITOR {+} </dev/tty >/dev/tty)'"
 
 HISTSIZE=5100
 export HISTFILE=~/.zsh_history
@@ -31,7 +35,6 @@ which eza >/dev/null && {
   alias l='eza --icons -l'
   alias la='eza --icons -la'
 }
-which ug >/dev/null && alias ugq='ug -Q -I -e'
 alias pstree='pstree -A'
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'       # no spelling correction on cp
@@ -99,9 +102,9 @@ bindkey '^[7' auto_quote
 
 function fzf-fill() {
   if [ "$#LBUFFER" -eq 0 ]; then
-    BUFFER="${BUFFER}$( fd -I . | fzf --preview 'ctpv {}')"
+    BUFFER="${BUFFER}$( fd -I . | fzf )"
   elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
-    BUFFER="${BUFFER}$( fd -I . | fzf --preview 'ctpv {}')"
+    BUFFER="${BUFFER}$( fd -I . | fzf )"
   else
   zle backward-word
     local DIR="" Q=${RBUFFER}
@@ -112,7 +115,7 @@ function fzf-fill() {
       DIR=${RBUFFER}
     fi
     # echo DIR:$DIR Q:$Q > ./tmp.txt
-    RBUFFER="$( fd -I . ${DIR} | fzf -q ${Q} --preview 'ctpv {}')"
+    RBUFFER="$( fd -I . ${DIR} | fzf -q ${Q} )"
   fi
   zle end-of-line
 }

@@ -11,6 +11,19 @@ which scr >/dev/null && {
   alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
 }
 
+which rg >/dev/null && {
+  function ff () {
+    rgcmd="rg -i -l"
+    [ -z "$*" ] && q0='--files' || q0="$*"
+    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -e --disabled \
+      --bind 'change:reload:$rgcmd {q} || true' \
+      --preview 'rg -i --pretty --context 2 {q} {}'" \
+    FZF_DEFAULT_COMMAND="$rgcmd $q0" \
+      fzf -q "$*"
+    echo $FZF_DEFAULT_COMMAND
+  }
+}
+
 # export NNN_OPENER='~/.config/nnn/plugins/nuke'
 export NNN_BMS='d:~/dl'
 export NNN_SPLITSIZE=75
@@ -50,7 +63,7 @@ END {
 EOF
 function meminfo() {
   ps -eo pmem,vsize,cmd \
-  | ug -v '\[' \
+  | rg -v '\[' \
   | awk "$awks" \
   | sort -g
 }
