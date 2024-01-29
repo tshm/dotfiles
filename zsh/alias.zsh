@@ -11,17 +11,16 @@ which scr >/dev/null && {
   alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
 }
 
-which rg >/dev/null && {
-  function ff () {
-    rgcmd="rg -i -l"
-    [ -z "$*" ] && q0='--files' || q0="$*"
-    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -e --disabled \
-      --bind 'change:reload:$rgcmd {q} || true' \
-      --preview 'rg -i --pretty --context 2 {q} {}'" \
-    FZF_DEFAULT_COMMAND="$rgcmd $q0" \
-      fzf -q "$*"
-    echo $FZF_DEFAULT_COMMAND
-  }
+function ff () {
+  rgcmd="rg --color=always --line-number --no-heading --smart-case"
+  [ -z "$*" ] && q0='--files' || q0="$*"
+  FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -e --disabled \
+    --delimiter : \
+    --color 'hl:-1:underline,hl+:-1:underline:reverse' \
+    --bind 'change:reload:$rgcmd {q} || true' \
+    --bind 'alt-e:become(vi {1} +{2} </dev/tty >/dev/tty)' \
+    --preview 'bat --color=always {1} --highlight-line {2}'" \
+  FZF_DEFAULT_COMMAND="$rgcmd $q0" fzf -q "$*"
 }
 
 # export NNN_OPENER='~/.config/nnn/plugins/nuke'

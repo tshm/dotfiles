@@ -21,6 +21,8 @@ export WORDCHARS="*?_-.[]~&;=!#$%^(){}<>"
 export FZF_DEFAULT_OPTS="-m --ansi --preview 'ctpv {}' \
   --bind 'alt-a:toggle-all' \
   --bind 'alt-p:toggle-preview' \
+  --bind 'alt-l:execute(bat --pager \"less -L\" {})' \
+  --bind 'alt-o:execute(e {})' \
   --bind 'alt-e:become($EDITOR {+} </dev/tty >/dev/tty)'"
 
 HISTSIZE=5100
