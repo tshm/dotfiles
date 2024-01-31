@@ -1,16 +1,11 @@
 #-*-shell-script-*-
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [ ! -d "$ZINIT_HOME" ]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
+[ ! -d "$ZINIT_HOME" ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d "$ZINIT_HOME/.git" ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 
 # init
 # ShellCheck
 source "${ZINIT_HOME}/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-arc=$(uname -m | cut -c1-5)
 
 zinit for light-mode \
   zsh-users/zsh-autosuggestions \
@@ -42,17 +37,10 @@ zinit ice as"command" from"gh-r" pick "ugit"
 zinit load Bhupesh-V/ugit
 
 # tools
-zinit ice ver"7fbd15150fe0fc84a34b6aa9e31c5589de3c9ffc"
 zinit load "zpm-zsh/clipboard"
-# set fpath += ~/.local/share/zinit/plugins/zpm-zsh---clipboard/functions/
-# autoload -Uz open pbcopy pbpaste clip
 
 zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"'
 zinit light cantino/mcfly
-
-zinit ice pick"deer"; zinit load "Vifon/deer"
-zle -N deer
-bindkey '\el' deer
 
 # finalize
 autoload -U compinit

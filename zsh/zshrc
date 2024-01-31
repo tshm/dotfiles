@@ -19,6 +19,7 @@ export LESS='--quit-if-one-screen -R -iMX'
 export LESSOPEN="|~/.dotfiles/lessfilter %s"
 export WORDCHARS="*?_-.[]~&;=!#$%^(){}<>"
 export FZF_DEFAULT_OPTS="-m --ansi --preview 'ctpv {}' \
+  --preview-window hidden \
   --bind 'alt-a:toggle-all' \
   --bind 'alt-p:toggle-preview' \
   --bind 'alt-l:execute(bat --pager \"less -L\" {})' \
@@ -73,9 +74,6 @@ precmd() {
   [ -n "$TMUX_PANE" ] && tmux rename-window $(basename $PWD)
   jobs;
 }
-
-# The following lines were added by compinstall
-# autoload -Uz compinit && compinit -u
 
 autoload -Uz vcs_info
 
