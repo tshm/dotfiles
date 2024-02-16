@@ -41,12 +41,9 @@ which eza >/dev/null && {
 alias pstree='pstree -A'
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'       # no spelling correction on cp
-# alias ls='ls --color=auto -F'
-# alias ll='ls --color=auto -Fl'
-# alias la='ls --color=auto -Fla'
-# alias dir='ls -l -h'
 alias rm='rm -i'
 alias dco='docker-compose'
+alias dcr='docker run -it --rm -v $PWD:/app -w /app'
 alias kc='kubectl'
 
 setopt   notify globdots correct cdablevars auto_menu auto_list
@@ -140,6 +137,7 @@ zstyle ':completion:*' file-sort name
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' ignore-parents parent
 # zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' completer _expand_alias _complete _ignored
 zstyle ':completion:*' max-errors 4
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' prompt 'correct'
