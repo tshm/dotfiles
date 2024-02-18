@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function run {
-  which "$1" || return;
+  builtin type -p "$1" || return;
   pgrep -f "$1" || "$@" &
 }
 

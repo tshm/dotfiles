@@ -1,0 +1,10 @@
+[Unit]
+Description=abc
+After=network-online.target
+
+[Mount]
+Type=rclone
+What=abc:
+Where=/home/user/mnt/abc
+Options=rw,allow_other,config=/home/user/.config/rclone/rclone.conf
+

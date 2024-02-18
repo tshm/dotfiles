@@ -3,12 +3,18 @@
 unset MAILCHECK
 uname=$(uname -a)
 
-which curl >/dev/null && function cheat () {
+builtin whence -p curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
-which scr >/dev/null && {
+builtin whence -p scr >/dev/null && {
   alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
+}
+
+builtin whence -p eza >/dev/null && {
+  alias ls='eza --icons'
+  alias l='eza --icons -l'
+  alias la='eza --icons -la'
 }
 
 function ff () {
@@ -71,14 +77,16 @@ function meminfo() {
     # nix-env --install --attr nixpkgs.nix nixpkgs.cacert
     nix-env --delete-generations 14d
     nix-channel --update
-    which home-manager && home-manager switch
+    builtin whence -p home-manager && home-manager switch
     nix-env -u
     nix-store --optimise
     nix-collect-garbage -d
   }
 }
 
-(which docker > /dev/null) && {
+(builtin whence -p docker > /dev/null) && {
+  alias dco='docker-compose'
+  alias dcr='docker run -it --rm -v $PWD:/app -w /app'
   function dockerclean() {
     docker system df
     docker rm `docker ps -aq`
@@ -87,12 +95,14 @@ function meminfo() {
   }
 }
 
-(which nvim >/dev/null) && {
+builtin whence -p kubectl >/dev/null && alias kc='kubectl'
+
+(builtin whence -p nvim >/dev/null) && {
   alias vi=nvim
   function viup() { nix-shell -p gcc --run "nvim -c 'TSUpdate all'" }
 }
 
-(which xdg-open >/dev/null) && {
+(builtin whence -p xdg-open >/dev/null) && {
   alias e=xdg-open
 }
 
@@ -100,7 +110,7 @@ function meminfo() {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   unalias e
   function e() {
-    (which wsl-open > /dev/null) && wsl-open "$*" \
+    (builtin whence -p wsl-open > /dev/null) && wsl-open "$*" \
       || cmd.exe /c start $(wslpath -w "$*")
   }
   function gvim() {

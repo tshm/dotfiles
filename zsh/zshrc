@@ -7,8 +7,8 @@ export PATH=~/.local/bin:$PATH
 NIX_PROFILED=~/.nix-profile/etc/profile.d
 [ -e "${NIX_PROFILED}/hm-session-vars.sh" ] && {
   source "${NIX_PROFILED}/hm-session-vars.sh"
-  which direnv >/dev/null && eval "$(direnv hook zsh)"
-  which zoxide >/dev/null && eval "$(zoxide init zsh)"
+  builtin whence -p direnv >/dev/null && eval "$(direnv hook zsh)"
+  builtin whence -p zoxide >/dev/null && eval "$(zoxide init zsh)"
 }
 
 export RSYNC_RSH='ssh'
@@ -33,18 +33,10 @@ export DIRSTACKSIZE=15
 export fignore=('~' .bak)
 hash -d 'D=/usr/share/doc'
 
-which eza >/dev/null && {
-  alias ls='eza --icons'
-  alias l='eza --icons -l'
-  alias la='eza --icons -la'
-}
 alias pstree='pstree -A'
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'       # no spelling correction on cp
 alias rm='rm -i'
-alias dco='docker-compose'
-alias dcr='docker run -it --rm -v $PWD:/app -w /app'
-alias kc='kubectl'
 
 setopt   notify globdots correct cdablevars auto_menu auto_list
 setopt   correctall noautocd recexact longlistjobs sharehistory
