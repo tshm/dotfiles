@@ -25,7 +25,6 @@
     pkgs.eza
     pkgs.ripgrep
     pkgs.nnn
-    pkgs.ctpv
     pkgs.viddy
     pkgs.delta
     pkgs.watchexec

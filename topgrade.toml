@@ -1,0 +1,12 @@
+# [include]
+# paths = ["~/.dotfiles/topgrade.toml"]
+
+[misc]
+pre_sudo = true
+no_retry = true
+no_self_update = true
+
+[commands]
+"zinit" = "zsh -i -c 'source ~/.dotfiles/zsh/zshrc && zinit update'"
+
+# EOD
