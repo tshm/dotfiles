@@ -5,9 +5,16 @@
   whitespace = cr-at-eol
   excludesfile = ~/.dotfiles/gitignore
   pager = delta
+[rerere]
+  enabled = true
 [commit]
   template = ~/.dotfiles/gitmessage.txt
+[branch]
+  sort = -committerdate
+[column]
+  ui = auto
 [alias]
+  mt = maintenance
   st = status -sb
   br = branch -vv
   ci = commit
@@ -16,6 +23,8 @@
   pu = !"[ -x git-bug ] && git-bug push; git push -u origin HEAD"
   pur = !"[ -x git-bug ] && git-bug pull; git pull --rebase --prune --autostash"
   prune = fetch --prune
+  fpush = push --force-with-lease
+  staash = stash --all
   stashu = stash push -k
   wait = reset HEAD
   amend = commit --amend --no-edit
