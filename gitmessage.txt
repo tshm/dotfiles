@@ -1,9 +1,9 @@
-build: subject
-ci: subject
-chore: subject
-docs: subject
 feat: subject
 fix: subject
+chore: subject
+ci: subject
+docs: subject
+build: subject
 perf: subject
 refactor: subject
 revert: subject

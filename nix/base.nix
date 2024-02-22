@@ -13,6 +13,7 @@
     pkgs.neovim
     pkgs.topgrade
     pkgs.atool
+    pkgs.git
     pkgs.git-imerge
     pkgs.tig
     pkgs.tmux
