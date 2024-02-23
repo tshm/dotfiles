@@ -37,7 +37,7 @@ resource "random_string" "postfix" {
   length  = 6
   special = false
   upper   = false
-  number  = false
+  numeric = false
 }
 
 locals {
@@ -75,14 +75,7 @@ resource "azurerm_kubernetes_cluster" "homeaks" {
   identity {
     type = "SystemAssigned"
   }
-  addon_profile {
-    http_application_routing {
-      enabled = false
-    }
-    kube_dashboard {
-      enabled = false
-    }
-  }
+  http_application_routing_enabled = false
   tags = local.common_tags
 }
 
