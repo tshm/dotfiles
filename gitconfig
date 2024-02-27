@@ -5,6 +5,8 @@
   whitespace = cr-at-eol
   excludesfile = ~/.dotfiles/gitignore
   pager = delta
+[init]
+  defaultBranch = main
 [rerere]
   enabled = true
 [commit]
@@ -47,12 +49,13 @@
 [delta]
   navigate = true
 [diff]
+  algorithm = histogram
   # external = difft
   colorMoved = default
   compactionHeuristic = true
   tool = "difft"
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
   renormalize = true
 [difftool]
   prompt = false
@@ -70,6 +73,7 @@
 [pull]
   rebase = true
 [push]
+  autosetupremote = true
   default = current
   followTags = true
 [tig]
