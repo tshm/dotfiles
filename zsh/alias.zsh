@@ -95,8 +95,6 @@ function meminfo() {
   }
 }
 
-builtin whence -p kubectl >/dev/null && alias kc='kubectl'
-
 (builtin whence -p nvim >/dev/null) && {
   alias vi=nvim
   function viup() { nix-shell -p gcc --run "nvim -c 'TSUpdate all'" }

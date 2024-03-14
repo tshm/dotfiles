@@ -14,3 +14,4 @@ opt.foldnestmax = 20
 opt.cursorline = true
 opt.spelllang = { "en", "cjk" }
 -- opt.spell = true
+opt.autochdir = true

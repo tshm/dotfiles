@@ -55,6 +55,7 @@
   compactionHeuristic = true
   tool = "difft"
 [merge]
+  # conflictstyle = diff3
   conflictstyle = zdiff3
   renormalize = true
 [difftool]
