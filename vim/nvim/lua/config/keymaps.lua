@@ -15,6 +15,9 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
+vim.keymap.del("n", "<Leader>gf") -- delete lazygit keymaps
+vim.keymap.del("n", "<Leader>gG") -- delete lazygit keymaps
+
 map("n", "<leader><space>", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 if vim.g.vscode then

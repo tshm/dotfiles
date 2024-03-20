@@ -17,10 +17,16 @@ return {
     end,
   },
   {
-    "tpope/vim-fugitive",
-    config = function()
-      vim.keymap.set("n", "<leader>gf", "<cmd>G<cr>", { desc = "fugitive", silent = true })
-    end,
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim", -- optional - Diff integration
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    keys = {
+      { "<Leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
+    },
+    config = true,
   },
   {
     "folke/tokyonight.nvim",
