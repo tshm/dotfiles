@@ -20,7 +20,7 @@ ${HOME_MANAGER_DIR}/base.nix: base.nix
 ${HOME_MANAGER_DIR}/home.nix: home.nix
 	cd ${HOME_MANAGER_DIR} && cp ~/.dotfiles/nix/$< .
 
-${HOME_MANAGER}: ${BIN_DIR}/nix
+${HOME_MANAGER}: ${BIN_DIR}/nix conf
 	. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && { \
 		nix-channel --add \
 		  https://github.com/nix-community/home-manager/archive/master.tar.gz \
