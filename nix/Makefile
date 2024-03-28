@@ -22,6 +22,12 @@ ${HOME_MANAGER_DIR}/home.nix: home.nix
 
 ${HOME_MANAGER}: ${BIN_DIR}/nix conf
 	. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && { \
+		nix run home-manager/master -- init; \
+		home-manager switch; \
+	}
+
+BKUP${HOME_MANAGER}: ${BIN_DIR}/nix conf
+	. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && { \
 		nix-channel --add \
 		  https://github.com/nix-community/home-manager/archive/master.tar.gz \
 			home-manager; \

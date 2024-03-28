@@ -91,6 +91,7 @@ function meminfo() {
     docker system df
     docker rm `docker ps -aq`
     docker volume rm `docker volume ls -q -f dangling=true`
+    docker image prune
     docker system df
   }
 }
