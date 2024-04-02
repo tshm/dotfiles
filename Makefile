@@ -36,9 +36,9 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 	ln -s ~/.dotfiles/vim/nvim $@
 
 ~/.gitconfig:
-	echo "[include]\n  path = ~/.dotfiles/gitconfig" > $@
-	echo '#[includeIf "gitdir:~/projdir/"]\n#  path = ~/projdir/.gitconfig' > $@
-	echo '#[includeIf "hasconfig:remote.*.url::**/github**"]\n#  path = ~/github/.gitconfig' > $@
+	echo -e "[include]\n  path = ~/.dotfiles/gitconfig" > $@
+	echo -e '#[includeIf "gitdir:~/projdir/"]\n#  path = ~/projdir/.gitconfig' >> $@
+	echo -e '#[includeIf "hasconfig:remote.*.url::**/github**"]\n#  path = ~/github/.gitconfig' >> $@
 
 ~/.zshrc:
 	echo 'source ~/.dotfiles/zsh/zshrc' > $@
