@@ -2,7 +2,9 @@
   "packages": [
     "kubectl@latest",
     "kubeconform@latest",
-    "kustomize@latest"
+    "kustomize@latest",
+    "k9s@latest",
+    "cloudflared@latest"
   ],
   "shell": {
     "init_hook": [
