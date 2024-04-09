@@ -106,7 +106,7 @@ flux-bootstrap:
 
 .kubeconfig:;
 	ssh $(K8S_HOST) cat /etc/rancher/k3s/k3s.yaml | sed 's/127.0.0.1/$(K8S_HOST)/' > $@
-	ln -s $@ .kubeconfig
+	# ln -s $@ .kubeconfig
 
 # terraform helpers
 destroy: NS := $(shell ${K} config get-contexts -o name)

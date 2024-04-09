@@ -77,7 +77,7 @@ function meminfo() {
     # nix-env --install --attr nixpkgs.nix nixpkgs.cacert
     nix-env --delete-generations 14d
     nix-channel --update
-    builtin whence -p home-manager && home-manager switch
+    builtin whence -p home-manager && home-manager switch --impure
     nix-env -u
     nix-store --optimise
     nix-collect-garbage -d

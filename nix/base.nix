@@ -31,8 +31,22 @@
     pkgs.watchexec
     pkgs.zoxide
   ];
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-  # programs.zsh.enable = true;
+  /* https://home-manager-options.extranix.com/? */
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      log = { enabled = true; };
+      manager = {
+          ratio = [0 3 7];
+          sort_by = "natural";
+          sort_dir_first = true;
+      };
+    };
+  };
 }
 
