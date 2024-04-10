@@ -7,7 +7,7 @@ PHONY: all shell tools git nix
 
 all: shell tools
 shell: ~/.zshrc wezterm.lua
-tools: ~/.tmux.conf git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins
+tools: ~/.tmux.conf git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
 
 ~/.tmux.conf:
 	echo "source-file ~/.dotfiles/tmux.conf" > $@
@@ -34,6 +34,10 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 ~/.config/nvim: ./vim/nvim
 	mkdir -p ~/.config
 	ln -s ~/.dotfiles/vim/nvim $@
+
+~/.config/mpv/mpv.conf:
+	mkdir -p ~/.config/mpv
+	cp mpv.conf ~/.config/mpv
 
 ~/.gitconfig:
 	echo -e "[include]\n  path = ~/.dotfiles/gitconfig" > $@
