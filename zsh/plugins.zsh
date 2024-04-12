@@ -23,9 +23,6 @@ zinit light zsh-users/zsh-completions
 zinit ice lucid nocompile nocompletions
 zinit load MenkeTechnologies/zsh-more-completions
 
-zinit ice as"completion"
-zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
-
 zinit snippet 'OMZ::lib/completion.zsh'
 zinit snippet 'OMZ::lib/compfix.zsh'
 
