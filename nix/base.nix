@@ -17,7 +17,6 @@
     pkgs.git
     pkgs.git-imerge
     pkgs.tig
-    pkgs.tmux
     pkgs.fzf
     pkgs.bat
     pkgs.btop
@@ -36,6 +35,12 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      source-file ~/.dotfiles/tmux.conf
+    '';
   };
   programs.yazi = {
     enable = true;

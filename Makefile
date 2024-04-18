@@ -9,9 +9,6 @@ all: shell tools
 shell: ~/.zshrc wezterm.lua
 tools: ~/.tmux.conf git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
 
-~/.tmux.conf:
-	echo "source-file ~/.dotfiles/tmux.conf" > $@
-
 nix:
 	cd nix && make
 
