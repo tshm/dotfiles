@@ -12,6 +12,7 @@
     pkgs.direnv
     pkgs.neovim
     pkgs.topgrade
+    pkgs.ctpv
     pkgs.atool
     pkgs.git
     pkgs.git-imerge
