@@ -7,7 +7,7 @@ PHONY: all shell tools git nix
 
 all: shell tools
 shell: ~/.zshrc wezterm.lua
-tools: ~/.tmux.conf git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
+tools: git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
 
 nix:
 	cd nix && make
