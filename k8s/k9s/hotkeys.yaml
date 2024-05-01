@@ -1,0 +1,29 @@
+#  $XDG_CONFIG_HOME/k9s/hotkeys.yaml
+hotKeys:
+  # Hitting Shift-0 navigates to your pod view
+  shift-0:
+    shortCut: Shift-0
+    description: Viewing pods
+    command: pods
+  # Hitting Shift-1 navigates to your deployments
+  shift-1:
+    shortCut: Shift-1
+    description: View deployments
+    command: dp
+  # Hitting Shift-2 navigates to your xray deployments
+  shift-2:
+    shortCut: Shift-2
+    description: Xray Deployments
+    command: xray deploy
+  # Hitting Shift-I navigates to your ingress
+  shift-i:
+    shortCut: Shift-I
+    description: View ingress
+    command: ingress
+  # Hitting Shift-S view the resources in the namespace of your current selection
+  shift-s:
+    shortCut: Shift-S
+    override: true # => will override the default shortcut related action if set to true (default to false)
+    description: Namespaced resources
+    command: "$RESOURCE_NAME $NAMESPACE"
+    keepHistory: true # whether you can return to the previous view
