@@ -1,9 +1,11 @@
-# The prompt to send to the API
-LLM_MODEL=${LLM_MODEL:-"llama3-70b-8192"}
-LLM_CONTEXT_SIZE=${LLM_CONTEXT_SIZE:-50}
-LLM_API_URL=${LLM_API_URL:-"https://api.groq.com/openai/v1/chat/completions"}
+# The function that will generate suggestions
+_complete_with_llm() {
+  # The prompt to send to the API
+  LLM_MODEL=${LLM_MODEL:-"llama3-70b-8192"}
+  LLM_CONTEXT_SIZE=${LLM_CONTEXT_SIZE:-50}
+  LLM_API_URL=${LLM_API_URL:-"https://api.groq.com/openai/v1/chat/completions"}
 
-LLM_SYSTEM_PROMPT=$(cat <<-EOS
+  read -r -d '' LLM_SYSTEM_PROMPT <<-'EOS'
 Act as very good zsh/bash shell auto completion engine.
 Your job is to come up with suggestions by guessing most probable next characters that follows based on given command execution history.
 - I use zsh/bash in linux.
@@ -14,10 +16,7 @@ Your job is to come up with suggestions by guessing most probable next character
 - respond only the completions.  No explanation nor reasoning are needed.
 - console buffer may include my intention as a comment prefixed by ##.
 EOS
-)
 
-# The function that will generate suggestions
-_complete_with_llm() {
   [ -z "$LLM_API_KEY" ] && echo 'Please set $LLM_API_KEY' && return
   # Get the current buffer and cursor position
   local buffer="${BUFFER}"
@@ -28,24 +27,20 @@ _complete_with_llm() {
   local console=$(tmux capture-pane -pS - | sed '/^$/d' | sed '$d' | tail -${LLM_CONTEXT_SIZE})
 
   # get tmux buffer (excluding the last line)
-  LLM_PROMPT=$(cat <<-EOF
+  read -r -d '' userprompt <<-EOF
   buffer of the terminal console:
-  \`\`\`
+  \'\'\'
   $console
-  \`\`\`
+  \'\'\'
 
   last line: ${prefix}
 EOF
-  )
-  local userprompt=$(jq -Rs . <<<"$LLM_PROMPT")
-  echo $userprompt > /tmp/in.json
-  # return;
 
   # Construct the API request
   local headers=(-H "Authorization: Bearer $LLM_API_KEY" -H "Content-Type: application/json")
   # local data='{"messages": "'"${LLMPROMPT}${prefix}"'"}'
-  local data='{"messages": [{"role": "system", "content": "'"$LLM_SYSTEM_PROMPT"'"}, {"role": "user", "content": '${userprompt}'}], "model": "'"$LLM_MODEL"'"}'
-
+  local data='{"messages": [{"role": "system", "content": '$(jq -Rs . <<< $LLM_SYSTEM_PROMPT)'}, {"role": "user", "content": '$(jq -Rs . <<< $userprompt)'}], "model": "'"$LLM_MODEL"'"}'
+  echo -E $data > /tmp/in.json
   # Make the API request
   local response=$(curl -s -X POST $LLM_API_URL "${headers[@]}" -d "$data")
 
