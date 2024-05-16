@@ -5,9 +5,8 @@
   tmux neww -c "$DIR"
   return
 }
-DIR=$({/bin/ls ~/.dotfiles/proj | egrep -v "sample|$1"| grep '\.sh' | sed 's/\.sh//'; zoxide query --list} | fzf) || return
-SN="$(basename $DIR)"
-echo -------- start $SN
+DIR=$({/bin/ls ~/.dotfiles/proj | sed '/sample/d;s/\.sh$//;s/^/ /'; zoxide query --list} | fzf) || return
+SN="$(basename $(sed 's/^ //'<<<$DIR))"
 tmux has -t $SN 2>/dev/null || {
   [ $DIR ] && [ -d $DIR ] && {
     tmux new-session -s "$SN" -c "$DIR" -d

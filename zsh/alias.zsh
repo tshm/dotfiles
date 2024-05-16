@@ -3,6 +3,10 @@
 unset MAILCHECK
 uname=$(uname -a)
 
+function scpbulk() {
+  tar czf - $1 | ssh $2 'tar xzf -'
+}
+
 builtin whence -p curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
