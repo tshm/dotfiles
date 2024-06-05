@@ -11,8 +11,16 @@ zinit for light-mode \
   zsh-users/zsh-autosuggestions \
   zdharma-continuum/history-search-multi-word \
   zdharma-continuum/fast-syntax-highlighting \
-  hlissner/zsh-autopair \
-  pick"async.zsh" src"pure.zsh" sindresorhus/pure
+  hlissner/zsh-autopair
+
+# prompt
+zinit ice compile'(pure|async).zsh' pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
+
+# zinit ice as"command" from"gh-r" \
+#           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+#           atpull"%atclone" src"init.zsh"
+# zinit light starship/starship
 
 # plugins
 zinit light zsh-users/zsh-history-substring-search
