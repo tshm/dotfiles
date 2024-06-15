@@ -19,25 +19,25 @@ ${BIN_DIR}/nix:
 	}
 
 ${HOME_MANAGER_DIR}/base.nix: base.nix
-	cd ${HOME_MANAGER_DIR} && ln -sf ~/.dotfiles/nix/$<
+	mkdir -p ${HOME_MANAGER_DIR} && cd ${HOME_MANAGER_DIR} && ln -sf ~/.dotfiles/nix/$<
 
 ${HOME_MANAGER_DIR}/home.nix: home.nix
-	cd ${HOME_MANAGER_DIR} && cp ~/.dotfiles/nix/$< .
+	mkdir -p ${HOME_MANAGER_DIR} && cd ${HOME_MANAGER_DIR} && cp ~/.dotfiles/nix/$< .
 
-${HOME_MANAGER}: ${BIN_DIR}/nix conf
+BKUP${HOME_MANAGER}: ${BIN_DIR}/nix conf
 	. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && { \
 		nix run home-manager/master -- init; \
 		home-manager switch --impure; \
 	}
 
-BKUP${HOME_MANAGER}: ${BIN_DIR}/nix conf
+${HOME_MANAGER}: ${BIN_DIR}/nix conf
 	. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && { \
 		nix-channel --add \
 		  https://github.com/nix-community/home-manager/archive/master.tar.gz \
 			home-manager; \
 		nix-channel --update; \
 		nix-shell '<home-manager>' -A install; \
-		home-manager switch; \
+		home-manager switch --impure; \
 	}
 
 ${DIRENV}:
