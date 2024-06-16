@@ -38,9 +38,7 @@
   df = !sh -c 'git diff --ignore-space-change --stat -p -w --color $*' -
   wdf = !sh -c 'git diff --word-diff --stat -p -w --color $*' -
   diffarchive = !git diff master.. --name-only | xargs git archive --format=zip -v HEAD > diffarchive.zip
-  search = !sh -c 'git log --all -G=$* --pretty=%H | tig --stdin'
-  search1 = !sh -c 'git log --all -S=$* --pretty=%H | tig --stdin'
-  nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
+  nuke = "!f() { git branch -D $1; git push origin :$1; }; f"
   diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
   xrebase = rebase --strategy=recursive --strategy-option=renormalize
   xcherry = cherry-pick --strategy=recursive --strategy-option=renormalize 
@@ -78,6 +76,7 @@
   default = current
   followTags = true
 [tig]
+  # diff-highlight = true
   tab-size = 2
   main-view-author = no
   ignore-space = some
@@ -87,6 +86,7 @@
   main = ! ?git nuke %(branch)
   status = i ?git ignore %(file)
   generic = d >git show %(commit)
+  # generic = V !sh -c 'git show $1:$2' -- %(commit) %(fileargs)
 [include]
   path = .gitconfig.local
 # vim: tabstop=2 expandtab ft=config
