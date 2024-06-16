@@ -79,7 +79,7 @@ function meminfo() {
 [ -d /nix ] && {
   function nixup() {
     nix-channel --update
-    builtin whence -p home-manager && home-manager switch --impure
+    home-manager switch
     nix-store --optimise
     nix-collect-garbage -d
   }
