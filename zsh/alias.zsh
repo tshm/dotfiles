@@ -11,8 +11,12 @@ builtin whence -p curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
 }
 
-builtin whence -p scr >/dev/null && {
-  alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
+builtin whence -p scrot >/dev/null && {
+  builtin whence -p wl-copy >/dev/null && {
+    alias scr='scrot -s -f - | wl-copy'
+  } || {
+    alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
+  }
 }
 
 builtin whence -p eza >/dev/null && {
