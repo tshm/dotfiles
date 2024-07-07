@@ -37,7 +37,7 @@ ${HOME_MANAGER}: ${BIN_DIR}/nix conf
 			home-manager; \
 		nix-channel --update; \
 		nix-shell '<home-manager>' -A install; \
-		home-manager switch --impure; \
+		home-manager switch; \
 	}
 
 ${DIRENV}:

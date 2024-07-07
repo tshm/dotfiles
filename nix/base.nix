@@ -8,7 +8,11 @@
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
   home.packages = [
+    pkgs.nix-index
     pkgs.fastfetch
+    pkgs.ssh
+    pkgs.ncdu
+    pkgs.jq
     pkgs.devbox
     pkgs.direnv
     pkgs.neovim
