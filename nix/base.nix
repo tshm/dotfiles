@@ -10,7 +10,7 @@
   home.packages = [
     pkgs.nix-index
     pkgs.fastfetch
-    pkgs.ssh
+    pkgs.openssh
     pkgs.ncdu
     pkgs.jq
     pkgs.devbox
