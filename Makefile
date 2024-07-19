@@ -6,8 +6,14 @@ ISWSL := $(shell uname -a | grep -i microsoft)
 PHONY: all shell tools git nix
 
 all: shell tools
-shell: ~/.zshrc wezterm.lua
+shell: ~/.zshrc wezterm.lua ~/.ssh/config
 tools: git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
+
+~/.ssh/config:
+	mkdir -p ~/.ssh
+	chmod 700 ~/.ssh
+	echo Include ~/.dotfiles/sshconfig >> ~/.ssh/config
+	chmod 600 ~/.ssh/config
 
 nix:
 	cd nix && make
