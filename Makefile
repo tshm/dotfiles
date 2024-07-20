@@ -40,7 +40,7 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 
 ~/.config/mpv/mpv.conf:
 	mkdir -p ~/.config/mpv
-	cp mpv.conf ~/.config/mpv
+	ln mpv.conf ~/.config/mpv/mpv.conf
 
 ~/.gitconfig:
 	echo -e "[include]\n  path = ~/.dotfiles/gitconfig" > $@
