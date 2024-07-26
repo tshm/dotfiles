@@ -42,7 +42,7 @@ zinit ice as"command" from"gh-r" pick "ugit"
 zinit load Bhupesh-V/ugit
 
 # tools
-zinit load "zpm-zsh/clipboard"
+zinit light "zpm-zsh/clipboard"
 
 # zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"'
 # zinit light cantino/mcfly
