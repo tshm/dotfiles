@@ -12,4 +12,5 @@ Host *
 #   LocalForward 84321 0.0.0.0:4321
 #   User myuser
 #   ProxyJump dmz
+#   #_Desc This is a sample description
 
