@@ -7,6 +7,7 @@
   home.stateVersion = "22.11";
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
+  nixpkgs.config.allowUnfree = true;
   home.packages = [
     pkgs.nix-index
     pkgs.fastfetch
