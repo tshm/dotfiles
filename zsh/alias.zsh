@@ -19,12 +19,6 @@ builtin whence -p scrot >/dev/null && {
   }
 }
 
-builtin whence -p eza >/dev/null && {
-  alias ls='eza --icons'
-  alias l='eza --icons -l'
-  alias la='eza --icons -la'
-}
-
 function ff () {
   rgcmd="rg --color=always --line-number --no-heading --smart-case"
   [ -z "$*" ] && q0='--files' || q0="$*"

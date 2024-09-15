@@ -4,13 +4,6 @@ bindkey -e # emacs key bindings
 source ~/.dotfiles/zsh/plugins.zsh
 export PATH=~/.local/bin:$PATH
 
-NIX_PROFILED=~/.nix-profile/etc/profile.d
-[ -e "${NIX_PROFILED}/hm-session-vars.sh" ] && {
-  source "${NIX_PROFILED}/hm-session-vars.sh"
-  builtin whence -p direnv >/dev/null && eval "$(direnv hook zsh)"
-  builtin whence -p zoxide >/dev/null && eval "$(zoxide init zsh)"
-}
-
 export RSYNC_RSH='ssh'
 export EDITOR=nvim
 export VISUAL=nvim

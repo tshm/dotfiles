@@ -6,7 +6,7 @@ ISWSL := $(shell uname -a | grep -i microsoft)
 PHONY: all shell tools git nix
 
 all: shell tools
-shell: ~/.zshrc wezterm.lua ~/.ssh/config
+shell: wezterm.lua ~/.ssh/config
 tools: git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
 
 ~/.ssh/config:
@@ -46,9 +46,6 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 	echo -e "[include]\n  path = ~/.dotfiles/gitconfig" > $@
 	echo -e '#[includeIf "gitdir:~/projdir/"]\n#  path = ~/projdir/.gitconfig' >> $@
 	echo -e '#[includeIf "hasconfig:remote.*.url::**/github**"]\n#  path = ~/github/.gitconfig' >> $@
-
-~/.zshrc:
-	echo 'source ~/.dotfiles/zsh/zshrc' > $@
 
 ifdef ISWSL
 ~/.local/bin/wsl-open:

@@ -15,32 +15,40 @@
     pkgs.ncdu
     pkgs.jq
     pkgs.devbox
-    pkgs.direnv
     pkgs.neovim
     pkgs.topgrade
     pkgs.ctpv
     pkgs.atool
-    pkgs.git
     pkgs.git-imerge
     pkgs.tig
-    pkgs.fzf
-    pkgs.bat
-    pkgs.btop
-    pkgs.fd
     pkgs.jc
     pkgs.jless
-    pkgs.eza
-    pkgs.ripgrep
     pkgs.nnn
     pkgs.viddy
     pkgs.delta
     pkgs.watchexec
-    pkgs.zoxide
   ];
+  programs.bat = {
+    enable = true;
+    extraPackages = [ pkgs.bat-extras.batdiff ];
+  };
+  programs.btop.enable = true;
+  programs.fd.enable = true;
+  programs.fzf.enable = true;
+  programs.ripgrep.enable = true;
+  programs.zoxide.enable = true;
   /* https://home-manager-options.extranix.com/? */
+  programs.git = {
+    enable = true;
+  };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+  programs.eza = {
+    enable = true;
+    icons = true;
+    git = true;
   };
   programs.tmux = {
     enable = true;
@@ -59,6 +67,13 @@
           sort_dir_first = true;
       };
     };
+  };
+  programs.zsh = {
+    enable = true;
+    initExtra = ''
+      source ~/.dotfiles/zsh/zshrc
+      [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+    '';
   };
 }
 

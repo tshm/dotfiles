@@ -2,9 +2,8 @@
 HOME_MANAGER_DIR := ~/.config/home-manager
 HOME_MANAGER := ~/.nix-profile/bin/home-manager
 BIN_DIR := /nix/var/nix/profiles/default/bin
-DIRENV := ~/.config/direnv/lib/local.sh
 
-all: nix conf ${DIRENV}
+all: nix conf
 
 PHONY: nix conf
 conf: ${HOME_MANAGER_DIR}/base.nix ${HOME_MANAGER_DIR}/home.nix
@@ -40,6 +39,3 @@ ${HOME_MANAGER}: ${BIN_DIR}/nix conf
 		home-manager switch; \
 	}
 
-${DIRENV}:
-	mkdir -p ~/.config/direnv/lib
-	echo source_env_if_exists .local.envrc > $@
