@@ -28,6 +28,25 @@
     pkgs.delta
     pkgs.watchexec
   ];
+  programs.topgrade = {
+    enable = true;
+    settings = {
+      misc = {
+        pre_sudo = true;
+        no_retry = true;
+        no_self_update = true;
+        disable = [
+          "node"
+        ];
+        set_title = false;
+        cleanup = true;
+      };
+      commands = {
+        "Run garbage collection on Nix store" = "nix-collect-garbage";
+        "zinit" = "zsh -i -c 'source ~/.dotfiles/zsh/zshrc && zinit update'";
+      };
+    };
+  };
   programs.bat = {
     enable = true;
     extraPackages = [ pkgs.bat-extras.batdiff ];
