@@ -45,13 +45,13 @@ zinit load Bhupesh-V/ugit
 zinit light "zpm-zsh/clipboard"
 zinit light "sunlei/zsh-ssh"
 
-zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"'
-zinit light cantino/mcfly
+# zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"'
+# zinit light cantino/mcfly
 
-# zinit ice as"command" from"gh-r" bpick"atuin-*.tar.gz" mv"atuin*/atuin -> atuin" \
-#     atclone"./atuin init zsh --disable-up-arrow > init.zsh; ./atuin gen-completions --shell zsh > _atuin" \
-#     atpull"%atclone" src"init.zsh"
-# zinit light atuinsh/atuin
+zinit ice as"command" from"gh-r" bpick"atuin-*.tar.gz" mv"atuin*/atuin -> atuin" \
+    atclone"./atuin init zsh --disable-up-arrow > init.zsh; ./atuin gen-completions --shell zsh > _atuin" \
+    atpull"%atclone" src"init.zsh"
+zinit light atuinsh/atuin
 
 # finalize
 autoload -U compinit
