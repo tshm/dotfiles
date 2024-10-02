@@ -27,7 +27,7 @@
     pkgs.nnn
     pkgs.viddy
     pkgs.delta
-    pkgs.watchexec
+    pkgs.entr
   ];
   programs.topgrade = {
     enable = true;
@@ -50,13 +50,16 @@
   };
   programs.bat = {
     enable = true;
-    extraPackages = [ pkgs.bat-extras.batdiff ];
+    # extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
   };
   programs.btop.enable = true;
   programs.fd.enable = true;
   programs.fzf.enable = true;
   programs.ripgrep.enable = true;
-  programs.zoxide.enable = true;
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   /* https://home-manager-options.extranix.com/? */
   programs.git = {
     enable = true;
@@ -64,6 +67,7 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+    enableZshIntegration = true;
   };
   programs.eza = {
     enable = true;
@@ -92,6 +96,8 @@
     enable = true;
     initExtra = ''
       source ~/.dotfiles/zsh/zshrc
+    '';
+    loginExtra = ''
       [ -f ~/.zshrc.local ] && source ~/.zshrc.local
     '';
   };
