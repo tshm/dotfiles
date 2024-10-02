@@ -20,6 +20,7 @@
     pkgs.ctpv
     pkgs.atool
     pkgs.git-imerge
+    pkgs.git-absorb
     pkgs.tig
     pkgs.jc
     pkgs.jless
