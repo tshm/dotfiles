@@ -9,6 +9,11 @@ all: shell tools
 shell: wezterm.lua ~/.ssh/config
 tools: git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
 
+~/.config/yazi/plugins:
+	mkdir -p ~/.config/yazi/plugins
+	cd $@ && ln -s ~/.dotfiles/yazi/plugins/tab.yazi
+	ya pack -a yazi-rs/plugins:hide-preview
+
 ~/.ssh/config:
 	mkdir -p ~/.ssh
 	chmod 700 ~/.ssh

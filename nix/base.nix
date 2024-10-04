@@ -91,6 +91,18 @@
           sort_dir_first = true;
       };
     };
+    # plugins = {
+    #   hide-preview = hide-preview;
+    #   tab = "./plugins/tab";
+    # };
+    keymap = {
+      manager = {
+        prepend_keymap =[
+          { on = "<Tab>"; run = "plugin --sync tab"; desc = "create or switch tab"; }
+          { on = "T"; run  = "plugin --sync hide-preview"; desc = "Toggle preview"; }
+        ];
+      };
+    };
   };
   programs.zsh = {
     enable = true;
