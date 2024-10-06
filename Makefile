@@ -3,11 +3,11 @@
 SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 ISWSL := $(shell uname -a | grep -i microsoft)
 
-PHONY: all shell tools git nix
+PHONY: all shell tools nix
 
 all: shell tools
 shell: wezterm.lua ~/.ssh/config
-tools: git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
+tools: nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
 
 ~/.config/yazi/plugins:
 	mkdir -p ~/.config/yazi/plugins
@@ -22,11 +22,6 @@ tools: git nvim ~/.config/lf/lfrc ~/.config/nnn/plugins ~/.config/mpv/mpv.conf
 
 nix:
 	cd nix && make
-
-git: ~/.config/git/ignore ~/.gitconfig
-~/.config/git/ignore:
-	mkdir -p ~/.config/git
-	ln -sf gitignore $@
 
 nvim: ~/.local/bin/nvim ~/.config/nvim
 ~/.local/bin/nvim:
