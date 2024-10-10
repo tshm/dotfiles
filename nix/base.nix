@@ -25,6 +25,7 @@
     pkgs.entr
     # devtools
     pkgs.devbox
+    pkgs.git-cliff
     pkgs.git-imerge
     pkgs.git-absorb
     pkgs.tig
@@ -102,6 +103,9 @@
         {
           path = "~/github/.gitconfig";
           condition = "hasconfig:remote.*.url::**/github**";
+        }
+        {
+          path = "~/.gitconfig.local";
         }
       ];
       ignores = [

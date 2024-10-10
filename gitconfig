@@ -16,6 +16,7 @@
 [column]
   ui = auto
 [alias]
+  bump = !bash -c 'export V=$(git-cliff --bumped-version) && git tag $V -m "bump to $V"' -
   mt = maintenance
   st = status -sb
   br = branch -vv

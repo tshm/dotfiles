@@ -3,8 +3,10 @@
 unset MAILCHECK
 uname=$(uname -a)
 
-function scpbulk() {
-  tar czf - $1 | ssh $2 'tar xzf -'
+function tarssh() {
+  [ -z "$1" -or -z "$2" ] && echo "Usage: tarssh <src_dir> <host> [<dest_dir>]" && return
+  dest=${3:-.}
+  tar zc $1 | ssh $2 "tar zx -C $dest"
 }
 
 builtin whence -p curl >/dev/null && function cheat () {
