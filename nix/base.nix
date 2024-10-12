@@ -17,11 +17,9 @@
     pkgs.openssh
     pkgs.ncdu
     # shelltools
-    pkgs.nnn
     pkgs.neovim
-    pkgs.ctpv
-    pkgs.atool
     pkgs.viddy
+    pkgs.p7zip
     pkgs.entr
     # devtools
     pkgs.devbox
@@ -35,29 +33,6 @@
     pkgs.jq
     pkgs.jless
   ];
-  xdg = {
-    enable = true;
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "application/json" = "jless.desktop";
-        "text/html" = "zenbrowser.desktop";
-      };
-    };
-    desktopEntries = {
-      jless = {
-        name = "jless";
-        exec = "jless %f";
-        terminal = true;
-        mimeType = [ "application/json" ];
-      };
-      zenbrowser = {
-        name = "Zen Browser";
-        exec = "flatpak run org.zen.Browser %U";
-        mimeType = [ "x-scheme-handler/http" "x-scheme-handler/https" ];
-      };
-    };
-  };
   programs = {
     home-manager.enable = true;
     topgrade = {
