@@ -3,11 +3,40 @@
 unset MAILCHECK
 uname=$(uname -a)
 
-function tarssh() {
-  [ -z "$1" -or -z "$2" ] && echo "Usage: tarssh <src_dir> <host> [<dest_dir>]" && return
-  dest=${3:-.}
-  tar zc $1 | ssh $2 "tar zx -C $dest"
+function scptar() {
+  [ $# -ne 2 ] && echo "Usage: $1 <source> <destination>" && return 1
+  local src="$1"
+  local dst="$2"
+  # Parse source
+  local src_host=""
+  local src_path=""
+  if [[ "$src" =~ ":" ]]; then
+    src_host="${src%%:*}"
+    src_path="${src#*:}"
+  else
+    src_path="$src"
+  fi
+  # Parse destination
+  local dst_host=""
+  local dst_path=""
+  if [[ "$dst" =~ ":" ]]; then
+    dst_host="${dst%%:*}"
+    dst_path="${dst#*:}"
+  else
+    dst_path="$dst"
+  fi
+  # Handle different cases:
+  if [ -z "$src_host" ] && [ -n "$dst_host" ]; then # 1. Local to Remote
+    tar czf - "$src_path" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
+  elif [ -n "$src_host" ] && [ -z "$dst_host" ]; then # 2. Remote to Local
+    ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | tar xzf - -C "${dst_path}"
+  elif [ -n "$src_host" ] && [ -n "$dst_host" ]; then # 3. Remote to Remote
+    ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
+  else # 4. Local to Local
+    tar czf - "$src_path" | tar xzf - -C "${dst_path%/*}"
+  fi
 }
+compdef scptar=scp
 
 builtin whence -p curl >/dev/null && function cheat () {
   curl cheat.sh/$1 | bat
