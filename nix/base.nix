@@ -48,6 +48,14 @@ in
       "${config.xdg.configHome}/wezterm/wezterm.lua".source = ~/.dotfiles/wezterm/wezterm.lua;
     };
   };
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = ''
+      source = ~/.dotfiles/x/hyprland/vars.conf
+      source = custom.conf
+      source = ~/.dotfiles/x/hyprland/general.conf
+    '';
+  };
   programs = {
     home-manager.enable = true;
     topgrade = {

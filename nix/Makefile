@@ -1,13 +1,26 @@
-
+NIXOS=$(shell which nix | grep run)
 HOME_MANAGER_DIR := ~/.config/home-manager
 HOME_MANAGER := ~/.nix-profile/bin/home-manager
 BIN_DIR := /nix/var/nix/profiles/default/bin
 
-all: nix conf
-
-PHONY: nix conf
+PHONY: nix conf unstable
 conf: ${HOME_MANAGER_DIR}/base.nix ${HOME_MANAGER_DIR}/home.nix
 nix: ${BIN_DIR}/nix ${HOME_MANAGER} conf
+
+ifdef NIXOS
+all: unstable
+else
+all: nix conf
+endif
+
+unstable:
+	nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+	nix-channel --add \
+		https://github.com/nix-community/home-manager/archive/master.tar.gz \
+		home-manager;
+	nix-channel --update;
+	nix-shell '<home-manager>' -A install;
+	home-manager switch;
 
 ${BIN_DIR}/nix:
 	curl --proto '=https' --tlsv1.2 -sSf \
