@@ -1,38 +1,53 @@
 { config, lib, pkgs, ... }:
 
+let
+  isWSL = builtins.pathExists "/proc/sys/fs/binfmt_misc/WSLInterop";
+in
 {
   # imports = [ ./base.nix ];
   targets.genericLinux.enable = true;
-  home.stateVersion = "22.11";
-  home.username = builtins.getEnv "USER";
-  home.homeDirectory = builtins.getEnv "HOME";
   nixpkgs.config.allowUnfree = true;
-  home.packages = [
-    # NIX
-    pkgs.comma
-    pkgs.nix-index
-    # platform
-    pkgs.fastfetch
-    pkgs.topgrade
-    pkgs.openssh
-    pkgs.ncdu
-    # shelltools
-    pkgs.neovim
-    pkgs.viddy
-    pkgs.p7zip
-    pkgs.entr
-    # devtools
-    pkgs.devbox
-    pkgs.git-cliff
-    pkgs.git-imerge
-    pkgs.git-absorb
-    pkgs.tig
-    pkgs.delta
-    pkgs.tokei
-    pkgs.jc
-    pkgs.jq
-    pkgs.jless
-  ];
+  home = {
+    stateVersion = "22.11";
+    username = builtins.getEnv "USER";
+    homeDirectory = builtins.getEnv "HOME";
+    packages = [
+      # NIX
+      pkgs.comma
+      pkgs.nix-index
+      # platform
+      pkgs.fastfetch
+      pkgs.topgrade
+      pkgs.openssh
+      pkgs.ncdu
+      # shelltools
+      pkgs.neovim
+      pkgs.viddy
+      pkgs.p7zip
+      pkgs.entr
+      # devtools
+      pkgs.devbox
+      pkgs.git-cliff
+      pkgs.git-imerge
+      pkgs.git-absorb
+      pkgs.tig
+      pkgs.delta
+      pkgs.tokei
+      pkgs.jc
+      pkgs.jq
+      pkgs.jless
+    ] ++ (if isWSL then [
+      pkgs.wsl-open
+      pkgs.wslu
+    ] else []);
+    file = {
+      "${config.xdg.configHome}/mpv/mpv.conf".source = ~/.dotfiles/mpv.conf;
+      "${config.xdg.configHome}/k9s/hotkeys.conf".source = ~/.dotfiles/k8s/k9s/hotkeys.yaml;
+      "${config.xdg.configHome}/k9s/plugins.conf".source = ~/.dotfiles/k8s/k9s/plugins.yaml;
+      ".ssh/config".source = ~/.dotfiles/sshconfig;
+      "${config.xdg.configHome}/wezterm/wezterm.lua".source = ~/.dotfiles/wezterm/wezterm.lua;
+    };
+  };
   programs = {
     home-manager.enable = true;
     topgrade = {

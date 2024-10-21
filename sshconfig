@@ -1,9 +1,4 @@
-# Include ~/.dotfiles/sshconfig
-
-Host *
-  ControlMaster auto
-  ControlPath ~/.ssh/mux-%r@%h:%p
-  ControlPersist 4h
+Include ./*.config
 
 # Host test
 #   HostName test.com
@@ -13,4 +8,9 @@ Host *
 #   User myuser
 #   ProxyJump dmz
 #   #_Desc This is a sample description
+
+# Host *
+#   ControlMaster auto
+#   ControlPath ~/.ssh/mux-%r@%h:%p
+#   ControlPersist 4h
 
