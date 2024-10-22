@@ -7,6 +7,7 @@ in
   # imports = [ ./base.nix ];
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
+  fonts.fontconfig.enable = !isWSL;
   home = {
     stateVersion = "22.11";
     username = builtins.getEnv "USER";
@@ -20,6 +21,7 @@ in
       pkgs.topgrade
       pkgs.openssh
       pkgs.ncdu
+      pkgs.psmisc
       # shelltools
       pkgs.neovim
       pkgs.viddy
@@ -39,17 +41,20 @@ in
     ] ++ (if isWSL then [
       pkgs.wsl-open
       pkgs.wslu
-    ] else []);
+    ] else [
+      pkgs.waybar
+    ]);
     file = {
       "${config.xdg.configHome}/mpv/mpv.conf".source = ~/.dotfiles/mpv.conf;
       "${config.xdg.configHome}/k9s/hotkeys.conf".source = ~/.dotfiles/k8s/k9s/hotkeys.yaml;
       "${config.xdg.configHome}/k9s/plugins.conf".source = ~/.dotfiles/k8s/k9s/plugins.yaml;
       ".ssh/config".source = ~/.dotfiles/sshconfig;
       "${config.xdg.configHome}/wezterm/wezterm.lua".source = ~/.dotfiles/wezterm/wezterm.lua;
+      "${config.xdg.configHome}/waybar/config.jsonc".source = ~/.dotfiles/x/waybar/config.jsonc;
     };
   };
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = !isWSL;
     extraConfig = ''
       source = ~/.dotfiles/x/hyprland/vars.conf
       source = custom.conf
@@ -122,7 +127,7 @@ in
     };
     eza = {
       enable = true;
-      icons = "auto";
+      icons = true;
       git = true;
     };
     tmux = {
