@@ -1,10 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   isWSL = builtins.pathExists "/proc/sys/fs/binfmt_misc/WSLInterop";
 in
 {
-  # imports = [ ./base.nix ];
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = !isWSL;
@@ -49,6 +48,7 @@ in
       pkgs.wslu
     ] else [
       pkgs.waybar
+      pkgs.beeper
     ]);
     file = {
       "${config.xdg.configHome}/mpv/mpv.conf".source = ~/.dotfiles/mpv.conf;
@@ -70,6 +70,9 @@ in
       source = ~/.dotfiles/x/hyprland/general.conf
     '';
   };
+  # services = {
+  #   syncthing.enable = !isWSL;
+  # };
   programs = {
     home-manager.enable = true;
     topgrade = {
