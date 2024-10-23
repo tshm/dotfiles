@@ -21,12 +21,18 @@ in
       pkgs.topgrade
       pkgs.openssh
       pkgs.ncdu
-      pkgs.psmisc
+      # langs
+      pkgs.luajitPackages.luarocks
+      pkgs.go
+      pkgs.nodejs
       # shelltools
+      pkgs.psmisc
       pkgs.neovim
       pkgs.viddy
       pkgs.p7zip
       pkgs.entr
+      pkgs.unzip
+      pkgs.wget
       # devtools
       pkgs.devbox
       pkgs.git-cliff
@@ -50,11 +56,14 @@ in
       "${config.xdg.configHome}/k9s/plugins.conf".source = ~/.dotfiles/k8s/k9s/plugins.yaml;
       ".ssh/config".source = ~/.dotfiles/sshconfig;
       "${config.xdg.configHome}/wezterm/wezterm.lua".source = ~/.dotfiles/wezterm/wezterm.lua;
-      "${config.xdg.configHome}/waybar/config.jsonc".source = ~/.dotfiles/x/waybar/config.jsonc;
+      "${config.xdg.configHome}/waybar/".source = ~/.dotfiles/x/waybar;
+      "${config.xdg.configHome}/nvim/".source = ~/.dotfiles/vim/nvim;
+      # "${config.xdg.configHome}/yazi/plugins/tab.yazi".source = ~/.dotfiles/yazi/plugins/tab.yazi;
     };
   };
   wayland.windowManager.hyprland = {
     enable = !isWSL;
+    package = pkgs.hyprland; # use system installed binary
     extraConfig = ''
       source = ~/.dotfiles/x/hyprland/vars.conf
       source = custom.conf
@@ -127,7 +136,7 @@ in
     };
     eza = {
       enable = true;
-      icons = true;
+      icons = "auto";
       git = true;
     };
     tmux = {
@@ -159,10 +168,10 @@ in
           { name = "*.json"; use = "jless"; }
         ];
       };
-      # plugins = {
-      #   hide-preview = hide-preview;
-      #   tab = "./plugins/tab";
-      # };
+      plugins = {
+        # hide-preview = hide-preview;
+        tab = ~/.dotfiles/yazi/plugins/tab.yazi;
+      };
       keymap = {
         manager = {
           prepend_keymap =[

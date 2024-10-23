@@ -3,13 +3,11 @@
 SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 ISWSL := $(shell uname -a | grep -i microsoft)
 
-PHONY: all shell tools nix
+PHONY: all nix
 
-all: ~/.config/yazi/plugins
+all: ~/.config/yazi/plugins/yazi-rs
 
-~/.config/yazi/plugins:
-	mkdir -p ~/.config/yazi/plugins
-	cd $@ && ln -s ~/.dotfiles/yazi/plugins/tab.yazi
+~/.config/yazi/plugins/yazi-rs:
 	ya pack -a yazi-rs/plugins:hide-preview
 
 nix:
