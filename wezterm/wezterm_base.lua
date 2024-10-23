@@ -19,6 +19,8 @@ config.adjust_window_size_when_changing_font_size = false
 -- config.default_prog = { "wsl" }
 -- config.default_domain = "WSL:Ubuntu"
 
+config.enable_wayland = false
+
 config.mouse_bindings = {
 	{
 		event = {

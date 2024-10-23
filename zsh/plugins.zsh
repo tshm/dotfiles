@@ -17,6 +17,9 @@ zinit for light-mode \
 zinit ice compile'(pure|async).zsh' pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
 
+# zinit ice depth=1
+# zinit light jeffreytse/zsh-vi-mode
+
 # zinit ice as"command" from"gh-r" \
 #           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
 #           atpull"%atclone" src"init.zsh"
