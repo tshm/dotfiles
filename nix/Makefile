@@ -13,7 +13,11 @@ else
 all: nix conf
 endif
 
-unstable:
+nixos-unstable:
+	nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs
+	nix-channel --update
+
+unstable: conf
 	nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 	nix-channel --add \
 		https://github.com/nix-community/home-manager/archive/master.tar.gz \
