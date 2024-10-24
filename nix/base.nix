@@ -1,16 +1,34 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   isWSL = builtins.pathExists "/proc/sys/fs/binfmt_misc/WSLInterop";
+  homePath = builtins.getEnv "HOME";
+  wrapElectronApp = { appName, binName ? appName }:
+    pkgs.symlinkJoin {
+      name = appName;
+      paths = [ pkgs.${appName} ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = lib.strings.concatStrings [
+        "wrapProgram $out/bin/"
+        binName
+        " --add-flags \"--ozone-platform-hint=auto\""
+        " --add-flags \"--enable-wayland-ime\""
+      ];
+    };
+  vscode-fhs = wrapElectronApp { appName = "vscode-fhs"; binName = "code"; };
+  beeper = wrapElectronApp { appName = "beeper"; };
 in
 {
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = !isWSL;
+  dconf.settings = lib.mkIf (!isWSL) {
+    "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
   home = {
     stateVersion = "22.11";
     username = builtins.getEnv "USER";
-    homeDirectory = builtins.getEnv "HOME";
+    homeDirectory = homePath;
     packages = [
       # NIX
       pkgs.comma
@@ -22,6 +40,8 @@ in
       pkgs.ncdu
       # langs
       pkgs.luajitPackages.luarocks
+      pkgs.dotnet-sdk
+      pkgs.cargo
       pkgs.go
       pkgs.nodejs
       # shelltools
@@ -48,13 +68,16 @@ in
       pkgs.wslu
     ] else [
       pkgs.waybar
-      pkgs.beeper
+      beeper
+      vscode-fhs
+      pkgs.neovide
     ]);
     file = {
       "${config.xdg.configHome}/mpv/mpv.conf".source = ~/.dotfiles/mpv.conf;
       "${config.xdg.configHome}/k9s/hotkeys.conf".source = ~/.dotfiles/k8s/k9s/hotkeys.yaml;
       "${config.xdg.configHome}/k9s/plugins.conf".source = ~/.dotfiles/k8s/k9s/plugins.yaml;
-      ".ssh/config".source = ~/.dotfiles/sshconfig;
+      "~/.ssh/config".source = ~/.dotfiles/sshconfig;
+      # "${homePath}/.ssh/config".source = ~/.dotfiles/sshconfig;
       "${config.xdg.configHome}/wezterm/wezterm.lua".source = ~/.dotfiles/wezterm/wezterm.lua;
       "${config.xdg.configHome}/waybar/".source = ~/.dotfiles/x/waybar;
       "${config.xdg.configHome}/nvim/".source = ~/.dotfiles/vim/nvim;
@@ -154,9 +177,9 @@ in
       settings = {
         log = { enabled = true; };
         manager = {
-            ratio = [0 3 7];
-            sort_by = "natural";
-            sort_dir_first = true;
+          ratio = [ 0 3 7 ];
+          sort_by = "natural";
+          sort_dir_first = true;
         };
         opener = {
           less = [
@@ -177,9 +200,9 @@ in
       };
       keymap = {
         manager = {
-          prepend_keymap =[
+          prepend_keymap = [
             { on = "<Tab>"; run = "plugin --sync tab"; desc = "create or switch tab"; }
-            { on = "T"; run  = "plugin --sync hide-preview"; desc = "Toggle preview"; }
+            { on = "T"; run = "plugin --sync hide-preview"; desc = "Toggle preview"; }
           ];
         };
       };

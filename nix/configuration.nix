@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 let
-jalocale = "ja_JP.UTF-8";
-locale = "en_US.UTF-8";
+  jalocale = "ja_JP.UTF-8";
+  locale = "en_US.UTF-8";
 in
 {
   imports = [
@@ -10,7 +10,7 @@ in
   ];
   hardware.graphics.enable = true;
 
-# Bluetooth
+  # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
@@ -36,13 +36,18 @@ in
     StandardInput = "tty";
     StandardOutput = "tty";
     StandardError = "journal"; # Without this errors will spam on screen
-# Without these bootlogs will spam on screen
-      TTYReset = true;
+    # Without these bootlogs will spam on screen
+    TTYReset = true;
     TTYVHangup = true;
     TTYVTDisallocate = true;
   };
 
-  location.enable = true;
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = false;
+    dates = "weekly";
+  };
+
   location.provider = "geoclue2";
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = locale;
@@ -58,10 +63,15 @@ in
     LC_TIME = locale;
   };
   i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = [ pkgs.fcitx5-mozc pkgs.fcitx5-gtk ];
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = [
+      pkgs.fcitx5-mozc
+      pkgs.fcitx5-gtk
+    ];
   };
-  services.xserver.xkb = { # Configure keymap in X11
+  services.xserver.xkb = {
+    # Configure keymap in X11
     layout = "jp";
     variant = "";
   };
@@ -69,15 +79,43 @@ in
   # required for Codeium to work
   programs.nix-ld = {
     enable = true;
-    libraries = [];
+    libraries = [ ];
   };
 
+  security.polkit.enable = true;
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    enable = true;
+    description = "Authentication Agent";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      #Type = "Simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 5;
+      TimeoutStopSec = 10;
+    };
+  };
+
+  programs.dconf = {
+    enable = true;
+  };
+  # environment.etc."gtk-3.0/settings.ini" = ''
+  #   [Settings]
+  #   gtk-application-prefer-dark-theme=1
+  # '';
   programs.hyprland = {
     enable = true;
   };
+  # xdg.portal = {
+  #   enable = true;
+  #   extraportals = [ pkgs.xdg-desktop-portal-gtk ];
+  # };
   fonts = {
     enableDefaultPackages = true;
-    packages = [ # pkgs.nerdfonts
+    packages = [
+      pkgs.nerdfonts
       pkgs.noto-fonts-cjk-serif
       pkgs.noto-fonts-cjk-sans
       pkgs.noto-fonts-emoji
@@ -136,37 +174,40 @@ in
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = [
-    pkgs.cargo
-      pkgs.hyprland
-      pkgs.wl-clipboard
-
-      pkgs.cloudflare-warp
-
-      pkgs.ffmpegthumbnailer
-      pkgs.p7zip
-      pkgs.poppler
-      pkgs.imagemagick
-
-      pkgs.mpv
-      pkgs.wofi
-      pkgs.waybar
-      pkgs.kitty
-      pkgs.wezterm
-      pkgs.xdg-desktop-portal
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.mesa.drivers
-
-      pkgs.dconf
-      pkgs.neovim
-      pkgs.gnumake
-      pkgs.vim
-      pkgs.curl
-      pkgs.git
-      pkgs.gcc
-      pkgs.zig
-      ];
+    # base tools
+    pkgs.gnumake
+    pkgs.vim
+    pkgs.neovim
+    pkgs.curl
+    pkgs.git
+    pkgs.gcc
+    # desktop environment related
+    pkgs.hyprland
+    pkgs.wl-clipboard
+    pkgs.cloudflare-warp
+    pkgs.p7zip
+    pkgs.poppler
+    pkgs.imagemagick
+    pkgs.mpv
+    pkgs.wofi
+    pkgs.waybar
+    pkgs.kitty
+    pkgs.wezterm
+    # pkgs.adwaita-qt
+    # pkgs.gnome3.adwaita-icon-theme
+    # pkgs.lxappearance
+    #
+    pkgs.polkit_gnome
+    #pkgs.lxqt.lxqt-policykit
+    pkgs.dconf
+    pkgs.qt6ct
+    pkgs.ffmpegthumbnailer
+    pkgs.xdg-desktop-portal
+    pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-wlr
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.mesa.drivers
+  ];
 
   services.openssh.enable = true;
   services.flatpak.enable = true;

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... } @ args:
+{ lib, ... } @ args:
 
 let
   base = (import ./base.nix) args;
@@ -7,8 +7,9 @@ let
       # pkgs.neovim
     ];
     /*
-    programs.java = { enable = true; };
+      programs.java = { enable = true; };
     */
   };
-in lib.recursiveUpdate base over
+in
+lib.recursiveUpdate base over
 
