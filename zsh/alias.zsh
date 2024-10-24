@@ -106,11 +106,20 @@ function meminfo() {
   | sort -g
 }
 [ -d /nix ] && {
+  function _download_nixpkgs_cache_index() {
+    filename="index-$(uname -m | sed 's/^arm64$/aarch64/')-$(uname | tr A-Z a-z)"
+    mkdir -p ~/.cache/nix-index && pushd ~/.cache/nix-index
+    # -N will only download a new version if there is an update.
+    wget -q -N https://github.com/nix-community/nix-index-database/releases/latest/download/$filename
+    ln -f $filename files
+    popd
+  }
   function nixup() {
     nix-channel --update
     home-manager switch
     nix-store --optimise
     nix-collect-garbage -d
+    _download_nixpkgs_cache_index
   }
 }
 
