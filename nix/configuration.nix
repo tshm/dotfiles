@@ -28,6 +28,10 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  services.logind.extraConfig = ''
+    HandlePowerKey=suspend
+  '';
+
   services.greetd = {
     enable = true;
     settings = {
@@ -204,12 +208,15 @@ in
     pkgs.imagemagick
     pkgs.mpv
     pkgs.wofi
+    pkgs.pavucontrol
+    #pkgs.mako
     pkgs.waybar
     pkgs.kitty
     pkgs.wezterm
     #
     pkgs.polkit_gnome
     #pkgs.lxqt.lxqt-policykit
+    pkgs.libnotify
     pkgs.dconf
     pkgs.qt6ct
     pkgs.ffmpegthumbnailer
