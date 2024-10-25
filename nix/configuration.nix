@@ -1,26 +1,32 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
-  jalocale = "ja_JP.UTF-8";
-  locale = "en_US.UTF-8";
+  hostname = "minf";
+  username = "tshm";
+  baselocale = "en_US.UTF-8";
+  locale = "ja_JP.UTF-8";
 in
 {
   imports = [
     ./hardware-configuration.nix
   ];
+
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    timeout = 3;
+  };
+
   hardware.graphics.enable = true;
+
+  networking.hostName = hostname;
+  networking.networkmanager.enable = true;
+  console.useXkbConfig = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "minf";
-  networking.networkmanager.enable = true;
-  console.useXkbConfig = true;
 
   services.greetd = {
     enable = true;
@@ -50,17 +56,17 @@ in
 
   location.provider = "geoclue2";
   time.timeZone = "Asia/Tokyo";
-  i18n.defaultLocale = locale;
+  i18n.defaultLocale = baselocale;
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = locale;
-    LC_IDENTIFICATION = locale;
-    LC_MEASUREMENT = jalocale;
-    LC_MONETARY = jalocale;
-    LC_NAME = locale;
-    LC_NUMERIC = locale;
-    LC_PAPER = jalocale;
-    LC_TELEPHONE = jalocale;
-    LC_TIME = locale;
+    LC_ADDRESS = baselocale;
+    LC_IDENTIFICATION = baselocale;
+    LC_MEASUREMENT = locale;
+    LC_MONETARY = locale;
+    LC_NAME = baselocale;
+    LC_NUMERIC = baselocale;
+    LC_PAPER = locale;
+    LC_TELEPHONE = locale;
+    LC_TIME = baselocale;
   };
   i18n.inputMethod = {
     enable = true;
@@ -101,17 +107,9 @@ in
   programs.dconf = {
     enable = true;
   };
-  # environment.etc."gtk-3.0/settings.ini" = ''
-  #   [Settings]
-  #   gtk-application-prefer-dark-theme=1
-  # '';
   programs.hyprland = {
     enable = true;
   };
-  # xdg.portal = {
-  #   enable = true;
-  #   extraportals = [ pkgs.xdg-desktop-portal-gtk ];
-  # };
   fonts = {
     enableDefaultPackages = true;
     packages = [
@@ -121,6 +119,7 @@ in
       pkgs.noto-fonts-emoji
       pkgs.fira-code
       pkgs.source-han-serif
+      pkgs.font-awesome
     ];
     fontconfig = {
       defaultFonts = {
@@ -148,6 +147,7 @@ in
     pulse.enable = true;
   };
 
+  # cloudflare-warp
   systemd.packages = [
     pkgs.cloudflare-warp
   ];
@@ -155,22 +155,36 @@ in
     "warp-svc.service"
   ];
 
-  users.users.tshm = {
-    isNormalUser = true;
-    description = "tshm";
-    extraGroups = [ "networkmanager" "wheel" "syncthing" ];
+  programs.zsh.enable = true;
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users = {
+      ${username} = {
+        isNormalUser = true;
+        extraGroups = [ "networkmanager" "wheel" "syncthing" "docker" ];
+      };
+    };
+  };
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      logDriver = "json-file";
+    };
   };
 
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
+    user = username;
+    dataDir = "/home/${username}/.syncthing_data";
+    configDir = "/home/${username}/.config/syncthing";
+    overrideDevices = false;
+    overrideFolders = false;
     settings.gui = {
-      user = "tshm";
+      user = username;
     };
   };
-
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = [
@@ -193,9 +207,6 @@ in
     pkgs.waybar
     pkgs.kitty
     pkgs.wezterm
-    # pkgs.adwaita-qt
-    # pkgs.gnome3.adwaita-icon-theme
-    # pkgs.lxappearance
     #
     pkgs.polkit_gnome
     #pkgs.lxqt.lxqt-policykit
@@ -211,6 +222,20 @@ in
 
   services.openssh.enable = true;
   services.flatpak.enable = true;
+
+  system.fsPackages = [ pkgs.bindfs ];
+  fileSystems =
+    let
+      mkRoSymBind = path: {
+        device = path;
+        fsType = "fuse.bindfs";
+        options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
+      };
+    in
+    {
+      "/usr/share/fonts" = mkRoSymBind "${config.system.path}/share/X11/fonts";
+      "/usr/local/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
+    };
 
   system.stateVersion = "24.05";
 }
