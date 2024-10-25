@@ -15,8 +15,6 @@ let
         " --add-flags \"--enable-wayland-ime\""
       ];
     };
-  vscode-fhs = wrapElectronApp { appName = "vscode-fhs"; binName = "code"; };
-  beeper = wrapElectronApp { appName = "beeper"; };
 in
 {
   targets.genericLinux.enable = true;
@@ -68,8 +66,8 @@ in
       pkgs.wslu
     ] else [
       pkgs.waybar
-      beeper
-      vscode-fhs
+      (wrapElectronApp { appName = "beeper"; })
+      (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
       pkgs.neovide
     ]);
     file = {
@@ -87,8 +85,9 @@ in
     enable = !isWSL;
     package = pkgs.hyprland; # use system installed binary
     extraConfig = ''
+      # extraConfig
       source = ~/.dotfiles/x/hyprland/vars.conf
-      source = custom.conf
+      source = *local.conf
       source = ~/.dotfiles/x/hyprland/general.conf
     '';
   };
