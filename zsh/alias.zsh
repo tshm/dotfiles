@@ -106,6 +106,7 @@ function meminfo() {
   | sort -g
 }
 [ -d /nix ] && {
+  export NIX_ALLOW_UNFREE=1
   function _download_nixpkgs_cache_index() {
     filename="index-$(uname -m | sed 's/^arm64$/aarch64/')-$(uname | tr A-Z a-z)"
     mkdir -p ~/.cache/nix-index && pushd ~/.cache/nix-index

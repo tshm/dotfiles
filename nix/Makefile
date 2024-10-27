@@ -13,6 +13,12 @@ else
 all: nix conf
 endif
 
+nixos:
+	pushd /etc/nixos && \
+		mv configuration.nix _bkup.nix && \
+		ln -s ~/.dotfiles/nix/baseos.nix && \
+		cp ~/.dotfiles/nix/configuration.nix .
+
 nixos-unstable:
 	nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs
 	nix-channel --update

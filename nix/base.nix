@@ -23,6 +23,10 @@ in
   dconf.settings = lib.mkIf (!isWSL) {
     "org/gnome/desktop/interface".color-scheme = "prefer-dark";
   };
+  gtk = {
+    enable = true;
+    iconTheme.name = "Flat-Remix-Blue";
+  };
   home = {
     stateVersion = "22.11";
     username = builtins.getEnv "USER";
@@ -66,6 +70,7 @@ in
       pkgs.wslu
     ] else [
       pkgs.waybar
+      pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
       (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
       pkgs.neovide
