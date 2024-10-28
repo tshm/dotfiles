@@ -3,3 +3,4 @@ tmp/
 *.passwd
 proj
 .vscode
+nix/result

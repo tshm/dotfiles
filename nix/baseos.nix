@@ -212,7 +212,7 @@
     pkgs.mpv
     pkgs.wofi
     pkgs.pavucontrol
-    #pkgs.mako
+    pkgs.mako
     pkgs.waybar
     pkgs.kitty
     pkgs.wezterm
