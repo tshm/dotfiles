@@ -65,3 +65,6 @@ ${HOME_MANAGER}: ${BIN_DIR}/nix conf
 		home-manager switch; \
 	}
 
+hm-flake:
+	nix run home-manager/master -- init
+

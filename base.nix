@@ -1,9 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   isWSL = builtins.pathExists "/proc/sys/fs/binfmt_misc/WSLInterop";
   homePath = builtins.getEnv "HOME";
-  # currentDir = "~/.dotfiles/nix/";
   wrapElectronApp = { appName, binName ? appName }:
     pkgs.symlinkJoin {
       name = appName;
@@ -79,13 +78,13 @@ in
       pkgs.neovide
     ]);
     file = {
-      "${config.xdg.configHome}/mpv/mpv.conf".source = ~/.dotfiles/mpv.conf;
-      "${config.xdg.configHome}/k9s/hotkeys.conf".source = ~/.dotfiles/k8s/k9s/hotkeys.yaml;
-      "${config.xdg.configHome}/k9s/plugins.conf".source = ~/.dotfiles/k8s/k9s/plugins.yaml;
-      ".ssh/config".source = ~/.dotfiles/sshconfig;
-      "${config.xdg.configHome}/wezterm/wezterm.lua".source = ~/.dotfiles/wezterm/wezterm.lua;
-      "${config.xdg.configHome}/waybar/".source = ~/.dotfiles/x/waybar;
-      "${config.xdg.configHome}/nvim/".source = ~/.dotfiles/vim/nvim;
+      "${config.xdg.configHome}/mpv/mpv.conf".source = builtins.path "${inputs.dotfiles}/mpv.conf";
+      "${config.xdg.configHome}/k9s/hotkeys.conf".source = builtins.path "${inputs.dotfiles}/k8s/k9s/hotkeys.yaml";
+      "${config.xdg.configHome}/k9s/plugins.conf".source = builtins.path "${inputs.dotfiles}/k8s/k9s/plugins.yaml";
+      # ".ssh/config".source = ~/.dotfiles/sshconfig;
+      # "${config.xdg.configHome}/wezterm/wezterm.lua".source = ~/.dotfiles/wezterm/wezterm.lua;
+      # "${config.xdg.configHome}/waybar/".source = ~/.dotfiles/x/waybar;
+      # "${config.xdg.configHome}/nvim/".source = ~/.dotfiles/vim/nvim;
       # "${config.xdg.configHome}/yazi/plugins/tab.yazi".source = ~/.dotfiles/yazi/plugins/tab.yazi;
     };
   };
@@ -200,10 +199,10 @@ in
           { name = "*.json"; use = "jless"; }
         ];
       };
-      plugins = {
-        # hide-preview = hide-preview;
-        tab = ~/.dotfiles/yazi/plugins/tab.yazi;
-      };
+      # plugins = {
+      #   # hide-preview = hide-preview;
+      #   tab = "${inputs.dotfiles}/yazi/plugins/tab.yazi";
+      # };
       keymap = {
         manager = {
           prepend_keymap = [
