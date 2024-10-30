@@ -4,3 +4,4 @@ tmp/
 proj
 .vscode
 nix/result
+result

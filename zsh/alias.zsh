@@ -116,8 +116,8 @@ function meminfo() {
     popd
   }
   function nixup() {
+    sudo -i nix upgrade-nix
     nix-channel --update
-    home-manager switch
     nix-store --optimise
     nix-collect-garbage -d
     _download_nixpkgs_cache_index

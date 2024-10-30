@@ -1,33 +1,13 @@
-{ isWSL ? false, user ? "tshm", }: { config, lib, pkgs, self, ... }:
+{ user, config, lib, pkgs, self, ... }:
 
 let
   configPath = pathStr: builtins.path { path = "${self}${pathStr}"; };
-  wrapElectronApp = { appName, binName ? appName }:
-    pkgs.symlinkJoin {
-      name = appName;
-      paths = [ pkgs.${appName} ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = lib.strings.concatStrings [
-        "wrapProgram $out/bin/"
-        binName
-        " --add-flags \"--ozone-platform-hint=auto\""
-        " --add-flags \"--enable-wayland-ime\""
-      ];
-    };
 in
 {
   nix.package = pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
-  fonts.fontconfig.enable = !isWSL;
-  dconf.settings = lib.mkIf (!isWSL) {
-    "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-  };
-  gtk = {
-    enable = true;
-    iconTheme.name = "Flat-Remix-Blue";
-  };
   home = {
     stateVersion = "22.11";
     username = user;
@@ -66,37 +46,14 @@ in
       pkgs.jc
       pkgs.jq
       pkgs.jless
-    ] ++ (if isWSL then [
-      pkgs.wsl-open
-      pkgs.wslu
-    ] else [
-      pkgs.bluetuith
-      pkgs.waybar
-      pkgs.ags
-      (wrapElectronApp { appName = "beeper"; })
-      (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
-      pkgs.neovide
-    ]);
+    ];
     file = {
-      "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
       "${config.xdg.configHome}/k9s/hotkeys.conf".source = configPath "/k8s/k9s/hotkeys.yaml";
       "${config.xdg.configHome}/k9s/plugins.conf".source = configPath "/k8s/k9s/plugins.yaml";
       ".ssh/config".source = configPath "/sshconfig";
-      "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
-      "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
       "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
       "${config.xdg.configHome}/yazi/plugins/tab.yazi".source = configPath "/yazi/plugins/tab.yazi";
     };
-  };
-  wayland.windowManager.hyprland = {
-    enable = !isWSL;
-    package = pkgs.hyprland; # use system installed binary
-    extraConfig = ''
-      # extraConfig
-      source = ~/.dotfiles/x/hyprland/vars.conf
-      source = *local.conf
-      source = ~/.dotfiles/x/hyprland/general.conf
-    '';
   };
   # services = {
   #   syncthing.enable = !input.isWSL;

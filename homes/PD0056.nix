@@ -2,7 +2,6 @@
 
 {
   home.packages = [
-    pkgs.neovim
     pkgs.qsv
     pkgs.deno
     pkgs.teller
