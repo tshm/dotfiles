@@ -10,6 +10,7 @@
     pkgs.duckdb
     pkgs.podman
     pkgs.podman-compose
+    pkgs.podman-tui
   ];
   programs.java = { enable = true; };
   programs.go = { enable = true; };

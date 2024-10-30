@@ -3,9 +3,12 @@
 SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 ISWSL := $(shell uname -a | grep -i microsoft)
 
-PHONY: all nix
+PHONY: all home-manager
 
-all: ~/.config/yazi/plugins/yazi-rs
+all: ~/.config/yazi/plugins/yazi-rs home-manager
+
+home-manager:
+	nix run home-manager/master -- switch --flake .
 
 ~/.config/yazi/plugins/yazi-rs:
 	ya pack -a yazi-rs/plugins:hide-preview

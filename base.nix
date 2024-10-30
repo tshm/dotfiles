@@ -1,8 +1,7 @@
-{ config, lib, pkgs, inputs, ... }:
+{ isWSL ? false, user ? "tshm", }: { config, lib, pkgs, self, ... }:
 
 let
-  isWSL = builtins.pathExists "/proc/sys/fs/binfmt_misc/WSLInterop";
-  homePath = builtins.getEnv "HOME";
+  configPath = pathStr: builtins.path { path = "${self}${pathStr}"; };
   wrapElectronApp = { appName, binName ? appName }:
     pkgs.symlinkJoin {
       name = appName;
@@ -31,8 +30,8 @@ in
   };
   home = {
     stateVersion = "22.11";
-    username = builtins.getEnv "USER";
-    homeDirectory = homePath;
+    username = user;
+    homeDirectory = "/home/${user}/";
     packages = [
       # NIX
       pkgs.comma
@@ -71,6 +70,7 @@ in
       pkgs.wsl-open
       pkgs.wslu
     ] else [
+      pkgs.bluetuith
       pkgs.waybar
       pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
@@ -78,14 +78,14 @@ in
       pkgs.neovide
     ]);
     file = {
-      "${config.xdg.configHome}/mpv/mpv.conf".source = builtins.path "${inputs.dotfiles}/mpv.conf";
-      "${config.xdg.configHome}/k9s/hotkeys.conf".source = builtins.path "${inputs.dotfiles}/k8s/k9s/hotkeys.yaml";
-      "${config.xdg.configHome}/k9s/plugins.conf".source = builtins.path "${inputs.dotfiles}/k8s/k9s/plugins.yaml";
-      # ".ssh/config".source = ~/.dotfiles/sshconfig;
-      # "${config.xdg.configHome}/wezterm/wezterm.lua".source = ~/.dotfiles/wezterm/wezterm.lua;
-      # "${config.xdg.configHome}/waybar/".source = ~/.dotfiles/x/waybar;
-      # "${config.xdg.configHome}/nvim/".source = ~/.dotfiles/vim/nvim;
-      # "${config.xdg.configHome}/yazi/plugins/tab.yazi".source = ~/.dotfiles/yazi/plugins/tab.yazi;
+      "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
+      "${config.xdg.configHome}/k9s/hotkeys.conf".source = configPath "/k8s/k9s/hotkeys.yaml";
+      "${config.xdg.configHome}/k9s/plugins.conf".source = configPath "/k8s/k9s/plugins.yaml";
+      ".ssh/config".source = configPath "/sshconfig";
+      "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
+      "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
+      "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
+      "${config.xdg.configHome}/yazi/plugins/tab.yazi".source = configPath "/yazi/plugins/tab.yazi";
     };
   };
   wayland.windowManager.hyprland = {
@@ -99,7 +99,7 @@ in
     '';
   };
   # services = {
-  #   syncthing.enable = !isWSL;
+  #   syncthing.enable = !input.isWSL;
   # };
   programs = {
     home-manager.enable = true;
