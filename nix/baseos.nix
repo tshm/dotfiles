@@ -167,7 +167,7 @@
 
   virtualisation = {
     podman = {
-      enable = false;
+      enable = true;
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
@@ -199,6 +199,9 @@
     pkgs.curl
     pkgs.git
     pkgs.gcc
+
+    pkgs.gparted
+    pkgs.busybox
     # container
     pkgs.podman-tui
     pkgs.podman-compose
@@ -212,7 +215,7 @@
     pkgs.mpv
     pkgs.wofi
     pkgs.pavucontrol
-    pkgs.mako
+    pkgs.dunst
     pkgs.waybar
     pkgs.kitty
     pkgs.wezterm
@@ -247,5 +250,6 @@
       "/usr/local/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
     };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "24.05";
 }

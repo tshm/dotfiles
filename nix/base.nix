@@ -3,6 +3,7 @@
 let
   isWSL = builtins.pathExists "/proc/sys/fs/binfmt_misc/WSLInterop";
   homePath = builtins.getEnv "HOME";
+  # currentDir = "~/.dotfiles/nix/";
   wrapElectronApp = { appName, binName ? appName }:
     pkgs.symlinkJoin {
       name = appName;
@@ -17,6 +18,7 @@ let
     };
 in
 {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = !isWSL;
