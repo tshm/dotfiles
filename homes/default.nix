@@ -5,6 +5,14 @@ let
   pkgs = nixpkgs.legacyPackages.${system};
 in
 {
+  "pi@spi" = home-manager.lib.homeManagerConfiguration {
+    pkgs = nixpkgs.legacyPackages.aarch64-linux;
+    extraSpecialArgs = args // { user = "pi"; };
+    modules = [
+      base
+      ./spi.nix
+    ];
+  };
   "tshm@PD0056" = home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
     extraSpecialArgs = args;

@@ -5,3 +5,4 @@ proj
 .vscode
 nix/result
 result
+**/.env
