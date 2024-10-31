@@ -1,7 +1,7 @@
-{ user, config, pkgs, self, ... }:
+{ user, config, pkgs, ... }:
 
 let
-  configPath = pathStr: builtins.path { path = "${self}${pathStr}"; };
+  configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
   nix.package = pkgs.nix;
