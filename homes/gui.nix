@@ -28,6 +28,7 @@ in
     packages = [
       pkgs.bluetuith
       pkgs.waybar
+      pkgs.xdragon
       pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
       (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
