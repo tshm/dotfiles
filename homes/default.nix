@@ -24,7 +24,7 @@ in
   };
   "tshm@minf" = home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
-    extraSpecialArgs = args;
+    extraSpecialArgs = args // { inherit system; };
     modules = [
       base
       ./gui.nix

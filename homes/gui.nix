@@ -1,4 +1,4 @@
-{ config, lib, pkgs, self, ... }:
+{ config, lib, pkgs, self, system, ... } @ inputs:
 
 let
   configPath = pathStr: builtins.path { path = "${self}${pathStr}"; };
@@ -26,6 +26,7 @@ in
   };
   home = {
     packages = [
+      inputs.zen-browser.packages."${system}".specific
       pkgs.bluetuith
       pkgs.waybar
       pkgs.xdragon

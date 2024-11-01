@@ -234,21 +234,20 @@
   ];
 
   services.openssh.enable = true;
-  services.flatpak.enable = true;
-
-  system.fsPackages = [ pkgs.bindfs ];
-  fileSystems =
-    let
-      mkRoSymBind = path: {
-        device = path;
-        fsType = "fuse.bindfs";
-        options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
-      };
-    in
-    {
-      "/usr/share/fonts" = mkRoSymBind "${config.system.path}/share/X11/fonts";
-      "/usr/local/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
-    };
+  # services.flatpak.enable = true;
+  # system.fsPackages = [ pkgs.bindfs ];
+  # fileSystems =
+  #   let
+  #     mkRoSymBind = path: {
+  #       device = path;
+  #       fsType = "fuse.bindfs";
+  #       options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
+  #     };
+  #   in
+  #   {
+  #     "/usr/share/fonts" = mkRoSymBind "${config.system.path}/share/X11/fonts";
+  #     "/usr/local/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
+  #   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "24.05";
