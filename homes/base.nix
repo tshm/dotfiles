@@ -1,6 +1,7 @@
 { user, config, pkgs, ... }:
 
 let
+  #configPath = pathStr: builtins.path { path = "/home/${user}/.dotfiles${pathStr}"; };
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
@@ -14,6 +15,7 @@ in
     homeDirectory = "/home/${user}/";
     packages = [
       # NIX
+      pkgs.nh
       pkgs.comma
       pkgs.nix-index
       # platform

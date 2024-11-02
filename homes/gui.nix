@@ -1,7 +1,7 @@
-{ config, lib, pkgs, self, system, ... } @ inputs:
+{ user, config, lib, pkgs, system, ... } @ inputs:
 
 let
-  configPath = pathStr: builtins.path { path = "${self}${pathStr}"; };
+  configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   wrapElectronApp = { appName, binName ? appName }:
     pkgs.symlinkJoin {
       name = appName;
@@ -29,7 +29,7 @@ in
       inputs.zen-browser.packages."${system}".specific
       pkgs.bluetuith
       pkgs.waybar
-      pkgs.xdragon
+      pkgs.ripdrag
       pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
       (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })

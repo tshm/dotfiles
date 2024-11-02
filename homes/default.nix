@@ -31,4 +31,13 @@ in
       ./minf.nix
     ];
   };
+  "tshm@x360" = home-manager.lib.homeManagerConfiguration {
+    inherit pkgs;
+    extraSpecialArgs = args // { inherit system; };
+    modules = [
+      base
+      ./gui.nix
+      ./x360.nix
+    ];
+  };
 }
