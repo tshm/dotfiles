@@ -17,19 +17,12 @@ in
       # NIX
       pkgs.nh
       pkgs.comma
-      pkgs.nix-index
       # platform
       pkgs.fastfetch
-      pkgs.topgrade
       pkgs.openssh
       pkgs.ncdu
-      # langs
-      pkgs.luajitPackages.luarocks
-      pkgs.dotnet-sdk
-      pkgs.cargo
-      pkgs.go
-      pkgs.nodejs
       # shelltools
+      pkgs.file
       pkgs.psmisc
       pkgs.neovim
       pkgs.viddy

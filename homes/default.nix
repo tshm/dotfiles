@@ -10,6 +10,7 @@ in
     extraSpecialArgs = args // { user = "pi"; };
     modules = [
       base
+      ./dev.nix
       ./spi.nix
     ];
   };
@@ -19,7 +20,16 @@ in
     modules = [
       base
       ./wsl.nix
+      ./dev.nix
       ./PD0056.nix
+    ];
+  };
+  "tshm@usb" = home-manager.lib.homeManagerConfiguration {
+    inherit pkgs;
+    extraSpecialArgs = args // { inherit system; };
+    modules = [
+      base
+      ./gui.nix
     ];
   };
   "tshm@minf" = home-manager.lib.homeManagerConfiguration {
@@ -28,6 +38,7 @@ in
     modules = [
       base
       ./gui.nix
+      ./dev.nix
       ./minf.nix
     ];
   };
@@ -37,6 +48,7 @@ in
     modules = [
       base
       ./gui.nix
+      ./dev.nix
       ./x360.nix
     ];
   };
