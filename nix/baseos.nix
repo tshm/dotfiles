@@ -3,13 +3,18 @@
 , baselocale ? "en_US.UTF-8"
 , locale ? "ja_JP.UTF-8"
 }:
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
 {
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-    timeout = 3;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      timeout = 3;
+    };
+    kernelParams = [ "mem_sleep_default=deep" ];
+    resumeDevice = lib.mkIf (builtins.length config.swapDevices == 1)
+      (builtins.head config.swapDevices).device;
   };
 
   hardware.graphics.enable = true;
@@ -24,7 +29,11 @@
   services.blueman.enable = true;
 
   services.logind.extraConfig = ''
-    HandlePowerKey=suspend
+    #
+    HandlePowerKey=hibernate
+    # HandlePowerKey=poweroff
+    HandleLidSwitch=suspend
+    HandleLidSwitchExternalPower=suspend
   '';
 
   services.greetd = {
@@ -193,6 +202,7 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = [
     # base tools
+    pkgs.inxi
     pkgs.gnumake
     pkgs.vim
     pkgs.neovim
@@ -200,7 +210,6 @@
     pkgs.git
     pkgs.gcc
 
-    pkgs.gparted
     pkgs.busybox
     # container
     pkgs.podman-tui
