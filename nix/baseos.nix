@@ -15,6 +15,7 @@
     kernelParams = [ "mem_sleep_default=deep" ];
     resumeDevice = lib.mkIf (builtins.length config.swapDevices == 1)
       (builtins.head config.swapDevices).device;
+    # initrd.prepend = [ "./acpi_override" ];
   };
 
   hardware.graphics.enable = true;

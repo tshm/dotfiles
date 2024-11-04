@@ -34,6 +34,8 @@ in
       (wrapElectronApp { appName = "beeper"; })
       (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
       pkgs.neovide
+      pkgs.pamixer
+      pkgs.brightnessctl
     ];
     file = {
       "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
