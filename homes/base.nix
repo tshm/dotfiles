@@ -18,6 +18,7 @@ in
       pkgs.nh
       pkgs.comma
       # platform
+      pkgs.file
       pkgs.fastfetch
       pkgs.openssh
       pkgs.ncdu

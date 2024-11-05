@@ -1,7 +1,8 @@
 {
-  description = "Home Manager configurations";
+  description = "Nix configurations";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,8 +11,12 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ args:
+  outputs = { self, nixpkgs, ... } @ args:
+    let
+      inputs = { user = "tshm"; } // args;
+    in
     {
-      homeConfigurations = import ./homes ({ user = "tshm"; } // args);
+      nixosConfigurations = import ./hosts inputs;
+      homeConfigurations = import ./homes inputs;
     };
 }

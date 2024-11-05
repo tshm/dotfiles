@@ -5,7 +5,12 @@ ISWSL := $(shell uname -a | grep -i microsoft)
 all: home-manager
 
 home-manager:
+	which nh && env FLAKE=$$(pwd) nh home switch || \
 	nix run home-manager/master -- switch --flake .
+
+os:
+	which nh && env FLAKE=$$(pwd) nh os switch || \
+	sudo nixos-rebuild switch --flake .
 
 yazi: ~/.config/yazi/plugins/yazi-rs
 ~/.config/yazi/plugins/yazi-rs:
