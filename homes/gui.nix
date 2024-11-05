@@ -36,6 +36,8 @@ in
       pkgs.neovide
       pkgs.pamixer
       pkgs.brightnessctl
+      pkgs.slurp
+      pkgs.grim
     ];
     file = {
       "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
