@@ -86,6 +86,15 @@ in
     zoxide = {
       enable = true;
       enableZshIntegration = true;
+      enableNushellIntegration = true;
+    };
+    nushell = {
+      enable = true;
+    };
+    carapace = {
+      enable = true;
+      enableZshIntegration = true;
+      enableNushellIntegration = true;
     };
     /* https://home-manager-options.extranix.com/? */
     git = {
@@ -117,6 +126,7 @@ in
       enable = true;
       nix-direnv.enable = true;
       enableZshIntegration = true;
+      enableNushellIntegration = true;
     };
     eza = {
       enable = true;
@@ -132,6 +142,7 @@ in
     yazi = {
       enable = true;
       enableZshIntegration = true;
+      enableNushellIntegration = true;
       settings = {
         log = { enabled = true; };
         manager = {

@@ -62,16 +62,6 @@ function ff () {
   FZF_DEFAULT_COMMAND="$rgcmd $q0" fzf -q "$*"
 }
 
-# export NNN_OPENER='~/.config/nnn/plugins/nuke'
-export NNN_BMS='d:~/dl'
-export NNN_SPLITSIZE=75
-export NNN_BATSTYLE=plain
-export NNN_PLUG='p:-preview-tui;l:!less -iR $nnn*;c:!code $nnn*;e:!nvim $nnn*;g:!xdg-open .'
-export NNN_OPTS='Aae'
-function n() {
-  env LESS='-R -iMX' BAT_PAGER='less -R' nnn $*
-}
-
 function tm () {
   \builtin local SN=${1:-home} DIR
   [ -e ~/.dotfiles/proj/${SN}.sh ] || {
