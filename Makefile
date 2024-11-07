@@ -1,8 +1,16 @@
 # initial setup
 SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 ISWSL := $(shell uname -a | grep -i microsoft)
+BIN_DIR := /nix/var/nix/profiles/default/bin
 
 all: home-manager
+
+nix: ${BIN_DIR}/nix
+
+${BIN_DIR}/nix:
+	@echo non NIXOS
+	curl --proto '=https' --tlsv1.2 -sSf \
+		-L https://install.determinate.systems/nix | sh -s -- install
 
 home-manager:
 	which nh && env FLAKE=$$(pwd) nh home switch || \
@@ -12,12 +20,14 @@ os:
 	which nh && env FLAKE=$$(pwd) nh os switch || \
 	sudo nixos-rebuild switch --flake .
 
+add-unstable:
+	@echo NIXOS
+	nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs
+	nix-channel --update
+
 yazi: ~/.config/yazi/plugins/yazi-rs
 ~/.config/yazi/plugins/yazi-rs:
 	ya pack -a yazi-rs/plugins:hide-preview
-
-nix:
-	cd nix && make
 
 nvim: ~/.local/bin/nvim ~/.config/nvim
 ~/.local/bin/nvim:
@@ -26,15 +36,7 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 	chmod u+x nvim.appimage
 	mv nvim.appimage ~/.local/bin/nvim
 
-~/.config/nvim: ./vim/nvim
-	mkdir -p ~/.config
-	ln -s ~/.dotfiles/vim/nvim $@
-
 resh:
 	curl -fsSL https://raw.githubusercontent.com/curusarn/resh/master/scripts/rawinstall.sh | bash
 
-~/.config/nnn/plugins:
-	mkdir -p ~/.config/nnn/plugins
-	sh -c "$$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
-
-PHONY: all yazi home-manager
+PHONY: all yazi home-manager nix add-unstable

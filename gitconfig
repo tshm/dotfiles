@@ -88,6 +88,6 @@
   status = i ?git ignore %(file)
   generic = d >git show %(commit)
   # generic = V !sh -c 'git show $1:$2' -- %(commit) %(fileargs)
-[include] # include host local configuration
-	path = "~/.config/git/local.gitconfig"
+#[include] # include host local configuration
+	#path = "~/.config/git/local.gitconfig"
 # vim: tabstop=2 expandtab ft=config
