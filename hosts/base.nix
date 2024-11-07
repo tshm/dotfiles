@@ -7,7 +7,6 @@
 
 let
   useHibernation = (builtins.length config.swapDevices == 1);
-  powerkeyaction = if useHibernation then "hibernate" else "suspend";
 in
 {
   boot = {
@@ -17,21 +16,13 @@ in
       timeout = 3;
     };
     kernelParams = lib.mkIf useHibernation [ "mem_sleep_default=deep" ];
-    resumeDevice = lib.mkIf useHibernation
-      (builtins.head config.swapDevices).device;
+    resumeDevice = lib.mkIf useHibernation (builtins.head config.swapDevices).device;
     # initrd.prepend = [ "./acpi_override" ];
   };
-
-  hardware.graphics.enable = true;
 
   networking.hostName = host;
   networking.networkmanager.enable = true;
   console.useXkbConfig = true;
-
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
 
   services.tlp = {
     enable = true;
@@ -42,7 +33,7 @@ in
   };
   services.logind.extraConfig = ''
     #################################################
-    HandlePowerKey=${powerkeyaction}
+    HandlePowerKey=${if useHibernation then "hibernate" else "suspend"}
     # HandlePowerKey=poweroff
     HandleLidSwitch=suspend
     HandleLidSwitchExternalPower=suspend
@@ -96,11 +87,6 @@ in
       pkgs.fcitx5-gtk
     ];
   };
-  services.xserver.xkb = {
-    # Configure keymap in X11
-    layout = "jp";
-    variant = "";
-  };
 
   # required for Codeium to work
   programs.nix-ld = {
@@ -109,63 +95,7 @@ in
   };
 
   security.polkit.enable = true;
-  systemd.user.services.polkit-gnome-authentication-agent-1 = {
-    enable = true;
-    description = "Authentication Agent";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-      #Type = "Simple";
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      Restart = "on-failure";
-      RestartSec = 5;
-      TimeoutStopSec = 10;
-    };
-  };
-
-  programs.dconf = {
-    enable = true;
-  };
-  programs.hyprland = {
-    enable = true;
-  };
-  fonts = {
-    enableDefaultPackages = true;
-    packages = [
-      pkgs.nerdfonts
-      pkgs.noto-fonts-cjk-serif
-      pkgs.noto-fonts-cjk-sans
-      pkgs.noto-fonts-emoji
-      pkgs.fira-code
-      pkgs.source-han-serif
-      pkgs.font-awesome
-    ];
-    fontconfig = {
-      defaultFonts = {
-        sansSerif = [ "Noto Sans CJK JP" ];
-        serif = [ "Noto Serif CJK JP" ];
-      };
-    };
-  };
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
-  services.xserver = {
-    enable = true;
-    displayManager.startx.enable = false;
-    displayManager.gdm.enable = false;
-    displayManager.lightdm.enable = false;
-    desktopManager.gnome.enable = false;
-  };
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # cloudflare-warp
   systemd.packages = [
@@ -221,37 +151,15 @@ in
     pkgs.curl
     pkgs.git
     pkgs.gcc
-
     pkgs.busybox
     # container
     pkgs.podman-tui
     pkgs.podman-compose
     # desktop environment related
-    pkgs.hyprland
-    pkgs.wl-clipboard
     pkgs.cloudflare-warp
     pkgs.p7zip
-    pkgs.poppler
     pkgs.imagemagick
-    pkgs.mpv
-    pkgs.wofi
-    pkgs.pavucontrol
-    pkgs.dunst
-    pkgs.waybar
-    pkgs.kitty
-    pkgs.wezterm
-    #
-    pkgs.polkit_gnome
-    #pkgs.lxqt.lxqt-policykit
-    pkgs.libnotify
-    pkgs.dconf
-    pkgs.qt6ct
     pkgs.ffmpegthumbnailer
-    pkgs.xdg-desktop-portal
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-wlr
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.mesa.drivers
   ];
 
   services.openssh.enable = true;

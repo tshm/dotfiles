@@ -34,6 +34,7 @@ in
       (wrapElectronApp { appName = "beeper"; })
       (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
       pkgs.neovide
+      pkgs.mpv
       pkgs.pamixer
       pkgs.brightnessctl
       pkgs.slurp

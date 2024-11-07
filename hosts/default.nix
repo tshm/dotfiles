@@ -1,8 +1,8 @@
-{ nixpkgs, nixos-hardware, ... } @ args:
+{ nixpkgs, ... } @ args:
 let
   base = import ./base.nix;
+  gui = import ./gui.nix;
   system = "x86_64-linux";
-  pkgs = nixpkgs.legacyPackages.${system};
 in
 {
   "minf" = nixpkgs.lib.nixosSystem {
@@ -11,6 +11,7 @@ in
     modules = [
       ./minf
       (base { host = "minf"; })
+      (gui { })
     ];
   };
 
@@ -20,6 +21,7 @@ in
     modules = [
       ./x360
       (base { host = "x360"; })
+      (gui { })
     ];
   };
 }
