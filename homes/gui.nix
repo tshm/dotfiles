@@ -32,7 +32,7 @@ in
       pkgs.ripdrag
       pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
-      (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
+      (wrapElectronApp { appName = "code-cursor"; binName = "cursor"; })
       pkgs.neovide
       pkgs.mpv
       pkgs.pamixer
