@@ -14,7 +14,7 @@ config.color_scheme = "Bamboo"
 config.audible_bell = "Disabled"
 config.adjust_window_size_when_changing_font_size = false
 
--- config.font = wezterm.font("FiraMono Nerd Font")
+config.font = wezterm.font("FiraCode Nerd Font")
 -- config.default_prog = { "/usr/bin/zsh", "-l" }
 -- config.default_prog = { "wsl" }
 -- config.default_domain = "WSL:Ubuntu"

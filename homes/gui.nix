@@ -29,6 +29,7 @@ in
       inputs.zen-browser.packages."${system}".specific
       pkgs.bluetuith
       pkgs.waybar
+      pkgs.copyq
       pkgs.ripdrag
       pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
