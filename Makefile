@@ -13,11 +13,11 @@ ${BIN_DIR}/nix:
 		-L https://install.determinate.systems/nix | sh -s -- install
 
 home-manager:
-	which nh && env FLAKE=$$(realpath $$(pwd)) nh home switch ${UPDATE} || \
+	which nh && env FLAKE=$$(realpath .) nh home switch ${UPDATE} || \
 	nix run home-manager/master -- switch --flake .
 
 os:
-	which nh && env FLAKE=$$(pwd) nh os switch || \
+	which nh && env FLAKE=$$(realpath .) nh os switch || \
 	sudo nixos-rebuild switch --flake .
 
 add-unstable:
