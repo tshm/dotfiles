@@ -3,6 +3,8 @@
 unset MAILCHECK
 uname=$(uname -a)
 
+alias yt-dlp="noglob yt-dlp"
+
 function scptar() {
   [ $# -ne 2 ] && echo "Usage: $1 <source> <destination>" && return 1
   local src="$1"

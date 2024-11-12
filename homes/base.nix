@@ -1,7 +1,6 @@
 { user, config, pkgs, ... }:
 
 let
-  #configPath = pathStr: builtins.path { path = "/home/${user}/.dotfiles${pathStr}"; };
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
@@ -20,7 +19,6 @@ in
       # platform
       pkgs.file
       pkgs.fastfetch
-      pkgs.openssh
       pkgs.ncdu
       # shelltools
       pkgs.file
@@ -47,7 +45,6 @@ in
     file = {
       "${config.xdg.configHome}/k9s/hotkeys.conf".source = configPath "/k8s/k9s/hotkeys.yaml";
       "${config.xdg.configHome}/k9s/plugins.conf".source = configPath "/k8s/k9s/plugins.yaml";
-      ".ssh/config".source = configPath "/sshconfig";
       "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
       "${config.xdg.configHome}/yazi/plugins/tab.yazi".source = configPath "/yazi/plugins/tab.yazi";
     };
@@ -80,6 +77,27 @@ in
       enable = true;
       # extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
     };
+    ssh = {
+      enable = true;
+      includes = [ "./*.config" ];
+      extraConfig = ''
+        # vim: ft=sshconfig
+
+        # Host test
+        #   HostName test.com
+        #   Port 1234
+        #   DynamicForward 9999
+        #   LocalForward 84321 0.0.0.0:4321
+        #   User myuser
+        #   ProxyJump dmz
+        #   #_Desc This is a sample description
+
+        # Host *
+        #   ControlMaster auto
+        #   ControlPath ~/.ssh/mux-%r@%h:%p
+        #   ControlPersist 4h
+      '';
+    };
     btop.enable = true;
     fd.enable = true;
     fzf.enable = true;
@@ -93,7 +111,7 @@ in
       enable = true;
     };
     carapace = {
-      enable = true;
+      enable = false; # it breaks other completions
       enableZshIntegration = true;
       enableNushellIntegration = true;
     };
@@ -185,6 +203,7 @@ in
     };
     zsh = {
       enable = true;
+      enableCompletion = true;
       initExtra = ''
         source ~/.dotfiles/zsh/zshrc
       '';
