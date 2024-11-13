@@ -1,24 +1,24 @@
 { nixpkgs, home-manager, ... } @ args:
 let
-  base = import ./base.nix;
   system = "x86_64-linux";
   pkgs = nixpkgs.legacyPackages.${system};
+  extraSpecialArgs = args // { user = "tshm"; };
 in
 {
   "pi@spi" = home-manager.lib.homeManagerConfiguration {
     pkgs = nixpkgs.legacyPackages.aarch64-linux;
-    extraSpecialArgs = args // { user = "pi"; };
+    extraSpecialArgs = extraSpecialArgs // { user = "pi"; };
     modules = [
-      base
+      ./base.nix
       ./dev.nix
       ./spi.nix
     ];
   };
   "tshm@PD0056" = home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
-    extraSpecialArgs = args;
+    inherit extraSpecialArgs;
     modules = [
-      base
+      ./base.nix
       ./wsl.nix
       ./dev.nix
       ./PD0056.nix
@@ -26,17 +26,17 @@ in
   };
   "tshm@usb" = home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
-    extraSpecialArgs = args // { inherit system; };
+    inherit extraSpecialArgs;
     modules = [
-      base
+      ./base.nix
       ./gui.nix
     ];
   };
   "tshm@minf" = home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
-    extraSpecialArgs = args // { inherit system; };
+    inherit extraSpecialArgs;
     modules = [
-      base
+      ./base.nix
       ./gui.nix
       ./dev.nix
       ./minf.nix
@@ -44,9 +44,9 @@ in
   };
   "tshm@x360" = home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
-    extraSpecialArgs = args // { inherit system; };
+    inherit extraSpecialArgs;
     modules = [
-      base
+      ./base.nix
       ./gui.nix
       ./dev.nix
       ./x360.nix
