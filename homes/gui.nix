@@ -38,14 +38,12 @@ in
       (wrapElectronApp { appName = "beeper"; })
       (wrapElectronApp { appName = "code-cursor"; binName = "cursor"; })
       pkgs.neovide
-      pkgs.mpv
       pkgs.pamixer
       pkgs.brightnessctl
       pkgs.slurp
       pkgs.grim
     ];
     file = {
-      "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
       "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
       "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
     };
