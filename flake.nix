@@ -9,6 +9,7 @@
     };
     # until zen-browser-flake is merged into nixos-unstable
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    hyprswitch.url = "github:h3rmt/hyprswitch/release";
   };
 
   outputs = { self, nixpkgs, ... } @ args:

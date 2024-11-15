@@ -198,6 +198,13 @@ in
           prepend_keymap = [
             { on = "<Tab>"; run = "plugin --sync tab"; desc = "create or switch tab"; }
             { on = "T"; run = "plugin --sync hide-preview"; desc = "Toggle preview"; }
+            {
+              on = "<C-n>";
+              run = ''
+                shell 'ripdrag -x "$1"' --confirm
+              '';
+              desc = "drag and drop";
+            }
           ];
         };
       };

@@ -2,7 +2,7 @@
 let
   system = "x86_64-linux";
   pkgs = nixpkgs.legacyPackages.${system};
-  extraSpecialArgs = args // { user = "tshm"; };
+  extraSpecialArgs = args // { inherit system; user = "tshm"; };
 in
 {
   "pi@spi" = home-manager.lib.homeManagerConfiguration {
