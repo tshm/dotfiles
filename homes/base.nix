@@ -37,7 +37,6 @@ in
       pkgs.git-imerge
       pkgs.git-absorb
       pkgs.tig
-      pkgs.delta
       pkgs.tokei
       pkgs.jc
       pkgs.jq
@@ -134,6 +133,8 @@ in
     /* https://home-manager-options.extranix.com/? */
     git = {
       enable = true;
+      delta.enable = true;
+      lfs.enable = true;
       includes = [
         { path = "~/.dotfiles/gitconfig"; }
         {

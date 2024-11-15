@@ -50,6 +50,16 @@ in
       "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
     };
   };
+  programs.mpv = {
+    enable = true;
+    config = {
+      vo = "gpu";
+      hwdec = "auto";
+      speed = "1.21";
+      sub-auto = "fuzzy";
+      save-position-on-quit = "yes";
+    };
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland; # use system installed binary
