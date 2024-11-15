@@ -101,7 +101,22 @@ in
     };
     btop.enable = true;
     fd.enable = true;
-    fzf.enable = true;
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      defaultCommand = "fd";
+      defaultOptions = [
+        "-m"
+        "--ansi"
+        "--preview 'bat {}'"
+        "--preview-window hidden"
+        "--bind 'alt-a:toggle-all'"
+        "--bind 'alt-p:toggle-preview'"
+        ''--bind 'alt-l:execute(bat --pager \"less -L\" {})' ''
+        "--bind 'alt-o:execute(e {})'"
+        "--bind 'alt-e:become(vi {+} </dev/tty >/dev/tty)'"
+      ];
+    };
     ripgrep.enable = true;
     zoxide = {
       enable = true;
@@ -215,13 +230,16 @@ in
       initExtra = ''
         source ~/.dotfiles/zsh/zshrc
       '';
-      loginExtra = ''
-        [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-      '';
       shellAliases = {
-        y = "yazi";
+        y = "yy";
+        pstree = "pstree -A";
+        mv = "nocorrect mv";
+        cp = "nocorrect cp";
+        rm = "rm -i";
+        yt-dlp = "noglob yt-dlp";
       };
     };
   };
 }
+
 

@@ -3,8 +3,6 @@
 unset MAILCHECK
 uname=$(uname -a)
 
-alias yt-dlp="noglob yt-dlp"
-
 function scptar() {
   [ $# -ne 2 ] && echo "Usage: $1 <source> <destination>" && return 1
   local src="$1"
@@ -50,18 +48,6 @@ builtin whence -p scrot >/dev/null && {
   } || {
     alias scr='scrot -s -f - | xclip -selection clipboard -t image/png -i'
   }
-}
-
-function ff () {
-  rgcmd="rg --color=always --line-number --no-heading --smart-case"
-  [ -z "$*" ] && q0='--files' || q0="$*"
-  FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -e --disabled \
-    --delimiter : \
-    --color 'hl:-1:underline,hl+:-1:underline:reverse' \
-    --bind 'change:reload:$rgcmd {q} || true' \
-    --bind 'alt-e:become(vi {1} +{2} </dev/tty >/dev/tty)' \
-    --preview 'bat --color=always {1} --highlight-line {2}'" \
-  FZF_DEFAULT_COMMAND="$rgcmd $q0" fzf -q "$*"
 }
 
 function tm () {

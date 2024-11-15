@@ -11,13 +11,6 @@ export PAGER='less'
 export LESS='--quit-if-one-screen -R -iMX -x4'
 export LESSOPEN="|~/.dotfiles/lessfilter %s"
 export WORDCHARS="*?_-.[]~&;=!#$%^(){}<>"
-export FZF_DEFAULT_OPTS="-m --ansi --preview 'ctpv {}' \
-  --preview-window hidden \
-  --bind 'alt-a:toggle-all' \
-  --bind 'alt-p:toggle-preview' \
-  --bind 'alt-l:execute(bat --pager \"less -L\" {})' \
-  --bind 'alt-o:execute(e {})' \
-  --bind 'alt-e:become($EDITOR {+} </dev/tty >/dev/tty)'"
 
 HISTSIZE=5100
 export HISTFILE=~/.zsh_history
@@ -25,11 +18,6 @@ export SAVEHIST=5000
 export DIRSTACKSIZE=15
 export fignore=('~' .bak)
 hash -d 'D=/usr/share/doc'
-
-alias pstree='pstree -A'
-alias mv='nocorrect mv'       # no spelling correction on mv
-alias cp='nocorrect cp'       # no spelling correction on cp
-alias rm='rm -i'
 
 setopt   notify globdots correct cdablevars auto_menu auto_list
 setopt   correctall noautocd recexact longlistjobs sharehistory
@@ -82,13 +70,25 @@ function auto_quote() {
 zle -N auto_quote
 bindkey '^[7' auto_quote
 
-function fzf-fill() {
+function fzfrg() {
+  local B=$(
+    rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+    fzf --delimiter : \
+        --preview 'bat --color=always {1} --highlight-line {2}' \
+        --bind 'ctrl-e:become($EDITOR {1} +{2})'
+  )
+  RBUFFER=$(echo $B | cut -d: -f1)
+}
+zle -N fzfrg
+bindkey '^[s' fzfrg
+
+function fzffd() {
   if [ "$#LBUFFER" -eq 0 ]; then
     BUFFER="${BUFFER}$( fd -I . | fzf )"
   elif [ "${BUFFER:$#BUFFER-1}" = " " ]; then
     BUFFER="${BUFFER}$( fd -I . | fzf )"
   else
-  zle backward-word
+    zle backward-word
     local DIR="" Q=${RBUFFER}
     if [ "${LBUFFER:$#LBUFFER-1}" = "/" ]; then
       zle backward-delete-char
@@ -101,8 +101,8 @@ function fzf-fill() {
   fi
   zle end-of-line
 }
-zle -N fzf-fill
-bindkey '^[r' fzf-fill
+zle -N fzffd
+bindkey '^[r' fzffd
 
 function pastebuf() {
   TARGET=$(pbpaste | tr -d '\r\n')
