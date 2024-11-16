@@ -31,6 +31,7 @@ in
       pkgs.hyprsunset
       pkgs.bluetuith
       pkgs.waybar
+      pkgs.swaynotificationcenter
       pkgs.copyq
       pkgs.rofi-wayland-unwrapped
       pkgs.ripdrag

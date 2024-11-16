@@ -17,7 +17,7 @@ home-manager:
 	nix run home-manager/master -- switch --flake .
 
 os:
-	which nh && env FLAKE=$$(realpath .) nh os switch || \
+	which nh && env FLAKE=$$(realpath .) nh os switch ${UPDATE} || \
 	sudo nixos-rebuild switch --flake .
 
 add-unstable:

@@ -89,7 +89,6 @@
     pkgs.imagemagick
     pkgs.wofi
     pkgs.pavucontrol
-    pkgs.dunst
     pkgs.waybar
     pkgs.kitty
     pkgs.polkit_gnome
