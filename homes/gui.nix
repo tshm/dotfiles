@@ -28,7 +28,6 @@ in
     packages = [
       inputs.hyprswitch.packages."${system}".default
       inputs.zen-browser.packages."${system}".specific
-      pkgs.hyprsunset
       pkgs.bluetuith
       pkgs.waybar
       pkgs.swaynotificationcenter
@@ -37,6 +36,7 @@ in
       pkgs.ripdrag
       pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
+      (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
       (wrapElectronApp { appName = "code-cursor"; binName = "cursor"; })
       pkgs.neovide
       pkgs.pamixer

@@ -37,7 +37,7 @@ in
       pkgs.git-imerge
       pkgs.git-absorb
       pkgs.tig
-      pkgs.tokei
+      pkgs.scc
       pkgs.jc
       pkgs.jq
       pkgs.jless
