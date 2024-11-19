@@ -233,6 +233,8 @@ in
       '';
       shellAliases = {
         y = "yy";
+        l = "ll";
+        v = "nvim";
         pstree = "pstree -A";
         mv = "nocorrect mv";
         cp = "nocorrect cp";
