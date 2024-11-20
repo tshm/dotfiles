@@ -30,6 +30,7 @@ in
       inputs.zen-browser.packages."${system}".specific
       pkgs.bluetuith
       pkgs.waybar
+      pkgs.colloid-icon-theme
       pkgs.swaynotificationcenter
       pkgs.copyq
       pkgs.rofi-wayland-unwrapped
@@ -37,7 +38,6 @@ in
       pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
       (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
-      (wrapElectronApp { appName = "code-cursor"; binName = "cursor"; })
       pkgs.neovide
       pkgs.pamixer
       pkgs.brightnessctl
@@ -65,7 +65,6 @@ in
     extraConfig = ''
       # extraConfig
       source = ~/.dotfiles/x/hyprland/vars.conf
-      source = *local.conf
       source = ~/.dotfiles/x/hyprland/general.conf
     '';
   };

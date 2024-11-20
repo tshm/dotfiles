@@ -25,6 +25,7 @@ in
       pkgs.file
       pkgs.psmisc
       pkgs.neovim
+      pkgs.autossh
       pkgs.viddy
       pkgs.p7zip
       pkgs.entr
