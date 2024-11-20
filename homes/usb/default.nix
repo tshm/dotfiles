@@ -10,5 +10,4 @@
       ../modules/dev.nix
     ];
   };
-
 }
