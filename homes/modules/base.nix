@@ -1,9 +1,12 @@
-{ user, config, pkgs, ... }:
+{ user, config, pkgs, nix-index-database, ... }:
 
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
+  imports = [
+    nix-index-database.hmModules.nix-index
+  ];
   nix.package = pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   targets.genericLinux.enable = true;
@@ -15,7 +18,6 @@ in
     packages = [
       # NIX
       pkgs.nh
-      pkgs.comma
       # platform
       pkgs.openssh
       pkgs.file
@@ -55,6 +57,7 @@ in
   # };
   programs = {
     home-manager.enable = true;
+    nix-index-database.comma.enable = true;
     topgrade = {
       enable = true;
       settings = {
@@ -245,5 +248,4 @@ in
     };
   };
 }
-
 
