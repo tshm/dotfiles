@@ -24,6 +24,7 @@ in
       pkgs.fastfetch
       pkgs.ncdu
       # shelltools
+      pkgs.python3
       pkgs.file
       pkgs.psmisc
       pkgs.neovim
@@ -50,6 +51,7 @@ in
       "${config.xdg.configHome}/k9s/plugins.conf".source = configPath "/k8s/k9s/plugins.yaml";
       "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
       "${config.xdg.configHome}/yazi/plugins/tab.yazi".source = configPath "/yazi/plugins/tab.yazi";
+      "${config.xdg.configHome}/yazi/plugins/enter.yazi".source = configPath "/yazi/plugins/enter.yazi";
     };
   };
   # services = {
@@ -218,10 +220,11 @@ in
           prepend_keymap = [
             { on = "<Tab>"; run = "plugin --sync tab"; desc = "create or switch tab"; }
             { on = "T"; run = "plugin --sync hide-preview"; desc = "Toggle preview"; }
+            { on = "l"; run = "plugin --sync enter"; desc = "Enter dir"; }
             {
               on = "<C-n>";
               run = ''
-                shell 'ripdrag -x "$1"' --confirm
+                shell 'ripdrag -x "$@"' --confirm
               '';
               desc = "drag and drop";
             }

@@ -24,6 +24,20 @@ in
     enable = true;
     iconTheme.name = "Flat-Remix-Blue";
   };
+  xdg = {
+    enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "zen.desktop";
+        "application/xhtml+xml" = "zen.desktop";
+        "text/html" = "zen.desktop";
+        "text/xml" = "zen.desktop";
+        "x-scheme-handler/http" = "zen.desktop";
+        "x-scheme-handler/https" = "zen.desktop";
+      };
+    };
+  };
   home = {
     packages = [
       inputs.hyprswitch.packages."${system}".default
@@ -43,6 +57,9 @@ in
       pkgs.brightnessctl
       pkgs.slurp
       pkgs.grim
+      # extra
+      pkgs.pqiv
+      pkgs.brave
     ];
     file = {
       "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
