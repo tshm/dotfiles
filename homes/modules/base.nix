@@ -128,6 +128,12 @@ in
       enableZshIntegration = true;
       enableNushellIntegration = true;
     };
+    atuin = {
+      enable = true;
+      enableZshIntegration = true;
+      enableNushellIntegration = true;
+      flags = [ "--disable-up-arrow" ];
+    };
     nushell = {
       enable = true;
     };
