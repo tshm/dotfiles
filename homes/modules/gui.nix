@@ -35,6 +35,8 @@ in
         "text/xml" = "zen.desktop";
         "x-scheme-handler/http" = "zen.desktop";
         "x-scheme-handler/https" = "zen.desktop";
+        "image/png" = "feh.desktop";
+        "image/jpeg" = "feh.desktop";
       };
     };
   };
@@ -58,7 +60,6 @@ in
       pkgs.slurp
       pkgs.grim
       # extra
-      pkgs.pqiv
       pkgs.brave
     ];
     file = {
@@ -66,15 +67,18 @@ in
       "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
     };
   };
-  programs.mpv = {
-    enable = true;
-    config = {
-      vo = "gpu";
-      hwdec = "auto";
-      speed = "1.21";
-      sub-auto = "fuzzy";
-      save-position-on-quit = "yes";
+  programs = {
+    mpv = {
+      enable = true;
+      config = {
+        vo = "gpu";
+        hwdec = "auto";
+        speed = "1.21";
+        sub-auto = "fuzzy";
+        save-position-on-quit = "yes";
+      };
     };
+    feh.enable = true;
   };
   wayland.windowManager.hyprland = {
     enable = true;
