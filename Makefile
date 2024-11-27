@@ -1,29 +1,27 @@
 # initial setup
-SRC := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-ISWSL := $(shell uname -a | grep -i microsoft)
-BIN_DIR := /nix/var/nix/profiles/default/bin
+NIXOS:=$(shell which nix)
 
 all: home-manager
 
-nix: ${BIN_DIR}/nix
-
-${BIN_DIR}/nix:
+ifdef NIXOS
+nix:; @echo NIXOS
+else
+nix:
 	@echo non NIXOS
 	curl --proto '=https' --tlsv1.2 -sSf \
 		-L https://install.determinate.systems/nix | sh -s -- install
+endif
 
-home-manager:
-	which nh && env FLAKE=$$(realpath .) nh home switch ${UPDATE} || \
+home-manager: nix
+	which nh && env FLAKE=$$(realpath .) nh home switch || \
 	nix run home-manager/master -- switch --flake .
 
 os:
-	which nh && env FLAKE=$$(realpath .) nh os switch ${UPDATE} || \
+	which nh && env FLAKE=$$(realpath .) nh os switch || \
 	sudo nixos-rebuild switch --flake .
 
-add-unstable:
-	@echo NIXOS
-	nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs
-	nix-channel --update
+update:
+	nix flake update
 
 yazi: ~/.config/yazi/plugins/yazi-rs
 ~/.config/yazi/plugins/yazi-rs:
@@ -39,4 +37,4 @@ nvim: ~/.local/bin/nvim ~/.config/nvim
 resh:
 	curl -fsSL https://raw.githubusercontent.com/curusarn/resh/master/scripts/rawinstall.sh | bash
 
-PHONY: all yazi home-manager nix add-unstable
+PHONY: all yazi home-manager nix update

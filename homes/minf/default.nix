@@ -10,6 +10,7 @@
       ../modules/dev.nix
       {
         home.packages = [
+          pkgs.qsv
           pkgs.deno
         ];
         wayland.windowManager.hyprland = {
