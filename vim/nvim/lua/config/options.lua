@@ -11,6 +11,8 @@ opt.foldlevelstart = 99
 opt.foldenable = true
 opt.foldnestmax = 20
 
+opt.clipboard = "unnamedplus"
+
 opt.cursorline = true
 opt.spelllang = { "en", "cjk" }
 -- opt.spell = true
