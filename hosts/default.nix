@@ -25,4 +25,14 @@ in
       gui
     ];
   };
+
+  "usb" = nixpkgs.lib.nixosSystem {
+    inherit system;
+    inherit specialArgs;
+    modules = [
+      ./usb
+      (base { host = "usb"; })
+      gui
+    ];
+  };
 }
