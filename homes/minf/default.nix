@@ -15,11 +15,15 @@
         ];
         wayland.windowManager.hyprland = {
           settings = {
-            "workspace" = [
+            device = {
+              name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3";
+              sensitivity = 1.0;
+            };
+            workspace = [
               "1, layoutopt:orientation:right"
               "2, layoutopt:orientation:left"
             ];
-            "exec-once" = [
+            exec-once = [
               "[workspace 1] zen"
               "[workspace 1 silent] beeper"
               "[workspace 2 silent] kitty"

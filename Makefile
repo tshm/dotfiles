@@ -1,9 +1,12 @@
 # initial setup
-NIXOS:=$(shell which nix)
+ISNIXOS:=$(shell grep ID=nixos /etc/os-release)
+NIX:=$(shell which nix)
 
-all: home-manager
+home-manager: nix
+	which nh && env FLAKE=$$(realpath .) nh home switch || \
+	nix run home-manager/master -- switch --flake .
 
-ifdef NIXOS
+ifdef ISNIXOS
 nix:; @echo NIXOS
 else
 nix:
@@ -12,11 +15,10 @@ nix:
 		-L https://install.determinate.systems/nix | sh -s -- install
 endif
 
-home-manager: nix
-	which nh && env FLAKE=$$(realpath .) nh home switch || \
-	nix run home-manager/master -- switch --flake .
+sudo:
+	@sudo echo
 
-os:
+os: sudo home-manager
 	which nh && env FLAKE=$$(realpath .) nh os switch || \
 	sudo nixos-rebuild switch --flake .
 

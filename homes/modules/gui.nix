@@ -22,7 +22,14 @@ in
   };
   gtk = {
     enable = true;
-    iconTheme.name = "Flat-Remix-Blue";
+    # iconTheme = {
+    #   name = "Adwaita";
+    #   package = pkgs.adwaita-icon-theme;
+    # };
+    # theme = {
+    #   name = "Adapta-Nokto-Eta";
+    #   package = pkgs.adapta-gtk-theme;
+    # };
   };
   xdg = {
     enable = true;
@@ -44,12 +51,13 @@ in
     packages = [
       inputs.hyprswitch.packages."${system}".default
       inputs.zen-browser.packages."${system}".specific
+      pkgs.catppuccin-gtk
       pkgs.bluetuith
       pkgs.waybar
-      pkgs.colloid-icon-theme
+      pkgs.mediainfo
+      pkgs.papirus-icon-theme
       pkgs.swaynotificationcenter
       pkgs.copyq
-      pkgs.rofi-wayland-unwrapped
       pkgs.ripdrag
       pkgs.ags
       (wrapElectronApp { appName = "beeper"; })
@@ -68,6 +76,20 @@ in
     };
   };
   programs = {
+    rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+      terminal = "${pkgs.kitty}/bin/kitty";
+      extraConfig = {
+        modi = "drun";
+        show-icons = true;
+        drun-display-format = "{icon} {name}";
+        disable-history = false;
+        hide-scrollbar = true;
+        display-drun = "   Apps ";
+        sidebar-mode = true;
+      };
+    };
     mpv = {
       enable = true;
       config = {

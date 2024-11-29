@@ -1,22 +1,27 @@
-{ user, config, pkgs, nix-index-database, ... }:
+{ user, config, pkgs, ... } @inputs:
 
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
   imports = [
-    nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.hmModules.nix-index
+    inputs.catppuccin.homeManagerModules.catppuccin
   ];
   nix.package = pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
+  catppuccin = {
+    enable = true;
+    accent = "green";
+    pointerCursor.enable = true;
+  };
   home = {
     stateVersion = "22.11";
     username = user;
     homeDirectory = "/home/${user}/";
     packages = [
-      # NIX
       pkgs.nh
       # platform
       pkgs.openssh
@@ -60,6 +65,15 @@ in
   programs = {
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
+    # nh = {
+    #   enable = true;
+    #   package = pkgs.nh;
+    #   flake = "/home/${user}/.dotfiles";
+    #   clean = {
+    #     enable = true;
+    #     extraArgs = "--keep-since 10d --keep 3";
+    #   };
+    # };
     topgrade = {
       enable = true;
       settings = {
@@ -226,7 +240,7 @@ in
           prepend_keymap = [
             { on = "<Tab>"; run = "plugin --sync tab"; desc = "create or switch tab"; }
             { on = "T"; run = "plugin --sync hide-preview"; desc = "Toggle preview"; }
-            { on = "l"; run = "plugin --sync enter"; desc = "Enter dir"; }
+            { on = "<Enter>"; run = "plugin --sync enter"; desc = "Enter dir"; }
             {
               on = "<C-n>";
               run = ''
