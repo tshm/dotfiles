@@ -46,6 +46,7 @@ in
       pkgs.git-imerge
       pkgs.git-absorb
       pkgs.tig
+      pkgs.lnav
       pkgs.scc
       pkgs.jc
       pkgs.jq

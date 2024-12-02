@@ -3,14 +3,14 @@ ISNIXOS:=$(shell grep ID=nixos /etc/os-release)
 NIX:=$(shell which nix)
 
 home-manager: nix
-	which nh && env FLAKE=$$(realpath .) nh home switch || \
+	which nh && nh home switch || \
 	nix run home-manager/master -- switch --flake .
 
-ifdef ISNIXOS
-nix:; @echo NIXOS
+ifdef NIX
+nix:; @echo nix exists
 else
 nix:
-	@echo non NIXOS
+	@echo no nix
 	curl --proto '=https' --tlsv1.2 -sSf \
 		-L https://install.determinate.systems/nix | sh -s -- install
 endif
@@ -18,8 +18,14 @@ endif
 sudo:
 	@sudo echo
 
-os: sudo home-manager
-	which nh && env FLAKE=$$(realpath .) nh os switch || \
+ifdef ISNIXOS
+all: sudo home-manager os
+else
+all: home-manager
+endif
+
+os: sudo
+	which nh && nh os switch || \
 	sudo nixos-rebuild switch --flake .
 
 update:
