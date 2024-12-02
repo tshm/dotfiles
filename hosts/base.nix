@@ -6,7 +6,7 @@
 { pkgs, config, lib, ... }:
 
 let
-  useHibernation = (builtins.length config.swapDevices == 1);
+  useHibernation = builtins.length config.swapDevices > 0;
 in
 {
   boot = {
@@ -52,17 +52,10 @@ in
     Type = "idle";
     StandardInput = "tty";
     StandardOutput = "tty";
-    StandardError = "journal"; # Without this errors will spam on screen
-    # Without these bootlogs will spam on screen
+    StandardError = "journal";
     TTYReset = true;
     TTYVHangup = true;
     TTYVTDisallocate = true;
-  };
-
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-    dates = "weekly";
   };
 
   location.provider = "geoclue2";
@@ -115,6 +108,16 @@ in
       };
     };
   };
+  services.displayManager.sessionPackages = [
+    ((pkgs.writeTextDir "share/wayland-sessions/zsh.desktop" ''
+      [Desktop Entry]
+      Name = zsh
+      Exec = zsh
+      Type = Application
+      DesktopNames = zsh
+      Terminal = true
+    '').overrideAttrs (_: { passthru.providedSessions = [ "zsh" ]; }))
+  ];
 
   virtualisation = {
     podman = {
