@@ -12,6 +12,7 @@ builtins.foldl' (s: i: s // i) { } [
   (import ./spi inputs)
   (import ./minf inputs)
   (import ./PD0056 inputs)
+  (import ./PN0093 inputs)
   (import ./x360 inputs)
   (import ./usb inputs)
 ]
