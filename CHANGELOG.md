@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.0.0] - 2024-12-03
 
 ### 🚀 Features
 
@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - *(neovim)* Use Neogit
 - *(neovim)* Add yanky
 - *(k9s)* Add shortcuts
+- *(nix)* Use flake for hm
 
 ### 🐛 Bug Fixes
 
@@ -81,6 +82,74 @@ All notable changes to this project will be documented in this file.
 - *(tmux)* Bind g
 - *(yazi)* Use yazi plugins
 - *(home-manager)* Configure git
+- Use git cliff
+- *(nix)* Remove mime type
+- Cleanup
+- *(zsh)* Scptar
+- *(nix)* Manage more conf files in hm
+- *(hyprland)* Manage config via homemanager
+- Adjust for nixos
+- Add waybar into hm
+- *(yazi)* Handle custom plugin in hm
+- Add beeper
+- *(waybar)* Power menu
+- *(nix)* IME support
+- *(nix)* Integrate with nix-index-database
+- *(hypr)* Adjust icons
+- *(nix)* Symlink fonts for flatpak apps
+- *(hypr)* Adjust layout
+- *(nix)* Powerbutton
+- *(hyprland)* Fix low contrast theme
+- *(nix)* Use nixos-hardware
+- *(nixos)* Enable flake
+- *(home-manager)* Split host based config
+- *(nix)* Add pi
+- *(gui)* Waybar toggling
+- *(hm)* Use symlink
+- *(x)* Adjust IME config
+- *(x)* Use zen-browser via flake
+- *(home)* Add nh
+- *(hm)* Split dev dependency
+- *(nix)* Support hibernation
+- *(hm)* Add gui tools
+- *(nix)* Use flake
+- *(hyprland)* Add screenshot
+- *(tmux)* Use sensible plugin
+- *(nixos)* Split gui out of base
+- *(hm)* Add carapace
+- *(nix)* Cleanup
+- *(nix)* Use realpath for avoiding symlinks
+- *(nix)* Update hw
+- *(nvim)* Update
+- *(gui)* Use cursor for now
+- *(hm)* Update flake
+- *(hm)* Add onefetch
+- *(vim)* Update
+- *(zsh)* Completion problem
+- *(nix)* Refactor
+- *(hyprland)* Add hyprswitch
+- *(fzf)* Add zsh binding
+- *(nix)* Cleanup
+- *(mpv)* Put config in nix
+- *(gui)* Use swaync
+- *(hm)* Add info
+- Update info.sh
+- Update aliases
+- *(nix)* Restruct
+- Update aliases
+- *(nix)* Use db
+- *(nix)* Mime
+- *(hm)* Integrate atuin
+- *(nix)* Install feh
+- *(nix)* Update flake
+- *(tmux)* Use mouse input
+- *(nix)* Update flake
+- *(hypr)* Adjust sensitivity
+- *(hm)* Theming up
+- *(tmux)* Adjust color
+- *(hm)* Simplify Makefile
+- *(nixos)* Add terminal login session
+- *(hm)* Add PN0093
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -89,6 +158,10 @@ All notable changes to this project will be documented in this file.
 - Use fzf for interactive grep
 - Update lazy.nvim
 - Update nvim
+
+### Experiment
+
+- Manage nixos config here
 
 ### Nix
 

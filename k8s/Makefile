@@ -59,9 +59,11 @@ stable = https://charts.helm.sh/stable
 traefik = https://helm.traefik.io/traefik
 jetstack = https://charts.jetstack.io/
 crossplane = https://charts.crossplane.io/stable
+cilium = https://helm.cilium.io/
+
 helm-%:
 	helm repo ls | grep $* || helm repo add stable $($*)
-helm: helm-stable helm-traefik helm-jetstack helm-crossplane
+helm: helm-stable helm-traefik helm-jetstack helm-crossplane helm-cilium
 	helm repo update >/dev/null
 
 crossplane: NS := crossplane-system
@@ -79,6 +81,9 @@ cert-manager: helm
 	$K -n ${NS} wait --for=condition=available deployment/cert-manager
 	sleep 20
 	$K apply -f ${DIR}/${CONTEXT}/issuer.yaml
+
+metallb:
+	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.8/config/manifests/metallb-native.yaml
 
 ingress: helm
 	echo "setting up ingress-controller with hostname: ${HOSTNAME_K8S}"
@@ -143,3 +148,12 @@ delete_namespace:
 	@if [ "${NS}" == "" ]; then echo 'usage: make delete_namespace -e NS=xxx'; exit 1; fi
 	$K get namespace ${NS} -o json | jq '(.spec.finalizers)=[]' > .tmp.json
 	$K replace --raw "/api/v1/namespaces/${NS}/finalize" -f .tmp.json
+
+
+# cloudflared: https://developers.cloudflare.com/cloudflare-one/tutorials/many-cfd-one-tunnel/
+tunnel_create: .manifest/initialSetup/tunnel/.cloudflared_credentials.json
+	[ -z ${DOMAIN} -o -z ${HOSTNAME} ] && echo 'HOSTNAME and DOMAIN are required' && exit 1
+	cloudflared tunnel create ${HOSTNAME}
+	cloudflared tunnel route dns ${HOSTNAME} ${HOSTNAME}.${DOMAIN}
+	cp ${HOME}/.cloudflared/*.json ./manifest/initialSetup/tunnel/.cloudflared_credentials.json
+	$K apply -k ./manifest/initialSetup/tunnel

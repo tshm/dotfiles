@@ -10,3 +10,4 @@ terraform.tfstate
 .*.kubeconfig
 .*.env
 .*kubeconfig*.yaml
+output
