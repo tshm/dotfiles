@@ -1,5 +1,5 @@
 #-*-shell-script-*-
-# vim: ft=zsh
+# vim: ft=zsh foldmethod=indent
 unset MAILCHECK
 uname=$(uname -a)
 
@@ -113,6 +113,6 @@ function meminfo() {
       || cmd.exe /c start $(wslpath -w "$*")
   }
   function gvim() {
-    nvim-qt.exe --wsl $*
+    neovide.exe --wsl $*
   }
 }

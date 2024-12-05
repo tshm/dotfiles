@@ -41,6 +41,7 @@ zinit snippet 'OMZ::lib/compfix.zsh'
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 zinit light wfxr/forgit
+zinit light b4b4r07/emoji-cli
 zinit ice as"command" from"gh-r" pick "ugit"
 zinit load Bhupesh-V/ugit
 

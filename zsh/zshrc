@@ -1,5 +1,6 @@
 #-*-shell-script-*-
 # vim: ft=zsh
+stty -ixon
 bindkey -e # emacs key bindings
 source ~/.dotfiles/zsh/plugins.zsh
 export PATH=~/.local/bin:$PATH

@@ -17,3 +17,5 @@ opt.cursorline = true
 opt.spelllang = { "en", "cjk" }
 -- opt.spell = true
 opt.autochdir = true
+
+opt.guifont = "FiraCode Nerd Font:h12"
