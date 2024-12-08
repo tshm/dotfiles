@@ -11,6 +11,7 @@
       {
         home.packages = [
           pkgs.deno
+          pkgs.iio-hyprland
         ];
         wayland.windowManager.hyprland = {
           settings = {
@@ -20,6 +21,7 @@
             };
             monitor = "eDP-1,1920x1080,0x0,1";
             "exec-once" = [
+              "iio-hyprland"
               "[workspace 1 silent] beeper"
               "[workspace 2] zen"
               "[workspace 2 silent] kitty"

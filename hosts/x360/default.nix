@@ -1,4 +1,4 @@
-{ nixpkgs, nixos-hardware, ... } @ args:
+{ nixos-hardware, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -7,4 +7,5 @@
     nixos-hardware.nixosModules.common-cpu-amd
     nixos-hardware.nixosModules.common-gpu-amd
   ];
+  hardware.sensor.iio.enable = true;
 }
