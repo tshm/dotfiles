@@ -52,6 +52,7 @@ in
       inputs.hyprswitch.packages."${system}".default
       inputs.zen-browser.packages."${system}".specific
       pkgs.catppuccin-gtk
+      # pkgs.deskflow
       pkgs.bluetuith
       pkgs.waybar
       pkgs.mediainfo

@@ -17,8 +17,9 @@ echo $btcmd
 
 # Define the menu options
 options+=(
-  "💤 Suspend: systemctl suspend"
-  "⏹️ Shutdown: systemctl poweroff"
+  "💤 Sleep: systemctl suspend"
+  "⏻  Shutdown: systemctl poweroff"
+  "🔄 Reboot: systemctl reboot"
 )
 
 # Display the options using Rofi
