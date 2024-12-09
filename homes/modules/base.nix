@@ -56,8 +56,6 @@ in
       "${config.xdg.configHome}/k9s/hotkeys.conf".source = configPath "/k8s/k9s/hotkeys.yaml";
       "${config.xdg.configHome}/k9s/plugins.conf".source = configPath "/k8s/k9s/plugins.yaml";
       "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
-      "${config.xdg.configHome}/yazi/plugins/tab.yazi".source = configPath "/yazi/plugins/tab.yazi";
-      "${config.xdg.configHome}/yazi/plugins/enter.yazi".source = configPath "/yazi/plugins/enter.yazi";
     };
   };
   # services = {
@@ -82,14 +80,11 @@ in
           pre_sudo = true;
           no_retry = true;
           no_self_update = true;
-          disable = [
-            "node"
-          ];
+          disable = [ "node" ];
           set_title = false;
           cleanup = true;
         };
         commands = {
-          "Run garbage collection on Nix store" = "nix-collect-garbage";
           "zinit" = "zsh -i -c 'source ~/.dotfiles/zsh/zshrc && zinit update'";
         };
       };
@@ -181,8 +176,11 @@ in
         ".*.vim"
         ".vscode"
         "*.favdoc"
+        ".direnv/"
         ".*.local"
+        ".local.*"
         ".env"
+        ".*.env"
       ];
     };
     direnv = {
@@ -193,7 +191,31 @@ in
       config = {
         global.hide_env_diff = true;
       };
+      # https://github.com/direnv/direnv/issues/73
       stdlib = ''
+        # vim: ft=sh
+        export_alias() {
+          local name=$1
+          shift
+          local alias_dir=$PWD/.direnv/aliases
+          local target="$alias_dir/$name"
+          local oldpath="$PATH"
+          mkdir -p "$alias_dir"
+          if ! [[ ":$PATH:" == *":$alias_dir:"* ]]; then
+            PATH_add "$alias_dir"
+          fi
+          cat <<EOT > $target
+        #!/usr/bin/env bash
+        PATH="$oldpath"
+        exec $@ \$@
+        EOT
+          chmod +x "$target"
+        }
+
+        [ -f ./.local.envrc ] && {
+          echo 'direnv: loading ./.local.envrc'
+          source ./.local.envrc
+        }
         onefetch
       '';
     };
@@ -232,10 +254,11 @@ in
           { name = "*.json"; use = "jless"; }
         ];
       };
-      # plugins = {
-      #   # hide-preview = hide-preview;
-      #   tab = "${inputs.dotfiles}/yazi/plugins/tab.yazi";
-      # };
+      plugins = {
+        # hide-preview = hide-preview;
+        enter = ../../yazi/plugins/enter.yazi;
+        tab = ../../yazi/plugins/tab.yazi;
+      };
       keymap = {
         manager = {
           prepend_keymap = [
@@ -248,6 +271,12 @@ in
                 shell 'ripdrag -x "$@"' --confirm
               '';
               desc = "drag and drop";
+            }
+            {
+              on = [ "g" "u" ];
+              run = ''
+                shell 'ya pub dds-cd --str "$(git rev-parse --show-toplevel)"' --confirm
+              '';
             }
           ];
         };

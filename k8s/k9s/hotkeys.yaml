@@ -20,6 +20,10 @@ hotKeys:
     shortCut: Shift-I
     description: View ingress
     command: ingress
+  shift-3:
+    shortCut: Shift-3
+    description: View Services
+    command: services
   # Hitting Shift-S view the resources in the namespace of your current selection
   shift-s:
     shortCut: Shift-S
