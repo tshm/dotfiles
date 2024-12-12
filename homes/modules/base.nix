@@ -53,8 +53,8 @@ in
       pkgs.jless
     ];
     file = {
-      "${config.xdg.configHome}/k9s/hotkeys.conf".source = configPath "/k8s/k9s/hotkeys.yaml";
-      "${config.xdg.configHome}/k9s/plugins.conf".source = configPath "/k8s/k9s/plugins.yaml";
+      "${config.xdg.configHome}/k9s/hotkeys.yaml".source = configPath "/k8s/k9s/hotkeys.yaml";
+      "${config.xdg.configHome}/k9s/plugins.yaml".source = configPath "/k8s/k9s/plugins.yaml";
       "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
     };
   };
@@ -262,9 +262,9 @@ in
       keymap = {
         manager = {
           prepend_keymap = [
-            { on = "<Tab>"; run = "plugin --sync tab"; desc = "create or switch tab"; }
-            { on = "T"; run = "plugin --sync hide-preview"; desc = "Toggle preview"; }
-            { on = "<Enter>"; run = "plugin --sync enter"; desc = "Enter dir"; }
+            { on = "<Tab>"; run = "plugin tab"; desc = "create or switch tab"; }
+            { on = "T"; run = "plugin hide-preview"; desc = "Toggle preview"; }
+            { on = "<Enter>"; run = "plugin enter"; desc = "Enter dir"; }
             {
               on = "<C-n>";
               run = ''
