@@ -87,6 +87,11 @@ in
     libraries = [ ];
   };
 
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   security.polkit.enable = true;
   security.rtkit.enable = true;
 

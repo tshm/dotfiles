@@ -25,7 +25,8 @@
             ];
             exec-once = [
               "[workspace 1] zen"
-              "[workspace 1 silent] beeper"
+              # temporary fix...
+              "[workspace 1 silent] beeper --ozone-platform-hint=x11"
               "[workspace 2 silent] kitty"
             ];
           };

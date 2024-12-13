@@ -1,19 +1,7 @@
-{ user, config, lib, pkgs, system, ... } @ inputs:
+{ user, config, pkgs, system, ... } @ inputs:
 
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
-  wrapElectronApp = { appName, binName ? appName }:
-    pkgs.symlinkJoin {
-      name = appName;
-      paths = [ pkgs.${appName} ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = lib.strings.concatStrings [
-        "wrapProgram $out/bin/"
-        binName
-        " --add-flags \"--ozone-platform-hint=auto\""
-        " --add-flags \"--enable-wayland-ime\""
-      ];
-    };
 in
 {
   fonts.fontconfig.enable = true;
@@ -51,8 +39,10 @@ in
     packages = [
       inputs.hyprswitch.packages."${system}".default
       inputs.zen-browser.packages."${system}".specific
+      pkgs.appimage-run
       pkgs.catppuccin-gtk
       # pkgs.deskflow
+      # pkgs.input-leap
       pkgs.bluetuith
       pkgs.waybar
       pkgs.mediainfo
@@ -61,8 +51,8 @@ in
       pkgs.copyq
       pkgs.ripdrag
       pkgs.ags
-      (wrapElectronApp { appName = "beeper"; })
-      (wrapElectronApp { appName = "vscode-fhs"; binName = "code"; })
+      pkgs.beeper
+      pkgs.vscode-fhs
       pkgs.neovide
       pkgs.pamixer
       pkgs.brightnessctl
