@@ -180,7 +180,7 @@ in
         ".*.local"
         ".local.*"
         ".env"
-        ".*.env"
+        ".*.env*"
       ];
     };
     direnv = {
@@ -207,7 +207,7 @@ in
           cat <<EOT > $target
         #!/usr/bin/env bash
         PATH="$oldpath"
-        exec $@ \$@
+        eval $@ \$@
         EOT
           chmod +x "$target"
         }
