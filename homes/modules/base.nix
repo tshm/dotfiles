@@ -20,7 +20,7 @@ in
   home = {
     stateVersion = "22.11";
     username = user;
-    homeDirectory = "/home/${user}/";
+    homeDirectory = "/home/${user}";
     packages = [
       pkgs.nh
       # platform
@@ -66,15 +66,15 @@ in
   programs = {
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
-    # nh = {
-    #   enable = true;
-    #   package = pkgs.nh;
-    #   flake = "/home/${user}/.dotfiles";
-    #   clean = {
-    #     enable = true;
-    #     extraArgs = "--keep-since 10d --keep 3";
-    #   };
-    # };
+    nh = {
+      enable = true;
+      flake = "/home/${user}/.dotfiles";
+      clean = {
+        enable = true;
+        dates = "weekly";
+        extraArgs = " --keep 5 --keep-since 10d";
+      };
+    };
     topgrade = {
       enable = true;
       settings = {
@@ -172,17 +172,6 @@ in
         {
           path = "~/.gitconfig.local";
         }
-      ];
-      ignores = [
-        ".DS_Store"
-        ".*.vim"
-        ".vscode"
-        "*.favdoc"
-        ".direnv/"
-        ".*.local"
-        ".local.*"
-        ".env"
-        ".*.env*"
       ];
     };
     direnv = {
