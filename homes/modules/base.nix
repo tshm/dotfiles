@@ -51,6 +51,8 @@ in
       pkgs.jc
       pkgs.jq
       pkgs.jless
+      # extras
+      #pkgs.chawan
     ];
     file = {
       "${config.xdg.configHome}/k9s/hotkeys.yaml".source = configPath "/k8s/k9s/hotkeys.yaml";

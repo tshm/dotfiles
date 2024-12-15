@@ -22,7 +22,7 @@
             monitor = "eDP-1,1920x1080,0x0,1";
             "exec-once" = [
               "iio-hyprland"
-              "[workspace 1 silent] beeper"
+              "[workspace 1 silent] beeper --ozone-platform-hint=x11"
               "[workspace 2] zen"
               "[workspace 2 silent] kitty"
             ];
