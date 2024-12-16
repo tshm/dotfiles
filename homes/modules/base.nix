@@ -67,12 +67,13 @@ in
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
     nh = {
-      enable = true;
+      # TODO
+      enable = false;
       flake = "/home/${user}/.dotfiles";
       clean = {
-        enable = true;
+        enable = false;
         dates = "weekly";
-        extraArgs = " --keep 5 --keep-since 10d";
+        extraArgs = "--keep 5 --keep-since 10d";
       };
     };
     topgrade = {
