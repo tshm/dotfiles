@@ -5,7 +5,7 @@
   autocrlf = false
   whitespace = cr-at-eol
   pager = delta
-  excludesfile = ~/.dotfiles/gitignore  
+  excludesfile = ~/.dotfiles/gitignore
 [init]
   defaultBranch = main
 [rerere]
