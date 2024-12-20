@@ -17,7 +17,7 @@ echo $btcmd
 
 # Define the menu options
 options+=(
-  "💤 Sleep: systemctl suspend"
+  "⏸ Sleep: systemctl suspend"
   "⏻  Shutdown: systemctl poweroff"
   "🔄 Reboot: systemctl reboot"
 )

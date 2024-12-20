@@ -15,7 +15,7 @@ in
   catppuccin = {
     enable = true;
     accent = "green";
-    pointerCursor.enable = true;
+    cursors.enable = true;
   };
   home = {
     stateVersion = "22.11";
