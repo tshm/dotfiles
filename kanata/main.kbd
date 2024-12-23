@@ -1,0 +1,2 @@
+(defcfg process-unmapped-keys yes)
+(include "./map.kbd")

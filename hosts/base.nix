@@ -136,6 +136,19 @@ in
     };
   };
 
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      internalKeyboard = {
+        # devices = [
+        #   "/dev/input/by-id/usb-Lenovo_ThinkPad_Compact_USB_Keyboard_with_TrackPoint-event-kbd"
+        # ];
+        extraDefCfg = "process-unmapped-keys yes";
+        config = builtins.readFile ./../kanata/map.kbd;
+      };
+    };
+  };
+
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
