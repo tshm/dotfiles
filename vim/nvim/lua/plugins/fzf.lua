@@ -1,5 +1,5 @@
 return {
-  "nvim-telescope/telescope.nvim",
+  "ibhagwan/fzf-lua",
   keys = {
     { "<leader><space>", false },
   },
