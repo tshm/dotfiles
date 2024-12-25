@@ -173,7 +173,7 @@ mode "resize" {
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width $step px or $step ppt
-        bindsym Down resize grow height $step 
+        bindsym Down resize grow height $step
         bindsym Up resize shrink height $step px or $step ppt
         bindsym Right resize grow width $step px or $step ppt
 

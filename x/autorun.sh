@@ -16,4 +16,3 @@ run pa-applet
 # run volumeicon
 run cbatticon
 run xfce4-power-manager
-

@@ -42,9 +42,6 @@ in
       # devtools
       pkgs.devbox
       pkgs.onefetch
-      pkgs.git-cliff
-      pkgs.git-imerge
-      pkgs.git-absorb
       pkgs.tig
       pkgs.lnav
       pkgs.scc
@@ -293,4 +290,3 @@ in
     };
   };
 }
-

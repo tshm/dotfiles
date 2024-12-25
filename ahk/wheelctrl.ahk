@@ -17,7 +17,7 @@ MButton::
   MouseGetPos, X0, Y0
   fn := Func("SendWheelEvent").bind(Y0, Scale)
   SetTimer, % fn, 100
-return 
+return
 
 MButton Up::
   MouseGetPos, X1, Y1
@@ -57,7 +57,7 @@ MouseOperation(op, acc:=1)
   } else if (op == "RIGHT") {
     MouseMove,  step, 0, 0, R
   } else if (op == "LCLICK") {
-    Click 
+    Click
   } else if (op == "RCLICK") {
     Click, right
   } else if (op == "WHEELUP") {
@@ -104,4 +104,3 @@ e::MouseOperation("WHEELDOWN")
 
 #If DebugP
 !^r::Reload
-

@@ -29,7 +29,6 @@ selected=$(printf '%s\n' "${options[@]}" | rofi -dmenu -i -p "Select an action:"
 if [[ -n "$selected" ]]; then
   cmd=$(echo $selected | cut -d: -f2- | xargs)
   result=$(eval $cmd)
-  [ "$?" = "0" ] && icon=✅ || icon=❌ 
+  [ "$?" = "0" ] && icon=✅ || icon=❌
   notify-send "$icon" "$result"
 fi
-

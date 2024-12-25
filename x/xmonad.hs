@@ -44,4 +44,3 @@ main = do
 		  -- ex=`cat ~/.dmenu | dmenu` && exec $ex
 		  ("<XF86AudioMedia>", spawn "sudo systemctl hibernate")
 		]
-

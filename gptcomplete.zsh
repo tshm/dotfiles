@@ -1,3 +1,4 @@
+#!/bin/zsh
 # The function that will generate suggestions
 _complete_with_llm() {
   # The prompt to send to the API
@@ -17,14 +18,14 @@ Your job is to come up with suggestions by guessing most probable next character
 - console buffer may include my intention as a comment prefixed by ##.
 EOS
 
-  [ -z "$LLM_API_KEY" ] && echo 'Please set $LLM_API_KEY' && return
+  [ -z "$LLM_API_KEY" ] && echo "Please set $LLM_API_KEY" && return
   # Get the current buffer and cursor position
   local buffer="${BUFFER}"
   local cursor=$CURSOR
 
   # Trim the buffer to the current cursor position
   local prefix=${buffer:0:$cursor}
-  local console=$(tmux capture-pane -pS - | sed '/^$/d' | sed '$d' | tail -${LLM_CONTEXT_SIZE})
+  local console=$(tmux capture-pane -pS - | sed '/^$/d' | sed '$d' | tail -"${LLM_CONTEXT_SIZE}")
 
   # get tmux buffer (excluding the last line)
   read -r -d '' userprompt <<-EOF
@@ -39,16 +40,16 @@ EOF
   # Construct the API request
   local headers=(-H "Authorization: Bearer $LLM_API_KEY" -H "Content-Type: application/json")
   # local data='{"messages": "'"${LLMPROMPT}${prefix}"'"}'
-  local data='{"messages": [{"role": "system", "content": '$(jq -Rs . <<< $LLM_SYSTEM_PROMPT)'}, {"role": "user", "content": '$(jq -Rs . <<< $userprompt)'}], "model": "'"$LLM_MODEL"'"}'
-  echo -E $data > /tmp/in.json
+  local data='{"messages": [{"role": "system", "content": '$(jq -Rs . <<< $LLM_SYSTEM_PROMPT)'}, {"role": "user", "content": '$(jq -Rs . <<< "$userprompt")'}], "model": "'"$LLM_MODEL"'"}'
+  echo -E "$data" > /tmp/in.json
   # Make the API request
   local response=$(curl -s -X POST $LLM_API_URL "${headers[@]}" -d "$data")
 
   [ -n "$LLM_DEBUG" ] && echo $data && return
-  echo $response > /tmp/out.json
+  echo "$response" > /tmp/out.json
 
   # Extract the suggestions from the json response
-  local choice=$(echo $response | jq -r '.choices[0].message.content')
+  local choice=$(echo "$response" | jq -r '.choices[0].message.content')
   local suggestions=(${(f)${choice##*: }})
   suggestions=(${suggestions#*, })
 

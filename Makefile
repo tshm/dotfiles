@@ -16,9 +16,6 @@ nix:
 		-L https://install.determinate.systems/nix | sh -s -- install
 endif
 
-sudo:
-	@sudo echo
-
 ifdef ISNIXOS
 all: sudo home-manager os
 else

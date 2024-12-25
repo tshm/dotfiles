@@ -8,4 +8,3 @@ RemainAfterExit=no
 User=root
 Group=root
 ExecStart=/sbin/rungetty tty7 -u root -g root -- /bin/su tshm -l -c "startx"
-

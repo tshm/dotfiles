@@ -12,7 +12,7 @@ status:;
 	@echo showing k8s status for: ${CONTEXT}
 	$K cluster-info
 	@echo --
-	$K get nodes,hpa,svc,deployment -A 
+	$K get nodes,hpa,svc,deployment -A
 
 setup:;
 	@[ -h .git/hooks/pre-commit ] \

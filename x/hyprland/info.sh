@@ -11,4 +11,3 @@ VPN=$(warp-cli status | cut -d' ' -f3)
 
 notify-send "$(date '+%Y/%m/%d %H:%M')" \
   "$BT$VPN$BAT"
-

@@ -43,7 +43,7 @@
   nuke = "!f() { git branch -D $1; git push origin :$1; }; f"
   diffdump = "!f() { cp $2 new.$(basename $2); git show $1:$2 > old.$(basename $2); }; f"
   xrebase = rebase --strategy=recursive --strategy-option=renormalize
-  xcherry = cherry-pick --strategy=recursive --strategy-option=renormalize 
+  xcherry = cherry-pick --strategy=recursive --strategy-option=renormalize
 [interactive]
   diffFilter = delta --color-only
 [delta]
@@ -89,4 +89,3 @@
   status = i ?git ignore %(file)
   generic = d >git show %(commit)
   # generic = V !sh -c 'git show $1:$2' -- %(commit) %(fileargs)
-

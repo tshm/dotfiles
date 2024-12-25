@@ -7,4 +7,3 @@ Loop Files, %A_ScriptDir%\*.ahk
   }
 }
 ExitApp
-
