@@ -15,10 +15,18 @@
         ];
         wayland.windowManager.hyprland = {
           settings = {
-            device = {
-              name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3";
+            device = [{
+              name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-1";
               sensitivity = 1.0;
-            };
+            }
+              {
+                name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3";
+                sensitivity = 1.0;
+              }
+              {
+                name = "elecom-trackball-mouse-huge-trackball-1";
+                sensitivity = 1.0;
+              }];
             workspace = [
               "1, layoutopt:orientation:right"
               "2, layoutopt:orientation:left"

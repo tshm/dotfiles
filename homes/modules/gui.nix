@@ -38,7 +38,7 @@ in
   home = {
     packages = [
       inputs.hyprswitch.packages."${system}".default
-      inputs.zen-browser.packages."${system}".specific
+      inputs.zen-browser.packages."${system}".default
       pkgs.appimage-run
       pkgs.catppuccin-gtk
       # pkgs.deskflow
