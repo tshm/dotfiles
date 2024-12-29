@@ -22,6 +22,8 @@ else
 all: home-manager
 endif
 
+sudo:; sudo echo sudo
+
 os: sudo
 	which nh && nh os switch || \
 	sudo nixos-rebuild switch --flake .
@@ -55,4 +57,4 @@ kanata/kanata_gui.exe:
 	# powershell.exe "[Environment]::GetFolderPath('Startup')"
 endif
 
-PHONY: all yazi home-manager nix update katana
+PHONY: all yazi home-manager nix update katana sudo
