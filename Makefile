@@ -57,4 +57,7 @@ kanata/kanata_gui.exe:
 	# powershell.exe "[Environment]::GetFolderPath('Startup')"
 endif
 
+.git/hooks/pre-commit:
+	pre-commit install
+
 PHONY: all yazi home-manager nix update katana sudo
