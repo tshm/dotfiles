@@ -41,6 +41,7 @@ in
       inputs.zen-browser.packages."${system}".default
       pkgs.appimage-run
       pkgs.catppuccin-gtk
+      pkgs.hyprshade
       # pkgs.deskflow
       # pkgs.input-leap
       pkgs.bluetuith
