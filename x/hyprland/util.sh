@@ -20,7 +20,7 @@ options+=(
   "⏸ Sleep: systemctl suspend"
   "⏻  Shutdown: systemctl poweroff"
   "🔄 Reboot: systemctl reboot"
-  "🌙 shader: hyprshade toggle"
+  "🌙 shader: hyprshade toggle blue-light-filter"
 )
 
 # Display the options using Rofi
