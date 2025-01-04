@@ -1,26 +1,33 @@
+;; vim: ft=lisp
 (defsrc
   caps
-  a s d f
-  j k l ;
+  a s d f g
+  h j k l ;
 )
 
 (defvar
-  tap-time 200
-  hold-time 200
+  tap-timeout 100
+  hold-timeout 200
+  tt $tap-timeout
+  ht $hold-timeout
 )
 
 (defalias
-  caps (tap-hold $tap-time $hold-time esc lctl)
-  a (tap-hold $tap-time $hold-time a lmet)
-  s (tap-hold $tap-time $hold-time s lalt)
-  d (tap-hold $tap-time $hold-time d lsft)
-  f (tap-hold $tap-time $hold-time f lctl)
-  j (tap-hold $tap-time $hold-time j rctl)
-  k (tap-hold $tap-time $hold-time k rsft)
-  l (tap-hold $tap-time $hold-time l ralt)
-  ; (tap-hold $tap-time $hold-time ; rmet)
+  caps (tap-hold $tt $ht esc (layer-while-held arrows))
+  ;;
+  a (tap-hold $tt $ht a lmet)
+  s (tap-hold $tt $ht s lalt)
+  d (tap-hold $tt $ht d lsft)
+  f (tap-hold $tt $ht f lctl)
+  j (tap-hold $tt $ht j rctl)
+  k (tap-hold $tt $ht k rsft)
+  l (tap-hold $tt $ht l ralt)
+  ; (tap-hold $tt $ht ; rmet)
 )
 
 (deflayer base
-  @caps @a  @s  @d  @f  @j  @k  @l  @;
+  @caps  @a @s @d @f _  _ @j @k @l @;
+)
+(deflayer arrows
+  _  lrld _ _ _ _  left down up right _
 )
