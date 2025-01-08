@@ -1,18 +1,21 @@
 ;; vim: ft=lisp
+;; kanata configuration
 (defsrc
+  spc
   caps
   a s d f g
   h j k l ;
 )
 
 (defvar
-  tap-timeout 100
+  tap-timeout 200
   hold-timeout 200
   tt $tap-timeout
   ht $hold-timeout
 )
 
 (defalias
+  spc (tap-hold $tt $ht spc lalt)
   caps (tap-hold $tt $ht esc (layer-while-held arrows))
   ;;
   a (tap-hold $tt $ht a lmet)
@@ -26,8 +29,14 @@
 )
 
 (deflayer base
-  @caps  @a @s @d @f _  _ @j @k @l @;
+  @spc
+  @caps
+  @a @s @d @f _
+  _ @j @k @l @;
 )
 (deflayer arrows
-  _  lrld _ _ _ _  left down up right _
+  _
+  _
+  _ _ _ _ _
+  left down up right lrld
 )

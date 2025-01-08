@@ -8,6 +8,7 @@
     pkgs.cargo
     pkgs.go
     pkgs.nodejs
+    pkgs.sqlite
     # git extras
     pkgs.git-cliff
     pkgs.git-imerge
