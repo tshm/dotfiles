@@ -136,6 +136,15 @@ in
     };
   };
 
+  programs.nh = {
+    enable = true;
+    flake = "/home/${user}/.dotfiles";
+    clean = {
+      enable = true;
+      dates = "weekly";
+      extraArgs = "--keep 5 --keep-since 10d";
+    };
+  };
   services.kanata = {
     enable = true;
     keyboards = {

@@ -63,16 +63,6 @@ in
   programs = {
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
-    nh = {
-      # TODO
-      enable = false;
-      flake = "/home/${user}/.dotfiles";
-      clean = {
-        enable = false;
-        dates = "weekly";
-        extraArgs = "--keep 5 --keep-since 10d";
-      };
-    };
     topgrade = {
       enable = true;
       settings = {
