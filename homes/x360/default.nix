@@ -13,21 +13,11 @@
           pkgs.deno
           pkgs.iio-hyprland
         ];
-        wayland.windowManager.hyprland = {
-          settings = {
-            device = {
-              name = "syna3290:01-06cb:cd4f-touchpad";
-              sensitivity = 0.0;
-            };
-            monitor = "eDP-1,1920x1080,0x0,1";
-            "exec-once" = [
-              "iio-hyprland"
-              "[workspace 1 silent] beeper --ozone-platform-hint=x11"
-              "[workspace 2] zen"
-              "[workspace 2 silent] kitty"
-            ];
-          };
-        };
+        wayland.windowManager.hyprland.extraConfig = ''
+          monitor = "eDP-1,1920x1080,0x0,1"
+          workspace=1, layoutopt:orientation:right
+          workspace=2, layoutopt:orientation:left
+        '';
         programs.java = { enable = false; };
         programs.go = { enable = false; };
       }

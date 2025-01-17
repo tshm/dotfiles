@@ -97,10 +97,23 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland; # use system installed binary
-    extraConfig = ''
-      # extraConfig
-      source = ~/.dotfiles/x/hyprland/vars.conf
-      source = ~/.dotfiles/x/hyprland/general.conf
-    '';
+    settings = {
+      source = [
+        "~/.dotfiles/x/hyprland/vars.conf"
+        "~/.dotfiles/x/hyprland/general.conf"
+      ];
+      device = [
+        { name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-1"; sensitivity = 1.0; }
+        { name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3"; sensitivity = 1.0; }
+        { name = "elecom-trackball-mouse-huge-trackball-1"; sensitivity = 1.0; }
+        { name = "syna3290:01-06cb:cd4f-touchpad"; sensitivity = 0.0; }
+      ];
+      exec-once = [
+        "[workspace 2] zen"
+        # temporary fix...
+        "[workspace 1 silent] beeper --ozone-platform-hint=x11"
+        "[workspace 2 silent] $terminal"
+      ];
+    };
   };
 }
