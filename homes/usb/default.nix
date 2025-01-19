@@ -13,7 +13,7 @@
           pkgs.deno
         ];
         wayland.windowManager.hyprland.extraConfig = ''
-          monitor = "eDP-1,1920x1080,0x0,1"
+          monitor = eDP-1,1920x1080,0x0,1
           workspace=1, layoutopt:orientation:right
           workspace=2, layoutopt:orientation:left
         '';
