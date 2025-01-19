@@ -213,12 +213,21 @@ in
       enable = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
+      initLua = ''
+        require("git"):setup()
+      '';
       settings = {
         log = { enabled = true; };
         manager = {
           ratio = [ 0 3 7 ];
           sort_by = "natural";
           sort_dir_first = true;
+        };
+        plugin = {
+          prepend_fetchers = [
+            { id = "git"; name = "*"; run = "git"; }
+            { id = "git"; name = "*/"; run = "git"; }
+          ];
         };
         opener = {
           less = [

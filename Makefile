@@ -31,9 +31,12 @@ os: sudo
 update:
 	nix flake update
 
-yazi: ~/.config/yazi/plugins/yazi-rs
-~/.config/yazi/plugins/yazi-rs:
+yazi: ~/.config/yazi/plugins/hide-preview.yazi/ ~/.config/yazi/plugins/git.yazi
+~/.config/yazi/plugins/hide-preview.yazi:
 	ya pack -a yazi-rs/plugins:hide-preview
+
+~/.config/yazi/plugins/git.yazi:
+	ya pack -a yazi-rs/plugins:git
 
 nvim: ~/.local/bin/nvim ~/.config/nvim
 ~/.local/bin/nvim:
