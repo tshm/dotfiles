@@ -15,12 +15,17 @@ btdevice=$(bluetoothctl devices Connected)
 }
 echo $btcmd
 
+capture() {
+  grim -g $(slurp -w 0) - | wl-copy
+}
+
 # Define the menu options
 options+=(
   "⏸ Sleep: systemctl suspend"
   "⏻  Shutdown: systemctl poweroff"
   "🔄 Reboot: systemctl reboot"
   "🌙 shader: hyprshade toggle blue-light-filter"
+  "capture: capture"
 )
 
 # Display the options using Rofi
