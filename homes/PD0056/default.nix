@@ -10,6 +10,7 @@
       ../modules/dev.nix
       {
         home.packages = [
+          pkgs.sshfs
           pkgs.qsv
           pkgs.deno
           pkgs.teller

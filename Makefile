@@ -60,7 +60,8 @@ kanata/kanata_gui.exe:
 	# powershell.exe "[Environment]::GetFolderPath('Startup')"
 endif
 
-.git/hooks/pre-commit:
-	pre-commit install
+.git/hooks/pre-commit: flake.lock
+	pre-commit autoupdate
+	pre-commit install -f
 
 PHONY: all yazi home-manager nix update katana sudo
