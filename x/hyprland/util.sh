@@ -16,7 +16,7 @@ btdevice=$(bluetoothctl devices Connected)
 echo $btcmd
 
 capture() {
-  grim -g $(slurp -w 0) - | wl-copy
+  grim -g "$(slurp -w 0)" - | wl-copy
 }
 
 # Define the menu options
