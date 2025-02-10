@@ -7,7 +7,7 @@
     "cloudflared@latest",
     "terraform@latest",
     "talosctl@latest",
-    "kubernetes-helm@latest"
+    "kubernetes-helm@3.17.0"
   ],
   "shell": {
     "init_hook": [
