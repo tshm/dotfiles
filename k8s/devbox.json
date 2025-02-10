@@ -4,7 +4,7 @@
     "kubeconform@latest",
     "kustomize@latest",
     "k9s@latest",
-    "cloudflared@latest",
+    "cloudflared@2024.12.2",
     "terraform@latest",
     "talosctl@latest",
     "kubernetes-helm@latest"
