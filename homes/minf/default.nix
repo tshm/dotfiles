@@ -12,6 +12,9 @@
         home.packages = [
           pkgs.qsv
           pkgs.deno
+          # pkgs.ollama
+          pkgs.nodePackages.localtunnel
+          # pkgs.lmstudio
         ];
         wayland.windowManager.hyprland.extraConfig = ''
           workspace=1, layoutopt:orientation:right

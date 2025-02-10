@@ -53,7 +53,7 @@ in
       pkgs.ripdrag
       pkgs.ags
       pkgs.beeper
-      pkgs.vscode-fhs
+      pkgs.vscode
       pkgs.neovide
       pkgs.pamixer
       pkgs.brightnessctl
