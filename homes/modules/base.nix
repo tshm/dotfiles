@@ -251,8 +251,8 @@ in
       keymap = {
         manager = {
           prepend_keymap = [
-            { on = "k"; run = "plugin arrow --args=-1"; }
-            { on = "j"; run = "plugin arrow --args=1"; }
+            { on = "k"; run = "plugin arrow -1"; }
+            { on = "j"; run = "plugin arrow 1"; }
             { on = "<Tab>"; run = "plugin tab"; desc = "create or switch tab"; }
             { on = "T"; run = "plugin hide-preview"; desc = "Toggle preview"; }
             { on = "<Enter>"; run = "plugin enter"; desc = "Enter dir"; }
