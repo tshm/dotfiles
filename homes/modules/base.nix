@@ -43,6 +43,7 @@ in
       pkgs.devbox
       pkgs.onefetch
       pkgs.tig
+      pkgs.pre-commit
       pkgs.lnav
       pkgs.scc
       pkgs.jc

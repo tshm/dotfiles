@@ -13,7 +13,9 @@
     pkgs.git-cliff
     pkgs.git-imerge
     pkgs.git-absorb
-    pkgs.pre-commit
     pkgs.commitizen
+    # misc
+    # pkgs.radicle-node
+    # pkgs.oils-for-unix
   ];
 }
