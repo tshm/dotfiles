@@ -2,173 +2,53 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] - 2024-12-03
+## [1.1.0] - 2025-02-14
 
 ### 🚀 Features
 
-- Tmux nested session
-- *(lf)* Add lfrc
-- *(tmux)* Session switcher
-- *(backup)* Backup script
-- *(nvim)* Autochdir for telescope relative
-- *(neovim)* Use Neogit
-- *(neovim)* Add yanky
-- *(k9s)* Add shortcuts
-- *(nix)* Use flake for hm
+- *(util)* Add utility rofi script
+- *(k8s)* Add proxmox sample
 
 ### 🐛 Bug Fixes
 
-- *(k8s)* Update version
-- Remove bin/e
-- *(nix)* Fix path
-- *(nix)* Add default direnv
-- Use nix-installer
-- Use resh
-- Add zt cmd
-- Nnn pager
-- *(zsh)* Add zz compl
-- Disable leap
-- *(git)* Remove git abort
-- Add scr alias
-- Wezterm
-- *(wezterm)* Mkdir config dir
-- Colorscheme
-- *(nnn)* Use nnn
-- *(nvim)* Disable flash
-- *(tig)* Add diff shortcut
-- *(nnn)* Use plugins
-- Remove nix-env --install
-- Fzf completion
-- *(nix)* Installation
-- *(wsl)* Add config
-- *(wsl)* Add swap=0
-- Ff better line handling
-- *(git)* Fix search alias
-- *(zsh)* Expand aliases
-- *(zsh)* Use whence instead of which
-- *(topgrade)* Add zinit updater
-- *(git)* Add rerere
-- *(git)* Use explicit option
-- *(tmux)* Splitw uses -h flag now
-- *(terraform)* Update
-- *(git)* Adjust config
-- *(nix)* Use flake installer
-- *(git)* Makefile
-- *(nix)* Use yazi
-- Add mpv conf
-- *(nix)* Use ctpv
-- *(nix)* Handle tmux from home-manager
-- Remove tmux.conf
-- *(zsh)* Escape fix
-- *(tmux)* Mark sessions
-- Home manager switch
-- *(git)* Nuke
-- Suport waylant
-- *(nix)* Typo
-- Use atuin
-- Sshconfig
-- *(zsh)* Adjust path of clip
-- Mpv conf
-- *(wezterm)* Add mouse binding
-- Add hyprland config
-- *(zsh)* Use mcfly for now
-- *(hyprland)* Master switch
-- *(nix)* Enable unfree apps
-- *(tmux)* Bind C-k for popup
-- *(home-manager)* Use topgrade
-- *(hyprland)* Add waybar
-- *(zsh)* Use atuin
-- *(hyprland)* Add media keys
-- *(tmux)* Bind g
-- *(yazi)* Use yazi plugins
-- *(home-manager)* Configure git
-- Use git cliff
-- *(nix)* Remove mime type
-- Cleanup
-- *(zsh)* Scptar
-- *(nix)* Manage more conf files in hm
-- *(hyprland)* Manage config via homemanager
-- Adjust for nixos
-- Add waybar into hm
-- *(yazi)* Handle custom plugin in hm
-- Add beeper
-- *(waybar)* Power menu
-- *(nix)* IME support
-- *(nix)* Integrate with nix-index-database
-- *(hypr)* Adjust icons
-- *(nix)* Symlink fonts for flatpak apps
-- *(hypr)* Adjust layout
-- *(nix)* Powerbutton
-- *(hyprland)* Fix low contrast theme
-- *(nix)* Use nixos-hardware
-- *(nixos)* Enable flake
-- *(home-manager)* Split host based config
-- *(nix)* Add pi
-- *(gui)* Waybar toggling
-- *(hm)* Use symlink
-- *(x)* Adjust IME config
-- *(x)* Use zen-browser via flake
-- *(home)* Add nh
-- *(hm)* Split dev dependency
-- *(nix)* Support hibernation
-- *(hm)* Add gui tools
-- *(nix)* Use flake
-- *(hyprland)* Add screenshot
-- *(tmux)* Use sensible plugin
-- *(nixos)* Split gui out of base
-- *(hm)* Add carapace
-- *(nix)* Cleanup
-- *(nix)* Use realpath for avoiding symlinks
-- *(nix)* Update hw
-- *(nvim)* Update
-- *(gui)* Use cursor for now
-- *(hm)* Update flake
-- *(hm)* Add onefetch
-- *(vim)* Update
-- *(zsh)* Completion problem
-- *(nix)* Refactor
-- *(hyprland)* Add hyprswitch
-- *(fzf)* Add zsh binding
-- *(nix)* Cleanup
-- *(mpv)* Put config in nix
-- *(gui)* Use swaync
-- *(hm)* Add info
-- Update info.sh
-- Update aliases
-- *(nix)* Restruct
-- Update aliases
-- *(nix)* Use db
-- *(nix)* Mime
-- *(hm)* Integrate atuin
-- *(nix)* Install feh
-- *(nix)* Update flake
-- *(tmux)* Use mouse input
-- *(nix)* Update flake
-- *(hypr)* Adjust sensitivity
-- *(hm)* Theming up
-- *(tmux)* Adjust color
-- *(hm)* Simplify Makefile
-- *(nixos)* Add terminal login session
-- *(hm)* Add PN0093
+- *(zsh)* Add neovide
+- *(nix)* Enable iio
+- *(direnv)* Add alias hack
+- *(gui)* Add sleep cmd
+- *(nh)* Broken beeper use x11 mode
+- *(hm)* Alias hack
+- *(git)* Keep gitignore for windows usage
+- *(nh)* Disable nh service
+- *(kanata)* Setup for wsl setup
+- Lazyvim use fzf
+- Missed sudo rule
+- *(gui)* Support hyprshade
+- *(git)* Install pre-commit hook via envrc
+- *(gui)* Allow overwrap
+- *(kanata)* Add caps keymap
+- *(kanata)* Experiment space -> alt mapping
+- *(yazi)* Allow kj to warp
+- *(yaxi)* Update new plugin
+- *(git)* Verbump support
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove old aliases
-- Use mcfly
-- Use fzf for interactive grep
-- Update lazy.nvim
-- Update nvim
+- *(nh)* Update
+- Update flake
+- Flake update
+- Add kanata
+- Update
+- Add pre-commit hook
+- *(nix)* Update
+- *(nix)* Update
+- Update
+- Update
+- Update flake
+- Update pre-commit
+- Update flake
+- Update
 
-### Experiment
-
-- Manage nixos config here
-
-### Nix
-
-- Use git-absorb
-- Use loginExtra
-
-## [1.0] - 2023-10-24
+## [1.0.0] - 2024-12-03
 
 ### 🚀 Features
 
@@ -193,6 +73,15 @@ All notable changes to this project will be documented in this file.
 - Add zz cmd
 - *(zsh)* Define zz alias
 - *(zsh)* Reuse original _files comp
+- Tmux nested session
+- *(lf)* Add lfrc
+- *(tmux)* Session switcher
+- *(backup)* Backup script
+- *(nvim)* Autochdir for telescope relative
+- *(neovim)* Use Neogit
+- *(neovim)* Add yanky
+- *(k9s)* Add shortcuts
+- *(nix)* Use flake for hm
 
 ### 🐛 Bug Fixes
 
@@ -340,6 +229,167 @@ All notable changes to this project will be documented in this file.
 - *(git)* Use renormalize strategy
 - *(nix)* Fix nix installation
 - *(vim)* Disable autoformat
+- *(k8s)* Update version
+- Remove bin/e
+- *(nix)* Fix path
+- *(nix)* Add default direnv
+- Use nix-installer
+- Use resh
+- Add zt cmd
+- Nnn pager
+- *(zsh)* Add zz compl
+- Disable leap
+- *(git)* Remove git abort
+- Add scr alias
+- Wezterm
+- *(wezterm)* Mkdir config dir
+- Colorscheme
+- *(nnn)* Use nnn
+- *(nvim)* Disable flash
+- *(tig)* Add diff shortcut
+- *(nnn)* Use plugins
+- Remove nix-env --install
+- Fzf completion
+- *(nix)* Installation
+- *(wsl)* Add config
+- *(wsl)* Add swap=0
+- Ff better line handling
+- *(git)* Fix search alias
+- *(zsh)* Expand aliases
+- *(zsh)* Use whence instead of which
+- *(topgrade)* Add zinit updater
+- *(git)* Add rerere
+- *(git)* Use explicit option
+- *(tmux)* Splitw uses -h flag now
+- *(terraform)* Update
+- *(git)* Adjust config
+- *(nix)* Use flake installer
+- *(git)* Makefile
+- *(nix)* Use yazi
+- Add mpv conf
+- *(nix)* Use ctpv
+- *(nix)* Handle tmux from home-manager
+- Remove tmux.conf
+- *(zsh)* Escape fix
+- *(tmux)* Mark sessions
+- Home manager switch
+- *(git)* Nuke
+- Suport waylant
+- *(nix)* Typo
+- Use atuin
+- Sshconfig
+- *(zsh)* Adjust path of clip
+- Mpv conf
+- *(wezterm)* Add mouse binding
+- Add hyprland config
+- *(zsh)* Use mcfly for now
+- *(hyprland)* Master switch
+- *(nix)* Enable unfree apps
+- *(tmux)* Bind C-k for popup
+- *(home-manager)* Use topgrade
+- *(hyprland)* Add waybar
+- *(zsh)* Use atuin
+- *(hyprland)* Add media keys
+- *(tmux)* Bind g
+- *(yazi)* Use yazi plugins
+- *(home-manager)* Configure git
+- Use git cliff
+- *(nix)* Remove mime type
+- Cleanup
+- *(zsh)* Scptar
+- *(nix)* Manage more conf files in hm
+- *(hyprland)* Manage config via homemanager
+- Adjust for nixos
+- Add waybar into hm
+- *(yazi)* Handle custom plugin in hm
+- Add beeper
+- *(waybar)* Power menu
+- *(nix)* IME support
+- *(nix)* Integrate with nix-index-database
+- *(hypr)* Adjust icons
+- *(nix)* Symlink fonts for flatpak apps
+- *(hypr)* Adjust layout
+- *(nix)* Powerbutton
+- *(hyprland)* Fix low contrast theme
+- *(nix)* Use nixos-hardware
+- *(nixos)* Enable flake
+- *(home-manager)* Split host based config
+- *(nix)* Add pi
+- *(gui)* Waybar toggling
+- *(hm)* Use symlink
+- *(x)* Adjust IME config
+- *(x)* Use zen-browser via flake
+- *(home)* Add nh
+- *(hm)* Split dev dependency
+- *(nix)* Support hibernation
+- *(hm)* Add gui tools
+- *(nix)* Use flake
+- *(hyprland)* Add screenshot
+- *(tmux)* Use sensible plugin
+- *(nixos)* Split gui out of base
+- *(hm)* Add carapace
+- *(nix)* Cleanup
+- *(nix)* Use realpath for avoiding symlinks
+- *(nix)* Update hw
+- *(nvim)* Update
+- *(gui)* Use cursor for now
+- *(hm)* Update flake
+- *(hm)* Add onefetch
+- *(vim)* Update
+- *(zsh)* Completion problem
+- *(nix)* Refactor
+- *(hyprland)* Add hyprswitch
+- *(fzf)* Add zsh binding
+- *(nix)* Cleanup
+- *(mpv)* Put config in nix
+- *(gui)* Use swaync
+- *(hm)* Add info
+- Update info.sh
+- Update aliases
+- *(nix)* Restruct
+- Update aliases
+- *(nix)* Use db
+- *(nix)* Mime
+- *(hm)* Integrate atuin
+- *(nix)* Install feh
+- *(nix)* Update flake
+- *(tmux)* Use mouse input
+- *(nix)* Update flake
+- *(hypr)* Adjust sensitivity
+- *(hm)* Theming up
+- *(tmux)* Adjust color
+- *(hm)* Simplify Makefile
+- *(nixos)* Add terminal login session
+- *(hm)* Add PN0093
+
+### 💼 Other
+
+- Local config inclusion
+- Local config inclusion
+- Add quote func / refactor cmd stack
+- Use unite-session for default
+- Use unite-gitlsfiles
+- Wrong quotation
+- Wrong passkey format
+- 0prev should not be kept as v:this_session, use old copy instead.
+- Fzf handling
+- Key collision
+- Support clipboard access via unite.
+- Wrap/list toggle unite cmd
+- Bind history-search
+- Use 256 color
+- Avoid unnesessary compinit
+- Sanitize config everytime
+- Make --prune default
+- Zplugin -> zinit
+- Update plugins
+- Add docker cleanup script
+- Adjust hint mode for google
+- Use bit
+- Put installer
+- Use git-absorb
+- Use loginExtra
+- Manage nixos config here
 
 ### 🚜 Refactor
 
@@ -355,55 +405,10 @@ All notable changes to this project will be documented in this file.
 - Refactor
 - Update home-manager
 - *(nvim)* Use codeium.nvim
-
-### Bugfix
-
-- Wrong quotation
-- Wrong passkey format
-- 0prev should not be kept as v:this_session, use old copy instead.
-- Fzf handling
-- Key collision
-- Support clipboard access via unite.
-- Wrap/list toggle unite cmd
-
-### Fish
-
-- Local config inclusion
-- Local config inclusion
-- Add quote func / refactor cmd stack
-
-### Gitconfig
-
-- Make --prune default
-
-### Misc
-
-- Update plugins
-- Add docker cleanup script
-- Adjust hint mode for google
-- Use bit
-- Put installer
-
-### Rename
-
-- Zplugin -> zinit
-
-### Tmux
-
-- Use 256 color
-
-### Tridactylrc
-
-- Sanitize config everytime
-
-### Vimrc
-
-- Use unite-session for default
-- Use unite-gitlsfiles
-
-### Zsh
-
-- Bind history-search
-- Avoid unnesessary compinit
+- Remove old aliases
+- Use mcfly
+- Use fzf for interactive grep
+- Update lazy.nvim
+- Update nvim
 
 <!-- generated by git-cliff -->
