@@ -187,7 +187,7 @@ in
           cat <<EOT > $target
         #!/usr/bin/env bash
         PATH="$oldpath"
-        eval $@ \$@
+        exec $@ \$@
         EOT
           chmod +x "$target"
         }

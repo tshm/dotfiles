@@ -19,9 +19,9 @@
 [alias]
   bump = !bash -c '\
     git diff --quiet --ignore-submodules HEAD &&\
-    git-cliff --bump -o && git commit CHANGELOG.md -m \"chore: bump version\" &&\
-    export V=$(git-cliff --bumped-version) &&\
-    git tag $V -m \"bump to $V\"'
+    git cliff --bump -o && git commit CHANGELOG.md -m \"chore: bump version\" &&\
+    export V=$(git cliff --bumped-version) && echo $V &&\
+    git tag $V -m \"bump to $V\" || git status -sb'
   mt = maintenance
   st = status -sb
   br = branch -vv
