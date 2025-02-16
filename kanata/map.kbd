@@ -31,8 +31,8 @@
 (deflayer base
   @spc
   @caps
-  @a @s @d @f _
-  _ @j @k @l @;
+  @a @s _ @f _
+  _ @j _ @l @;
 )
 (deflayer arrows
   _
