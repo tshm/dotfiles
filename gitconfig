@@ -75,6 +75,8 @@
 [user]
   name = Tosh Satake
   email = 2sm@csc.jp
+[rebase]
+  updateRefs = true
 [pull]
   rebase = true
 [push]
