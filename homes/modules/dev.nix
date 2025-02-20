@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, system, ... } @ inputs:
 
 {
   home.packages = [
@@ -15,6 +15,7 @@
     pkgs.git-absorb
     pkgs.commitizen
     # misc
+    inputs.localias.packages."${system}".default
     # pkgs.radicle-node
     # pkgs.oils-for-unix
   ];

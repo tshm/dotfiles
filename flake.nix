@@ -15,6 +15,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    localias.url = "github:peterldowns/localias";
   };
 
   outputs = { self, nixpkgs, ... } @ args:
