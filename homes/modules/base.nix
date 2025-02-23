@@ -76,7 +76,7 @@ in
           cleanup = true;
         };
         commands = {
-          "zinit" = "zsh -i -c 'source ~/.dotfiles/zsh/zshrc && zinit update'";
+          # "zinit" = "zsh -i -c 'source ~/.dotfiles/zsh/zshrc && zinit update'";
         };
       };
     };
