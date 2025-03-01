@@ -71,7 +71,7 @@ in
           pre_sudo = true;
           no_retry = true;
           no_self_update = true;
-          disable = [ "node" ];
+          disable = [ "node" "nix" ];
           set_title = false;
           cleanup = true;
         };
