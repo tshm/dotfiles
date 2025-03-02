@@ -87,7 +87,6 @@
     pkgs.p7zip
     pkgs.poppler
     pkgs.imagemagick
-    pkgs.wofi
     pkgs.pavucontrol
     pkgs.waybar
     pkgs.kitty
