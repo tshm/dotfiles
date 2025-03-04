@@ -111,7 +111,7 @@ in
       exec-once = [
         "[workspace 2] zen"
         # temporary fix...
-        "[workspace 1 silent] beeper --ozone-platform-hint=x11"
+        "[workspace 1 silent] beeper"
         "[workspace 2 silent] $terminal"
       ];
     };
