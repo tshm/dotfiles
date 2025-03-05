@@ -187,16 +187,17 @@ in
           cat <<EOT > $target
         #!/usr/bin/env bash
         PATH="$oldpath"
-        exec $@ \$@
+        exec $@ "\$@"
         EOT
           chmod +x "$target"
         }
-
+        # load .local.envrc
         [ -f ./.local.envrc ] && {
           echo 'direnv: loading ./.local.envrc'
           source ./.local.envrc
         }
-        onefetch
+        # run onefetch
+        git rev-parse --is-inside-work-tree >/dev/null 2>&1 && onefetch
       '';
     };
     eza = {
