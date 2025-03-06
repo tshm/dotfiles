@@ -39,6 +39,7 @@ in
     packages = [
       inputs.hyprswitch.packages."${system}".default
       inputs.zen-browser.packages."${system}".default
+      pkgs.wezterm
       pkgs.appimage-run
       pkgs.catppuccin-gtk
       pkgs.hyprshade
