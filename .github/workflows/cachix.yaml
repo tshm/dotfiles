@@ -1,0 +1,46 @@
+name: "build"
+on:
+  pull_request:
+  push:
+
+jobs:
+  homemanager:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: ["tshm@PN0093"]
+    steps:
+      - name: Checkout flake
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v25
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      # - uses: cachix/cachix-action@v14
+      #   with:
+      #     name: tshmcache
+      #     authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
+      - name: Build ${{ matrix.package }}
+        run: nix run home-manager/master -- build --flake .#${{ matrix.package }}
+
+      - run: nix-shell --run "echo OK"
+
+  # nixos:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       package: ["tshm@x360"]
+  #   steps:
+  #     - name: Checkout flake
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Install nix
+  #       uses: DeterminateSystems/nix-installer-action@v16
+  #
+  #     - name: Build ${{ matrix.package }}
+  #       run: nixos-rebuild build --flake .#${{ matrix.package }}

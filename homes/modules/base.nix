@@ -8,8 +8,25 @@ in
     inputs.nix-index-database.hmModules.nix-index
     inputs.catppuccin.homeManagerModules.catppuccin
   ];
-  nix.package = pkgs.nix;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      trusted-users = [ user ];
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = [
+        "https://cache.nixos.org"
+        "https://nix-community.cachix.org"
+        "https://nixpkgs.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "nixpkgs.cachix.org-1:q91R6hxbwFvDqTSDKwDAV4T5PxqXGxswD8vhONFMeOE="
+      ];
+      keep-derivations = true;
+      keep-outputs = true;
+    };
+  };
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
   catppuccin = {
@@ -23,6 +40,7 @@ in
     homeDirectory = "/home/${user}";
     packages = [
       pkgs.nh
+      pkgs.cachix
       # platform
       pkgs.openssh
       pkgs.file

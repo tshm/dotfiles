@@ -46,7 +46,7 @@
   fonts = {
     enableDefaultPackages = true;
     packages = [
-      pkgs.fira-code-nerdfont
+      pkgs.nerd-fonts.fira-code
       pkgs.noto-fonts-cjk-serif
       pkgs.noto-fonts-cjk-sans
       pkgs.noto-fonts-emoji
@@ -71,7 +71,7 @@
     displayManager.lightdm.enable = false;
     desktopManager.gnome.enable = false;
   };
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
