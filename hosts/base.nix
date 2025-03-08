@@ -3,7 +3,7 @@
 , baselocale ? "en_US.UTF-8"
 , locale ? "ja_JP.UTF-8"
 }:
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, nixsettings, ... }:
 
 let
   useHibernation = builtins.length config.swapDevices > 0;
@@ -18,6 +18,11 @@ in
     kernelParams = lib.mkIf useHibernation [ "mem_sleep_default=deep" ];
     resumeDevice = lib.mkIf useHibernation (builtins.head config.swapDevices).device;
     # initrd.prepend = [ "./acpi_override" ];
+  };
+  nix.settings = nixsettings // {
+    keep-derivations = true;
+    keep-outputs = true;
+    experimental-features = [ "nix-command" "flakes" ];
   };
 
   networking.hostName = host;
@@ -208,6 +213,5 @@ in
   #     "/usr/local/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
   #   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "24.05";
 }

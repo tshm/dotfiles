@@ -8,39 +8,47 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ["tshm@PN0093"]
+        home:
+          - "tshm@PN0093"
+          - "tshm@minf"
+          - "tshm@PD0056"
+          - "tshm@x360"
     steps:
       - name: Checkout flake
         uses: actions/checkout@v4
 
-      - name: Install nix
-        uses: cachix/install-nix-action@v25
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v16
+
+      - uses: cachix/cachix-action@v14
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
+          name: tshmcache
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      # - uses: cachix/cachix-action@v14
-      #   with:
-      #     name: tshmcache
-      #     authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - name: Build ${{ matrix.home }}
+        run: |
+          nix run home-manager/master
+          -- build --flake .#${{ matrix.home }}
 
-      - uses: DeterminateSystems/magic-nix-cache-action@v2
+  nixos:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        host: ["x360", "minf"]
+    steps:
+      - name: Checkout flake
+        uses: actions/checkout@v4
 
-      - name: Build ${{ matrix.package }}
-        run: nix run home-manager/master -- build --flake .#${{ matrix.package }}
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v16
 
-      - run: nix-shell --run "echo OK"
+      - uses: cachix/cachix-action@v14
+        with:
+          name: tshmcache
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-  # nixos:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       package: ["tshm@x360"]
-  #   steps:
-  #     - name: Checkout flake
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Install nix
-  #       uses: DeterminateSystems/nix-installer-action@v16
-  #
-  #     - name: Build ${{ matrix.package }}
-  #       run: nixos-rebuild build --flake .#${{ matrix.package }}
+      - name: Build ${{ matrix.host }}
+        run: |
+          nix --extra-experimental-features
+          "nix-command flakes" build
+          '.#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel'
