@@ -1,11 +1,11 @@
-{ nixpkgs, ... } @ args:
+{ nixpkgs, user, ... } @ args:
 let
   system = "x86_64-linux";
   inputs = args // {
     pkgs = nixpkgs.legacyPackages.${system};
     extraSpecialArgs = args // { inherit system; user = "tshm"; };
     inherit system;
-    user = "tshm";
+    user = user;
   };
 in
 builtins.foldl' (s: i: s // i) { } [
