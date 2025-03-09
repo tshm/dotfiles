@@ -27,7 +27,7 @@ jobs:
 
       - name: Build ${{ matrix.home }}
         run: |
-          nix run home-manager/master
+          nix run home-manager/master \
           -- build --flake .#${{ matrix.home }}
 
   nixos:
@@ -49,6 +49,6 @@ jobs:
 
       - name: Build ${{ matrix.host }}
         run: |
-          nix --extra-experimental-features
-          "nix-command flakes" build
+          nix --extra-experimental-features \
+          "nix-command flakes" build \
           '.#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel'
