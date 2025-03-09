@@ -10,10 +10,14 @@
   defaultBranch = main
 [rerere]
   enabled = true
+  autoupdate = true
 [commit]
+  verbose = true
   template = ~/.dotfiles/gitmessage.txt
 [branch]
   sort = -committerdate
+[tag]
+  sort = version:refname
 [column]
   ui = auto
 [alias]
@@ -56,8 +60,10 @@
 [diff]
   algorithm = histogram
   # external = difft
-  colorMoved = default
+  colorMoved = plain
   compactionHeuristic = true
+  mnemonicPrefix = true
+  renames = true
   tool = "difft"
 [merge]
   # conflictstyle = diff3
@@ -78,11 +84,17 @@
   email = 2sm@csc.jp
 [rebase]
   updateRefs = true
+  autoSquash = true
+  autoStash = true
 [pull]
   rebase = true
+[fetch]
+  prune = true
+  pruneTags = true
+  followTags = true
 [push]
-  autosetupremote = true
-  default = current
+  autosetupRemote = true
+  default = simple
   followTags = true
 [tig]
   # diff-highlight = true
