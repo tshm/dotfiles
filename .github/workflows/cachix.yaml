@@ -1,18 +1,24 @@
-name: "build"
+name: Builder 🛠️
 on:
   pull_request:
   push:
 
 jobs:
   homemanager:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         home:
-          - "tshm@PN0093"
-          - "tshm@minf"
-          - "tshm@PD0056"
-          - "tshm@x360"
+          - runner: "ubuntu-latest"
+            target: "tshm@PN0093"
+          - runner: "ubuntu-latest"
+            target: "tshm@minf"
+          - runner: "ubuntu-latest"
+            target: "tshm@x360"
+          - runner: "ubuntu-latest"
+            target: "tshm@PD0056"
+          - runner: "ubuntu-24.04-arm"
+            target: "pi@spi"
+    runs-on: ${{ matrix.home.runner }}
     steps:
       - name: Checkout flake
         uses: actions/checkout@v4
@@ -25,10 +31,10 @@ jobs:
           name: tshmcache
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - name: Build ${{ matrix.home }}
+      - name: Build ${{ matrix.home.target }} @ ${{ matrix.home.runner}}
         run: |
           nix run home-manager/master \
-          -- build --flake .#${{ matrix.home }}
+          -- build --flake .#${{ matrix.home.target }}
 
   nixos:
     runs-on: ubuntu-latest
