@@ -22,7 +22,7 @@
   ui = auto
 [alias]
   bump = !bash -c '\
-    cd "$GIT_PREFIX" &&\
+    cd "./$GIT_PREFIX" &&\
     git diff --quiet --ignore-submodules HEAD &&\
     git cliff --bump -o && git commit CHANGELOG.md -m \"chore: bump version\" &&\
     export V=$(git cliff --bumped-version) && echo $V &&\
