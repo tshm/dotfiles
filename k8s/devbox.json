@@ -5,7 +5,7 @@
     "kustomize@latest",
     "k9s@latest",
     "cloudflared@latest",
-    "terraform@latest",
+    "terraform@1.11.0",
     "talosctl@latest",
     "kubernetes-helm@latest"
   ],
