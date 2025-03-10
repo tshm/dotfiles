@@ -6,7 +6,7 @@
     "k9s@latest",
     "cloudflared@latest",
     "terraform@latest",
-    "talosctl@latest",
+    "talosctl@1.9.4",
     "kubernetes-helm@latest"
   ],
   "shell": {
