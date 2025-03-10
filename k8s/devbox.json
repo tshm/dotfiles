@@ -2,7 +2,7 @@
   "packages": [
     "kubectl@latest",
     "kubeconform@latest",
-    "kustomize@latest",
+    "kustomize@3.10.0",
     "k9s@latest",
     "cloudflared@latest",
     "terraform@latest",
