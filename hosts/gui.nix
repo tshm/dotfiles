@@ -1,5 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, catppuccin, ... } @ args:
 
+catppuccin.nixosModules.catppuccin args //
 {
   hardware.graphics.enable = true;
 
@@ -39,7 +40,6 @@
   catppuccin = {
     enable = true;
     accent = "green";
-    cursors.enable = true;
   };
 
   programs.dconf = {
