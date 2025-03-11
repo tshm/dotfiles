@@ -36,6 +36,11 @@
       TimeoutStopSec = 10;
     };
   };
+  catppuccin = {
+    enable = true;
+    accent = "green";
+    cursors.enable = true;
+  };
 
   programs.dconf = {
     enable = true;

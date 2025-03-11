@@ -95,6 +95,11 @@ in
     };
     feh.enable = true;
   };
+  catppuccin = {
+    enable = true;
+    accent = "green";
+    cursors.enable = true;
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland; # use system installed binary

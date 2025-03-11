@@ -12,13 +12,12 @@ in
     settings = inputs.nixsettings;
     package = pkgs.nix;
   };
-  targets.genericLinux.enable = true;
-  nixpkgs.config.allowUnfree = true;
   catppuccin = {
     enable = true;
     accent = "green";
-    cursors.enable = true;
   };
+  targets.genericLinux.enable = true;
+  nixpkgs.config.allowUnfree = true;
   home = {
     stateVersion = "22.11";
     username = user;
