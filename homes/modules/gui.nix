@@ -61,6 +61,7 @@ in
       pkgs.slurp
       pkgs.grim
       # extra
+      pkgs.obsidian
       pkgs.brave
     ];
     file = {
