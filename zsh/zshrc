@@ -13,6 +13,9 @@ export LESS='--quit-if-one-screen -R -iMX -x4'
 export LESSOPEN="|~/.dotfiles/lessfilter %s"
 export WORDCHARS="*?_-.[]~&;=!#$%^(){}<>"
 
+[ -S ${XDG_RUNTIME_DIR}podman/podman.sock ] \
+  && export DOCKER_HOST="unix:/${XDG_RUNTIME_DIR}podman/podman.sock"
+
 HISTSIZE=5100
 export HISTFILE=~/.zsh_history
 export SAVEHIST=5000

@@ -9,6 +9,7 @@
       ../modules/wsl.nix
       ../modules/dev.nix
       {
+        targets.genericLinux.enable = true;
         home.packages = [
           pkgs.sshfs
           pkgs.qsv

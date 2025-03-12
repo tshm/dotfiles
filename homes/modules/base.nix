@@ -11,6 +11,10 @@ in
   nix = {
     settings = inputs.nixsettings;
     package = pkgs.nix;
+    gc = {
+      automatic = true;
+      frequency = "weekly";
+    };
   };
   catppuccin = {
     enable = true;

@@ -114,7 +114,7 @@ in
     users = {
       ${user} = {
         isNormalUser = true;
-        extraGroups = [ "networkmanager" "wheel" "syncthing" "docker" ];
+        extraGroups = [ "networkmanager" "wheel" "syncthing" "podman" ];
       };
     };
   };
@@ -133,6 +133,7 @@ in
     podman = {
       enable = true;
       dockerCompat = true;
+      dockerSocket.enable = true;
       defaultNetwork.settings.dns_enabled = true;
     };
     docker = {
