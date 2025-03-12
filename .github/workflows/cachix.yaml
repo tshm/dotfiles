@@ -1,7 +1,13 @@
 name: Builder 🛠️
 on:
   pull_request:
+    paths:
+      - "flake.lock"
+      - "**/*.nix"
   push:
+    paths:
+      - "flake.lock"
+      - "**/*.nix"
 
 jobs:
   homemanager:
