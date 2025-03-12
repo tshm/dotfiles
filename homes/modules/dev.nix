@@ -1,4 +1,4 @@
-{ pkgs, system, ... } @ inputs:
+{ pkgs, system, lib, ... } @ inputs:
 
 {
   home.packages = [
@@ -15,8 +15,13 @@
     pkgs.git-absorb
     pkgs.commitizen
     # misc
-    inputs.localias.packages."${system}".default
     # pkgs.radicle-node
     # pkgs.oils-for-unix
-  ];
+  ] ++ (
+      if (lib.hasInfix "x86" system) then [
+        inputs.localias.packages."${system}".default
+      ]
+      else
+        []
+    );
 }

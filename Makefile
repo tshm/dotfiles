@@ -2,11 +2,17 @@
 ISNIXOS:=$(shell grep ID=nixos /etc/os-release)
 NIX:=$(shell which nix)
 ISWSL:=$(shell uname -a | grep WSL)
-CACHIX:=cachix watch-exec tshmcache
+
+HAS_CASHIX:=$(shell which cachix)
+ifdef HAS_CACHIX
+CACHIX:=cachix watch-exec tshmcache --
+else
+CACHIX:=
+endif
 
 home-manager: nix
-	which nh && ${CACHIX} -- nh home switch || \
-	${CACHIX} -- nix run home-manager/master -- switch --flake .
+	which nh && ${CACHIX} nh home switch || \
+	${CACHIX} nix run home-manager/master -- switch --flake .
 
 ifdef NIX
 nix:; @echo nix exists
@@ -26,8 +32,8 @@ endif
 sudo:; sudo echo sudo
 
 os: sudo
-	which nh && ${CACHIX} -- nh os switch || \
-	${CACHIX} -- sudo nixos-rebuild switch --flake .
+	which nh && ${CACHIX} nh os switch || \
+	${CACHIX} sudo nixos-rebuild switch --flake .
 
 update:
 	ya pack -u

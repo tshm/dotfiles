@@ -170,6 +170,7 @@ in
       nix-direnv.enable = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
+      enableFishIntegration = false;
       config = {
         global.hide_env_diff = true;
       };

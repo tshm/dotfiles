@@ -1,18 +1,19 @@
 { nixpkgs, user, ... } @ args:
 let
-  system = "x86_64-linux";
-  inputs = args // {
+  inputs = system: username: args // {
     pkgs = nixpkgs.legacyPackages.${system};
-    extraSpecialArgs = args // { inherit system; user = "tshm"; };
+    extraSpecialArgs = args // { inherit system; user = username; };
     inherit system;
-    user = user;
+    user = username;
   };
+  arm_inputs = inputs "aarch64-linux" "pi";
+  x86_inputs = inputs "x86_64-linux" user;
 in
 builtins.foldl' (s: i: s // i) { } [
-  (import ./spi inputs)
-  (import ./minf inputs)
-  (import ./PD0056 inputs)
-  (import ./PN0093 inputs)
-  (import ./x360 inputs)
-  (import ./usb inputs)
+  (import ./spi arm_inputs)
+  (import ./minf x86_inputs)
+  (import ./PD0056 x86_inputs)
+  (import ./PN0093 x86_inputs)
+  (import ./x360 x86_inputs)
+  (import ./usb x86_inputs)
 ]
