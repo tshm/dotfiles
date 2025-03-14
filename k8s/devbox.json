@@ -6,7 +6,7 @@
     "k9s@latest",
     "cloudflared@latest",
     "kubernetes-helm@latest",
-    "oci-cli@latest"
+    "oci-cli@3.51.8"
   ],
   "shell": {
     "init_hook": ["echo 'Welcome to devbox!' > /dev/null"],
