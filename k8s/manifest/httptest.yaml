@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-web-server
+  labels:
+    app: test-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test-web
+  template:
+    metadata:
+      labels:
+        app: test-web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html-content
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: html-content
+          configMap:
+            name: test-web-content
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-web-content
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Test K8s Server</title>
+    </head>
+    <body>
+        <h1>Hello from Kubernetes!</h1>
+        <p>This is a test page served from our K8s cluster.</p>
+    </body>
+    </html>
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-web-service
+spec:
+  selector:
+    app: test-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---

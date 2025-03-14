@@ -11,7 +11,7 @@ plugins:
     confirm: true
     args:
       - -c
-      - "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=ubuntu:16.04 --share-processes -- bash"
+      - "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=ubuntu --share-processes -- bash"
   debug:
     shortCut: Shift-D
     description: Add debug container
@@ -22,4 +22,4 @@ plugins:
     confirm: true
     args:
       - -c
-      - "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.12 --share-processes -- bash"
+      - "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot --share-processes -- bash"

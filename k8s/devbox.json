@@ -5,18 +5,13 @@
     "kustomize@latest",
     "k9s@latest",
     "cloudflared@latest",
-    "terraform@latest",
-    "talosctl@0.14.3",
-    "kubernetes-helm@latest"
+    "kubernetes-helm@latest",
+    "oci-cli@latest"
   ],
   "shell": {
-    "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null"
-    ],
+    "init_hook": ["echo 'Welcome to devbox!' > /dev/null"],
     "scripts": {
-      "test": [
-        "echo \"Error: no test specified\" && exit 1"
-      ]
+      "test": ["echo \"Error: no test specified\" && exit 1"]
     }
   }
 }

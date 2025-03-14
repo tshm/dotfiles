@@ -58,12 +58,13 @@ config: ${DIR}/initialSetup/*
 stable = https://charts.helm.sh/stable
 traefik = https://helm.traefik.io/traefik
 jetstack = https://charts.jetstack.io/
-crossplane = https://charts.crossplane.io/stable
+#crossplane = https://charts.crossplane.io/stable
 cilium = https://helm.cilium.io/
+authentik = https://charts.goauthentik.io
 
 helm-%:
-	helm repo ls | grep $* || helm repo add stable $($*)
-helm: helm-stable helm-traefik helm-jetstack helm-crossplane helm-cilium
+	helm repo ls | grep $* || helm repo add $* $($*)
+helm: helm-stable helm-traefik helm-jetstack helm-cilium helm-authentik
 	helm repo update >/dev/null
 
 crossplane: NS := crossplane-system
@@ -71,6 +72,13 @@ crossplane: helm
 	$K get ns ${NS} >|/dev/null 2>&1 || $K create ns ${NS}
 	helm upgrade --install crossplane crossplane-stable/crossplane \
 		--namespace ${NS}
+
+authentik: NS := authentik
+authentik: helm
+	$K get ns ${NS} >|/dev/null 2>&1 || $K create ns ${NS}
+	helm upgrade --install authentik authentik/authentik \
+		--namespace ${NS} \
+		-f ./authentik_values.yaml
 
 cert-manager: NS := cert-manager
 cert-manager: helm
@@ -86,6 +94,7 @@ metallb:
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.8/config/manifests/metallb-native.yaml
 
 ingress: helm
+	[ -z "${HOSTNAME_K8S}" ] && echo 'HOSTNAME_K8S is empty.  export the hostname'; exit 1
 	echo "setting up ingress-controller with hostname: ${HOSTNAME_K8S}"
 	helm upgrade --install traefik traefik/traefik --namespace kube-system \
 		--set fullnameOverride=traefik \
