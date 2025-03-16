@@ -1,6 +1,18 @@
-{ user, config, pkgs, system, ... } @ inputs:
+{ user, config, lib, pkgs, system, ... } @ inputs:
 
 let
+  wrapElectronApp = { appName, binName ? appName }:
+    pkgs.symlinkJoin {
+      name = appName;
+      paths = [ pkgs.${appName} ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = lib.strings.concatStrings [
+        "wrapProgram $out/bin/"
+        binName
+        " --add-flags \"--ozone-platform-hint=x11\""
+        " --add-flags \"--enable-wayland-ime\""
+      ];
+    };
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
@@ -53,7 +65,7 @@ in
       pkgs.copyq
       pkgs.ripdrag
       pkgs.ags
-      pkgs.beeper
+      (wrapElectronApp { appName = "beeper"; })
       pkgs.vscode
       pkgs.neovide
       pkgs.pamixer
@@ -117,7 +129,6 @@ in
       ];
       exec-once = [
         "[workspace 2] zen"
-        # temporary fix...
         "[workspace 1 silent] beeper"
         "[workspace 2 silent] $terminal"
       ];

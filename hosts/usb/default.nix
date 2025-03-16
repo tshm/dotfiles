@@ -1,4 +1,4 @@
-{ nixpkgs, nixos-hardware, ... } @ args:
+{ nixos-hardware, ... } @ args:
 {
   imports = [
     ./hardware-configuration.nix
