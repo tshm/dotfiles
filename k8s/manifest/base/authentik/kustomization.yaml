@@ -1,25 +1,27 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: authentik
 
 resources:
-  - ns.yaml
-#- ingressroute.yaml
+  - HelmRepository.yaml
+  - HelmRelease.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
 
-secretGenerator:
-  - files:
-      - .dockerconfigjson=.docker.config.json
-    name: regcred
-    namespace: apps
-    type: kubernetes.io/dockerconfigjson
+# secretGenerator:
+#   - files:
+#       - .dockerconfigjson=.docker.config.json
+#     name: regcred
+#     namespace: apps
+#     type: kubernetes.io/dockerconfigjson
 
-configMapGenerator:
-  - envs:
-      - .app.env
-    name: env
-    namespace: apps
+# configMapGenerator:
+#   - name: authentik-values
+#     namespace: authentik
+#     files:
+#       - values.yaml=.values.yaml
+
 # replacements:
 #   - source:
 #       fieldPath: data.HOSTNAME_APP

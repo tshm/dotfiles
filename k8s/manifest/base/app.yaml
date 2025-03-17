@@ -35,7 +35,6 @@ spec:
       imagePullSecrets:
         - name: regcred
 ---
-# service intended to be exposed via ingress
 apiVersion: v1
 kind: Service
 metadata:

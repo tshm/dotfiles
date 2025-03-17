@@ -22,21 +22,6 @@ setup:;
 clean_evicted:;
 	$K get pods -A --field-selector=status.phase=Failed -o json | $K delete -f -
 
-help:
-	@echo targets:
-	@echo - create
-	@echo - ingress
-	@echo - cert-manager
-	@echo - config
-	@echo - gitops
-
-install:
-	$(MAKE) create
-	$(MAKE) ingress
-	$(MAKE) cert-manager
-	$(MAKE) config
-	$(MAKE) gitops
-
 # manifest validation
 KUSTOMIZE_DIRS := $(patsubst %/kustomization.yaml,%,$(shell find manifest -name kustomization.yaml))
 CRDS_SCHEMA_LOCATION := 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'
@@ -60,11 +45,10 @@ traefik = https://helm.traefik.io/traefik
 jetstack = https://charts.jetstack.io/
 #crossplane = https://charts.crossplane.io/stable
 cilium = https://helm.cilium.io/
-authentik = https://charts.goauthentik.io
 
 helm-%:
 	helm repo ls | grep $* || helm repo add $* $($*)
-helm: helm-stable helm-traefik helm-jetstack helm-cilium helm-authentik
+helm: helm-stable helm-traefik helm-jetstack helm-cilium
 	helm repo update >/dev/null
 
 crossplane: NS := crossplane-system
@@ -72,13 +56,6 @@ crossplane: helm
 	$K get ns ${NS} >|/dev/null 2>&1 || $K create ns ${NS}
 	helm upgrade --install crossplane crossplane-stable/crossplane \
 		--namespace ${NS}
-
-authentik: NS := authentik
-authentik: helm
-	$K get ns ${NS} >|/dev/null 2>&1 || $K create ns ${NS}
-	helm upgrade --install authentik authentik/authentik \
-		--namespace ${NS} \
-		-f ./authentik_values.yaml
 
 cert-manager: NS := cert-manager
 cert-manager: helm

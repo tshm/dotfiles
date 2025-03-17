@@ -5,12 +5,13 @@ namespace: flux-system
 resources:
   - https://github.com/fluxcd/flux2/manifests/install?ref=v2.5.1
   - gitrepository.yaml
-  - appkustomization.yaml
+  - authentik.yaml
+  # - appkustomization.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
 
-secretGenerator:
-  - envs:
-      - .gitsecret.env
-    name: flux-system
+# secretGenerator:
+#   - envs:
+#       - .gitsecret.env
+#     name: flux-system

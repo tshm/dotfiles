@@ -1,0 +1,60 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: authentik
+      version: '>=2023.10.0'
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: authentik
+  values:
+    # Authentik server configuration
+    authentik:
+      # Use existing secret for the secret key
+      secret_key: ""
+      existingSecret: authentik-secrets
+      existingSecretKey: akadmin-password
+
+      # This sends anonymous usage-data, stack traces on errors and
+      # performance data to sentry.io, and is fully opt-in
+      error_reporting:
+        enabled: true
+
+      # Use existing secret for PostgreSQL password
+      postgresql:
+        password: ""
+        existingSecret: authentik-secrets
+        existingSecretKey: postgresql-password
+
+    server:
+      ingress:
+        # Specify kubernetes ingress controller class name
+        ingressClassName: nginx # Change to traefik or kong if needed
+        enabled: true
+        hosts:
+          - authentik.domain.tld
+
+    # PostgreSQL configuration
+    postgresql:
+      enabled: true
+      auth:
+        # Use existing secret for database password
+        password: ""
+        existingSecret: authentik-secrets
+        userPasswordKey: postgresql-password
+        adminPasswordKey: postgresql-password
+
+    # Redis configuration
+    redis:
+      enabled: true
+      auth:
+        # Use existing secret for Redis password
+        password: ""
+        existingSecret: authentik-secrets
+        existingSecretKey: redis-password
