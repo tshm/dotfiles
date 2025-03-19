@@ -11,6 +11,7 @@ CACHIX:=
 endif
 
 home-manager: nix
+	ya pack -u
 	which nh && ${CACHIX} nh home switch || \
 	${CACHIX} nix run home-manager/master -- switch --flake .
 
@@ -36,7 +37,6 @@ os: sudo
 	${CACHIX} sudo nixos-rebuild switch --flake .
 
 update:
-	ya pack -u
 	nix flake update
 
 yazi: ~/.config/yazi/plugins/hide-preview.yazi/ ~/.config/yazi/plugins/git.yazi
