@@ -6,3 +6,5 @@ proj
 nix/result
 result
 **/.env
+.docker.config.json
+.token.txt

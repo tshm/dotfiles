@@ -39,6 +39,12 @@ k3s:;
 config: ${DIR}/initialSetup/*
 	$K apply -k ${DIR}/initialSetup
 
+webdl: ${DIR}/initialSetup/webdl/*
+	echo EMAIL_USER=${EMAIL_USER} > ${DIR}/initialSetup/webdl/.secret.env
+	echo EMAIL_PASSWORD=${EMAIL_PASSWORD} >> ${DIR}/initialSetup/webdl/.secret.env
+	echo FILE_RETENTION_DAYS=${FILE_RETENTION_DAYS} > ${DIR}/initialSetup/webdl/.values.env
+	$K apply -k ${DIR}/initialSetup/webdl
+
 # apply helm charts
 stable = https://charts.helm.sh/stable
 traefik = https://helm.traefik.io/traefik

@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: webdl
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+  - ns.yaml
+
+secretGenerator:
+- name: webdl-secrets
+  namespace: webdl
+  envs:
+    - .secret.env
+
+configMapGenerator:
+- name: webdl-values
+  namespace: webdl
+  envs:
+    - .values.env

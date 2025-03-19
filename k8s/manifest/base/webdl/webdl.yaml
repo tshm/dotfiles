@@ -1,0 +1,44 @@
+--- #deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webdl
+  namespace: webdl
+  labels:
+    app: webdl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webdl
+  template:
+    metadata:
+      labels:
+        app: webdl
+    spec:
+      containers:
+        - name: webdl
+          image: ghcr.io/tshm/webdl/webdl
+          ports:
+            - containerPort: 8080
+          # load environment variables from secret and configmap
+          envFrom:
+            - secretRef:
+                name: webdl-secrets
+            - configMapRef:
+                name: webdl-values
+--- #service ClusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  name: webdl
+  namespace: webdl
+spec:
+  selector:
+    app: webdl
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+---

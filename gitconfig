@@ -88,10 +88,10 @@
   autoStash = true
 [pull]
   rebase = true
-[fetch]
-  prune = true
-  pruneTags = true
-  followTags = true
+# [fetch]
+#   prune = true
+#   pruneTags = true
+#   followTags = true
 [push]
   autosetupRemote = true
   default = simple

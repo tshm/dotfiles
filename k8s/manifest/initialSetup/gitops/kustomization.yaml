@@ -5,7 +5,6 @@ namespace: flux-system
 resources:
   - https://github.com/fluxcd/flux2/manifests/install?ref=v2.5.1
   - gitrepository.yaml
-  - authentik.yaml
   # - appkustomization.yaml
 
 generatorOptions:
