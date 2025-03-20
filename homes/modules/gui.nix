@@ -1,18 +1,19 @@
-{ user, config, lib, pkgs, system, ... } @ inputs:
+{ user, config, pkgs, system, ... } @ inputs:
 
 let
-  wrapElectronApp = { appName, binName ? appName }:
-    pkgs.symlinkJoin {
-      name = appName;
-      paths = [ pkgs.${appName} ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = lib.strings.concatStrings [
-        "wrapProgram $out/bin/"
-        binName
-        " --add-flags \"--ozone-platform-hint=x11\""
-        " --add-flags \"--enable-wayland-ime\""
-      ];
-    };
+  beeper = import ../apps/beeper.nix { inherit pkgs; };
+  # wrapElectronApp = { appName, binName ? appName }:
+  #   pkgs.symlinkJoin {
+  #     name = appName;
+  #     paths = [ pkgs.${appName} ];
+  #     buildInputs = [ pkgs.makeWrapper ];
+  #     postBuild = lib.strings.concatStrings [
+  #       "wrapProgram $out/bin/"
+  #       binName
+  #       " --add-flags \"--ozone-platform-hint=x11\""
+  #       " --add-flags \"--enable-wayland-ime\""
+  #     ];
+  #   };
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
@@ -65,7 +66,8 @@ in
       pkgs.copyq
       pkgs.ripdrag
       pkgs.ags
-      (wrapElectronApp { appName = "beeper"; })
+      # (wrapElectronApp { appName = "beeper"; })
+      beeper
       pkgs.vscode
       pkgs.neovide
       pkgs.pamixer
