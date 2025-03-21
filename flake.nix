@@ -8,8 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
-    # until zen-browser-flake is merged into nixos-unstable
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     hyprswitch.url = "github:h3rmt/hyprswitch/release";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";

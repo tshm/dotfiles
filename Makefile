@@ -11,9 +11,9 @@ CACHIX:=
 endif
 
 home-manager: nix
-	ya pack -u
 	which nh && ${CACHIX} nh home switch || \
 	${CACHIX} nix run home-manager/master -- switch --flake .
+	ya pack -u
 
 ifdef NIX
 nix:; @echo nix exists

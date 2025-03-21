@@ -1,7 +1,6 @@
 { user, config, pkgs, system, ... } @ inputs:
 
 let
-  beeper = import ../apps/beeper.nix { inherit pkgs; };
   # wrapElectronApp = { appName, binName ? appName }:
   #   pkgs.symlinkJoin {
   #     name = appName;
@@ -50,8 +49,9 @@ in
   };
   home = {
     packages = [
+      (pkgs.callPackage ../apps/zen.nix { inherit pkgs; })
+      (pkgs.callPackage ../apps/beeper.nix { inherit pkgs; })
       inputs.hyprswitch.packages."${system}".default
-      inputs.zen-browser.packages."${system}".default
       pkgs.wezterm
       pkgs.appimage-run
       pkgs.catppuccin-gtk
@@ -66,8 +66,6 @@ in
       pkgs.copyq
       pkgs.ripdrag
       pkgs.ags
-      # (wrapElectronApp { appName = "beeper"; })
-      beeper
       pkgs.vscode
       pkgs.neovide
       pkgs.pamixer

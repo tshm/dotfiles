@@ -1,12 +1,11 @@
 { pkgs, ... }:
 let
-  pname = "beeper";
+  pname = "zen";
   version = "latest";
   src = pkgs.fetchurl {
-    curlOptsList = [ "-L" "-H" "Accept:application/octet-stream" ];
-    url = "https://api.beeper.com/desktop/download/linux/x64/stable/com.automattic.beeper.desktop";
+    url = "https://github.com/zen-browser/desktop/releases/latest/download/zen-x86_64.AppImage";
     # sha256 = pkgs.lib.fakeSha256;
-    sha256 = "sha256-OLwLjgWFOiBS5RkEpvhH7hreri8EF+JRvKy+Kdre8gM=";
+    sha256 = "sha256-oTsjIubuPST6tNUoY4kmBC34VnbqhkW+fcIiRdiO3oE=";
   };
   appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
 in
@@ -14,8 +13,8 @@ pkgs.appimageTools.wrapType2 {
   inherit pname version src;
   pkgs = pkgs;
   extraInstallCommands = ''
-    install -m 444 -D ${appimageContents}/beepertexts.desktop -t $out/share/applications
-    install -m 444 -D ${appimageContents}/beepertexts.png -t $out/share/icons/hicolor/128x128/apps
+    install -m 444 -D ${appimageContents}/${pname}.desktop -t $out/share/applications
+    install -m 444 -D ${appimageContents}/${pname}.png -t $out/share/icons/hicolor/128x128/apps
   '';
 
   # extraBwrapArgs = [
