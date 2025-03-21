@@ -1,6 +1,6 @@
 module "talos-k8s-cluster" {
   source  = "vdupain/talos-k8s-cluster/proxmox"
-  version = "1.4.0"
+  version = "1.5.0"
 
   cluster = {
     name     = "testcluster"
