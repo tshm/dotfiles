@@ -1,0 +1,30 @@
+name: App 💻 Updater ✨
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 5 * * *"
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Update apps
+        run: |
+          make apphash_update
+      - name: create pull request if any file changed
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update apps"
+          title: "Update apps"
+          body: "Update apps"
+          branch: "app-update"
+          base: "main"
+          labels: "dependencies, automated"
+          reviewers: "determinatesystems"
+          assignees: "determinatesystems"
+          draft: false

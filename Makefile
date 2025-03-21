@@ -15,6 +15,20 @@ home-manager: nix
 	${CACHIX} nix run home-manager/master -- switch --flake .
 	ya pack -u
 
+APPSRC := $(shell find ./homes/apps/ -name '*.nix')
+APPS := $(patsubst ./homes/apps/%.nix, update.%, $(APPSRC))
+
+apphash_update: $(APPS)
+
+update.%: ./homes/apps/%.nix
+	$(eval URL := $(shell sed -ne '/url =/s/.*url = //p' "$<"))
+	echo updating $% from ${URL}
+	$(eval HASH := $(shell nix-prefetch-url --type sha256 ${URL}))
+	$(eval SRI := $(shell nix hash convert --hash-algo sha256 --to sri ${HASH}))
+	echo ${SRI}
+	sed -i "s|sha256 = \".*\";|sha256 = \"${SRI}\";|" "$<"
+	echo "Hash updated in $<: ${SRI}"
+
 ifdef NIX
 nix:; @echo nix exists
 else
@@ -72,4 +86,4 @@ endif
 	pre-commit autoupdate
 	pre-commit install -f
 
-PHONY: all yazi home-manager nix update katana sudo
+PHONY: all yazi home-manager nix update katana sudo x
