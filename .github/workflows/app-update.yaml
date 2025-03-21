@@ -23,7 +23,7 @@ jobs:
           title: "Update apps"
           body: "Update apps"
           branch: "app-update"
-          base: "main"
+          base: "master"
           labels: "dependencies, automated"
           reviewers: "determinatesystems"
           assignees: "determinatesystems"
