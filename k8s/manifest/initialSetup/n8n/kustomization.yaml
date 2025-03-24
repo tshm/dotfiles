@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: n8n
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+  - ns.yaml
+
+configMapGenerator:
+  - name: n8n-values
+    namespace: n8n
+    envs:
+      - .values.env
+  - name: litestream-config
+    namespace: n8n
+    files:
+      - litestream.yml
+
+secretGenerator:
+  - name: n8n-secrets
+    namespace: n8n
+    envs:
+      - .secrets.env

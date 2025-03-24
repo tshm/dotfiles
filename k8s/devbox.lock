@@ -52,51 +52,51 @@
     "github:NixOS/nixpkgs/nixpkgs-unstable": {
       "resolved": "github:NixOS/nixpkgs/096478927c360bc18ea80c8274f013709cf7bdcd?lastModified=1742206328&narHash=sha256-q%2BAQ%2F%2F%2FoMnyyFzzF4H9ShSRENt3Zsx37jTiRkLkXXE0%3D"
     },
-    "k9s@latest": {
-      "last_modified": "2025-03-11T17:52:14Z",
-      "resolved": "github:NixOS/nixpkgs/0d534853a55b5d02a4ababa1d71921ce8f0aee4c#k9s",
+    "k9s@0.40.10": {
+      "last_modified": "2025-03-19T06:05:51Z",
+      "resolved": "github:NixOS/nixpkgs/44e422ba8ed1bdec9620b0733601669972f91170#k9s",
       "source": "devbox-search",
-      "version": "0.40.5",
+      "version": "0.40.10",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/njclallwmrmgbq7nvjhmspqlaxbkas4y-k9s-0.40.5",
+              "path": "/nix/store/infabhdxccd7i6a2r52px0r6g8n5im4m-k9s-0.40.10",
               "default": true
             }
           ],
-          "store_path": "/nix/store/njclallwmrmgbq7nvjhmspqlaxbkas4y-k9s-0.40.5"
+          "store_path": "/nix/store/infabhdxccd7i6a2r52px0r6g8n5im4m-k9s-0.40.10"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/i8kk8b1ygjpp9ls1fi9w2b1jf1hn4dz6-k9s-0.40.5",
+              "path": "/nix/store/bc6da7fr0wj0niqm7dsqs3fsy0xqjnmc-k9s-0.40.10",
               "default": true
             }
           ],
-          "store_path": "/nix/store/i8kk8b1ygjpp9ls1fi9w2b1jf1hn4dz6-k9s-0.40.5"
+          "store_path": "/nix/store/bc6da7fr0wj0niqm7dsqs3fsy0xqjnmc-k9s-0.40.10"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/r7iqfz7bvx84jgyydn05g1yb24gfzgxd-k9s-0.40.5",
+              "path": "/nix/store/knb8fzrvljhdhj3wkniyzmmj7ypay4n3-k9s-0.40.10",
               "default": true
             }
           ],
-          "store_path": "/nix/store/r7iqfz7bvx84jgyydn05g1yb24gfzgxd-k9s-0.40.5"
+          "store_path": "/nix/store/knb8fzrvljhdhj3wkniyzmmj7ypay4n3-k9s-0.40.10"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/1n6gd03nrlw3xs4w22cdfqfpq3jy4z39-k9s-0.40.5",
+              "path": "/nix/store/vjz71svbgk1m77sb2cazzsk48gxz881n-k9s-0.40.10",
               "default": true
             }
           ],
-          "store_path": "/nix/store/1n6gd03nrlw3xs4w22cdfqfpq3jy4z39-k9s-0.40.5"
+          "store_path": "/nix/store/vjz71svbgk1m77sb2cazzsk48gxz881n-k9s-0.40.10"
         }
       }
     },
@@ -232,51 +232,51 @@
         }
       }
     },
-    "kubernetes-helm@latest": {
-      "last_modified": "2025-02-27T15:48:43Z",
-      "resolved": "github:NixOS/nixpkgs/6c5c5f5100281f8f4ff23f13edd17d645178c87c#kubernetes-helm",
+    "kubernetes-helm@3.17.2": {
+      "last_modified": "2025-03-16T16:17:41Z",
+      "resolved": "github:NixOS/nixpkgs/8f76cf16b17c51ae0cc8e55488069593f6dab645#kubernetes-helm",
       "source": "devbox-search",
-      "version": "3.17.1",
+      "version": "3.17.2",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/bzzy1zzckgl7sxr7jnsgf5vkskzd0qgv-kubernetes-helm-3.17.1",
+              "path": "/nix/store/brc3q5prx53ip89csfg37g9ydwwgfd1p-kubernetes-helm-3.17.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/bzzy1zzckgl7sxr7jnsgf5vkskzd0qgv-kubernetes-helm-3.17.1"
+          "store_path": "/nix/store/brc3q5prx53ip89csfg37g9ydwwgfd1p-kubernetes-helm-3.17.2"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/w1yy5hhh6idsryy0ssigwrbazxa4kfkz-kubernetes-helm-3.17.1",
+              "path": "/nix/store/xrgs4la1szz3f3kf7w9g21wzp30mdfy2-kubernetes-helm-3.17.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/w1yy5hhh6idsryy0ssigwrbazxa4kfkz-kubernetes-helm-3.17.1"
+          "store_path": "/nix/store/xrgs4la1szz3f3kf7w9g21wzp30mdfy2-kubernetes-helm-3.17.2"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/ag4d5787s6r15mzrn5cqg04v7f6w5n88-kubernetes-helm-3.17.1",
+              "path": "/nix/store/r10crkfz1nfn5yq18670jbsbjf09l4fg-kubernetes-helm-3.17.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/ag4d5787s6r15mzrn5cqg04v7f6w5n88-kubernetes-helm-3.17.1"
+          "store_path": "/nix/store/r10crkfz1nfn5yq18670jbsbjf09l4fg-kubernetes-helm-3.17.2"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/gwxrxx8a1vnv9ig3q2wjhbv6sbww9k9d-kubernetes-helm-3.17.1",
+              "path": "/nix/store/0lhjm5b1k49rsirsrvsqasbrv1im6w6j-kubernetes-helm-3.17.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/gwxrxx8a1vnv9ig3q2wjhbv6sbww9k9d-kubernetes-helm-3.17.1"
+          "store_path": "/nix/store/0lhjm5b1k49rsirsrvsqasbrv1im6w6j-kubernetes-helm-3.17.2"
         }
       }
     },
@@ -328,67 +328,67 @@
         }
       }
     },
-    "oci-cli@3.52.0": {
-      "last_modified": "2025-03-11T17:52:14Z",
-      "resolved": "github:NixOS/nixpkgs/0d534853a55b5d02a4ababa1d71921ce8f0aee4c#oci-cli",
+    "oci-cli@3.53.0": {
+      "last_modified": "2025-03-21T08:42:37Z",
+      "resolved": "github:NixOS/nixpkgs/bfa9810ff7104a17555ab68ebdeafb6705f129b1#oci-cli",
       "source": "devbox-search",
-      "version": "3.52.0",
+      "version": "3.53.0",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/gm6jvi7qw4lyzzrcwh3f3k4y2kkiji61-oci-cli-3.52.0",
+              "path": "/nix/store/p9p405l3x4sf4a32dm0g9sk9mqcpxxvy-oci-cli-3.53.0",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/1c9gdikpn7lbida2zad7jhp36drzjcn0-oci-cli-3.52.0-dist"
+              "path": "/nix/store/q0ccpls7lxvbdbhp65n38f5q362bbkj8-oci-cli-3.53.0-dist"
             }
           ],
-          "store_path": "/nix/store/gm6jvi7qw4lyzzrcwh3f3k4y2kkiji61-oci-cli-3.52.0"
+          "store_path": "/nix/store/p9p405l3x4sf4a32dm0g9sk9mqcpxxvy-oci-cli-3.53.0"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/sx81s50lyl06f6kfqph4yr8j287rmaid-oci-cli-3.52.0",
+              "path": "/nix/store/q8j0qmy472dbzr9hp7fbbcavjw5li4bc-oci-cli-3.53.0",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/awvmssszlnq2c3c9762045g5krfpfs39-oci-cli-3.52.0-dist"
+              "path": "/nix/store/g85z762whg4ns4206102bz4j8ksah7cv-oci-cli-3.53.0-dist"
             }
           ],
-          "store_path": "/nix/store/sx81s50lyl06f6kfqph4yr8j287rmaid-oci-cli-3.52.0"
+          "store_path": "/nix/store/q8j0qmy472dbzr9hp7fbbcavjw5li4bc-oci-cli-3.53.0"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/pdlj37m4w40y6d69mwm7i96nqbpi4l3y-oci-cli-3.52.0",
+              "path": "/nix/store/13s8l59p41kpzgln4yp3vkdgl5rs1wgr-oci-cli-3.53.0",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/5xmkc1q03s7d8la20pjd38q0p55gch0k-oci-cli-3.52.0-dist"
+              "path": "/nix/store/fp93kapf5wf2nwyqyn15pcsw5kyx9qcc-oci-cli-3.53.0-dist"
             }
           ],
-          "store_path": "/nix/store/pdlj37m4w40y6d69mwm7i96nqbpi4l3y-oci-cli-3.52.0"
+          "store_path": "/nix/store/13s8l59p41kpzgln4yp3vkdgl5rs1wgr-oci-cli-3.53.0"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/y3818k20yjih2pfbm6qkzca04xb6sh4g-oci-cli-3.52.0",
+              "path": "/nix/store/k68z0ifql6096xd0272k1ns67pr2h18l-oci-cli-3.53.0",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/vmd08mjkz9ciks4x3cp4nfc7zv5azrf4-oci-cli-3.52.0-dist"
+              "path": "/nix/store/ybd78pbva2rfqvgzx4mgpk9r1y3x35fj-oci-cli-3.53.0-dist"
             }
           ],
-          "store_path": "/nix/store/y3818k20yjih2pfbm6qkzca04xb6sh4g-oci-cli-3.52.0"
+          "store_path": "/nix/store/k68z0ifql6096xd0272k1ns67pr2h18l-oci-cli-3.53.0"
         }
       }
     }

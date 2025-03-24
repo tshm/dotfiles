@@ -45,6 +45,25 @@ webdl: ${DIR}/initialSetup/webdl/*
 	echo FILE_RETENTION_DAYS=${FILE_RETENTION_DAYS} > ${DIR}/initialSetup/webdl/.values.env
 	$K apply -k ${DIR}/initialSetup/webdl
 
+n8n: ${DIR}/initialSetup/n8n/*
+	$(eval F := ${DIR}/initialSetup/n8n)
+	@echo ---- values into ${F}/.values.env
+	@echo N8N_HOST=${N8N_HOST} > $F/.values.env
+	@echo N8N_PORT=${N8N_PORT} >> $F/.values.env
+	@echo N8N_PROTOCOL=${N8N_PROTOCOL} >> $F/.values.env
+	@echo NODE_ENV=production >> $F/.values.env
+	@echo WEBHOOK_URL=${N8N_WEBHOOK_URL} >> $F/.values.env
+	@echo GENERIC_TIMEZONE=${N8N_GENERIC_TIMEZONE} >> $F/.values.env
+	#@echo DB_TYPE=postgresdb >> $F/.values.env
+	#@echo DB_POSTGRESDB_HOST=${N8N_DB_POSTGRESDB_HOST} >> $F/.values.env
+	@echo ---- secrets into ${F}/.secrets.env
+	@echo CLOUDFLARE_SECRETKEY=${CLOUDFLARE_SECRETKEY} > $F/.secrets.env
+	@echo CLOUDFLARE_R2_ACCOUNT_ID=${CLOUDFLARE_R2_ACCOUNT_ID} >> $F/.secrets.env
+	@echo CLOUDFLARE_R2_BUCKET_NAME=${CLOUDFLARE_R2_BUCKET_NAME} >> $F/.secrets.env
+	@echo CLOUDFLARE_R2_ACCESS_KEY_ID=${CLOUDFLARE_R2_ACCESS_KEY_ID} >> $F/.secrets.env
+	@echo CLOUDFLARE_R2_SECRET_ACCESS_KEY=${CLOUDFLARE_R2_SECRET_ACCESS_KEY} >> $F/.secrets.env
+	$K apply -k ${DIR}/initialSetup/n8n
+
 # apply helm charts
 stable = https://charts.helm.sh/stable
 traefik = https://helm.traefik.io/traefik

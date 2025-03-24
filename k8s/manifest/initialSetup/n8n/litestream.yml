@@ -1,0 +1,19 @@
+logging:
+  level: debug
+  type: text
+  stderr: true
+
+dbs:
+  - path: /home/node/.n8n/database.sqlite
+    replicas:
+      - type: s3
+        endpoint: https://${CLOUDFLARE_R2_ACCOUNT_ID}.r2.cloudflarestorage.com
+        path: database.sqlite
+        region: auto
+        retention: 12h
+        retention-check-interval: 1h
+        snapshot-interval: 4h
+        sync-interval: 1h
+        bucket: ${CLOUDFLARE_R2_BUCKET_NAME}
+        access-key-id: ${CLOUDFLARE_R2_ACCESS_KEY_ID}
+        secret-access-key: ${CLOUDFLARE_R2_SECRET_ACCESS_KEY}

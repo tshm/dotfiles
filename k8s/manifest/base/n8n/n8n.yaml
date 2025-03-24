@@ -1,3 +1,15 @@
+--- #pvc for persistent storage which uses left over
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: n8n-data
+#   namespace: n8n
+# spec:
+#   accessModes: # read and write for a single node
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 2Gi
 --- #deployment
 apiVersion: apps/v1
 kind: Deployment
@@ -16,23 +28,66 @@ spec:
       labels:
         app: n8n
     spec:
+      # init container to create sqlite using litestream
+      initContainers:
+        - name: litestream-init
+          image: litestream/litestream
+          command: ["/bin/sh", '-c']
+          args:
+            - |
+              mkdir -p /home/node/.n8n && \
+              litestream restore -if-db-not-exists -if-replica-exists /home/node/.n8n/database.sqlite && \
+              chmod 777 /home/node/.n8n/database.sqlite || true
+          envFrom:
+            - secretRef:
+                name: n8n-secrets
+          volumeMounts:
+            - name: litestream-config
+              mountPath: /etc/litestream.yml
+              subPath: litestream.yml
+            - name: shared-data
+              mountPath: /home/node/.n8n
       containers:
         - name: n8n
           image: n8nio/n8n
           ports:
             - containerPort: 5678
---- #pvc
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: n8n-data
-  namespace: n8n
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
+          envFrom:
+            - configMapRef:
+                name: n8n-values
+            - secretRef:
+                name: n8n-secrets
+          volumeMounts:
+            - name: shared-data
+              mountPath: /home/node/.n8n
+        # sidecar to sync sqlite with s3
+        - name: litestream
+          image: litestream/litestream
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              litestream replicate
+          volumeMounts:
+            - name: litestream-config
+              mountPath: /etc/litestream.yml
+              subPath: litestream.yml
+            - name: shared-data
+              mountPath: /home/node/.n8n
+          envFrom:
+            - secretRef:
+                name: n8n-secrets
+      volumes:
+        - name: litestream-config
+          configMap:
+            name: litestream-config
+            items:
+            - key: litestream.yml
+              path: litestream.yml
+        - name: shared-data
+          emptyDir: {}
+        # - name: data
+        #   persistentVolumeClaim:
+        #     claimName: n8n-data
 --- #service ClusterIP
 apiVersion: v1
 kind: Service
@@ -47,5 +102,4 @@ spec:
       port: 80
       targetPort: 5678
   type: ClusterIP
-
 ---
