@@ -1,6 +1,6 @@
 logging:
-  level: debug
-  type: text
+  level: info
+  type: json
   stderr: true
 
 dbs:

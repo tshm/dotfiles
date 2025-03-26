@@ -62,6 +62,7 @@ n8n: ${DIR}/initialSetup/n8n/*
 	@echo CLOUDFLARE_R2_BUCKET_NAME=${CLOUDFLARE_R2_BUCKET_NAME} >> $F/.secrets.env
 	@echo CLOUDFLARE_R2_ACCESS_KEY_ID=${CLOUDFLARE_R2_ACCESS_KEY_ID} >> $F/.secrets.env
 	@echo CLOUDFLARE_R2_SECRET_ACCESS_KEY=${CLOUDFLARE_R2_SECRET_ACCESS_KEY} >> $F/.secrets.env
+	@echo N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY} >> $F/.secrets.env
 	$K apply -k ${DIR}/initialSetup/n8n
 
 # apply helm charts
