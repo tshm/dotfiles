@@ -288,6 +288,9 @@ in
       initExtra = ''
         source ~/.dotfiles/zsh/zshrc
       '';
+      loginExtra = ''
+        tm
+      '';
       shellAliases = {
         y = "yy";
         l = "ll";
