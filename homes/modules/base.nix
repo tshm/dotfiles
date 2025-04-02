@@ -289,7 +289,7 @@ in
         source ~/.dotfiles/zsh/zshrc
       '';
       loginExtra = ''
-        tm
+        [ -z "$TMUX" ] && tm
       '';
       shellAliases = {
         y = "yy";
