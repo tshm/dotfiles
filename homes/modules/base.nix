@@ -288,6 +288,9 @@ in
       initExtra = ''
         source ~/.dotfiles/zsh/zshrc
       '';
+      loginExtra = ''
+        [ -z "$TMUX" ] && tm
+      '';
       shellAliases = {
         y = "yy";
         l = "ll";
