@@ -53,7 +53,7 @@ os: sudo
 update:
 	nix flake update
 
-yazi: ~/.config/yazi/plugins/hide-preview.yazi/ ~/.config/yazi/plugins/git.yazi
+yazi: ~/.config/yazi/plugins/hide-preview.yazi/
 ~/.config/yazi/plugins/hide-preview.yazi:
 	ya pack -a yazi-rs/plugins:hide-preview
 
