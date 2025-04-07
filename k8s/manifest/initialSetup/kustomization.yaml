@@ -3,23 +3,23 @@ kind: Kustomization
 
 resources:
   - ns.yaml
-#- ingressroute.yaml
+  #- ingressroute.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
-
-secretGenerator:
-  - files:
-      - .dockerconfigjson=.docker.config.json
-    name: regcred
-    namespace: apps
-    type: kubernetes.io/dockerconfigjson
-
-configMapGenerator:
-  - envs:
-      - .app.env
-    name: env
-    namespace: apps
+#
+# secretGenerator:
+#   - files:
+#       - .dockerconfigjson=.docker.config.json
+#     name: regcred
+#     namespace: apps
+#     type: kubernetes.io/dockerconfigjson
+# configMapGenerator:
+#   - envs:
+#       - .app.env
+#     name: env
+#     namespace: apps
+#
 # replacements:
 #   - source:
 #       fieldPath: data.HOSTNAME_APP
