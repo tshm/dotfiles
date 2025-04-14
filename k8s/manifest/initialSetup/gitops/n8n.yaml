@@ -9,7 +9,7 @@ spec:
   wait: true
   force: true
   prune: true
-  path: ./k8s/manifest/base/authentik
+  path: ./k8s/manifest/base/n8n
   sourceRef:
     kind: GitRepository
     name: flux-system

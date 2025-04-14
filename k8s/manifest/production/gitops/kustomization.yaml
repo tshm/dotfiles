@@ -3,11 +3,11 @@ kind: Kustomization
 namespace: flux-system
 
 resources:
-- ../../base/gitops
+  - ../../initialSetup/gitops
 
 generatorOptions:
   disableNameSuffixHash: true
 
 patches:
-- path: gitrepository.yaml
-- path: appkustomization.yaml
+  - path: gitrepository.yaml
+  - path: appkustomization.yaml
