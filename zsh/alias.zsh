@@ -14,7 +14,7 @@ function scptar() {
     src_host="${src%%:*}"
     src_path="${src#*:}"
   else
-    src_path="$src"
+    src_path="$(realpath --relative-base=. $src)"
   fi
   # Parse destination
   local dst_host=""
@@ -23,7 +23,7 @@ function scptar() {
     dst_host="${dst%%:*}"
     dst_path="${dst#*:}"
   else
-    dst_path="$dst"
+    dst_path="$(realpath --relative-base=. $dst)"
   fi
   # Handle different cases:
   if [ -z "$src_host" ] && [ -n "$dst_host" ]; then # 1. Local to Remote
