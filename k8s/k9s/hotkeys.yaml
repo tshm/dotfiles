@@ -16,7 +16,7 @@ hotKeys:
     description: Xray Deployments
     command: xray deploy
   # Hitting Shift-I navigates to your ingress
-  shift-i:
+  shift-I:
     shortCut: Shift-I
     description: View ingress
     command: ingress
