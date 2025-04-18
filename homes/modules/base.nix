@@ -6,7 +6,7 @@ in
 {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
   ];
   nix = {
     settings = inputs.nixsettings;
@@ -193,7 +193,7 @@ in
           fi
           cat <<EOT > $target
         #!/usr/bin/env bash
-        PATH="$oldpath"
+        PATH="$oldpath:\$PATH"
         exec $@ "\$@"
         EOT
           chmod +x "$target"
@@ -285,8 +285,12 @@ in
     zsh = {
       enable = true;
       enableCompletion = true;
+      # initExtraFirst = ''
+      #   zmodload zsh/zprof
+      # '';
       initExtra = ''
         source ~/.dotfiles/zsh/zshrc
+        # zprof
       '';
       loginExtra = ''
         [ -z "$TMUX" ] && tm

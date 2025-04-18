@@ -50,6 +50,11 @@ os: sudo
 	which nh && ${CACHIX} nh os switch || \
 	${CACHIX} sudo nixos-rebuild switch --flake .
 
+clean:
+	which nh && nh clean all
+	nix-collect-garbage -d
+	nix-store --optimize
+
 update:
 	nix flake update
 
