@@ -58,9 +58,9 @@ clean:
 update:
 	nix flake update
 
-yazi: ~/.config/yazi/plugins/hide-preview.yazi/
-~/.config/yazi/plugins/hide-preview.yazi:
-	ya pack -a yazi-rs/plugins:hide-preview
+yazi: ~/.config/yazi/plugins/toggle-pane.yazi
+~/.config/yazi/plugins/toggle-pane.yazi:
+	ya pack -a yazi-rs/plugins:toggle-pane
 
 ~/.config/yazi/plugins/git.yazi:
 	ya pack -a yazi-rs/plugins:git
