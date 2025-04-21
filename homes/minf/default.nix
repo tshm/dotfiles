@@ -20,8 +20,8 @@
           workspace=1, layoutopt:orientation:right
           workspace=2, layoutopt:orientation:left
         '';
-        programs.java = { enable = false; };
-        programs.go = { enable = false; };
+        programs.java = { enable = true; };
+        programs.go = { enable = true; };
       }
     ];
   };
