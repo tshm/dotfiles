@@ -2,6 +2,8 @@
 
 {
   home.packages = [
+    pkgs.lima
+    pkgs.scrcpy
     # langs
     pkgs.luajitPackages.luarocks
     pkgs.dotnet-runtime
