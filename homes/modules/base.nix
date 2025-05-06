@@ -49,6 +49,7 @@ in
       pkgs.devbox
       pkgs.onefetch
       pkgs.tig
+      pkgs.jujutsu
       pkgs.pre-commit
       pkgs.lnav
       pkgs.scc
