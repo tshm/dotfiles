@@ -151,6 +151,7 @@
     "modules": [
       "custom/expand",
       "custom/separator",
+      "backlight",
       "custom/separator",
       "cpu",
       "custom/separator",
@@ -170,6 +171,11 @@
   "temperature": {
     "critical-threshold": 80,
     "format": "",
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{percent}% {icon}",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
   },
 
   "custom/shutdown": {
