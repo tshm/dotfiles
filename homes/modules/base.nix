@@ -289,12 +289,13 @@ in
       # initExtraFirst = ''
       #   zmodload zsh/zprof
       # '';
-      initExtra = ''
+      initContent = ''
         source ~/.dotfiles/zsh/zshrc
         # zprof
       '';
       loginExtra = ''
-        [ -z "$TMUX" ] && tm
+        [ -f .local.zlogin ] && source .local.zlogin
+        # [ -z "$TMUX" ] && tm
       '';
       shellAliases = {
         y = "yy";
