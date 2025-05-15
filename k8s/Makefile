@@ -54,6 +54,7 @@ n8n: ${DIR}/initialSetup/n8n/*
 	@echo NODE_ENV=production >> $F/.values.env
 	@echo WEBHOOK_URL=${N8N_WEBHOOK_URL} >> $F/.values.env
 	@echo GENERIC_TIMEZONE=${N8N_GENERIC_TIMEZONE} >> $F/.values.env
+	@echo N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true >> $F/.values.env
 	#@echo DB_TYPE=postgresdb >> $F/.values.env
 	#@echo DB_POSTGRESDB_HOST=${N8N_DB_POSTGRESDB_HOST} >> $F/.values.env
 	@echo ---- secrets into ${F}/.secrets.env
