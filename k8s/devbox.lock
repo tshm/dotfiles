@@ -100,51 +100,51 @@
         }
       }
     },
-    "kubeconform@latest": {
-      "last_modified": "2025-03-23T05:31:05Z",
-      "resolved": "github:NixOS/nixpkgs/dd613136ee91f67e5dba3f3f41ac99ae89c5406b#kubeconform",
+    "kubeconform@0.7.0": {
+      "last_modified": "2025-05-12T23:16:24Z",
+      "resolved": "github:NixOS/nixpkgs/2e1da60850ce8159db9654a969c2c683f41c18b5#kubeconform",
       "source": "devbox-search",
-      "version": "0.6.7",
+      "version": "0.7.0",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/5kk47cdxsv0q4q2a24ghmxi24dyac291-kubeconform-0.6.7",
+              "path": "/nix/store/26ag62nrp9pa99cnhdhy5vqv5f8b4rak-kubeconform-0.7.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/5kk47cdxsv0q4q2a24ghmxi24dyac291-kubeconform-0.6.7"
+          "store_path": "/nix/store/26ag62nrp9pa99cnhdhy5vqv5f8b4rak-kubeconform-0.7.0"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/9ga6gcmffich7zkgxypms3n4b5b2bhmd-kubeconform-0.6.7",
+              "path": "/nix/store/qgvgzllyn6zsfhm657qi1v24cw3f4wlx-kubeconform-0.7.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/9ga6gcmffich7zkgxypms3n4b5b2bhmd-kubeconform-0.6.7"
+          "store_path": "/nix/store/qgvgzllyn6zsfhm657qi1v24cw3f4wlx-kubeconform-0.7.0"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/s9kmdmw3rr2p64zgv4vpd6pczllkw72a-kubeconform-0.6.7",
+              "path": "/nix/store/l7g44ih4m2i3mwi86jqn1pdx0d3n2ilx-kubeconform-0.7.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/s9kmdmw3rr2p64zgv4vpd6pczllkw72a-kubeconform-0.6.7"
+          "store_path": "/nix/store/l7g44ih4m2i3mwi86jqn1pdx0d3n2ilx-kubeconform-0.7.0"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/0gxc8fpj58hyy3r2ncmjhsj4wlm9w32d-kubeconform-0.6.7",
+              "path": "/nix/store/yzf99jnnizcf3i9vprxwsgdpdkxbxh60-kubeconform-0.7.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/0gxc8fpj58hyy3r2ncmjhsj4wlm9w32d-kubeconform-0.6.7"
+          "store_path": "/nix/store/yzf99jnnizcf3i9vprxwsgdpdkxbxh60-kubeconform-0.7.0"
         }
       }
     },
