@@ -37,6 +37,8 @@
   pur = !"[ -x git-bug ] && git-bug pull; git pull --rebase --prune --autostash"
   prune = fetch --prune
   fpush = push --force-with-lease
+  current-branch-name = ! git branch | grep -e '^\\* ' | sed -e 's/^\\* //g'
+  fpull = !git fetch && git reset --hard origin/$(git current-branch-name)
   staash = stash --all
   stashu = stash push --keep-index
   wait = reset HEAD
