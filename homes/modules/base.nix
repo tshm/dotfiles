@@ -228,7 +228,7 @@ in
       # '';
       settings = {
         log = { enabled = true; };
-        manager = {
+        mgr = {
           ratio = [ 0 3 7 ];
           sort_by = "natural";
           sort_dir_first = true;
@@ -259,7 +259,7 @@ in
         arrow = ../../yazi/plugins/arrow.yazi;
       };
       keymap = {
-        manager = {
+        mgr = {
           prepend_keymap = [
             { on = "k"; run = "plugin arrow -1"; }
             { on = "j"; run = "plugin arrow 1"; }
