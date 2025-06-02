@@ -2,8 +2,8 @@
 options=()
 
 warp-cli status | grep Connected &&
-  warpcmd="✅ Warp Disconnect: warp-cli disconnect; warp-cli status" ||
-  warpcmd="❌ Warp Connect: warp-cli connect; warp-cli status"
+  warpcmd="❌ Warp Disconnect: warp-cli disconnect; warp-cli status" ||
+  warpcmd="✅ Warp Connect: warp-cli connect; warp-cli status"
 options+=("$warpcmd")
 
 btdevice=$(bluetoothctl devices Connected)
