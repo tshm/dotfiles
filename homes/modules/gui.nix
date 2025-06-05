@@ -16,6 +16,7 @@ let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
+  imports = [ inputs.hyprshell.homeModules.hyprshell ];
   fonts.fontconfig.enable = true;
   dconf.settings = {
     "org/gnome/desktop/interface".color-scheme = "prefer-dark";
@@ -51,7 +52,6 @@ in
     packages = [
       (pkgs.callPackage ../apps/zen.nix { inherit pkgs; })
       (pkgs.callPackage ../apps/beeper.nix { inherit pkgs; })
-      inputs.hyprswitch.packages."${system}".default
       pkgs.wezterm
       pkgs.appimage-run
       pkgs.catppuccin-gtk
@@ -82,6 +82,23 @@ in
     };
   };
   programs = {
+    hyprshell = {
+      enable = true;
+      systemd.args = "-v";
+      settings = {
+        launcher = {
+          max_items = 6;
+          plugins.websearch = {
+              enable = true;
+              engines = [{
+                  name = "DuckDuckGo";
+                  url = "https://duckduckgo.com/?q=%s";
+                  key = "d";
+              }];
+          };
+        };
+      };
+    };
     rofi = {
       enable = true;
       package = pkgs.rofi-wayland;
