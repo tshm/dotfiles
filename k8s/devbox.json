@@ -1,6 +1,6 @@
 {
   "packages": [
-    "kubectl@1.33.0",
+    "kubectl@1.33.1",
     "kubeconform@latest",
     "kustomize@latest",
     "k9s@0.50.5",
