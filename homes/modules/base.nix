@@ -45,6 +45,7 @@ in
       pkgs.entr
       pkgs.unzip
       pkgs.wget
+      pkgs.clipboard-jh
       # devtools
       pkgs.devbox
       pkgs.onefetch
