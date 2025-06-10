@@ -14,13 +14,13 @@ jobs:
     strategy:
       matrix:
         home:
-          - runner: "ubuntu-latest"
+          - runner: "blacksmith-4vcpu-ubuntu-2404"
             target: "tshm@PN0093"
-          - runner: "ubuntu-latest"
+          - runner: "blacksmith-4vcpu-ubuntu-2404"
             target: "tshm@minf"
-          - runner: "ubuntu-latest"
+          - runner: "blacksmith-4vcpu-ubuntu-2404"
             target: "tshm@x360"
-          - runner: "ubuntu-latest"
+          - runner: "blacksmith-4vcpu-ubuntu-2404"
             target: "tshm@PD0056"
           - runner: "ubuntu-24.04-arm"
             target: "pi@spi"
@@ -43,7 +43,7 @@ jobs:
           -- build --flake .#${{ matrix.home.target }}
 
   nixos:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     strategy:
       matrix:
         host: ["x360", "minf"]
