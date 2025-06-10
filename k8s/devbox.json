@@ -1,7 +1,7 @@
 {
   "packages": [
     "kubectl@1.33.1",
-    "kubeconform@latest",
+    "kubeconform@0.7.0",
     "kustomize@latest",
     "k9s@0.50.5",
     "cloudflared@latest",
