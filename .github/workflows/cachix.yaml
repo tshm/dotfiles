@@ -22,7 +22,7 @@ jobs:
             target: "tshm@x360"
           - runner: "blacksmith-4vcpu-ubuntu-2404"
             target: "tshm@PD0056"
-          - runner: "ubuntu-24.04-arm"
+          - runner: "blacksmith-4vcpu-ubuntu-2404"
             target: "pi@spi"
     runs-on: ${{ matrix.home.runner }}
     steps:
