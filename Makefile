@@ -10,9 +10,13 @@ else
 CACHIX:=
 endif
 
+HAS_NH:=$(shell which nh)
 home-manager: nix
-	which nh && ${CACHIX} nh home switch || \
+ifdef HAS_NH
+	${CACHIX} nh home switch
+else
 	${CACHIX} nix run home-manager/master -- switch --flake .
+endif
 
 APPSRC := $(shell find ./homes/apps/ -name '*.nix')
 APPS := $(patsubst ./homes/apps/%.nix, update.%, $(APPSRC))
@@ -46,8 +50,11 @@ endif
 sudo:; sudo echo sudo
 
 os: sudo
-	which nh && ${CACHIX} nh os switch || \
+ifdef HAS_NH
+	${CACHIX} nh os switch
+else
 	${CACHIX} sudo nixos-rebuild switch --flake .
+endif
 
 clean:
 	which nh && nh clean all

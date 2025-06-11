@@ -235,6 +235,10 @@ in
           sort_dir_first = true;
         };
         plugin = {
+          prepend_previewers = [
+            { mime = "{image,audio,video}/*"; run = "mediainfo"; }
+            { mime = "application/x-subrip"; run = "mediainfo"; }
+          ];
           # prepend_fetchers = [
           #   { id = "git"; name = "*"; run = "git"; }
           #   { id = "git"; name = "*/"; run = "git"; }

@@ -11,7 +11,10 @@ in
 {
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
       efi.canTouchEfiVariables = true;
       timeout = 3;
     };
@@ -99,6 +102,7 @@ in
 
   security.polkit.enable = true;
   security.rtkit.enable = true;
+  security.sudo.wheelNeedsPassword = false;
 
   # cloudflare-warp
   systemd.packages = [

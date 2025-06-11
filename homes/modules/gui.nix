@@ -60,6 +60,7 @@ in
       # pkgs.input-leap
       pkgs.bluetuith
       pkgs.waybar
+      pkgs.mpv
       pkgs.mediainfo
       pkgs.papirus-icon-theme
       pkgs.swaynotificationcenter
@@ -79,6 +80,7 @@ in
     file = {
       "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
       "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
+      "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
     };
   };
   programs = {
@@ -111,16 +113,6 @@ in
         hide-scrollbar = true;
         display-drun = "   Apps ";
         sidebar-mode = true;
-      };
-    };
-    mpv = {
-      enable = true;
-      config = {
-        vo = "gpu";
-        hwdec = "auto";
-        speed = "1.21";
-        sub-auto = "fuzzy";
-        save-position-on-quit = "yes";
       };
     };
     feh.enable = true;
