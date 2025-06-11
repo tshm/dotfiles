@@ -13,7 +13,6 @@ endif
 home-manager: nix
 	which nh && ${CACHIX} nh home switch || \
 	${CACHIX} nix run home-manager/master -- switch --flake .
-	ya pack -u
 
 APPSRC := $(shell find ./homes/apps/ -name '*.nix')
 APPS := $(patsubst ./homes/apps/%.nix, update.%, $(APPSRC))
@@ -57,13 +56,6 @@ clean:
 
 update:
 	nix flake update
-
-yazi: ~/.config/yazi/plugins/toggle-pane.yazi
-~/.config/yazi/plugins/toggle-pane.yazi:
-	ya pack -a yazi-rs/plugins:toggle-pane
-
-~/.config/yazi/plugins/git.yazi:
-	ya pack -a yazi-rs/plugins:git
 
 nvim: ~/.local/bin/nvim ~/.config/nvim
 ~/.local/bin/nvim:

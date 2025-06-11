@@ -258,6 +258,13 @@ in
         enter = ../../yazi/plugins/enter.yazi;
         tab = ../../yazi/plugins/tab.yazi;
         arrow = ../../yazi/plugins/arrow.yazi;
+        bypass = pkgs.yaziPlugins.bypass;
+        chmod = pkgs.yaziPlugins.chmod;
+        mediainfo = pkgs.yaziPlugins.mediainfo;
+        ouch = pkgs.yaziPlugins.ouch;
+        restore = pkgs.yaziPlugins.restore;
+        projects = pkgs.yaziPlugins.projects;
+        toggle-pane = pkgs.yaziPlugins.toggle-pane;
       };
       keymap = {
         mgr = {
@@ -280,6 +287,10 @@ in
                 shell 'ya pub dds-cd --str "$(git rev-parse --show-toplevel)"' --confirm
               '';
             }
+            { on = [ "P" "s" ]; run = "plugin projects save"; }
+            { on = [ "P" "l" ]; run = "plugin projects load"; }
+            { on = [ "P" "P" ]; run = "plugin projects load_last"; }
+            { on = [ "P" "d" ]; run = "plugin projects delete"; }
           ];
         };
       };
