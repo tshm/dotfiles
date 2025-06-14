@@ -44,6 +44,7 @@ in
       pkgs.p7zip
       pkgs.entr
       pkgs.unzip
+      # pkgs.archivemount
       pkgs.wget
       pkgs.clipboard-jh
       # devtools
@@ -224,9 +225,11 @@ in
       enable = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
-      # initLua = ''
-      #   require("git"):setup()
-      # '';
+      initLua = ''
+        -- require("git"):setup()
+        -- require("archivemount"):setup()
+        require("projects"):setup({})
+      '';
       settings = {
         log = { enabled = true; };
         mgr = {
@@ -262,11 +265,9 @@ in
         enter = ../../yazi/plugins/enter.yazi;
         tab = ../../yazi/plugins/tab.yazi;
         arrow = ../../yazi/plugins/arrow.yazi;
-        bypass = pkgs.yaziPlugins.bypass;
         chmod = pkgs.yaziPlugins.chmod;
         mediainfo = pkgs.yaziPlugins.mediainfo;
-        ouch = pkgs.yaziPlugins.ouch;
-        restore = pkgs.yaziPlugins.restore;
+        # archivemount = pkgs.yaziPlugins.archivemount;
         projects = pkgs.yaziPlugins.projects;
         toggle-pane = pkgs.yaziPlugins.toggle-pane;
       };
@@ -291,10 +292,14 @@ in
                 shell 'ya pub dds-cd --str "$(git rev-parse --show-toplevel)"' --confirm
               '';
             }
+            # { on = [ "m" "a" ]; run = "plugin archivemount mount"; }
+            # { on = [ "m" "u" ]; run = "plugin archivemount unmount"; }
+            { on = [ "c" "m" ]; run = "plugin chmod"; }
             { on = [ "P" "s" ]; run = "plugin projects save"; }
             { on = [ "P" "l" ]; run = "plugin projects load"; }
             { on = [ "P" "P" ]; run = "plugin projects load_last"; }
             { on = [ "P" "d" ]; run = "plugin projects delete"; }
+            { on = [ "q" ]; run = "plugin projects quit"; }
           ];
         };
       };
