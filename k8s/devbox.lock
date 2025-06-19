@@ -329,67 +329,67 @@
         }
       }
     },
-    "oci-cli@3.56.1": {
-      "last_modified": "2025-05-25T15:24:27Z",
-      "resolved": "github:NixOS/nixpkgs/bdac72d387dca7f836f6ef1fe547755fb0e9df61#oci-cli",
+    "oci-cli@3.58.1": {
+      "last_modified": "2025-06-18T03:01:18Z",
+      "resolved": "github:NixOS/nixpkgs/5395fb3ab3f97b9b7abca147249fa2e8ed27b192#oci-cli",
       "source": "devbox-search",
-      "version": "3.56.1",
+      "version": "3.58.1",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/c8v8rry1fpj974whz6xd20kv0h0drf5a-oci-cli-3.56.1",
+              "path": "/nix/store/gw3q94n6185qygdlspwwjq1aczibl5m4-oci-cli-3.58.1",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/q52750zncb4b4spi4vnm375qxrdb26bm-oci-cli-3.56.1-dist"
+              "path": "/nix/store/7pcjsfahraajamb3n8l8i6mbyn3arsj7-oci-cli-3.58.1-dist"
             }
           ],
-          "store_path": "/nix/store/c8v8rry1fpj974whz6xd20kv0h0drf5a-oci-cli-3.56.1"
+          "store_path": "/nix/store/gw3q94n6185qygdlspwwjq1aczibl5m4-oci-cli-3.58.1"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/xxmm21ngdhcj50brxmpykz5ca64gkdbz-oci-cli-3.56.1",
+              "path": "/nix/store/00qml3bhs9lv6kyshrnmmgdqvhdki265-oci-cli-3.58.1",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/y08ln5n5br6qdklw770xb4hc1fnnha1q-oci-cli-3.56.1-dist"
+              "path": "/nix/store/k6dv9djndbia76bin6k9gv6cs8knylnq-oci-cli-3.58.1-dist"
             }
           ],
-          "store_path": "/nix/store/xxmm21ngdhcj50brxmpykz5ca64gkdbz-oci-cli-3.56.1"
+          "store_path": "/nix/store/00qml3bhs9lv6kyshrnmmgdqvhdki265-oci-cli-3.58.1"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/4ifddvpmda3rp2gp60ny9jqkc963zw85-oci-cli-3.56.1",
+              "path": "/nix/store/rmnvn5h2aq4qxm85457scj3y32sr2djx-oci-cli-3.58.1",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/yqm7v2bgz01svic4zbvxzbs0wi4lnr50-oci-cli-3.56.1-dist"
+              "path": "/nix/store/d8zyj6jxvs53hbhqwyh2q2zilck0yjgb-oci-cli-3.58.1-dist"
             }
           ],
-          "store_path": "/nix/store/4ifddvpmda3rp2gp60ny9jqkc963zw85-oci-cli-3.56.1"
+          "store_path": "/nix/store/rmnvn5h2aq4qxm85457scj3y32sr2djx-oci-cli-3.58.1"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/sishx1v6cnjxvylrdcpclbw3d9fnqxz3-oci-cli-3.56.1",
+              "path": "/nix/store/bn5xvp3hj051aryxyjl7lpf8jqaprb9f-oci-cli-3.58.1",
               "default": true
             },
             {
               "name": "dist",
-              "path": "/nix/store/yn8in58p65hphxjnmjm6qmaw5a17zqpk-oci-cli-3.56.1-dist"
+              "path": "/nix/store/xhllb9wvzxvdwcg2f8ji6mb78vpjfad1-oci-cli-3.58.1-dist"
             }
           ],
-          "store_path": "/nix/store/sishx1v6cnjxvylrdcpclbw3d9fnqxz3-oci-cli-3.56.1"
+          "store_path": "/nix/store/bn5xvp3hj051aryxyjl7lpf8jqaprb9f-oci-cli-3.58.1"
         }
       }
     }
