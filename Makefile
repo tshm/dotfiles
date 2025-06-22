@@ -85,6 +85,7 @@ kanata/kanata_gui.exe:
 	echo $V
 	mkdir -p tmp
 	wget https://github.com/jtroo/kanata/releases/download/$V/kanata_gui.exe -O $@
+	wget https://github.com/jtroo/kanata/releases/download/$V/kanata_winIOv2.exe -O $@
 	# shell:common startup
 	# powershell.exe "[Environment]::GetFolderPath('Startup')"
 endif
