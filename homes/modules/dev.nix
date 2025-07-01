@@ -17,13 +17,14 @@
     pkgs.git-absorb
     pkgs.commitizen
     # misc
+    pkgs.gemini-cli
     # pkgs.radicle-node
     # pkgs.oils-for-unix
   ] ++ (
-      if (lib.hasInfix "x86" system) then [
-        inputs.localias.packages."${system}".default
-      ]
-      else
-        []
-    );
+    if (lib.hasInfix "x86" system) then [
+      inputs.localias.packages."${system}".default
+    ]
+    else
+      [ ]
+  );
 }
