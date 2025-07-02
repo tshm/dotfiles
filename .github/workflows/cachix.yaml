@@ -22,7 +22,7 @@ jobs:
             target: "tshm@x360"
           - runner: "ubuntu-latest"
             target: "tshm@PD0056"
-          - runner: "ubuntu-latest"
+          - runner: "ubuntu-24.04-arm"
             target: "pi@spi"
     runs-on: ${{ matrix.home.runner }}
     steps:
