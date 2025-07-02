@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
-    hyprshell.url = "github:h3rmt/hyprswitch?ref=hyprshell";
+    # hyprshell.url = "github:h3rmt/hyprswitch?ref=hyprshell";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
