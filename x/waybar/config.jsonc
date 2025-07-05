@@ -16,7 +16,7 @@
   "modules-right": [
     "group/info-stuff",
     "group/expand",
-    "tray",
+    //"tray",
     "group/system-stuff",
   ],
 }
