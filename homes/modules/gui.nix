@@ -34,6 +34,23 @@ in
   };
   xdg = {
     enable = true;
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-termfilechooser
+      ];
+      config = {
+        common = {
+          default = [ "hyprland" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser"];
+        };
+        hyprland = {
+          default = [ "hyprland" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser"];
+        };
+      };
+    };
     mimeApps = {
       enable = true;
       defaultApplications = {
@@ -55,7 +72,9 @@ in
       pkgs.wezterm
       pkgs.appimage-run
       pkgs.catppuccin-gtk
-      pkgs.hyprshade
+      pkgs.gammastep
+      pkgs.xdg-desktop-portal-termfilechooser
+      # pkgs.hyprshade
       # pkgs.deskflow
       # pkgs.input-leap
       pkgs.bluetuith
