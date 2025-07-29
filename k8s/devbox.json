@@ -3,7 +3,7 @@
     "kubectl@1.33.2",
     "kubeconform@0.7.0",
     "kustomize@latest",
-    "k9s@0.50.6",
+    "k9s@0.50.9",
     "cloudflared@latest",
     "kubernetes-helm@3.18.3",
     "oci-cli@3.61.0"
