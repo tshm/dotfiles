@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     localias.url = "github:peterldowns/localias";
+    mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
   };
 
   outputs = { self, nixpkgs, ... } @ args:

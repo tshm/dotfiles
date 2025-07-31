@@ -1,18 +1,6 @@
 { user, config, pkgs, system, ... } @ inputs:
 
 let
-  # wrapElectronApp = { appName, binName ? appName }:
-  #   pkgs.symlinkJoin {
-  #     name = appName;
-  #     paths = [ pkgs.${appName} ];
-  #     buildInputs = [ pkgs.makeWrapper ];
-  #     postBuild = lib.strings.concatStrings [
-  #       "wrapProgram $out/bin/"
-  #       binName
-  #       " --add-flags \"--ozone-platform-hint=x11\""
-  #       " --add-flags \"--enable-wayland-ime\""
-  #     ];
-  #   };
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {

@@ -24,7 +24,7 @@ pkgs.appimageTools.wrapType2 {
   dieWithParent = false;
 
   meta = {
-    description = "Beeper";
+    description = "Zen";
     license = pkgs.lib.licenses.unfree;
     platforms = with pkgs.lib.platforms; linux;
   };
