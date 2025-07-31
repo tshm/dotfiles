@@ -4,9 +4,17 @@ let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
+
+
+
+
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
+
+
+    inputs.nix-index-database.homeModules.nix-index
+
     inputs.catppuccin.homeModules.catppuccin
+
   ];
   nix = {
     settings = inputs.nixsettings;

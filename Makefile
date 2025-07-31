@@ -66,6 +66,7 @@ clean:
 
 update:
 	nix flake update
+	cd ./homes/modules/node2nix; make
 
 nvim: ~/.local/bin/nvim ~/.config/nvim
 ~/.local/bin/nvim:

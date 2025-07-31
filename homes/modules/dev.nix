@@ -1,5 +1,8 @@
 { pkgs, system, lib, ... } @ inputs:
 
+let
+  nodePackages = pkgs.callPackage ./node2nix { inherit pkgs system; };
+in
 {
   home.packages = [
     pkgs.lima
@@ -17,7 +20,8 @@
     pkgs.git-absorb
     pkgs.commitizen
     # misc
-    pkgs.gemini-cli
+    # nodePackages."opencode-ai"
+    # nodePackages."@google/gemini-cli"
     # pkgs.radicle-node
     # pkgs.oils-for-unix
   ] ++ (
