@@ -4097,10 +4097,10 @@ in
   opencode-ai = nodeEnv.buildNodePackage {
     name = "opencode-ai";
     packageName = "opencode-ai";
-    version = "0.3.86";
+    version = "0.3.93";
     src = fetchurl {
-      url = "https://registry.npmjs.org/opencode-ai/-/opencode-ai-0.3.86.tgz";
-      sha512 = "zb7fmz+ozpSBRqnd6/yuIaenCtBk1q8tXiDsxJn+3BI7E5fsnLhrzsU5N75RCtuDgu0oZw6ui6O9fTDnutmVuw==";
+      url = "https://registry.npmjs.org/opencode-ai/-/opencode-ai-0.3.93.tgz";
+      sha512 = "ls3KjrO7qTZmb7NLaWLvHjSi719fSq72qt7Z3WnjwyBIbwdL4sEMIzPgFuKGcgr4YjKabEZYN6oy+hbvqChIlg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
