@@ -15,13 +15,14 @@ in
     pkgs.nodejs
     pkgs.sqlite
     # git extras
+    pkgs.gh
     pkgs.git-cliff
     pkgs.git-imerge
     pkgs.git-absorb
     pkgs.commitizen
     # misc
     # nodePackages."opencode-ai"
-    # nodePackages."@google/gemini-cli"
+    nodePackages."@google/gemini-cli"
     # pkgs.radicle-node
     # pkgs.oils-for-unix
   ] ++ (
