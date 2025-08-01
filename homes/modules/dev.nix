@@ -1,7 +1,7 @@
 { pkgs, system, config, lib, mcp-servers-nix, ... } @ inputs:
 
 let
-  nodePackages = pkgs.callPackage ./node2nix { inherit pkgs system; nodejs = pkgs.nodejs_20; };
+  # nodePackages = pkgs.callPackage ./node2nix { inherit pkgs system; nodejs = pkgs.nodejs_20; };
 in
   {
   home.file."${config.xdg.configHome}/mcp/mcp.json".source = mcp-servers-nix.lib.mkConfig pkgs {
@@ -31,7 +31,8 @@ in
     # misc
     # nodePackages."opencode-ai"
     pkgs.opencode
-    nodePackages."@google/gemini-cli"
+    # nodePackages."@google/gemini-cli"
+    pkgs.gemini-cli
     # pkgs.radicle-node
     # pkgs.oils-for-unix
   ] ++ (
