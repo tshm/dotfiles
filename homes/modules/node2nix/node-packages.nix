@@ -4108,5 +4108,16 @@ in
     production = true;
     bypassCache = true;
     reconstructLock = true;
+    # Override to remove problematic postinstall script
+    postInstall = ''
+      runHook preInstall
+      mkdir -p $out/lib/node_modules/opencode-ai
+      cp -r node_modules/opencode-ai/* $out/lib/node_modules/opencode-ai/
+      # Remove the postinstall script to avoid symlink issues
+      rm -f $out/lib/node_modules/opencode-ai/postinstall.mjs || true
+      # Also remove the postinstall script from package.json
+      sed -i '/"postinstall":/d' $out/lib/node_modules/opencode-ai/package.json || true
+      runHook postInstall
+    '';
   };
 }

@@ -29,8 +29,7 @@ in
     pkgs.git-absorb
     pkgs.commitizen
     # misc
-    # Temporarily disable opencode-ai due to build issues
-    # nodePackages.opencode-ai
+    nodePackages.opencode-ai
     pkgs.opencode
     # nodePackages."@google/gemini-cli"
     pkgs.gemini-cli
