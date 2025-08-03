@@ -8,3 +8,6 @@ result
 **/.env
 .docker.config.json
 .token.txt
+GEMINI.md
+CRUSH.md
+.crush/
