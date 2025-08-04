@@ -29,10 +29,10 @@ in
     pkgs.git-absorb
     pkgs.commitizen
     # misc
+    # pkgs.opencode
     # nodePackages.opencode-ai
-    pkgs.opencode
     # nodePackages."@google/gemini-cli"
-    pkgs.gemini-cli
+    # pkgs.gemini-cli
     # pkgs.radicle-node
     # pkgs.oils-for-unix
   ] ++ (
