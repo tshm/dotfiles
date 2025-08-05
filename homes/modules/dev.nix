@@ -3,7 +3,7 @@
 let
   # nodePackages = pkgs.callPackage ./node2nix { inherit pkgs system; nodejs = pkgs.nodejs_20; };
 in
-  {
+{
   home.file."${config.xdg.configHome}/mcp/mcp.json".source = mcp-servers-nix.lib.mkConfig pkgs {
     programs = {
       context7.enable = true;
@@ -18,6 +18,7 @@ in
     # langs
     pkgs.luajitPackages.luarocks
     pkgs.dotnet-runtime
+    pkgs.uv
     pkgs.cargo
     pkgs.go
     pkgs.nodejs
@@ -36,10 +37,10 @@ in
     # pkgs.radicle-node
     # pkgs.oils-for-unix
   ] ++ (
-      if (lib.hasInfix "x86" system) then [
-        inputs.localias.packages."${system}".default
-      ]
-      else
-        [ ]
-    );
+    if (lib.hasInfix "x86" system) then [
+      inputs.localias.packages."${system}".default
+    ]
+    else
+      [ ]
+  );
 }
