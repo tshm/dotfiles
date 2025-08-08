@@ -29,7 +29,7 @@
     "tooltip-format-disconnected": "Error",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
     "tooltip-format-ethernet": "{ifname} 🖧 ",
-    "on-click": "wezterm nmtui",
+    "on-click": "kitty nmtui",
   },
 
   "clock": {
