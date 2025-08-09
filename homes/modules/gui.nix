@@ -69,7 +69,6 @@ in
       pkgs.waybar
       pkgs.mpv
       pkgs.mediainfo
-      pkgs.papirus-icon-theme
       pkgs.swaynotificationcenter
       pkgs.copyq
       pkgs.ripdrag
