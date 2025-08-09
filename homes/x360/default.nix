@@ -11,6 +11,7 @@
       {
         home.packages = [
           pkgs.deno
+          # autorotate
           pkgs.iio-hyprland
         ];
         wayland.windowManager.hyprland.extraConfig = ''
