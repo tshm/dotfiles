@@ -13,8 +13,11 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # inputs = {
+    #   lan-mouse.url = "github:feschber/lan-mouse";
+    # };
     localias.url = "github:peterldowns/localias";
-    mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
+    # mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
   };
 
   outputs = { self, nixpkgs, ... } @ args:

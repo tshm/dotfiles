@@ -1,17 +1,17 @@
-{ pkgs, system, config, lib, mcp-servers-nix, ... } @ inputs:
+{ pkgs, system, lib, ... } @ inputs:
 
 let
   # nodePackages = pkgs.callPackage ./node2nix { inherit pkgs system; nodejs = pkgs.nodejs_20; };
 in
 {
-  home.file."${config.xdg.configHome}/mcp/mcp.json".source = mcp-servers-nix.lib.mkConfig pkgs {
-    programs = {
-      context7.enable = true;
-      memory.enable = true;
-      sequential-thinking.enable = true;
-      # fetch.enable = true;
-    };
-  };
+  # home.file."${config.xdg.configHome}/mcp/mcp.json".source = mcp-servers-nix.lib.mkConfig pkgs {
+  #   programs = {
+  #     context7.enable = true;
+  #     memory.enable = true;
+  #     sequential-thinking.enable = true;
+  #     # fetch.enable = true;
+  #   };
+  # };
   home.packages = [
     pkgs.lima
     pkgs.scrcpy
