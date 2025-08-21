@@ -68,6 +68,12 @@ catppuccin.nixosModules.catppuccin args //
   };
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    # IME
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    INPUT_METHOD = "fcitx";
+    SDL_IM_MODULE = "fcitx";
   };
   services.xserver = {
     enable = true;
