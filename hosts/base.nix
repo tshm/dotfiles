@@ -39,19 +39,19 @@ in
       STOP_CHARGE_THRESH_BAT0 = 70;
     };
   };
-  services.logind.extraConfig = ''
-    #################################################
-    HandlePowerKey=${if useHibernation then "hibernate" else "suspend"}
-    # HandlePowerKey=poweroff
-    HandleLidSwitch=suspend
-    HandleLidSwitchExternalPower=suspend
-  '';
+  services.logind.settings = {
+    Login = {
+      HandlePowerKey = if useHibernation then "hibernate" else "suspend";
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchExternalPower = "suspend";
+    };
+  };
 
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --remember-session";
         user = "greeter";
       };
     };

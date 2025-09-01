@@ -29,6 +29,7 @@
         trusted-users = [ "root" user ];
         substituters = [
           "https://cache.nixos.org"
+          "https://tshmcache.cachix.org"
           "https://nix-community.cachix.org"
           "https://nixpkgs.cachix.org"
         ];

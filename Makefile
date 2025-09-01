@@ -3,7 +3,7 @@ ISNIXOS:=$(shell grep ID=nixos /etc/os-release)
 NIX:=$(shell which nix)
 ISWSL:=$(shell uname -a | grep WSL)
 
-HAS_CASHIX:=$(shell which cachix)
+HAS_CACHIX:=$(shell which cachix)
 ifdef HAS_CACHIX
 CACHIX:=cachix watch-exec tshmcache --
 else

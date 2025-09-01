@@ -4,24 +4,16 @@ let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in
 {
-
-
-
-
   imports = [
-
-
     inputs.nix-index-database.homeModules.nix-index
-
     inputs.catppuccin.homeModules.catppuccin
-
   ];
   nix = {
     settings = inputs.nixsettings;
     package = pkgs.nix;
     gc = {
       automatic = true;
-      frequency = "weekly";
+      dates = "weekly";
     };
   };
   catppuccin = {
@@ -103,23 +95,19 @@ in
     };
     ssh = {
       enable = true;
+      enableDefaultConfig = false;
       includes = [ "./*.config" ];
+      matchBlocks = {
+        "*" = {};
+      };
       extraConfig = ''
-        # vim: ft=sshconfig
-
-        # Host test
-        #   HostName test.com
-        #   Port 1234
-        #   DynamicForward 9999
-        #   LocalForward 84321 0.0.0.0:4321
-        #   User myuser
-        #   ProxyJump dmz
-        #   #_Desc This is a sample description
-
-        # Host *
-        #   ControlMaster auto
-        #   ControlPath ~/.ssh/mux-%r@%h:%p
-        #   ControlPersist 4h
+        # HostName test.com
+        # Port 1234
+        # User myuser
+        # DynamicForward 9999
+        # LocalForward 84321 0.0.0.0:4321
+        # ProxyJump dmz
+        # #_Desc This is a sample description
       '';
     };
     btop.enable = true;
