@@ -60,9 +60,9 @@ in
       pkgs.wezterm
       pkgs.appimage-run
       pkgs.catppuccin-gtk
-      pkgs.gammastep
       pkgs.xdg-desktop-portal-termfilechooser
-      # pkgs.hyprshade
+      pkgs.hyprshade
+      # pkgs.gammastep
       # pkgs.deskflow
       # pkgs.input-leap
       pkgs.bluetuith

@@ -12,13 +12,13 @@
         home.packages = [
           pkgs.deno
           # autorotate
-          pkgs.iio-hyprland
+          # pkgs.iio-hyprland
         ];
         wayland.windowManager.hyprland.extraConfig = ''
           monitor = eDP-1,1920x1080,auto,1
           workspace=1, layoutopt:orientation:right
           workspace=2, layoutopt:orientation:left
-          exec-once = iio-hyprland
+          # exec-once = iio-hyprland
         '';
         programs.java = { enable = false; };
         programs.go = { enable = false; };
