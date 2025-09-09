@@ -32,6 +32,10 @@ update.%: ./homes/apps/%.nix
 	sed -i "s|sha256 = \".*\";|sha256 = \"${SRI}\";|" "$<"
 	echo "Hash updated in $<: ${SRI}"
 
+.PHONY: zi up
+up: update apphash_update
+zi:; zsh -i -c 'zinit update'
+
 ifdef NIX
 nix:; @echo nix exists
 else
