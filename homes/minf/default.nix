@@ -1,4 +1,4 @@
-{ home-manager, pkgs, extraSpecialArgs, ... }:
+{ home-manager, pkgs, extraSpecialArgs, vicinae, ... }:
 
 {
   "tshm@minf" = home-manager.lib.homeManagerConfiguration {
@@ -6,6 +6,7 @@
     inherit extraSpecialArgs;
     modules = [
       ../modules/base.nix
+      vicinae.homeManagerModules.default
       ../modules/gui.nix
       ../modules/dev.nix
       {
