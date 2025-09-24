@@ -32,9 +32,23 @@ update.%: ./homes/apps/%.nix
 	sed -i "s|sha256 = \".*\";|sha256 = \"${SRI}\";|" "$<"
 	echo "Hash updated in $<: ${SRI}"
 
-.PHONY: zi up
+.PHONY: zi up spi-build spi-switch
 up: update apphash_update
 zi:; zsh -i -c 'zinit update'
+
+spi-build:
+	@echo "Building spi host image on x86 Linux..."
+	${CACHIX} nix build .#packages.x86_64-linux.spi-image --out-link result-spi
+
+spi-switch:
+	@echo "Switching to spi host configuration..."
+	${CACHIX} sudo nixos-rebuild switch --flake .#spi
+
+# Alternative build method using direct flake reference
+spi-flake-build:
+	@echo "Building spi host image using flake reference..."
+	${CACHIX} nix build .#spi --out-link result-spi
+
 
 ifdef NIX
 nix:; @echo nix exists

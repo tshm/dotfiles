@@ -7,15 +7,18 @@
 
 let
   useHibernation = builtins.length config.swapDevices > 0;
+  isRaspberryPi = host == "spi";
 in
 {
   boot = {
     loader = {
       systemd-boot = {
-        enable = true;
+        enable = lib.mkIf (!isRaspberryPi) false;
         configurationLimit = 10;
       };
-      efi.canTouchEfiVariables = true;
+      efi = lib.mkIf (!isRaspberryPi) {
+        canTouchEfiVariables = true;
+      };
       timeout = 3;
     };
     kernelParams = lib.mkIf useHibernation [ "mem_sleep_default=deep" ];
@@ -29,10 +32,10 @@ in
   };
 
   networking.hostName = host;
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = lib.mkIf (!isRaspberryPi) true;
   console.useXkbConfig = true;
 
-  services.tlp = {
+  services.tlp = lib.mkIf (!isRaspberryPi) {
     enable = true;
     settings = {
       START_CHARGE_THRESH_BAT0 = 40;
@@ -42,12 +45,12 @@ in
   services.logind.settings = {
     Login = {
       HandlePowerKey = if useHibernation then "hibernate" else "suspend";
-      HandleLidSwitch = "suspend";
-      HandleLidSwitchExternalPower = "suspend";
+      HandleLidSwitch = lib.mkIf (!isRaspberryPi) "suspend";
+      HandleLidSwitchExternalPower = lib.mkIf (!isRaspberryPi) "suspend";
     };
   };
 
-  services.greetd = {
+  services.greetd = lib.mkIf (!isRaspberryPi) {
     enable = true;
     settings = {
       default_session = {
@@ -56,7 +59,7 @@ in
       };
     };
   };
-  systemd.services.greetd.serviceConfig = {
+  systemd.services.greetd.serviceConfig = lib.mkIf (!isRaspberryPi) {
     Type = "idle";
     StandardInput = "tty";
     StandardOutput = "tty";
@@ -92,15 +95,15 @@ in
     binfmt = true;
   };
 
-  security.polkit.enable = true;
-  security.rtkit.enable = true;
+  security.polkit.enable = lib.mkIf (!isRaspberryPi) true;
+  security.rtkit.enable = lib.mkIf (!isRaspberryPi) true;
   security.sudo.wheelNeedsPassword = false;
 
   # cloudflare-warp
-  systemd.packages = [
+  systemd.packages = lib.mkIf (!isRaspberryPi) [
     pkgs.cloudflare-warp
   ];
-  systemd.targets.multi-user.wants = [
+  systemd.targets.multi-user.wants = lib.mkIf (!isRaspberryPi) [
     "warp-svc.service"
   ];
 
@@ -110,11 +113,11 @@ in
     users = {
       ${user} = {
         isNormalUser = true;
-        extraGroups = [ "networkmanager" "wheel" "syncthing" "podman" ];
+        extraGroups = lib.mkIf (!isRaspberryPi) [ "networkmanager" "wheel" "syncthing" "podman" ];
       };
     };
   };
-  services.displayManager.sessionPackages = [
+  services.displayManager.sessionPackages = lib.mkIf (!isRaspberryPi) [
     ((pkgs.writeTextDir "share/wayland-sessions/zsh.desktop" ''
       [Desktop Entry]
       Name = zsh
@@ -126,19 +129,19 @@ in
   ];
 
   virtualisation = {
-    podman = {
+    podman = lib.mkIf (!isRaspberryPi) {
       enable = true;
       dockerCompat = true;
       dockerSocket.enable = true;
       defaultNetwork.settings.dns_enabled = true;
     };
-    docker = {
+    docker = lib.mkIf (!isRaspberryPi) {
       enable = false;
       logDriver = "json-file";
     };
   };
 
-  programs.nh = {
+  programs.nh = lib.mkIf (!isRaspberryPi) {
     enable = true;
     flake = "/home/${user}/.dotfiles";
     clean = {
@@ -147,7 +150,7 @@ in
       extraArgs = "--keep 5 --keep-since 10d";
     };
   };
-  services.kanata = {
+  services.kanata = lib.mkIf (!isRaspberryPi) {
     enable = true;
     keyboards = {
       internalKeyboard = {
@@ -160,7 +163,7 @@ in
     };
   };
 
-  services.syncthing = {
+  services.syncthing = lib.mkIf (!isRaspberryPi) {
     enable = true;
     openDefaultPorts = true;
     user = user;

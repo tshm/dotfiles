@@ -43,11 +43,25 @@
           "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
         ];
       };
-      inputs = { user = user; nixsettings = nixsettings; } // args;
+      # Cross-compilation support for aarch64-linux
+      system = "x86_64-linux";
+      crossSystem = "aarch64-linux";
+      pkgsFor = system: import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      pkgs = pkgsFor system;
+      crossPkgs = pkgsFor crossSystem;
+      inputs = { user = user; nixsettings = nixsettings; pkgs = pkgs; crossPkgs = crossPkgs; } // args;
 
     in
     {
       nixosConfigurations = import ./hosts inputs;
       homeConfigurations = import ./homes inputs;
+
+      # Cross-compilation packages
+      packages.${system} = {
+        spi-image = self.nixosConfigurations.spi.config.system.build.sdImage;
+      };
     };
 }

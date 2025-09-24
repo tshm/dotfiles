@@ -35,4 +35,13 @@ in
       gui
     ];
   };
+
+   "spi" = nixpkgs.lib.nixosSystem {
+     system = "aarch64-linux";
+     specialArgs = specialArgs // { inherit nixpkgs; };
+     modules = [
+       ./spi
+       (base { host = "spi"; })
+     ];
+   };
 }
