@@ -10,9 +10,6 @@ else
 CACHIX:=
 endif
 
-xx:
-	${CACHIX} nixos-rebuild build --flake .#minf
-
 HAS_NH:=$(shell which nh)
 home-manager: nix
 ifdef HAS_NH
@@ -23,6 +20,9 @@ endif
 
 APPSRC := $(shell find ./homes/apps/ -name '*.nix')
 APPS := $(patsubst ./homes/apps/%.nix, update.%, $(APPSRC))
+
+xx:
+	${CACHIX} nixos-rebuild build --flake .#minf
 
 apphash_update: $(APPS)
 

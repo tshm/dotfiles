@@ -125,7 +125,6 @@ in
     # };
     rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
       terminal = "${pkgs.kitty}/bin/kitty";
       extraConfig = {
         modi = "drun";

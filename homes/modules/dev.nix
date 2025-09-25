@@ -28,7 +28,7 @@ in
     pkgs.git-cliff
     pkgs.git-imerge
     pkgs.git-absorb
-    pkgs.commitizen
+    # pkgs.commitizen
     # misc
     # pkgs.opencode
     # nodePackages.opencode-ai
