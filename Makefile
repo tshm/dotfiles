@@ -10,6 +10,9 @@ else
 CACHIX:=
 endif
 
+xx:
+	${CACHIX} nixos-rebuild build --flake .#minf
+
 HAS_NH:=$(shell which nh)
 home-manager: nix
 ifdef HAS_NH
@@ -38,7 +41,7 @@ zi:; zsh -i -c 'zinit update'
 
 spi-build:
 	@echo "Building spi host image on x86 Linux..."
-	${CACHIX} nix build .#packages.x86_64-linux.spi-image --out-link result-spi
+	${CACHIX} nix build .#packages.aarch64-linux.spi-image --out-link result-spi
 
 spi-switch:
 	@echo "Switching to spi host configuration..."

@@ -1,14 +1,15 @@
-{ config, lib, pkgs, nixos-hardware, nixpkgs, ... }:
+{ config, lib, nixos-hardware, nixpkgs, crossPkgs, ... }:
 
 {
    imports = [
      nixos-hardware.nixosModules.raspberry-pi-4
-     (import "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
+     "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
    ];
 
   boot = {
     loader = {
       grub.enable = false;
+      grub.devices = [ "/dev/disk/by-label/NIXOS_SD" ];
       generic-extlinux-compatible.enable = true;
     };
     kernelParams = [ "console=ttyAMA0,115200n8" "console=tty1" ];
@@ -20,16 +21,16 @@
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
     };
-    "/mnt/data" = {
-      device = "/dev/sda1";
-      fsType = "ext4";
-      options = [ "defaults" ];
-    };
-    "/mnt/nfs" = {
-      device = "192.168.1.1:/share/nfs";
-      fsType = "nfs";
-      options = [ "defaults" ];
-    };
+    # "/mnt/data" = {
+    #   device = "/dev/sda1";
+    #   fsType = "ext4";
+    #   options = [ "defaults" ];
+    # };
+    # "/mnt/nfs" = {
+    #   device = "192.168.1.1:/share/nfs";
+    #   fsType = "nfs";
+    #   options = [ "defaults" ];
+    # };
   };
 
   networking = {
@@ -52,12 +53,12 @@
   virtualisation.podman.enable = false;
   virtualisation.docker.enable = false;
 
-  # Basic packages only
-  environment.systemPackages = [
-    pkgs.curl
-    pkgs.git
-    pkgs.busybox
-  ];
+   # Basic packages only
+   environment.systemPackages = [
+     crossPkgs.curl
+     crossPkgs.git
+     crossPkgs.busybox
+   ];
 
   system.stateVersion = "24.05";
 }

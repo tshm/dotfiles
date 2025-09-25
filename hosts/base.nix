@@ -3,7 +3,7 @@
 , baselocale ? "en_US.UTF-8"
 , locale ? "ja_JP.UTF-8"
 }:
-{ pkgs, config, lib, nixsettings, ... }:
+{ config, lib, nixsettings, pkgs ? config.nixpkgs.pkgs, ... }:
 
 let
   useHibernation = builtins.length config.swapDevices > 0;
@@ -97,7 +97,7 @@ in
 
   security.polkit.enable = lib.mkIf (!isRaspberryPi) true;
   security.rtkit.enable = lib.mkIf (!isRaspberryPi) true;
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo.wheelNeedsPassword = lib.mkIf (!isRaspberryPi) false;
 
   # cloudflare-warp
   systemd.packages = lib.mkIf (!isRaspberryPi) [

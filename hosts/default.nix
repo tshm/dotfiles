@@ -1,4 +1,4 @@
-{ nixpkgs, ... } @ args:
+{ nixpkgs, crossPkgs, ... } @ args:
 let
   base = import ./base.nix;
   gui = import ./gui.nix;
@@ -36,12 +36,14 @@ in
     ];
   };
 
-   "spi" = nixpkgs.lib.nixosSystem {
-     system = "aarch64-linux";
-     specialArgs = specialArgs // { inherit nixpkgs; };
-     modules = [
-       ./spi
-       (base { host = "spi"; })
-     ];
-   };
+    "spi" = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      specialArgs = specialArgs // {
+        inherit nixpkgs crossPkgs;
+      };
+      modules = [
+        ./spi
+        (base { host = "spi"; })
+      ];
+    };
 }

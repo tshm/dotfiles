@@ -51,8 +51,11 @@
         config.allowUnfree = true;
       };
       pkgs = pkgsFor system;
-      crossPkgs = pkgsFor crossSystem;
-      inputs = { user = user; nixsettings = nixsettings; pkgs = pkgs; crossPkgs = crossPkgs; } // args;
+      crossPkgs = import nixpkgs {
+        system = crossSystem;
+        config.allowUnfree = true;
+      };
+      inputs = { user = user; nixsettings = nixsettings; crossPkgs = crossPkgs;} // args;
 
     in
     {
@@ -61,6 +64,9 @@
 
       # Cross-compilation packages
       packages.${system} = {
+        spi-image = self.nixosConfigurations.spi.config.system.build.sdImage;
+      };
+      packages.${crossSystem} = {
         spi-image = self.nixosConfigurations.spi.config.system.build.sdImage;
       };
     };
