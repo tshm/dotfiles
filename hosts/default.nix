@@ -36,14 +36,14 @@ in
     ];
   };
 
-    "spi" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      specialArgs = specialArgs // {
-        inherit nixpkgs crossPkgs;
-      };
-      modules = [
-        ./spi
-        (base { host = "spi"; })
-      ];
+  "spi" = nixpkgs.lib.nixosSystem {
+    system = "aarch64-linux";
+    specialArgs = specialArgs // {
+      inherit nixpkgs crossPkgs;
     };
+    modules = [
+      ./spi
+      (base { host = "spi"; })
+    ];
+  };
 }

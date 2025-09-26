@@ -13,7 +13,7 @@ in
   boot = {
     loader = {
       systemd-boot = {
-        enable = lib.mkIf (!isRaspberryPi) false;
+        enable = lib.mkIf (!isRaspberryPi) true;
         configurationLimit = 10;
       };
       efi = lib.mkIf (!isRaspberryPi) {

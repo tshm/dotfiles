@@ -6,7 +6,7 @@
     inherit extraSpecialArgs;
     modules = [
       ../modules/base.nix
-      vicinae.homeManagerModules.default
+      # vicinae.homeManagerModules.default
       ../modules/gui.nix
       ../modules/dev.nix
       {
