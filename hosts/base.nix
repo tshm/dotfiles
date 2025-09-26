@@ -177,25 +177,26 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = [
-    # base tools
-    pkgs.inxi
-    pkgs.gnumake
-    pkgs.vim
-    pkgs.neovim
-    pkgs.curl
-    pkgs.git
-    pkgs.gcc
-    pkgs.busybox
-    # container
-    pkgs.podman-tui
-    pkgs.podman-compose
-    # desktop environment related
-    pkgs.cloudflare-warp
-    pkgs.p7zip
-    pkgs.imagemagick
-    pkgs.ffmpegthumbnailer
-  ];
+   environment.systemPackages = [
+     # base tools
+     pkgs.inxi
+     pkgs.gnumake
+     pkgs.vim
+     pkgs.neovim
+     pkgs.curl
+     pkgs.git
+     pkgs.gcc
+     pkgs.busybox
+     # container
+     pkgs.podman-tui
+     pkgs.podman-compose
+     # desktop environment related
+   ] ++ lib.optionals (!isRaspberryPi) [
+     pkgs.cloudflare-warp
+     pkgs.p7zip
+     pkgs.imagemagick
+     pkgs.ffmpegthumbnailer
+   ];
 
   services.openssh.enable = true;
   # services.flatpak.enable = true;

@@ -6,15 +6,17 @@
      "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
    ];
 
-  boot = {
-    loader = {
-      grub.enable = false;
-      grub.devices = [ "/dev/disk/by-label/NIXOS_SD" ];
-      generic-extlinux-compatible.enable = true;
-    };
-    kernelParams = [ "console=ttyAMA0,115200n8" "console=tty1" ];
-    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
-  };
+   boot = {
+     loader = {
+       grub.enable = false;
+       grub.devices = [ "/dev/disk/by-label/NIXOS_SD" ];
+       generic-extlinux-compatible.enable = true;
+     };
+     kernelParams = [ "console=ttyAMA0,115200n8" "console=tty1" ];
+     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
+     initrd.includeDefaultModules = false;
+     kernelPackages = crossPkgs.linuxKernel.packages.linux_6_6;
+   };
 
   fileSystems = {
     "/" = {
