@@ -3,14 +3,18 @@
 , baselocale ? "en_US.UTF-8"
 , locale ? "ja_JP.UTF-8"
 }:
-{ config, lib, nixsettings, pkgs ? config.nixpkgs.pkgs, ... }:
+{ config, lib, nixsettings, agenix, pkgs ? config.nixpkgs.pkgs, ... }:
 
 let
   useHibernation = builtins.length config.swapDevices > 0;
   isRaspberryPi = host == "spi";
 in
 {
+  imports = [
+    agenix.nixosModules.default
+  ];
   boot = {
+    binfmt.emulatedSystems = lib.mkIf (!isRaspberryPi) [ "aarch64-linux" ];
     loader = {
       systemd-boot = {
         enable = lib.mkIf (!isRaspberryPi) true;
@@ -114,7 +118,7 @@ in
       ${user} = {
         isNormalUser = true;
         # password = null;
-        hashedPassword = "$6$QcBwOap/toZLcbMr$2Sq8ocJ.Twl1dXjf6f6MiYFTheKY4ltPBlHCu4hCcEf5aO1Lw8YCwqa/rc67HI1kZzzpmHaqmrr0nokqSmVvD/";
+        hashedPasswordFile = config.age.secrets.user-password.path;
         extraGroups = [ "networkmanager" "wheel" "syncthing" "podman" ];
       };
     };
@@ -179,26 +183,26 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
-   environment.systemPackages = [
-     # base tools
-     pkgs.inxi
-     pkgs.gnumake
-     pkgs.vim
-     pkgs.neovim
-     pkgs.curl
-     pkgs.git
-     pkgs.gcc
-     pkgs.busybox
-     # container
-     pkgs.podman-tui
-     pkgs.podman-compose
-     # desktop environment related
-   ] ++ lib.optionals (!isRaspberryPi) [
-     pkgs.cloudflare-warp
-     pkgs.p7zip
-     pkgs.imagemagick
-     pkgs.ffmpegthumbnailer
-   ];
+  environment.systemPackages = [
+    # base tools
+    pkgs.inxi
+    pkgs.gnumake
+    pkgs.vim
+    pkgs.neovim
+    pkgs.curl
+    pkgs.git
+    pkgs.gcc
+    pkgs.busybox
+    # container
+    pkgs.podman-tui
+    pkgs.podman-compose
+    # desktop environment related
+  ] ++ lib.optionals (!isRaspberryPi) [
+    pkgs.cloudflare-warp
+    pkgs.p7zip
+    pkgs.imagemagick
+    pkgs.ffmpegthumbnailer
+  ];
 
   services.openssh.enable = true;
   # services.flatpak.enable = true;
@@ -217,4 +221,8 @@ in
   #   };
 
   system.stateVersion = "24.05";
+
+  # Agenix configuration for secrets
+  age.secrets.user-password.file = "/home/${user}/.dotfiles/secrets/user-password.age";
+  age.identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
 }

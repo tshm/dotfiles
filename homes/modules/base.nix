@@ -5,9 +5,16 @@ let
 in
 {
   imports = [
+    inputs.agenix.homeManagerModules.default
     inputs.nix-index-database.homeModules.nix-index
     inputs.catppuccin.homeModules.catppuccin
   ];
+  age = {
+    identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
+    secrets = {
+      user-password.file = configPath "/secrets/user-password.age";
+    };
+  };
   nix = {
     settings = inputs.nixsettings;
     package = pkgs.nix;
@@ -29,6 +36,7 @@ in
     packages = [
       pkgs.nh
       pkgs.cachix
+      inputs.agenix.packages.${pkgs.system}.default
       # platform
       pkgs.openssh
       pkgs.file

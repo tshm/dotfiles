@@ -3,11 +3,15 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    catppuccin.url = "github:catppuccin/nix";
+     home-manager = {
+       url = "github:nix-community/home-manager";
+       inputs.nixpkgs.follows = "nixpkgs";
+     };
+     agenix = {
+       url = "github:ryantm/agenix";
+       inputs.nixpkgs.follows = "nixpkgs";
+     };
+     catppuccin.url = "github:catppuccin/nix";
     # hyprshell.url = "github:h3rmt/hyprswitch?ref=hyprshell";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";

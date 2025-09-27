@@ -1,4 +1,4 @@
-{ user, config, pkgs, system, ... } @ inputs:
+{ user, config, pkgs, ... }:
 
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
