@@ -113,7 +113,9 @@ in
     users = {
       ${user} = {
         isNormalUser = true;
-        extraGroups = lib.mkIf (!isRaspberryPi) [ "networkmanager" "wheel" "syncthing" "podman" ];
+        # password = null;
+        hashedPassword = "$6$QcBwOap/toZLcbMr$2Sq8ocJ.Twl1dXjf6f6MiYFTheKY4ltPBlHCu4hCcEf5aO1Lw8YCwqa/rc67HI1kZzzpmHaqmrr0nokqSmVvD/";
+        extraGroups = [ "networkmanager" "wheel" "syncthing" "podman" ];
       };
     };
   };
@@ -163,8 +165,8 @@ in
     };
   };
 
-  services.syncthing = lib.mkIf (!isRaspberryPi) {
-    enable = true;
+  services.syncthing = {
+    enable = lib.mkDefault true;
     openDefaultPorts = true;
     user = user;
     dataDir = "/home/${user}/.syncthing_data";

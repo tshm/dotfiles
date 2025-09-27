@@ -35,17 +35,17 @@ update.%: ./homes/apps/%.nix
 	sed -i "s|sha256 = \".*\";|sha256 = \"${SRI}\";|" "$<"
 	echo "Hash updated in $<: ${SRI}"
 
-.PHONY: zi up spi-build spi-switch
+.PHONY: zi up spi-build spi
 up: update apphash_update
 zi:; zsh -i -c 'zinit update'
+
+spi: result-spi
+	, unzstd result-spi/sd-image/*.img.zst -o .spi.img
+	sudo dd if=.spi.img of=/dev/sda bs=10MB oflag=dsync status=progress
 
 spi-build:
 	@echo "Building spi host image on x86 Linux..."
 	${CACHIX} nix build .#packages.aarch64-linux.spi-image --out-link result-spi
-
-spi-switch:
-	@echo "Switching to spi host configuration..."
-	${CACHIX} sudo nixos-rebuild switch --flake .#spi
 
 # Alternative build method using direct flake reference
 spi-flake-build:

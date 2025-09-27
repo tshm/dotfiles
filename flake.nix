@@ -44,13 +44,7 @@
         ];
       };
       # Cross-compilation support for aarch64-linux
-      system = "x86_64-linux";
       crossSystem = "aarch64-linux";
-      pkgsFor = system: import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      pkgs = pkgsFor system;
       crossPkgs = import nixpkgs {
         system = crossSystem;
         config.allowUnfree = true;
@@ -63,9 +57,6 @@
       homeConfigurations = import ./homes inputs;
 
       # Cross-compilation packages
-      packages.${system} = {
-        spi-image = self.nixosConfigurations.spi.config.system.build.sdImage;
-      };
       packages.${crossSystem} = {
         spi-image = self.nixosConfigurations.spi.config.system.build.sdImage;
       };

@@ -1,4 +1,4 @@
-{ config, lib, nixos-hardware, nixpkgs, crossPkgs, ... }:
+{ nixos-hardware, nixpkgs, crossPkgs, ... }:
 
 {
    imports = [
