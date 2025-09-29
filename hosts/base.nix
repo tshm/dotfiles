@@ -1,4 +1,5 @@
 { host
+, forServer ? false
 , user ? "tshm"
 , baselocale ? "en_US.UTF-8"
 , locale ? "ja_JP.UTF-8"
@@ -39,14 +40,14 @@ in
   networking.networkmanager.enable = lib.mkIf (!isRaspberryPi) true;
   console.useXkbConfig = true;
 
-  services.tlp = lib.mkIf (!isRaspberryPi) {
+  services.tlp = lib.mkIf (!forServer) {
     enable = true;
     settings = {
       START_CHARGE_THRESH_BAT0 = 40;
       STOP_CHARGE_THRESH_BAT0 = 70;
     };
   };
-  services.logind.settings = {
+  services.logind.settings = lib.mkIf (!forServer) {
     Login = {
       HandlePowerKey = if useHibernation then "hibernate" else "suspend";
       HandleLidSwitch = lib.mkIf (!isRaspberryPi) "suspend";
@@ -54,7 +55,7 @@ in
     };
   };
 
-  services.greetd = lib.mkIf (!isRaspberryPi) {
+  services.greetd = lib.mkIf (!forServer) {
     enable = true;
     settings = {
       default_session = {
@@ -63,7 +64,7 @@ in
       };
     };
   };
-  systemd.services.greetd.serviceConfig = lib.mkIf (!isRaspberryPi) {
+  systemd.services.greetd.serviceConfig = lib.mkIf (!forServer) {
     Type = "idle";
     StandardInput = "tty";
     StandardOutput = "tty";
@@ -101,7 +102,7 @@ in
 
   security.polkit.enable = lib.mkIf (!isRaspberryPi) true;
   security.rtkit.enable = lib.mkIf (!isRaspberryPi) true;
-  security.sudo.wheelNeedsPassword = lib.mkIf (!isRaspberryPi) false;
+  security.sudo.wheelNeedsPassword = false;
 
   # cloudflare-warp
   systemd.packages = lib.mkIf (!isRaspberryPi) [
@@ -123,7 +124,7 @@ in
       };
     };
   };
-  services.displayManager.sessionPackages = lib.mkIf (!isRaspberryPi) [
+  services.displayManager.sessionPackages = lib.mkIf (!forServer) [
     ((pkgs.writeTextDir "share/wayland-sessions/zsh.desktop" ''
       [Desktop Entry]
       Name = zsh
@@ -147,7 +148,7 @@ in
     };
   };
 
-  programs.nh = lib.mkIf (!isRaspberryPi) {
+  programs.nh = {
     enable = true;
     flake = "/home/${user}/.dotfiles";
     clean = {
@@ -156,7 +157,7 @@ in
       extraArgs = "--keep 5 --keep-since 10d";
     };
   };
-  services.kanata = lib.mkIf (!isRaspberryPi) {
+  services.kanata = lib.mkIf (!forServer) {
     enable = true;
     keyboards = {
       internalKeyboard = {

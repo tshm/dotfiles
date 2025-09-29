@@ -9,7 +9,7 @@ primarily using NixOS, but with support for other systems as well.
 The repository is organized as follows:
 
 - `homes/`: Contains Home Manager configurations for different user environments.
-- `hosts/`: Contains NixOS configurations for different machines.
+ - `hosts/`: Contains NixOS configurations for different machines, including minf, spi, usb, x360, and t440p.
 - `k8s/`: Kubernetes configurations and related tools.
 - `vim/nvim/`: Neovim configuration.
 - `zsh/`: Zsh shell configuration.
@@ -55,4 +55,3 @@ Development dependencies are managed by [pre-commit](https://pre-commit.com/):
 
 This repository also uses [Renovate](https://www.mend.io/free-developer-tools/renovate/)
 to keep dependencies up to date.
-

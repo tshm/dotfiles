@@ -16,4 +16,5 @@ builtins.foldl' (s: i: s // i) { } [
   (import ./PN0093 x86_inputs)
   (import ./x360 x86_inputs)
   (import ./usb x86_inputs)
+  (import ./t440p x86_inputs)
 ]

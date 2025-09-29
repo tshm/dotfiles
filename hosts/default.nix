@@ -6,6 +6,15 @@
    specialArgs = args // { inherit system; };
  in
 {
+   "t440p" = nixpkgs.lib.nixosSystem {
+     inherit system;
+     inherit specialArgs;
+     modules = [
+       ./t440p
+       (base { host = "tp"; forServer = true; })
+     ];
+   };
+
    "minf" = nixpkgs.lib.nixosSystem {
      inherit system;
      inherit specialArgs;
@@ -41,7 +50,7 @@
      specialArgs = specialArgs // { inherit nixpkgs crossPkgs; };
      modules = [
        ./spi
-       (base { host = "spi"; })
+       (base { host = "spi"; forServer = true; })
      ];
    };
 }
