@@ -39,9 +39,12 @@ update.%: ./homes/apps/%.nix
 up: update apphash_update
 zi:; zsh -i -c 'zinit update'
 
-spi: result-spi
+.spi.img: result-spi
 	, unzstd result-spi/sd-image/*.img.zst -o .spi.img
-	sudo dd if=.spi.img of=/dev/sda bs=10MB oflag=dsync status=progress
+
+spi: .spi.img
+	# sudo dd if=.spi.img of=/dev/sda bs=10MB oflag=dsync status=progress
+	, qemu-system-aarch64 -M raspi4b -drive file=.spi.img,format=raw -nographic
 
 spi-build:
 	@echo "Building spi host image on x86 Linux..."
