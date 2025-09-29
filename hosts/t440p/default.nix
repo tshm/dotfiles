@@ -13,4 +13,12 @@
   services.greetd.enable = false;
   services.syncthing.enable = false;
   services.kanata.enable = false;
+
+  services.logind.settings = {
+    Login = {
+      HandlePowerKey = "poweroff";
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+    };
+  };
 }
