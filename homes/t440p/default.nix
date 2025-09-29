@@ -1,7 +1,7 @@
 { home-manager, pkgs, extraSpecialArgs, ... }:
 
 {
-  "tshm@minf" = home-manager.lib.homeManagerConfiguration {
+  "tshm@tp" = home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
     inherit extraSpecialArgs;
     modules = [

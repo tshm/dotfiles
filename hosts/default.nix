@@ -6,7 +6,7 @@
    specialArgs = args // { inherit system; };
  in
 {
-   "t440p" = nixpkgs.lib.nixosSystem {
+   "tp" = nixpkgs.lib.nixosSystem {
      inherit system;
      inherit specialArgs;
      modules = [

@@ -18,10 +18,10 @@ in
     binfmt.emulatedSystems = lib.mkIf (!isRaspberryPi) [ "aarch64-linux" ];
     loader = {
       systemd-boot = {
-        enable = lib.mkIf (!isRaspberryPi) true;
+        enable = lib.mkIf (!isRaspberryPi && host != "tp") true;
         configurationLimit = 10;
       };
-      efi = lib.mkIf (!isRaspberryPi) {
+      efi = lib.mkIf (!isRaspberryPi && host != "tp") {
         canTouchEfiVariables = true;
       };
       timeout = 3;
@@ -96,8 +96,8 @@ in
   };
 
   programs.appimage = {
-    enable = true;
-    binfmt = true;
+    enable = !forServer;
+    binfmt = !forServer;
   };
 
   security.polkit.enable = lib.mkIf (!isRaspberryPi) true;
@@ -105,10 +105,10 @@ in
   security.sudo.wheelNeedsPassword = false;
 
   # cloudflare-warp
-  systemd.packages = lib.mkIf (!isRaspberryPi) [
+  systemd.packages = lib.mkIf (!forServer) [
     pkgs.cloudflare-warp
   ];
-  systemd.targets.multi-user.wants = lib.mkIf (!isRaspberryPi) [
+  systemd.targets.multi-user.wants = lib.mkIf (!forServer) [
     "warp-svc.service"
   ];
 
