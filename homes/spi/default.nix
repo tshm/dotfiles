@@ -1,9 +1,9 @@
 { home-manager, pkgs, nixpkgs, extraSpecialArgs, ... }:
 
 {
-  "pi@spi" = home-manager.lib.homeManagerConfiguration {
+  "tshm@spi" = home-manager.lib.homeManagerConfiguration {
     pkgs = nixpkgs.legacyPackages.aarch64-linux;
-    extraSpecialArgs = extraSpecialArgs // { user = "pi"; };
+    extraSpecialArgs = extraSpecialArgs;
     modules = [
       ../modules/base.nix
       ../modules/dev.nix

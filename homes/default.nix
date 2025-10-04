@@ -6,7 +6,7 @@ let
     inherit system;
     user = username;
   };
-  arm_inputs = inputs "aarch64-linux" "pi";
+  arm_inputs = inputs "aarch64-linux" user;
   x86_inputs = inputs "x86_64-linux" user;
 in
 builtins.foldl' (s: i: s // i) { } [
