@@ -134,6 +134,10 @@ in
       Terminal = true
     '').overrideAttrs (_: { passthru.providedSessions = [ "zsh" ]; }))
   ];
+  services.tailscale = {
+    enable = lib.mkDefault true;
+    useRoutingFeatures = "both";
+  };
 
   virtualisation = {
     podman = lib.mkIf (!isRaspberryPi) {
