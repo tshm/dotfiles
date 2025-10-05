@@ -147,6 +147,11 @@ in
       enableZshIntegration = true;
       enableNushellIntegration = true;
       flags = [ "--disable-up-arrow" ];
+      settings = {
+        update_check = false;
+        filter_model = "host";
+        invert = true;
+      };
     };
     nushell = {
       enable = true;
