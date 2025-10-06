@@ -10,7 +10,10 @@ else
 CACHIX:=
 endif
 
+ifndef NONH
 HAS_NH:=$(shell which nh)
+endif
+
 home-manager: nix
 ifdef HAS_NH
 	${CACHIX} nh home switch
@@ -22,7 +25,7 @@ APPSRC := $(shell find ./homes/apps/ -name '*.nix')
 APPS := $(patsubst ./homes/apps/%.nix, update.%, $(APPSRC))
 
 xx:
-	${CACHIX} nixos-rebuild build --flake .#minf
+	${CACHIX} nixos-rebuild build --flake .${TARGET}
 
 apphash_update: $(APPS)
 
@@ -35,26 +38,20 @@ update.%: ./homes/apps/%.nix
 	sed -i "s|sha256 = \".*\";|sha256 = \"${SRI}\";|" "$<"
 	echo "Hash updated in $<: ${SRI}"
 
-.PHONY: zi up spi-build spi
+.PHONY: zi up sd-burn
 up: update apphash_update
 zi:; zsh -i -c 'zinit update'
 
-.spi.img: result-spi
-	, unzstd result-spi/sd-image/*.img.zst -o .spi.img
+sd-burn: spi.img
+	sudo dd if=spi.img of=${SD_DEV} bs=10MB oflag=dsync status=progress
 
-spi: .spi.img
-	# sudo dd if=.spi.img of=/dev/sda bs=10MB oflag=dsync status=progress
-	, qemu-system-aarch64 -M raspi4b -drive file=.spi.img,format=raw -nographic
+spi.img: result-spi
+	, unzstd result-spi/sd-image/*.img.zst -o spi.img
+	echo , qemu-system-aarch64 -M raspi4b -drive file=spi.img,format=raw -nographic
 
-spi-build:
+result-spi: ./hosts/spi/default.nix
 	@echo "Building spi host image on x86 Linux..."
 	${CACHIX} nix build .#packages.aarch64-linux.spi-image --out-link result-spi
-
-# Alternative build method using direct flake reference
-spi-flake-build:
-	@echo "Building spi host image using flake reference..."
-	${CACHIX} nix build .#spi --out-link result-spi
-
 
 ifdef NIX
 nix:; @echo nix exists

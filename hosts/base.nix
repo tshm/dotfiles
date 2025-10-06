@@ -14,6 +14,9 @@ in
   imports = [
     agenix.nixosModules.default
   ];
+  age.secrets.user-password-hash.file = "/home/${user}/.dotfiles/secrets/user-password-hash.age";
+  age.identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
+
   boot = {
     binfmt.emulatedSystems = lib.mkIf (!isRaspberryPi) [ "aarch64-linux" ];
     loader = {
@@ -102,15 +105,11 @@ in
 
   security.polkit.enable = lib.mkIf (!isRaspberryPi) true;
   security.rtkit.enable = lib.mkIf (!isRaspberryPi) true;
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo.wheelNeedsPassword = lib.mkDefault false;
 
   # cloudflare-warp
-  systemd.packages = lib.mkIf (!forServer) [
-    pkgs.cloudflare-warp
-  ];
-  systemd.targets.multi-user.wants = lib.mkIf (!forServer) [
-    "warp-svc.service"
-  ];
+  systemd.packages = lib.mkIf (!forServer) [ pkgs.cloudflare-warp ];
+  systemd.targets.multi-user.wants = lib.mkIf (!forServer) [ "warp-svc.service" ];
 
   programs.zsh.enable = true;
   users = {
@@ -119,7 +118,12 @@ in
       ${user} = {
         isNormalUser = true;
         # password = null;
-        hashedPasswordFile = config.age.secrets.user-password.path;
+        hashedPasswordFile = config.age.secrets.user-password-hash.path;
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE1nFDHaQvTrUEDiPpT3qvVJXEot5IEhBJmUZ0WKRPYD"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOe16XtRvMF6S+1Z0tkk3R7jV211Ff2ynmoL+BinKmwW"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF1GtASZbx/L6Nm348S7peM7yQbLcg7xH+wqkWBtD6Y7"
+        ];
         extraGroups = [ "networkmanager" "wheel" "syncthing" "podman" ];
       };
     };
@@ -202,12 +206,13 @@ in
     pkgs.podman-tui
     pkgs.podman-compose
     # desktop environment related
-  ] ++ lib.optionals (!isRaspberryPi) [
-    pkgs.cloudflare-warp
-    pkgs.p7zip
-    pkgs.imagemagick
-    pkgs.ffmpegthumbnailer
-  ];
+  ] ++
+    lib.optionals (!isRaspberryPi) [
+      pkgs.cloudflare-warp
+      pkgs.p7zip
+      pkgs.imagemagick
+      pkgs.ffmpegthumbnailer
+    ];
 
   services.openssh.enable = true;
   # services.flatpak.enable = true;
@@ -226,8 +231,4 @@ in
   #   };
 
   system.stateVersion = "24.05";
-
-  # Agenix configuration for secrets
-  age.secrets.user-password.file = "/home/${user}/.dotfiles/secrets/user-password.age";
-  age.identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
 }

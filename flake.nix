@@ -60,9 +60,9 @@
       nixosConfigurations = import ./hosts inputs;
       homeConfigurations = import ./homes inputs;
 
-      # Cross-compilation packages
+      # Cross-compilation 1st boot image
       packages.${crossSystem} = {
-        spi-image = self.nixosConfigurations.spi.config.system.build.sdImage;
+        spi-image = self.nixosConfigurations.spi_first.config.system.build.sdImage;
       };
     };
 }

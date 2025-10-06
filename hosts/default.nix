@@ -45,11 +45,22 @@
      ];
    };
 
+   "spi_first" = nixpkgs.lib.nixosSystem {
+     system = "aarch64-linux";
+     specialArgs = specialArgs // { inherit nixpkgs crossPkgs; };
+     modules = [
+       ./spi
+       (import ./spi/sd.nix)
+       (base { host = "spi"; forServer = true; })
+     ];
+   };
+
    "spi" = nixpkgs.lib.nixosSystem {
      system = "aarch64-linux";
      specialArgs = specialArgs // { inherit nixpkgs crossPkgs; };
      modules = [
        ./spi
+       (import ./spi/prod.nix)
        (base { host = "spi"; forServer = true; })
      ];
    };
