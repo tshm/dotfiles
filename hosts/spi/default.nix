@@ -37,4 +37,9 @@
 
   services.greetd.enable = false;
   services.kanata.enable = false;
+
+  environment.systemPackages = [
+    crossPkgs.libraspberrypi
+    crossPkgs.raspberrypi-eeprom
+  ];
 }

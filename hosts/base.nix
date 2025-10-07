@@ -124,7 +124,7 @@ in
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOe16XtRvMF6S+1Z0tkk3R7jV211Ff2ynmoL+BinKmwW"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF1GtASZbx/L6Nm348S7peM7yQbLcg7xH+wqkWBtD6Y7"
         ];
-        extraGroups = [ "networkmanager" "wheel" "syncthing" "podman" ];
+        extraGroups = [ "networkmanager" "wheel" "syncthing" "podman" "docker" ];
       };
     };
   };
