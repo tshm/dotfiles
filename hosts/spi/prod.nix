@@ -9,13 +9,21 @@
     "/mnt/data" = {
       device = "/dev/sda1";
       fsType = "ext4";
-      options = [ "defaults" "noauto" "nofail" ];
+      options = [ "defaults" "nofail" ];
     };
     "/mnt/nfs" = {
       device = "192.168.1.1:/share/nfs";
       fsType = "nfs";
       options = [ "defaults" "noauto" "nofail" ];
     };
+  };
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "10 *     * * *   ${user}   /mnt/data/srv/duck.sh"
+      "30 */2   * * *   ${user}   ~/work/videodl/dl.sh ."
+    ];
   };
 
   networking = {
