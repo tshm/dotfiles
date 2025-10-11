@@ -48,6 +48,9 @@ catppuccin.nixosModules.catppuccin args //
   programs.hyprland = {
     enable = true;
   };
+  programs.niri = {
+    enable = true;
+  };
   fonts = {
     enableDefaultPackages = true;
     packages = [
@@ -102,6 +105,10 @@ catppuccin.nixosModules.catppuccin args //
     pkgs.mesa.drivers
     # desktop environment related
     pkgs.hyprland
+    pkgs.niri
+    pkgs.niriswitcher
+    pkgs.nirius
+    pkgs.xwayland-satellite
     pkgs.wl-clipboard
     pkgs.p7zip
     pkgs.poppler

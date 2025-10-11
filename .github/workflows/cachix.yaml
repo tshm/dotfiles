@@ -23,7 +23,7 @@ jobs:
           - runner: "ubuntu-latest"
             target: "tshm@PD0056"
           - runner: "ubuntu-24.04-arm"
-            target: "pi@spi"
+            target: "tshm@spi"
     runs-on: ${{ matrix.home.runner }}
     steps:
       - name: Checkout flake
