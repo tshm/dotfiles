@@ -5,7 +5,7 @@
     "kustomize@latest",
     "k9s@0.50.9",
     "cloudflared@latest",
-    "kubernetes-helm@3.18.4",
+    "kubernetes-helm@3.19.0",
     "oci-cli@3.64.1"
   ],
   "shell": {
