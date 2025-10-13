@@ -1,4 +1,4 @@
-{ nixpkgs, crossPkgs, agenix, user, config, ... }:
+{ user, ... }:
 
 {
   fileSystems = {
@@ -21,8 +21,8 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "10 *     * * *   ${user}   /mnt/data/srv/duck.sh"
-      "30 */2   * * *   ${user}   ~/work/videodl/dl.sh ."
+      "10 *     * * *   ${user}   . /etc/profile && /mnt/data/srv/duck.sh"
+      "30 */2   * * *   ${user}   . /etc/profile && /mnt/data/yt/Video/dl.sh"
     ];
   };
 
