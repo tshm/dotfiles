@@ -11,7 +11,23 @@ opt.foldlevelstart = 99
 opt.foldenable = true
 opt.foldnestmax = 20
 
-opt.clipboard = "unnamedplus"
+-- Use tmux clipboard when available, fallback to system clipboard
+if vim.env.TMUX then
+  vim.g.clipboard = {
+    name = 'tmux',
+    copy = {
+      ['+'] = {'tmux', 'load-buffer', '-w', '-'},
+      ['*'] = {'tmux', 'load-buffer', '-w', '-'},
+    },
+    paste = {
+      ['+'] = {'tmux', 'save-buffer', '-'},
+      ['*'] = {'tmux', 'save-buffer', '-'},
+    },
+    cache_enabled = 1,
+  }
+else
+  opt.clipboard = "unnamedplus"
+end
 
 opt.cursorline = true
 opt.spelllang = { "en", "cjk" }
