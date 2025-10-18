@@ -48,9 +48,9 @@ catppuccin.nixosModules.catppuccin args //
   programs.hyprland = {
     enable = true;
   };
-  programs.niri = {
-    enable = true;
-  };
+  # programs.niri = {
+  #   enable = true;
+  # };
   fonts = {
     enableDefaultPackages = true;
     packages = [
@@ -104,9 +104,6 @@ catppuccin.nixosModules.catppuccin args //
   environment.systemPackages = [
     pkgs.mesa.drivers
     # desktop environment related
-    # pkgs.hyprland
-    # pkgs.hyprlandPlugins.hyprscrolling
-    # pkgs.niri
     pkgs.niriswitcher
     pkgs.nirius
     pkgs.xwayland-satellite

@@ -25,7 +25,7 @@ in
     portal = {
       enable = true;
       extraPortals = [
-        pkgs.xdg-desktop-portal-hyprland
+        args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
         pkgs.xdg-desktop-portal-termfilechooser
       ];
       config = {
@@ -145,10 +145,11 @@ in
   };
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.hyprland; # use system installed binary
+    package = args.hyprland.packages.${pkgs.system}.hyprland;
+    portalPackage = args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     plugins = [
       args.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
-      args.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      args.hyprland-plugins.packages.${pkgs.system}.hyprexpo
     ];
     settings = {
       source = [
