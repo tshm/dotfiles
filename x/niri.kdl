@@ -4,17 +4,17 @@
 // https://yalter.github.io/niri/Configuration:-Introduction
 
 environment {
-  ELECTRON_OZONE_PLATFORM_HINT "auto"
-  // QT_QPA_PLATFORMTHEME "qt6ct"
-  // XCURSOR_SIZE "26"
-  // HYPRCURSOR_SIZE "26"
-  // XMODIFIERS "@im=fcitx"
-  // GLFW_IM_MODULE "ibus"
-  // GTK_IM_MODULE  ""
-  // DefaultIMModule "fcitx"
-  // OZONE_PLATFORM "wayland"
-  // QT_QPA_PLATFORM "wayland"
-  // XDG_SESSION_TYPE "wayland"
+  // ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORMTHEME "qt6ct"
+  XCURSOR_SIZE "26"
+  HYPRCURSOR_SIZE "26"
+  XMODIFIERS "@im=fcitx"
+  GLFW_IM_MODULE "ibus"
+  GTK_IM_MODULE  ""
+  DefaultIMModule "fcitx"
+  OZONE_PLATFORM "wayland"
+  QT_QPA_PLATFORM "wayland"
+  XDG_SESSION_TYPE "wayland"
 }
 
 // Input device configuration.

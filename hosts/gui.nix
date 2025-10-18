@@ -105,6 +105,7 @@ catppuccin.nixosModules.catppuccin args //
     pkgs.mesa.drivers
     # desktop environment related
     pkgs.hyprland
+    # pkgs.hyprlandPlugins.hyprscrolling
     pkgs.niri
     pkgs.niriswitcher
     pkgs.nirius
