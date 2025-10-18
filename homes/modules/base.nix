@@ -64,7 +64,7 @@ in
       pkgs.lnav
       pkgs.scc
       pkgs.jc
-      pkgs.jq
+      pkgs.yq
       pkgs.jless
       # extras
       #pkgs.chawan
@@ -335,6 +335,7 @@ in
         mv = "nocorrect mv";
         cp = "nocorrect cp";
         rm = "rm -i";
+        jq = "yq";
         yt-dlp = "noglob yt-dlp";
       };
     };
