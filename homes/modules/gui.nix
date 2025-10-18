@@ -1,4 +1,4 @@
-{ user, config, pkgs, ... }:
+{ user, config, pkgs, ... } @ args:
 
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
@@ -146,6 +146,10 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland; # use system installed binary
+    plugins = [
+      args.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
+      args.hyprland-plugins.packages.${pkgs.system}.hyprbars
+    ];
     settings = {
       source = [
         "~/.dotfiles/x/hyprland/vars.conf"

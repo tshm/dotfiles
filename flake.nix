@@ -12,7 +12,6 @@
        inputs.nixpkgs.follows = "nixpkgs";
      };
      catppuccin.url = "github:catppuccin/nix";
-    # hyprshell.url = "github:h3rmt/hyprswitch?ref=hyprshell";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +22,12 @@
     localias.url = "github:peterldowns/localias";
     # mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
     vicinae.url = "github:vicinaehq/vicinae";
+    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprshell.url = "github:h3rmt/hyprswitch?ref=hyprshell";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs = { self, nixpkgs, ... } @ args:

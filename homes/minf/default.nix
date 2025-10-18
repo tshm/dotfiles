@@ -13,8 +13,8 @@
         home.packages = [
           pkgs.qsv
           pkgs.deno
-          # pkgs.ollama
           pkgs.nodePackages.localtunnel
+          # pkgs.ollama
           # pkgs.lmstudio
         ];
         wayland.windowManager.hyprland.extraConfig = ''
