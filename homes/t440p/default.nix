@@ -1,4 +1,9 @@
-{ home-manager, pkgs, extraSpecialArgs, ... }:
+{
+  home-manager,
+  pkgs,
+  extraSpecialArgs,
+  ...
+}:
 
 {
   "tshm@tp" = home-manager.lib.homeManagerConfiguration {
@@ -15,8 +20,12 @@
           pkgs.nodePackages.localtunnel
           # pkgs.lmstudio
         ];
-        programs.java = { enable = true; };
-        programs.go = { enable = true; };
+        programs.java = {
+          enable = true;
+        };
+        programs.go = {
+          enable = true;
+        };
       }
     ];
   };

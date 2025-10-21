@@ -1,4 +1,9 @@
-{ user, config, pkgs, ... } @inputs:
+{
+  user,
+  config,
+  pkgs,
+  ...
+}@inputs:
 
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
@@ -91,7 +96,10 @@ in
           pre_sudo = true;
           no_retry = true;
           no_self_update = true;
-          disable = [ "node" "nix" ];
+          disable = [
+            "node"
+            "nix"
+          ];
           set_title = false;
           cleanup = true;
         };
@@ -109,7 +117,7 @@ in
       enableDefaultConfig = false;
       includes = [ "./*.config" ];
       matchBlocks = {
-        "*" = {};
+        "*" = { };
       };
       extraConfig = ''
         # HostName test.com
@@ -164,10 +172,10 @@ in
       enableZshIntegration = true;
       enableNushellIntegration = true;
     };
-    /* https://home-manager-options.extranix.com/? */
-     git = {
-       enable = true;
-       lfs.enable = true;
+    # https://home-manager-options.extranix.com/?
+    git = {
+      enable = true;
+      lfs.enable = true;
       includes = [
         { path = "~/.dotfiles/gitconfig"; }
         {
@@ -178,19 +186,17 @@ in
           path = "~/github/.gitconfig";
           condition = "hasconfig:remote.*.url::**/github**";
         }
-        {
-          path = "~/.gitconfig.local";
-        }
-       ];
-     };
-     delta = {
-       enable = true;
-       options = {
-         navigate = true;
-         light = false;
-       };
-     };
-     direnv = {
+        { path = "~/.gitconfig.local"; }
+      ];
+    };
+    delta = {
+      enable = true;
+      options = {
+        navigate = true;
+        light = false;
+      };
+    };
+    direnv = {
       enable = true;
       nix-direnv.enable = true;
       enableZshIntegration = true;
@@ -249,16 +255,28 @@ in
         require("projects"):setup({})
       '';
       settings = {
-        log = { enabled = true; };
+        log = {
+          enabled = true;
+        };
         mgr = {
-          ratio = [ 0 3 7 ];
+          ratio = [
+            0
+            3
+            7
+          ];
           sort_by = "natural";
           sort_dir_first = true;
         };
         plugin = {
           prepend_previewers = [
-            { mime = "{image,audio,video}/*"; run = "mediainfo"; }
-            { mime = "application/x-subrip"; run = "mediainfo"; }
+            {
+              mime = "{image,audio,video}/*";
+              run = "mediainfo";
+            }
+            {
+              mime = "application/x-subrip";
+              run = "mediainfo";
+            }
           ];
           # prepend_fetchers = [
           #   { id = "git"; name = "*"; run = "git"; }
@@ -267,15 +285,29 @@ in
         };
         opener = {
           less = [
-            { run = ''less "$@"''; block = true; desc = "less"; }
+            {
+              run = ''less "$@"'';
+              block = true;
+              desc = "less";
+            }
           ];
           jless = [
-            { run = ''jless "$@"''; block = true; desc = "jless"; }
+            {
+              run = ''jless "$@"'';
+              block = true;
+              desc = "jless";
+            }
           ];
         };
         open.prepend_rules = [
-          { name = "*.vtt"; use = "less"; }
-          { name = "*.json"; use = "jless"; }
+          {
+            name = "*.vtt";
+            use = "less";
+          }
+          {
+            name = "*.json";
+            use = "jless";
+          }
         ];
       };
       plugins = {
@@ -292,11 +324,29 @@ in
       keymap = {
         mgr = {
           prepend_keymap = [
-            { on = "k"; run = "plugin arrow -1"; }
-            { on = "j"; run = "plugin arrow 1"; }
-            { on = "<Tab>"; run = "plugin tab"; desc = "create or switch tab"; }
-            { on = "T"; run = "plugin toggle-pane min-preview"; desc = "Toggle preview"; }
-            { on = "<Enter>"; run = "plugin enter"; desc = "Enter dir"; }
+            {
+              on = "k";
+              run = "plugin arrow -1";
+            }
+            {
+              on = "j";
+              run = "plugin arrow 1";
+            }
+            {
+              on = "<Tab>";
+              run = "plugin tab";
+              desc = "create or switch tab";
+            }
+            {
+              on = "T";
+              run = "plugin toggle-pane min-preview";
+              desc = "Toggle preview";
+            }
+            {
+              on = "<Enter>";
+              run = "plugin enter";
+              desc = "Enter dir";
+            }
             {
               on = "<C-n>";
               run = ''
@@ -305,19 +355,55 @@ in
               desc = "drag and drop";
             }
             {
-              on = [ "g" "u" ];
+              on = [
+                "g"
+                "u"
+              ];
               run = ''
                 shell 'ya pub dds-cd --str "$(git rev-parse --show-toplevel)"' --confirm
               '';
             }
             # { on = [ "m" "a" ]; run = "plugin archivemount mount"; }
             # { on = [ "m" "u" ]; run = "plugin archivemount unmount"; }
-            { on = [ "c" "m" ]; run = "plugin chmod"; }
-            { on = [ "P" "s" ]; run = "plugin projects save"; }
-            { on = [ "P" "l" ]; run = "plugin projects load"; }
-            { on = [ "P" "P" ]; run = "plugin projects load_last"; }
-            { on = [ "P" "d" ]; run = "plugin projects delete"; }
-            { on = [ "q" ]; run = "plugin projects quit"; }
+            {
+              on = [
+                "c"
+                "m"
+              ];
+              run = "plugin chmod";
+            }
+            {
+              on = [
+                "P"
+                "s"
+              ];
+              run = "plugin projects save";
+            }
+            {
+              on = [
+                "P"
+                "l"
+              ];
+              run = "plugin projects load";
+            }
+            {
+              on = [
+                "P"
+                "P"
+              ];
+              run = "plugin projects load_last";
+            }
+            {
+              on = [
+                "P"
+                "d"
+              ];
+              run = "plugin projects delete";
+            }
+            {
+              on = [ "q" ];
+              run = "plugin projects quit";
+            }
           ];
         };
       };

@@ -1,4 +1,10 @@
-{ home-manager, pkgs, nixpkgs, extraSpecialArgs, ... }:
+{
+  home-manager,
+  pkgs,
+  nixpkgs,
+  extraSpecialArgs,
+  ...
+}:
 
 {
   "tshm@spi" = home-manager.lib.homeManagerConfiguration {
@@ -12,8 +18,12 @@
         home.packages = [
           pkgs.deno
         ];
-        programs.java = { enable = false; };
-        programs.go = { enable = false; };
+        programs.java = {
+          enable = false;
+        };
+        programs.go = {
+          enable = false;
+        };
       }
     ];
   };

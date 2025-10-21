@@ -1,4 +1,9 @@
-{ home-manager, pkgs, extraSpecialArgs, ... }:
+{
+  home-manager,
+  pkgs,
+  extraSpecialArgs,
+  ...
+}:
 
 {
   "tshm@minf" = home-manager.lib.homeManagerConfiguration {
@@ -20,8 +25,12 @@
           workspace=1, layoutopt:orientation:right
           workspace=2, layoutopt:orientation:left
         '';
-        programs.java = { enable = true; };
-        programs.go = { enable = true; };
+        programs.java = {
+          enable = true;
+        };
+        programs.go = {
+          enable = true;
+        };
       }
     ];
   };

@@ -1,4 +1,9 @@
-{ home-manager, pkgs, extraSpecialArgs, ... }:
+{
+  home-manager,
+  pkgs,
+  extraSpecialArgs,
+  ...
+}:
 
 {
   "tshm@PN0093" = home-manager.lib.homeManagerConfiguration {
@@ -13,8 +18,12 @@
         home.packages = [
           pkgs.duckdb
         ];
-        programs.java = { enable = true; };
-        programs.go = { enable = true; };
+        programs.java = {
+          enable = true;
+        };
+        programs.go = {
+          enable = true;
+        };
       }
     ];
   };

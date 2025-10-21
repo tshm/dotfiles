@@ -3,7 +3,11 @@ let
   pname = "beeper";
   version = "latest";
   src = pkgs.fetchurl {
-    curlOptsList = [ "-L" "-H" "Accept:application/octet-stream" ];
+    curlOptsList = [
+      "-L"
+      "-H"
+      "Accept:application/octet-stream"
+    ];
     url = "https://api.beeper.com/desktop/download/linux/x64/stable/com.automattic.beeper.desktop";
     # sha256 = pkgs.lib.fakeSha256;
     sha256 = "sha256-35fPd3bwbUwhdEtMrq/P+vPeh9Kdv9vwCP6LC7p4N9I=";

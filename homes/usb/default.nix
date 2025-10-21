@@ -1,4 +1,9 @@
-{ home-manager, pkgs, extraSpecialArgs, ... }:
+{
+  home-manager,
+  pkgs,
+  extraSpecialArgs,
+  ...
+}:
 
 {
   "tshm@usb" = home-manager.lib.homeManagerConfiguration {

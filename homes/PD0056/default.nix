@@ -1,4 +1,9 @@
-{ home-manager, pkgs, extraSpecialArgs, ... }:
+{
+  home-manager,
+  pkgs,
+  extraSpecialArgs,
+  ...
+}:
 
 {
   "tshm@PD0056" = home-manager.lib.homeManagerConfiguration {
@@ -21,8 +26,12 @@
           pkgs.podman-compose
           pkgs.podman-tui
         ];
-        programs.java = { enable = true; };
-        programs.go = { enable = true; };
+        programs.java = {
+          enable = true;
+        };
+        programs.go = {
+          enable = true;
+        };
       }
     ];
   };

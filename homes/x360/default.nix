@@ -1,4 +1,9 @@
-{ home-manager, pkgs, extraSpecialArgs, ... }:
+{
+  home-manager,
+  pkgs,
+  extraSpecialArgs,
+  ...
+}:
 
 {
   "tshm@x360" = home-manager.lib.homeManagerConfiguration {
@@ -20,8 +25,12 @@
           workspace=2, layoutopt:orientation:left
           # exec-once = iio-hyprland
         '';
-        programs.java = { enable = false; };
-        programs.go = { enable = false; };
+        programs.java = {
+          enable = false;
+        };
+        programs.go = {
+          enable = false;
+        };
       }
     ];
   };
