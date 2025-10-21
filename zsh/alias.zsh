@@ -25,15 +25,28 @@ function scptar() {
   else
     dst_path="$(realpath --relative-base=. $dst)"
   fi
-  # Handle different cases:
-  if [ -z "$src_host" ] && [ -n "$dst_host" ]; then # 1. Local to Remote
-    tar czf - "$src_path" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
-  elif [ -n "$src_host" ] && [ -z "$dst_host" ]; then # 2. Remote to Local
-    ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | tar xzf - -C "${dst_path}"
-  elif [ -n "$src_host" ] && [ -n "$dst_host" ]; then # 3. Remote to Remote
-    ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
-  else # 4. Local to Local
-    tar czf - "$src_path" | tar xzf - -C "${dst_path%/*}"
+  # Handle different cases with progress via pv if available
+  if command -v pv >/dev/null 2>&1; then
+    if [ -z "$src_host" ] && [ -n "$dst_host" ]; then # 1. Local to Remote
+      tar czf - "$src_path" | pv | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
+    elif [ -n "$src_host" ] && [ -z "$dst_host" ]; then # 2. Remote to Local
+      ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | pv | tar xzf - -C "${dst_path}"
+    elif [ -n "$src_host" ] && [ -n "$dst_host" ]; then # 3. Remote to Remote
+      ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | pv | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
+    else # 4. Local to Local
+      tar czf - "$src_path" | pv | tar xzf - -C "${dst_path%/*}"
+    fi
+  else
+    # Fallback without progress
+    if [ -z "$src_host" ] && [ -n "$dst_host" ]; then # 1. Local to Remote
+      tar czf - "$src_path" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
+    elif [ -n "$src_host" ] && [ -z "$dst_host" ]; then # 2. Remote to Local
+      ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | tar xzf - -C "${dst_path}"
+    elif [ -n "$src_host" ] && [ -n "$dst_host" ]; then # 3. Remote to Remote
+      ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
+    else # 4. Local to Local
+      tar czf - "$src_path" | tar xzf - -C "${dst_path%/*}"
+    fi
   fi
 }
 compdef scptar=scp

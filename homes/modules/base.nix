@@ -54,6 +54,7 @@ in
       pkgs.unzip
       # pkgs.archivemount
       pkgs.wget
+      pkgs.pv
       pkgs.clipboard-jh
       # devtools
       pkgs.devbox
@@ -67,6 +68,8 @@ in
       pkgs.yq
       pkgs.jless
       # extras
+      pkgs.restic
+      pkgs.rclone
       #pkgs.chawan
     ];
     file = {
