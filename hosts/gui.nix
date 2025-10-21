@@ -1,7 +1,8 @@
-{ pkgs, catppuccin, ... } @ args:
+{ pkgs, ... }@args:
 
-catppuccin.nixosModules.catppuccin args //
 {
+  imports =
+    [ args.mango.nixosModules.mango args.catppuccin.nixosModules.catppuccin ];
   hardware.graphics.enable = true;
 
   # Bluetooth
@@ -12,10 +13,7 @@ catppuccin.nixosModules.catppuccin args //
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = [
-      pkgs.fcitx5-mozc
-      pkgs.fcitx5-gtk
-    ];
+    fcitx5.addons = [ pkgs.fcitx5-mozc pkgs.fcitx5-gtk ];
   };
   services.xserver.xkb = {
     # Configure keymap in X11
@@ -31,7 +29,8 @@ catppuccin.nixosModules.catppuccin args //
     after = [ "graphical-session.target" ];
     serviceConfig = {
       #Type = "Simple";
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      ExecStart =
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       Restart = "on-failure";
       RestartSec = 5;
       TimeoutStopSec = 10;
@@ -42,12 +41,9 @@ catppuccin.nixosModules.catppuccin args //
     accent = "green";
   };
 
-  programs.dconf = {
-    enable = true;
-  };
-  programs.hyprland = {
-    enable = true;
-  };
+  programs.dconf = { enable = true; };
+  programs.hyprland = { enable = true; };
+  programs.mango.enable = true;
   # programs.niri = {
   #   enable = true;
   # };
@@ -102,7 +98,7 @@ catppuccin.nixosModules.catppuccin args //
   };
 
   environment.systemPackages = [
-    pkgs.mesa.drivers
+    pkgs.mesa
     # desktop environment related
     pkgs.niriswitcher
     pkgs.nirius

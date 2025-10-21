@@ -4,16 +4,17 @@
 , baselocale ? "en_US.UTF-8"
 , locale ? "ja_JP.UTF-8"
 }:
-{ config, lib, nixsettings, agenix, pkgs ? config.nixpkgs.pkgs, ... }:
+{ config, lib, nixsettings, agenix, home-manager, homeConfigurations, pkgs ? config.nixpkgs.pkgs, ... }:
 
 let
   useHibernation = builtins.length config.swapDevices > 0;
   isRaspberryPi = host == "spi";
 in
 {
-  imports = [
-    agenix.nixosModules.default
-  ];
+   imports = [
+     agenix.nixosModules.default
+     # home-manager.nixosModules.default
+   ];
   age.secrets.user-password-hash.file = "/home/${user}/.dotfiles/secrets/user-password-hash.age";
   age.identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
 
@@ -165,6 +166,12 @@ in
       extraArgs = "--keep 5 --keep-since 10d";
     };
   };
+
+   # home-manager = {
+   #   useGlobalPkgs = true;
+   #   useUserPackages = true;
+   #   users.${user} = homeConfigurations."${user}@${host}";
+   # };
   services.kanata = lib.mkIf (!forServer) {
     enable = true;
     keyboards = {

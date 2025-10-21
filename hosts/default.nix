@@ -1,67 +1,64 @@
- { nixpkgs, crossPkgs, ... } @ args:
- let
-   base = import ./base.nix;
-   gui = import ./gui.nix;
-   system = "x86_64-linux";
-   specialArgs = args // { inherit system; };
- in
-{
-   "tp" = nixpkgs.lib.nixosSystem {
-     inherit system;
-     inherit specialArgs;
-     modules = [
-       ./t440p
-       (base { host = "tp"; forServer = true; })
-     ];
-   };
+{ nixpkgs, crossPkgs, ... }@args:
 
-   "minf" = nixpkgs.lib.nixosSystem {
-     inherit system;
-     inherit specialArgs;
-     modules = [
-       ./minf
-       (base { host = "minf"; })
-       gui
-     ];
-   };
+let
+  base = import ./base.nix;
+  gui = import ./gui.nix;
+  system = "x86_64-linux";
+  specialArgs = args // { inherit system; };
+in {
+  "tp" = nixpkgs.lib.nixosSystem {
+    inherit system;
+    inherit specialArgs;
+    modules = [
+      ./t440p
+      (base {
+        host = "tp";
+        forServer = true;
+      })
+    ];
+  };
 
-   "x360" = nixpkgs.lib.nixosSystem {
-     inherit system;
-     inherit specialArgs;
-     modules = [
-       ./x360
-       (base { host = "x360"; })
-       gui
-     ];
-   };
+  "minf" = nixpkgs.lib.nixosSystem {
+    inherit system;
+    inherit specialArgs;
+    modules = [ ./minf (base { host = "minf"; }) gui ];
+  };
 
-   "usb" = nixpkgs.lib.nixosSystem {
-     inherit system;
-     inherit specialArgs;
-     modules = [
-       ./usb
-       (base { host = "usb"; })
-       gui
-     ];
-   };
+  "x360" = nixpkgs.lib.nixosSystem {
+    inherit system;
+    inherit specialArgs;
+    modules = [ ./x360 (base { host = "x360"; }) gui ];
+  };
 
-   "spi_first" = nixpkgs.lib.nixosSystem {
-     system = "aarch64-linux";
-     specialArgs = specialArgs // { inherit nixpkgs crossPkgs; };
-     modules = [
-       ./spi
-       (import ./spi/sd.nix)
-       (base { host = "spi"; forServer = true; })
-     ];
-   };
+  "usb" = nixpkgs.lib.nixosSystem {
+    inherit system;
+    inherit specialArgs;
+    modules = [ ./usb (base { host = "usb"; }) gui ];
+  };
 
-   "spi" = nixpkgs.lib.nixosSystem {
-     system = "aarch64-linux";
-     specialArgs = specialArgs // { inherit nixpkgs crossPkgs; };
-     modules = [
-       ./spi
-       (import ./spi/prod.nix)
-       (base { host = "spi"; forServer = true; })
-     ];
-   };
+  "spi_first" = nixpkgs.lib.nixosSystem {
+    system = "aarch64-linux";
+    specialArgs = specialArgs // { inherit nixpkgs crossPkgs; };
+    modules = [
+      ./spi
+      (import ./spi/sd.nix)
+      (base {
+        host = "spi";
+        forServer = true;
+      })
+    ];
+  };
+
+  "spi" = nixpkgs.lib.nixosSystem {
+    system = "aarch64-linux";
+    specialArgs = specialArgs // { inherit nixpkgs crossPkgs; };
+    modules = [
+      ./spi
+      (import ./spi/prod.nix)
+      (base {
+        host = "spi";
+        forServer = true;
+      })
+    ];
+  };
 }

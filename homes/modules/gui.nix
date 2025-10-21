@@ -1,10 +1,14 @@
-{ user, config, pkgs, ... } @ args:
+{ user, config, pkgs, ... }@args:
 
 let
-  configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
-in
-{
-  # imports = [ inputs.hyprshell.homeModules.hyprshell ];
+  configPath = pathStr:
+    config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+in {
+  imports = [
+    args.mango.hmModules.mango
+    # args.vicinae.homeManagerModules.default
+    # args.hyprshell.homeModules.hyprshell
+  ];
   fonts.fontconfig.enable = true;
   dconf.settings = {
     "org/gnome/desktop/interface".color-scheme = "prefer-dark";
@@ -31,11 +35,11 @@ in
       config = {
         common = {
           default = [ "hyprland" ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser"];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
         };
         hyprland = {
           default = [ "hyprland" ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser"];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
         };
       };
     };
@@ -99,7 +103,8 @@ in
       pkgs.brave
     ];
     file = {
-      "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
+      "${config.xdg.configHome}/wezterm/wezterm.lua".source =
+        configPath "/wezterm/wezterm.lua";
       "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
       "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
       # "${config.xdg.configHome}/niri/config.kdl".text = "include \"/home/${user}/.dotfiles/x/niri.kdl\"";
@@ -143,10 +148,12 @@ in
     accent = "green";
     cursors.enable = true;
   };
+  wayland.windowManager.mango = { enable = true; };
   wayland.windowManager.hyprland = {
     enable = true;
     package = args.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     plugins = [
       args.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
       args.hyprland-plugins.packages.${pkgs.system}.hyprexpo
@@ -157,10 +164,22 @@ in
         "~/.dotfiles/x/hyprland/general.conf"
       ];
       device = [
-        { name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-1"; sensitivity = 1.0; }
-        { name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3"; sensitivity = 1.0; }
-        { name = "elecom-trackball-mouse-huge-trackball-1"; sensitivity = 1.0; }
-        { name = "syna3290:01-06cb:cd4f-touchpad"; sensitivity = 0.0; }
+        {
+          name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-1";
+          sensitivity = 1.0;
+        }
+        {
+          name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3";
+          sensitivity = 1.0;
+        }
+        {
+          name = "elecom-trackball-mouse-huge-trackball-1";
+          sensitivity = 1.0;
+        }
+        {
+          name = "syna3290:01-06cb:cd4f-touchpad";
+          sensitivity = 0.0;
+        }
       ];
       exec-once = [
         "[workspace 2] zen"

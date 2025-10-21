@@ -165,10 +165,9 @@ in
       enableNushellIntegration = true;
     };
     /* https://home-manager-options.extranix.com/? */
-    git = {
-      enable = true;
-      delta.enable = true;
-      lfs.enable = true;
+     git = {
+       enable = true;
+       lfs.enable = true;
       includes = [
         { path = "~/.dotfiles/gitconfig"; }
         {
@@ -182,9 +181,16 @@ in
         {
           path = "~/.gitconfig.local";
         }
-      ];
-    };
-    direnv = {
+       ];
+     };
+     delta = {
+       enable = true;
+       options = {
+         navigate = true;
+         light = false;
+       };
+     };
+     direnv = {
       enable = true;
       nix-direnv.enable = true;
       enableZshIntegration = true;
