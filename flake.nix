@@ -7,18 +7,26 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
+    # extras
+    quickshell = {
+      url = "github:outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # inputs = {
-    #   lan-mouse.url = "github:feschber/lan-mouse";
-    # };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell"; # Use same quickshell version
+    };
+    # lan-mouse.url = "github:feschber/lan-mouse";
     localias.url = "github:peterldowns/localias";
     # mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
     vicinae.url = "github:vicinaehq/vicinae";
@@ -32,17 +40,13 @@
     # flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs =
-    inputs:
+  outputs = inputs:
     let
       user = "tshm";
       nixsettings = {
         keep-derivations = true;
         keep-outputs = true;
-        trusted-users = [
-          "root"
-          user
-        ];
+        trusted-users = [ "root" user ];
         substituters = [
           "https://cache.nixos.org"
           "https://tshmcache.cachix.org"
@@ -71,11 +75,9 @@
         user = user;
         nixsettings = nixsettings;
         crossPkgs = crossPkgs;
-      }
-      // inputs;
+      } // inputs;
 
-    in
-    {
+    in {
       nixosConfigurations = import ./hosts flakeInputs;
       homeConfigurations = import ./homes flakeInputs;
 

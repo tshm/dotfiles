@@ -44,9 +44,7 @@
   programs.dconf = { enable = true; };
   programs.hyprland = { enable = true; };
   programs.mango.enable = true;
-  # programs.niri = {
-  #   enable = true;
-  # };
+  programs.niri.enable = true;
   fonts = {
     enableDefaultPackages = true;
     packages = [
@@ -103,6 +101,9 @@
     pkgs.niriswitcher
     pkgs.nirius
     pkgs.xwayland-satellite
+    args.noctalia.packages.${args.system}.default
+    ##
+    ##
     pkgs.wl-clipboard
     pkgs.p7zip
     pkgs.poppler

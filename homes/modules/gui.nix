@@ -1,15 +1,11 @@
-{
-  user,
-  config,
-  pkgs,
-  ...
-}@args:
+{ user, config, pkgs, ... }@args:
 
 let
-  configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
-in
-{
+  configPath = pathStr:
+    config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+in {
   imports = [
+    args.noctalia.homeModules.default
     args.mango.hmModules.mango
     # args.vicinae.homeManagerModules.default
     # args.hyprshell.homeModules.hyprshell
@@ -95,7 +91,7 @@ in
       pkgs.mpv
       pkgs.mediainfo
       pkgs.swaynotificationcenter
-      pkgs.copyq
+      # pkgs.copyq
       pkgs.ripdrag
       pkgs.ags
       pkgs.vscode
@@ -108,13 +104,15 @@ in
       pkgs.brave
     ];
     file = {
-      "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
+      "${config.xdg.configHome}/wezterm/wezterm.lua".source =
+        configPath "/wezterm/wezterm.lua";
       "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
       "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
       # "${config.xdg.configHome}/niri/config.kdl".text = "include \"/home/${user}/.dotfiles/x/niri.kdl\"";
     };
   };
   programs = {
+    noctalia-shell = { enable = true; };
     # hyprshell = {
     #   enable = true;
     #   systemd.args = "-v";
@@ -152,13 +150,12 @@ in
     accent = "green";
     cursors.enable = true;
   };
-  wayland.windowManager.mango = {
-    enable = true;
-  };
+  wayland.windowManager.mango = { enable = true; };
   wayland.windowManager.hyprland = {
     enable = true;
     package = args.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     plugins = [
       args.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
       args.hyprland-plugins.packages.${pkgs.system}.hyprexpo
