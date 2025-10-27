@@ -68,7 +68,6 @@ in
       pkgs.jujutsu
       pkgs.pre-commit
       pkgs.lnav
-      pkgs.scc
       pkgs.jc
       pkgs.yq
       pkgs.jless

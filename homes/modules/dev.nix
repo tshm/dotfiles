@@ -5,9 +5,9 @@
   ...
 }@inputs:
 
-let
-  # nodePackages = pkgs.callPackage ./node2nix { inherit pkgs system; nodejs = pkgs.nodejs_20; };
-in
+# let
+#    nodePackages = pkgs.callPackage ./node2nix { inherit pkgs system; nodejs = pkgs.nodejs_20; };
+# in
 {
   # home.file."${config.xdg.configHome}/mcp/mcp.json".source = mcp-servers-nix.lib.mkConfig pkgs {
   #   programs = {
@@ -35,6 +35,7 @@ in
     pkgs.git-absorb
     # pkgs.commitizen
     # misc
+    pkgs.scc
     # pkgs.opencode
     # nodePackages.opencode-ai
     # nodePackages."@google/gemini-cli"
