@@ -5,7 +5,7 @@ let
     config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 in {
   imports = [
-    args.noctalia.homeModules.default
+    # args.noctalia.homeModules.default
     args.mango.hmModules.mango
     # args.vicinae.homeManagerModules.default
     # args.hyprshell.homeModules.hyprshell
@@ -112,7 +112,7 @@ in {
     };
   };
   programs = {
-    noctalia-shell = { enable = true; };
+    # noctalia-shell = { enable = true; };
     # hyprshell = {
     #   enable = true;
     #   systemd.args = "-v";

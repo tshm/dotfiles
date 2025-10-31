@@ -101,7 +101,7 @@
     pkgs.niriswitcher
     pkgs.nirius
     pkgs.xwayland-satellite
-    args.noctalia.packages.${args.system}.default
+    # args.noctalia.packages.${args.system}.default
     ##
     ##
     pkgs.wl-clipboard

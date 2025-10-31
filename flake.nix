@@ -17,15 +17,15 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     # extras
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell"; # Use same quickshell version
-    };
+    # quickshell = {
+    #   url = "github:outfoxxed/quickshell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia-shell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.quickshell.follows = "quickshell"; # Use same quickshell version
+    # };
     # lan-mouse.url = "github:feschber/lan-mouse";
     localias.url = "github:peterldowns/localias";
     # mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
