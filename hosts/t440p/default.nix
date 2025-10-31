@@ -9,7 +9,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  services.tlp.enable = false;
+  services.auto-cpufreq.enable = true;
   services.greetd.enable = false;
   services.syncthing.enable = false;
   services.kanata.enable = false;

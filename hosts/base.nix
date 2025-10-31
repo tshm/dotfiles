@@ -44,13 +44,10 @@ in
   networking.networkmanager.enable = lib.mkIf (!isRaspberryPi) true;
   console.useXkbConfig = true;
 
-  services.tlp = lib.mkIf (!forServer) {
+  services.auto-cpufreq = lib.mkIf (!forServer) {
     enable = true;
-    settings = {
-      START_CHARGE_THRESH_BAT0 = 40;
-      STOP_CHARGE_THRESH_BAT0 = 70;
-    };
   };
+  services.tlp.enable = false;
   services.logind.settings = lib.mkIf (!forServer) {
     Login = {
       HandlePowerKey = if useHibernation then "hibernate" else "suspend";

@@ -25,9 +25,8 @@
     };
   };
 
-   networking.hostName = "spi";
+  networking.hostName = "spi";
 
-  services.tlp.enable = false; # Not needed on Raspberry Pi
   services.logind.settings.Login = {
     HandlePowerKey = "suspend";
     HandleLidSwitch = "ignore"; # No lid on Raspberry Pi
@@ -40,6 +39,6 @@
 
   environment.systemPackages = [
     crossPkgs.libraspberrypi
-    crossPkgs.raspberrypi-eeprom
+    crossPkgs.libraspberrypi
   ];
 }

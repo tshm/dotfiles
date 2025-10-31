@@ -10,7 +10,7 @@ let
     ];
     url = "https://api.beeper.com/desktop/download/linux/x64/stable/com.automattic.beeper.desktop";
     # sha256 = pkgs.lib.fakeSha256;
-    sha256 = "sha256-35fPd3bwbUwhdEtMrq/P+vPeh9Kdv9vwCP6LC7p4N9I=";
+    sha256 = "sha256-r7WPuxPlqcUQ937TcBBG93Uo9WCY1wnH3Jm2PWI9siU=";
   };
   appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
 in
