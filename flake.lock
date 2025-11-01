@@ -61,11 +61,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1761553912,
-        "narHash": "sha256-3UOEQPBlZo9OixT9L1zoD67QheopTG8/EfRPGKyP9bg=",
+        "lastModified": 1761906071,
+        "narHash": "sha256-uq0X0KRzZkKGlkU1ARM+LWCAVvSYJZtTMpuzMO6LXRs=",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "7b42c91911c143ae3ea32a79cc8582b5920f24e3",
+        "rev": "fd1bc7b1af0a576edb13c166c4b1f7b5c7555a73",
         "type": "github"
       },
       "original": {
@@ -562,11 +562,11 @@
         "scenefx": "scenefx"
       },
       "locked": {
-        "lastModified": 1761891596,
-        "narHash": "sha256-yHP7GrI93cGgRDIV+7W3+SbYg0htnnfIlLrDW3q5o6A=",
+        "lastModified": 1761906653,
+        "narHash": "sha256-ZOVZ7LHYDIUxAXqDdIx63LMkEbBoMUN13N4gmQtXg+E=",
         "owner": "DreamMaoMao",
         "repo": "mangowc",
-        "rev": "17f0562cfb9859ef00f851e649dcfb3005f788ca",
+        "rev": "5bb149f84e1c75a4b271e98847a4a241dea5f9ec",
         "type": "github"
       },
       "original": {
@@ -612,11 +612,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1761827175,
-        "narHash": "sha256-XdPVSYyIBK4/ruoqujaQmmSGg3J2/EenexV9IEXhr6o=",
+        "lastModified": 1761933221,
+        "narHash": "sha256-rNHeoG3ZrA94jczyLSjxCtu67YYPYIlXXr0uhG3wNxM=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "43ffe9ac82567512abb83187cb673de1091bdfa8",
+        "rev": "7467f155fcba189eb088a7601f44fbef7688669b",
         "type": "github"
       },
       "original": {
@@ -628,11 +628,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1760524057,
-        "narHash": "sha256-EVAqOteLBFmd7pKkb0+FIUyzTF61VKi7YmvP1tw4nEw=",
+        "lastModified": 1761672384,
+        "narHash": "sha256-o9KF3DJL7g7iYMZq9SWgfS1BFlNbsm6xplRjVlOCkXI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "544961dfcce86422ba200ed9a0b00dd4b1486ec5",
+        "rev": "08dacfca559e1d7da38f3cf05f1f45ee9bfd213c",
         "type": "github"
       },
       "original": {
@@ -736,58 +736,6 @@
         "type": "github"
       }
     },
-<<<<<<< Updated upstream
-    "noctalia": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "quickshell": [
-          "quickshell"
-        ],
-        "systems": "systems_4"
-      },
-      "locked": {
-        "lastModified": 1761886915,
-        "narHash": "sha256-KpAOz15WIhZgycRkDSf1HSSG9JIlPPtXxP9R0JKPmjM=",
-        "owner": "noctalia-dev",
-        "repo": "noctalia-shell",
-        "rev": "aa30e90ec7535266617e94a35fd9a7fe29eb8236",
-        "type": "github"
-      },
-      "original": {
-        "owner": "noctalia-dev",
-        "repo": "noctalia-shell",
-        "type": "github"
-      }
-    },
-||||||| Stash base
-    "noctalia": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "quickshell": [
-          "quickshell"
-        ],
-        "systems": "systems_4"
-      },
-      "locked": {
-        "lastModified": 1761190730,
-        "narHash": "sha256-XAs/Q4zBJIfK/bwq9KjTUkTH15A+Pe2rIilyvalEHuM=",
-        "owner": "noctalia-dev",
-        "repo": "noctalia-shell",
-        "rev": "c3439b262c7cb3d57c93197a93a3aa382582bdae",
-        "type": "github"
-      },
-      "original": {
-        "owner": "noctalia-dev",
-        "repo": "noctalia-shell",
-        "type": "github"
-      }
-    },
-=======
->>>>>>> Stashed changes
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -811,50 +759,6 @@
         "type": "github"
       }
     },
-<<<<<<< Updated upstream
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1761897390,
-        "narHash": "sha256-er4gYrIoThYLjlsOMTysoRfn67d1Gci+ZpqDrtQxrA0=",
-        "owner": "outfoxxed",
-        "repo": "quickshell",
-        "rev": "fc704e6b5d445899a1565955268c91942a4f263f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "outfoxxed",
-        "repo": "quickshell",
-        "type": "github"
-      }
-    },
-||||||| Stash base
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1760822546,
-        "narHash": "sha256-cy3wJQQzQbZ/EYUfTDuMiP/haPOjkqGgWOPPl7K9oiM=",
-        "owner": "outfoxxed",
-        "repo": "quickshell",
-        "rev": "3e2ce40b18af943f9ba370ed73565e9f487663ef",
-        "type": "github"
-      },
-      "original": {
-        "owner": "outfoxxed",
-        "repo": "quickshell",
-        "type": "github"
-      }
-    },
-=======
->>>>>>> Stashed changes
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -957,11 +861,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1761897453,
-        "narHash": "sha256-ZjBYGWZ0lj3hLdzXoeXED671g99pFyBLP4wUbSOQq2A=",
+        "lastModified": 1761969493,
+        "narHash": "sha256-dzELgEPjHfZykwSepxTKJ16UflR343G/IUafsGHdKKA=",
         "owner": "vicinaehq",
         "repo": "vicinae",
-        "rev": "d27f9b37666fd451bed4d1ee12929ad9791fc1a5",
+        "rev": "1e013b57b7e6133115fefc68f33e763a461897fc",
         "type": "github"
       },
       "original": {
