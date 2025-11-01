@@ -51,7 +51,7 @@
       pkgs.nerd-fonts.fira-code
       pkgs.noto-fonts-cjk-serif
       pkgs.noto-fonts-cjk-sans
-      pkgs.noto-fonts-emoji
+      pkgs.noto-fonts-color-emoji
       pkgs.fira-code
       pkgs.source-han-serif
       pkgs.font-awesome
@@ -115,7 +115,7 @@
     #pkgs.lxqt.lxqt-policykit
     pkgs.libnotify
     pkgs.dconf
-    pkgs.qt6ct
+    pkgs.qt6Packages.qt6ct
     ## Flatpak
     # pkgs.xdg-desktop-portal
     # pkgs.xdg-desktop-portal-gtk
