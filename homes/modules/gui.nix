@@ -7,7 +7,7 @@ in {
   imports = [
     # args.noctalia.homeModules.default
     args.mango.hmModules.mango
-    # args.vicinae.homeManagerModules.default
+    args.vicinae.homeManagerModules.default
     # args.hyprshell.homeModules.hyprshell
   ];
   fonts.fontconfig.enable = true;
@@ -58,22 +58,22 @@ in {
       };
     };
   };
-  # services.vicinae = {
-  #   enable = true;
-  #   autoStart = true;
-  #   settings = {
-  #     faviconService = "twenty"; # twenty | google | none
-  #     font.size = 14;
-  #     popToRootOnClose = false;
-  #     rootSearch.searchFiles = false;
-  #     theme.name = "vicinae-dark";
-  #     window = {
-  #       csd = true;
-  #       opacity = 0.95;
-  #       rounding = 10;
-  #     };
-  #   };
-  # };
+  services.vicinae = {
+    enable = true;
+    autoStart = true;
+    settings = {
+      faviconService = "twenty"; # twenty | google | none
+      font.size = 14;
+      popToRootOnClose = false;
+      rootSearch.searchFiles = false;
+      theme.name = "vicinae-dark";
+      window = {
+        csd = true;
+        opacity = 0.95;
+        rounding = 10;
+      };
+    };
+  };
   home = {
     packages = [
       (pkgs.callPackage ../apps/zen.nix { inherit pkgs; })
