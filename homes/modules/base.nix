@@ -230,7 +230,7 @@ in
           source ./.local.envrc
         }
         # run onefetch
-        git rev-parse --is-inside-work-tree >/dev/null 2>&1 && onefetch
+        git rev-parse --is-inside-work-tree >/dev/null 2>&1 && onefetch --nerd-fonts
       '';
     };
     eza = {
