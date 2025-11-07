@@ -150,7 +150,15 @@ in {
     accent = "green";
     cursors.enable = true;
   };
-  wayland.windowManager.mango = { enable = true; };
+  wayland.windowManager.mango = {
+    enable = true;
+    settings = ''
+      # config.conf
+    '';
+    autostart_sh = ''
+      # autostart.sh
+    '';
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = args.hyprland.packages.${pkgs.system}.hyprland;
