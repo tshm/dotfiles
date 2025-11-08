@@ -5,4 +5,9 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  path: ./manifest/production
+  interval: 10m0s
+  path: ./k8s/manifest/production
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system

@@ -4,10 +4,10 @@ namespace: flux-system
 
 resources:
   - ../../initialSetup/gitops
+  - appkustomization.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
 
 patches:
   - path: gitrepository.yaml
-  - path: appkustomization.yaml
