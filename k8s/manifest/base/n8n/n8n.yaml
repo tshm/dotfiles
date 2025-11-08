@@ -31,8 +31,8 @@ spec:
       # init container to create sqlite using litestream
       initContainers:
         - name: litestream-init
-          image: litestream/litestream
-          command: ["/bin/sh", '-c']
+          image: litestream/litestream:0.3.13
+          command: ["/bin/sh", "-c"]
           args:
             - |
               mkdir -p /home/node/.n8n && \
@@ -62,7 +62,7 @@ spec:
               mountPath: /home/node/.n8n
         # sidecar to sync sqlite with s3
         - name: litestream
-          image: litestream/litestream
+          image: litestream/litestream:0.3.13
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -81,8 +81,8 @@ spec:
           configMap:
             name: litestream-config
             items:
-            - key: litestream.yml
-              path: litestream.yml
+              - key: litestream.yml
+                path: litestream.yml
         - name: shared-data
           emptyDir: {}
         # - name: data

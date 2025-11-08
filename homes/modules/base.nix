@@ -61,6 +61,7 @@ in
       pkgs.wget
       pkgs.pv
       pkgs.clipboard-jh
+      pkgs.croc
       # devtools
       pkgs.devbox
       pkgs.onefetch
