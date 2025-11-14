@@ -363,6 +363,13 @@ in
                 shell 'ya pub dds-cd --str "$(git rev-parse --show-toplevel)"' --confirm
               '';
             }
+            {
+              on = [
+                "g"
+                "t"
+              ];
+              run = "cd ~/.local/share/Trash/";
+            }
             # { on = [ "m" "a" ]; run = "plugin archivemount mount"; }
             # { on = [ "m" "u" ]; run = "plugin archivemount unmount"; }
             {
