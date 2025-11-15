@@ -82,8 +82,8 @@ in {
       pkgs.appimage-run
       pkgs.catppuccin-gtk
       pkgs.xdg-desktop-portal-termfilechooser
-      pkgs.hyprshade
-      # pkgs.gammastep
+      # pkgs.hyprshade
+      pkgs.gammastep
       # pkgs.deskflow
       # pkgs.input-leap
       pkgs.bluetuith

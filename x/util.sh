@@ -24,7 +24,7 @@ options+=(
   "⏸ Sleep: systemctl suspend"
   "⏻  Shutdown: systemctl poweroff"
   "🔄 Reboot: systemctl reboot"
-  "🌙 shader: hyprshade toggle blue-light-filter"
+  "🌙 shader: pkill gammastep || gammastep &"
   "capture: capture"
 )
 
