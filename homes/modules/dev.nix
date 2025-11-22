@@ -20,6 +20,7 @@
   home.packages = [
     pkgs.lima
     pkgs.scrcpy
+    pkgs.zed-editor
     # langs
     pkgs.luajitPackages.luarocks
     pkgs.dotnet-runtime
