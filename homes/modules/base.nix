@@ -49,6 +49,7 @@ in
       pkgs.ncdu
       # shelltools
       pkgs.python3
+      pkgs.trashy
       pkgs.file
       pkgs.psmisc
       pkgs.neovim
