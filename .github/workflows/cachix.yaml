@@ -27,7 +27,7 @@ jobs:
     runs-on: ${{ matrix.home.runner }}
     steps:
       - name: Checkout flake
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v21
@@ -49,7 +49,7 @@ jobs:
         host: ["x360", "minf"]
     steps:
       - name: Checkout flake
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v21
