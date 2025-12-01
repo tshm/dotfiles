@@ -317,6 +317,7 @@ in
         tab = ../../yazi/plugins/tab.yazi;
         arrow = ../../yazi/plugins/arrow.yazi;
         chmod = pkgs.yaziPlugins.chmod;
+        git = pkgs.yaziPlugins.git;
         mediainfo = pkgs.yaziPlugins.mediainfo;
         # archivemount = pkgs.yaziPlugins.archivemount;
         projects = pkgs.yaziPlugins.projects;
