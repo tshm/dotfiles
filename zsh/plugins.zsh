@@ -49,18 +49,21 @@ zinit load Bhupesh-V/ugit
 zinit light "zpm-zsh/clipboard"
 zinit light "sunlei/zsh-ssh"
 
-# finalize
-autoload -U compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-
 # fzf-tab has to be loaded after compinit
 zinit light Aloxaf/fzf-tab
 [ -n "$TMUX" ] && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
+# finalize
 zinit ice atload'_zsh_autosuggest_start'
 
 zinit cdreplay -q
 zinit cdlist
+
+autoload -U compinit
+zmodload zsh/stat
+ZCOMPDUMP=${ZDOTDIR:-$HOME}/.zcompdump
+if [[ ! -f $ZCOMPDUMP ]] || (( $(date +%s) - $(zstat +mtime $ZCOMPDUMP 2>/dev/null || echo 0) > 86400 )); then
+  compinit
+else
+  compinit -C
+fi
