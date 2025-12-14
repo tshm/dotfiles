@@ -15,7 +15,7 @@
 )
 
 (defalias
-  spc (tap-hold $tt $ht spc lalt)
+  spc (tap-hold $tt $ht spc (layer-while-held arrows))
   caps (tap-hold $tt $ht esc (layer-while-held arrows))
   ;;
   a (tap-hold $tt $ht a lmet)
