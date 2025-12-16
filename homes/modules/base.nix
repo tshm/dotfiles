@@ -2,6 +2,7 @@
   user,
   config,
   pkgs,
+  lib,
   ...
 }@inputs:
 
@@ -116,7 +117,7 @@ in
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      includes = [ "./*.config" ];
+      includes = [ "~/.ssh/*.config" ];
       matchBlocks = {
         "*" = { };
       };
@@ -419,11 +420,11 @@ in
     };
     zsh = {
       enable = true;
-      enableCompletion = true;
+      enableCompletion = false;
       # initExtraFirst = ''
       #   zmodload zsh/zprof
       # '';
-      initContent = ''
+      initContent = lib.mkBefore ''
         source ~/.dotfiles/zsh/zshrc
         # zprof
       '';

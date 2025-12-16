@@ -47,17 +47,9 @@ zinit load Bhupesh-V/ugit
 
 # tools
 zinit light "zpm-zsh/clipboard"
-zinit light "sunlei/zsh-ssh"
-
-# fzf-tab has to be loaded after compinit
-zinit light Aloxaf/fzf-tab
-[ -n "$TMUX" ] && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # finalize
 zinit ice atload'_zsh_autosuggest_start'
-
-zinit cdreplay -q
-zinit cdlist
 
 autoload -U compinit
 zmodload zsh/stat
@@ -67,3 +59,39 @@ if [[ ! -f $ZCOMPDUMP ]] || (( $(date +%s) - $(zstat +mtime $ZCOMPDUMP 2>/dev/nu
 else
   compinit -C
 fi
+
+zinit cdreplay -q
+zinit cdlist
+
+# fzf-tab has to be loaded after compinit
+zinit light Aloxaf/fzf-tab
+[ -n "$TMUX" ] && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+# zsh-ssh must be loaded after fzf-tab to override ^I binding
+zinit light "sunlei/zsh-ssh"
+
+# Patch _parse_config_file to use 'realpath -s' for symlink compatibility (e.g. home-manager)
+_parse_config_file() {
+  setopt localoptions rematchpcre
+  unsetopt nomatch
+  local config_file_path=$(realpath -s "$1")
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    if [[ $line =~ ^[Ii]nclude[[:space:]]+(.*) ]] && (( $#match > 0 )); then
+      local include_paths=(${(z)match[1]})
+      for raw_path in "${include_paths[@]}"; do
+        local expanded=${~raw_path}
+        if [[ "$expanded" != /* ]]; then
+          expanded="$(dirname "$config_file_path")/$expanded"
+        fi
+        for include_file_path in $~expanded; do
+          if [[ -f "$include_file_path" ]]; then
+            echo ""
+            _parse_config_file "$include_file_path"
+          fi
+        done
+      done
+    else
+      echo "$line"
+    fi
+  done < "$config_file_path"
+}
