@@ -6,7 +6,7 @@ let
     curlOptsList = [ "-L" "-H" "Accept:application/octet-stream" ];
     url = "https://api.beeper.com/desktop/download/linux/x64/stable/com.automattic.beeper.desktop";
     # sha256 = pkgs.lib.fakeSha256;
-    sha256 = "sha256-2IASocz5dgO3KXSvm4i8wyFClEF/4oRtOJZAsfg0mJA=";
+    sha256 = "sha256-t2knYAy6G/Xd/dOAvqA+wiTa6K//maHiwjY7Apshjhk=";
   };
   appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
 in pkgs.appimageTools.wrapType2 {
