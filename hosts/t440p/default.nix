@@ -21,4 +21,6 @@
       HandleLidSwitchExternalPower = "ignore";
     };
   };
+
+  services.tailscale.extraUpFlags = [ "--advertise-exit-node" ];
 }
