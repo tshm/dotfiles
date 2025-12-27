@@ -60,7 +60,10 @@ in {
   };
   services.vicinae = {
     enable = true;
-    autoStart = true;
+    systemd = {
+      enable = true;
+      autoStart = true;
+    };
     settings = {
       faviconService = "twenty"; # twenty | google | none
       font.size = 14;
