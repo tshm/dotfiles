@@ -37,6 +37,7 @@
     # pkgs.commitizen
     # misc
     pkgs.scc
+    pkgs.ast-grep
     # pkgs.opencode
     # nodePackages.opencode-ai
     # nodePackages."@google/gemini-cli"
