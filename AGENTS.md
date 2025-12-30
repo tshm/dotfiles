@@ -1,67 +1,88 @@
-# Agent Instructions for Dotfiles Repository
+# Dotfiles Knowledge Base
 
-## Build/Lint/Test Commands
+**Generated:** 2025-12-30
+**Commit:** b4e3acd
+**Branch:** master
 
-- **Full build**: `make` or `make all` - builds and switches NixOS/home-manager configurations
-- **Update dependencies**: `make update` - updates flake inputs and app hashes
-- **Clean**: `make clean` - garbage collects and optimizes Nix store
-- **Pre-commit checks**: `pre-commit run --all-files` - runs linting and formatting checks
-- **Specific host build**: `make home-manager` (for home-manager) or `make os` (for NixOS)
+## Overview
 
-## Code Style Guidelines
+NixOS/home-manager dotfiles managing multi-machine configurations (desktop, laptops, Raspberry Pi, USB boot). Nix flakes + home-manager for declarative system/user separation.
 
-### Nix Code Style
+## Structure
 
-- Use functional programming patterns with `let ... in` expressions
-- Group imports at the top of files using `imports = [ ... ];`
-- Use descriptive variable names following camelCase convention
-- Maintain consistent 2-space indentation
-- Use attribute sets `{ key = value; }` for configuration
-- Add comments for complex logic or configuration sections
-- Follow the pattern: `inputs@{ ... }: { ... }` for function arguments
+```
+.dotfiles/
+├── flake.nix         # Entry point - inputs/outputs
+├── homes/            # Home-manager user configs (per-machine)
+├── hosts/            # NixOS system configs (per-machine)
+├── k8s/              # Kubernetes manifests + Terraform
+├── vim/nvim/         # Neovim (LazyVim-based)
+├── zsh/              # Zsh shell config + zinit plugins
+├── x/                # Wayland/X11 (Hyprland, Waybar, Niri, i3)
+├── wezterm/          # Terminal emulator config
+├── kanata/           # Keyboard remapping
+├── secrets/          # Agenix-encrypted secrets
+└── Makefile          # Build/deploy targets
+```
 
-### General Guidelines
+## Where to Look
 
-- Use pre-commit hooks for automatic formatting and linting
-- Keep commit messages clear and descriptive using conventional commits
-- Organize code into logical modules and separate concerns
-- Use relative paths and proper Nix path handling
-- Avoid hardcoding system-specific values
+| Task | Location | Notes |
+|------|----------|-------|
+| Add system package | `hosts/base.nix` or `hosts/gui.nix` | Use `environment.systemPackages` |
+| Add user package | `homes/modules/base.nix` or `gui.nix` | Use `home.packages` |
+| New machine config | `hosts/<name>/` + `homes/<name>/` | Import in `default.nix` |
+| Hyprland keybinds | `x/hyprland/general.conf` | |
+| Neovim plugins | `vim/nvim/lua/plugins/` | LazyVim format |
+| Shell aliases | `zsh/alias.zsh` | |
+| Secrets | `secrets/` | Encrypted with agenix |
 
-### Error Handling
+## Commands
 
-- Use Nix's built-in error handling and validation
-- Provide meaningful error messages in assertions
-- Handle optional dependencies gracefully with `lib.mkIf`
+```bash
+make all              # Full rebuild (NixOS + home-manager)
+make home-manager     # User config only
+make os               # System config only (NixOS)
+make update           # Update flake.lock + app hashes
+make clean            # GC + optimize nix store
+pre-commit run --all  # Lint/format checks
+```
 
-### Naming Conventions
+## Conventions
 
-- Functions: camelCase (`myFunction`)
-- Variables: camelCase (`myVariable`)
-- Modules: descriptive names matching their purpose
-- Configuration attributes: descriptive lowercase with hyphens if needed
+- **Nix style**: 2-space indent, camelCase vars, `inputs@{ ... }` pattern
+- **Commits**: Conventional commits (`feat:`, `fix:`, `refactor:`)
+- **Module hierarchy**: `base.nix` → `gui.nix` → `dev.nix` (progressive enhancement)
+- **Host configs**: Import shared modules + hardware-specific overrides
+- **Secrets**: Never commit plaintext; use agenix
 
-### Imports and Dependencies
+## Anti-Patterns
 
-- Group related imports together
-- Use `inputs.self` for self-references within flakes
-- Leverage `lib.mkMerge` for combining configurations
-- Prefer `lib.mkDefault` for default values that can be overridden
+- **Hardcoded paths**: Use `lib.mkDefault`, relative paths
+- **Host-specific in shared**: Use `lib.mkIf` for conditional logic
+- **Skipping pre-commit**: Always run before commit
+- **Direct package versions**: Let flake.lock manage versions
 
-## Testing Approach
+## Unique Patterns
 
-Since this is a configuration repository rather than application code:
+- **Cross-compilation**: ARM (aarch64-linux) images built on x86 via `crossPkgs`
+- **Cachix integration**: `make` targets use `cachix watch-exec` when available
+- **nh tool**: Faster switching via `nh` if installed (falls back to `nix run`)
+- **App hash updates**: `make up` auto-updates app hashes in `homes/apps/*.nix`
 
-- Manual testing by running `make` and verifying system state
-- Use `nix flake check` to validate flake syntax
-- Test configurations on target systems before committing
-- No automated unit tests; rely on integration testing
+## Module Dependencies
 
-## Commit Message Format
+```
+flake.nix
+├── hosts/default.nix ──> hosts/{minf,x360,spi,...}/default.nix
+│                         └── imports: base.nix, gui.nix, hardware
+└── homes/default.nix ──> homes/{minf,x360,spi,...}/default.nix
+                          └── imports: modules/{base,gui,dev,wsl}.nix
+```
 
-Follow conventional commits:
+## Notes
 
-- `feat: add new configuration`
-- `fix: resolve issue with X`
-- `docs: update documentation`
-- `refactor: restructure Y module`
+- **FIXME**: hyprexpo plugin incompatibility in `homes/modules/gui.nix`
+- **tmp dirs**: `k8s/tmp/` is gitignored, may contain build artifacts
+- **WSL support**: `homes/modules/wsl.nix` for Windows Subsystem for Linux
+- **Multiple WMs**: Hyprland (primary), Niri, i3 configs coexist in `x/`
