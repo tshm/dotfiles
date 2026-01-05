@@ -2,6 +2,7 @@
 # vim: ft=zsh foldmethod=indent
 unset MAILCHECK
 uname=$(uname -a)
+export PATH=$HOME/npm-globals/bin:$HOME/opencode/bin:$PATH
 
 function scptar() {
   [ $# -ne 2 ] && echo "Usage: $1 <source> <destination>" && return 1
@@ -106,6 +107,44 @@ function meminfo() {
     docker volume rm `docker volume ls -q -f dangling=true`
     docker image prune
     docker system df
+  }
+}
+
+## if clavix is installed then call it, otherwise install it
+## via npm install -g clavix, then call it
+function clavix() {
+  local bin=~/.npm-globals/bin/clavix
+  (builtin whence -p clavix >/dev/null) && {
+    $bin "$@"
+  } || {
+    echo "clavix not found, installing via npm..."
+    mkdir -p ~/.npm-globals/
+    npm install -g --prefix ~/.npm-globals/ clavix && $bin "$@"
+  }
+}
+
+## curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
+function bd() {
+  local bin=/home/tshm/.local/bin/bd
+  (builtin whence -p bd >/dev/null) && {
+    $bin "$@"
+  } || {
+    echo "bd not found, installing via install script..."
+    mkdir -p ~/tshm/.local/bin/
+    curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash && $bin "$@"
+  }
+}
+
+# opencode: curl -fsSL https://opencode.ai/install | bash
+# path: ~/.opencode/bin/opencode
+function opencode() {
+  local bin=~/.opencode/bin/opencode
+  (builtin whence -p opencode >/dev/null) && {
+    $bin "$@"
+  } || {
+    echo "opencode not found, installing via install script..."
+    mkdir -p ~/.opencode/bin/
+    curl -fsSL https://opencode.ai/install | bash && $bin "$@"
   }
 }
 
