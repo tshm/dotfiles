@@ -114,7 +114,7 @@ function meminfo() {
 ## via npm install -g clavix, then call it
 function clavix() {
   local bin=~/.npm-globals/bin/clavix
-  (builtin whence -p clavix >/dev/null) && {
+  (builtin test -x $bin >/dev/null) && {
     $bin "$@"
   } || {
     echo "clavix not found, installing via npm..."
@@ -126,7 +126,7 @@ function clavix() {
 ## curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
 function bd() {
   local bin=/home/tshm/.local/bin/bd
-  (builtin whence -p bd >/dev/null) && {
+  (builtin test -x $bin >/dev/null) && {
     $bin "$@"
   } || {
     echo "bd not found, installing via install script..."
@@ -139,7 +139,7 @@ function bd() {
 # path: ~/.opencode/bin/opencode
 function opencode() {
   local bin=~/.opencode/bin/opencode
-  (builtin whence -p opencode >/dev/null) && {
+  (builtin test -x $bin >/dev/null) && {
     $bin "$@"
   } || {
     echo "opencode not found, installing via install script..."
