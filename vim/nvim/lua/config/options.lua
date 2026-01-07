@@ -12,20 +12,7 @@ opt.foldenable = true
 opt.foldnestmax = 20
 
 -- Use tmux clipboard when available, fallback to system clipboard
-if vim.env.TMUX then
-  vim.g.clipboard = {
-    name = 'tmux',
-    copy = {
-      ['+'] = {'tmux', 'load-buffer', '-w', '-'},
-      ['*'] = {'tmux', 'load-buffer', '-w', '-'},
-    },
-    paste = {
-      ['+'] = {'tmux', 'save-buffer', '-'},
-      ['*'] = {'tmux', 'save-buffer', '-'},
-    },
-    cache_enabled = 1,
-  }
-elseif vim.fn.has("wsl") == 1 then
+if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
     name = "win32yank-wsl",
     copy = {
@@ -39,6 +26,19 @@ elseif vim.fn.has("wsl") == 1 then
     cache_enabled = 0,
   }
   opt.clipboard = "unnamedplus"
+elseif vim.env.TMUX then
+  vim.g.clipboard = {
+    name = 'tmux',
+    copy = {
+      ['+'] = {'tmux', 'load-buffer', '-w', '-'},
+      ['*'] = {'tmux', 'load-buffer', '-w', '-'},
+    },
+    paste = {
+      ['+'] = {'tmux', 'save-buffer', '-'},
+      ['*'] = {'tmux', 'save-buffer', '-'},
+    },
+    cache_enabled = 1,
+  }
 else
   opt.clipboard = "unnamedplus"
 end
