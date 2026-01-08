@@ -1,97 +1,96 @@
 # Dotfiles Knowledge Base
 
-**Generated:** 2025-12-30
-**Commit:** b4e3acd
-**Branch:** master
+**Generated:** 2026-01-08
+**Context:** NixOS + Home Manager Configuration
 
 ## Overview
+NixOS/home-manager dotfiles managing multi-machine configurations (desktop, laptops, Raspberry Pi, USB boot).
+Uses **Nix Flakes** for declarative system/user separation and **Agenix** for secret management.
 
-NixOS/home-manager dotfiles managing multi-machine configurations (desktop, laptops, Raspberry Pi, USB boot). Nix flakes + home-manager for declarative system/user separation.
+## Development Workflow
 
-## Structure
+### Build & Deploy
+| Command | Description |
+|---------|-------------|
+| `make all` | Full rebuild (NixOS system + Home Manager user) |
+| `make os` | Rebuild NixOS system only (requires sudo) |
+| `make home-manager` | Rebuild Home Manager user config only |
+| `make xx` | Build target system (defined by `TARGET` env var) |
+| `make sd-burn` | Build and burn Raspberry Pi image (requires `spi.img`) |
+
+### Maintenance
+| Command | Description |
+|---------|-------------|
+| `make update` | Update `flake.lock` inputs |
+| `make up` | Update flake inputs AND app hashes (`homes/apps/*.nix`) |
+| `make clean` | Garbage collect old generations & optimize store |
+| `make zi` | Update Zinit plugins (Zsh) |
+
+### Verification (Lint & Test)
+There is no single "test" command. Verification is done via linting and successful builds.
+- **Lint All Files**: `pre-commit run --all-files`
+- **Lint Checks**:
+  - `trailing-whitespace`: Trim trailing whitespace
+  - `end-of-file-fixer`: Ensure single newline at EOF
+  - `check-yaml`: Validate YAML syntax
+  - `check-json`: Validate JSON syntax
+  - `commitizen`: Ensure conventional commit messages
+- **Node2Nix**: If modifying `homes/modules/node2nix/package.json`, run `make` in that directory to regenerate Nix expressions.
+
+## Code Style & Conventions
+
+### Nix Language
+- **Indent**: 2 spaces (no tabs).
+- **Naming**: `camelCase` for variables and attributes.
+- **Inputs**: Use `inputs@{ ... }` pattern in modules.
+- **Paths**: ALWAYS use relative paths. Avoid absolute paths.
+- **Modularity**:
+  - Use `lib.mkDefault` for overridable values.
+  - Use `lib.mkIf` for conditional logic (e.g., host-specific configs).
+  - Split configs into `base.nix` (shared), `gui.nix` (desktop), `dev.nix` (development).
+
+### Secrets
+- **Tool**: Agenix (`secrets/` directory).
+- **Rule**: NEVER commit plaintext secrets. Ensure `.age` files are encrypted.
+
+### Git & Commits
+- **Format**: Conventional Commits (`feat:`, `fix:`, `chore:`, `refactor:`).
+- **Enforcement**: Checked by `pre-commit` hook (Commitizen).
+
+## Project Structure
 
 ```
 .dotfiles/
-├── flake.nix         # Entry point - inputs/outputs
-├── homes/            # Home-manager user configs (per-machine)
-├── hosts/            # NixOS system configs (per-machine)
-├── k8s/              # Kubernetes manifests + Terraform
-├── vim/nvim/         # Neovim (LazyVim-based)
-├── zsh/              # Zsh shell config + zinit plugins
-├── x/                # Wayland/X11 (Hyprland, Waybar, Niri, i3)
-├── wezterm/          # Terminal emulator config
-├── kanata/           # Keyboard remapping
-├── secrets/          # Agenix-encrypted secrets
-└── Makefile          # Build/deploy targets
+├── flake.nix         # Entry point: inputs, outputs, system definitions
+├── homes/            # User configurations (Home Manager)
+│   ├── modules/      # Shared user modules (base, gui, dev, wsl)
+│   ├── apps/         # App-specific configs (often with pinned hashes)
+│   └── <host>/       # Per-machine user overrides
+├── hosts/            # System configurations (NixOS)
+│   ├── <host>/       # Per-machine system config (hardware, networking)
+│   └── modules/      # Shared system modules
+├── k8s/              # Kubernetes manifests & Terraform
+├── vim/nvim/         # Neovim config (LazyVim based)
+├── x/                # Window Managers (Hyprland, Waybar, Niri, i3)
+├── secrets/          # Encrypted secrets
+└── Makefile          # Task runner
 ```
 
-## Where to Look
+## Where to Find Things
 
-| Task | Location | Notes |
-|------|----------|-------|
-| Add system package | `hosts/base.nix` or `hosts/gui.nix` | Use `environment.systemPackages` |
-| Add user package | `homes/modules/base.nix` or `gui.nix` | Use `home.packages` |
-| New machine config | `hosts/<name>/` + `homes/<name>/` | Import in `default.nix` |
-| Hyprland keybinds | `x/hyprland/general.conf` | |
-| Neovim plugins | `vim/nvim/lua/plugins/` | LazyVim format |
-| Shell aliases | `zsh/alias.zsh` | |
-| Secrets | `secrets/` | Encrypted with agenix |
-
-## Commands
-
-```bash
-make all              # Full rebuild (NixOS + home-manager)
-make home-manager     # User config only
-make os               # System config only (NixOS)
-make update           # Update flake.lock + app hashes
-make clean            # GC + optimize nix store
-pre-commit run --all  # Lint/format checks
-```
-
-## Conventions
-
-- **Nix style**: 2-space indent, camelCase vars, `inputs@{ ... }` pattern
-- **Commits**: Conventional commits (`feat:`, `fix:`, `refactor:`)
-- **Module hierarchy**: `base.nix` → `gui.nix` → `dev.nix` (progressive enhancement)
-- **Host configs**: Import shared modules + hardware-specific overrides
-- **Secrets**: Never commit plaintext; use agenix
-
-## Anti-Patterns
-
-- **Hardcoded paths**: Use `lib.mkDefault`, relative paths
-- **Host-specific in shared**: Use `lib.mkIf` for conditional logic
-- **Skipping pre-commit**: Always run before commit
-- **Direct package versions**: Let flake.lock manage versions
-
-## Unique Patterns
-
-- **Cross-compilation**: ARM (aarch64-linux) images built on x86 via `crossPkgs`
-- **Cachix integration**: `make` targets use `cachix watch-exec` when available
-- **nh tool**: Faster switching via `nh` if installed (falls back to `nix run`)
-- **App hash updates**: `make up` auto-updates app hashes in `homes/apps/*.nix`
-
-## Module Dependencies
-
-```
-flake.nix
-├── hosts/default.nix ──> hosts/{minf,x360,spi,...}/default.nix
-│                         └── imports: base.nix, gui.nix, hardware
-└── homes/default.nix ──> homes/{minf,x360,spi,...}/default.nix
-                          └── imports: modules/{base,gui,dev,wsl}.nix
-```
-
-## Notes
-
-- **FIXME**: hyprexpo plugin incompatibility in `homes/modules/gui.nix`
-- **tmp dirs**: `k8s/tmp/` is gitignored, may contain build artifacts
-- **WSL support**: `homes/modules/wsl.nix` for Windows Subsystem for Linux
-- **Multiple WMs**: Hyprland (primary), Niri, i3 configs coexist in `x/`
-
+| Task | Location |
+|------|----------|
+| **Add System Pkg** | `hosts/<host>/default.nix` or `hosts/modules/base.nix` |
+| **Add User Pkg** | `homes/modules/base.nix` or `homes/modules/gui.nix` |
+| **Hyprland Config** | `x/hyprland/` |
+| **Neovim Plugins** | `vim/nvim/lua/plugins/` |
+| **Shell Aliases** | `zsh/alias.zsh` |
+| **App Versions** | `homes/apps/*.nix` (managed by `make up`) |
 
 <!-- CLAVIX:START -->
-# Clavix Instructions for Generic Agents
+# Clavix Instructions for GitHub Copilot
 
-This guide is for agents that can only read documentation (no slash-command support). If your platform supports custom slash commands, use those instead.
+These instructions enhance GitHub Copilot's understanding of Clavix prompt optimization workflows available in this project.
 
 ---
 
@@ -100,7 +99,7 @@ This guide is for agents that can only read documentation (no slash-command supp
 **CRITICAL: Know which mode you're in and STOP at the right point.**
 
 **OPTIMIZATION workflows** (NO CODE ALLOWED):
-- Improve mode - Prompt optimization only (auto-selects depth)
+- Fast/deep optimization - Prompt improvement only
 - Your role: Analyze, optimize, show improved prompt, **STOP**
 - ❌ DO NOT implement the prompt's requirements
 - ✅ After showing optimized prompt, tell user: "Run `/clavix:implement --latest` to implement"
@@ -132,29 +131,15 @@ For complete step-by-step workflows, see `.clavix/instructions/`:
 | **Prompt Optimization** | `workflows/improve.md` | Intent detection + quality assessment + auto-depth selection |
 | **PRD Generation** | `workflows/prd.md` | Socratic questions → full PRD + quick PRD |
 | **Mode Boundaries** | `core/clavix-mode.md` | Planning vs implementation distinction |
-| **File Operations** | `core/file-operations.md` | File creation patterns |
-| **Verification** | `core/verification.md` | Post-implementation verification |
 
 **Troubleshooting:**
 - `troubleshooting/jumped-to-implementation.md` - If you started coding during planning
 - `troubleshooting/skipped-file-creation.md` - If files weren't created
 - `troubleshooting/mode-confusion.md` - When unclear about planning vs implementation
 
----
-
-## 🔍 Workflow Detection Keywords
-
-| Keywords in User Request | Recommended Workflow | File Reference |
-|---------------------------|---------------------|----------------|
-| "improve this prompt", "make it better", "optimize" | Improve mode → Auto-depth optimization | `workflows/improve.md` |
-| "analyze thoroughly", "edge cases", "alternatives" | Improve mode (--comprehensive) | `workflows/improve.md` |
-| "create a PRD", "product requirements" | PRD mode → Socratic questioning | `workflows/prd.md` |
-| "let's discuss", "not sure what I want" | Conversational mode → Start gathering | `workflows/start.md` |
-| "summarize our conversation" | Extract mode → Analyze thread | `workflows/summarize.md` |
-| "refine", "update PRD", "change requirements", "modify prompt" | Refine mode → Update existing content | `workflows/refine.md` |
-| "verify", "check my implementation" | Verify mode → Implementation verification | `core/verification.md` |
-
 **When detected:** Reference the corresponding `.clavix/instructions/workflows/{workflow}.md` file.
+
+**⚠️ GitHub Copilot Limitation:** If Write tool unavailable, provide file content with clear "save to" instructions for user.
 
 ---
 
@@ -169,9 +154,7 @@ For complete step-by-step workflows, see `.clavix/instructions/`:
 | `clavix version` | Show version |
 
 ### Workflow Commands (Slash Commands)
-All workflows are executed via slash commands that AI agents read and follow:
-
-> **Command Format:** Commands shown with colon (`:`) format. Some tools use hyphen (`-`): Claude Code uses `/clavix:improve`, Cursor uses `/clavix-improve`. Your tool autocompletes the correct format.
+All workflows are executed via slash commands:
 
 | Slash Command | Purpose |
 |---------------|---------|
@@ -181,23 +164,22 @@ All workflows are executed via slash commands that AI agents read and follow:
 | `/clavix:implement` | Execute tasks or prompts (auto-detects source) |
 | `/clavix:start` | Begin conversational session |
 | `/clavix:summarize` | Extract requirements from conversation |
-| `/clavix:refine` | Refine existing PRD or saved prompt |
 
 ### Agentic Utilities (Project Management)
-These utilities provide structured workflows for project completion:
-
 | Utility | Purpose |
 |---------|---------|
-| `/clavix:verify` | Check implementation against PRD requirements, run validation |
-| `/clavix:archive` | Archive completed work to `.clavix/archive/` for reference |
+| `/clavix:verify` | Check implementation against PRD requirements |
+| `/clavix:archive` | Archive completed work to `.clavix/archive/` |
 
-**Quick start:**
-```bash
-npm install -g clavix
-clavix init
-```
+---
 
-**How it works:** Slash commands are markdown templates. When invoked, the agent reads the template and follows its instructions using native tools (Read, Write, Edit, Bash).
+## 🔄 Prompt Lifecycle Workflow
+
+**Prompt Lifecycle:**
+1. **Optimize**: `/clavix:improve` → Analyzes and improves your prompt
+2. **Review**: Agent reads `.clavix/outputs/prompts/*.md` to list saved prompts
+3. **Execute**: `/clavix:implement --latest` → Implement when ready
+4. **Cleanup**: Agent deletes old prompt files from `.clavix/outputs/prompts/`
 
 ---
 
@@ -211,76 +193,82 @@ PRD Creation → Task Planning → Implementation → Archive
 
 **Detailed steps:**
 
-1. **Planning Phase**
-   - Run: `/clavix:prd` or `/clavix:start` → `/clavix:summarize`
-   - Output: `.clavix/outputs/{project}/full-prd.md` + `quick-prd.md`
-   - Mode: PLANNING
-
-2. **Task Preparation**
-   - Run: `/clavix:plan` transforms PRD into curated task list
-   - Output: `.clavix/outputs/{project}/tasks.md`
-   - Mode: PLANNING (Pre-Implementation)
-
-3. **Implementation Phase**
-   - Run: `/clavix:implement`
-   - Agent executes tasks systematically
-   - Mode: IMPLEMENTATION
-   - Agent edits tasks.md directly to mark progress (`- [ ]` → `- [x]`)
-
-4. **Completion**
-   - Run: `/clavix:archive`
-   - Archives completed work
-   - Mode: Management
+1. **Planning Phase** - `/clavix:prd` or `/clavix:start` → `/clavix:summarize`
+2. **Task Preparation** - `/clavix:plan` transforms PRD into tasks.md
+3. **Implementation Phase** - `/clavix:implement` executes tasks systematically
+4. **Completion** - `/clavix:archive` archives completed work
 
 **Key principle:** Planning workflows create documents. Implementation workflows write code.
 
 ---
 
-## 💡 Best Practices for Generic Agents
+## 🎯 Quality Dimensions
 
-1. **Always reference instruction files** - Don't recreate workflow steps inline, point to `.clavix/instructions/workflows/`
+When analyzing prompts, consider these 5 dimensions:
 
-2. **Respect mode boundaries** - Planning mode = no code, Implementation mode = write code
+- **Clarity**: Is the objective clear and unambiguous?
+- **Efficiency**: Concise without losing critical information?
+- **Structure**: Information organized logically (context → requirements → constraints → output)?
+- **Completeness**: All specs provided (persona, format, tone, success criteria)?
+- **Actionability**: Can AI take immediate action?
 
-3. **Use checkpoints** - Follow the CHECKPOINT pattern from instruction files to track progress
+**Reference:** See `workflows/improve.md` for complete quality assessment patterns
 
-4. **Create files explicitly** - Use Write tool for every file, verify with ls, never skip file creation
+---
 
-5. **Ask when unclear** - If mode is ambiguous, ask: "Should I implement or continue planning?"
+## 💡 Best Practices for GitHub Copilot
 
-6. **Track complexity** - Use conversational mode for complex requirements (15+ exchanges, 5+ features, 3+ topics)
-
-7. **Label improvements** - When optimizing prompts, mark changes with [ADDED], [CLARIFIED], [STRUCTURED], [EXPANDED], [SCOPED]
+1. **Suggest appropriate workflow** - `/clavix:improve` for prompts, `/clavix:prd` for strategic planning
+2. **Reference instruction files** - Point to `.clavix/instructions/workflows/*.md` instead of recreating steps
+3. **Respect mode boundaries** - Planning mode = no code, Implementation mode = write code
+4. **Use quality dimensions** - Apply 5-dimension assessment principles in responses
+5. **Guide users to slash commands** - Recommend appropriate `/clavix:*` commands for their needs
 
 ---
 
 ## ⚠️ Common Mistakes
 
 ### ❌ Jumping to implementation during planning
-**Wrong:** User discusses feature → agent generates code immediately
+**Wrong:** User discusses feature → Copilot generates code immediately
 
-**Right:** User discusses feature → agent asks questions → creates PRD/prompt → asks if ready to implement
+**Right:** User discusses feature → Suggest `/clavix:prd` or `/clavix:start` → Create planning docs first
 
-### ❌ Skipping file creation
-**Wrong:** Display content in chat, don't write files
+### ❌ Not suggesting Clavix workflows
+**Wrong:** User asks "How should I phrase this?" → Copilot provides generic advice
 
-**Right:** Create directory → Write files → Verify existence → Display paths
+**Right:** User asks "How should I phrase this?" → Suggest `/clavix:improve` for quality assessment
 
-### ❌ Recreating workflow instructions inline
-**Wrong:** Copy entire fast mode workflow into response
+### ❌ Recreating workflow steps inline
+**Wrong:** Copilot explains entire PRD generation process in chat
 
-**Right:** Reference `.clavix/instructions/workflows/improve.md` and follow its steps
+**Right:** Copilot references `.clavix/instructions/workflows/prd.md` and suggests running `/clavix:prd`
 
-### ❌ Not using instruction files
-**Wrong:** Make up workflow steps or guess at process
+---
 
-**Right:** Read corresponding `.clavix/instructions/workflows/*.md` file and follow exactly
+## 🔗 Integration with GitHub Copilot
+
+When users ask for help with prompts or requirements:
+
+1. **Detect need** - Identify if user needs planning, optimization, or implementation
+2. **Suggest slash command** - Recommend appropriate `/clavix:*` command
+3. **Explain benefit** - Describe expected output and value
+4. **Help interpret** - Assist with understanding Clavix-generated outputs
+5. **Apply principles** - Use quality dimensions in your responses
+
+**Example flow:**
+```
+User: "I want to build a dashboard but I'm not sure how to phrase the requirements"
+Copilot: "I suggest running `/clavix:start` to begin conversational requirements gathering.
+This will help us explore your needs naturally, then we can extract structured requirements
+with `/clavix:summarize`. Alternatively, if you have a rough idea, try:
+`/clavix:improve 'Build a dashboard for...'` for quick optimization."
+```
 
 ---
 
 **Artifacts stored under `.clavix/`:**
 - `.clavix/outputs/<project>/` - PRDs, tasks, prompts
-- `.clavix/templates/` - Custom overrides
+- `.clavix/config.json` - Project configuration
 
 ---
 
@@ -291,29 +279,3 @@ PRD Creation → Task Planning → Implementation → Archive
 **For mode clarification:** See `.clavix/instructions/core/clavix-mode.md`
 
 <!-- CLAVIX:END -->
-
-## Landing the Plane (Session Completion)
-
-**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
-
-**MANDATORY WORKFLOW:**
-
-1. **File issues for remaining work** - Create issues for anything that needs follow-up
-2. **Run quality gates** (if code changed) - Tests, linters, builds
-3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
-   ```bash
-   git pull --rebase
-   bd sync
-   git push
-   git status  # MUST show "up to date with origin"
-   ```
-5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
-7. **Hand off** - Provide context for next session
-
-**CRITICAL RULES:**
-- Work is NOT complete until `git push` succeeds
-- NEVER stop before pushing - that leaves work stranded locally
-- NEVER say "ready to push when you are" - YOU must push
-- If push fails, resolve and retry until it succeeds
