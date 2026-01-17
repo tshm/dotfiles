@@ -328,14 +328,6 @@ in
         mgr = {
           prepend_keymap = [
             {
-              on = "k";
-              run = "plugin arrow -1";
-            }
-            {
-              on = "j";
-              run = "plugin arrow 1";
-            }
-            {
               on = "<Tab>";
               run = "plugin tab";
               desc = "create or switch tab";
@@ -410,10 +402,6 @@ in
               ];
               run = "plugin projects delete";
             }
-            {
-              on = [ "q" ];
-              run = "plugin projects quit";
-            }
           ];
         };
       };
@@ -421,9 +409,10 @@ in
     zsh = {
       enable = true;
       enableCompletion = false;
-      # initExtraFirst = ''
-      #   zmodload zsh/zprof
-      # '';
+      initExtraFirst = ''
+        # Create tmux socket directory if it doesn't exist
+        [ -n "$XDG_RUNTIME_DIR" ] && mkdir -p "$XDG_RUNTIME_DIR/tmux-$(id -u)" 2>/dev/null
+      '';
       initContent = lib.mkBefore ''
         source ~/.dotfiles/zsh/zshrc
         # zprof
