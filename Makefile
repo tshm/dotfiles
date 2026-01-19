@@ -30,17 +30,7 @@ xx:
 apphash_update: $(APPS)
 
 dev:
-	@echo "installing opencode..."
-	mkdir -p ~/.opencode/bin/
-	opencode --version || curl -fsSL https://opencode.ai/install | bash
-	@echo "installing oh-my-opencode..."
-	bunx oh-my-opencode install
-	@echo "installing clavix..."
-	mkdir -p ~/.npm-globals/
-	npm install -g --prefix ~/.npm-globals/ clavix
-	@echo "installing bd..."
-	mkdir -p ~/tshm/.local/bin/
-	curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
+	cd ./agent 66 make
 
 update.%: ./homes/apps/%.nix
 	$(eval URL := $(shell sed -ne '/url =/s/.*url = //p' "$<"))

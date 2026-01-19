@@ -1,0 +1,51 @@
+{
+  "context7": {
+    "type": "local",
+    "command": [
+      "npx",
+      "-y",
+      "@upstash/context7-mcp"
+    ],
+    "environment": {
+      "DEFAULT_MINIMUM_TOKENS": ""
+    },
+    "enabled": true
+  },
+  "ddg-search": {
+    "type": "local",
+    "command": [
+      "uvx",
+      "duckduckgo-mcp-server"
+    ],
+    "enabled": true
+  },
+  "chrome-devtools": {
+    "type": "local",
+    "command": [
+      "npx",
+      "-y",
+      "chrome-devtools-mcp@latest"
+    ],
+    "enabled": true
+  },
+  "memory": {
+    "type": "local",
+    "command": [
+      "npx",
+      "-y",
+      "@modelcontextprotocol/server-memory"
+    ],
+    "enabled": true
+  },
+  "serena": {
+    "type": "local",
+    "enabled": true,
+    "command": [
+      "uvx",
+      "--from",
+      "git+https://github.com/oraios/serena",
+      "serena",
+      "start-mcp-server"
+    ]
+  }
+}
