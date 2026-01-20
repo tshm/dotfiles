@@ -4,6 +4,8 @@ unset MAILCHECK
 uname=$(uname -a)
 
 alias tokscale='bunx tokscale@latest'
+alias opencode='~/.opencode/bin/opencode'
+alias op=opencode
 
 function scptar() {
   [ $# -ne 2 ] && echo "Usage: $1 <source> <destination>" && return 1

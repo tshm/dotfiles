@@ -85,9 +85,9 @@ in
       "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
     };
   };
-  # services = {
-  #   syncthing.enable = !input.isWSL;
-  # };
+  home.sessionVariables = {
+    TMUX_TMPDIR = lib.mkForce "/tmp";
+  };
   programs = {
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
@@ -409,11 +409,13 @@ in
     zsh = {
       enable = true;
       enableCompletion = false;
-      initExtraFirst = ''
+      initContent = lib.mkBefore ''
+        # Fix tmux socket permissions issue in WSL
+        export TMUX_TMPDIR="/tmp"
+
         # Create tmux socket directory if it doesn't exist
         [ -n "$XDG_RUNTIME_DIR" ] && mkdir -p "$XDG_RUNTIME_DIR/tmux-$(id -u)" 2>/dev/null
-      '';
-      initContent = lib.mkBefore ''
+
         source ~/.dotfiles/zsh/zshrc
         # zprof
       '';
