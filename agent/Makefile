@@ -19,10 +19,10 @@ opencode:
 	@echo "installing opencode..."
 	opencode --version || curl -fsSL https://opencode.ai/install | bash
 	@echo update config
-	ln -sf ${PWD}/BASE_AGENTS.md ~/.config/opencode/AGENTS.md
 	mkdir -p ~/.config/opencode/config
+	ln -sf ${PWD}/BASE_AGENTS.md ~/.config/opencode/AGENTS.md
 	for i in ${PWD}/config/*.json; do \
 	  ln -sf $$i ~/.config/opencode/config/$$(basename $$i); \
 	done
 	ln -sf ${PWD}/merge-config.sh ~/.config/opencode
-	pushd ~/.config/opencode && ./merge-config.sh ; popd
+	cd ~/.config/opencode && ./merge-config.sh

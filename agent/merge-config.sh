@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # OpenCode Config Merger
 # Combines modular JSON config files into a single opencode.json
 
@@ -28,7 +28,8 @@ log_error() {
 }
 
 # Check for jq
-if ! command -v jq &> /dev/null; then
+if which jq &> /dev/null; then
+else
     log_error "jq is not installed. Please install it first:"
     log_error "  Ubuntu/Debian: sudo apt-get install jq"
     log_error "  macOS: brew install jq"

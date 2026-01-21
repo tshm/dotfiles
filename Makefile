@@ -30,7 +30,7 @@ xx:
 apphash_update: $(APPS)
 
 dev:
-	cd ./agent 66 make
+	cd ./agent && make
 
 update.%: ./homes/apps/%.nix
 	$(eval URL := $(shell sed -ne '/url =/s/.*url = //p' "$<"))
