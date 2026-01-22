@@ -1,6 +1,6 @@
+SHELL := $(shell command -v bash 2>/dev/null || command -v sh)
 .SHELLFLAGS := -euo pipefail -c
 .ONESHELL:
-SHELL := $(shell command -v bash 2>/dev/null || command -v sh)
 
 CONFIG_DIR ?= ${PWD}/config
 OUTPUT_FILE ?= ${PWD}/opencode.jsonc
@@ -56,7 +56,7 @@ merge-config:
 		local path="${CONFIG_DIR}/$$file.jsonc"
 		if [ -f "$$path" ]; then
 			log_info "  + $$file.jsonc"
-			BASE_CONFIG=$$(echo "$$BASE_CONFIG" | jq --slurpfile data <(cat "$$path" | grep -v '^[[:blank:]]*//'| yq) ". + {\"$$key\": \$$data[0]}")
+			BASE_CONFIG=$$(echo "$$BASE_CONFIG" | yq --slurpfile data <(cat "$$path" | grep -v '^[[:blank:]]*//'| yq) ". + {\"$$key\": \$$data[0]}")
 		fi
 	}
 	if [ ! -d "${CONFIG_DIR}" ]; then
@@ -81,8 +81,8 @@ merge-config:
 			tools|mcp|plugins|providers) continue ;;
 		esac
 		log_info "  + $$filename.jsonc"
-		BASE_CONFIG=$$(echo "$$BASE_CONFIG" | jq --slurpfile data <(json5 "$$config_file") ". + {\"$$filename\": \$$data[0]}")
+		BASE_CONFIG=$$(echo "$$BASE_CONFIG" | yq --slurpfile data <(cat "$$config_file" | grep -v '^[[:blank:]]*//'| yq) ". + {\"$$filename\": \$$data[0]}")
 	done
-	echo "$$BASE_CONFIG" | jq '.' > "${OUTPUT_FILE}"
+	echo "$$BASE_CONFIG" | yq '.' > "${OUTPUT_FILE}"
 	log_info "Successfully generated: ${OUTPUT_FILE}"
 	log_info "Done!"
