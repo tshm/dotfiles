@@ -1,4 +1,3 @@
-
 .SHELLFLAGS := -euo pipefail -c
 .ONESHELL:
 SHELL := $(shell command -v bash 2>/dev/null || command -v sh)
@@ -14,7 +13,7 @@ dev: opencode
 	npm install -g --prefix ~/.npm-globals/ clavix
 	@echo "installing bd..."
 	mkdir -p ~/tshm/.local/bin/
-	curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
+	bd upgrade || curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
 
 .PHONY: agents
 agents:
@@ -31,7 +30,7 @@ clean-tools:
 .PHONY: opencode
 opencode: ~/.opencode/bin/opencode
 	@echo "installing opencode..."
-	opencode --version || curl -fsSL 'https://opencode.ai/install | bash'
+	[ -x ~/.opencode/bin/opencode ] && ~/.opencode/bin/opencode upgrade || (curl -fsSL https://opencode.ai/install | bash)
 	@echo update config
 	mkdir -p ~/.config/opencode/config
 	ln -sf ${PWD}/BASE_AGENTS.md ~/.config/opencode/AGENTS.md
@@ -57,15 +56,7 @@ merge-config:
 		local path="${CONFIG_DIR}/$$file.jsonc"
 		if [ -f "$$path" ]; then
 			log_info "  + $$file.jsonc"
-			local json_cmd
-			if command -v json5 >/dev/null 2>&1; then
-				json_cmd="json5"
-			elif command -v npx >/dev/null 2>&1; then
-				json_cmd="npx -y json5"
-			else
-				json_cmd="nix run nixpkgs#nodePackages.json5 --"
-			fi
-			BASE_CONFIG=$$(echo "$$BASE_CONFIG" | jq --slurpfile data <($$json_cmd "$$path") ". + {\"$$key\": \$$data[0]}")
+			BASE_CONFIG=$$(echo "$$BASE_CONFIG" | jq --slurpfile data <(cat "$$path" | grep -v '^[[:blank:]]*//'| yq) ". + {\"$$key\": \$$data[0]}")
 		fi
 	}
 	if [ ! -d "${CONFIG_DIR}" ]; then
