@@ -316,6 +316,7 @@ in
         # hide-preview = hide-preview;
         enter = ../../yazi/plugins/enter.yazi;
         tab = ../../yazi/plugins/tab.yazi;
+        shell-prefill = ../../yazi/plugins/shell-prefill.yazi;
         chmod = pkgs.yaziPlugins.chmod;
         git = pkgs.yaziPlugins.git;
         mediainfo = pkgs.yaziPlugins.mediainfo;
@@ -330,6 +331,11 @@ in
               on = "<Tab>";
               run = "plugin tab";
               desc = "create or switch tab";
+            }
+            {
+              on = "!";
+              run = "plugin shell-prefill";
+              desc = "Shell prefill";
             }
             {
               on = "T";

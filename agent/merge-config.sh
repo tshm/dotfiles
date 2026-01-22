@@ -6,8 +6,8 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/config"
-OUTPUT_FILE="$SCRIPT_DIR/opencode.json"
-BACKUP_FILE="$SCRIPT_DIR/opencode.json.backup"
+OUTPUT_FILE="$SCRIPT_DIR/opencode.jsonc"
+BACKUP_FILE="$SCRIPT_DIR/opencode.jsonc.backup"
 
 # Color output
 RED='\033[0;31m'
@@ -25,6 +25,99 @@ log_warn() {
 
 log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
+}
+
+strip_jsonc() {
+    python - "$1" <<'PY'
+import re
+import sys
+
+path = sys.argv[1]
+with open(path, "r", encoding="utf-8") as handle:
+    data = handle.read()
+
+out = []
+i = 0
+in_string = False
+escape = False
+length = len(data)
+
+while i < length:
+    ch = data[i]
+    nxt = data[i + 1] if i + 1 < length else ""
+
+    if in_string:
+        out.append(ch)
+        if escape:
+            escape = False
+        elif ch == "\\":
+            escape = True
+        elif ch == '"':
+            in_string = False
+        i += 1
+        continue
+
+    if ch == '"':
+        in_string = True
+        out.append(ch)
+        i += 1
+        continue
+
+    if ch == "/" and nxt == "/":
+        i += 2
+        while i < length and data[i] not in "\r\n":
+            i += 1
+        continue
+
+    if ch == "/" and nxt == "*":
+        i += 2
+        while i + 1 < length and not (data[i] == "*" and data[i + 1] == "/"):
+            i += 1
+        i += 2
+        continue
+
+    out.append(ch)
+    i += 1
+
+data = "".join(out)
+out = []
+i = 0
+in_string = False
+escape = False
+length = len(data)
+
+while i < length:
+    ch = data[i]
+    if in_string:
+        out.append(ch)
+        if escape:
+            escape = False
+        elif ch == "\\":
+            escape = True
+        elif ch == '"':
+            in_string = False
+        i += 1
+        continue
+
+    if ch == '"':
+        in_string = True
+        out.append(ch)
+        i += 1
+        continue
+
+    if ch == ",":
+        j = i + 1
+        while j < length and data[j].isspace():
+            j += 1
+        if j < length and data[j] in "]}":
+            i += 1
+            continue
+
+    out.append(ch)
+    i += 1
+
+sys.stdout.write("".join(out))
+PY
 }
 
 # Check for jq
@@ -45,7 +138,7 @@ fi
 
 # Backup existing opencode.json if it exists
 if [ -f "$OUTPUT_FILE" ]; then
-    log_info "Backing up existing opencode.json to opencode.json.backup"
+    log_info "Backing up existing $OUTPUT_FILE to $BACKUP_FILE"
     cp "$OUTPUT_FILE" "$BACKUP_FILE"
 fi
 
@@ -57,40 +150,40 @@ BASE_CONFIG='{
 }'
 
 # Merge tools if exists
-if [ -f "$CONFIG_DIR/tools.json" ]; then
-    log_info "  + tools.json"
-    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile tools "$CONFIG_DIR/tools.json" '. + {tools: $tools[0]}')
+if [ -f "$CONFIG_DIR/tools.jsonc" ]; then
+    log_info "  + tools.jsonc"
+    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile tools <(strip_jsonc "$CONFIG_DIR/tools.jsonc") '. + {tools: $tools[0]}')
 fi
 
 # Merge mcp if exists
-if [ -f "$CONFIG_DIR/mcp.json" ]; then
-    log_info "  + mcp.json"
-    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile mcp "$CONFIG_DIR/mcp.json" '. + {mcp: $mcp[0]}')
+if [ -f "$CONFIG_DIR/mcp.jsonc" ]; then
+    log_info "  + mcp.jsonc"
+    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile mcp <(strip_jsonc "$CONFIG_DIR/mcp.jsonc") '. + {mcp: $mcp[0]}')
 fi
 
 # Merge plugins if exists
-if [ -f "$CONFIG_DIR/plugins.json" ]; then
-    log_info "  + plugins.json"
-    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile plugin "$CONFIG_DIR/plugins.json" '. + {plugin: $plugin[0]}')
+if [ -f "$CONFIG_DIR/plugins.jsonc" ]; then
+    log_info "  + plugins.jsonc"
+    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile plugin <(strip_jsonc "$CONFIG_DIR/plugins.jsonc") '. + {plugin: $plugin[0]}')
 fi
 
 # Merge providers if exists
-if [ -f "$CONFIG_DIR/providers.json" ]; then
-    log_info "  + providers.json"
-    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile provider "$CONFIG_DIR/providers.json" '. + {provider: $provider[0]}')
+if [ -f "$CONFIG_DIR/providers.jsonc" ]; then
+    log_info "  + providers.jsonc"
+    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile provider <(strip_jsonc "$CONFIG_DIR/providers.jsonc") '. + {provider: $provider[0]}')
 fi
 
 # Merge any additional config files (keybinds, server, etc.)
-for config_file in "$CONFIG_DIR"/*.json; do
-    filename=$(basename "$config_file" .json)
+for config_file in "$CONFIG_DIR"/*.jsonc; do
+    filename=$(basename "$config_file" .jsonc)
 
     # Skip files we've already processed
     if [[ "$filename" == "tools" || "$filename" == "mcp" || "$filename" == "plugins" || "$filename" == "providers" ]]; then
         continue
     fi
 
-    log_info "  + $filename.json"
-    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile data "$config_file" '. + {("'"$filename"'"): $data[0]}')
+    log_info "  + $filename.jsonc"
+    BASE_CONFIG=$(echo "$BASE_CONFIG" | jq --slurpfile data <(strip_jsonc "$config_file") '. + {("'"$filename"'"): $data[0]}')
 done
 
 # Write final config

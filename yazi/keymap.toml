@@ -1,0 +1,3 @@
+[[manager]]
+key = "!"
+exec = "plugin shell-prefill"
