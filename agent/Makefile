@@ -17,7 +17,7 @@ dev: opencode
 
 .PHONY: agents
 agents:
-	curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s advanced
+	curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s advanced --install-dir ~/.config/opencode
 
 oh-my-opencode: opencode
 	@echo "installing oh-my-opencode..."
