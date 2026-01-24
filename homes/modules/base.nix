@@ -325,6 +325,7 @@ in
         toggle-pane = pkgs.yaziPlugins.toggle-pane;
       };
       keymap = {
+        force = true;
         mgr = {
           prepend_keymap = [
             {
@@ -413,6 +414,7 @@ in
     };
     zsh = {
       enable = true;
+      dotDir = config.home.homeDirectory;
       enableCompletion = false;
       initContent = lib.mkBefore ''
         # Fix tmux socket permissions issue in WSL
