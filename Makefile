@@ -108,10 +108,14 @@ REPO:=jtroo/kanata
 kanata:
 	@V=$$(curl -s 'https://api.github.com/repos/${REPO}/releases/latest' | jq -r .tag_name) && \
 		echo "latest release: $$V"; \
-	# prefer a Windows zip (asset name containing "win"/"windows") then fall back to any .zip
-	ZIPURL=$$(curl -s 'https://api.github.com/repos/${REPO}/releases/latest' | jq -r '.assets[] | select((.name | test("(?i)win|windows")) and (.name | test("\\.zip$$"))) | .browser_download_url' | head -n1); \
+	# prefer a Windows x86/x64 zip: collect asset names and URLs then filter with grep/awk
+	ASSETS=$$(curl -s 'https://api.github.com/repos/${REPO}/releases/latest' | jq -r '.assets[] | [.name, .browser_download_url] | @tsv'); \
+	ZIPURL=$$(echo "$$ASSETS" | grep -iE 'win|windows' | grep -iE 'x86|x64|amd64|x86_64' | awk -F"\t" '{print $$2}' | head -n1); \
 	if [ -z "$$ZIPURL" ]; then \
-		ZIPURL=$$(curl -s 'https://api.github.com/repos/${REPO}/releases/latest' | jq -r '.assets[] | select(.name | test("\\.zip$$")) | .browser_download_url' | head -n1); \
+		ZIPURL=$$(echo "$$ASSETS" | grep -iE 'win|windows' | awk -F"\t" '{print $$2}' | head -n1); \
+	fi; \
+	if [ -z "$$ZIPURL" ]; then \
+		ZIPURL=$$(echo "$$ASSETS" | awk -F"\t" '{print $$2}' | head -n1); \
 	fi; \
 	if [ -z "$$ZIPURL" ]; then echo "no .zip asset found for ${REPO} release $$V"; exit 1; fi; \
 	mkdir -p kanata tmp tmp/extract; \
@@ -121,7 +125,14 @@ kanata:
 	if [ -z "$$(find tmp/extract -mindepth 1 -print -quit)" ]; then echo "zip appears empty for ${REPO} release $$V"; exit 1; fi; \
 	# copy all files from the zip into kanata/ (preserve structure)
 	mkdir -p kanata; cp -a tmp/extract/. kanata/; \
-	echo "kanata files copied into kanata/"
+	# remove ARM binaries and keep only x86/x64 windows executables
+	find kanata -type f \( -iname '*arm*' -o -iname '*arm64*' \) -exec rm -f {} + || true; \
+	# remove any .exe that doesn't look like x86/x64/amd64/win32
+	find kanata -type f -iname '*.exe' \! \( -iname '*x64*' -o -iname '*x86*' -o -iname '*amd64*' -o -iname '*win32*' \) -exec rm -f {} + || true; \
+	# ensure at least one .exe exists
+	if [ -z "$$(find kanata -type f -iname '*.exe' -print -quit)" ]; then echo "no x86/x64 windows binaries found in zip"; exit 1; fi; \
+	echo "kanata x86/x64 windows binaries copied into kanata/"
+
 endif
 
 .git/hooks/pre-commit: flake.lock
