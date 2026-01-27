@@ -104,15 +104,24 @@ resh:
 
 ifdef ISWSL
 REPO:=jtroo/kanata
-kanata: kanata/kanata_gui.exe
-kanata/kanata_gui.exe:
-	$(eval V:=$(shell curl 'https://api.github.com/repos/${REPO}/releases/latest' | jq -r .tag_name))
-	echo $V
-	mkdir -p tmp
-	wget https://github.com/jtroo/kanata/releases/download/$V/kanata_gui.exe -O $@
-	wget https://github.com/jtroo/kanata/releases/download/$V/kanata_winIOv2.exe -O $@
-	# shell:common startup
-	# powershell.exe "[Environment]::GetFolderPath('Startup')"
+.PHONY: kanata
+kanata:
+	@V=$$(curl -s 'https://api.github.com/repos/${REPO}/releases/latest' | jq -r .tag_name) && \
+		echo "latest release: $$V"; \
+	# prefer a Windows zip (asset name containing "win"/"windows") then fall back to any .zip
+	ZIPURL=$$(curl -s 'https://api.github.com/repos/${REPO}/releases/latest' | jq -r '.assets[] | select((.name | test("(?i)win|windows")) and (.name | test("\\.zip$$"))) | .browser_download_url' | head -n1); \
+	if [ -z "$$ZIPURL" ]; then \
+		ZIPURL=$$(curl -s 'https://api.github.com/repos/${REPO}/releases/latest' | jq -r '.assets[] | select(.name | test("\\.zip$$")) | .browser_download_url' | head -n1); \
+	fi; \
+	if [ -z "$$ZIPURL" ]; then echo "no .zip asset found for ${REPO} release $$V"; exit 1; fi; \
+	mkdir -p kanata tmp tmp/extract; \
+	wget -q -O tmp/kanata.zip "$$ZIPURL"; \
+	unzip -o tmp/kanata.zip -d tmp/extract >/dev/null; \
+	# ensure the zip had contents
+	if [ -z "$$(find tmp/extract -mindepth 1 -print -quit)" ]; then echo "zip appears empty for ${REPO} release $$V"; exit 1; fi; \
+	# copy all files from the zip into kanata/ (preserve structure)
+	mkdir -p kanata; cp -a tmp/extract/. kanata/; \
+	echo "kanata files copied into kanata/"
 endif
 
 .git/hooks/pre-commit: flake.lock
