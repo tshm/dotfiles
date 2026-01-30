@@ -6,18 +6,31 @@ CONFIG_DIR ?= ${PWD}/config
 OUTPUT_FILE ?= ${PWD}/opencode.jsonc
 BACKUP_FILE ?= ${OUTPUT_FILE}.backup
 
-.PHONY: dev
-dev: opencode
+.PHONY: dev clavix beads
+dev: opencode clavix beads
+
+clavix: ~/.npm-globals/bin/clavix
 	@echo "installing clavix..."
 	mkdir -p ~/.npm-globals/
 	npm install -g --prefix ~/.npm-globals/ clavix
+
+beads: ~/.local/bin/bd
 	@echo "installing bd..."
 	mkdir -p ~/tshm/.local/bin/
+	# for more details
 	bd upgrade || curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
+
+.PHONY: clawdbot
+clawdbot:
+	npm install -g --prefix ~/.npm-globals/ clawdbot
+
+.PHONY: tokenscope
+tokenscope:
+	curl -sSL https://raw.githubusercontent.com/ramtinJ95/opencode-tokenscope/main/plugin/install.sh | bash
 
 .PHONY: agents
 agents:
-	curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s advanced --install-dir ~/.config/opencode
+	curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s full --install-dir ~/.config/opencode
 
 oh-my-opencode: opencode
 	@echo "installing oh-my-opencode..."
