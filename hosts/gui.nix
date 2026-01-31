@@ -75,10 +75,9 @@
   services.xserver = {
     enable = true;
     displayManager.startx.enable = false;
-    displayManager.gdm.enable = false;
-    displayManager.lightdm.enable = false;
-    desktopManager.gnome.enable = false;
   };
+  services.displayManager.gdm.enable = false;
+  services.desktopManager.gnome.enable = false;
   security.rtkit.enable = true;
   services.pulseaudio.enable = false;
   services.pipewire = {
@@ -86,14 +85,37 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
-  services.pipewire.wireplumber.extraConfig.bluetoothEnhancements = {
-    "monitor.bluez.properties" = {
-      "bluez5.enable-sbc-xq" = true;
-      "bluez5.enable-msbc" = true;
-      "bluez5.enable-hw-volume" = true;
+    jack.enable = false;
+    wireplumber = {
+      enable = true;
+      extraConfig = {
+        "10-bluez-enhancements" = {
+          "monitor.bluez.properties" = {
+            "bluez5.enable-sbc-xq" = true;
+            "bluez5.enable-msbc" = true;
+            "bluez5.enable-hw-volume" = true;
+          };
+        };
+        "10-alsa-devices" = {
+          "monitor.alsa.rules" = [
+            {
+              matches = [
+                { "device.name" = "~alsa_card.*"; }
+              ];
+              actions = {
+                update-props = {
+                  "api.alsa.use-acp" = true;
+                  "api.acp.auto-profile" = "off";
+                  "api.acp.auto-port" = "off";
+                };
+              };
+            }
+          ];
+        };
+      };
     };
   };
+
 
   environment.systemPackages = [
     pkgs.mesa
@@ -109,6 +131,9 @@
     pkgs.poppler
     pkgs.imagemagick
     pkgs.pavucontrol
+    pkgs.alsa-tools
+    pkgs.alsa-utils
+    pkgs.pulseaudio
     pkgs.waybar
     pkgs.kitty
     pkgs.polkit_gnome

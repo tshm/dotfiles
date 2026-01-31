@@ -9,11 +9,58 @@
   ];
   hardware.sensor.iio.enable = true;
 
-  # Fix for Realtek ALC285 audio codec - force use of snd_hda_intel
+  # Audio configuration for PC speakers
   boot.kernelModules = [ "snd-hda-intel" ];
   boot.extraModprobeConfig = ''
-    options snd-hda-intel model=auto
-    options snd-hda-intel probe_mask=1
+    # Force HDA Intel codec and enable internal speakers for ALC285
+    options snd-hda-intel model=auto probe_mask=1 position_fix=0
+    # Specific ALC285 model for HP laptops
+    options snd-hda-codec-realtek model=hp-headset
+    # Enable internal speakers
+    options snd-hda-intel enable_msi=1
   '';
   boot.blacklistedKernelModules = [ "snd_sof" "snd_sof_amd_acp" "snd_sof_pci" ];
+
+  # Audio device configuration
+  hardware.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
+    jack.enable = false;
+    wireplumber = {
+      enable = true;
+      extraConfig = {
+        "10-alsa-card" = {
+          "monitor.alsa.rules" = [
+            {
+              matches = [
+                { "device.name" = "~alsa_card.pci-0000_04_00.6"; }
+              ];
+              actions = {
+                update-props = {
+                  "device.description" = "PC Speakers";
+                  "api.alsa.use-acp" = true;
+                  "api.acp.auto-profile" = true;
+                  "api.acp.auto-port" = true;
+                };
+              };
+            }
+          ];
+        };
+        "10-bluetooth-enhancements" = {
+          "monitor.bluez.properties" = {
+            "bluez5.enable-sbc-xq" = true;
+            "bluez5.enable-msbc" = true;
+            "bluez5.enable-hw-volume" = true;
+          };
+        };
+      };
+    };
+  };
+
+
 }
