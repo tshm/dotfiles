@@ -20,6 +20,8 @@ in
 
   boot = {
     binfmt.emulatedSystems = lib.mkIf (!isRaspberryPi) [ "aarch64-linux" ];
+    # Required for Dagger engine to work (uses iptables inside container)
+    kernelModules = [ "ip_tables" "iptable_nat" "iptable_filter" ];
     loader = {
       systemd-boot = {
         enable = lib.mkIf (!isRaspberryPi && host != "tp") true;
