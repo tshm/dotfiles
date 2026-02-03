@@ -1,2 +1,3 @@
 .docker.config.json
-.app.env
+# .app.env is tracked for GitOps hostname configuration
+# Add sensitive .env files here if needed (e.g., .secrets.env)
