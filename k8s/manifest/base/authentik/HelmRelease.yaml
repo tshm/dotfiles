@@ -18,7 +18,7 @@ spec:
       enabled: true
       existingSecret:
         secretName: ""
-      secret_key: ""
+      secret_key: "CHANGEME-REPLACE-WITH-RANDOM-KEY-IN-PRODUCTION"
       error_reporting:
         enabled: true
       postgresql:
