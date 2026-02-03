@@ -1,0 +1,108 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: traefik
+      version: '>=30.0.0'
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: traefik
+  values:
+    # Global arguments for Traefik
+    globalArguments:
+      - "--global.checknewversion=false"
+      - "--global.sendanonymoususage=false"
+
+    # Additional arguments
+    additionalArguments:
+      # Enable debug logging (remove in production)
+      # - "--log.level=DEBUG"
+      # Trust forwarded headers from Cloudflare Tunnel
+      - "--entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+      - "--entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+
+    # Deployment configuration
+    deployment:
+      enabled: true
+      kind: Deployment
+      replicas: 1
+
+    # Service configuration
+    service:
+      enabled: true
+      type: ClusterIP
+
+    # Ports configuration
+    ports:
+      # Web port (HTTP)
+      web:
+        port: 8000
+        exposedPort: 80
+        expose:
+          default: true
+        protocol: TCP
+      # Websecure port (HTTPS)
+      websecure:
+        port: 8443
+        exposedPort: 443
+        expose:
+          default: true
+        protocol: TCP
+        # Enable TLS
+        tls:
+          enabled: true
+      # Traefik dashboard/API
+      traefik:
+        port: 9000
+        exposedPort: 9000
+        expose:
+          default: false
+        protocol: TCP
+
+    # IngressClass configuration
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+      name: traefik
+
+    # Enable dashboard
+    ingressRoute:
+      dashboard:
+        enabled: true
+        # Require authentication for dashboard access
+        matchRule: Host(`traefik.local`) || PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+        entryPoints:
+          - web
+
+    # Providers
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+      kubernetesIngress:
+        enabled: true
+        publishedService:
+          enabled: true
+
+    # RBAC
+    rbac:
+      enabled: true
+
+    # Service Account
+    serviceAccount:
+      name: traefik
+
+    # Resources (adjust as needed)
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"

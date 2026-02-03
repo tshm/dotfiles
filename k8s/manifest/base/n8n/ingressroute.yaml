@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: n8n
+  namespace: n8n
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`n8n.domain.tld`)
+      kind: Rule
+      middlewares:
+        - name: authentik-forwardauth
+          namespace: traefik
+      services:
+        - name: n8n
+          port: 80

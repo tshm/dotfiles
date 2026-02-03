@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   # - app.yaml
   - deletefailedpods.yaml
+  - traefik
 
 generatorOptions:
   disableNameSuffixHash: true

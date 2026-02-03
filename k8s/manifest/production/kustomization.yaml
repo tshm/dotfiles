@@ -5,6 +5,7 @@ commonLabels:
   variant: prod
 
 resources:
+  - ../base
   - ../base/n8n
 
 generatorOptions:

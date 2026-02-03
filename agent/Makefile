@@ -32,6 +32,10 @@ tokenscope:
 agents:
 	curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s full --install-dir ~/.config/opencode
 
+.PHONY: openclaw
+openclaw:
+	npm install -g --prefix ~/.npm-globals/ openclaw
+
 oh-my-opencode: opencode
 	@echo "installing oh-my-opencode..."
 	bunx oh-my-opencode install

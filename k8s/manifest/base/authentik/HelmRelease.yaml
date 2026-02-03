@@ -35,7 +35,7 @@ spec:
     server:
       ingress:
         # Specify kubernetes ingress controller class name
-        ingressClassName: nginx # Change to traefik or kong if needed
+        ingressClassName: traefik
         enabled: true
         hosts:
           - authentik.domain.tld
