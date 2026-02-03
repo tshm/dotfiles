@@ -87,11 +87,6 @@ spec:
     rbac:
       enabled: true
 
-    # Service Account
-    serviceAccount:
-      create: true
-      name: traefik
-
     # Resources (adjust as needed)
     resources:
       requests:
