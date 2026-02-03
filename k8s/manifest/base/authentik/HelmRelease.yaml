@@ -17,12 +17,9 @@ spec:
     authentik:
       enabled: true
       existingSecret:
-        secretName: ""
-      secret_key: "CHANGEME-REPLACE-WITH-RANDOM-KEY-IN-PRODUCTION"
+        secretName: "authentik-secrets"
       error_reporting:
         enabled: true
-      postgresql:
-        password: "changeme123"
 
     server:
       ingress:
