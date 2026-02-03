@@ -25,9 +25,12 @@ Internet → Cloudflare Tunnel → Traefik → Authentik ForwardAuth → Service
    - Domain name configured in Cloudflare
 
 2. **Update Configuration**:
-   - Edit `manifest/base/authentik/HelmRelease.yaml` - Update `authentik.domain.tld`
-   - Edit `manifest/base/n8n/ingressroute.yaml` - Update `n8n.domain.tld`
-   - Configure Cloudflare Tunnel (see `CLOUDFLARE_TUNNEL_SETUP.md`)
+   - Edit `manifest/production/.app.env`:
+     ```bash
+     N8N_HOST=n8n.yourdomain.com
+     AUTHENTIK_HOST=auth.yourdomain.com
+     ```
+   - See [ENV_CONFIGURATION.md](ENV_CONFIGURATION.md) for details
 
 3. **Create Secrets**:
    ```bash
@@ -60,6 +63,7 @@ Internet → Cloudflare Tunnel → Traefik → Authentik ForwardAuth → Service
 ## Documentation
 
 - **[PLAN.md](PLAN.md)** - Original implementation plan
+- **[ENV_CONFIGURATION.md](ENV_CONFIGURATION.md)** - Environment variable configuration guide
 - **[DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md)** - Deployment steps and validation guide
 - **[CLOUDFLARE_TUNNEL_SETUP.md](CLOUDFLARE_TUNNEL_SETUP.md)** - Cloudflare Tunnel configuration
 - **[manifest/base/traefik/AUTHENTIK_SETUP.md](manifest/base/traefik/AUTHENTIK_SETUP.md)** - Authentik outpost setup
@@ -84,6 +88,7 @@ Internet → Cloudflare Tunnel → Traefik → Authentik ForwardAuth → Service
 
 ✅ **GitOps-native**: All resources managed via Flux
 ✅ **SSO-protected**: ForwardAuth middleware secures all services
+✅ **Environment-aware**: Hostnames configured via .env files
 ✅ **Cloudflare integration**: Trusted forwarded headers configured
 ✅ **Production-ready**: Includes validation, troubleshooting, and monitoring guides
 ✅ **Extensible**: Easy to add more protected services

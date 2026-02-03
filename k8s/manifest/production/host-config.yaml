@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: host-config
+  namespace: default
+data:
+  N8N_HOST: "n8n.domain.tld"
+  AUTHENTIK_HOST: "authentik.domain.tld"

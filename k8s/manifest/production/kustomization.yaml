@@ -6,10 +6,52 @@ commonLabels:
 
 resources:
   - ../base
+  - ../base/authentik
   - ../base/n8n
 
 generatorOptions:
   disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: host-config
+    namespace: default
+    envs:
+      - .app.env
+
+replacements:
+  - source:
+      kind: ConfigMap
+      name: host-config
+      fieldPath: data.N8N_HOST
+    targets:
+      - select:
+          kind: IngressRoute
+          name: n8n
+          namespace: n8n
+        fieldPaths:
+          - spec.routes.[kind=Rule].match
+        options:
+          delimiter: '`'
+          index: 1
+  - source:
+      kind: ConfigMap
+      name: host-config
+      fieldPath: data.AUTHENTIK_HOST
+    targets:
+      - select:
+          kind: HelmRelease
+          name: authentik
+          namespace: authentik
+        fieldPaths:
+          - spec.values.server.ingress.hosts.0
+#
+# images:
+#   - name: app
+#     newName: ghcr.io/tshm/app
+#     newTag: latest
+#
+# patchesStrategicMerge:
+#   - replicas-patch.yaml
 #
 # configMapGenerator:
 #   - name: env
