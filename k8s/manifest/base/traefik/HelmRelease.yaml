@@ -89,6 +89,7 @@ spec:
 
     # Service Account
     serviceAccount:
+      create: true
       name: traefik
 
     # Resources (adjust as needed)
