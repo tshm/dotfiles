@@ -17,6 +17,26 @@ This setup provides:
 Internet → Cloudflare Tunnel → Traefik → Authentik ForwardAuth → Services (n8n, etc.)
 ```
 
+## Deployment Strategy
+
+**This repository uses a two-phase deployment approach:**
+
+1. **Phase 1: Manual Secret/Config Setup** (`make init` or equivalent)
+   - Creates namespaces
+   - Generates `.app.env` and `.secrets.env` files from environment variables
+   - Uses `kubectl` to create secrets directly in the cluster
+   - Leverages kustomize `secretGenerator` and `configMapGenerator` to load secrets/configs
+
+2. **Phase 2: GitOps Service Deployment**
+   - After secrets are in place, use GitOps (Flux) to deploy services
+   - Services reference the secrets created in Phase 1 via `existingSecret`
+   - All application manifests are managed via Git and automatically reconciled
+
+**Why this approach?**
+- Secrets never committed to Git (security best practice)
+- GitOps manages declarative state for services
+- Clear separation between sensitive bootstrap and application deployment
+
 ## Quick Start
 
 1. **Prerequisites**:
@@ -24,7 +44,9 @@ Internet → Cloudflare Tunnel → Traefik → Authentik ForwardAuth → Service
    - Cloudflare Tunnel configured
    - Domain name configured in Cloudflare
 
-2. **Update Configuration**:
+2. **Phase 1 - Initial Setup (Manual)**:
+
+   a. Update configuration:
    - Edit `manifest/production/.app.env`:
      ```bash
      N8N_HOST=n8n.yourdomain.com
@@ -32,8 +54,12 @@ Internet → Cloudflare Tunnel → Traefik → Authentik ForwardAuth → Service
      ```
    - See [ENV_CONFIGURATION.md](ENV_CONFIGURATION.md) for details
 
-3. **Create Secrets**:
+   b. Create secrets and configs:
    ```bash
+   # Run initialization (creates namespaces, secrets, configmaps)
+   make init  # Or individual targets like: make n8n, make webdl
+
+   # Or manually create secrets:
    kubectl create namespace authentik
    kubectl create secret generic authentik-secrets \
      --from-literal=akadmin-password='<secure-password>' \
@@ -42,22 +68,22 @@ Internet → Cloudflare Tunnel → Traefik → Authentik ForwardAuth → Service
      -n authentik
    ```
 
-4. **Deploy**:
+3. **Phase 2 - GitOps Deployment**:
    ```bash
    # Validate manifests
    make check
 
-   # Apply via GitOps
+   # Apply via GitOps (Flux)
    flux reconcile kustomization production --with-source
 
-   # Or apply directly
+   # Or apply directly (not recommended for production)
    kubectl apply -k manifest/production
    ```
 
-5. **Configure Authentik**:
+4. **Configure Authentik**:
    - Follow steps in `manifest/base/traefik/AUTHENTIK_SETUP.md`
 
-6. **Validate**:
+5. **Validate**:
    - Follow steps in `DEPLOYMENT_VALIDATION.md`
 
 ## Documentation

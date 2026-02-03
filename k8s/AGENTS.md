@@ -2,17 +2,52 @@
 
 GitOps-style Kubernetes manifests + Terraform for cloud infrastructure.
 
+## Deployment Strategy Overview
+
+**IMPORTANT: This repository uses a two-phase deployment strategy:**
+
+### Phase 1: Manual Secret/Config Setup (`make init`)
+- **Purpose**: Bootstrap cluster with secrets and configurations
+- **Method**: Run `kubectl` commands by hand (via Makefile targets)
+- **What it does**:
+  - Creates namespaces
+  - Generates `.app.env` and `.secrets.env` files from environment variables
+  - Uses kustomize `secretGenerator`/`configMapGenerator` to load them into the cluster
+  - Creates secrets that GitOps-managed services will reference
+- **Examples**: `make n8n`, `make webdl`, `make config`
+
+### Phase 2: GitOps Service Deployment
+- **Purpose**: Deploy and manage services declaratively
+- **Method**: Flux reconciles manifests from Git
+- **What it does**:
+  - Deploys applications (Deployments, Services, IngressRoutes, etc.)
+  - References secrets created in Phase 1 via `existingSecret`
+  - Continuously reconciles desired state from Git
+- **Command**: `flux reconcile kustomization production --with-source`
+
+**Why this approach?**
+1. Secrets never committed to Git (security)
+2. GitOps manages all application state
+3. Clear separation: bootstrap secrets (manual) vs. application deployment (automated)
+
+**Before modifying this repository or cluster:**
+- Understand which phase you're working in
+- Phase 1 changes: Update Makefile targets and `.env` files
+- Phase 2 changes: Update manifests in `manifest/` directories
+
 ## Quick Reference
 
-| Task | Command |
-|------|---------|
-| Validate all manifests | `make check` |
-| Validate single directory | `make manifest/base/n8n` |
-| Cluster status | `make status` |
-| Apply initial setup | `make config` |
-| Apply GitOps | `make gitops` |
-| Terraform apply | `make create` |
-| Terraform destroy | `make destroy` |
+| Task | Command | Phase |
+|------|---------|-------|
+| Validate all manifests | `make check` | Both |
+| Validate single directory | `make manifest/base/n8n` | Phase 2 |
+| Cluster status | `make status` | - |
+| Apply initial setup | `make config` | Phase 1 |
+| Setup n8n secrets | `make n8n` | Phase 1 |
+| Setup webdl secrets | `make webdl` | Phase 1 |
+| Apply GitOps | `make gitops` | Phase 2 |
+| Terraform apply | `make create` | Phase 1 |
+| Terraform destroy | `make destroy` | - |
 
 ## Build & Validation
 
@@ -149,6 +184,17 @@ resource "azurerm_resource_group" "rg" {
 
 **NEVER commit secrets.** Use these patterns:
 
+**Two-Phase Deployment (This Repository's Approach):**
+1. **Phase 1**: Create secrets manually via `make init` targets (e.g., `make n8n`)
+   - Generates `.secrets.env` files from environment variables
+   - Uses kustomize `secretGenerator` to load into cluster
+   - Secrets are created once during initial setup
+2. **Phase 2**: GitOps-managed services reference these secrets
+   - HelmRelease uses `existingSecret` to reference Phase 1 secrets
+   - Deployments use `secretRef` or `envFrom` to consume secrets
+   - No secrets in Git, only references
+
+**General Patterns:**
 - `.env` files (gitignored) for local development
 - `secretGenerator` in kustomization.yaml with `.secrets.env` files
 - `existingSecret` references in HelmRelease values
@@ -158,6 +204,37 @@ Gitignored patterns: `.env`, `.kubeconfig*`, `*.tfstate*`, `.*.env`
 
 ## Common Workflows
 
+### Initial Cluster Setup (Two-Phase Deployment)
+
+**Phase 1: Bootstrap Secrets & Configs**
+```bash
+# 1. Set environment variables in .env file
+cp .default.env .env
+vim .env  # Edit with actual values
+
+# 2. Create secrets for each service
+make n8n      # Creates n8n secrets and configs
+make webdl    # Creates webdl secrets
+# Or run all initial setup
+make config   # Applies initialSetup manifests
+
+# 3. Verify secrets are created
+kubectl get secrets -A
+```
+
+**Phase 2: Deploy Services via GitOps**
+```bash
+# 1. Validate manifests
+make check
+
+# 2. Deploy via Flux (GitOps)
+make gitops
+
+# 3. Verify deployment
+kubectl get helmrelease -A
+kubectl get pods -A
+```
+
 ### Adding a New Application
 
 1. Create directory: `manifest/base/<app-name>/`
@@ -165,6 +242,10 @@ Gitignored patterns: `.env`, `.kubeconfig*`, `*.tfstate*`, `.*.env`
 3. Add deployment, service, and other manifests
 4. Reference from parent kustomization or create production overlay
 5. Validate: `make manifest/base/<app-name>`
+
+**If the application needs secrets:**
+1. Add Makefile target to create secrets (Phase 1)
+2. Use `existingSecret` in manifests (Phase 2)
 
 ### Production Overlay
 
