@@ -2,12 +2,21 @@ env
 tmp
 **/.id_rsa
 .env
+.default.env
 .terraform
 .kubeconfig*
 terraform.tfstate
+terraform.tfstate.backup
 *.tfstate*
 .terraform.lock*
 .*.kubeconfig
 .*.env
+.*.token
 .*kubeconfig*.yaml
+.docker.config.json
 output
+
+# Sensitive dotfiles - always ignore
+.cloudflare.token
+.secret.env
+.secrets.env

@@ -49,9 +49,6 @@ spec:
         protocol: TCP
         http3:
           enabled: false
-        middlewares: []
-        http:
-          tls: {}
         asDefault: false
       # Traefik dashboard/API
       traefik:

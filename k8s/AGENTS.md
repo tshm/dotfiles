@@ -184,7 +184,39 @@ resource "azurerm_resource_group" "rg" {
 
 **NEVER commit secrets.** Use these patterns:
 
-**Two-Phase Deployment (This Repository's Approach):**
+### 🔐 CRITICAL: Dotfile Security Rules
+
+**ALL dotfiles (files starting with `.`) MUST be git-ignored** because they often contain sensitive values and should NOT be in public repositories.
+
+**❌ NEVER commit or track these dotfiles:**
+- `.env`, `.default.env`, `.*.env` - Environment variables with secrets
+- `.kubeconfig*`, `.*kubeconfig*.yaml` - Kubernetes cluster credentials
+- `terraform.tfstate*` - Terraform state contains sensitive outputs
+- `.cloudflare.token`, `.*.token` - API tokens and credentials
+- `.docker.config.json` - Docker registry credentials
+- `.secret.env`, `.secrets.env` - Secret environment files
+- `**/.id_rsa`, `**/.ssh/` - SSH private keys
+
+**✅ The ONLY dotfiles that MAY be tracked:**
+- `.gitignore` files - Git configuration (contains no secrets)
+- `.envrc` - Environment loader (ONLY if it contains no literal secrets, just references)
+- `.app.env` - Application config (ONLY if it contains ZERO secrets, hostnames only)
+
+**Before committing ANY dotfile, verify:**
+```bash
+# Check if file contains secrets (GitHub tokens, passwords, keys, etc.)
+grep -iE '(password|secret|token|key|credential|api[_-]?key)' <filename>
+
+# If ANY matches found, the file MUST be gitignored
+```
+
+**Enforcement:**
+- `.gitignore` already blocks most dangerous patterns
+- AI agents MUST verify dotfiles contain no secrets before tracking
+- When in doubt, gitignore the file and use a `.example` template instead
+
+### Two-Phase Deployment (This Repository's Approach)
+
 1. **Phase 1**: Create secrets manually via `make init` targets (e.g., `make n8n`)
    - Generates `.secrets.env` files from environment variables
    - Uses kustomize `secretGenerator` to load into cluster
@@ -194,13 +226,27 @@ resource "azurerm_resource_group" "rg" {
    - Deployments use `secretRef` or `envFrom` to consume secrets
    - No secrets in Git, only references
 
-**General Patterns:**
+### General Patterns
+
 - `.env` files (gitignored) for local development
 - `secretGenerator` in kustomization.yaml with `.secrets.env` files
 - `existingSecret` references in HelmRelease values
 - Sealed-secrets or external secret operators for production
 
-Gitignored patterns: `.env`, `.kubeconfig*`, `*.tfstate*`, `.*.env`
+**Current gitignored patterns:**
+```gitignore
+.env
+.default.env
+.kubeconfig*
+*.tfstate*
+.*.env
+.*.token
+.*kubeconfig*.yaml
+.cloudflare.token
+.secret.env
+.secrets.env
+.docker.config.json
+```
 
 ## Common Workflows
 

@@ -2,6 +2,8 @@
 
 Complete GitOps configuration for Traefik ingress controller with Authentik SSO integration, managed via Flux.
 
+> **🔐 SECURITY NOTICE:** All dotfiles (`.env`, `.kubeconfig*`, etc.) contain sensitive credentials and MUST NOT be committed to git. See [SECURITY.md](SECURITY.md) and [DOTFILE_SECURITY.md](DOTFILE_SECURITY.md) for detailed guidelines.
+
 ## Overview
 
 This setup provides:
@@ -183,10 +185,18 @@ kubectl logs -n authentik -l app.kubernetes.io/name=authentik
 
 ## Resources
 
+### Documentation
 - [Traefik Documentation](https://doc.traefik.io/traefik/)
 - [Authentik Documentation](https://docs.goauthentik.io/)
 - [Flux Documentation](https://fluxcd.io/docs/)
 - [Cloudflare Tunnel Documentation](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/)
+
+### Repository Guides
+- **[SECURITY.md](SECURITY.md)** - Complete security guidelines and dotfile policy
+- **[DOTFILE_SECURITY.md](DOTFILE_SECURITY.md)** - Quick reference for dotfile handling
+- **[AGENTS.md](AGENTS.md)** - AI agent instructions and coding guidelines
+- **[ENV_CONFIGURATION.md](ENV_CONFIGURATION.md)** - Environment variable setup
+- **[DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md)** - Validation and troubleshooting
 
 ## License
 
