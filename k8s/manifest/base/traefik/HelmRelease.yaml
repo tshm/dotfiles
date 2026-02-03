@@ -14,16 +14,9 @@ spec:
         name: traefik
         namespace: traefik
   values:
-    # Global arguments for Traefik
-    globalArguments:
+    additionalArguments:
       - "--global.checknewversion=false"
       - "--global.sendanonymoususage=false"
-
-    # Additional arguments
-    additionalArguments:
-      # Enable debug logging (remove in production)
-      # - "--log.level=DEBUG"
-      # Trust forwarded headers from Cloudflare Tunnel
       - "--entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
       - "--entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
 
@@ -54,9 +47,12 @@ spec:
         expose:
           default: true
         protocol: TCP
-        # Enable TLS
-        tls:
-          enabled: true
+        http3:
+          enabled: false
+        middlewares: []
+        http:
+          tls: {}
+        asDefault: false
       # Traefik dashboard/API
       traefik:
         port: 9000
