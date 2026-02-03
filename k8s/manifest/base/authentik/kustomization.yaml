@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: authentik
 
 resources:
+  - ns.yaml
   - HelmRepository.yaml
   - HelmRelease.yaml
 
