@@ -14,23 +14,15 @@ spec:
         name: authentik
         namespace: authentik
   values:
-    # Authentik server configuration
     authentik:
-      # Use existing secret for the secret key
+      enabled: true
+      existingSecret:
+        secretName: ""
       secret_key: ""
-      existingSecret: authentik-secrets
-      existingSecretKey: akadmin-password
-
-      # This sends anonymous usage-data, stack traces on errors and
-      # performance data to sentry.io, and is fully opt-in
       error_reporting:
         enabled: true
-
-      # Use existing secret for PostgreSQL password
       postgresql:
-        password: ""
-        existingSecret: authentik-secrets
-        existingSecretKey: postgresql-password
+        password: "changeme123"
 
     server:
       ingress:
@@ -40,21 +32,12 @@ spec:
         hosts:
           - authentik.domain.tld
 
-    # PostgreSQL configuration
     postgresql:
       enabled: true
       auth:
-        # Use existing secret for database password
-        password: ""
-        existingSecret: authentik-secrets
-        userPasswordKey: postgresql-password
-        adminPasswordKey: postgresql-password
+        password: "changeme123"
 
-    # Redis configuration
     redis:
       enabled: true
       auth:
-        # Use existing secret for Redis password
-        password: ""
-        existingSecret: authentik-secrets
-        existingSecretKey: redis-password
+        password: "changeme123"
