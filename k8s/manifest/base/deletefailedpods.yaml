@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: deletefailedpods
+  namespace: default
 spec:
   schedule: "0 1,5,21 * * *"
   failedJobsHistoryLimit: 1
