@@ -9,6 +9,13 @@ BACKUP_FILE ?= ${OUTPUT_FILE}.backup
 .PHONY: dev clavix beads
 dev: opencode beads
 
+.PHONY: skills
+skills: agent-browser
+
+.PHONY: agent-browser
+agent-browser:
+	npx skills add vercel-labs/agent-browser
+
 clavix: ~/.npm-globals/bin/clavix
 	@echo "installing clavix..."
 	mkdir -p ~/.npm-globals/
@@ -103,3 +110,4 @@ merge-config:
 	echo "$$BASE_CONFIG" | yq '.' > "${OUTPUT_FILE}"
 	log_info "Successfully generated: ${OUTPUT_FILE}"
 	log_info "Done!"
+
