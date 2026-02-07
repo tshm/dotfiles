@@ -14,10 +14,10 @@
   boot.extraModprobeConfig = ''
     # Force HDA Intel codec and enable internal speakers for ALC285
     options snd-hda-intel model=auto probe_mask=1 position_fix=0
-    # Specific ALC285 model for HP laptops
-    options snd-hda-codec-realtek model=hp-headset
-    # Enable internal speakers
-    options snd-hda-intel enable_msi=1
+    # Specific ALC285 model for HP laptops - enable jack detection
+    options snd-hda-codec-realtek model=hp-headset-mic
+    # Enable internal speakers and jack detection
+    options snd-hda-intel enable_msi=1 jackpoll_ms=5000
   '';
   boot.blacklistedKernelModules = [ "snd_sof" "snd_sof_amd_acp" "snd_sof_pci" ];
 
@@ -50,6 +50,11 @@
               };
             }
           ];
+        };
+        "10-auto-switch-headphones" = {
+          "wireplumber.settings" = {
+            "device.routes.default-sink-route" = "headphones";
+          };
         };
         "10-bluetooth-enhancements" = {
           "monitor.bluez.properties" = {
