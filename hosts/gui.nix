@@ -96,22 +96,22 @@
             "bluez5.enable-hw-volume" = true;
           };
         };
-        "10-alsa-devices" = {
-          "monitor.alsa.rules" = [
-            {
-              matches = [
-                { "device.name" = "~alsa_card.*"; }
-              ];
-              actions = {
-                update-props = {
-                  "api.alsa.use-acp" = true;
-                  "api.acp.auto-profile" = "off";
-                  "api.acp.auto-port" = "off";
-                };
-              };
-            }
-          ];
-        };
+         "10-alsa-devices" = {
+           "monitor.alsa.rules" = [
+             {
+               matches = [
+                 { "device.name" = "~alsa_card.*"; }
+               ];
+               actions = {
+                 update-props = {
+                   "api.alsa.use-acp" = true;
+                   "api.acp.auto-profile" = "off";
+                   "api.acp.auto-port" = true;
+                 };
+               };
+             }
+           ];
+         };
       };
     };
   };
