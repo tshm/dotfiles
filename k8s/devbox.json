@@ -7,7 +7,7 @@
     "cloudflared@latest",
     "kubernetes-helm@3.19.1",
     "oci-cli@3.71.0",
-    "fluxcd@latest"
+    "fluxcd@2.7.5"
   ],
   "shell": {
     "init_hook": ["echo 'Welcome to devbox!' > /dev/null"],
