@@ -5,6 +5,7 @@ SHELL := $(shell command -v bash 2>/dev/null || command -v sh)
 CONFIG_DIR ?= ${PWD}/config
 OUTPUT_FILE ?= ${PWD}/opencode.jsonc
 BACKUP_FILE ?= ${OUTPUT_FILE}.backup
+NPM_OPT ?= -g --prefix ~/.npm-globals/
 
 .PHONY: dev clavix beads
 dev: opencode beads
@@ -14,22 +15,25 @@ skills: agent-browser
 
 .PHONY: agent-browser
 agent-browser:
-	npx skills add vercel-labs/agent-browser
+	@echo "installing agent-browser..."
+	mkdir -p ~/.npm-globals/
+	npm install ${NPM_OPT} agent-browser
+# 	npx -g --prefix ~/.npm-globals/ skills add vercel-labs/agent-browser
 
 clavix: ~/.npm-globals/bin/clavix
 	@echo "installing clavix..."
 	mkdir -p ~/.npm-globals/
-	npm install -g --prefix ~/.npm-globals/ clavix
+	npm install ${NPM_OPT} clavix
 
 beads: ~/.local/bin/bd
 	@echo "installing bd..."
-	mkdir -p ~/tshm/.local/bin/
+	mkdir -p ~/.local/bin/
 	# for more details
 	bd upgrade || curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
 
 .PHONY: clawdbot
 clawdbot:
-	npm install -g --prefix ~/.npm-globals/ clawdbot
+	npm install ${NPM_OPT} clawdbot
 
 .PHONY: tokenscope
 tokenscope:
@@ -41,7 +45,7 @@ agents:
 
 .PHONY: openclaw
 openclaw:
-	npm install -g --prefix ~/.npm-globals/ openclaw
+	npm install ${NPM_OPT} openclaw
 
 oh-my-opencode: opencode
 	@echo "installing oh-my-opencode..."

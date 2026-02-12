@@ -125,6 +125,8 @@ in
         # HostName test.com
         # Port 1234
         # User myuser
+        # ForwardX11 yes
+        # ForwardX11Trusted yes
         # DynamicForward 9999
         # LocalForward 84321 0.0.0.0:4321
         # ProxyJump dmz

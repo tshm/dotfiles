@@ -12,6 +12,7 @@
     modules = [
       ../modules/base.nix
       ../modules/dev.nix
+      ../modules/playwright.nix
       {
         home.packages = [
           pkgs.qsv
