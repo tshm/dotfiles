@@ -10,11 +10,11 @@
     ],
     "enabled": true,
   },
-  "ddg-search": {
-    "type": "local",
-    "command": ["uvx", "duckduckgo-mcp-server"],
-    "enabled": true,
-  },
+  // "ddg-search": {
+  //   "type": "local",
+  //   "command": ["uvx", "duckduckgo-mcp-server"],
+  //   "enabled": true,
+  // },
   // "serena": {
   //   "type": "local",
   //   "enabled": true,

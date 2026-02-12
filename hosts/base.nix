@@ -220,7 +220,14 @@ in
       pkgs.ffmpegthumbnailer
     ];
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+      X11DisplayOffset = 10;
+      X11UseLocalhost = true;
+    };
+  };
   # services.flatpak.enable = true;
   # system.fsPackages = [ pkgs.bindfs ];
   # fileSystems =
