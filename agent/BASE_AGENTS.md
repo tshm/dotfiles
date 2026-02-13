@@ -49,6 +49,30 @@
 - Don't introduce new tools without strong justification
 - Check if devbox.json exists, and use the tools defined in the file.
 
+### Verification Before Task Completion
+
+Before marking any task as complete, **ALWAYS** run the following if available:
+
+1. **Build** - Run the project's build command to ensure code compiles
+   - Check Makefile, package.json scripts, or project documentation
+   - Common: `make build`, `make all`, `npm run build`, `cargo build`
+
+2. **Linting** - Run linters to catch style and quality issues
+   - Check for pre-commit hooks, lint scripts, or linter configs
+   - Common: `make lint`, `npm run lint`, `pre-commit run --all-files`
+
+3. **Tests** - Run test suites to verify functionality
+   - Run relevant tests (unit, integration, or full suite)
+   - Common: `make test`, `npm test`, `cargo test`, `pytest`
+
+**Skip only if**:
+
+- No build system exists in the project
+- No linter configuration is present
+- No tests are defined for the project
+
+**Never skip** if these tools are available - catching issues early saves time.
+
 ### Code Style
 
 - Follow existing conventions in the project
@@ -71,6 +95,7 @@
 
 **ALWAYS**:
 
+- Run build, linting, and tests before completing tasks (if available)
 - Commit working code incrementally
 - Update plan documentation as you go
 - Learn from existing implementations
