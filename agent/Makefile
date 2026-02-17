@@ -13,6 +13,10 @@ dev: opencode beads
 .PHONY: skills
 skills: agent-browser
 
+.PHONY: openchamber
+openchamber:
+	bun add -g @openchamber/web
+
 .PHONY: agent-browser
 agent-browser:
 	@echo "installing agent-browser..."
@@ -47,9 +51,11 @@ agents:
 openclaw:
 	npm install ${NPM_OPT} openclaw
 
-oh-my-opencode: opencode
-	@echo "installing oh-my-opencode..."
-	bunx oh-my-opencode install
+.PHONY: omo
+omo:
+	@echo "installing oh-my-opencode-slim..."
+	#bunx oh-my-opencode install
+	bunx oh-my-opencode-slim install
 
 .PHONY: clean-tools
 clean-tools:
