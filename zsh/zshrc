@@ -4,6 +4,7 @@ stty -ixon
 bindkey -e # emacs key bindings
 source ~/.dotfiles/zsh/plugins.zsh
 export PATH=~/.local/bin:~/.opencode/bin:~/.npm-globals/bin:~/.bun/bin:$PATH
+export NPM_CONFIG_PREFIX=~/.npm-globals
 
 export RSYNC_RSH='ssh'
 export EDITOR=nvim
