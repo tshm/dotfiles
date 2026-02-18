@@ -100,7 +100,8 @@
       "default": ["", ""],
     },
     "scroll-step": 1,
-    "on-click": "pavucontrol",
+    "on-click": "~/.config/waybar/scripts/cycle-sinks.sh",
+    "on-click-right": "pavucontrol",
     "ignored-sinks": ["Easy Effects Sink"],
   },
 
