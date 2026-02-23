@@ -101,6 +101,7 @@ in
           disable = [
             "node"
             "nix"
+            "home-manager"
           ];
           set_title = false;
           cleanup = true;
