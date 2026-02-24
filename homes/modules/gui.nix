@@ -168,7 +168,7 @@ in {
     portalPackage =
       args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     plugins = [
-      args.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
+      # args.hyprland-plugins.packages.${pkgs.system}.hyprscrolling  # FIXME: requires Hyprland source headers
       # args.hyprland-plugins.packages.${pkgs.system}.hyprexpo  # FIXME: incompatible with current Hyprland
     ];
     settings = {
