@@ -47,9 +47,13 @@ tokenscope:
 agents:
 	curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s full --install-dir ~/.config/opencode
 
-.PHONY: openclaw
-openclaw:
-	npm install ${NPM_OPT} openclaw
+.PHONY: pi
+pi:
+	npm install ${NPM_OPT} @mariozechner/pi-coding-agent
+
+.PHONY: omp
+omp:
+	curl -fsSL https://raw.githubusercontent.com/can1357/oh-my-pi/main/scripts/install.sh | sh
 
 .PHONY: omo
 omo:
