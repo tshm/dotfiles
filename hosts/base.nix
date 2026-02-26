@@ -44,6 +44,13 @@ in
 
   networking.hostName = host;
   networking.networkmanager.enable = lib.mkIf (!isRaspberryPi) true;
+  networking.networkmanager.dns = lib.mkIf (!isRaspberryPi) "systemd-resolved";
+
+  services.resolved = lib.mkIf (!isRaspberryPi) {
+    enable = true;
+    # Prefer failing closed over leaking queries to public fallback resolvers.
+    settings.Resolve.FallbackDNS = [ ];
+  };
   console.useXkbConfig = true;
 
   services.auto-cpufreq = lib.mkIf (!forServer) {
@@ -141,6 +148,33 @@ in
   services.tailscale = {
     enable = lib.mkDefault true;
     useRoutingFeatures = "both";
+
+    # Keep normal DNS resolution pointed at the active network (e.g. corporate DNS).
+    # We'll route only *.ts.net via Tailscale DNS below.
+    extraUpFlags = lib.mkIf (!isRaspberryPi) [ "--accept-dns=false" ];
+  };
+
+  systemd.services.tailscale-split-dns = lib.mkIf (!isRaspberryPi && config.services.resolved.enable) {
+    description = "Route *.ts.net DNS queries to Tailscale DNS via systemd-resolved";
+    wantedBy = [ "sys-subsystem-net-devices-tailscale0.device" ];
+    bindsTo = [ "sys-subsystem-net-devices-tailscale0.device" ];
+    after = [
+      "sys-subsystem-net-devices-tailscale0.device"
+      "systemd-resolved.service"
+      "tailscaled.service"
+    ];
+    wants = [ "systemd-resolved.service" "tailscaled.service" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+
+    path = [ pkgs.systemd ];
+    script = ''
+      resolvectl dns tailscale0 100.100.100.100
+      resolvectl domain tailscale0 '~ts.net'
+    '';
   };
 
   virtualisation = {
