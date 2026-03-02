@@ -252,6 +252,9 @@ in
       pkgs.p7zip
       pkgs.imagemagick
       pkgs.ffmpegthumbnailer
+    ] ++ lib.optionals (host == "tp") [
+      pkgs.ethtool
+      pkgs.wakeonlan
     ];
 
   services.openssh = {
@@ -262,6 +265,8 @@ in
       X11UseLocalhost = true;
     };
   };
+
+
   # services.flatpak.enable = true;
   # system.fsPackages = [ pkgs.bindfs ];
   # fileSystems =
@@ -277,5 +282,22 @@ in
   #     "/usr/local/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
   #   };
 
+
+  # ===== Wake-on-LAN Configuration =====
+  # Enable WoL tools and service when services.wol-enabled is true
+
+  systemd.services.enable-wol = lib.mkIf (host == "tp") {
+    description = "Enable Wake-on-LAN on network interface";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.ethtool}/bin/ethtool -s ${config.services.wol-interface or "enp0s25"} wol g";
+      StandardOutput = "journal";
+      StandardError = "journal";
+    };
+  };
   system.stateVersion = "24.05";
 }
