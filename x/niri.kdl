@@ -430,23 +430,23 @@ binds {
 
   Mod+Q repeat=false { close-window; }
 
-  Mod+Left  { focus-column-left; }
+  Mod+Left  { focus-column-or-monitor-left; }
   Mod+Down  { focus-window-down; }
   Mod+Up    { focus-window-up; }
-  Mod+Right { focus-column-right; }
-  Mod+H     { focus-column-left; }
+  Mod+Right { focus-column-or-monitor-right; }
+  Mod+H     { focus-column-or-monitor-left; }
   Mod+J     { focus-window-down; }
   Mod+K     { focus-window-up; }
-  Mod+L     { focus-column-right; }
+  Mod+L     { focus-column-or-monitor-right; }
 
-  Mod+Shift+Left  { move-column-left; }
+  Mod+Shift+Left  { move-column-left-or-to-monitor-left; }
   Mod+Shift+Down  { move-window-down; }
   Mod+Shift+Up    { move-window-up; }
-  Mod+Shift+Right { move-column-right; }
-  Mod+Shift+H     { move-column-left; }
+  Mod+Shift+Right { move-column-right-or-to-monitor-right; }
+  Mod+Shift+H     { move-column-left-or-to-monitor-left; }
   Mod+Shift+J     { move-window-down; }
   Mod+Shift+K     { move-window-up; }
-  Mod+Shift+L     { move-column-right; }
+  Mod+Shift+L     { move-column-right-or-to-monitor-right; }
 
   // Alternative commands that move across workspaces when reaching
   // the first or last window in a column.
