@@ -155,7 +155,7 @@ in
   };
 
   systemd.services.tailscale-split-dns = lib.mkIf (!isRaspberryPi && config.services.resolved.enable) {
-    description = "Route *.ts.net DNS queries to Tailscale DNS via systemd-resolved";
+    description = "Route *.ts.net DNS to Tailscale, *.hq.empathy.co.jp to DHCP DNS via systemd-resolved";
     wantedBy = [ "sys-subsystem-net-devices-tailscale0.device" ];
     bindsTo = [ "sys-subsystem-net-devices-tailscale0.device" ];
     after = [
@@ -170,10 +170,19 @@ in
       RemainAfterExit = true;
     };
 
-    path = [ pkgs.systemd ];
+    path = [ pkgs.systemd pkgs.gawk pkgs.gnugrep ];
     script = ''
+      # Route *.ts.net to Tailscale DNS
       resolvectl dns tailscale0 100.100.100.100
       resolvectl domain tailscale0 '~ts.net'
+
+      # Route *.hq.empathy.co.jp to DHCP-assigned DNS (enp0s25)
+      # Get the DHCP DNS server from the primary network interface
+      DHCP_DNS=$(resolvectl status enp0s25 2>/dev/null | grep 'Current DNS Server:' | awk '{print $4}')
+      if [ -n "$DHCP_DNS" ]; then
+        resolvectl dns enp0s25 "$DHCP_DNS"
+        resolvectl domain enp0s25 '~hq.empathy.co.jp'
+      fi
     '';
   };
 
