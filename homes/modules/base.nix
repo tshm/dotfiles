@@ -234,11 +234,15 @@ in
         EOT
           chmod +x "$target"
         }
-        # load .local.envrc
-        [ -f ./.local.envrc ] && {
-          echo 'direnv: loading ./.local.envrc'
-          source ./.local.envrc
+        # devbox
+        use_devbox() {
+          watch_file devbox.json devbox.lock
+          eval "$(devbox shellenv --init-hook --install --no-refresh-alias)"
         }
+        [ -f $PWD/devbox.json ] && {
+          use devbox
+        }
+        source_env_if_exists .local.envrc
         # run onefetch
         git rev-parse --is-inside-work-tree >/dev/null 2>&1 && onefetch --nerd-fonts
       '';
