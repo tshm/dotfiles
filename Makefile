@@ -16,7 +16,7 @@ endif
 
 home-manager: nix
 ifdef HAS_NH
-	${CACHIX} nh home switch
+	${CACHIX} nh home switch --backup-extension backup
 else
 	${CACHIX} nix run home-manager/master -- switch --flake .
 endif

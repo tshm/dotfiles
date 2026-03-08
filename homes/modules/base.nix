@@ -101,13 +101,17 @@ in
           disable = [
             "node"
             "nix"
-            "home-manager"
+            "home_manager"
+            "nix_helper"
+            "yazi"
+            "git_repos"
           ];
           set_title = false;
           cleanup = true;
         };
         commands = {
           # "zinit" = "zsh -i -c 'source ~/.dotfiles/zsh/zshrc && zinit update'";
+          "devbox" = "devbox global update";
         };
       };
     };
