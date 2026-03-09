@@ -25,6 +25,4 @@ jobs:
           branch: "app-update"
           base: "master"
           labels: "dependencies, automated"
-          reviewers: "determinatesystems"
-          assignees: "determinatesystems"
           draft: false

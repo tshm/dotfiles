@@ -36,7 +36,10 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-    mango.url = "github:DreamMaoMao/mangowc";
+    mango = {
+      url = "github:DreamMaoMao/mangowc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
