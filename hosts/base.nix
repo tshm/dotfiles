@@ -118,6 +118,17 @@ in
   systemd.packages = lib.mkIf (!forServer) [ pkgs.cloudflare-warp ];
   systemd.targets.multi-user.wants = lib.mkIf (!forServer) [ "warp-svc.service" ];
 
+  system.activationScripts.removeLegacyNonNixosGpu = lib.stringAfter [ "etc" ] ''
+    unit=/etc/systemd/system/non-nixos-gpu.service
+    wants=/etc/systemd/system/multi-user.target.wants/non-nixos-gpu.service
+
+    if [ -L "$unit" ] || [ -e "$unit" ] || [ -L "$wants" ] || [ -e "$wants" ]; then
+      ${pkgs.systemd}/bin/systemctl disable --now non-nixos-gpu.service || true
+      ${pkgs.systemd}/bin/systemctl reset-failed non-nixos-gpu.service || true
+      ${pkgs.coreutils}/bin/rm -f "$unit" "$wants"
+    fi
+  '';
+
   programs.zsh.enable = true;
   users = {
     defaultUserShell = pkgs.zsh;

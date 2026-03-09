@@ -3,6 +3,7 @@
 let
   configPath = pathStr:
     config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+  platformSystem = pkgs.stdenv.hostPlatform.system;
 in {
   imports = [
     # args.noctalia.homeModules.default
@@ -30,7 +31,7 @@ in {
     portal = {
       enable = true;
       extraPortals = [
-        args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+        args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland
         pkgs.xdg-desktop-portal-termfilechooser
       ];
       config = {
@@ -164,12 +165,12 @@ in {
   };
   wayland.windowManager.hyprland = {
     enable = true;
-    package = args.hyprland.packages.${pkgs.system}.hyprland;
+    package = args.hyprland.packages.${platformSystem}.hyprland;
     portalPackage =
-      args.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+      args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland;
     plugins = [
-      # args.hyprland-plugins.packages.${pkgs.system}.hyprscrolling  # FIXME: requires Hyprland source headers
-      # args.hyprland-plugins.packages.${pkgs.system}.hyprexpo  # FIXME: incompatible with current Hyprland
+      # args.hyprland-plugins.packages.${platformSystem}.hyprscrolling  # FIXME: requires Hyprland source headers
+      # args.hyprland-plugins.packages.${platformSystem}.hyprexpo  # FIXME: incompatible with current Hyprland
     ];
     settings = {
       source = [

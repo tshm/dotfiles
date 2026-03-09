@@ -11,10 +11,8 @@ let
     // {
       pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = args // {
-        inherit system;
         user = username;
       };
-      inherit system;
       user = username;
       home-manager = home-manager;
     };

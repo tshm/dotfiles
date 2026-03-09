@@ -8,6 +8,7 @@
 
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+  platformSystem = pkgs.stdenv.hostPlatform.system;
 in
 {
   imports = [
@@ -42,7 +43,7 @@ in
     packages = [
       pkgs.nh
       pkgs.cachix
-      inputs.agenix.packages.${pkgs.system}.default
+      inputs.agenix.packages.${platformSystem}.default
       # platform
       pkgs.openssh
       pkgs.file
@@ -262,6 +263,7 @@ in
       enable = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
+      shellWrapperName = "y";
       initLua = ''
         -- require("git"):setup()
         -- require("archivemount"):setup()
@@ -442,7 +444,6 @@ in
         # [ -z "$TMUX" ] && tm
       '';
       shellAliases = {
-        y = "yy";
         l = "ll";
         v = "nvim";
         pstree = "pstree -A";
