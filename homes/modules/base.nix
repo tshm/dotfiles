@@ -84,6 +84,7 @@ in
       "${config.xdg.configHome}/k9s/hotkeys.yaml".source = configPath "/k8s/k9s/hotkeys.yaml";
       "${config.xdg.configHome}/k9s/plugins.yaml".source = configPath "/k8s/k9s/plugins.yaml";
       "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
+      "${config.xdg.configHome}/yazi/run.zsh".source = configPath "/yazi/run.zsh";
     };
   };
   home.sessionVariables = {
@@ -329,7 +330,6 @@ in
         # hide-preview = hide-preview;
         enter = ../../yazi/plugins/enter.yazi;
         tab = ../../yazi/plugins/tab.yazi;
-        shell-prefill = ../../yazi/plugins/shell-prefill.yazi;
         chmod = pkgs.yaziPlugins.chmod;
         git = pkgs.yaziPlugins.git;
         mediainfo = pkgs.yaziPlugins.mediainfo;
@@ -348,7 +348,9 @@ in
             }
             {
               on = "!";
-              run = "plugin shell-prefill";
+              run = ''
+                shell --block '$HOME/.config/yazi/run.zsh %s'
+              '';
               desc = "Shell prefill";
             }
             {
