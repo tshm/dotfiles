@@ -347,6 +347,11 @@ in
               desc = "create or switch tab";
             }
             {
+              on = "i";
+              run = "spot";
+              desc = "Spot hovered file";
+            }
+            {
               on = "!";
               run = ''
                 shell --block '$HOME/.config/yazi/run.zsh %s'
