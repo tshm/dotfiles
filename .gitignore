@@ -23,3 +23,5 @@ result-spi
 .opencode
 .beads/README.md
 .goopspec
+codemap.md
+.slim/

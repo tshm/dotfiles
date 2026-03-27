@@ -7,8 +7,7 @@ OUTPUT_FILE ?= ${PWD}/opencode.jsonc
 BACKUP_FILE ?= ${OUTPUT_FILE}.backup
 NPM_OPT ?= -g --prefix ~/.npm-globals/
 
-.PHONY: dev clavix beads
-dev: opencode beads
+dev: opencode
 
 .PHONY: skills
 skills: agent-browser
@@ -59,7 +58,7 @@ omp:
 omo:
 	@echo "installing oh-my-opencode-slim..."
 	#bunx oh-my-opencode install
-	bunx oh-my-opencode-slim install
+	bunx oh-my-opencode-slim@latest install
 
 .PHONY: clean-tools
 clean-tools:
@@ -125,3 +124,87 @@ merge-config:
 	log_info "Successfully generated: ${OUTPUT_FILE}"
 	log_info "Done!"
 
+
+.PHONY: pi-dev pi-base pi-mono-cache pi-extensions pi-ext-subagent pi-ext-plan pi-ext-todo pi-ext-permission pi-ext-preset pi-ext-git-checkpoint pi-skills pi-config pi-clean
+
+pi-dev: pi-base pi-mono-cache pi-extensions pi-skills pi-config
+	@echo "pi-dev: full setup complete (installing base pi, caching pi-mono, linking extensions/skills/config)"
+
+pi-base:
+	@echo "Installing/upgrading @mariozechner/pi-coding-agent"
+	mkdir -p ~/.npm-globals/
+	npm install ${NPM_OPT} @mariozechner/pi-coding-agent
+
+pi-mono-cache:
+	@echo "Cloning pi-mono examples/extensions into ~/.cache/pi-mono"
+	mkdir -p ~/.cache/pi-mono
+	if [ -d ~/.cache/pi-mono/.git ]; then \
+		git -C ~/.cache/pi-mono fetch --all --prune && git -C ~/.cache/pi-mono reset --hard origin/main || true; \
+	else \
+		git clone --filter=blob:none --no-checkout https://github.com/badlogic/pi-mono.git ~/.cache/pi-mono && \
+		git -C ~/.cache/pi-mono sparse-checkout init --cone && \
+		git -C ~/.cache/pi-mono sparse-checkout set examples/extensions && \
+		git -C ~/.cache/pi-mono checkout; \
+	fi
+
+pi-extensions: pi-ext-subagent pi-ext-plan pi-ext-todo pi-ext-permission pi-ext-preset pi-ext-git-checkpoint
+	@echo "Linked extensions into ~/.pi/agent/extensions"
+
+pi-ext-subagent:
+	@echo "Linking subagent extension"
+	mkdir -p ~/.pi/agent/extensions
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/subagent ~/.pi/agent/extensions/subagent
+
+pi-ext-plan:
+	@echo "Linking plan-mode extension"
+	mkdir -p ~/.pi/agent/extensions
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/plan-mode ~/.pi/agent/extensions/plan-mode
+
+pi-ext-todo:
+	@echo "Linking todo.ts"
+	mkdir -p ~/.pi/agent/extensions
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/todo.ts ~/.pi/agent/extensions/todo.ts
+
+pi-ext-permission:
+	@echo "Linking permission-gate.ts"
+	mkdir -p ~/.pi/agent/extensions
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/permission-gate.ts ~/.pi/agent/extensions/permission-gate.ts
+
+pi-ext-preset:
+	@echo "Linking preset.ts"
+	mkdir -p ~/.pi/agent/extensions
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/preset.ts ~/.pi/agent/extensions/preset.ts
+
+pi-ext-git-checkpoint:
+	@echo "Linking git-checkpoint.ts"
+	mkdir -p ~/.pi/agent/extensions
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/git-checkpoint.ts ~/.pi/agent/extensions/git-checkpoint.ts
+
+pi-skills:
+	@echo "Linking skills (cartography, find-skills, skill-creator) into ~/.pi/agent/skills"
+	mkdir -p ~/.pi/agent/skills
+	[ -d ~/.omp/skills/cartography ] && ln -sf ~/.omp/skills/cartography ~/.pi/agent/skills/cartography || true
+	[ -d ~/.omp/skills/find-skills ] && ln -sf ~/.omp/skills/find-skills ~/.pi/agent/skills/find-skills || true
+	[ -d ~/.omp/skills/skill-creator ] && ln -sf ~/.omp/skills/skill-creator ~/.pi/agent/skills/skill-creator || true
+	# fallback: check ~/.agents/skills
+	[ -d ~/.agents/skills/cartography ] && ln -sf ~/.agents/skills/cartography ~/.pi/agent/skills/cartography || true
+	[ -d ~/.agents/skills/find-skills ] && ln -sf ~/.agents/skills/find-skills ~/.pi/agent/skills/find-skills || true
+	[ -d ~/.agents/skills/skill-creator ] && ln -sf ~/.agents/skills/skill-creator ~/.pi/agent/skills/skill-creator || true
+
+pi-config:
+	@echo "Linking AGENTS.md and ensuring settings.json"
+	mkdir -p ~/.pi/agent
+	ln -sf ${PWD}/BASE_AGENTS.md ~/.pi/agent/AGENTS.md
+	# preserve existing settings.json if present; otherwise write a minimal one
+	if [ -f ~/.pi/agent/settings.json ]; then \
+		echo "settings.json already exists, leaving unchanged"; \
+	else \
+		printf '%s\n' '{' '  "quietStartup": true,' '  "defaultThinkingLevel": "off"' '}' > ~/.pi/agent/settings.json; \
+	fi
+
+pi-clean:
+	@echo "Cleaning pi cache and pi config symlinks (careful!)"
+	rm -rf ~/.cache/pi-mono
+	rm -rf ~/.pi/agent/extensions
+	rm -rf ~/.pi/agent/skills
+	rm -f ~/.pi/agent/AGENTS.md
