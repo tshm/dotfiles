@@ -1,6 +1,1 @@
-[
-  "opencode-goopspec",
-  "opencode-beads",
-  "opencode-antigravity-auth",
-  "@simonwjackson/opencode-direnv",
-]
+["opencode-antigravity-auth", "@simonwjackson/opencode-direnv"]
