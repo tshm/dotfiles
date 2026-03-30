@@ -181,8 +181,9 @@ pi-ext-git-checkpoint:
 	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/git-checkpoint.ts ~/.pi/agent/extensions/git-checkpoint.ts
 
 pi-skills:
-	@echo "Linking skills (cartography, find-skills, skill-creator) into ~/.pi/agent/skills"
+	@echo "Linking skills (cartography, find-skills, markitdown, skill-creator) into ~/.pi/agent/skills"
 	mkdir -p ~/.pi/agent/skills
+	[ -d ${CURDIR}/skills/markitdown ] && ln -sf ${CURDIR}/skills/markitdown ~/.pi/agent/skills/markitdown || true
 	[ -d ~/.omp/skills/cartography ] && ln -sf ~/.omp/skills/cartography ~/.pi/agent/skills/cartography || true
 	[ -d ~/.omp/skills/find-skills ] && ln -sf ~/.omp/skills/find-skills ~/.pi/agent/skills/find-skills || true
 	[ -d ~/.omp/skills/skill-creator ] && ln -sf ~/.omp/skills/skill-creator ~/.pi/agent/skills/skill-creator || true
