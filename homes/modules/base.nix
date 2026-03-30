@@ -19,7 +19,7 @@ in
   age = {
     identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
     secrets = {
-      user-password.file = configPath "/secrets/user-password.age";
+      user-password.file = configPath "/secrets/user-password-hash.age";
     };
   };
   nix = {
