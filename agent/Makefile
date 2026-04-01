@@ -125,15 +125,20 @@ merge-config:
 	log_info "Done!"
 
 
-.PHONY: pi-dev pi-base pi-mono-cache pi-extensions pi-ext-subagent pi-ext-plan pi-ext-todo pi-ext-permission pi-ext-preset pi-ext-git-checkpoint pi-skills pi-config pi-clean
+.PHONY: pi-dev pi-base pi-mono-cache pi-extensions pi-ext-subagent pi-ext-plan pi-ext-todo pi-ext-permission pi-ext-preset pi-ext-git-checkpoint pi-ext-notify pi-skills pi-config pi-clean
+
+OMP_AGENT_DIR ?= ${HOME}/.omp/agent
+OMP_EXT_DIR ?= ${OMP_AGENT_DIR}/extensions
+OMP_SKILL_DIR ?= ${OMP_AGENT_DIR}/skills
+VSCODE_USER_DIR ?= ${HOME}/.config/Code/User
+VSCODE_SETTINGS ?= ${VSCODE_USER_DIR}/settings.json
 
 pi-dev: pi-base pi-mono-cache pi-extensions pi-skills pi-config
-	@echo "pi-dev: full setup complete (installing base pi, caching pi-mono, linking extensions/skills/config)"
+	@echo "pi-dev: full setup complete (installing base omp, caching pi-mono, linking extensions/skills/config)"
 
 pi-base:
-	@echo "Installing/upgrading @mariozechner/pi-coding-agent"
-	mkdir -p ~/.npm-globals/
-	npm install ${NPM_OPT} @mariozechner/pi-coding-agent
+	@echo "Installing/upgrading @oh-my-pi/pi-coding-agent"
+	bun install -g @oh-my-pi/pi-coding-agent
 
 pi-mono-cache:
 	@echo "Cloning pi-mono examples/extensions into ~/.cache/pi-mono"
@@ -147,65 +152,70 @@ pi-mono-cache:
 		git -C ~/.cache/pi-mono checkout; \
 	fi
 
-pi-extensions: pi-ext-subagent pi-ext-plan pi-ext-todo pi-ext-permission pi-ext-preset pi-ext-git-checkpoint
-	@echo "Linked extensions into ~/.pi/agent/extensions"
+pi-extensions: pi-ext-subagent pi-ext-plan pi-ext-todo pi-ext-permission pi-ext-preset pi-ext-git-checkpoint pi-ext-notify
+	@echo "Linked extensions into ${OMP_EXT_DIR}"
 
 pi-ext-subagent:
 	@echo "Linking subagent extension"
-	mkdir -p ~/.pi/agent/extensions
-	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/subagent ~/.pi/agent/extensions/subagent
+	mkdir -p ${OMP_EXT_DIR}
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/subagent ${OMP_EXT_DIR}/subagent
 
 pi-ext-plan:
 	@echo "Linking plan-mode extension"
-	mkdir -p ~/.pi/agent/extensions
-	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/plan-mode ~/.pi/agent/extensions/plan-mode
+	mkdir -p ${OMP_EXT_DIR}
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/plan-mode ${OMP_EXT_DIR}/plan-mode
 
 pi-ext-todo:
 	@echo "Linking todo.ts"
-	mkdir -p ~/.pi/agent/extensions
-	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/todo.ts ~/.pi/agent/extensions/todo.ts
+	mkdir -p ${OMP_EXT_DIR}
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/todo.ts ${OMP_EXT_DIR}/todo.ts
 
 pi-ext-permission:
 	@echo "Linking permission-gate.ts"
-	mkdir -p ~/.pi/agent/extensions
-	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/permission-gate.ts ~/.pi/agent/extensions/permission-gate.ts
+	mkdir -p ${OMP_EXT_DIR}
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/permission-gate.ts ${OMP_EXT_DIR}/permission-gate.ts
 
 pi-ext-preset:
 	@echo "Linking preset.ts"
-	mkdir -p ~/.pi/agent/extensions
-	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/preset.ts ~/.pi/agent/extensions/preset.ts
+	mkdir -p ${OMP_EXT_DIR}
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/preset.ts ${OMP_EXT_DIR}/preset.ts
 
 pi-ext-git-checkpoint:
 	@echo "Linking git-checkpoint.ts"
-	mkdir -p ~/.pi/agent/extensions
-	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/git-checkpoint.ts ~/.pi/agent/extensions/git-checkpoint.ts
+	mkdir -p ${OMP_EXT_DIR}
+	ln -sf ~/.cache/pi-mono/packages/coding-agent/examples/extensions/git-checkpoint.ts ${OMP_EXT_DIR}/git-checkpoint.ts
+
+pi-ext-notify:
+	@echo "Linking notify.ts"
+	mkdir -p ${OMP_EXT_DIR}
+	ln -sf ${CURDIR}/extensions/notify.ts ${OMP_EXT_DIR}/notify.ts
 
 pi-skills:
-	@echo "Linking skills (cartography, find-skills, markitdown, skill-creator) into ~/.pi/agent/skills"
-	mkdir -p ~/.pi/agent/skills
-	[ -d ${CURDIR}/skills/markitdown ] && ln -sf ${CURDIR}/skills/markitdown ~/.pi/agent/skills/markitdown || true
-	[ -d ~/.omp/skills/cartography ] && ln -sf ~/.omp/skills/cartography ~/.pi/agent/skills/cartography || true
-	[ -d ~/.omp/skills/find-skills ] && ln -sf ~/.omp/skills/find-skills ~/.pi/agent/skills/find-skills || true
-	[ -d ~/.omp/skills/skill-creator ] && ln -sf ~/.omp/skills/skill-creator ~/.pi/agent/skills/skill-creator || true
+	@echo "Linking skills (cartography, find-skills, markitdown, skill-creator) into ${OMP_SKILL_DIR}"
+	mkdir -p ${OMP_SKILL_DIR}
+	[ -d ${CURDIR}/skills/markitdown ] && ln -sf ${CURDIR}/skills/markitdown ${OMP_SKILL_DIR}/markitdown || true
+	[ -d ${HOME}/.omp/skills/cartography ] && ln -sf ${HOME}/.omp/skills/cartography ${OMP_SKILL_DIR}/cartography || true
+	[ -d ${HOME}/.omp/skills/find-skills ] && ln -sf ${HOME}/.omp/skills/find-skills ${OMP_SKILL_DIR}/find-skills || true
+	[ -d ${HOME}/.omp/skills/skill-creator ] && ln -sf ${HOME}/.omp/skills/skill-creator ${OMP_SKILL_DIR}/skill-creator || true
 	# fallback: check ~/.agents/skills
-	[ -d ~/.agents/skills/cartography ] && ln -sf ~/.agents/skills/cartography ~/.pi/agent/skills/cartography || true
-	[ -d ~/.agents/skills/find-skills ] && ln -sf ~/.agents/skills/find-skills ~/.pi/agent/skills/find-skills || true
-	[ -d ~/.agents/skills/skill-creator ] && ln -sf ~/.agents/skills/skill-creator ~/.pi/agent/skills/skill-creator || true
+	[ -d ${HOME}/.agents/skills/cartography ] && ln -sf ${HOME}/.agents/skills/cartography ${OMP_SKILL_DIR}/cartography || true
+	[ -d ${HOME}/.agents/skills/find-skills ] && ln -sf ${HOME}/.agents/skills/find-skills ${OMP_SKILL_DIR}/find-skills || true
+	[ -d ${HOME}/.agents/skills/skill-creator ] && ln -sf ${HOME}/.agents/skills/skill-creator ${OMP_SKILL_DIR}/skill-creator || true
 
 pi-config:
-	@echo "Linking AGENTS.md and ensuring settings.json"
-	mkdir -p ~/.pi/agent
-	ln -sf ${PWD}/BASE_AGENTS.md ~/.pi/agent/AGENTS.md
-	# preserve existing settings.json if present; otherwise write a minimal one
-	if [ -f ~/.pi/agent/settings.json ]; then \
-		echo "settings.json already exists, leaving unchanged"; \
-	else \
-		printf '%s\n' '{' '  "quietStartup": true,' '  "defaultThinkingLevel": "off"' '}' > ~/.pi/agent/settings.json; \
-	fi
+	@echo "Linking AGENTS.md and configuring OMP notifications"
+	mkdir -p ${OMP_AGENT_DIR}
+	ln -sf ${PWD}/BASE_AGENTS.md ${OMP_AGENT_DIR}/AGENTS.md
+	omp config set startup.quiet true
+	omp config set completion.notify off
+	omp config set ask.notify on
+	@echo "Ensuring VS Code terminal bell is enabled in ${VSCODE_SETTINGS}"
+	mkdir -p ${VSCODE_USER_DIR}
+	env SETTINGS_FILE="${VSCODE_SETTINGS}" bun --eval 'const path = process.env.SETTINGS_FILE; if (!path) throw new Error("SETTINGS_FILE is required"); let data = {}; const file = Bun.file(path); if (await file.exists()) { const text = await file.text(); if (text.trim().length > 0) data = JSON.parse(text); } data["terminal.integrated.enableBell"] = true; data["terminal.integrated.bellDuration"] = 1000; await Bun.write(path, JSON.stringify(data, null, 2) + "\n");'
 
 pi-clean:
-	@echo "Cleaning pi cache and pi config symlinks (careful!)"
+	@echo "Cleaning pi cache and omp config symlinks (careful!)"
 	rm -rf ~/.cache/pi-mono
-	rm -rf ~/.pi/agent/extensions
-	rm -rf ~/.pi/agent/skills
-	rm -f ~/.pi/agent/AGENTS.md
+	rm -rf ${OMP_EXT_DIR}
+	rm -rf ${OMP_SKILL_DIR}
+	rm -f ${OMP_AGENT_DIR}/AGENTS.md
