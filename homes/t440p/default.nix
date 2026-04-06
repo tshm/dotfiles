@@ -18,7 +18,7 @@
           pkgs.qsv
           pkgs.deno
           # pkgs.ollama
-          pkgs.nodePackages.localtunnel
+          pkgs.localtunnel
           # pkgs.lmstudio
         ];
         programs.java = {

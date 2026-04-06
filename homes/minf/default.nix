@@ -17,7 +17,7 @@
         home.packages = [
           pkgs.qsv
           pkgs.deno
-          pkgs.nodePackages.localtunnel
+          pkgs.localtunnel
           # pkgs.ollama
           # pkgs.lmstudio
         ];
