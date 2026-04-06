@@ -16,6 +16,10 @@ skills: agent-browser
 openchamber:
 	bun add -g @openchamber/web
 
+.PHONY: markitdown
+markitdown:
+	npx skills add https://github.com/davila7/claude-code-templates --skill markitdown
+
 .PHONY: agent-browser
 agent-browser:
 	@echo "installing agent-browser..."
