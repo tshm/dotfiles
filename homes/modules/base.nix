@@ -66,6 +66,7 @@ in
       pkgs.clipboard-jh
       pkgs.croc
       # devtools
+      pkgs.bun
       pkgs.devbox
       pkgs.onefetch
       pkgs.tig
@@ -459,6 +460,7 @@ in
         rm = "rm -i";
         jq = "yq";
         yt-dlp = "noglob yt-dlp";
+        omp = "LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib omp";
       };
     };
   };

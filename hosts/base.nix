@@ -105,8 +105,6 @@ in
     libraries = [ ];
   };
 
-  # make nix-ld libraries visible to dlopen (e.g. bun native addons)
-  environment.sessionVariables.LD_LIBRARY_PATH = [ "/run/current-system/sw/share/nix-ld/lib" ];
 
   programs.appimage = {
     enable = !forServer;
