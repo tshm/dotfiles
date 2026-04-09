@@ -221,16 +221,16 @@ in
       stdlib = ''
         # vim: ft=sh
         export_alias() {
-          local name=$1
+          local name="$1"
           shift
-          local alias_dir=$PWD/.direnv/aliases
+          local alias_dir="$PWD/.direnv/aliases"
           local target="$alias_dir/$name"
           local oldpath="$PATH"
           mkdir -p "$alias_dir"
           if ! [[ ":$PATH:" == *":$alias_dir:"* ]]; then
             PATH_add "$alias_dir"
           fi
-          cat <<EOT > $target
+          cat <<EOT > "$target"
         #!/usr/bin/env bash
         PATH="$oldpath:\$PATH"
         exec $@ "\$@"
@@ -242,7 +242,7 @@ in
           watch_file devbox.json devbox.lock
           eval "$(devbox shellenv --init-hook --install --no-refresh-alias)"
         }
-        [ -f $PWD/devbox.json ] && {
+        [ -f "$PWD/devbox.json" ] && {
           use devbox
         }
         source_env_if_exists .local.envrc
