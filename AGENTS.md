@@ -2,187 +2,160 @@
 
 ## Project Overview
 
-This repository is a Nix Flake-based dotfiles monorepo for managing multiple NixOS machines, Home Manager user environments, Kubernetes infrastructure, editor/runtime configs, and local AI-agent tooling.
+This repo is a Nix Flake-based dotfiles monorepo. The primary outputs are NixOS system configs from `hosts/` and Home Manager configs from `homes/`, with separate operational areas for Kubernetes (`k8s/`), Neovim (`vim/nvim/`), and local OpenCode/Oh My Pi tooling (`agent/`).
 
-The root outputs are:
-- `nixosConfigurations` from `hosts/`
-- `homeConfigurations` from `homes/`
-
-Use `flake.nix` and `Makefile` as the authoritative entry points. `README.md` is a quick orientation doc, but the flake and module files define real behavior.
-
-## Repository Map
-
-Start here before editing:
-- `codemap.md` — repository-wide directory map
-- `homes/AGENTS.md` — Home Manager conventions
-- `hosts/AGENTS.md` — NixOS host conventions
-- `k8s/AGENTS.md` — Kubernetes/Terraform/GitOps rules
-- `vim/nvim/AGENTS.md` — Neovim/LazyVim rules
+Treat `flake.nix` and `Makefile` as the authoritative entry points. `README.md` is orientation; the flake, module files, and Makefiles define actual behavior.
 
 ## Architecture & Data Flow
 
-1. `flake.nix` declares inputs, cache settings, and `crossPkgs` for ARM builds.
-2. `flake.nix` exports:
-   - `nixosConfigurations = import ./hosts flakeInputs`
-   - `homeConfigurations = import ./homes flakeInputs`
-3. `hosts/default.nix` assembles per-machine NixOS systems from shared modules plus host-specific overrides and hardware configs.
-4. `homes/default.nix` assembles per-machine Home Manager profiles keyed like `tshm@x360`.
-5. Shared module layers carry most behavior:
-   - `homes/modules/base.nix` → core CLI, secrets, symlinked dotfiles
-   - `homes/modules/gui.nix` → desktop apps, Wayland, GUI config
-   - `homes/modules/dev.nix` → development tools
-   - `hosts/base.nix` → boot, networking, users, services, secrets
-   - `hosts/gui.nix` → desktop/audio/fonts/input stack
-6. `k8s/` is a separate GitOps + Terraform subsystem.
-7. `agent/` is a separate OpenCode / Oh My Pi setup area with symlink-heavy local automation.
+1. `flake.nix` declares upstream inputs, cache settings, and `crossPkgs` for `aarch64-linux`, then passes `flakeInputs` into `./hosts` and `./homes`.
+2. `hosts/default.nix` builds `nixosConfigurations` with `nixpkgs.lib.nixosSystem`, layering per-host modules on top of shared modules such as `hosts/base.nix` and `hosts/gui.nix`.
+3. `homes/default.nix` builds `homeConfigurations` for `user@host` pairs with `home-manager.lib.homeManagerConfiguration`, forwarding `extraSpecialArgs` like `user` and the flake inputs.
+4. Shared base modules carry most behavior:
+   - `homes/modules/base.nix` sets common CLI/dev tooling, Agenix, and repo-backed symlinks into `~/.config`.
+   - `hosts/base.nix` sets shared system services, networking, secrets, users, and host/role conditionals.
+5. Later imports override earlier ones. In practice, shared modules establish defaults and per-host files stay thin unless the change is genuinely machine-specific.
+6. `k8s/` and `agent/` are separate subsystems with their own tooling and process rules; do not treat them like ordinary root Nix edits.
+
+## Read Before Editing
+
+Read the local guide before touching these areas:
+
+- `homes/AGENTS.md`
+- `hosts/AGENTS.md`
+- `k8s/AGENTS.md`
+- `vim/nvim/AGENTS.md`
+
+Also read `agent/BASE_AGENTS.md` before changing agent-specific automation or assistant configuration.
 
 ## Key Directories
 
 | Path | Purpose |
 | --- | --- |
-| `homes/` | Home Manager entrypoint, shared modules, and per-host user overrides |
-| `hosts/` | NixOS entrypoint, shared modules, hardware configs, and per-host system overrides |
-| `homes/apps/` | App package definitions with pinned download hashes |
-| `k8s/` | Kubernetes manifests, Flux/GitOps bootstrap, Terraform, devbox toolchain |
+| `homes/` | Home Manager entrypoints, shared modules, and per-machine user configs |
+| `hosts/` | NixOS entrypoints, shared modules, hardware configs, and host overrides |
+| `homes/apps/` | App package definitions with URL/hash maintenance targets |
+| `k8s/` | Kubernetes manifests, bootstrap scripts, Flux/GitOps workflow, devbox toolchain |
+| `agent/` | OpenCode / Oh My Pi bootstrap, JSONC config merge, local extension wiring |
 | `vim/nvim/` | LazyVim-based Neovim config |
-| `x/` | Hyprland/Waybar and desktop session helpers |
-| `agent/` | OpenCode/OMP bootstrap scripts, modular JSONC config, local extensions |
-| `secrets/` | Agenix-managed encrypted secrets |
+| `x/` | Desktop session, Wayland, and UI config consumed by Home Manager |
+| `zsh/` | Shell config consumed by Home Manager symlinks/includes |
+| `secrets/` | Agenix-encrypted secrets only; never plaintext |
 
 ## Important Files
 
-- `flake.nix` — root composition and flake inputs
-- `Makefile` — preferred operator interface for rebuild/update workflows
+- `flake.nix` — root composition, inputs, cache/substituter settings, cross-arch wiring
+- `Makefile` — preferred operator interface for apply/update/build workflows
 - `homes/default.nix` — Home Manager output assembly
 - `hosts/default.nix` — NixOS output assembly
-- `.pre-commit-config.yaml` — repo-wide lint/commit hooks
-- `.github/workflows/cachix.yaml` — build validation for selected home and host targets
-- `k8s/devbox.json` — pinned toolchain for Kubernetes work
-- `agent/Makefile` — local agent tooling bootstrap and config merge entrypoint
+- `homes/modules/base.nix` — shared user packages, symlink strategy, common program defaults
+- `hosts/base.nix` — shared system services, secrets, user setup, host role conditionals
+- `.pre-commit-config.yaml` — repo-wide hooks
+- `.github/workflows/cachix.yaml` — CI build matrix for selected Home Manager and NixOS targets
+- `k8s/devbox.json` — pinned Kubernetes toolchain
+- `agent/Makefile` and `agent/merge-config.sh` — local OpenCode install/config merge flow
 
 ## Development Commands
 
-Prefer `make` targets over ad hoc commands.
+Prefer `make` targets over ad hoc Nix commands.
 
-### Root workflows
+### State-changing commands
 
 ```bash
 make home-manager   # apply Home Manager config
 make os             # apply NixOS config
 make all            # on NixOS: home-manager + os
 make update         # nix flake update
-make up             # update flake inputs + app hashes
-make clean          # GC + optimize store
+make up             # flake update + app hash refresh
+make dev            # enter agent/ and run its bootstrap makefile
 ```
 
-### Build validation
+`Makefile` is environment-aware: it prefers `nh` when available, wraps commands in `cachix watch-exec` when `cachix` is installed, and falls back to raw `nix`/`nixos-rebuild` otherwise.
 
-Use the same shapes as CI when validating non-trivial changes:
+### Validation commands
 
 ```bash
 pre-commit run --all-files
 nix run home-manager/master -- build --flake .#tshm@minf
 nix build '.#nixosConfigurations.x360.config.system.build.toplevel'
+cd k8s && devbox shell && make check
 ```
 
-Adjust the target to the host/home you changed.
+Adjust the Home Manager or NixOS target to the host you changed.
 
-### App hash maintenance
+### Maintenance commands
 
 ```bash
-make update.<app-name>   # updates sha256 in homes/apps/<app-name>.nix
-make apphash_update
+make apphash_update          # refresh hashes in homes/apps/*.nix
+make update.<app-name>       # refresh one app hash
 ```
 
-### Kubernetes workflow
+### Environment bootstrapping
 
-```bash
-cd k8s
-devbox shell
-make check
-```
-
-`k8s/` is devbox-first. Use the tool versions from `k8s/devbox.json`.
+- `.envrc` exports `NH_FLAKE=$(realpath .)` and runs `make .git/hooks/pre-commit` on direnv load.
+- The root repo assumes Nix is present or installable via the `nix` Make target.
+- `k8s/` is devbox-first. Use the versions pinned in `k8s/devbox.json`.
 
 ## Code Conventions & Common Patterns
 
-### Nix module structure
+### Nix module patterns
 
-- Prefer composition through `imports = [ ... ]`; most files are composition modules, not option-schema modules.
-- Keep the file's argument capture style (`@inputs`, `@args`) intact. These modules rely on flake wiring through `specialArgs` / `extraSpecialArgs`.
-- Use `platformSystem = pkgs.stdenv.hostPlatform.system` when indexing flake-provided packages.
+- Prefer composition via `imports = [ ... ]`; most files are composition modules, not standalone schemas.
+- Preserve the existing argument capture style (`@args`, `@inputs`) and the `specialArgs` / `extraSpecialArgs` plumbing. Many modules depend on those values being forwarded intact.
+- Use `platformSystem = pkgs.stdenv.hostPlatform.system` when indexing flake-provided packages inside Home Manager modules.
 - Put user packages in `home.packages`; put system packages in `environment.systemPackages`.
 
-### Dotfile symlinks
+### Repo-backed symlink pattern
 
-Shared Home Manager modules use this pattern for repo-backed config:
+`homes/modules/base.nix` uses out-of-store symlinks into this repo for managed dotfiles. Reuse the same shape instead of inventing new path logic:
 
 ```nix
 configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
 ```
 
-Reuse that pattern instead of inventing new symlink logic.
-
 ### Conditionals and overrides
 
 - Use `lib.mkIf`, `lib.mkDefault`, and `lib.optionals` for host/role/hardware gating.
-- `hosts/base.nix` uses `forServer` and `host == "spi"` style guards extensively.
-- Import order matters in `homes/`: later modules/host files override earlier shared modules.
+- `hosts/base.nix` uses `host == "spi"` and `forServer` extensively; preserve those existing boundaries instead of scattering new booleans.
+- Import order matters, especially under `homes/`: later imports win.
 
 ### Secrets and sensitive data
 
-- Secrets are managed with Agenix (`agenix` input, `secrets/`, `age.secrets.*`).
-- Do not commit plaintext secrets.
-- Reference generated secrets through `config.age.secrets.<name>.path` when wiring services.
-- For `k8s/`, follow the two-phase model from `k8s/AGENTS.md`: create secrets/config first, then reconcile Flux-managed manifests.
+- Secrets are managed with Agenix. Reference them through `config.age.secrets.<name>.path` or the existing module wiring.
+- Never commit plaintext secrets.
+- In `k8s/`, `.env`, `.kubeconfig*`, and similar dotfiles are explicitly sensitive and must stay out of git.
 
-### Desktop and service config
+### Subsystem-specific patterns
 
-- Desktop config is split between Home Manager (`homes/modules/gui.nix`, `x/`, `vim/nvim/`) and NixOS (`hosts/gui.nix`).
-- System services and activation work are usually defined inline in Nix modules; extend the closest existing module instead of adding detached shell glue.
+- `k8s/` follows a two-phase flow: manual secret/config bootstrap first, then Flux/GitOps reconciliation.
+- `vim/nvim/` is LazyVim-style: add plugins under `vim/nvim/lua/plugins/*.lua`, keymaps in `lua/config/keymaps.lua`, options in `lua/config/options.lua`, and extras in `lazyvim.json`.
+- `agent/` merges modular JSONC from `agent/config/*.jsonc` into one `opencode.jsonc`; preserve that merge-based layout.
 
 ## Runtime & Tooling Preferences
 
 - Nix Flakes are the source of truth.
-- Prefer `make` wrappers; they already account for `nh`, `cachix`, and host-specific behavior.
-- If a subdirectory has `devbox.json`, use devbox there. This is mandatory in practice for `k8s/`.
-- The repo uses:
-  - `pre-commit` for lint/validation hooks
-  - `commitizen` for commit message enforcement
-  - `git-cliff` for changelog generation
-  - `Renovate` for dependency updates
-- `agent/` automation is symlink-first and writes into `~/.config/opencode` and `~/.omp/agent`; warn before running targets that overwrite user-local config.
+- Prefer `make` wrappers; they already encode host-specific behavior and tool detection.
+- Use `devbox` anywhere a `devbox.json` exists. This is mandatory in practice for `k8s/`.
+- Pre-commit currently enforces whitespace/YAML/JSON/basic file checks plus `commitizen`; shellcheck/checkmake hooks are present but commented out.
+- Repo-wide automation also includes Renovate (`renovate.json`) and git-cliff (`cliff.toml`).
+- Home Manager base tooling includes `bun`, `devbox`, `pre-commit`, `yq`, `jj`, `atuin`, `direnv`, and related CLI utilities, so prefer existing tooling before introducing new dependencies.
 
 ## Testing & QA
 
-There is no conventional unit/integration test suite at the repo root.
+There is no conventional unit/integration test suite at the repo root. Verification is mostly static checks and real builds.
 
-Current QA posture is:
-- `pre-commit run --all-files` for static checks
-- Nix build validation for affected Home Manager / NixOS targets
-- GitHub Actions in `.github/workflows/cachix.yaml` build selected homes and hosts
-- `k8s/Makefile` + `kubeconform` validation for Kubernetes manifests
+- `pre-commit run --all-files` for repo-wide hygiene
+- Targeted Home Manager builds for changed homes
+- Targeted NixOS builds for changed hosts
+- `cd k8s && devbox shell && make check` for manifest validation via `kubectl kustomize | kubeconform`
+- GitHub Actions in `.github/workflows/cachix.yaml` build selected Home Manager targets (`tshm@PN0093`, `tshm@minf`, `tshm@x360`, `tshm@PD0056`, `tshm@spi`) and NixOS hosts (`x360`, `minf`)
+- `.github/workflows/app-update.yaml` runs `make apphash_update` on a schedule and opens a PR
 
-Do not claim "tests passed" unless you ran a real build or validation command. For most changes here, the right verification is a targeted Nix build, not a generic test runner.
+Do not claim "tests passed" unless you ran the relevant build or validation command yourself.
 
-## Subsystem Notes
+## Operational Cautions
 
-### `homes/` and `hosts/`
-- Read the local `AGENTS.md` before editing.
-- Shared modules carry most defaults; per-host files should stay thin unless the change is truly machine-specific.
-
-### `k8s/`
-- Read `k8s/AGENTS.md` first.
-- Use `devbox shell`.
-- Respect the two-phase deployment split:
-  1. manual secret/config bootstrap
-  2. GitOps reconciliation via Flux
-
-### `vim/nvim/`
-- Read `vim/nvim/AGENTS.md` first.
-- This is a LazyVim-style config: plugin specs live in `lua/plugins/`, core settings in `lua/config/`.
-
-### `agent/`
-- `agent/Makefile` bootstraps OpenCode and Oh My Pi tooling.
-- `agent/merge-config.sh` and `make merge-config` merge modular JSONC into a single OpenCode config.
-- These commands create symlinks into home-directory config locations; treat them as user-environment mutations, not harmless local builds.
+- `make home-manager`, `make os`, and many `agent/Makefile` targets mutate the local machine or user environment. Treat them as stateful operations, not harmless checks.
+- `agent/Makefile` writes into `~/.config/opencode`, `~/.opencode`, and `~/.npm-globals`; `merge-config` also creates a backup of the previous output file.
+- `k8s/Makefile` targets such as `init`, `config`, `n8n`, or `webdl` create secrets/config maps from environment variables and apply them to a real cluster.
+- For documentation or config questions, prefer the subsystem guides over guessing from one file in isolation.
