@@ -290,17 +290,21 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-spawn-at-startup "vicinae server"
-// This line starts waybar, a commonly used bar for Wayland compositors.
-// spawn-at-startup "waybar"
-// spawn-at-startup "noctalia-shell"
-
 spawn-at-startup "beeper"
 spawn-at-startup "zen"
 spawn-at-startup "kitty"
-spawn-at-startup "niriswitcher"
 spawn-at-startup "nirius"
 spawn-at-startup "fcitx5" "-d" "--replace"
+
+recent-windows {
+  debounce-ms 0
+  open-delay-ms 200
+
+  binds {
+    Alt+Tab { next-window; }
+    Alt+Shift+Tab { previous-window; }
+  }
+}
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -379,8 +383,6 @@ window-rule {
 }
 
 binds {
-  Alt+Tab repeat=false { spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application" ; }
-  Alt+Shift+Tab repeat=false { spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application" ; }
 
   // Keys consist of modifiers separated by + signs, followed by an XKB key name
   // in the end. To find an XKB name for a particular key, you may use a program
