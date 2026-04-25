@@ -78,9 +78,9 @@ sudo:; sudo echo sudo
 
 os: sudo
 ifdef HAS_NH
-	${CACHIX} nh os switch
+	${CACHIX} nh os boot
 else
-	${CACHIX} sudo nixos-rebuild switch --flake .
+	${CACHIX} sudo nixos-rebuild boot --flake .
 endif
 
 clean:

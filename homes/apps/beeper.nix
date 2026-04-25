@@ -6,7 +6,7 @@ let
     curlOptsList = [ "-L" "-H" "Accept:application/octet-stream" ];
     url = "https://api.beeper.com/desktop/download/linux/x64/stable/com.automattic.beeper.desktop";
     # sha256 = pkgs.lib.fakeSha256;
-    sha256 = "sha256-dz3Hg6HmV1T2NrzG+bbIbCPUweZThAnTGVQ4rYpyz0k=";
+    sha256 = "sha256-0x1p61zIkAGpBG0dyRwLqoKbhqI3EGTtqpdYr5sxhog=";
   };
   appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
 in pkgs.appimageTools.wrapType2 {
@@ -14,7 +14,13 @@ in pkgs.appimageTools.wrapType2 {
   pkgs = pkgs;
   extraInstallCommands = ''
     install -m 444 -D ${appimageContents}/beepertexts.desktop -t $out/share/applications
+    substituteInPlace $out/share/applications/beepertexts.desktop \
+      --replace-fail "AppRun" "beeper"
     install -m 444 -D ${appimageContents}/beepertexts.png -t $out/share/icons/hicolor/128x128/apps
+
+    . ${pkgs.makeWrapper}/nix-support/setup-hook
+    wrapProgram $out/bin/beeper \
+      --set OZONE_PLATFORM x11
   '';
 
   # extraBwrapArgs = [
