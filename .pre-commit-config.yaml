@@ -5,7 +5,8 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
-      # - id: end-of-file-fixer
+      - id: end-of-file-fixer
+        exclude: ^(k8s/\.envrc|agent/extensions/notify\.ts)$
       - id: check-yaml
         args: [--allow-multiple-documents]
       - id: check-json
@@ -14,8 +15,15 @@ repos:
     rev: v4.13.10
     hooks:
       - id: commitizen
-  # - repo: https://github.com/shellcheck-py/shellcheck-py
-  #   rev: v0.10.0.1
-  #   hooks:
-  #     - id: shellcheck
-  #       args: ["--severity=warning"] # Optionally only show errors and warnings  # - repo: https://github.com/mrtazz/checkmake.git
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+        files: ^(bkup/.*\.sh|x/.*\.sh)$
+        args: ["--severity=warning"]
+  - repo: https://github.com/mrtazz/checkmake.git
+    rev: v0.3.0
+    hooks:
+      - id: checkmake
+        files: ^(Makefile|agent/Makefile|k8s/Makefile)$
+        args: ["--config=checkmake.ini"]

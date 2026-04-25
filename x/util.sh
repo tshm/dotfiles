@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 options=()
 
 warp-cli status | grep Connected &&
@@ -8,12 +8,12 @@ options+=("$warpcmd")
 
 btdevice=$(bluetoothctl devices Connected)
 [ -n "$btdevice" ] && {
-  addr=$(echo $btdevice | cut -d' ' -f2)
-  name=$(echo $btdevice | cut -d' ' -f3-)
+  addr=$(echo "$btdevice" | cut -d' ' -f2)
+  name=$(echo "$btdevice" | cut -d' ' -f3-)
   btcmd="📶 Reconnect BluetoothDevice $name: bluetoothctl disconnect $addr; bluetoothctl connect $addr"
   options+=("$btcmd")
 }
-echo $btcmd
+echo "$btcmd"
 
 capture() {
   grim -g "$(slurp -w 0)" - | wl-copy
@@ -26,15 +26,15 @@ options+=(
   "🔄 Reboot: systemctl reboot"
   "🌙 shader: pkill gammastep || gammastep &"
   "capture: capture"
-)
+  )
 
 # Display the options using Rofi
 selected=$(printf '%s\n' "${options[@]}" | rofi -dmenu -i -p "Select an action:")
 
 # Execute the selected command
 if [[ -n "$selected" ]]; then
-  cmd=$(echo $selected | cut -d: -f2- | xargs)
-  result=$(eval $cmd)
+  cmd=$(echo "$selected" | cut -d: -f2- | xargs)
+  result=$(eval "$cmd")
   [ "$?" = "0" ] && icon=✅ || icon=❌
   notify-send "$icon" "$result"
 fi

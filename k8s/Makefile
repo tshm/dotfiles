@@ -1,6 +1,6 @@
 # makefile for installations
 
-.PHONY: ingress cert-manager helm kubeconfig status all
+.PHONY: ingress cert-manager helm kubeconfig status all setup clean_evicted check k3s config webdl n8n metallb gitops flux-bootstrap create logging cost delete_namespace tunnel_create destroy
 
 PWD := $(shell readlink -f ${PWD})
 SHELL := bash
@@ -98,7 +98,7 @@ metallb:
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.8/config/manifests/metallb-native.yaml
 
 ingress: helm
-	[ -z "${HOSTNAME_K8S}" ] && echo 'HOSTNAME_K8S is empty.  export the hostname'; exit 1
+	@if [ -z "${HOSTNAME_K8S}" ]; then echo 'HOSTNAME_K8S is empty. export the hostname'; exit 1; fi
 	echo "setting up ingress-controller with hostname: ${HOSTNAME_K8S}"
 	helm upgrade --install traefik traefik/traefik --namespace kube-system \
 		--set fullnameOverride=traefik \
@@ -153,9 +153,10 @@ logging:
 
 cost: NS := kubecost
 cost:
+	@if [ -z "${KUBECOST_TOKEN}" ]; then echo 'KUBECOST_TOKEN is required'; exit 1; fi
 	$K create namespace ${NS}
 	helm repo add kubecost https://kubecost.github.io/cost-analyzer/
-	helm install kubecost kubecost/cost-analyzer --namespace kubecost --set kubecostToken="dHNobUBjc2MuanA=xm343yadf98"
+	helm install kubecost kubecost/cost-analyzer --namespace kubecost --set kubecostToken="${KUBECOST_TOKEN}"
 
 delete_namespace:
 	@if [ "${NS}" == "" ]; then echo 'usage: make delete_namespace -e NS=xxx'; exit 1; fi
@@ -165,7 +166,7 @@ delete_namespace:
 
 # cloudflared: https://developers.cloudflare.com/cloudflare-one/tutorials/many-cfd-one-tunnel/
 tunnel_create: .manifest/initialSetup/tunnel/.cloudflared_credentials.json
-	[ -z ${DOMAIN} -o -z ${HOSTNAME} ] && echo 'HOSTNAME and DOMAIN are required' && exit 1
+	@[ -z "${DOMAIN}" ] || [ -z "${HOSTNAME}" ] && { echo 'HOSTNAME and DOMAIN are required'; exit 1; }
 	cloudflared tunnel create ${HOSTNAME}
 	cloudflared tunnel route dns ${HOSTNAME} ${HOSTNAME}.${DOMAIN}
 	cp ${HOME}/.cloudflared/*.json ./manifest/initialSetup/tunnel/.cloudflared_credentials.json

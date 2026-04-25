@@ -30,7 +30,7 @@ xx:
 apphash_update: $(APPS)
 
 dev:
-	cd ./agent && make
+	$(MAKE) -C ./agent
 
 update.%: ./homes/apps/%.nix
 	$(eval URL := $(shell sed -ne '/url =/s/.*url = //p' "$<"))
@@ -41,7 +41,8 @@ update.%: ./homes/apps/%.nix
 	sed -i "s|sha256 = \".*\";|sha256 = \"${SRI}\";|" "$<"
 	echo "Hash updated in $<: ${SRI}"
 
-.PHONY: zi up sd-burn
+.PHONY: all clean dev home-manager kanata nix nix-upgrade os resh sd-burn sudo up update xx zi .git/hooks/pre-commit
+.PHONY: spi.img result-spi
 up: update apphash_update
 zi:; zsh -i -c 'zinit update'
 
@@ -138,5 +139,3 @@ endif
 .git/hooks/pre-commit: flake.lock
 	pre-commit autoupdate
 	pre-commit install -f
-
-PHONY: all yazi home-manager nix update katana sudo x

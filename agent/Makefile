@@ -2,14 +2,19 @@ SHELL := $(shell command -v bash 2>/dev/null || command -v sh)
 .SHELLFLAGS := -euo pipefail -c
 .ONESHELL:
 
+.PHONY: all dev skills openchamber markitdown agent-browser clavix beads clawdbot tokenscope agents pi task-factory omp omo clean-tools opencode merge-config
+
+.DEFAULT_GOAL := all
+
 CONFIG_DIR ?= ${PWD}/config
 OUTPUT_FILE ?= ${PWD}/opencode.jsonc
 BACKUP_FILE ?= ${OUTPUT_FILE}.backup
 NPM_OPT ?= -g --prefix ~/.npm-globals/
 
+all: dev
+
 dev: opencode
 
-.PHONY: skills
 skills: agent-browser
 
 .PHONY: openchamber
