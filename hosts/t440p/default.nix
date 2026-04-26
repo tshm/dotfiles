@@ -21,5 +21,5 @@
     };
   };
 
-  services.tailscale.extraUpFlags = [ "--advertise-exit-node" ];
+  services.tailscale.extraSetFlags = [ "--advertise-exit-node" ];
 }
