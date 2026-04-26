@@ -78,7 +78,7 @@ clean-tools:
 	rm -rf ~/.config/opencode/node_modules
 
 .PHONY: opencode
-opencode: ~/.opencode/bin/opencode
+opencode:
 	@echo "installing opencode..."
 	[ -x ~/.opencode/bin/opencode ] && ~/.opencode/bin/opencode upgrade || (curl -fsSL https://opencode.ai/install | bash)
 	@echo update config
