@@ -32,6 +32,12 @@ agent-browser:
 	npm install ${NPM_OPT} agent-browser
 # 	npx -g --prefix ~/.npm-globals/ skills add vercel-labs/agent-browser
 
+.PHPNY: chorus
+chorus:
+	@echo "installing chorus..."
+	mkdir -p ~/.npm-globals/
+	npm install ${NPM_OPT} @chorus-aidlc/chorus
+
 clavix: ~/.npm-globals/bin/clavix
 	@echo "installing clavix..."
 	mkdir -p ~/.npm-globals/
