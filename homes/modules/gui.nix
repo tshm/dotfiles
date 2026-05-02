@@ -32,19 +32,29 @@ in {
       enable = true;
       extraPortals = [
         args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-termfilechooser
       ];
       config = {
         common = {
-          default = [ "hyprland" ];
+          default = [ "gtk" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
         };
         hyprland = {
-          default = [ "hyprland" ];
+          default = [ "hyprland" "gnome" "gtk" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+          "org.freedesktop.impl.portal.Settings" = [ "gnome" ];
+        };
+        niri = {
+          default = [ "gnome" "gtk" ];
+          "org.freedesktop.impl.portal.Access" = [ "gtk" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+          "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
         };
       };
     };
+
     mimeApps = {
       enable = true;
       defaultApplications = {
