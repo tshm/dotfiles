@@ -51,6 +51,7 @@ The main dependencies are:
 Development dependencies are managed by [pre-commit](https://pre-commit.com/):
 
 - [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks)
+- local Nix syntax checking via `nix-instantiate --parse`
 - [commitizen](https://github.com/commitizen-tools/commitizen)
 
 This repository also uses [Renovate](https://www.mend.io/free-developer-tools/renovate/)

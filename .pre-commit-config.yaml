@@ -11,6 +11,13 @@ repos:
         args: [--allow-multiple-documents]
       - id: check-json
       - id: check-added-large-files
+  - repo: local
+    hooks:
+      - id: nix-syntax-check
+        name: nix syntax check
+        entry: bash -eu -c 'for file in "$@"; do nix-instantiate --parse "$file" >/dev/null; done' --
+        language: system
+        files: \.nix$
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.13.10
     hooks:

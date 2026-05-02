@@ -136,7 +136,7 @@ configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfil
 - Nix Flakes are the source of truth.
 - Prefer `make` wrappers; they already encode host-specific behavior and tool detection.
 - Use `devbox` anywhere a `devbox.json` exists. This is mandatory in practice for `k8s/`.
-- Pre-commit currently enforces whitespace/YAML/JSON/basic file checks plus `commitizen`; shellcheck/checkmake hooks are present but commented out.
+- Pre-commit currently enforces whitespace/YAML/JSON/basic file checks, Nix syntax parsing via `nix-instantiate --parse`, `commitizen`, targeted shellcheck on `bkup/*.sh` and `x/*.sh`, and targeted checkmake on the repo Makefiles.
 - Repo-wide automation also includes Renovate (`renovate.json`) and git-cliff (`cliff.toml`).
 - Home Manager base tooling includes `bun`, `devbox`, `pre-commit`, `yq`, `jj`, `atuin`, `direnv`, and related CLI utilities, so prefer existing tooling before introducing new dependencies.
 
