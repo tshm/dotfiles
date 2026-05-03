@@ -19,7 +19,7 @@ repos:
         language: system
         files: \.nix$
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.13.10
+    rev: v4.15.0
     hooks:
       - id: commitizen
   - repo: https://github.com/shellcheck-py/shellcheck-py
