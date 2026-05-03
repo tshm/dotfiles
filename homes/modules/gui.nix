@@ -166,7 +166,8 @@ in {
   };
   wayland.windowManager.mango = {
     enable = true;
-    settings = ''
+    settings = { };
+    extraConfig = ''
       # config.conf
     '';
     autostart_sh = ''
