@@ -292,7 +292,7 @@ layout {
 
 spawn-at-startup "beeper"
 spawn-at-startup "zen"
-spawn-at-startup "kitty"
+spawn-at-startup "wezterm"
 spawn-at-startup "nirius"
 spawn-at-startup "fcitx5" "-d" "--replace"
 
