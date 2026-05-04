@@ -105,6 +105,7 @@ in
             "node"
             "nix"
             "home_manager"
+            "system"
             "nix_helper"
             "yazi"
             "git_repos"
