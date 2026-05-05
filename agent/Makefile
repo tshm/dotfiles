@@ -65,6 +65,25 @@ agents:
 pi:
 	npm install ${NPM_OPT} @mariozechner/pi-coding-agent
 
+.PHONY: pi-ext pi-rtk-optimizer pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
+pi-ext: pi-rtk-optimizer pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
+
+pi-observational-memory:
+	pi install npm:pi-observational-memory
+
+pi-minimal-subagent:
+	pi install git:github.com/elpapi42/pi-minimal-subagent
+
+pi-fork:
+	pi install git:github.com/elpapi42/pi-fork
+
+pi-codemapper:
+	pipx install git+https://github.com/MikeyBeez/codemapper.git
+	pi install git:git@github.com:elpapi42/pi-codemapper.git
+
+pi-rtk-optimizer:
+	pi install npm:pi-rtk-optimizer
+
 .PHONY: task-factory
 task-factory:
 	npm install ${NPM_OPT} task-factory
