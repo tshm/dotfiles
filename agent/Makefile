@@ -17,6 +17,14 @@ dev: opencode
 
 skills: agent-browser
 
+.PHONY: hermes
+hermes:
+	curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+
+.PHONY: multica
+multica:
+	curl -fsSL https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.sh | bash
+
 .PHONY: openchamber
 openchamber:
 	bun add -g @openchamber/web
