@@ -55,6 +55,15 @@ in {
       };
     };
 
+    dataFile = {
+      "vicinae/scripts/cloudflare-warp-common.sh".source =
+        configPath "/x/vicinae/scripts/cloudflare-warp-common.sh";
+      "vicinae/scripts/cloudflare-warp-connect.sh".source =
+        configPath "/x/vicinae/scripts/cloudflare-warp-connect.sh";
+      "vicinae/scripts/cloudflare-warp-disconnect.sh".source =
+        configPath "/x/vicinae/scripts/cloudflare-warp-disconnect.sh";
+    };
+
     mimeApps = {
       enable = true;
       defaultApplications = {
