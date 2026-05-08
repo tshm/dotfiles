@@ -129,6 +129,11 @@ in
       ${pkgs.coreutils}/bin/rm -f "$unit" "$wants"
     fi
   '';
+  system.activationScripts.ensureUsrLocalBin = lib.stringAfter [ "etc" ] ''
+    ${pkgs.coreutils}/bin/mkdir -p /usr/local/bin
+  '';
+
+  environment.sessionVariables.PATH = [ "/usr/local/bin" ];
 
   programs.zsh.enable = true;
   users = {
