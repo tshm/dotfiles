@@ -1,5 +1,4 @@
-{ nixos-hardware, ... }:
-{
+{ nixos-hardware, ... }: {
   imports = [
     ./hardware-configuration.nix
     nixos-hardware.nixosModules.common-pc

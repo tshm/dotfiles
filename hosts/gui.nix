@@ -1,6 +1,7 @@
 { pkgs, ... }@args:
-
-{
+let
+  vocalinux = pkgs.callPackage ./vocalinux.nix { };
+in {
   imports =
     [ args.mango.nixosModules.mango args.catppuccin.nixosModules.catppuccin ];
   hardware.graphics.enable = true;
@@ -42,6 +43,8 @@
   };
 
   programs.dconf = { enable = true; };
+  programs.ydotool.enable = true;
+  users.users.${args.user}.extraGroups = [ "ydotool" "input" ];
   programs.hyprland = { enable = true; };
   programs.mango.enable = true;
   programs.niri.enable = true;
@@ -119,6 +122,7 @@
 
   environment.systemPackages = [
     pkgs.mesa
+    vocalinux
     # desktop environment related
     pkgs.niriswitcher
     pkgs.nirius
