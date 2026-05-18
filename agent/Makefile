@@ -2,7 +2,7 @@ SHELL := $(shell command -v bash 2>/dev/null || command -v sh)
 .SHELLFLAGS := -euo pipefail -c
 .ONESHELL:
 
-.PHONY: all dev skills openchamber markitdown agent-browser clavix beads clawdbot tokenscope agents pi task-factory omp omo clean-tools opencode merge-config
+.PHONY: all dev skills openchamber markitdown agent-browser agents pi pi-ext pi-local-extensions task-factory omp omo clean-tools opencode merge-config
 
 .DEFAULT_GOAL := all
 
@@ -10,6 +10,7 @@ CONFIG_DIR ?= ${PWD}/config
 OUTPUT_FILE ?= ${PWD}/opencode.jsonc
 BACKUP_FILE ?= ${OUTPUT_FILE}.backup
 NPM_OPT ?= -g --prefix ~/.npm-globals/
+PI_AGENT_EXT_DIRS ?= ~/.pi/agent/extensions
 
 all: dev
 
@@ -46,34 +47,15 @@ chorus:
 	mkdir -p ~/.npm-globals/
 	npm install ${NPM_OPT} @chorus-aidlc/chorus
 
-clavix: ~/.npm-globals/bin/clavix
-	@echo "installing clavix..."
-	mkdir -p ~/.npm-globals/
-	npm install ${NPM_OPT} clavix
-
-beads: ~/.local/bin/bd
-	@echo "installing bd..."
-	mkdir -p ~/.local/bin/
-	# for more details
-	bd upgrade || curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
-
-.PHONY: clawdbot
-clawdbot:
-	npm install ${NPM_OPT} clawdbot
-
-.PHONY: tokenscope
-tokenscope:
-	curl -sSL https://raw.githubusercontent.com/ramtinJ95/opencode-tokenscope/main/plugin/install.sh | bash
-
 .PHONY: agents
 agents:
 	curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s full --install-dir ~/.config/opencode
 
 .PHONY: pi
 pi:
-	npm install ${NPM_OPT} @mariozechner/pi-coding-agent
+	npm install -f ${NPM_OPT} @mariozechner/pi-coding-agent
 
-.PHONY: pi-ext pi-rtk-optimizer pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
+.PHONY: pi-ext pi-local-extensions pi-rtk-optimizer pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
 pi-ext: pi-rtk-optimizer pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
 
 pi-observational-memory:
