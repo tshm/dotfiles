@@ -30,6 +30,16 @@ config.font_size = 11
 config.enable_wayland = true
 config.enable_kitty_keyboard = true
 
+config.use_ime = true
+config.enable_csi_u_key_encoding = false
+config.keys = {
+	{
+		key = "v",
+		mods = "CTRL",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	},
+}
+
 config.mouse_bindings = {
 	{
 		event = {

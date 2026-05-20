@@ -24,6 +24,7 @@
   services.tailscale = {
     enable = true;
     openFirewall = true;
+    useRoutingFeatures = "server";
     extraSetFlags = [
       "--advertise-exit-node"
       "--advertise-routes=192.168.84.0/24"
