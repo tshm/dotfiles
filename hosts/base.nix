@@ -164,7 +164,7 @@ in
   ];
   services.tailscale = {
     enable = lib.mkDefault true;
-    useRoutingFeatures = "both";
+    useRoutingFeatures = lib.mkDefault (if forServer then "server" else "both");
 
     # Keep normal DNS resolution pointed at the active network (e.g. corporate DNS).
     # We'll route only *.ts.net via Tailscale DNS below.
