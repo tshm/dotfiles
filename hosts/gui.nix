@@ -99,6 +99,24 @@ in {
             "bluez5.enable-hw-volume" = true;
           };
         };
+        "15-bluetooth-default-output" = {
+          "monitor.bluez.rules" = [
+            {
+              matches = [
+                {
+                  "media.class" = "Audio/Sink";
+                  "node.name" = "~bluez_output.*";
+                }
+              ];
+              actions = {
+                update-props = {
+                  "priority.driver" = 25000;
+                  "priority.session" = 25000;
+                };
+              };
+            }
+          ];
+        };
          "10-alsa-devices" = {
            "monitor.alsa.rules" = [
              {
