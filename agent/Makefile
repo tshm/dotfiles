@@ -41,6 +41,10 @@ agent-browser:
 	npm install ${NPM_OPT} agent-browser
 # 	npx -g --prefix ~/.npm-globals/ skills add vercel-labs/agent-browser
 
+.PHONY: understand
+understand:
+	curl -fsSL https://raw.githubusercontent.com/Lum1104/understand-Anything/main/install.sh | bash
+
 .PHPNY: chorus
 chorus:
 	@echo "installing chorus..."
