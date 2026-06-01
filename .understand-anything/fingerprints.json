@@ -1,0 +1,1232 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "29e5d74d631fd3014edd592f743a53e0fb1df254",
+  "generatedAt": "2026-05-29T05:48:11.643Z",
+  "files": {
+    ".envrc": {
+      "filePath": ".envrc",
+      "contentHash": "ff6b93eeab3c364a2ba451ccbf2adef9c8fa0f5c2705ec491a48d13dc4cca3cb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    ".gitattributes": {
+      "filePath": ".gitattributes",
+      "contentHash": "38414f633421b6240afcf7090ade908dd7ade5ed004b67c508402eab084f8cfc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/.understandignore": {
+      "filePath": ".understand-anything/.understandignore",
+      "contentHash": "cf4c910d600109391ec5c8e6ce881ec74c75287f0d1992ca8db3c1201e919a8d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 44,
+      "hasStructuralAnalysis": false
+    },
+    "agent/extensions/notify.ts": {
+      "filePath": "agent/extensions/notify.ts",
+      "contentHash": "33d23eb8e909b27b7d7397ab47bd7ea648346e2eb625ddcb5e8f8ee7312768b1",
+      "functions": [
+        {
+          "name": "sanitizeMessage",
+          "params": [
+            "message"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "detectNotificationSequence",
+          "params": [
+            "message"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "sendNotification",
+          "params": [
+            "message"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "buildCompletionMessage",
+          "params": [
+            "sessionManager"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "buildErrorMessage",
+          "params": [
+            "event"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "notifyExtension",
+          "params": [
+            "pi"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@oh-my-pi/pi-coding-agent",
+          "specifiers": [
+            "ExtensionAPI",
+            "ToolExecutionEndEvent"
+          ]
+        }
+      ],
+      "exports": [
+        "notifyExtension"
+      ],
+      "totalLines": 62,
+      "hasStructuralAnalysis": true
+    },
+    "agent/merge-config.sh": {
+      "filePath": "agent/merge-config.sh",
+      "contentHash": "774f86fb7be85769b17d47793027b9208c2438f20cd0c42ee8066555b188624a",
+      "functions": [
+        {
+          "name": "log_info",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "log_warn",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "log_error",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "strip_jsonc",
+          "params": [],
+          "exported": false,
+          "lineCount": 83
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 194,
+      "hasStructuralAnalysis": true
+    },
+    "ahk/layout.ahk": {
+      "filePath": "ahk/layout.ahk",
+      "contentHash": "a18014ddc46c57c9871baa68b1e260d9a0c160d09d66c42549c1c140b1f8a027",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 63,
+      "hasStructuralAnalysis": false
+    },
+    "ahk/startup.ahk": {
+      "filePath": "ahk/startup.ahk",
+      "contentHash": "82325c6b4204f177a872475a2178230c5fb30487c0dd469667746bf4f1264c55",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "ahk/wheelctrl.ahk": {
+      "filePath": "ahk/wheelctrl.ahk",
+      "contentHash": "a90e8e668dbb013b25fa4852ede35908debb369f1f55ba8aa118057b0c069c11",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 107,
+      "hasStructuralAnalysis": false
+    },
+    "bkup/backup.sh": {
+      "filePath": "bkup/backup.sh",
+      "contentHash": "899d8fe4987519c7b7a58e1e1f8de9e88ba7e6693fb44f849bdfd005f5e11086",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "flake.nix": {
+      "filePath": "flake.nix",
+      "contentHash": "a11404065484686b65f9abebc3aa8cc706ec25c7e26b90ca3cd8c13e98c03f89",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 96,
+      "hasStructuralAnalysis": false
+    },
+    "ghostty.config": {
+      "filePath": "ghostty.config",
+      "contentHash": "f6ea1b6cdb4bdd5f4b60bec42e7e95aadc5723b8dd89e30ebeea943877cb0293",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": false
+    },
+    "gitconfig": {
+      "filePath": "gitconfig",
+      "contentHash": "da112489b23a26ef9656d5e40096d7a7fb26ad9f26d9491eeb221bae8f3dad50",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 113,
+      "hasStructuralAnalysis": false
+    },
+    "gitignore": {
+      "filePath": "gitignore",
+      "contentHash": "1104f4538ecdc65c46e3915ab3a8e767c7c5642c57bf2236c0c876957d5f7518",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "gptcomplete.zsh": {
+      "filePath": "gptcomplete.zsh",
+      "contentHash": "8860f797e18779c1ca1f14d17324f3e4568bb11771a42287645cf8bdea311206",
+      "functions": [
+        {
+          "name": "_complete_with_llm",
+          "params": [],
+          "exported": false,
+          "lineCount": 59
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 65,
+      "hasStructuralAnalysis": true
+    },
+    "homes/apps/beeper.nix": {
+      "filePath": "homes/apps/beeper.nix",
+      "contentHash": "a4b9ad055b72d4d58eba05fec1238f56bd55e52b62dc29dfa0988127caf4488d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": false
+    },
+    "homes/apps/zen.nix": {
+      "filePath": "homes/apps/zen.nix",
+      "contentHash": "469ed60a2a714a39144afa3b323d95917afad6217dc1c349a1cd7dc27734fe69",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": false
+    },
+    "homes/default.nix": {
+      "filePath": "homes/default.nix",
+      "contentHash": "7af5f82d03b65d9ef10960ff351e1ab43a68ff68ff6cfa1126ec95ba7503df05",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": false
+    },
+    "homes/minf/default.nix": {
+      "filePath": "homes/minf/default.nix",
+      "contentHash": "e2f2c604a5a1175fcc28e7f1b0884b2a519a7506f6f6f46a6c439d6ba598e5b7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": false
+    },
+    "homes/modules/base.nix": {
+      "filePath": "homes/modules/base.nix",
+      "contentHash": "8b128d1759d0c9d039e786d888772f3616440c07f3cef45e82ac84d23e65a953",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 470,
+      "hasStructuralAnalysis": false
+    },
+    "homes/modules/dev.nix": {
+      "filePath": "homes/modules/dev.nix",
+      "contentHash": "94cc6af7730f779cc5286ab486f1710e691e1bde05cd37e6d1b0d931b8c8c5db",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 60,
+      "hasStructuralAnalysis": false
+    },
+    "homes/modules/gui.nix": {
+      "filePath": "homes/modules/gui.nix",
+      "contentHash": "796761fde903bb7d6c408f9e73fff91a92fa6fe4a69323eaa3fbd39eff49a9fa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 226,
+      "hasStructuralAnalysis": false
+    },
+    "homes/modules/node2nix/default.nix": {
+      "filePath": "homes/modules/node2nix/default.nix",
+      "contentHash": "aabc62f630aebb6ffe4ffb3e85f803930883d6c0a6496120067680f58c5ef706",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 35,
+      "hasStructuralAnalysis": false
+    },
+    "homes/modules/node2nix/node-env.nix": {
+      "filePath": "homes/modules/node2nix/node-env.nix",
+      "contentHash": "cbd2fc63bb9144a18d35d570f8c642fcd2deb4b4f2b27ca62c6f9dd3e4fcb520",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 802,
+      "hasStructuralAnalysis": false
+    },
+    "homes/modules/node2nix/node-packages.nix": {
+      "filePath": "homes/modules/node2nix/node-packages.nix",
+      "contentHash": "1b6807adc144c2ff3a63494ab9d96c28684cec9b057aab336b1d31c93693e549",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4201,
+      "hasStructuralAnalysis": false
+    },
+    "homes/modules/playwright.nix": {
+      "filePath": "homes/modules/playwright.nix",
+      "contentHash": "9a61708d88a43350bbec8943546b21fff21afe14169caa0dd156d5cacfeb18f2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": false
+    },
+    "homes/modules/wsl.nix": {
+      "filePath": "homes/modules/wsl.nix",
+      "contentHash": "3bbd360c93bac0a5e9fe07e4364f8e354cc33516bc26ace91a0bc64282e11c1a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "homes/PD0056/default.nix": {
+      "filePath": "homes/PD0056/default.nix",
+      "contentHash": "e4b26e48c1b92aaf6067d01b217b955affd5a18410901f9ed373e43c19910bb5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 40,
+      "hasStructuralAnalysis": false
+    },
+    "homes/PN0093/default.nix": {
+      "filePath": "homes/PN0093/default.nix",
+      "contentHash": "278abf79a64e9c3d60078032d1d42682a989597de2b6e1ca80fa6d7a625131cf",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": false
+    },
+    "homes/PN0097/default.nix": {
+      "filePath": "homes/PN0097/default.nix",
+      "contentHash": "0b6a72822ccda9837952847289f48d3b4a3f08e17d8520a791cca46171817c4f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": false
+    },
+    "homes/spi/default.nix": {
+      "filePath": "homes/spi/default.nix",
+      "contentHash": "ff3c98356ad662c70ee15ed7b4e9e643f6eeb10969e1ef61abecf90bcb09950c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": false
+    },
+    "homes/t440p/default.nix": {
+      "filePath": "homes/t440p/default.nix",
+      "contentHash": "af383ecbb5031886255676cdd17bad86c1684734f0e65f2c00dae0798c1e059c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": false
+    },
+    "homes/usb/default.nix": {
+      "filePath": "homes/usb/default.nix",
+      "contentHash": "36438a8b36698fec394772cf6529a74758c9141a566fe90b11fd88fc34512d53",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": false
+    },
+    "homes/x360/default.nix": {
+      "filePath": "homes/x360/default.nix",
+      "contentHash": "62be40eceb86e0db6c25d6988bab21f929854ea5632630fb8628f0ad9e279904",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/base.nix": {
+      "filePath": "hosts/base.nix",
+      "contentHash": "221da1ef225592159f6f5bdad7c917ed5ed9846b8876ffc4c962f5d16d007e40",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 330,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/default.nix": {
+      "filePath": "hosts/default.nix",
+      "contentHash": "9197acc0be4861e8964eeb1adf5dbfb7c891ca7700c02c54529325cef6995cb7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 65,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/gui.nix": {
+      "filePath": "hosts/gui.nix",
+      "contentHash": "c38bc20250d3fa6a125f9a19a7f32f1c272a26d3b421f6df48c20e54c616627b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 173,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/minf/default.nix": {
+      "filePath": "hosts/minf/default.nix",
+      "contentHash": "4c77f61f79c3adbc51a33b13c917d23fc95919afb88a8cb424d5037f3c8c8f2b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/minf/hardware-configuration.nix": {
+      "filePath": "hosts/minf/hardware-configuration.nix",
+      "contentHash": "1d98179be966429dda20272563909ad55a2045e668980777cb119da7516ef787",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/spi/default.nix": {
+      "filePath": "hosts/spi/default.nix",
+      "contentHash": "64f2591bf9cef8b0b9ca33f200b5dfdb0248f0da2b3c1b8a21534d97a9aacd3b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 45,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/spi/prod.nix": {
+      "filePath": "hosts/spi/prod.nix",
+      "contentHash": "53f3f94250c043b3f7b23f443a6d2a0cd299c762d9ed7a10bee11d2e4a4c8932",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 60,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/spi/sd.nix": {
+      "filePath": "hosts/spi/sd.nix",
+      "contentHash": "1c4d21a2620de2c363e8e9b4737d9237888857bf4454ad99216f4aabcc6b1c2b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/t440p/default.nix": {
+      "filePath": "hosts/t440p/default.nix",
+      "contentHash": "5e67fc348cd4ae269eada2b28875d22682f5e78b3a4d32e6c8eb8c36031c5299",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/t440p/hardware-configuration.nix": {
+      "filePath": "hosts/t440p/hardware-configuration.nix",
+      "contentHash": "405e723e25721ee4cdcebd5da7fcdbbc9e6743391b93696a5cb550b796ca0946",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/usb/configuration.nix": {
+      "filePath": "hosts/usb/configuration.nix",
+      "contentHash": "2f5afbcf4d7b05658402b42bc05abcb085404cd9b082663d9059f034171615e3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 15,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/usb/default.nix": {
+      "filePath": "hosts/usb/default.nix",
+      "contentHash": "49a8087ecdb21c11d390e52e69328245787e048470445fc2b8081378b30205ef",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/usb/hardware-configuration.nix": {
+      "filePath": "hosts/usb/hardware-configuration.nix",
+      "contentHash": "8234d9bb250200e7c80a94e0d9249877a8d0cda330119b76214be3c872a138ba",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/vocalinux.nix": {
+      "filePath": "hosts/vocalinux.nix",
+      "contentHash": "1a7b1f0c4f038f99432dca2e68afa3a2e37454bd37042f817304ecfa44f21536",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 244,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/x360/default.nix": {
+      "filePath": "hosts/x360/default.nix",
+      "contentHash": "c7ff87b01b2c79e516355423ea57dfcbd5c7d3cec9fd61b4de4903dd466b9125",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 72,
+      "hasStructuralAnalysis": false
+    },
+    "hosts/x360/hardware-configuration.nix": {
+      "filePath": "hosts/x360/hardware-configuration.nix",
+      "contentHash": "9d981e475301e525f747c4a458555529df2e99b632a0e9e79c99b825a50be3cc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 42,
+      "hasStructuralAnalysis": false
+    },
+    "kanata/kanata.kbd": {
+      "filePath": "kanata/kanata.kbd",
+      "contentHash": "c0d0d9712bdcccb37bf7ea1f859960239337d2efab3a5d8d0ddfb184ae716228",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "kanata/map.kbd": {
+      "filePath": "kanata/map.kbd",
+      "contentHash": "cc5935565c25c2816880c65898b6a6b64ecf9b26ba63f2596754211d477fddd0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": false
+    },
+    "lessfilter": {
+      "filePath": "lessfilter",
+      "contentHash": "8cb57b3386841d4ed05689509d0fa4bece9bc02b88042f4be51f16f968ba78e8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 18,
+      "hasStructuralAnalysis": false
+    },
+    "mpv.conf": {
+      "filePath": "mpv.conf",
+      "contentHash": "d6a9f8c7ba650744326ff91325935f0e6bc008e63d345f8cabdaf583441c8d0e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": false
+    },
+    "proj/sample.sh": {
+      "filePath": "proj/sample.sh",
+      "contentHash": "06f98f41c546956e7ff7e5da2a93996ab018987ce0a9ca2cc54296a72eb40e16",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "secrets/secrets.nix": {
+      "filePath": "secrets/secrets.nix",
+      "contentHash": "120b8340007fdb9de89737221bd6edcbea8a22d1df55a6bdefaa8e6e907e3e49",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "secrets/user-password-hash.age": {
+      "filePath": "secrets/user-password-hash.age",
+      "contentHash": "27bec113f64775c44a498ee7919e23c81b139630a3f573d308297ecc85aa18dd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "secrets/wifi-secrets.age": {
+      "filePath": "secrets/wifi-secrets.age",
+      "contentHash": "720d1bcf4a717e80969dee61ac2f0594eda7db9671a2bba9bc3728a22a496f38",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "systemd/home-user-mnt-abc.mount": {
+      "filePath": "systemd/home-user-mnt-abc.mount",
+      "contentHash": "178de5d079c265d7a2d2897af771aa765164c272bc58577e408a318bc2ef156f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "systemd/kbrequest.target": {
+      "filePath": "systemd/kbrequest.target",
+      "contentHash": "dbf91d446b7e4429783b392741aa9a577836618d3e06c9aaa67daea0c4769ee2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "systemd/startx.service": {
+      "filePath": "systemd/startx.service",
+      "contentHash": "d8ea9f4cb5da2fbee3e7d826070106138238fce4dfca8ee1acbf2e11d2a641d5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "tmux.conf": {
+      "filePath": "tmux.conf",
+      "contentHash": "85ff8d42d70d638f59db81e0a70990112f2c9b3fc4f63cc569383f16d01c6272",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 107,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/init.lua": {
+      "filePath": "vim/nvim/init.lua",
+      "contentHash": "3b2d6e9976a515b7c8df08ed7c7f61a5751e9c08a6ff5579d621b87312c9e2c6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/config/autocmds.lua": {
+      "filePath": "vim/nvim/lua/config/autocmds.lua",
+      "contentHash": "b92111beab3edb67b566585876bbb235f30c975153af400030aab4232316c3af",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/config/keymaps.lua": {
+      "filePath": "vim/nvim/lua/config/keymaps.lua",
+      "contentHash": "66e0872122be26659accd7eb9faad08c0d553c7af1de4f607b51eec07625a637",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/config/lazy.lua": {
+      "filePath": "vim/nvim/lua/config/lazy.lua",
+      "contentHash": "a98ae7032da7173c0aa59c02f8c22721071daaa4e67128193d715bbfe629fb76",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/config/options.lua": {
+      "filePath": "vim/nvim/lua/config/options.lua",
+      "contentHash": "3ea81a6934d3de5ce2ffe4c2dea018132642f4a6aacf0b43c9f25615eb33a405",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 52,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/plugins/core.lua": {
+      "filePath": "vim/nvim/lua/plugins/core.lua",
+      "contentHash": "31d11a14e7a049fc7fdfc1bec49efc9401e31aaecb5b6a417371e1cd88b0c788",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 67,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/plugins/disabled.lua": {
+      "filePath": "vim/nvim/lua/plugins/disabled.lua",
+      "contentHash": "426743bccb06945d1ffc3eec8185b1858a5b40653722e91de921c7b5f6ca4277",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/plugins/dropbar.lua": {
+      "filePath": "vim/nvim/lua/plugins/dropbar.lua",
+      "contentHash": "c72d0c5ac3d0c58df393e5bf077d65d4d0c94f8822e9a77fc6e64e53fabf9822",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 14,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/plugins/fzf.lua": {
+      "filePath": "vim/nvim/lua/plugins/fzf.lua",
+      "contentHash": "b03f4fe8086120f0b8f2db8ca25fbc3424be2c0b573d29f81aa8c9f022cd8fd2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/plugins/opencode.lua": {
+      "filePath": "vim/nvim/lua/plugins/opencode.lua",
+      "contentHash": "b64b27c93633848544eaac4b4bbe057a01eaea54844b628379a042348d167ffe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": false
+    },
+    "vim/nvim/lua/plugins/snacks.lua": {
+      "filePath": "vim/nvim/lua/plugins/snacks.lua",
+      "contentHash": "d1c6cc7c076c337b49bce332ecf0b90ce0a5557dbd8cdd7139b4d270b4bd3b59",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "wezterm/wezterm_base.lua": {
+      "filePath": "wezterm/wezterm_base.lua",
+      "contentHash": "9e5fb07654192d1e90eedf0c9dcb2fae3d226c8d7038977f587b55dfe9c5ad1f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 67,
+      "hasStructuralAnalysis": false
+    },
+    "wezterm/wezterm.lua": {
+      "filePath": "wezterm/wezterm.lua",
+      "contentHash": "659eb7a520d8863ad108784eb718d989e566b90696c1f1ac25c453478eac90b8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 23,
+      "hasStructuralAnalysis": false
+    },
+    "wsl/wsl.conf": {
+      "filePath": "wsl/wsl.conf",
+      "contentHash": "d726d3b3fbad398975712234cc2547079bc2ce22ea9d06b0a52494b0d26392fe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": false
+    },
+    "wsl/wslconfig": {
+      "filePath": "wsl/wslconfig",
+      "contentHash": "50123843cfa263df5ef3477b21b647797e3da3f5ba6d712ecceca250c5696654",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": false
+    },
+    "x/autorun.sh": {
+      "filePath": "x/autorun.sh",
+      "contentHash": "ab13d04e8af51f4e86fc87d70a212f1afe2b7f0f5ea90a1607830ea20412d556",
+      "functions": [
+        {
+          "name": "run",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "x/dmenu.sh": {
+      "filePath": "x/dmenu.sh",
+      "contentHash": "3281baa7b2df3d37ab402db10f0340b8633fe416cb9096c81df8bc2e6f34d033",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "x/hyprland/app.sh": {
+      "filePath": "x/hyprland/app.sh",
+      "contentHash": "7dc24b72322639c8d6e7e70b63bddd44ad0efa89f2ea814320f1b7fc9a6f1e7f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "x/hyprland/general.conf": {
+      "filePath": "x/hyprland/general.conf",
+      "contentHash": "53460b89411335a83e9d6be24b9fc47314349af56bee81346acaf6ae6ab86f2f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 237,
+      "hasStructuralAnalysis": false
+    },
+    "x/hyprland/local.conf": {
+      "filePath": "x/hyprland/local.conf",
+      "contentHash": "73f15f7b9967289210f9a92a9771eb97e86443508dfb6b43efb40c21ffbcce28",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": false
+    },
+    "x/hyprland/switch.sh": {
+      "filePath": "x/hyprland/switch.sh",
+      "contentHash": "8156398ed64e65debd6afcd393d33d234cbb4187f1c537818c0577e13c2464e9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "x/hyprland/vars.conf": {
+      "filePath": "x/hyprland/vars.conf",
+      "contentHash": "3a8452fff29625d4785e6a7c39e7b2b60b052db7d79f817b38e089dba4cd178e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 39,
+      "hasStructuralAnalysis": false
+    },
+    "x/i3/config": {
+      "filePath": "x/i3/config",
+      "contentHash": "91b11f8825ae1295b5f56daa2155c7ed4c8db7e407eae6bdca5ad22e07858799",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 193,
+      "hasStructuralAnalysis": false
+    },
+    "x/info.sh": {
+      "filePath": "x/info.sh",
+      "contentHash": "c103763bbdaa45459095b7c89a8ed3770b6ae6d7732dbc785231cffd52240f96",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "x/night.sh": {
+      "filePath": "x/night.sh",
+      "contentHash": "880fc0483b20367decad60b739ce31d978ed960f828175a46d5fcfab256ff163",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "x/niri.kdl": {
+      "filePath": "x/niri.kdl",
+      "contentHash": "78d38df0e27d1c132949a867af14e175f2aab16b3500d4cec9506fa3d5d3752e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 656,
+      "hasStructuralAnalysis": false
+    },
+    "x/util.sh": {
+      "filePath": "x/util.sh",
+      "contentHash": "e551d3b23a1fe7f1435a4a43755d63bcaa7def0f4c2a0996986822eb881a88c0",
+      "functions": [
+        {
+          "name": "capture",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "x/vicinae/scripts/cloudflare-warp-common.sh": {
+      "filePath": "x/vicinae/scripts/cloudflare-warp-common.sh",
+      "contentHash": "dd391eb04d6b80898cbc81dc5f2124edae6adc8641da72888747240f25bdd510",
+      "functions": [
+        {
+          "name": "ensure_warp_cli",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "current_warp_status",
+          "params": [],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "set_warp_state",
+          "params": [],
+          "exported": false,
+          "lineCount": 23
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "x/vicinae/scripts/cloudflare-warp-connect.sh": {
+      "filePath": "x/vicinae/scripts/cloudflare-warp-connect.sh",
+      "contentHash": "1f7a02107173338f65969ab7276b0a3ba7381089566c32b51ca07135a91bdcfa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "x/vicinae/scripts/cloudflare-warp-disconnect.sh": {
+      "filePath": "x/vicinae/scripts/cloudflare-warp-disconnect.sh",
+      "contentHash": "ed48082f05e6532d8e514b3618862b1a09481ca3da5c9862c3ddbcd7741b8729",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "x/waybar/scripts/cycle-sinks.sh": {
+      "filePath": "x/waybar/scripts/cycle-sinks.sh",
+      "contentHash": "c741a7688f00f5eb6b77cac29c8830987e1acd3563733d5f41d97af2b3712b36",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": true
+    },
+    "x/waybar/style.css": {
+      "filePath": "x/waybar/style.css",
+      "contentHash": "a965dbe61b18a630b4115c77ae823f5fa47522deafbddb0435bc124679a9d652",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 422,
+      "hasStructuralAnalysis": false
+    },
+    "x/windowswitcher.sh": {
+      "filePath": "x/windowswitcher.sh",
+      "contentHash": "ebfa106f670dba0e2ab4c07a2805c32ab577147e76a2c59cd5fe5c1d19c29508",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "x/xmobarrc": {
+      "filePath": "x/xmobarrc",
+      "contentHash": "f748d2f6f33ff4e4525f1f060842ab022f8dd40e123201e87c578084a605e78d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": false
+    },
+    "x/xmonad.hs": {
+      "filePath": "x/xmonad.hs",
+      "contentHash": "2b00e2e41efd389d3f4c433e4bbd7b7defa1a54f6e45bf8dad10b66d7a546759",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 47,
+      "hasStructuralAnalysis": false
+    },
+    "x/Xresources": {
+      "filePath": "x/Xresources",
+      "contentHash": "ccb835e8dc91e218763b9b5cb9a3abc654aae1a043b678ab477e870276764154",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": false
+    },
+    "yazi/plugins/enter.yazi/main.lua": {
+      "filePath": "yazi/plugins/enter.yazi/main.lua",
+      "contentHash": "0d9bd02d121d7819a4c673ab58a7e129ab16fd79bd52ac6d34d072dcdd3f56c7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": false
+    },
+    "yazi/plugins/tab.yazi/main.lua": {
+      "filePath": "yazi/plugins/tab.yazi/main.lua",
+      "contentHash": "73fec17352dca8cfe8e4b29dc7cc3e3c86bb8b002532640cda52ff95f84ad0fd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "yazi/run.zsh": {
+      "filePath": "yazi/run.zsh",
+      "contentHash": "46427a93ca68b9537e6bdb6c6a340661d5f38fe6bf29193b86a3303a7d72ad74",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "zsh/alias.zsh": {
+      "filePath": "zsh/alias.zsh",
+      "contentHash": "e60caa8db7420de3835197250cbf4ce2556411ef18e67a12e93276a488ab65b6",
+      "functions": [
+        {
+          "name": "scptar",
+          "params": [],
+          "exported": false,
+          "lineCount": 46
+        },
+        {
+          "name": "tm",
+          "params": [],
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "meminfo",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 135,
+      "hasStructuralAnalysis": true
+    },
+    "zsh/plugins.zsh": {
+      "filePath": "zsh/plugins.zsh",
+      "contentHash": "7d802df3ff0f9c2f7437d715368f18fbcf8b200940e87b9264b1980a6827ea76",
+      "functions": [
+        {
+          "name": "_parse_config_file",
+          "params": [],
+          "exported": false,
+          "lineCount": 24
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 98,
+      "hasStructuralAnalysis": true
+    },
+    "zsh/tmux_switch.sh": {
+      "filePath": "zsh/tmux_switch.sh",
+      "contentHash": "ebf8fc13fdedaeb8ac315d6abafb936c61014a926ffd82786ef86e7a05a8c8fe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "zsh/zlogout": {
+      "filePath": "zsh/zlogout",
+      "contentHash": "e1a7dcf498357fed0b5c112ac265ce06dcdd153fe0adf14d17ec162ade140454",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "zsh/zprofile": {
+      "filePath": "zsh/zprofile",
+      "contentHash": "dfb0f1b75b1899f09dd06efb89d5783ecf2cc2162b727fb4e1afde4822ec8ffc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": false
+    },
+    "zsh/zshenv": {
+      "filePath": "zsh/zshenv",
+      "contentHash": "2edc1469b8f1b72ce2c1554658efc217b7198bf13eebc2caae9d4c5b320ad19f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": false
+    },
+    "zsh/zshrc": {
+      "filePath": "zsh/zshrc",
+      "contentHash": "7c87739bb27b162f15b1b5f817931bd4a717377212cdbb47eb61843e095414c3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 144,
+      "hasStructuralAnalysis": false
+    }
+  }
+}

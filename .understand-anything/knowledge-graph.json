@@ -1,0 +1,4944 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "satake dotfiles",
+    "languages": [
+      "nix",
+      "yaml",
+      "shell",
+      "lua",
+      "markdown",
+      "terraform",
+      "jsonc",
+      "typescript",
+      "autohotkey"
+    ],
+    "frameworks": [
+      "NixOS",
+      "Home Manager",
+      "Nix Flakes",
+      "Kubernetes",
+      "Terraform",
+      "LazyVim",
+      "OpenCode"
+    ],
+    "description": "Nix Flake-based dotfiles monorepo for NixOS and Home Manager, with separate Kubernetes, Neovim, and local agent tooling subsystems.",
+    "analyzedAt": "2026-05-29T05:47:09.268Z",
+    "gitCommitHash": "29e5d74d631fd3014edd592f743a53e0fb1df254"
+  },
+  "nodes": [
+    {
+      "id": "pipeline:.github/workflows/app-update.yaml",
+      "type": "pipeline",
+      "name": "app-update.yaml",
+      "filePath": ".github/workflows/app-update.yaml",
+      "summary": "Defines automation steps and operational targets in app-update.yaml.",
+      "tags": [
+        "ci-cd",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/cachix.yaml",
+      "type": "pipeline",
+      "name": "cachix.yaml",
+      "filePath": ".github/workflows/cachix.yaml",
+      "summary": "Defines automation steps and operational targets in cachix.yaml.",
+      "tags": [
+        "ci-cd",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/flake-inputs.yaml",
+      "type": "pipeline",
+      "name": "flake-inputs.yaml",
+      "filePath": ".github/workflows/flake-inputs.yaml",
+      "summary": "Defines automation steps and operational targets in flake-inputs.yaml.",
+      "tags": [
+        "ci-cd",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/flake-update.yaml",
+      "type": "pipeline",
+      "name": "flake-update.yaml",
+      "filePath": ".github/workflows/flake-update.yaml",
+      "summary": "Defines automation steps and operational targets in flake-update.yaml.",
+      "tags": [
+        "ci-cd",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/opencode.yml",
+      "type": "pipeline",
+      "name": "opencode.yml",
+      "filePath": ".github/workflows/opencode.yml",
+      "summary": "Defines automation steps and operational targets in opencode.yml.",
+      "tags": [
+        "ci-cd",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.pre-commit-config.yaml",
+      "type": "config",
+      "name": ".pre-commit-config.yaml",
+      "filePath": ".pre-commit-config.yaml",
+      "summary": "Configures behavior for .pre-commit-config.yaml within this repository.",
+      "tags": [
+        "configuration",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "summary": "Documents repository-specific working conventions, architecture, commands, and safety rules for automated changes.",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:CHANGELOG.md",
+      "type": "document",
+      "name": "CHANGELOG.md",
+      "filePath": "CHANGELOG.md",
+      "summary": "Documents CHANGELOG.md guidance starting from the \"Changelog\" section.",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "pipeline:Makefile",
+      "type": "pipeline",
+      "name": "Makefile",
+      "filePath": "Makefile",
+      "summary": "Provides the main operational entry points for applying, updating, and maintaining this dotfiles repository.",
+      "tags": [
+        "ci-cd",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "step:Makefile:home-manager",
+      "type": "step",
+      "name": "home-manager",
+      "filePath": "Makefile",
+      "summary": "Defines automation step home-manager in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:xx",
+      "type": "step",
+      "name": "xx",
+      "filePath": "Makefile",
+      "summary": "Defines automation step xx in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:apphash_update",
+      "type": "step",
+      "name": "apphash_update",
+      "filePath": "Makefile",
+      "summary": "Defines automation step apphash_update in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:dev",
+      "type": "step",
+      "name": "dev",
+      "filePath": "Makefile",
+      "summary": "Defines automation step dev in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:up",
+      "type": "step",
+      "name": "up",
+      "filePath": "Makefile",
+      "summary": "Defines automation step up in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:zi",
+      "type": "step",
+      "name": "zi",
+      "filePath": "Makefile",
+      "summary": "Defines automation step zi in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:sd-burn",
+      "type": "step",
+      "name": "sd-burn",
+      "filePath": "Makefile",
+      "summary": "Defines automation step sd-burn in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:spi.img",
+      "type": "step",
+      "name": "spi.img",
+      "filePath": "Makefile",
+      "summary": "Defines automation step spi.img in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:result-spi",
+      "type": "step",
+      "name": "result-spi",
+      "filePath": "Makefile",
+      "summary": "Defines automation step result-spi in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:nix",
+      "type": "step",
+      "name": "nix",
+      "filePath": "Makefile",
+      "summary": "Defines automation step nix in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:nix-upgrade",
+      "type": "step",
+      "name": "nix-upgrade",
+      "filePath": "Makefile",
+      "summary": "Defines automation step nix-upgrade in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:all",
+      "type": "step",
+      "name": "all",
+      "filePath": "Makefile",
+      "summary": "Defines automation step all in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:sudo",
+      "type": "step",
+      "name": "sudo",
+      "filePath": "Makefile",
+      "summary": "Defines automation step sudo in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:os",
+      "type": "step",
+      "name": "os",
+      "filePath": "Makefile",
+      "summary": "Defines automation step os in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:clean",
+      "type": "step",
+      "name": "clean",
+      "filePath": "Makefile",
+      "summary": "Defines automation step clean in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:update",
+      "type": "step",
+      "name": "update",
+      "filePath": "Makefile",
+      "summary": "Defines automation step update in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:nvim",
+      "type": "step",
+      "name": "nvim",
+      "filePath": "Makefile",
+      "summary": "Defines automation step nvim in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:resh",
+      "type": "step",
+      "name": "resh",
+      "filePath": "Makefile",
+      "summary": "Defines automation step resh in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:Makefile:kanata",
+      "type": "step",
+      "name": "kanata",
+      "filePath": "Makefile",
+      "summary": "Defines automation step kanata in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Introduces the dotfiles repository structure, installation flow, and primary maintenance commands.",
+      "tags": [
+        "documentation",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:checkmake.ini",
+      "type": "config",
+      "name": "checkmake.ini",
+      "filePath": "checkmake.ini",
+      "summary": "Configures behavior for checkmake.ini within this repository.",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:cliff.toml",
+      "type": "config",
+      "name": "cliff.toml",
+      "filePath": "cliff.toml",
+      "summary": "Configures behavior for cliff.toml within this repository.",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:gitmessage.txt",
+      "type": "document",
+      "name": "gitmessage.txt",
+      "filePath": "gitmessage.txt",
+      "summary": "Documents guidance and operational context in gitmessage.txt.",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:gptcomplete.zsh",
+      "type": "file",
+      "name": "gptcomplete.zsh",
+      "filePath": "gptcomplete.zsh",
+      "summary": "Defines gptcomplete.zsh as part of the repository's script layer.",
+      "tags": [
+        "automation",
+        "shell"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:gptcomplete.zsh:_complete_with_llm",
+      "type": "function",
+      "name": "_complete_with_llm",
+      "filePath": "gptcomplete.zsh",
+      "lineRange": [
+        3,
+        61
+      ],
+      "summary": "Implements _complete_with_llm in gptcomplete.zsh.",
+      "tags": [
+        "function",
+        "script"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:renovate.json",
+      "type": "config",
+      "name": "renovate.json",
+      "filePath": "renovate.json",
+      "summary": "Configures behavior for renovate.json within this repository.",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:agent/BASE_AGENTS.md",
+      "type": "document",
+      "name": "BASE_AGENTS.md",
+      "filePath": "agent/BASE_AGENTS.md",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "documentation",
+        "agent-tooling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:agent/Makefile",
+      "type": "pipeline",
+      "name": "Makefile",
+      "filePath": "agent/Makefile",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "ci-cd",
+        "build-system",
+        "agent-tooling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "step:agent/Makefile:all",
+      "type": "step",
+      "name": "all",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step all in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:dev",
+      "type": "step",
+      "name": "dev",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step dev in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:skills",
+      "type": "step",
+      "name": "skills",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step skills in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:hermes",
+      "type": "step",
+      "name": "hermes",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step hermes in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:multica",
+      "type": "step",
+      "name": "multica",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step multica in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:openchamber",
+      "type": "step",
+      "name": "openchamber",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step openchamber in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:markitdown",
+      "type": "step",
+      "name": "markitdown",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step markitdown in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:agent-browser",
+      "type": "step",
+      "name": "agent-browser",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step agent-browser in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:understand",
+      "type": "step",
+      "name": "understand",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step understand in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:chorus",
+      "type": "step",
+      "name": "chorus",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step chorus in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:agents",
+      "type": "step",
+      "name": "agents",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step agents in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:pi",
+      "type": "step",
+      "name": "pi",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step pi in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:pi-ext",
+      "type": "step",
+      "name": "pi-ext",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step pi-ext in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:pi-observational-memory",
+      "type": "step",
+      "name": "pi-observational-memory",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step pi-observational-memory in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:pi-minimal-subagent",
+      "type": "step",
+      "name": "pi-minimal-subagent",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step pi-minimal-subagent in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:pi-fork",
+      "type": "step",
+      "name": "pi-fork",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step pi-fork in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:pi-codemapper",
+      "type": "step",
+      "name": "pi-codemapper",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step pi-codemapper in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:pi-rtk-optimizer",
+      "type": "step",
+      "name": "pi-rtk-optimizer",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step pi-rtk-optimizer in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:task-factory",
+      "type": "step",
+      "name": "task-factory",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step task-factory in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:omp",
+      "type": "step",
+      "name": "omp",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step omp in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:omo",
+      "type": "step",
+      "name": "omo",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step omo in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:clean-tools",
+      "type": "step",
+      "name": "clean-tools",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step clean-tools in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:opencode",
+      "type": "step",
+      "name": "opencode",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step opencode in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:agent/Makefile:merge-config",
+      "type": "step",
+      "name": "merge-config",
+      "filePath": "agent/Makefile",
+      "summary": "Defines automation step merge-config in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:agent/merge-config.sh",
+      "type": "file",
+      "name": "merge-config.sh",
+      "filePath": "agent/merge-config.sh",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "automation",
+        "agent-tooling",
+        "shell"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:agent/merge-config.sh:strip_jsonc",
+      "type": "function",
+      "name": "strip_jsonc",
+      "filePath": "agent/merge-config.sh",
+      "lineRange": [
+        30,
+        112
+      ],
+      "summary": "Implements strip_jsonc in merge-config.sh.",
+      "tags": [
+        "function",
+        "script"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:agent/config/mcp.jsonc",
+      "type": "config",
+      "name": "mcp.jsonc",
+      "filePath": "agent/config/mcp.jsonc",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "configuration",
+        "agent-tooling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:agent/config/plugins.jsonc",
+      "type": "config",
+      "name": "plugins.jsonc",
+      "filePath": "agent/config/plugins.jsonc",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "configuration",
+        "agent-tooling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:agent/config/providers.jsonc",
+      "type": "config",
+      "name": "providers.jsonc",
+      "filePath": "agent/config/providers.jsonc",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "configuration",
+        "agent-tooling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/.envrc",
+      "type": "service",
+      "name": ".envrc",
+      "filePath": "k8s/.envrc",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/AGENTS.md",
+      "type": "service",
+      "name": "AGENTS.md",
+      "filePath": "k8s/AGENTS.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "service:k8s/CLOUDFLARE_TUNNEL_SETUP.md",
+      "type": "service",
+      "name": "CLOUDFLARE_TUNNEL_SETUP.md",
+      "filePath": "k8s/CLOUDFLARE_TUNNEL_SETUP.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/DEPLOYMENT_VALIDATION.md",
+      "type": "service",
+      "name": "DEPLOYMENT_VALIDATION.md",
+      "filePath": "k8s/DEPLOYMENT_VALIDATION.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "service:k8s/DOTFILE_SECURITY.md",
+      "type": "service",
+      "name": "DOTFILE_SECURITY.md",
+      "filePath": "k8s/DOTFILE_SECURITY.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/ENV_CONFIGURATION.md",
+      "type": "service",
+      "name": "ENV_CONFIGURATION.md",
+      "filePath": "k8s/ENV_CONFIGURATION.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:k8s/Makefile",
+      "type": "pipeline",
+      "name": "Makefile",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation steps and operational targets in Makefile.",
+      "tags": [
+        "ci-cd",
+        "build-system",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "step:k8s/Makefile:status",
+      "type": "step",
+      "name": "status",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step status in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:setup",
+      "type": "step",
+      "name": "setup",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step setup in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:clean_evicted",
+      "type": "step",
+      "name": "clean_evicted",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step clean_evicted in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:check",
+      "type": "step",
+      "name": "check",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step check in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:k3s",
+      "type": "step",
+      "name": "k3s",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step k3s in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:config",
+      "type": "step",
+      "name": "config",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step config in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:webdl",
+      "type": "step",
+      "name": "webdl",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step webdl in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:n8n",
+      "type": "step",
+      "name": "n8n",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step n8n in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:stable",
+      "type": "step",
+      "name": "stable",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step stable in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:traefik",
+      "type": "step",
+      "name": "traefik",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step traefik in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:jetstack",
+      "type": "step",
+      "name": "jetstack",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step jetstack in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:cilium",
+      "type": "step",
+      "name": "cilium",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step cilium in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:helm",
+      "type": "step",
+      "name": "helm",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step helm in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:crossplane",
+      "type": "step",
+      "name": "crossplane",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step crossplane in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:cert-manager",
+      "type": "step",
+      "name": "cert-manager",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step cert-manager in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:metallb",
+      "type": "step",
+      "name": "metallb",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step metallb in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:ingress",
+      "type": "step",
+      "name": "ingress",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step ingress in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:gitops",
+      "type": "step",
+      "name": "gitops",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step gitops in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:flux-bootstrap",
+      "type": "step",
+      "name": "flux-bootstrap",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step flux-bootstrap in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:destroy",
+      "type": "step",
+      "name": "destroy",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step destroy in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:create",
+      "type": "step",
+      "name": "create",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step create in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:kubeconfig",
+      "type": "step",
+      "name": "kubeconfig",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step kubeconfig in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:logging",
+      "type": "step",
+      "name": "logging",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step logging in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:cost",
+      "type": "step",
+      "name": "cost",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step cost in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:delete_namespace",
+      "type": "step",
+      "name": "delete_namespace",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step delete_namespace in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:k8s/Makefile:tunnel_create",
+      "type": "step",
+      "name": "tunnel_create",
+      "filePath": "k8s/Makefile",
+      "summary": "Defines automation step tunnel_create in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/PLAN.md",
+      "type": "service",
+      "name": "PLAN.md",
+      "filePath": "k8s/PLAN.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/QUICKSTART_ENV.md",
+      "type": "service",
+      "name": "QUICKSTART_ENV.md",
+      "filePath": "k8s/QUICKSTART_ENV.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/README.md",
+      "type": "service",
+      "name": "README.md",
+      "filePath": "k8s/README.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/SECURITY.md",
+      "type": "service",
+      "name": "SECURITY.md",
+      "filePath": "k8s/SECURITY.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "service:k8s/devbox.json",
+      "type": "service",
+      "name": "devbox.json",
+      "filePath": "k8s/devbox.json",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/providers.tf",
+      "type": "resource",
+      "name": "providers.tf",
+      "filePath": "k8s/providers.tf",
+      "summary": "Defines Terraform-backed infrastructure or cluster provisioning settings for the Kubernetes environment.",
+      "tags": [
+        "infrastructure",
+        "kubernetes",
+        "terraform"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/proxmox_k8s.tf",
+      "type": "resource",
+      "name": "proxmox_k8s.tf",
+      "filePath": "k8s/proxmox_k8s.tf",
+      "summary": "Defines Terraform-backed infrastructure or cluster provisioning settings for the Kubernetes environment.",
+      "tags": [
+        "infrastructure",
+        "kubernetes",
+        "terraform"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/proxmox_k8s.tf:local_file.kubeconfig",
+      "type": "resource",
+      "name": "local_file.kubeconfig",
+      "filePath": "k8s/proxmox_k8s.tf",
+      "summary": "Defines local_file resource local_file.kubeconfig.",
+      "tags": [
+        "resource",
+        "infrastructure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/proxmox_k8s.tf:local_file.talosconfig",
+      "type": "resource",
+      "name": "local_file.talosconfig",
+      "filePath": "k8s/proxmox_k8s.tf",
+      "summary": "Defines local_file resource local_file.talosconfig.",
+      "tags": [
+        "resource",
+        "infrastructure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/proxmox_k8s.tf:module.talos-k8s-cluster",
+      "type": "resource",
+      "name": "module.talos-k8s-cluster",
+      "filePath": "k8s/proxmox_k8s.tf",
+      "summary": "Defines module resource module.talos-k8s-cluster.",
+      "tags": [
+        "resource",
+        "infrastructure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/vars.tf",
+      "type": "resource",
+      "name": "vars.tf",
+      "filePath": "k8s/vars.tf",
+      "summary": "Defines Terraform-backed infrastructure or cluster provisioning settings for the Kubernetes environment.",
+      "tags": [
+        "infrastructure",
+        "kubernetes",
+        "terraform"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/app.yaml",
+      "type": "service",
+      "name": "app.yaml",
+      "filePath": "k8s/manifest/base/app.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/base/deletefailedpods.yaml",
+      "type": "service",
+      "name": "deletefailedpods.yaml",
+      "filePath": "k8s/manifest/base/deletefailedpods.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/base/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/authentik/HelmRelease.yaml",
+      "type": "service",
+      "name": "HelmRelease.yaml",
+      "filePath": "k8s/manifest/base/authentik/HelmRelease.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/authentik/HelmRepository.yaml",
+      "type": "service",
+      "name": "HelmRepository.yaml",
+      "filePath": "k8s/manifest/base/authentik/HelmRepository.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/authentik/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/base/authentik/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/authentik/ns.yaml",
+      "type": "service",
+      "name": "ns.yaml",
+      "filePath": "k8s/manifest/base/authentik/ns.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/longhorn/helmrelease.yaml",
+      "type": "service",
+      "name": "helmrelease.yaml",
+      "filePath": "k8s/manifest/base/longhorn/helmrelease.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/longhorn/helmrepo.yaml",
+      "type": "service",
+      "name": "helmrepo.yaml",
+      "filePath": "k8s/manifest/base/longhorn/helmrepo.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/longhorn/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/base/longhorn/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/longhorn/namespace.yaml",
+      "type": "service",
+      "name": "namespace.yaml",
+      "filePath": "k8s/manifest/base/longhorn/namespace.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/n8n/ingressroute.yaml",
+      "type": "service",
+      "name": "ingressroute.yaml",
+      "filePath": "k8s/manifest/base/n8n/ingressroute.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/n8n/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/base/n8n/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/n8n/n8n.yaml",
+      "type": "service",
+      "name": "n8n.yaml",
+      "filePath": "k8s/manifest/base/n8n/n8n.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/base/n8n/ns.yaml",
+      "type": "service",
+      "name": "ns.yaml",
+      "filePath": "k8s/manifest/base/n8n/ns.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/traefik/AUTHENTIK_SETUP.md",
+      "type": "service",
+      "name": "AUTHENTIK_SETUP.md",
+      "filePath": "k8s/manifest/base/traefik/AUTHENTIK_SETUP.md",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/base/traefik/HelmRelease.yaml",
+      "type": "service",
+      "name": "HelmRelease.yaml",
+      "filePath": "k8s/manifest/base/traefik/HelmRelease.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/base/traefik/HelmRepository.yaml",
+      "type": "service",
+      "name": "HelmRepository.yaml",
+      "filePath": "k8s/manifest/base/traefik/HelmRepository.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/traefik/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/base/traefik/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/traefik/middleware-authentik.yaml",
+      "type": "service",
+      "name": "middleware-authentik.yaml",
+      "filePath": "k8s/manifest/base/traefik/middleware-authentik.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/traefik/ns.yaml",
+      "type": "service",
+      "name": "ns.yaml",
+      "filePath": "k8s/manifest/base/traefik/ns.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/authentik/authentik.yaml",
+      "type": "service",
+      "name": "authentik.yaml",
+      "filePath": "k8s/manifest/initialSetup/authentik/authentik.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/authentik/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/initialSetup/authentik/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/authentik/ns.yaml",
+      "type": "service",
+      "name": "ns.yaml",
+      "filePath": "k8s/manifest/initialSetup/authentik/ns.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/gitops/authentik.yaml",
+      "type": "service",
+      "name": "authentik.yaml",
+      "filePath": "k8s/manifest/initialSetup/gitops/authentik.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/gitops/gitrepository.yaml",
+      "type": "service",
+      "name": "gitrepository.yaml",
+      "filePath": "k8s/manifest/initialSetup/gitops/gitrepository.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/gitops/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/initialSetup/gitops/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/gitops/n8n.yaml",
+      "type": "service",
+      "name": "n8n.yaml",
+      "filePath": "k8s/manifest/initialSetup/gitops/n8n.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/gitops/sample.gitsecret.env",
+      "type": "service",
+      "name": "sample.gitsecret.env",
+      "filePath": "k8s/manifest/initialSetup/gitops/sample.gitsecret.env",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/ingress.yaml",
+      "type": "service",
+      "name": "ingress.yaml",
+      "filePath": "k8s/manifest/initialSetup/ingress.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/ingressroute.yaml",
+      "type": "service",
+      "name": "ingressroute.yaml",
+      "filePath": "k8s/manifest/initialSetup/ingressroute.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/initialSetup/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/ns.yaml",
+      "type": "service",
+      "name": "ns.yaml",
+      "filePath": "k8s/manifest/initialSetup/ns.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/fluent-bit-configmap.yaml",
+      "type": "service",
+      "name": "fluent-bit-configmap.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/fluent-bit-configmap.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/fluent-bit-ds.yaml",
+      "type": "service",
+      "name": "fluent-bit-ds.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/fluent-bit-ds.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/grafana.yaml",
+      "type": "service",
+      "name": "grafana.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/grafana.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/loki-configmap.yaml",
+      "type": "service",
+      "name": "loki-configmap.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/loki-configmap.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/loki.yaml",
+      "type": "service",
+      "name": "loki.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/loki.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/namespace.yaml",
+      "type": "service",
+      "name": "namespace.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/namespace.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/prometheus-configmap.yaml",
+      "type": "service",
+      "name": "prometheus-configmap.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/prometheus-configmap.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/logging/prometheus.yaml",
+      "type": "service",
+      "name": "prometheus.yaml",
+      "filePath": "k8s/manifest/initialSetup/logging/prometheus.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/n8n/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/initialSetup/n8n/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/n8n/litestream.yml",
+      "type": "service",
+      "name": "litestream.yml",
+      "filePath": "k8s/manifest/initialSetup/n8n/litestream.yml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/n8n/ns.yaml",
+      "type": "service",
+      "name": "ns.yaml",
+      "filePath": "k8s/manifest/initialSetup/n8n/ns.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/n8n/webdl.yaml",
+      "type": "service",
+      "name": "webdl.yaml",
+      "filePath": "k8s/manifest/initialSetup/n8n/webdl.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/tunnel/cloudflared.yaml",
+      "type": "service",
+      "name": "cloudflared.yaml",
+      "filePath": "k8s/manifest/initialSetup/tunnel/cloudflared.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/tunnel/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/initialSetup/tunnel/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/tunnel/namespace.yaml",
+      "type": "service",
+      "name": "namespace.yaml",
+      "filePath": "k8s/manifest/initialSetup/tunnel/namespace.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/webdl/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/initialSetup/webdl/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/webdl/ns.yaml",
+      "type": "service",
+      "name": "ns.yaml",
+      "filePath": "k8s/manifest/initialSetup/webdl/ns.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/initialSetup/webdl/webdl.yaml",
+      "type": "service",
+      "name": "webdl.yaml",
+      "filePath": "k8s/manifest/initialSetup/webdl/webdl.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/production/gitops/appkustomization.yaml",
+      "type": "service",
+      "name": "appkustomization.yaml",
+      "filePath": "k8s/manifest/production/gitops/appkustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/production/gitops/gitrepository.yaml",
+      "type": "service",
+      "name": "gitrepository.yaml",
+      "filePath": "k8s/manifest/production/gitops/gitrepository.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/production/gitops/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/production/gitops/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:vim/nvim/.neoconf.json",
+      "type": "config",
+      "name": ".neoconf.json",
+      "filePath": "vim/nvim/.neoconf.json",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "configuration",
+        "neovim"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:vim/nvim/AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "vim/nvim/AGENTS.md",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "documentation",
+        "neovim"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:vim/nvim/lazyvim.json",
+      "type": "config",
+      "name": "lazyvim.json",
+      "filePath": "vim/nvim/lazyvim.json",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "configuration",
+        "neovim"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:vim/nvim/stylua.toml",
+      "type": "config",
+      "name": "stylua.toml",
+      "filePath": "vim/nvim/stylua.toml",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "configuration",
+        "neovim"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/autorun.sh",
+      "type": "file",
+      "name": "autorun.sh",
+      "filePath": "x/autorun.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/dmenu.sh",
+      "type": "file",
+      "name": "dmenu.sh",
+      "filePath": "x/dmenu.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/info.sh",
+      "type": "file",
+      "name": "info.sh",
+      "filePath": "x/info.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/night.sh",
+      "type": "file",
+      "name": "night.sh",
+      "filePath": "x/night.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/util.sh",
+      "type": "file",
+      "name": "util.sh",
+      "filePath": "x/util.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/windowswitcher.sh",
+      "type": "file",
+      "name": "windowswitcher.sh",
+      "filePath": "x/windowswitcher.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/vicinae/scripts/cloudflare-warp-common.sh",
+      "type": "file",
+      "name": "cloudflare-warp-common.sh",
+      "filePath": "x/vicinae/scripts/cloudflare-warp-common.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:x/vicinae/scripts/cloudflare-warp-common.sh:current_warp_status",
+      "type": "function",
+      "name": "current_warp_status",
+      "filePath": "x/vicinae/scripts/cloudflare-warp-common.sh",
+      "lineRange": [
+        11,
+        25
+      ],
+      "summary": "Implements current_warp_status in cloudflare-warp-common.sh.",
+      "tags": [
+        "function",
+        "script"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:x/vicinae/scripts/cloudflare-warp-common.sh:set_warp_state",
+      "type": "function",
+      "name": "set_warp_state",
+      "filePath": "x/vicinae/scripts/cloudflare-warp-common.sh",
+      "lineRange": [
+        27,
+        49
+      ],
+      "summary": "Implements set_warp_state in cloudflare-warp-common.sh.",
+      "tags": [
+        "function",
+        "script"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:x/vicinae/scripts/cloudflare-warp-connect.sh",
+      "type": "file",
+      "name": "cloudflare-warp-connect.sh",
+      "filePath": "x/vicinae/scripts/cloudflare-warp-connect.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/vicinae/scripts/cloudflare-warp-disconnect.sh",
+      "type": "file",
+      "name": "cloudflare-warp-disconnect.sh",
+      "filePath": "x/vicinae/scripts/cloudflare-warp-disconnect.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:x/waybar/config.jsonc",
+      "type": "config",
+      "name": "config.jsonc",
+      "filePath": "x/waybar/config.jsonc",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "configuration",
+        "desktop"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:x/waybar/modules.jsonc",
+      "type": "config",
+      "name": "modules.jsonc",
+      "filePath": "x/waybar/modules.jsonc",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "configuration",
+        "desktop"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:x/waybar/style.css",
+      "type": "file",
+      "name": "style.css",
+      "filePath": "x/waybar/style.css",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:zsh/alias.zsh",
+      "type": "file",
+      "name": "alias.zsh",
+      "filePath": "zsh/alias.zsh",
+      "summary": "Configures shell behavior and reusable command-line helpers.",
+      "tags": [
+        "automation",
+        "shell"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:zsh/alias.zsh:scptar",
+      "type": "function",
+      "name": "scptar",
+      "filePath": "zsh/alias.zsh",
+      "lineRange": [
+        10,
+        55
+      ],
+      "summary": "Implements scptar in alias.zsh.",
+      "tags": [
+        "function",
+        "script"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:zsh/alias.zsh:tm",
+      "type": "function",
+      "name": "tm",
+      "filePath": "zsh/alias.zsh",
+      "lineRange": [
+        70,
+        87
+      ],
+      "summary": "Implements tm in alias.zsh.",
+      "tags": [
+        "function",
+        "script"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:zsh/plugins.zsh",
+      "type": "file",
+      "name": "plugins.zsh",
+      "filePath": "zsh/plugins.zsh",
+      "summary": "Configures shell behavior and reusable command-line helpers.",
+      "tags": [
+        "automation",
+        "shell"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:zsh/plugins.zsh:_parse_config_file",
+      "type": "function",
+      "name": "_parse_config_file",
+      "filePath": "zsh/plugins.zsh",
+      "lineRange": [
+        74,
+        97
+      ],
+      "summary": "Implements _parse_config_file in plugins.zsh.",
+      "tags": [
+        "function",
+        "script"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:zsh/tmux_switch.sh",
+      "type": "file",
+      "name": "tmux_switch.sh",
+      "filePath": "zsh/tmux_switch.sh",
+      "summary": "Configures shell behavior and reusable command-line helpers.",
+      "tags": [
+        "automation",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.envrc",
+      "type": "file",
+      "name": ".envrc",
+      "filePath": ".envrc",
+      "summary": "Defines .envrc as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.gitattributes",
+      "type": "file",
+      "name": ".gitattributes",
+      "filePath": ".gitattributes",
+      "summary": "Defines .gitattributes as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.github/dependabot.yml",
+      "type": "config",
+      "name": "dependabot.yml",
+      "filePath": ".github/dependabot.yml",
+      "summary": "Configures behavior for dependabot.yml within this repository.",
+      "tags": [
+        "configuration",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "Defines .understandignore as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:agent/extensions/notify.ts",
+      "type": "file",
+      "name": "notify.ts",
+      "filePath": "agent/extensions/notify.ts",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "agent-tooling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:agent/extensions/notify.ts:detectNotificationSequence",
+      "type": "function",
+      "name": "detectNotificationSequence",
+      "filePath": "agent/extensions/notify.ts",
+      "lineRange": [
+        10,
+        30
+      ],
+      "summary": "Implements detectNotificationSequence in notify.ts.",
+      "tags": [
+        "function",
+        "code"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:agent/extensions/notify.ts:notifyExtension",
+      "type": "function",
+      "name": "notifyExtension",
+      "filePath": "agent/extensions/notify.ts",
+      "lineRange": [
+        46,
+        62
+      ],
+      "summary": "Implements notifyExtension in notify.ts.",
+      "tags": [
+        "function",
+        "code",
+        "exported"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:agent/skills/markitdown/references/api_reference.md",
+      "type": "document",
+      "name": "api_reference.md",
+      "filePath": "agent/skills/markitdown/references/api_reference.md",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "documentation",
+        "agent-tooling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:agent/skills/markitdown/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": "agent/skills/markitdown/SKILL.md",
+      "summary": "Configures local agent tooling, skills, or bootstrap flows used alongside the dotfiles repo.",
+      "tags": [
+        "documentation",
+        "agent-tooling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ahk/layout.ahk",
+      "type": "file",
+      "name": "layout.ahk",
+      "filePath": "ahk/layout.ahk",
+      "summary": "Defines layout.ahk as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ahk/startup.ahk",
+      "type": "file",
+      "name": "startup.ahk",
+      "filePath": "ahk/startup.ahk",
+      "summary": "Defines startup.ahk as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ahk/wheelctrl.ahk",
+      "type": "file",
+      "name": "wheelctrl.ahk",
+      "filePath": "ahk/wheelctrl.ahk",
+      "summary": "Defines wheelctrl.ahk as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:bkup/.default.env",
+      "type": "config",
+      "name": ".default.env",
+      "filePath": "bkup/.default.env",
+      "summary": "Configures behavior for .default.env within this repository.",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:bkup/backup.sh",
+      "type": "file",
+      "name": "backup.sh",
+      "filePath": "bkup/backup.sh",
+      "summary": "Defines backup.sh as part of the repository's script layer.",
+      "tags": [
+        "automation",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:copyq/pop.ini",
+      "type": "config",
+      "name": "pop.ini",
+      "filePath": "copyq/pop.ini",
+      "summary": "Configures behavior for pop.ini within this repository.",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:flake.nix",
+      "type": "file",
+      "name": "flake.nix",
+      "filePath": "flake.nix",
+      "summary": "Defines the flake inputs and top-level NixOS and Home Manager outputs for the dotfiles repository.",
+      "tags": [
+        "nix"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ghostty.config",
+      "type": "file",
+      "name": "ghostty.config",
+      "filePath": "ghostty.config",
+      "summary": "Defines ghostty.config as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:gitconfig",
+      "type": "file",
+      "name": "gitconfig",
+      "filePath": "gitconfig",
+      "summary": "Defines gitconfig as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:gitignore",
+      "type": "file",
+      "name": "gitignore",
+      "filePath": "gitignore",
+      "summary": "Defines gitignore as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:homes/AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "homes/AGENTS.md",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "documentation",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/apps/beeper.nix",
+      "type": "file",
+      "name": "beeper.nix",
+      "filePath": "homes/apps/beeper.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/apps/zen.nix",
+      "type": "file",
+      "name": "zen.nix",
+      "filePath": "homes/apps/zen.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/minf/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/minf/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/modules/base.nix",
+      "type": "file",
+      "name": "base.nix",
+      "filePath": "homes/modules/base.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:homes/modules/dev.nix",
+      "type": "file",
+      "name": "dev.nix",
+      "filePath": "homes/modules/dev.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:homes/modules/gui.nix",
+      "type": "file",
+      "name": "gui.nix",
+      "filePath": "homes/modules/gui.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:homes/modules/node2nix/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/modules/node2nix/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:homes/modules/node2nix/Makefile",
+      "type": "pipeline",
+      "name": "Makefile",
+      "filePath": "homes/modules/node2nix/Makefile",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "ci-cd",
+        "build-system",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:homes/modules/node2nix/Makefile:all",
+      "type": "step",
+      "name": "all",
+      "filePath": "homes/modules/node2nix/Makefile",
+      "summary": "Defines automation step all in Makefile.",
+      "tags": [
+        "automation",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/modules/node2nix/node-env.nix",
+      "type": "file",
+      "name": "node-env.nix",
+      "filePath": "homes/modules/node2nix/node-env.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:homes/modules/node2nix/node-packages.nix",
+      "type": "file",
+      "name": "node-packages.nix",
+      "filePath": "homes/modules/node2nix/node-packages.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:homes/modules/node2nix/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "homes/modules/node2nix/package.json",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "configuration",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/modules/playwright.nix",
+      "type": "file",
+      "name": "playwright.nix",
+      "filePath": "homes/modules/playwright.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/modules/wsl.nix",
+      "type": "file",
+      "name": "wsl.nix",
+      "filePath": "homes/modules/wsl.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/PD0056/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/PD0056/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/PN0093/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/PN0093/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/PN0097/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/PN0097/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/spi/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/spi/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/t440p/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/t440p/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/usb/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/usb/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:homes/x360/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "homes/x360/default.nix",
+      "summary": "Declares Home Manager configuration for shared user settings or a specific host profile.",
+      "tags": [
+        "nix",
+        "home-manager"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:hosts/AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "hosts/AGENTS.md",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "documentation",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/base.nix",
+      "type": "file",
+      "name": "base.nix",
+      "filePath": "hosts/base.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:hosts/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "hosts/default.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:hosts/gui.nix",
+      "type": "file",
+      "name": "gui.nix",
+      "filePath": "hosts/gui.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:hosts/minf/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "hosts/minf/default.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/minf/hardware-configuration.nix",
+      "type": "file",
+      "name": "hardware-configuration.nix",
+      "filePath": "hosts/minf/hardware-configuration.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/spi/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "hosts/spi/default.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/spi/prod.nix",
+      "type": "file",
+      "name": "prod.nix",
+      "filePath": "hosts/spi/prod.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:hosts/spi/sd.nix",
+      "type": "file",
+      "name": "sd.nix",
+      "filePath": "hosts/spi/sd.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/t440p/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "hosts/t440p/default.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/t440p/hardware-configuration.nix",
+      "type": "file",
+      "name": "hardware-configuration.nix",
+      "filePath": "hosts/t440p/hardware-configuration.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/usb/configuration.nix",
+      "type": "file",
+      "name": "configuration.nix",
+      "filePath": "hosts/usb/configuration.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/usb/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "hosts/usb/default.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/usb/hardware-configuration.nix",
+      "type": "file",
+      "name": "hardware-configuration.nix",
+      "filePath": "hosts/usb/hardware-configuration.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:hosts/vocalinux.nix",
+      "type": "file",
+      "name": "vocalinux.nix",
+      "filePath": "hosts/vocalinux.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:hosts/x360/default.nix",
+      "type": "file",
+      "name": "default.nix",
+      "filePath": "hosts/x360/default.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:hosts/x360/hardware-configuration.nix",
+      "type": "file",
+      "name": "hardware-configuration.nix",
+      "filePath": "hosts/x360/hardware-configuration.nix",
+      "summary": "Declares system-level NixOS configuration for shared host behavior or a specific machine.",
+      "tags": [
+        "nix",
+        "host-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/.github/copilot-instructions.md",
+      "type": "service",
+      "name": "copilot-instructions.md",
+      "filePath": "k8s/.github/copilot-instructions.md",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "resource:k8s/aks/k8s.tf",
+      "type": "resource",
+      "name": "k8s.tf",
+      "filePath": "k8s/aks/k8s.tf",
+      "summary": "Defines Terraform-backed infrastructure or cluster provisioning settings for the Kubernetes environment.",
+      "tags": [
+        "infrastructure",
+        "kubernetes",
+        "terraform"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "resource:k8s/aks/k8s.tf:random_string.postfix",
+      "type": "resource",
+      "name": "random_string.postfix",
+      "filePath": "k8s/aks/k8s.tf",
+      "summary": "Defines random_string resource random_string.postfix.",
+      "tags": [
+        "resource",
+        "infrastructure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/aks/k8s.tf:azurerm_resource_group.rg",
+      "type": "resource",
+      "name": "azurerm_resource_group.rg",
+      "filePath": "k8s/aks/k8s.tf",
+      "summary": "Defines azurerm_resource_group resource azurerm_resource_group.rg.",
+      "tags": [
+        "resource",
+        "infrastructure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/aks/k8s.tf:azurerm_kubernetes_cluster.homeaks",
+      "type": "resource",
+      "name": "azurerm_kubernetes_cluster.homeaks",
+      "filePath": "k8s/aks/k8s.tf",
+      "summary": "Defines azurerm_kubernetes_cluster resource azurerm_kubernetes_cluster.homeaks.",
+      "tags": [
+        "resource",
+        "infrastructure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "resource:k8s/aks/k8s.tf:azurerm_kubernetes_cluster_node_pool.workers",
+      "type": "resource",
+      "name": "azurerm_kubernetes_cluster_node_pool.workers",
+      "filePath": "k8s/aks/k8s.tf",
+      "summary": "Defines azurerm_kubernetes_cluster_node_pool resource azurerm_kubernetes_cluster_node_pool.workers.",
+      "tags": [
+        "resource",
+        "infrastructure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/k9s/hotkeys.yaml",
+      "type": "service",
+      "name": "hotkeys.yaml",
+      "filePath": "k8s/k9s/hotkeys.yaml",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/k9s/plugins.yaml",
+      "type": "service",
+      "name": "plugins.yaml",
+      "filePath": "k8s/k9s/plugins.yaml",
+      "summary": "Provides infrastructure or operations material for the Kubernetes subsystem in this repository.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/webdl/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/base/webdl/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/base/webdl/webdl.yaml",
+      "type": "service",
+      "name": "webdl.yaml",
+      "filePath": "k8s/manifest/base/webdl/webdl.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/httptest.yaml",
+      "type": "service",
+      "name": "httptest.yaml",
+      "filePath": "k8s/manifest/httptest.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:k8s/manifest/production/host-config.yaml",
+      "type": "service",
+      "name": "host-config.yaml",
+      "filePath": "k8s/manifest/production/host-config.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:k8s/manifest/production/kustomization.yaml",
+      "type": "service",
+      "name": "kustomization.yaml",
+      "filePath": "k8s/manifest/production/kustomization.yaml",
+      "summary": "Defines Kubernetes resources used to deploy or expose services in the cluster.",
+      "tags": [
+        "deployment",
+        "kubernetes",
+        "yaml"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:kanata/kanata.kbd",
+      "type": "file",
+      "name": "kanata.kbd",
+      "filePath": "kanata/kanata.kbd",
+      "summary": "Defines kanata.kbd as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:kanata/map.kbd",
+      "type": "file",
+      "name": "map.kbd",
+      "filePath": "kanata/map.kbd",
+      "summary": "Defines map.kbd as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lessfilter",
+      "type": "file",
+      "name": "lessfilter",
+      "filePath": "lessfilter",
+      "summary": "Defines lessfilter as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:mpv.conf",
+      "type": "file",
+      "name": "mpv.conf",
+      "filePath": "mpv.conf",
+      "summary": "Defines mpv.conf as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:proj/sample.sh",
+      "type": "file",
+      "name": "sample.sh",
+      "filePath": "proj/sample.sh",
+      "summary": "Defines sample.sh as part of the repository's script layer.",
+      "tags": [
+        "automation",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:secrets/secrets.nix",
+      "type": "file",
+      "name": "secrets.nix",
+      "filePath": "secrets/secrets.nix",
+      "summary": "Stores encrypted secret material or secret declarations referenced by the Nix configuration.",
+      "tags": [
+        "nix",
+        "secrets"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:secrets/user-password-hash.age",
+      "type": "file",
+      "name": "user-password-hash.age",
+      "filePath": "secrets/user-password-hash.age",
+      "summary": "Stores encrypted secret material or secret declarations referenced by the Nix configuration.",
+      "tags": [
+        "secrets"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:secrets/wifi-secrets.age",
+      "type": "file",
+      "name": "wifi-secrets.age",
+      "filePath": "secrets/wifi-secrets.age",
+      "summary": "Stores encrypted secret material or secret declarations referenced by the Nix configuration.",
+      "tags": [
+        "secrets"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:systemd/home-user-mnt-abc.mount",
+      "type": "file",
+      "name": "home-user-mnt-abc.mount",
+      "filePath": "systemd/home-user-mnt-abc.mount",
+      "summary": "Defines home-user-mnt-abc.mount as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:systemd/kbrequest.target",
+      "type": "file",
+      "name": "kbrequest.target",
+      "filePath": "systemd/kbrequest.target",
+      "summary": "Defines kbrequest.target as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:systemd/startx.service",
+      "type": "file",
+      "name": "startx.service",
+      "filePath": "systemd/startx.service",
+      "summary": "Defines startx.service as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tmux.conf",
+      "type": "file",
+      "name": "tmux.conf",
+      "filePath": "tmux.conf",
+      "summary": "Defines tmux.conf as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:vim/nvim/init.lua",
+      "type": "file",
+      "name": "init.lua",
+      "filePath": "vim/nvim/init.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/config/autocmds.lua",
+      "type": "file",
+      "name": "autocmds.lua",
+      "filePath": "vim/nvim/lua/config/autocmds.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/config/keymaps.lua",
+      "type": "file",
+      "name": "keymaps.lua",
+      "filePath": "vim/nvim/lua/config/keymaps.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/config/lazy.lua",
+      "type": "file",
+      "name": "lazy.lua",
+      "filePath": "vim/nvim/lua/config/lazy.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/config/options.lua",
+      "type": "file",
+      "name": "options.lua",
+      "filePath": "vim/nvim/lua/config/options.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/plugins/core.lua",
+      "type": "file",
+      "name": "core.lua",
+      "filePath": "vim/nvim/lua/plugins/core.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:vim/nvim/lua/plugins/disabled.lua",
+      "type": "file",
+      "name": "disabled.lua",
+      "filePath": "vim/nvim/lua/plugins/disabled.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/plugins/dropbar.lua",
+      "type": "file",
+      "name": "dropbar.lua",
+      "filePath": "vim/nvim/lua/plugins/dropbar.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/plugins/fzf.lua",
+      "type": "file",
+      "name": "fzf.lua",
+      "filePath": "vim/nvim/lua/plugins/fzf.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/plugins/opencode.lua",
+      "type": "file",
+      "name": "opencode.lua",
+      "filePath": "vim/nvim/lua/plugins/opencode.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vim/nvim/lua/plugins/snacks.lua",
+      "type": "file",
+      "name": "snacks.lua",
+      "filePath": "vim/nvim/lua/plugins/snacks.lua",
+      "summary": "Configures Neovim behavior, plugins, or editor defaults for this dotfiles setup.",
+      "tags": [
+        "neovim",
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wezterm/wezterm_base.lua",
+      "type": "file",
+      "name": "wezterm_base.lua",
+      "filePath": "wezterm/wezterm_base.lua",
+      "summary": "Defines wezterm_base.lua as part of the repository's code layer.",
+      "tags": [
+        "lua"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wezterm/wezterm.lua",
+      "type": "file",
+      "name": "wezterm.lua",
+      "filePath": "wezterm/wezterm.lua",
+      "summary": "Defines wezterm.lua as part of the repository's code layer.",
+      "tags": [
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wsl/wsl.conf",
+      "type": "file",
+      "name": "wsl.conf",
+      "filePath": "wsl/wsl.conf",
+      "summary": "Defines wsl.conf as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wsl/wslconfig",
+      "type": "file",
+      "name": "wslconfig",
+      "filePath": "wsl/wslconfig",
+      "summary": "Defines wslconfig as part of the repository's code layer.",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/hyprland/app.sh",
+      "type": "file",
+      "name": "app.sh",
+      "filePath": "x/hyprland/app.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/hyprland/general.conf",
+      "type": "file",
+      "name": "general.conf",
+      "filePath": "x/hyprland/general.conf",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:x/hyprland/local.conf",
+      "type": "file",
+      "name": "local.conf",
+      "filePath": "x/hyprland/local.conf",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/hyprland/switch.sh",
+      "type": "file",
+      "name": "switch.sh",
+      "filePath": "x/hyprland/switch.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/hyprland/vars.conf",
+      "type": "file",
+      "name": "vars.conf",
+      "filePath": "x/hyprland/vars.conf",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/i3/config",
+      "type": "file",
+      "name": "config",
+      "filePath": "x/i3/config",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:x/niri.kdl",
+      "type": "file",
+      "name": "niri.kdl",
+      "filePath": "x/niri.kdl",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:x/waybar/scripts/cycle-sinks.sh",
+      "type": "file",
+      "name": "cycle-sinks.sh",
+      "filePath": "x/waybar/scripts/cycle-sinks.sh",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "automation",
+        "desktop",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/xmobarrc",
+      "type": "file",
+      "name": "xmobarrc",
+      "filePath": "x/xmobarrc",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/xmonad.hs",
+      "type": "file",
+      "name": "xmonad.hs",
+      "filePath": "x/xmonad.hs",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:x/Xresources",
+      "type": "file",
+      "name": "Xresources",
+      "filePath": "x/Xresources",
+      "summary": "Defines desktop session behavior, key utilities, or window manager configuration.",
+      "tags": [
+        "desktop"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:yazi/plugins/enter.yazi/main.lua",
+      "type": "file",
+      "name": "main.lua",
+      "filePath": "yazi/plugins/enter.yazi/main.lua",
+      "summary": "Defines main.lua as part of the repository's code layer.",
+      "tags": [
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:yazi/plugins/tab.yazi/main.lua",
+      "type": "file",
+      "name": "main.lua",
+      "filePath": "yazi/plugins/tab.yazi/main.lua",
+      "summary": "Defines main.lua as part of the repository's code layer.",
+      "tags": [
+        "lua"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:yazi/run.zsh",
+      "type": "file",
+      "name": "run.zsh",
+      "filePath": "yazi/run.zsh",
+      "summary": "Defines run.zsh as part of the repository's script layer.",
+      "tags": [
+        "automation",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:zsh/zlogout",
+      "type": "file",
+      "name": "zlogout",
+      "filePath": "zsh/zlogout",
+      "summary": "Configures shell behavior and reusable command-line helpers.",
+      "tags": [
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:zsh/zprofile",
+      "type": "file",
+      "name": "zprofile",
+      "filePath": "zsh/zprofile",
+      "summary": "Configures shell behavior and reusable command-line helpers.",
+      "tags": [
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:zsh/zshenv",
+      "type": "file",
+      "name": "zshenv",
+      "filePath": "zsh/zshenv",
+      "summary": "Configures shell behavior and reusable command-line helpers.",
+      "tags": [
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:zsh/zshrc",
+      "type": "file",
+      "name": "zshrc",
+      "filePath": "zsh/zshrc",
+      "summary": "Configures shell behavior and reusable command-line helpers.",
+      "tags": [
+        "shell"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:.pre-commit-config.yaml",
+      "target": "pipeline:Makefile",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "file:flake.nix",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "file:homes/default.nix",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "file:hosts/default.nix",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:home-manager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:xx",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:apphash_update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:dev",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:up",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:zi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:sd-burn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:spi.img",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:result-spi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:nix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:nix-upgrade",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:all",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:sudo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:os",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:clean",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:nvim",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:resh",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "step:Makefile:kanata",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "file:flake.nix",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "file:homes/default.nix",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:Makefile",
+      "target": "file:hosts/default.nix",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:flake.nix",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "pipeline:Makefile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:gptcomplete.zsh",
+      "target": "function:gptcomplete.zsh:_complete_with_llm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:all",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:dev",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:skills",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:hermes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:multica",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:openchamber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:markitdown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:agent-browser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:understand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:chorus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:agents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:pi",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:pi-ext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:pi-observational-memory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:pi-minimal-subagent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:pi-fork",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:pi-codemapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:pi-rtk-optimizer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:task-factory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:omp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:omo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:clean-tools",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:opencode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "step:agent/Makefile:merge-config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:agent/Makefile",
+      "target": "file:agent/merge-config.sh",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:agent/merge-config.sh",
+      "target": "function:agent/merge-config.sh:strip_jsonc",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "config:agent/config/mcp.jsonc",
+      "target": "file:agent/merge-config.sh",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:agent/config/plugins.jsonc",
+      "target": "file:agent/merge-config.sh",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:agent/config/providers.jsonc",
+      "target": "file:agent/merge-config.sh",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:status",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:setup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:clean_evicted",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:check",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:k3s",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:webdl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:n8n",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:stable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:traefik",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:jetstack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:cilium",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:helm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:crossplane",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:cert-manager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:metallb",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:ingress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:gitops",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:flux-bootstrap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:destroy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:create",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:kubeconfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:logging",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:cost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:delete_namespace",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "step:k8s/Makefile:tunnel_create",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "pipeline:k8s/Makefile",
+      "target": "resource:k8s/providers.tf",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "resource:k8s/proxmox_k8s.tf",
+      "target": "resource:k8s/proxmox_k8s.tf:local_file.kubeconfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "resource:k8s/proxmox_k8s.tf",
+      "target": "resource:k8s/proxmox_k8s.tf:local_file.talosconfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "resource:k8s/proxmox_k8s.tf",
+      "target": "resource:k8s/proxmox_k8s.tf:module.talos-k8s-cluster",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "resource:k8s/proxmox_k8s.tf",
+      "target": "resource:k8s/proxmox_k8s.tf:local_file.kubeconfig",
+      "type": "provisions",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "resource:k8s/proxmox_k8s.tf",
+      "target": "resource:k8s/proxmox_k8s.tf:local_file.talosconfig",
+      "type": "provisions",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "resource:k8s/proxmox_k8s.tf",
+      "target": "resource:k8s/proxmox_k8s.tf:module.talos-k8s-cluster",
+      "type": "provisions",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:x/vicinae/scripts/cloudflare-warp-common.sh",
+      "target": "function:x/vicinae/scripts/cloudflare-warp-common.sh:current_warp_status",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:x/vicinae/scripts/cloudflare-warp-common.sh",
+      "target": "function:x/vicinae/scripts/cloudflare-warp-common.sh:set_warp_state",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:zsh/alias.zsh",
+      "target": "function:zsh/alias.zsh:scptar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:zsh/alias.zsh",
+      "target": "function:zsh/alias.zsh:tm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:zsh/plugins.zsh",
+      "target": "function:zsh/plugins.zsh:_parse_config_file",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:agent/extensions/notify.ts",
+      "target": "function:agent/extensions/notify.ts:detectNotificationSequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:agent/extensions/notify.ts",
+      "target": "function:agent/extensions/notify.ts:notifyExtension",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:agent/extensions/notify.ts",
+      "target": "function:agent/extensions/notify.ts:notifyExtension",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline:homes/modules/node2nix/Makefile",
+      "target": "step:homes/modules/node2nix/Makefile:all",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "resource:k8s/aks/k8s.tf",
+      "target": "resource:k8s/aks/k8s.tf:random_string.postfix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "resource:k8s/aks/k8s.tf",
+      "target": "resource:k8s/aks/k8s.tf:azurerm_resource_group.rg",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "resource:k8s/aks/k8s.tf",
+      "target": "resource:k8s/aks/k8s.tf:azurerm_kubernetes_cluster.homeaks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "resource:k8s/aks/k8s.tf",
+      "target": "resource:k8s/aks/k8s.tf:azurerm_kubernetes_cluster_node_pool.workers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "resource:k8s/aks/k8s.tf",
+      "target": "resource:k8s/aks/k8s.tf:random_string.postfix",
+      "type": "provisions",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "resource:k8s/aks/k8s.tf",
+      "target": "resource:k8s/aks/k8s.tf:azurerm_resource_group.rg",
+      "type": "provisions",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "resource:k8s/aks/k8s.tf",
+      "target": "resource:k8s/aks/k8s.tf:azurerm_kubernetes_cluster.homeaks",
+      "type": "provisions",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "resource:k8s/aks/k8s.tf",
+      "target": "resource:k8s/aks/k8s.tf:azurerm_kubernetes_cluster_node_pool.workers",
+      "type": "provisions",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:core",
+      "name": "Core",
+      "description": "Core application files",
+      "nodeIds": [
+        "file:gptcomplete.zsh",
+        "file:agent/merge-config.sh",
+        "file:x/autorun.sh",
+        "file:x/dmenu.sh",
+        "file:x/info.sh",
+        "file:x/night.sh",
+        "file:x/util.sh",
+        "file:x/windowswitcher.sh",
+        "file:x/vicinae/scripts/cloudflare-warp-common.sh",
+        "file:x/vicinae/scripts/cloudflare-warp-connect.sh",
+        "file:x/vicinae/scripts/cloudflare-warp-disconnect.sh",
+        "file:x/waybar/style.css",
+        "file:zsh/alias.zsh",
+        "file:zsh/plugins.zsh",
+        "file:zsh/tmux_switch.sh",
+        "file:.envrc",
+        "file:.gitattributes",
+        "file:.understand-anything/.understandignore",
+        "file:agent/extensions/notify.ts",
+        "file:ahk/layout.ahk",
+        "file:ahk/startup.ahk",
+        "file:ahk/wheelctrl.ahk",
+        "file:bkup/backup.sh",
+        "file:flake.nix",
+        "file:ghostty.config",
+        "file:gitconfig",
+        "file:gitignore",
+        "file:homes/apps/beeper.nix",
+        "file:homes/apps/zen.nix",
+        "file:homes/default.nix",
+        "file:homes/minf/default.nix",
+        "file:homes/modules/base.nix",
+        "file:homes/modules/dev.nix",
+        "file:homes/modules/gui.nix",
+        "file:homes/modules/node2nix/default.nix",
+        "file:homes/modules/node2nix/node-env.nix",
+        "file:homes/modules/node2nix/node-packages.nix",
+        "file:homes/modules/playwright.nix",
+        "file:homes/modules/wsl.nix",
+        "file:homes/PD0056/default.nix",
+        "file:homes/PN0093/default.nix",
+        "file:homes/PN0097/default.nix",
+        "file:homes/spi/default.nix",
+        "file:homes/t440p/default.nix",
+        "file:homes/usb/default.nix",
+        "file:homes/x360/default.nix",
+        "file:hosts/base.nix",
+        "file:hosts/default.nix",
+        "file:hosts/gui.nix",
+        "file:hosts/minf/default.nix",
+        "file:hosts/minf/hardware-configuration.nix",
+        "file:hosts/spi/default.nix",
+        "file:hosts/spi/prod.nix",
+        "file:hosts/spi/sd.nix",
+        "file:hosts/t440p/default.nix",
+        "file:hosts/t440p/hardware-configuration.nix",
+        "file:hosts/usb/configuration.nix",
+        "file:hosts/usb/default.nix",
+        "file:hosts/usb/hardware-configuration.nix",
+        "file:hosts/vocalinux.nix",
+        "file:hosts/x360/default.nix",
+        "file:hosts/x360/hardware-configuration.nix",
+        "file:kanata/kanata.kbd",
+        "file:kanata/map.kbd",
+        "file:lessfilter",
+        "file:mpv.conf",
+        "file:proj/sample.sh",
+        "file:secrets/secrets.nix",
+        "file:secrets/user-password-hash.age",
+        "file:secrets/wifi-secrets.age",
+        "file:systemd/home-user-mnt-abc.mount",
+        "file:systemd/kbrequest.target",
+        "file:systemd/startx.service",
+        "file:tmux.conf",
+        "file:vim/nvim/init.lua",
+        "file:vim/nvim/lua/plugins/core.lua",
+        "file:vim/nvim/lua/plugins/disabled.lua",
+        "file:vim/nvim/lua/plugins/dropbar.lua",
+        "file:vim/nvim/lua/plugins/fzf.lua",
+        "file:vim/nvim/lua/plugins/opencode.lua",
+        "file:vim/nvim/lua/plugins/snacks.lua",
+        "file:wezterm/wezterm_base.lua",
+        "file:wezterm/wezterm.lua",
+        "file:wsl/wsl.conf",
+        "file:wsl/wslconfig",
+        "file:x/hyprland/app.sh",
+        "file:x/hyprland/general.conf",
+        "file:x/hyprland/local.conf",
+        "file:x/hyprland/switch.sh",
+        "file:x/hyprland/vars.conf",
+        "file:x/niri.kdl",
+        "file:x/waybar/scripts/cycle-sinks.sh",
+        "file:x/xmobarrc",
+        "file:x/xmonad.hs",
+        "file:x/Xresources",
+        "file:yazi/plugins/enter.yazi/main.lua",
+        "file:yazi/plugins/tab.yazi/main.lua",
+        "file:yazi/run.zsh",
+        "file:zsh/zlogout",
+        "file:zsh/zprofile",
+        "file:zsh/zshenv",
+        "file:zsh/zshrc"
+      ]
+    },
+    {
+      "id": "layer:configuration-layer",
+      "name": "Configuration Layer",
+      "description": "Application configuration and environment settings",
+      "nodeIds": [
+        "file:vim/nvim/lua/config/autocmds.lua",
+        "file:vim/nvim/lua/config/keymaps.lua",
+        "file:vim/nvim/lua/config/lazy.lua",
+        "file:vim/nvim/lua/config/options.lua",
+        "file:x/i3/config"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Core",
+      "description": "Core application files. Key files: gptcomplete.zsh, autorun.sh, dmenu.sh, info.sh, night.sh, util.sh, windowswitcher.sh, cloudflare-warp-common.sh, cloudflare-warp-connect.sh, cloudflare-warp-disconnect.sh, style.css, alias.zsh, plugins.zsh, tmux_switch.sh, .envrc, .gitattributes, .understandignore, notify.ts, layout.ahk, startup.ahk, wheelctrl.ahk, backup.sh, ghostty.config, gitconfig, gitignore, beeper.nix, zen.nix, default.nix, base.nix, dev.nix, gui.nix, default.nix, node-env.nix, node-packages.nix, playwright.nix, wsl.nix, default.nix, default.nix, default.nix, default.nix, default.nix, default.nix, default.nix, base.nix, gui.nix, default.nix, hardware-configuration.nix, default.nix, prod.nix, sd.nix, default.nix, hardware-configuration.nix, configuration.nix, default.nix, hardware-configuration.nix, vocalinux.nix, default.nix, hardware-configuration.nix, kanata.kbd, map.kbd, lessfilter, mpv.conf, sample.sh, secrets.nix, user-password-hash.age, wifi-secrets.age, home-user-mnt-abc.mount, kbrequest.target, startx.service, tmux.conf, init.lua, core.lua, disabled.lua, dropbar.lua, fzf.lua, opencode.lua, snacks.lua, wezterm_base.lua, wezterm.lua, wsl.conf, wslconfig, app.sh, general.conf, local.conf, switch.sh, vars.conf, niri.kdl, cycle-sinks.sh, xmobarrc, xmonad.hs, Xresources, main.lua, main.lua, run.zsh, zlogout, zprofile, zshenv, zshrc, merge-config.sh, flake.nix, default.nix, default.nix.",
+      "nodeIds": [
+        "file:gptcomplete.zsh",
+        "file:x/autorun.sh",
+        "file:x/dmenu.sh",
+        "file:x/info.sh",
+        "file:x/night.sh",
+        "file:x/util.sh",
+        "file:x/windowswitcher.sh",
+        "file:x/vicinae/scripts/cloudflare-warp-common.sh",
+        "file:x/vicinae/scripts/cloudflare-warp-connect.sh",
+        "file:x/vicinae/scripts/cloudflare-warp-disconnect.sh",
+        "file:x/waybar/style.css",
+        "file:zsh/alias.zsh",
+        "file:zsh/plugins.zsh",
+        "file:zsh/tmux_switch.sh",
+        "file:.envrc",
+        "file:.gitattributes",
+        "file:.understand-anything/.understandignore",
+        "file:agent/extensions/notify.ts",
+        "file:ahk/layout.ahk",
+        "file:ahk/startup.ahk",
+        "file:ahk/wheelctrl.ahk",
+        "file:bkup/backup.sh",
+        "file:ghostty.config",
+        "file:gitconfig",
+        "file:gitignore",
+        "file:homes/apps/beeper.nix",
+        "file:homes/apps/zen.nix",
+        "file:homes/minf/default.nix",
+        "file:homes/modules/base.nix",
+        "file:homes/modules/dev.nix",
+        "file:homes/modules/gui.nix",
+        "file:homes/modules/node2nix/default.nix",
+        "file:homes/modules/node2nix/node-env.nix",
+        "file:homes/modules/node2nix/node-packages.nix",
+        "file:homes/modules/playwright.nix",
+        "file:homes/modules/wsl.nix",
+        "file:homes/PD0056/default.nix",
+        "file:homes/PN0093/default.nix",
+        "file:homes/PN0097/default.nix",
+        "file:homes/spi/default.nix",
+        "file:homes/t440p/default.nix",
+        "file:homes/usb/default.nix",
+        "file:homes/x360/default.nix",
+        "file:hosts/base.nix",
+        "file:hosts/gui.nix",
+        "file:hosts/minf/default.nix",
+        "file:hosts/minf/hardware-configuration.nix",
+        "file:hosts/spi/default.nix",
+        "file:hosts/spi/prod.nix",
+        "file:hosts/spi/sd.nix",
+        "file:hosts/t440p/default.nix",
+        "file:hosts/t440p/hardware-configuration.nix",
+        "file:hosts/usb/configuration.nix",
+        "file:hosts/usb/default.nix",
+        "file:hosts/usb/hardware-configuration.nix",
+        "file:hosts/vocalinux.nix",
+        "file:hosts/x360/default.nix",
+        "file:hosts/x360/hardware-configuration.nix",
+        "file:kanata/kanata.kbd",
+        "file:kanata/map.kbd",
+        "file:lessfilter",
+        "file:mpv.conf",
+        "file:proj/sample.sh",
+        "file:secrets/secrets.nix",
+        "file:secrets/user-password-hash.age",
+        "file:secrets/wifi-secrets.age",
+        "file:systemd/home-user-mnt-abc.mount",
+        "file:systemd/kbrequest.target",
+        "file:systemd/startx.service",
+        "file:tmux.conf",
+        "file:vim/nvim/init.lua",
+        "file:vim/nvim/lua/plugins/core.lua",
+        "file:vim/nvim/lua/plugins/disabled.lua",
+        "file:vim/nvim/lua/plugins/dropbar.lua",
+        "file:vim/nvim/lua/plugins/fzf.lua",
+        "file:vim/nvim/lua/plugins/opencode.lua",
+        "file:vim/nvim/lua/plugins/snacks.lua",
+        "file:wezterm/wezterm_base.lua",
+        "file:wezterm/wezterm.lua",
+        "file:wsl/wsl.conf",
+        "file:wsl/wslconfig",
+        "file:x/hyprland/app.sh",
+        "file:x/hyprland/general.conf",
+        "file:x/hyprland/local.conf",
+        "file:x/hyprland/switch.sh",
+        "file:x/hyprland/vars.conf",
+        "file:x/niri.kdl",
+        "file:x/waybar/scripts/cycle-sinks.sh",
+        "file:x/xmobarrc",
+        "file:x/xmonad.hs",
+        "file:x/Xresources",
+        "file:yazi/plugins/enter.yazi/main.lua",
+        "file:yazi/plugins/tab.yazi/main.lua",
+        "file:yazi/run.zsh",
+        "file:zsh/zlogout",
+        "file:zsh/zprofile",
+        "file:zsh/zshenv",
+        "file:zsh/zshrc",
+        "file:agent/merge-config.sh",
+        "file:flake.nix",
+        "file:homes/default.nix",
+        "file:hosts/default.nix"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Configuration Layer",
+      "description": "Application configuration and environment settings. Key files: autocmds.lua, keymaps.lua, lazy.lua, options.lua, config.",
+      "nodeIds": [
+        "file:vim/nvim/lua/config/autocmds.lua",
+        "file:vim/nvim/lua/config/keymaps.lua",
+        "file:vim/nvim/lua/config/lazy.lua",
+        "file:vim/nvim/lua/config/options.lua",
+        "file:x/i3/config"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Supporting Components",
+      "description": "Additional supporting files: app-update.yaml, cachix.yaml, flake-inputs.yaml, flake-update.yaml, opencode.yml, .pre-commit-config.yaml, AGENTS.md, CHANGELOG.md, README.md, checkmake.ini, cliff.toml, gitmessage.txt, renovate.json, BASE_AGENTS.md, Makefile, mcp.jsonc, plugins.jsonc, providers.jsonc, .envrc, AGENTS.md, CLOUDFLARE_TUNNEL_SETUP.md, DEPLOYMENT_VALIDATION.md, DOTFILE_SECURITY.md, ENV_CONFIGURATION.md, Makefile, PLAN.md, QUICKSTART_ENV.md, README.md, SECURITY.md, devbox.json, proxmox_k8s.tf, vars.tf, app.yaml, deletefailedpods.yaml, kustomization.yaml, HelmRelease.yaml, HelmRepository.yaml, kustomization.yaml, ns.yaml, helmrelease.yaml, helmrepo.yaml, kustomization.yaml, namespace.yaml, ingressroute.yaml, kustomization.yaml, n8n.yaml, ns.yaml, AUTHENTIK_SETUP.md, HelmRelease.yaml, HelmRepository.yaml, kustomization.yaml, middleware-authentik.yaml, ns.yaml, authentik.yaml, kustomization.yaml, ns.yaml, authentik.yaml, gitrepository.yaml, kustomization.yaml, n8n.yaml, sample.gitsecret.env, ingress.yaml, ingressroute.yaml, kustomization.yaml, ns.yaml, fluent-bit-configmap.yaml, fluent-bit-ds.yaml, grafana.yaml, kustomization.yaml, loki-configmap.yaml, loki.yaml, namespace.yaml, prometheus-configmap.yaml, prometheus.yaml, kustomization.yaml, litestream.yml, ns.yaml, webdl.yaml, cloudflared.yaml, kustomization.yaml, namespace.yaml, kustomization.yaml, ns.yaml, webdl.yaml, appkustomization.yaml, gitrepository.yaml, kustomization.yaml, .neoconf.json, AGENTS.md, lazyvim.json, stylua.toml, config.jsonc, modules.jsonc, dependabot.yml, api_reference.md, SKILL.md, .default.env, pop.ini, AGENTS.md, Makefile, package.json, AGENTS.md, copilot-instructions.md, k8s.tf, hotkeys.yaml, plugins.yaml, kustomization.yaml, webdl.yaml, httptest.yaml, host-config.yaml, kustomization.yaml, Makefile, _complete_with_llm, all, dev, skills, hermes, multica, openchamber, markitdown, agent-browser, understand, chorus, agents, pi, pi-ext, pi-observational-memory, pi-minimal-subagent, pi-fork, pi-codemapper, pi-rtk-optimizer, task-factory, omp, omo, clean-tools, opencode, merge-config, status, setup, clean_evicted, check, k3s, config, webdl, n8n, stable, traefik, jetstack, cilium, helm, crossplane, cert-manager, metallb, ingress, gitops, flux-bootstrap, destroy, create, kubeconfig, logging, cost, delete_namespace, tunnel_create, providers.tf, local_file.kubeconfig, local_file.talosconfig, module.talos-k8s-cluster, current_warp_status, set_warp_state, scptar, tm, _parse_config_file, detectNotificationSequence, notifyExtension, all, random_string.postfix, azurerm_resource_group.rg, azurerm_kubernetes_cluster.homeaks, azurerm_kubernetes_cluster_node_pool.workers, home-manager, xx, apphash_update, dev, up, zi, sd-burn, spi.img, result-spi, nix, nix-upgrade, all, sudo, os, clean, update, nvim, resh, kanata, strip_jsonc.",
+      "nodeIds": [
+        "pipeline:.github/workflows/app-update.yaml",
+        "pipeline:.github/workflows/cachix.yaml",
+        "pipeline:.github/workflows/flake-inputs.yaml",
+        "pipeline:.github/workflows/flake-update.yaml",
+        "pipeline:.github/workflows/opencode.yml",
+        "config:.pre-commit-config.yaml",
+        "document:AGENTS.md",
+        "document:CHANGELOG.md",
+        "document:README.md",
+        "config:checkmake.ini",
+        "config:cliff.toml",
+        "document:gitmessage.txt",
+        "config:renovate.json",
+        "document:agent/BASE_AGENTS.md",
+        "pipeline:agent/Makefile",
+        "config:agent/config/mcp.jsonc",
+        "config:agent/config/plugins.jsonc",
+        "config:agent/config/providers.jsonc",
+        "service:k8s/.envrc",
+        "service:k8s/AGENTS.md",
+        "service:k8s/CLOUDFLARE_TUNNEL_SETUP.md",
+        "service:k8s/DEPLOYMENT_VALIDATION.md",
+        "service:k8s/DOTFILE_SECURITY.md",
+        "service:k8s/ENV_CONFIGURATION.md",
+        "pipeline:k8s/Makefile",
+        "service:k8s/PLAN.md",
+        "service:k8s/QUICKSTART_ENV.md",
+        "service:k8s/README.md",
+        "service:k8s/SECURITY.md",
+        "service:k8s/devbox.json",
+        "resource:k8s/proxmox_k8s.tf",
+        "resource:k8s/vars.tf",
+        "service:k8s/manifest/base/app.yaml",
+        "service:k8s/manifest/base/deletefailedpods.yaml",
+        "service:k8s/manifest/base/kustomization.yaml",
+        "service:k8s/manifest/base/authentik/HelmRelease.yaml",
+        "service:k8s/manifest/base/authentik/HelmRepository.yaml",
+        "service:k8s/manifest/base/authentik/kustomization.yaml",
+        "service:k8s/manifest/base/authentik/ns.yaml",
+        "service:k8s/manifest/base/longhorn/helmrelease.yaml",
+        "service:k8s/manifest/base/longhorn/helmrepo.yaml",
+        "service:k8s/manifest/base/longhorn/kustomization.yaml",
+        "service:k8s/manifest/base/longhorn/namespace.yaml",
+        "service:k8s/manifest/base/n8n/ingressroute.yaml",
+        "service:k8s/manifest/base/n8n/kustomization.yaml",
+        "service:k8s/manifest/base/n8n/n8n.yaml",
+        "service:k8s/manifest/base/n8n/ns.yaml",
+        "service:k8s/manifest/base/traefik/AUTHENTIK_SETUP.md",
+        "service:k8s/manifest/base/traefik/HelmRelease.yaml",
+        "service:k8s/manifest/base/traefik/HelmRepository.yaml",
+        "service:k8s/manifest/base/traefik/kustomization.yaml",
+        "service:k8s/manifest/base/traefik/middleware-authentik.yaml",
+        "service:k8s/manifest/base/traefik/ns.yaml",
+        "service:k8s/manifest/initialSetup/authentik/authentik.yaml",
+        "service:k8s/manifest/initialSetup/authentik/kustomization.yaml",
+        "service:k8s/manifest/initialSetup/authentik/ns.yaml",
+        "service:k8s/manifest/initialSetup/gitops/authentik.yaml",
+        "service:k8s/manifest/initialSetup/gitops/gitrepository.yaml",
+        "service:k8s/manifest/initialSetup/gitops/kustomization.yaml",
+        "service:k8s/manifest/initialSetup/gitops/n8n.yaml",
+        "service:k8s/manifest/initialSetup/gitops/sample.gitsecret.env",
+        "service:k8s/manifest/initialSetup/ingress.yaml",
+        "service:k8s/manifest/initialSetup/ingressroute.yaml",
+        "service:k8s/manifest/initialSetup/kustomization.yaml",
+        "service:k8s/manifest/initialSetup/ns.yaml",
+        "service:k8s/manifest/initialSetup/logging/fluent-bit-configmap.yaml",
+        "service:k8s/manifest/initialSetup/logging/fluent-bit-ds.yaml",
+        "service:k8s/manifest/initialSetup/logging/grafana.yaml",
+        "service:k8s/manifest/initialSetup/logging/kustomization.yaml",
+        "service:k8s/manifest/initialSetup/logging/loki-configmap.yaml",
+        "service:k8s/manifest/initialSetup/logging/loki.yaml",
+        "service:k8s/manifest/initialSetup/logging/namespace.yaml",
+        "service:k8s/manifest/initialSetup/logging/prometheus-configmap.yaml",
+        "service:k8s/manifest/initialSetup/logging/prometheus.yaml",
+        "service:k8s/manifest/initialSetup/n8n/kustomization.yaml",
+        "service:k8s/manifest/initialSetup/n8n/litestream.yml",
+        "service:k8s/manifest/initialSetup/n8n/ns.yaml",
+        "service:k8s/manifest/initialSetup/n8n/webdl.yaml",
+        "service:k8s/manifest/initialSetup/tunnel/cloudflared.yaml",
+        "service:k8s/manifest/initialSetup/tunnel/kustomization.yaml",
+        "service:k8s/manifest/initialSetup/tunnel/namespace.yaml",
+        "service:k8s/manifest/initialSetup/webdl/kustomization.yaml",
+        "service:k8s/manifest/initialSetup/webdl/ns.yaml",
+        "service:k8s/manifest/initialSetup/webdl/webdl.yaml",
+        "service:k8s/manifest/production/gitops/appkustomization.yaml",
+        "service:k8s/manifest/production/gitops/gitrepository.yaml",
+        "service:k8s/manifest/production/gitops/kustomization.yaml",
+        "config:vim/nvim/.neoconf.json",
+        "document:vim/nvim/AGENTS.md",
+        "config:vim/nvim/lazyvim.json",
+        "config:vim/nvim/stylua.toml",
+        "config:x/waybar/config.jsonc",
+        "config:x/waybar/modules.jsonc",
+        "config:.github/dependabot.yml",
+        "document:agent/skills/markitdown/references/api_reference.md",
+        "document:agent/skills/markitdown/SKILL.md",
+        "config:bkup/.default.env",
+        "config:copyq/pop.ini",
+        "document:homes/AGENTS.md",
+        "pipeline:homes/modules/node2nix/Makefile",
+        "config:homes/modules/node2nix/package.json",
+        "document:hosts/AGENTS.md",
+        "service:k8s/.github/copilot-instructions.md",
+        "resource:k8s/aks/k8s.tf",
+        "service:k8s/k9s/hotkeys.yaml",
+        "service:k8s/k9s/plugins.yaml",
+        "service:k8s/manifest/base/webdl/kustomization.yaml",
+        "service:k8s/manifest/base/webdl/webdl.yaml",
+        "service:k8s/manifest/httptest.yaml",
+        "service:k8s/manifest/production/host-config.yaml",
+        "service:k8s/manifest/production/kustomization.yaml",
+        "pipeline:Makefile",
+        "function:gptcomplete.zsh:_complete_with_llm",
+        "step:agent/Makefile:all",
+        "step:agent/Makefile:dev",
+        "step:agent/Makefile:skills",
+        "step:agent/Makefile:hermes",
+        "step:agent/Makefile:multica",
+        "step:agent/Makefile:openchamber",
+        "step:agent/Makefile:markitdown",
+        "step:agent/Makefile:agent-browser",
+        "step:agent/Makefile:understand",
+        "step:agent/Makefile:chorus",
+        "step:agent/Makefile:agents",
+        "step:agent/Makefile:pi",
+        "step:agent/Makefile:pi-ext",
+        "step:agent/Makefile:pi-observational-memory",
+        "step:agent/Makefile:pi-minimal-subagent",
+        "step:agent/Makefile:pi-fork",
+        "step:agent/Makefile:pi-codemapper",
+        "step:agent/Makefile:pi-rtk-optimizer",
+        "step:agent/Makefile:task-factory",
+        "step:agent/Makefile:omp",
+        "step:agent/Makefile:omo",
+        "step:agent/Makefile:clean-tools",
+        "step:agent/Makefile:opencode",
+        "step:agent/Makefile:merge-config",
+        "step:k8s/Makefile:status",
+        "step:k8s/Makefile:setup",
+        "step:k8s/Makefile:clean_evicted",
+        "step:k8s/Makefile:check",
+        "step:k8s/Makefile:k3s",
+        "step:k8s/Makefile:config",
+        "step:k8s/Makefile:webdl",
+        "step:k8s/Makefile:n8n",
+        "step:k8s/Makefile:stable",
+        "step:k8s/Makefile:traefik",
+        "step:k8s/Makefile:jetstack",
+        "step:k8s/Makefile:cilium",
+        "step:k8s/Makefile:helm",
+        "step:k8s/Makefile:crossplane",
+        "step:k8s/Makefile:cert-manager",
+        "step:k8s/Makefile:metallb",
+        "step:k8s/Makefile:ingress",
+        "step:k8s/Makefile:gitops",
+        "step:k8s/Makefile:flux-bootstrap",
+        "step:k8s/Makefile:destroy",
+        "step:k8s/Makefile:create",
+        "step:k8s/Makefile:kubeconfig",
+        "step:k8s/Makefile:logging",
+        "step:k8s/Makefile:cost",
+        "step:k8s/Makefile:delete_namespace",
+        "step:k8s/Makefile:tunnel_create",
+        "resource:k8s/providers.tf",
+        "resource:k8s/proxmox_k8s.tf:local_file.kubeconfig",
+        "resource:k8s/proxmox_k8s.tf:local_file.talosconfig",
+        "resource:k8s/proxmox_k8s.tf:module.talos-k8s-cluster",
+        "function:x/vicinae/scripts/cloudflare-warp-common.sh:current_warp_status",
+        "function:x/vicinae/scripts/cloudflare-warp-common.sh:set_warp_state",
+        "function:zsh/alias.zsh:scptar",
+        "function:zsh/alias.zsh:tm",
+        "function:zsh/plugins.zsh:_parse_config_file",
+        "function:agent/extensions/notify.ts:detectNotificationSequence",
+        "function:agent/extensions/notify.ts:notifyExtension",
+        "step:homes/modules/node2nix/Makefile:all",
+        "resource:k8s/aks/k8s.tf:random_string.postfix",
+        "resource:k8s/aks/k8s.tf:azurerm_resource_group.rg",
+        "resource:k8s/aks/k8s.tf:azurerm_kubernetes_cluster.homeaks",
+        "resource:k8s/aks/k8s.tf:azurerm_kubernetes_cluster_node_pool.workers",
+        "step:Makefile:home-manager",
+        "step:Makefile:xx",
+        "step:Makefile:apphash_update",
+        "step:Makefile:dev",
+        "step:Makefile:up",
+        "step:Makefile:zi",
+        "step:Makefile:sd-burn",
+        "step:Makefile:spi.img",
+        "step:Makefile:result-spi",
+        "step:Makefile:nix",
+        "step:Makefile:nix-upgrade",
+        "step:Makefile:all",
+        "step:Makefile:sudo",
+        "step:Makefile:os",
+        "step:Makefile:clean",
+        "step:Makefile:update",
+        "step:Makefile:nvim",
+        "step:Makefile:resh",
+        "step:Makefile:kanata",
+        "function:agent/merge-config.sh:strip_jsonc"
+      ]
+    }
+  ]
+}
