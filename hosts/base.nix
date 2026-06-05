@@ -7,8 +7,37 @@
 { config, lib, nixsettings, agenix, home-manager, homeConfigurations, pkgs ? config.nixpkgs.pkgs, ... }:
 
 let
+  userHome = "/home/${user}";
   useHibernation = builtins.length config.swapDevices > 0;
   isRaspberryPi = host == "spi";
+  multicaRuntimePath = lib.concatStringsSep ":" [
+    "/usr/local/bin"
+    "${userHome}/.bun/bin"
+    "${userHome}/.npm-globals/bin"
+    "${userHome}/.local/share/devbox/global/default/.devbox/nix/profile/default/bin"
+    "${userHome}/.opencode/bin"
+    "${userHome}/go/bin"
+    "${userHome}/.local/bin"
+    "${userHome}/.nix-profile/bin"
+    "/run/wrappers/bin"
+    "/nix/profile/bin"
+    "${userHome}/.local/state/nix/profile/bin"
+    "/etc/profiles/per-user/${user}/bin"
+    "/nix/var/nix/profiles/default/bin"
+    "/run/current-system/sw/bin"
+    "${userHome}/.local/share/devbox/global/default/.devbox/virtenv/runx/bin"
+  ];
+  multicaDaemonLauncher = pkgs.writeShellScript "multica-daemon-launcher" ''
+    export PATH='${multicaRuntimePath}'
+
+    multica_bin="$(command -v multica || true)"
+    if [ -z "$multica_bin" ]; then
+      echo "multica binary not found on PATH: $PATH" >&2
+      exit 1
+    fi
+
+    exec "$multica_bin" daemon start --foreground
+  '';
 in
 {
    imports = [
@@ -308,6 +337,29 @@ in
   #     "/usr/local/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
   #   };
 
+
+  systemd.services.multica-daemon = lib.mkIf (host == "tp") {
+    description = "Multica agent daemon";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    environment = {
+      HOME = userHome;
+      LOGNAME = user;
+      USER = user;
+      XDG_CONFIG_HOME = "${userHome}/.config";
+    };
+    serviceConfig = {
+      Type = "simple";
+      User = user;
+      WorkingDirectory = userHome;
+      ExecStart = multicaDaemonLauncher;
+      Restart = "on-failure";
+      RestartSec = 5;
+      StandardOutput = "journal";
+      StandardError = "journal";
+    };
+  };
 
   # ===== Wake-on-LAN Configuration =====
   # Enable WoL tools and service when services.wol-enabled is true
