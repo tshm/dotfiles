@@ -45,3 +45,7 @@ Import order matters - later modules can override earlier.
 - `home.packages`: User-level packages
 - `programs.<name>.enable`: Declarative program config
 - `xdg.configHome`: XDG base directory integration
+
+## Child DOX Index
+
+No child DOX files.

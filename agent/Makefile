@@ -24,6 +24,10 @@ dev: opencode
 
 skills: agent-browser
 
+.PHONY: graphify
+graphify:
+	uv tool install graphifyy
+
 .PHONY: hermes
 hermes:
 	curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash

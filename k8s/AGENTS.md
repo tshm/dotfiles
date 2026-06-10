@@ -339,3 +339,7 @@ dotenv .env
 - K9s config in `k9s/` (hotkeys, plugins)
 - Uses direnv for automatic environment loading
 - Context defaults to `production` (override with `CONTEXT=dev make ...`)
+
+## Child DOX Index
+
+No child DOX files.

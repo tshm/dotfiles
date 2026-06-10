@@ -40,3 +40,7 @@ nvim/
 
 - Symlinked to `~/.config/nvim` via home-manager
 - `lazy-lock.json` pins plugin versions (auto-updated)
+
+## Child DOX Index
+
+No child DOX files.

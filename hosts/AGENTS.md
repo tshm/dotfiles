@@ -44,3 +44,7 @@ hosts/
 - `lib.mkIf (!forServer)`: Skip GUI services on servers
 - `specialArgs`: Pass flake inputs to modules
 - `imports`: Hardware config + shared modules
+
+## Child DOX Index
+
+No child DOX files.

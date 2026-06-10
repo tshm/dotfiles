@@ -132,3 +132,7 @@ function meminfo() {
     neovide.exe --wsl $*
   }
 }
+
+function docx() {
+  curl 'https://github.com/agent0ai/dox/blob/main/AGENTS.md?plain=1' -O
+}
