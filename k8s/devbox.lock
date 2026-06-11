@@ -1,51 +1,51 @@
 {
   "lockfile_version": "1",
   "packages": {
-    "cloudflared@latest": {
-      "last_modified": "2026-04-23T13:07:47Z",
-      "resolved": "github:NixOS/nixpkgs/01fbdeef22b76df85ea168fbfe1bfd9e63681b30#cloudflared",
+    "cloudflared@2026.5.0": {
+      "last_modified": "2026-05-21T08:15:18Z",
+      "resolved": "github:NixOS/nixpkgs/4a29d733e8a7d5b824c3d8c958a946a9867b3eb2#cloudflared",
       "source": "devbox-search",
-      "version": "2026.3.0",
+      "version": "2026.5.0",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/9gxhnyznnkxk7zcylf57q8b1j0q5y1xq-cloudflared-2026.3.0",
+              "path": "/nix/store/ljx5mrzk8rd5wiq7kcjrp296z9pvqjqr-cloudflared-2026.5.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/9gxhnyznnkxk7zcylf57q8b1j0q5y1xq-cloudflared-2026.3.0"
+          "store_path": "/nix/store/ljx5mrzk8rd5wiq7kcjrp296z9pvqjqr-cloudflared-2026.5.0"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/125yx6r4s36ajs2nsqkvm4jf27xsc3k7-cloudflared-2026.3.0",
+              "path": "/nix/store/kfb3bhda3glywx1k0ampjanwy51s8pd5-cloudflared-2026.5.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/125yx6r4s36ajs2nsqkvm4jf27xsc3k7-cloudflared-2026.3.0"
+          "store_path": "/nix/store/kfb3bhda3glywx1k0ampjanwy51s8pd5-cloudflared-2026.5.0"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/i5mv74sh7w3d91x68kgvihqyjj43glwf-cloudflared-2026.3.0",
+              "path": "/nix/store/0r6f2hkyvvvxh1whi9ylq73cvcz0fl42-cloudflared-2026.5.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/i5mv74sh7w3d91x68kgvihqyjj43glwf-cloudflared-2026.3.0"
+          "store_path": "/nix/store/0r6f2hkyvvvxh1whi9ylq73cvcz0fl42-cloudflared-2026.5.0"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/zhqr5k2a9kbbbzbbhl08mjh4hidy3m2r-cloudflared-2026.3.0",
+              "path": "/nix/store/w2ynxmdj4q2548rvg901bjyjmb01ixxr-cloudflared-2026.5.0",
               "default": true
             }
           ],
-          "store_path": "/nix/store/zhqr5k2a9kbbbzbbhl08mjh4hidy3m2r-cloudflared-2026.3.0"
+          "store_path": "/nix/store/w2ynxmdj4q2548rvg901bjyjmb01ixxr-cloudflared-2026.5.0"
         }
       }
     },
