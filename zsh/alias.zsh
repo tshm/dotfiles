@@ -134,5 +134,5 @@ function meminfo() {
 }
 
 function docx() {
-  curl 'https://github.com/agent0ai/dox/blob/main/AGENTS.md?plain=1' -O
+  curl -fL -O 'https://raw.githubusercontent.com/agent0ai/dox/main/AGENTS.md'
 }
