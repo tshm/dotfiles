@@ -49,6 +49,7 @@ in
 
   boot = {
     binfmt.emulatedSystems = lib.mkIf (!isRaspberryPi) [ "aarch64-linux" ];
+    zfs.forceImportRoot = false;
     # Required for Dagger engine to work (uses iptables inside container)
     kernelModules = [ "ip_tables" "iptable_nat" "iptable_filter" ];
     loader = {

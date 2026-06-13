@@ -175,6 +175,9 @@ in {
   };
   wayland.windowManager.mango = {
     enable = true;
+    package = pkgs.callPackage (args.mango + "/nix") {
+      scenefx = pkgs.scenefx;
+    };
     settings = { };
     extraConfig = ''
       # config.conf
@@ -185,6 +188,7 @@ in {
   };
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     package = args.hyprland.packages.${platformSystem}.hyprland;
     portalPackage =
       args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland;

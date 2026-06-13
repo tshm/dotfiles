@@ -32,6 +32,7 @@ in
   };
   catppuccin = {
     enable = true;
+    autoEnable = true;
     accent = "green";
   };
   targets.genericLinux.enable = true;
@@ -128,9 +129,7 @@ in
       enable = true;
       enableDefaultConfig = false;
       includes = [ "~/.ssh/*.config" ];
-      matchBlocks = {
-        "*" = { };
-      };
+      settings."*" = { };
       extraConfig = ''
         # HostName test.com
         # Port 1234

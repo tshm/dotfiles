@@ -92,6 +92,7 @@ Child DOX files:
 
 Root-owned areas without child DOX:
 
+- Root documentation and metadata: `README.md`, `CHANGELOG.md`, `LICENSE`, `.gitattributes`, `.envrc`, `.vscode/`, `.goopspec/`, and `.understand-anything/`.
 - Root Nix flake and repository automation: `flake.nix`, `flake.lock`, `Makefile`, `.pre-commit-config.yaml`, `checkmake.ini`, `renovate.json`, `cliff.toml`, and `.github/`.
 - Small shell/editor/app configs: `zsh/`, `wezterm/`, `tmux.conf`, `yazi/`, `ahk/`, `copyq/`, `ghostty.config`, `gitconfig`, `gitignore`, `gitmessage.txt`, `gptcomplete.zsh`, `lessfilter`, and `mpv.conf`.
-- Host-adjacent support assets: `bkup/`, `kanata/`, `proj/`, `systemd/`, `wsl/`, and `tmp/` artifacts that are intentionally tracked or ignored by their local rules.
+- Host-adjacent support assets: `bkup/`, `kanata/`, `proj/`, `systemd/`, `wsl/`, `tmp/`, and generated `result/` artifacts that are intentionally tracked or ignored by their local rules.

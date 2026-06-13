@@ -22,7 +22,7 @@
   boot.blacklistedKernelModules = [ "snd_sof" "snd_sof_amd_acp" "snd_sof_pci" ];
 
   # Audio device configuration
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa = {

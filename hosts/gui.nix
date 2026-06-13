@@ -39,6 +39,7 @@ in {
   };
   catppuccin = {
     enable = true;
+    autoEnable = true;
     accent = "green";
   };
 
@@ -46,7 +47,12 @@ in {
   programs.ydotool.enable = true;
   users.users.${args.user}.extraGroups = [ "ydotool" "input" ];
   programs.hyprland = { enable = true; };
-  programs.mango.enable = true;
+  programs.mango = {
+    enable = true;
+    package = pkgs.callPackage (args.mango + "/nix") {
+      scenefx = pkgs.scenefx;
+    };
+  };
   programs.niri.enable = true;
   fonts = {
     enableDefaultPackages = true;
