@@ -320,11 +320,11 @@ in
         };
         open.prepend_rules = [
           {
-            name = "*.vtt";
+            url = "*.vtt";
             use = "less";
           }
           {
-            name = "*.json";
+            url = "*.json";
             use = "jless";
           }
         ];
