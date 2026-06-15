@@ -77,6 +77,7 @@ Default section order:
 ## User Preferences
 
 When the user requests a durable behavior change, record it here or in the relevant child AGENTS.md
+- Keep organization-specific private network configuration out of tracked dotfiles; manage it through an external private flake/module instead.
 
 ## Child DOX Index
 
