@@ -45,6 +45,7 @@ Import order matters - later modules can override earlier.
 - `home.packages`: User-level packages
 - `programs.<name>.enable`: Declarative program config
 - `xdg.configHome`: XDG base directory integration
+- WSL yazi: `modules/wsl.nix` sends Office/PDF-style GUI files to Windows via `cmd.exe /C start`
 
 ## Child DOX Index
 
