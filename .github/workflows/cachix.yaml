@@ -4,14 +4,20 @@ on:
     paths:
       - "flake.lock"
       - "**/*.nix"
+      - ".github/workflows/cachix.yaml"
   push:
     paths:
       - "flake.lock"
       - "**/*.nix"
+      - ".github/workflows/cachix.yaml"
 
+env:
+  NIX_CONFIG: |
+    fallback = true
 jobs:
   homemanager:
     strategy:
+      fail-fast: false
       matrix:
         home:
           - runner: "ubuntu-latest"
@@ -45,6 +51,7 @@ jobs:
   nixos:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         host: ["x360", "minf"]
     steps:
