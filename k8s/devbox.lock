@@ -1,7 +1,7 @@
 {
   "lockfile_version": "1",
   "packages": {
-    "cloudflared@latest": {
+    "cloudflared@2026.6.0": {
       "last_modified": "2026-06-12T02:02:01Z",
       "resolved": "github:NixOS/nixpkgs/173d0ad7a974f8543a9ab01d2271b2e290341b33#cloudflared",
       "source": "devbox-search",
