@@ -85,9 +85,9 @@
       homeConfigurations = import ./homes flakeInputs;
 
       # Cross-compilation 1st boot image
-      # packages.${crossSystem} = {
-      #   spi-image = inputs.self.nixosConfigurations.spi_first.config.system.build.sdImage;
-      # };
+      packages.${crossSystem} = {
+        spi-image = inputs.self.nixosConfigurations.spi_first.config.system.build.sdImage;
+      };
 
       # Default package for x86_64-linux
       # packages.x86_64-linux.default = inputs.self.nixosConfigurations.minf.config.system.build.toplevel;

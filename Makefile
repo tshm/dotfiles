@@ -33,13 +33,7 @@ dev:
 	$(MAKE) -C ./agent
 
 update.%: ./homes/apps/%.nix
-	$(eval URL := $(shell sed -ne '/url =/s/.*url = //p' "$<"))
-	echo updating $% from ${URL}
-	$(eval HASH := $(shell nix-prefetch-url --type sha256 ${URL}))
-	$(eval SRI := $(shell nix hash convert --hash-algo sha256 --to sri ${HASH}))
-	echo ${SRI}
-	sed -i "s|sha256 = \".*\";|sha256 = \"${SRI}\";|" "$<"
-	echo "Hash updated in $<: ${SRI}"
+	python3 ./scripts/update-app-hash.py "$<"
 
 .PHONY: all clean dev home-manager kanata nix nix-upgrade os resh sd-burn sudo up update xx zi .git/hooks/pre-commit
 .PHONY: spi.img result-spi

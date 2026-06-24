@@ -1,10 +1,9 @@
 { pkgs, ... }:
 let
   pname = "beeper";
-  version = "latest";
+  version = "4.2.945";
   src = pkgs.fetchurl {
-    curlOptsList = [ "-L" "-H" "Accept:application/octet-stream" ];
-    url = "https://api.beeper.com/desktop/download/linux/x64/stable/com.automattic.beeper.desktop";
+    url = "https://beeper-desktop.download.beeper.com/builds/Beeper-${version}-x86_64.AppImage";
     # sha256 = pkgs.lib.fakeSha256;
     sha256 = "sha256-opr2Fqzr7nJTCa66d9S0+WToD9zmOXJRfA2hnSvRiaE=";
   };

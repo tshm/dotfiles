@@ -26,3 +26,4 @@ result-spi
 codemap.md
 .slim/
 .claude
+scripts/__pycache__/
