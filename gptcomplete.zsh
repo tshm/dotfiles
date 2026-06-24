@@ -12,6 +12,18 @@ _gptcomplete_log() {
   print -r -- "[$timestamp] $*" >> "$log_file" 2>/dev/null
 }
 
+_gptcomplete_fast_model_for_api_url() {
+  emulate -L zsh
+  setopt local_options no_aliases
+
+  local api_url="${(L)1}"
+  case "$api_url" in
+    (*://bifrost.hq.empathy.co.jp/*|bifrost.hq.empathy.co.jp/*) print -r -- "codex/gpt-5.4-mini" ;;
+    (*://api.openai.com/*|api.openai.com/*) print -r -- "gpt-5-nano" ;;
+    (*://api.groq.com/*|api.groq.com/*) print -r -- "openai/gpt-oss-20b" ;;
+  esac
+}
+
 _complete_with_llm() {
   emulate -L zsh
   setopt local_options no_aliases
@@ -27,9 +39,14 @@ _complete_with_llm() {
 
   local log_prompts="${GPTCOMPLETE_LOG_PROMPTS:-${LLM_LOG_PROMPTS:-0}}"
 
-  local model="${GPTCOMPLETE_MODEL:-${LLM_MODEL:-llama3-70b-8192}}"
-  local context_size="${GPTCOMPLETE_CONTEXT_SIZE:-${LLM_CONTEXT_SIZE:-50}}"
   local api_url="${GPTCOMPLETE_API_URL:-${LLM_API_URL:-https://api.groq.com/openai/v1/chat/completions}}"
+  local model=""
+  if [[ -n ${GPTCOMPLETE_MODEL-} ]]; then
+    model="$GPTCOMPLETE_MODEL"
+  elif [[ -z ${GPTCOMPLETE_API_URL-} ]]; then
+    model="${LLM_MODEL:-}"
+  fi
+  local context_size="${GPTCOMPLETE_CONTEXT_SIZE:-${LLM_CONTEXT_SIZE:-50}}"
   local api_format="${GPTCOMPLETE_API_FORMAT:-${LLM_API_FORMAT:-auto}}"
   local api_key="${GPTCOMPLETE_API_KEY:-${LLM_API_KEY-}}"
   local connect_timeout="${GPTCOMPLETE_CONNECT_TIMEOUT:-${LLM_CONNECT_TIMEOUT:-5}}"
@@ -83,6 +100,18 @@ _complete_with_llm() {
 
   api_url_log="${api_url%%\?*}"
   [[ "$api_url" == *\?* ]] && api_url_log="${api_url_log}?<redacted>"
+
+  if [[ -z "$model" ]]; then
+    model="$(_gptcomplete_fast_model_for_api_url "$api_url")"
+    [[ -z "$model" ]] && model="llama3-70b-8192"
+  elif [[ "${(L)model}" == auto || "${(L)model}" == fastest ]]; then
+    model="$(_gptcomplete_fast_model_for_api_url "$api_url")"
+    if [[ -z "$model" ]]; then
+      _gptcomplete_log "$log_file" "fast_model_unavailable api_url=$api_url_log"
+      zle -M "No fastest model is configured for this provider; set GPTCOMPLETE_MODEL"
+      return 1
+    fi
+  fi
 
   if [[ "$codex_compat" == auto ]]; then
     [[ "$model" == codex/* ]] && codex_compat=1 || codex_compat=0
