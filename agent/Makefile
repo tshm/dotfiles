@@ -94,7 +94,7 @@ task-factory:
 
 .PHONY: omp
 omp:
-	curl -fsSL https://raw.githubusercontent.com/can1357/oh-my-pi/main/scripts/install.sh | sh
+	curl -fsSL https://raw.githubusercontent.com/can1357/oh-my-pi/main/scripts/install.sh | sh -s -- --binary
 
 .PHONY: claudecode
 claudecode:
