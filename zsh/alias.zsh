@@ -117,6 +117,10 @@ function meminfo() {
   alias e=xdg-open
 }
 
+function restore() {
+  trash list | fzf --multi | awk '{$1=$1;print}' | rev | cut -d ' ' -f1 | rev | xargs trash restore --match=exact --force
+}
+
 function aup() {
   local -i failed=0 ran=0
   local cmd opencode_cmd

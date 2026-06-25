@@ -24,6 +24,10 @@ dev: opencode
 
 skills: agent-browser
 
+.PHONY: ponytail
+ponytail:
+	omp install git:github.com/DietrichGebert/ponytail
+
 .PHONY: graphify
 graphify:
 	uv tool install graphifyy
