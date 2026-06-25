@@ -154,4 +154,5 @@ function dox() {
   # backup if AGENTS.md exists at current folder
   [ -f AGENTS.md ] && mv AGENTS.md AGENTS.md.bak
   curl -fL -O 'https://raw.githubusercontent.com/agent0ai/dox/main/AGENTS.md'
+  omp -p 'update dox index.  if AGENTS.md.bak exists, then merge the contents into new AGENTS.md'
 }
