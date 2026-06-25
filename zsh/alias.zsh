@@ -113,13 +113,30 @@ function meminfo() {
   }
 }
 
-(builtin whence -p nvim >/dev/null) && {
-  alias vi=nvim
-  function viup() { nix-shell -p gcc --run "nvim -c 'TSUpdate all'" }
-}
-
 (builtin whence -p xdg-open >/dev/null) && {
   alias e=xdg-open
+}
+
+function aup() {
+  local -i failed=0 ran=0
+  local cmd opencode_cmd
+
+  for cmd in omp hermes pi; do
+    (builtin whence -p -- "$cmd" > /dev/null) || continue
+    echo "========== $cmd =========="
+    "$cmd" update || failed=1
+    ran=1
+  done
+
+  opencode_cmd="$(builtin whence -p opencode 2>/dev/null)" || opencode_cmd="$HOME/.opencode/bin/opencode"
+  [ -x "$opencode_cmd" ] && {
+    echo "========== opencode =========="
+    "$opencode_cmd" upgrade || failed=1
+    ran=1
+  }
+
+  (( ran )) || echo "aup: nothing to update"
+  return $failed
 }
 
 (echo $uname | grep -i microsoft >/dev/null) && {
@@ -133,6 +150,8 @@ function meminfo() {
   }
 }
 
-function docx() {
+function dox() {
+  # backup if AGENTS.md exists at current folder
+  [ -f AGENTS.md ] && mv AGENTS.md AGENTS.md.bak
   curl -fL -O 'https://raw.githubusercontent.com/agent0ai/dox/main/AGENTS.md'
 }
