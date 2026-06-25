@@ -49,7 +49,7 @@
         }
       }
     },
-    "fluxcd@latest": {
+    "fluxcd@2.8.8": {
       "last_modified": "2026-05-25T07:42:19Z",
       "resolved": "github:NixOS/nixpkgs/f9d8b65950353691ab56561e7c73d2e1063d810b#fluxcd",
       "source": "devbox-search",
