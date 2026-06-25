@@ -61,6 +61,26 @@ config.mouse_bindings = {
 		mods = "NONE",
 		action = wezterm.action.PasteFrom("Clipboard"),
 	},
+	{
+		event = {
+			Down = {
+				streak = 1,
+				button = { WheelUp = 1 },
+			},
+		},
+		mods = "NONE",
+		action = wezterm.action.SendString("\027[5;30012~"),
+	},
+	{
+		event = {
+			Down = {
+				streak = 1,
+				button = { WheelDown = 1 },
+			},
+		},
+		mods = "NONE",
+		action = wezterm.action.SendString("\027[5;30013~"),
+	},
 }
 
 return config
