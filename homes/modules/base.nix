@@ -15,6 +15,7 @@ in
     inputs.agenix.homeManagerModules.default
     inputs.nix-index-database.homeModules.nix-index
     inputs.catppuccin.homeModules.catppuccin
+    inputs.hunk.homeManagerModules.default
   ];
   age = {
     identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
@@ -207,6 +208,15 @@ in
       options = {
         navigate = true;
         light = false;
+      };
+    };
+    hunk = {
+      enable = true;
+      enableGitIntegration = true;
+      settings = {
+        theme = "graphite";
+        mode = "split";
+        line_numbers = true;
       };
     };
     direnv = {
