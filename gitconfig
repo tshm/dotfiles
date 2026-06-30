@@ -4,7 +4,7 @@
   ignorecase = false
   autocrlf = false
   whitespace = cr-at-eol
-  pager = delta
+  pager = hunk pager
   excludesfile = ~/.dotfiles/gitignore
 [init]
   defaultBranch = main

@@ -14,6 +14,10 @@ config.color_scheme = "Bamboo"
 config.audible_bell = "SystemBeep"
 config.adjust_window_size_when_changing_font_size = false
 
+wezterm.on("bell", function(window, pane)
+	window:toast_notification("WezTerm", "Bell triggered in pane " .. pane:pane_id())
+end)
+
 config.font = wezterm.font_with_fallback({
 	{ family = "FiraCode Nerd Font" },
 	{ family = "Noto Sans CJK JP" },
