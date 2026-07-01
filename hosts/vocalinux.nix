@@ -19,9 +19,6 @@
 , pkg-config
 , portaudio
 , pango
-, shaderc
-, vulkan-headers
-, vulkan-loader
 , wl-clipboard
 , wtype
 , xdotool
@@ -52,16 +49,11 @@ let
       cmake
       ninja
       pkg-config
-      shaderc
       patchelf
     ];
 
     dontUseCmakeConfigure = true;
 
-    buildInputs = [
-      vulkan-headers
-      vulkan-loader
-    ];
 
     propagatedBuildInputs = [
       python3Packages.numpy
@@ -74,12 +66,11 @@ let
       substituteInPlace pyproject.toml --replace-fail '"repairwheel",' ""
     '';
 
-    env.GGML_VULKAN = "1";
     env.NO_REPAIR = "1";
 
     preFixup = ''
       sitePackages="$out/${python3.sitePackages}"
-      runtimeRpath="\$ORIGIN:${lib.makeLibraryPath [ stdenv.cc.cc.lib vulkan-loader ]}"
+      runtimeRpath="\$ORIGIN:${lib.makeLibraryPath [ stdenv.cc.cc.lib ]}"
 
       for so in "$sitePackages"/*.so "$sitePackages"/*.so.*; do
         if [ -e "$so" ]; then
