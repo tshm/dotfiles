@@ -19,12 +19,31 @@ capture() {
   grim -g "$(slurp -w 0)" - | wl-copy
 }
 
+keyboard_layout_name() {
+  local line
+
+  while IFS= read -r line; do
+    [[ $line =~ ^[[:space:]]*\*[[:space:]]*[0-9]+[[:space:]]+(.+) ]] && {
+      printf '%s\n' "${BASH_REMATCH[1]}"
+      return
+    }
+  done < <(niri msg keyboard-layouts)
+
+  return 1
+}
+
+keyboard_layout() {
+  niri msg action switch-layout next
+}
+
+current_layout=$(keyboard_layout_name)
 # Define the menu options
 options+=(
   "⏸ Sleep: systemctl suspend"
   "⏻  Shutdown: systemctl poweroff"
   "🔄 Reboot: systemctl reboot"
   "🌙 shader: pkill gammastep || gammastep &"
+  "⌨ Keyboard Layout${current_layout:+ ($current_layout)}: keyboard_layout"
   "capture: capture"
   )
 

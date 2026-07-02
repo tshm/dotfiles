@@ -29,7 +29,7 @@ input {
       layout "us,jp"
       // For example:
       // layout "us,ru"
-      options "grp:alt_space_toggle"
+      // Native niri bind below handles Alt+Space; don't also bind it in XKB.
       // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
       // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
 
@@ -621,12 +621,9 @@ binds {
   // Mod+W { toggle-column-tabbed-display; }
 
   // Actions to switch layouts.
-  // Note: if you uncomment these, make sure you do NOT have
-  // a matching layout switch hotkey configured in xkb options above.
-  // Having both at once on the same hotkey will break the switching,
-  // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-  // Mod+Space       { switch-layout "next"; }
-  // Mod+Shift+Space { switch-layout "prev"; }
+  // Native layout switching. Keep this out of xkb options above, or it toggles twice.
+  Alt+Space       { switch-layout "next"; }
+  Alt+Shift+Space { switch-layout "prev"; }
 
   Print { screenshot; }
   Ctrl+Print { screenshot-screen; }
