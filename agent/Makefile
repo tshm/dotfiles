@@ -24,6 +24,10 @@ dev: opencode
 
 skills: agent-browser
 
+.PHONY: herdr
+herdr:
+	curl -fsSL https://herdr.dev/install.sh | sh
+
 .PHONY: ponytail
 ponytail:
 	omp install git:github.com/DietrichGebert/ponytail
