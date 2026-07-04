@@ -4,6 +4,25 @@ let
   configPath = pathStr:
     config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   platformSystem = pkgs.stdenv.hostPlatform.system;
+  hyprlandGuiutils =
+    args.hyprland.inputs."hyprland-guiutils".packages.${platformSystem}.hyprland-guiutils.overrideAttrs
+      (old: {
+        buildInputs = old.buildInputs ++ [ pkgs.pango ];
+        postPatch = (old.postPatch or "") + ''
+          substituteInPlace CMakeLists.txt \
+            --replace-fail "  libdrm)" "  libdrm
+          pango)"
+        '';
+      });
+  hyprlandPackage =
+    args.hyprland.packages.${platformSystem}.hyprland.override {
+      hyprland-guiutils = hyprlandGuiutils;
+    };
+  hyprlandPortal =
+    args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland.override
+      {
+        hyprland = hyprlandPackage;
+      };
 in {
   imports = [
     # args.noctalia.homeModules.default
@@ -31,7 +50,7 @@ in {
     portal = {
       enable = true;
       extraPortals = [
-        args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland
+        hyprlandPortal
         pkgs.xdg-desktop-portal-gnome
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-termfilechooser
@@ -189,9 +208,8 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
-    package = args.hyprland.packages.${platformSystem}.hyprland;
-    portalPackage =
-      args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland;
+    package = hyprlandPackage;
+    portalPackage = hyprlandPortal;
     plugins = [
       # args.hyprland-plugins.packages.${platformSystem}.hyprscrolling  # FIXME: requires Hyprland source headers
       # args.hyprland-plugins.packages.${platformSystem}.hyprexpo  # FIXME: incompatible with current Hyprland
