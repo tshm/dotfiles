@@ -95,6 +95,23 @@ in
     };
   };
 
+  # systemd-logind owns lid-switch handling. Some HP laptops stop delivering
+  # lid events after resume until logind reopens the input device.
+  systemd.services.restart-logind-after-sleep = lib.mkIf (!forServer && !isRaspberryPi && useHibernation) {
+    description = "Restart logind after resume so lid switch events work again";
+    wantedBy = [ "sleep.target" ];
+    before = [ "sleep.target" ];
+    unitConfig.StopWhenUnneeded = true;
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = "true";
+    preStop = ''
+      ${pkgs.systemd}/bin/systemctl restart systemd-logind.service
+    '';
+  };
+
   services.greetd = lib.mkIf (!forServer) {
     enable = true;
     settings = {
