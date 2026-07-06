@@ -63,6 +63,12 @@ in
       pkgs.p7zip
       pkgs.entr
       pkgs.unzip
+      pkgs.gnutar
+      pkgs.gzip
+      pkgs.bzip2
+      pkgs.xz
+      pkgs.findutils
+      pkgs.coreutils
       # pkgs.archivemount
       pkgs.wget
       pkgs.pv
@@ -281,6 +287,7 @@ in
         -- require("git"):setup()
         -- require("archivemount"):setup()
         require("projects"):setup({})
+        require("archive-edit"):setup({ max_size = 100 * 1024 * 1024, max_files = 100 })
       '';
       settings = {
         log = {
@@ -340,7 +347,7 @@ in
       };
       plugins = {
         # hide-preview = hide-preview;
-        enter = ../../yazi/plugins/enter.yazi;
+        archive-edit = ../../yazi/plugins/archive-edit.yazi;
         smart-tab = ../../yazi/plugins/smart-tab.yazi;
         chmod = pkgs.yaziPlugins.chmod;
         git = pkgs.yaziPlugins.git;
@@ -377,8 +384,8 @@ in
             }
             {
               on = "<Enter>";
-              run = "plugin enter";
-              desc = "Enter dir";
+              run = "plugin archive-edit enter";
+              desc = "Enter dir or editable archive";
             }
             {
               on = "<C-n>";
@@ -405,6 +412,14 @@ in
             }
             # { on = [ "m" "a" ]; run = "plugin archivemount mount"; }
             # { on = [ "m" "u" ]; run = "plugin archivemount unmount"; }
+            {
+              on = [
+                "m"
+                "s"
+              ];
+              run = "plugin archive-edit flush";
+              desc = "Save editable archive";
+            }
             {
               on = [
                 "c"
