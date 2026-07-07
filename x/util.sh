@@ -40,6 +40,7 @@ current_layout=$(keyboard_layout_name)
 # Define the menu options
 options+=(
   "⏸ Sleep: systemctl suspend"
+  "💤 Hibernate: systemctl hibernate"
   "⏻  Shutdown: systemctl poweroff"
   "🔄 Reboot: systemctl reboot"
   "🌙 shader: pkill gammastep || gammastep &"
