@@ -69,7 +69,6 @@ in
       pkgs.xz
       pkgs.findutils
       pkgs.coreutils
-      # pkgs.archivemount
       pkgs.wget
       pkgs.pv
       pkgs.clipboard-jh
@@ -284,8 +283,6 @@ in
       enableNushellIntegration = true;
       shellWrapperName = "y";
       initLua = ''
-        -- require("git"):setup()
-        -- require("archivemount"):setup()
         require("projects"):setup({})
         require("archive-edit"):setup({ max_size = 100 * 1024 * 1024, max_files = 100 })
       '';
@@ -313,10 +310,6 @@ in
               run = "mediainfo";
             }
           ];
-          # prepend_fetchers = [
-          #   { id = "git"; name = "*"; run = "git"; }
-          #   { id = "git"; name = "*/"; run = "git"; }
-          # ];
         };
         opener = {
           less = [
@@ -350,9 +343,7 @@ in
         archive-edit = ../../yazi/plugins/archive-edit.yazi;
         smart-tab = ../../yazi/plugins/smart-tab.yazi;
         chmod = pkgs.yaziPlugins.chmod;
-        git = pkgs.yaziPlugins.git;
         mediainfo = pkgs.yaziPlugins.mediainfo;
-        # archivemount = pkgs.yaziPlugins.archivemount;
         projects = pkgs.yaziPlugins.projects;
         toggle-pane = pkgs.yaziPlugins.toggle-pane;
       };
@@ -410,8 +401,6 @@ in
               ];
               run = "cd ~/.local/share/Trash/";
             }
-            # { on = [ "m" "a" ]; run = "plugin archivemount mount"; }
-            # { on = [ "m" "u" ]; run = "plugin archivemount unmount"; }
             {
               on = [
                 "m"
