@@ -16,6 +16,7 @@
       {
         home.packages = [
           pkgs.deno
+          pkgs.libreoffice
           # autorotate
           # pkgs.iio-hyprland
         ];
