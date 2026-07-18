@@ -194,9 +194,6 @@ in {
   };
   wayland.windowManager.mango = {
     enable = true;
-    package = pkgs.callPackage (args.mango + "/nix") {
-      scenefx = pkgs.scenefx;
-    };
     settings = { };
     extraConfig = ''
       # config.conf

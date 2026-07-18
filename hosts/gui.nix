@@ -49,9 +49,6 @@ in {
   programs.hyprland = { enable = true; };
   programs.mango = {
     enable = true;
-    package = pkgs.callPackage (args.mango + "/nix") {
-      scenefx = pkgs.scenefx;
-    };
   };
   programs.niri.enable = true;
   fonts = {

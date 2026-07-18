@@ -10,6 +10,7 @@
     hunk = {
       url = "github:modem-dev/hunk";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.bun2nix.inputs.systems.url = "github:nix-systems/default-linux";
     };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
