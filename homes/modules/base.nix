@@ -210,6 +210,7 @@ in
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      historyWidget.command = "";
       defaultCommand = "fd";
       defaultOptions = [
         "-m"
