@@ -54,6 +54,7 @@ in
       # shelltools
       pkgs.python3
       pkgs.pipx
+      pkgs.python3Packages.markitdown
       pkgs.trashy
       pkgs.file
       pkgs.psmisc
@@ -302,6 +303,10 @@ in
         plugin = {
           prepend_previewers = [
             {
+              url = "*.{docx,xlsx,pptx}";
+              run = ''piper -- PYTHONWARNINGS=ignore::RuntimeWarning:pydub.utils markitdown "$1"'';
+            }
+            {
               mime = "{image,audio,video}/*";
               run = "mediainfo";
             }
@@ -344,6 +349,7 @@ in
         smart-tab = ../../yazi/plugins/smart-tab.yazi;
         chmod = pkgs.yaziPlugins.chmod;
         mediainfo = pkgs.yaziPlugins.mediainfo;
+        piper = pkgs.yaziPlugins.piper;
         projects = pkgs.yaziPlugins.projects;
         toggle-pane = pkgs.yaziPlugins.toggle-pane;
       };
