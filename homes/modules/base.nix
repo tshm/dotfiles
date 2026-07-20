@@ -9,6 +9,59 @@
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   platformSystem = pkgs.stdenv.hostPlatform.system;
+  emojiCli = pkgs.fetchFromGitHub {
+    owner = "babarot";
+    repo = "emoji-cli";
+    rev = "0fbb2e48e07218c5a2776100a4c708b21cb06688";
+    sha256 = "1hfjhng5y8pldrnbd1qhylnf5g0ikjz5szmk5cmf56xz686x2bla";
+  };
+  zshMoreCompletions = pkgs.fetchFromGitHub {
+    owner = "MenkeTechnologies";
+    repo = "zsh-more-completions";
+    rev = "cf16fbfdfc9d920078a08f42570c2fea4abdfab6";
+    sha256 = "12vc0mqlk845cy0wcxf3y3z7y2dykhkgf39alm78k1kc60nhhyv9";
+  };
+  zshSsh = pkgs.fetchFromGitHub {
+    owner = "sunlei";
+    repo = "zsh-ssh";
+    rev = "cee8c2a119dd53f01dc6aef1ce79faa783aa2e3f";
+    sha256 = "0qmgjb2vygl12xw82lnmdrz7hn2847r0m9dyizyf9qx2hsqml8np";
+  };
+  compiledZshPlugins = pkgs.runCommand "compiled-zsh-plugins" { nativeBuildInputs = [ pkgs.zsh ]; } ''
+    mkdir -p $out
+    cp -r ${pkgs.zsh-autosuggestions} $out/autosuggestions
+    cp -r ${pkgs.zsh-history-search-multi-word} $out/history-search-multi-word
+    cp -r ${pkgs.zsh-fast-syntax-highlighting} $out/fast-syntax-highlighting
+    cp -r ${pkgs.zsh-autopair} $out/autopair
+    cp -r ${pkgs.pure-prompt} $out/pure
+    cp -r ${pkgs.zsh-history-substring-search} $out/history-substring-search
+    cp -r ${pkgs.zsh-forgit} $out/forgit
+    cp -r ${emojiCli} $out/emoji
+    cp -r ${pkgs.zsh-clipboard} $out/clipboard
+    cp -r ${pkgs.zsh-fzf-tab} $out/fzf-tab
+    cp -r ${zshSsh} $out/zsh-ssh
+    chmod -R u+w $out
+
+    zsh -fc '
+    zcompile $out/autosuggestions/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+    zcompile $out/autosuggestions/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    zcompile $out/history-search-multi-word/share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh
+    zcompile $out/fast-syntax-highlighting/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+    zcompile $out/autopair/share/zsh/zsh-autopair/autopair.zsh
+    zcompile $out/pure/share/zsh/site-functions/async
+    zcompile $out/pure/share/zsh/site-functions/prompt_pure_setup
+    zcompile $out/history-substring-search/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
+    zcompile $out/history-substring-search/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+    zcompile $out/forgit/share/zsh/zsh-forgit/forgit.plugin.zsh
+    zcompile $out/emoji/emoji-cli.plugin.zsh
+    zcompile $out/emoji/emoji-cli.zsh
+    zcompile $out/clipboard/share/zsh/plugins/clipboard/clipboard.plugin.zsh
+    zcompile $out/fzf-tab/share/fzf-tab/fzf-tab.plugin.zsh
+    zcompile $out/fzf-tab/share/fzf-tab/fzf-tab.zsh
+    zcompile $out/zsh-ssh/zsh-ssh.plugin.zsh
+    zcompile $out/zsh-ssh/zsh-ssh.zsh
+    '
+  '';
 in
 {
   imports = [
@@ -56,6 +109,7 @@ in
       pkgs.pipx
       pkgs.python3Packages.markitdown
       pkgs.trashy
+      pkgs.trashy
       pkgs.file
       pkgs.psmisc
       pkgs.neovim
@@ -79,6 +133,9 @@ in
       pkgs.devbox
       pkgs.onefetch
       pkgs.tig
+      (lib.hiPrio pkgs.git-extras)
+      pkgs.ugit
+      pkgs.zsh-forgit
       pkgs.jujutsu
       pkgs.pre-commit
       pkgs.lnav
@@ -123,7 +180,6 @@ in
           cleanup = true;
         };
         commands = {
-          # "zinit" = "zsh -i -c 'source ~/.dotfiles/zsh/zshrc && zinit update'";
           "devbox" = "devbox global update";
         };
       };
@@ -284,7 +340,7 @@ in
       enableNushellIntegration = true;
       shellWrapperName = "y";
       initLua = ''
-        require("projects"):setup({})
+        require("recycle-bin"):setup()
         require("archive-edit"):setup({ max_size = 100 * 1024 * 1024, max_files = 100 })
       '';
       settings = {
@@ -344,19 +400,23 @@ in
         ];
       };
       plugins = {
-        # hide-preview = hide-preview;
         archive-edit = ../../yazi/plugins/archive-edit.yazi;
         smart-tab = ../../yazi/plugins/smart-tab.yazi;
         chmod = pkgs.yaziPlugins.chmod;
         mediainfo = pkgs.yaziPlugins.mediainfo;
         piper = pkgs.yaziPlugins.piper;
-        projects = pkgs.yaziPlugins.projects;
+        recycle-bin = pkgs.yaziPlugins.recycle-bin;
         toggle-pane = pkgs.yaziPlugins.toggle-pane;
       };
       keymap = {
         force = true;
         mgr = {
           prepend_keymap = [
+            {
+              on = ["R" "b"];
+              run = "plugin recycle-bin";
+              desc = "Open Recycle Bin";
+            }
             {
               on = "<Tab>";
               run = "plugin smart-tab";
@@ -402,13 +462,6 @@ in
             }
             {
               on = [
-                "g"
-                "t"
-              ];
-              run = "cd ~/.local/share/Trash/";
-            }
-            {
-              on = [
                 "m"
                 "s"
               ];
@@ -421,34 +474,6 @@ in
                 "m"
               ];
               run = "plugin chmod";
-            }
-            {
-              on = [
-                "P"
-                "s"
-              ];
-              run = "plugin projects save";
-            }
-            {
-              on = [
-                "P"
-                "l"
-              ];
-              run = "plugin projects load";
-            }
-            {
-              on = [
-                "P"
-                "P"
-              ];
-              run = "plugin projects load_last";
-            }
-            {
-              on = [
-                "P"
-                "d"
-              ];
-              run = "plugin projects delete";
             }
           ];
         };
@@ -464,6 +489,64 @@ in
 
         # Create tmux socket directory if it doesn't exist
         [ -n "$XDG_RUNTIME_DIR" ] && mkdir -p "$XDG_RUNTIME_DIR/tmux-$(id -u)" 2>/dev/null
+
+        source ${compiledZshPlugins}/autosuggestions/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+        source ${compiledZshPlugins}/history-search-multi-word/share/zsh/zsh-history-search-multi-word/history-search-multi-word.plugin.zsh
+        source ${compiledZshPlugins}/fast-syntax-highlighting/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+        source ${compiledZshPlugins}/autopair/share/zsh/zsh-autopair/autopair.zsh
+
+        fpath+=(${compiledZshPlugins}/pure/share/zsh/site-functions)
+        source ${compiledZshPlugins}/pure/share/zsh/site-functions/prompt_pure_setup
+
+        source ${compiledZshPlugins}/history-substring-search/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
+
+        fpath+=(${pkgs.zsh-completions}/share/zsh/site-functions)
+        source ${zshMoreCompletions}/zsh-more-completions.plugin.zsh
+        source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/completion.zsh
+        source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/compfix.zsh
+
+        source ${compiledZshPlugins}/forgit/share/zsh/zsh-forgit/forgit.plugin.zsh
+        source ${compiledZshPlugins}/emoji/emoji-cli.plugin.zsh
+        source ${compiledZshPlugins}/clipboard/share/zsh/plugins/clipboard/clipboard.plugin.zsh
+
+        autoload -U compinit
+        zmodload zsh/stat
+        ZCOMPDUMP=${config.home.homeDirectory}/.zcompdump
+        if [[ ! -f $ZCOMPDUMP ]] || (( $(date +%s) - $(zstat +mtime $ZCOMPDUMP 2>/dev/null || echo 0) > 86400 )); then
+          compinit
+        else
+          compinit -C
+        fi
+
+        source ${compiledZshPlugins}/fzf-tab/share/fzf-tab/fzf-tab.plugin.zsh
+        [ -n "$TMUX" ] && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+        source ${compiledZshPlugins}/zsh-ssh/zsh-ssh.plugin.zsh
+
+        # Patch _parse_config_file to use 'realpath -s' for symlink compatibility (e.g. home-manager)
+        _parse_config_file() {
+          setopt localoptions rematchpcre
+          unsetopt nomatch
+          local config_file_path=$(realpath -s "$1")
+          while IFS= read -r line || [[ -n "$line" ]]; do
+            if [[ $line =~ ^[Ii]nclude[[:space:]]+(.*) ]] && (( $#match > 0 )); then
+              local include_paths=(''${(z)match[1]})
+              for raw_path in "''${include_paths[@]}"; do
+                local expanded=''${~raw_path}
+                if [[ "$expanded" != /* ]]; then
+                  expanded="$(dirname "$config_file_path")/$expanded"
+                fi
+                for include_file_path in $~expanded; do
+                  if [[ -f "$include_file_path" ]]; then
+                    echo ""
+                    _parse_config_file "$include_file_path"
+                  fi
+                done
+              done
+            else
+              echo "$line"
+            fi
+          done < "$config_file_path"
+        }
 
         source ~/.dotfiles/zsh/zshrc
         # zprof

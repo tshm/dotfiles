@@ -35,10 +35,9 @@ dev:
 update.%: ./homes/apps/%.nix
 	python3 ./scripts/update-app-hash.py "$<"
 
-.PHONY: all clean dev home-manager kanata nix nix-upgrade os resh sd-burn sudo up update xx zi .git/hooks/pre-commit
+.PHONY: all clean dev home-manager kanata nix nix-upgrade os resh sd-burn sudo up update xx .git/hooks/pre-commit
 .PHONY: spi.img result-spi
 up: update apphash_update
-zi:; zsh -i -c 'zinit update'
 
 sd-burn: spi.img
 	sudo dd if=spi.img of=${SD_DEV} bs=10MB oflag=dsync status=progress
