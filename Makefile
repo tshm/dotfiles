@@ -2,6 +2,9 @@
 ISNIXOS:=$(shell grep ID=nixos /etc/os-release)
 NIX:=$(shell which nix)
 ISWSL:=$(shell uname -a | grep WSL)
+PRIVATE_FLAKE:=$(wildcard $(HOME)/.dotfiles-private)
+NIXOS_FLAKE:=$(if $(PRIVATE_FLAKE),$(PRIVATE_FLAKE),.)
+NIXOS_FLAKE_ARGS:=$(if $(PRIVATE_FLAKE),--override-input dotfiles path:$(CURDIR))
 
 HAS_CACHIX:=$(shell which cachix)
 ifdef HAS_CACHIX
@@ -25,7 +28,7 @@ APPSRC := $(shell find ./homes/apps/ -name '*.nix')
 APPS := $(patsubst ./homes/apps/%.nix, update.%, $(APPSRC))
 
 xx:
-	${CACHIX} nixos-rebuild build --flake .${TARGET}
+	${CACHIX} nixos-rebuild build --flake ${NIXOS_FLAKE}${TARGET} ${NIXOS_FLAKE_ARGS}
 
 apphash_update: $(APPS)
 
@@ -72,9 +75,9 @@ sudo:; sudo echo sudo
 
 os: sudo
 ifdef HAS_NH
-	${CACHIX} nh os boot
+	${CACHIX} nh os boot ${NIXOS_FLAKE} ${NIXOS_FLAKE_ARGS}
 else
-	${CACHIX} sudo nixos-rebuild boot --flake .
+	${CACHIX} sudo nixos-rebuild boot --flake ${NIXOS_FLAKE} ${NIXOS_FLAKE_ARGS}
 endif
 
 clean:
