@@ -1,6 +1,6 @@
 { pkgs, ... }@args:
 let
-  vocalinux = pkgs.callPackage ./vocalinux.nix { };
+  opentypeless = pkgs.callPackage ../homes/apps/opentypeless.nix { };
 in {
   imports =
     [ args.mango.nixosModules.mango args.catppuccin.nixosModules.catppuccin ];
@@ -143,7 +143,7 @@ in {
 
   environment.systemPackages = [
     pkgs.mesa
-    vocalinux
+    opentypeless
     # desktop environment related
     pkgs.niriswitcher
     pkgs.nirius
