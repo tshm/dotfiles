@@ -80,3 +80,5 @@ spawn_and_wait "Beeper" '(?i)(beepertexts|beeper|com\.automattic\.beeper)' '(?i)
 
 nirius &
 fcitx5 -d --replace &
+
+opentypeless &
