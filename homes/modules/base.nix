@@ -108,6 +108,7 @@ in
       pkgs.python3
       pkgs.pipx
       pkgs.python3Packages.markitdown
+      pkgs.pandoc
       pkgs.trashy
       pkgs.trashy
       pkgs.file
@@ -362,6 +363,10 @@ in
             {
               url = "*.{docx,xlsx,pptx}";
               run = ''piper -- PYTHONWARNINGS=ignore::RuntimeWarning:pydub.utils markitdown "$1"'';
+            }
+            {
+              url = "*.epub";
+              run = ''piper -- pandoc "$1" -t plain'';
             }
             {
               mime = "{image,audio,video}/*";
