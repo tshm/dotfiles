@@ -73,9 +73,10 @@ spawn_and_wait() {
   wait_for_new_window "$description" "$app_pattern" "$title_pattern" "$previous_count" || true
 }
 
-spawn_and_wait "Beeper" '(?i)(beepertexts|beeper|com\.automattic\.beeper)' '(?i)beeper' beeper
+waybar &
 spawn_and_wait "Zen Browser" '(?i)(^zen$|app\.zen_browser\.zen)' '(?i)zen browser' zen
 spawn_and_wait "WezTerm" '^org\.wezfurlong\.wezterm$' '(?i)wezterm' wezterm
+spawn_and_wait "Beeper" '(?i)(beepertexts|beeper|com\.automattic\.beeper)' '(?i)beeper' beeper
 
 nirius &
 fcitx5 -d --replace &

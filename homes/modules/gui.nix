@@ -117,6 +117,7 @@ in {
     };
   };
   home = {
+    pointerCursor.enable = true;
     packages = [
       (pkgs.callPackage ../apps/zen.nix { inherit pkgs; })
       (pkgs.callPackage ../apps/beeper.nix { inherit pkgs; })

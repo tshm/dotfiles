@@ -285,6 +285,9 @@ layout {
   }
 }
 
+workspace "main"
+workspace "beeper"
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -349,6 +352,11 @@ window-rule {
   // You can get away with just app-id="wezterm" if you want.
   match app-id=r#"^org\.wezfurlong\.wezterm$"#
   default-column-width {}
+}
+
+window-rule {
+  match app-id=r#"(?i)^(beepertexts|beeper|com\.automattic\.beeper)$"#
+  open-on-workspace "beeper"
 }
 
 // Open the Firefox picture-in-picture player as floating by default.

@@ -19,9 +19,9 @@ endif
 
 home-manager: nix
 ifdef HAS_NH
-	${CACHIX} nh home switch --backup-extension backup
+	NIX_CONFIG="warn-dirty = false" ${CACHIX} nh home switch --backup-extension backup
 else
-	${CACHIX} nix run home-manager/master -- switch --flake .
+	NIX_CONFIG="warn-dirty = false" ${CACHIX} nix run home-manager/master -- switch --flake .
 endif
 
 APPSRC := $(shell find ./homes/apps/ -name '*.nix')
