@@ -181,7 +181,7 @@ in
           set_title = false;
           cleanup = true;
         };
-        pre_commands = {
+        commands = {
           "omp" = "omp update";
           "opencode" = "opencode upgrade";
           "hermes" = "hermes update";
