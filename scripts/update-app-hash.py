@@ -128,6 +128,7 @@ def hash_from_url(url, version, current_hash):
     beeper_result = beeper_update(url, version, current_hash)
     if beeper_result:
         return beeper_result
+    url = url.replace("${version}", version)
 
     latest_match = GITHUB_LATEST_RE.match(url)
     if latest_match:
