@@ -166,6 +166,7 @@ in
       settings = {
         misc = {
           pre_sudo = true;
+          assume_yes = true;
           no_retry = true;
           no_self_update = true;
           disable = [
@@ -180,7 +181,10 @@ in
           set_title = false;
           cleanup = true;
         };
-        commands = {
+        pre_commands = {
+          "omp" = "omp update";
+          "opencode" = "opencode upgrade";
+          "hermes" = "hermes update";
           "devbox" = "devbox global update";
         };
       };

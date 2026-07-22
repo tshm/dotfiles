@@ -121,28 +121,6 @@ function restore() {
   trash list | fzf --multi | awk '{$1=$1;print}' | rev | cut -d ' ' -f1 | rev | xargs trash restore --match=exact --force
 }
 
-function aup() {
-  local -i failed=0 ran=0
-  local cmd opencode_cmd
-
-  for cmd in omp hermes pi; do
-    (builtin whence -p -- "$cmd" > /dev/null) || continue
-    echo "========== $cmd =========="
-    "$cmd" update || failed=1
-    ran=1
-  done
-
-  opencode_cmd="$(builtin whence -p opencode 2>/dev/null)" || opencode_cmd="$HOME/.opencode/bin/opencode"
-  [ -x "$opencode_cmd" ] && {
-    echo "========== opencode =========="
-    "$opencode_cmd" upgrade || failed=1
-    ran=1
-  }
-
-  (( ran )) || echo "aup: nothing to update"
-  return $failed
-}
-
 (echo $uname | grep -i microsoft >/dev/null) && {
   alias scoopup="scoop update '*' && scoop cleanup '*' && scoop cache rm '*'"
   function e() {
