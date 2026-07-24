@@ -48,13 +48,7 @@ def sha256_hex_to_sri(digest):
     return "sha256-" + base64.b64encode(raw_hash).decode("ascii")
 
 
-def github_release_digest(owner, repo, asset_name, tag=None):
-    if tag:
-        api_url = f"https://api.github.com/repos/{owner}/{repo}/releases/tags/{tag}"
-    else:
-        api_url = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
-
-    release = fetch_json(api_url)
+def github_asset_digest(owner, repo, release, asset_name):
     for asset in release.get("assets", []):
         if asset.get("name") == asset_name:
             digest = asset.get("digest")
@@ -65,6 +59,15 @@ def github_release_digest(owner, repo, asset_name, tag=None):
             return sha256_hex_to_sri(digest)
 
     raise RuntimeError(f"asset {asset_name!r} not found in {owner}/{repo} release")
+
+
+def github_release_digest(owner, repo, asset_name, tag=None):
+    if tag:
+        api_url = f"https://api.github.com/repos/{owner}/{repo}/releases/tags/{tag}"
+    else:
+        api_url = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
+
+    return github_asset_digest(owner, repo, fetch_json(api_url), asset_name)
 
 
 def sri_from_sha256_bytes(raw_hash):
@@ -128,17 +131,44 @@ def hash_from_url(url, version, current_hash):
     beeper_result = beeper_update(url, version, current_hash)
     if beeper_result:
         return beeper_result
-    url = url.replace("${version}", version)
-
-    latest_match = GITHUB_LATEST_RE.match(url)
-    if latest_match:
-        owner, repo, asset = latest_match.groups()
-        return github_release_digest(owner, repo, unquote(asset)), None, None
 
     tag_match = GITHUB_TAG_RE.match(url)
     if tag_match:
         owner, repo, tag, asset = tag_match.groups()
-        return github_release_digest(owner, repo, unquote(asset), unquote(tag)), None, None
+        tag = unquote(tag)
+        asset = unquote(asset)
+        if tag == "v${version}":
+            release = fetch_json(
+                f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
+            )
+            latest_tag = release.get("tag_name", "")
+            if not latest_tag.startswith("v"):
+                raise RuntimeError(f"cannot parse GitHub release tag {latest_tag!r}")
+            latest_version = latest_tag.removeprefix("v")
+            latest_asset = asset.replace("${version}", latest_version)
+            new_version = latest_version if latest_version != version else None
+            return (
+                github_asset_digest(owner, repo, release, latest_asset),
+                new_version,
+                None,
+            )
+
+        return (
+            github_release_digest(
+                owner,
+                repo,
+                asset.replace("${version}", version),
+                tag.replace("${version}", version),
+            ),
+            None,
+            None,
+        )
+
+    url = url.replace("${version}", version)
+    latest_match = GITHUB_LATEST_RE.match(url)
+    if latest_match:
+        owner, repo, asset = latest_match.groups()
+        return github_release_digest(owner, repo, unquote(asset)), None, None
 
     host = urlparse(url).netloc
     raise RuntimeError(

@@ -1,10 +1,10 @@
 { pkgs, ... }:
 let
   pname = "opentypeless";
-  version = "1.1.50";
+  version = "1.1.52";
   src = pkgs.fetchurl {
     url = "https://github.com/tover0314-w/opentypeless/releases/download/v${version}/OpenTypeless_${version}_amd64.AppImage";
-    hash = "sha256-PfvDqiBu5HHViIeVWwuXbN+koQRaLWXkwKxexjXO/IU=";
+    hash = "sha256-OmfvOFF2L0DMNpaX4m3V6cj3JmxarmVq78TNc3dCxmw=";
   };
   appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
 in pkgs.appimageTools.wrapType2 {
