@@ -6,7 +6,7 @@
     "k9s@0.51.0",
     "cloudflared@latest",
     "kubernetes-helm@4.2.2",
-    "oci-cli@3.88.0",
+    "oci-cli@3.89.1",
     "fluxcd@2.8.8"
   ],
   "shell": {
