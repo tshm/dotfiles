@@ -31,7 +31,7 @@ config.font_size = 11
 -- config.default_prog = { "wsl" }
 -- config.default_domain = "WSL:Ubuntu"
 
-config.enable_wayland = false
+-- config.enable_wayland = false
 config.enable_kitty_keyboard = true
 
 config.use_ime = true
