@@ -8,6 +8,9 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
+  systemd.oomd.enableUserSlices = true;
+  zramSwap.enable = true;
+
   services.auto-cpufreq.enable = true;
   services.greetd.enable = false;
   services.syncthing.enable = false;
