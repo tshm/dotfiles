@@ -1,6 +1,6 @@
 { pkgs, ... }@args:
 let
-  opentypeless = pkgs.callPackage ../homes/apps/opentypeless.nix { };
+  speakoflow = pkgs.callPackage ../homes/apps/speakoflow.nix { };
 in {
   imports =
     [ args.mango.nixosModules.mango args.catppuccin.nixosModules.catppuccin ];
@@ -46,7 +46,7 @@ in {
   programs.dconf = { enable = true; };
   programs.ydotool.enable = true;
   users.users.${args.user}.extraGroups = [ "ydotool" "input" ];
-  programs.hyprland = { enable = true; };
+  # programs.hyprland = { enable = true; };
   programs.mango = {
     enable = true;
   };
@@ -143,7 +143,7 @@ in {
 
   environment.systemPackages = [
     pkgs.mesa
-    opentypeless
+    speakoflow
     # desktop environment related
     pkgs.niriswitcher
     pkgs.nirius

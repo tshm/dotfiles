@@ -35,12 +35,14 @@
     localias.url = "github:peterldowns/localias";
     # mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
     vicinae.url = "github:vicinaehq/vicinae";
+    /*
     hyprland.url = "github:hyprwm/Hyprland";
     # hyprshell.url = "github:h3rmt/hyprswitch?ref=hyprshell";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+    */
     mango = {
       url = "github:DreamMaoMao/mangowc";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,17 +62,17 @@
           "https://tshmcache.cachix.org"
           "https://nix-community.cachix.org"
           "https://nixpkgs.cachix.org"
-          "https://hyprland.cachix.org"
+          # "https://hyprland.cachix.org"
           "https://vicinae.cachix.org"
         ];
-        trusted-substituters = [ "https://hyprland.cachix.org" ];
+        # trusted-substituters = [ "https://hyprland.cachix.org" ];
         trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "nixpkgs.cachix.org-1:q91R6hxbwFvDqTSDKwDAV4T5PxqXGxswD8vhONFMeOE="
           "tshmcache.cachix.org-1:0btnJOmOtW8UjTeoXCjhxOuc/TLcXcxL+DGBJ0sNEw0="
           "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+          # "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         ];
       };
       # Cross-compilation support for aarch64-linux

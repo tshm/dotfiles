@@ -16,7 +16,6 @@ let
   appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
 in pkgs.appimageTools.wrapType2 {
   inherit pname version src;
-  pkgs = pkgs;
   extraInstallCommands = ''
     install -m 444 -D ${appimageContents}/beepertexts.desktop -t $out/share/applications
     substituteInPlace $out/share/applications/beepertexts.desktop \

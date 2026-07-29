@@ -3,6 +3,7 @@
 let
   configPath = pathStr:
     config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+  /*
   platformSystem = pkgs.stdenv.hostPlatform.system;
   hyprlandGuiutils =
     args.hyprland.inputs."hyprland-guiutils".packages.${platformSystem}.hyprland-guiutils.overrideAttrs
@@ -23,6 +24,7 @@ let
       {
         hyprland = hyprlandPackage;
       };
+  */
 in {
   imports = [
     # args.noctalia.homeModules.default
@@ -50,7 +52,7 @@ in {
     portal = {
       enable = true;
       extraPortals = [
-        hyprlandPortal
+        # hyprlandPortal
         pkgs.xdg-desktop-portal-gnome
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-termfilechooser
@@ -60,11 +62,13 @@ in {
           default = [ "gtk" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
         };
+        /*
         hyprland = {
           default = [ "hyprland" "gnome" "gtk" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
           "org.freedesktop.impl.portal.Settings" = [ "gnome" ];
         };
+        */
         niri = {
           default = [ "gnome" "gtk" ];
           "org.freedesktop.impl.portal.Access" = [ "gtk" ];
@@ -203,6 +207,7 @@ in {
       # autostart.sh
     '';
   };
+  /*
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
@@ -242,4 +247,5 @@ in {
       ];
     };
   };
+  */
 }
