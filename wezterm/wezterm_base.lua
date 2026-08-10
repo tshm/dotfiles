@@ -5,9 +5,10 @@ local config = {}
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
+config.front_end = "Software"
 
 config.window_close_confirmation = "NeverPrompt"
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false
 -- config.color_scheme = "Earthsong"
 config.color_scheme = "Bamboo"
 
