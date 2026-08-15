@@ -3,6 +3,21 @@
 let
   configPath = pathStr:
     config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+  tailscaleVicinaeExtension = pkgs.buildNpmPackage {
+    pname = "vicinae-tailscale-control";
+    version = "1.0.0";
+    src = ../../x/vicinae/extensions/tailscale;
+    npmDepsHash = "sha256-8In9NQ1StAzn2VSP3naNeymXzjkx/rPL0iBw4fAFops=";
+    npmBuildFlags = [ "--" "--out" "dist" ];
+    doCheck = true;
+    checkPhase = "npm test";
+    installPhase = ''
+      runHook preInstall
+      mkdir -p "$out"
+      cp -r dist/. "$out/"
+      runHook postInstall
+    '';
+  };
   /*
   platformSystem = pkgs.stdenv.hostPlatform.system;
   hyprlandGuiutils =
@@ -85,6 +100,8 @@ in {
         configPath "/x/vicinae/scripts/cloudflare-warp-connect.sh";
       "vicinae/scripts/cloudflare-warp-disconnect.sh".source =
         configPath "/x/vicinae/scripts/cloudflare-warp-disconnect.sh";
+      "vicinae/extensions/tailscale-control".source =
+        tailscaleVicinaeExtension;
     };
 
     mimeApps = {

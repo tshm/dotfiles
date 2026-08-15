@@ -1,0 +1,38 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "tailscale-control",
+  "title": "Tailscale",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Control the local Tailscale connection and exit node",
+  "author": "tshm",
+  "license": "MIT",
+  "platforms": ["Linux"],
+  "icon": "command-icon.png",
+  "commands": [
+    {
+      "name": "control",
+      "title": "Tailscale",
+      "subtitle": "Control",
+      "description": "View connection status and choose an exit node",
+      "mode": "view"
+    },
+    {
+      "name": "toggle",
+      "title": "Toggle Tailscale",
+      "subtitle": "Connection",
+      "description": "Connect or disconnect the local Tailscale client",
+      "mode": "no-view"
+    }
+  ],
+  "scripts": {
+    "build": "vici build",
+    "test": "node --test test/*.test.mts"
+  },
+  "dependencies": {
+    "@vicinae/api": "0.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0"
+  }
+}
