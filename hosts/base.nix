@@ -10,6 +10,12 @@ let
   userHome = "/home/${user}";
   useHibernation = builtins.length config.swapDevices > 0;
   isRaspberryPi = host == "spi";
+  warpMdm = pkgs.writeText "cloudflare-warp-mdm.xml" ''
+    <dict>
+      <key>service_mode</key>
+      <string>tunnelonly</string>
+    </dict>
+  '';
 in
 {
    imports = [
@@ -50,8 +56,12 @@ in
 
   services.resolved = lib.mkIf (!isRaspberryPi) {
     enable = true;
-    # Prefer failing closed over leaking queries to public fallback resolvers.
-    settings.Resolve.FallbackDNS = [ ];
+    settings.Resolve = {
+      DNS = [ "100.100.100.100" ];
+      Domains = [ "~ts.net" ];
+      # Prefer failing closed over leaking queries to public fallback resolvers.
+      FallbackDNS = [ ];
+    };
   };
   console.useXkbConfig = true;
 
@@ -120,6 +130,10 @@ in
   # cloudflare-warp
   systemd.packages = lib.mkIf (!forServer) [ pkgs.cloudflare-warp ];
   systemd.targets.multi-user.wants = lib.mkIf (!forServer) [ "warp-svc.service" ];
+  systemd.tmpfiles.rules = lib.mkIf (!forServer) [
+    "d /var/lib/cloudflare-warp 0755 root root -"
+    "L+ /var/lib/cloudflare-warp/mdm.xml - - - - ${warpMdm}"
+  ];
 
   system.activationScripts.removeLegacyNonNixosGpu = lib.stringAfter [ "etc" ] ''
     unit=/etc/systemd/system/non-nixos-gpu.service
@@ -167,35 +181,13 @@ in
   services.tailscale = {
     enable = lib.mkDefault true;
     useRoutingFeatures = lib.mkDefault (if forServer then "server" else "both");
-    extraSetFlags = lib.mkIf (!forServer) [ "--operator=${user}" ];
-
     # Keep normal DNS resolution pointed at the active network (e.g. corporate DNS).
-    # We'll route only *.ts.net via Tailscale DNS below.
-    extraUpFlags = lib.mkIf (!isRaspberryPi) [ "--accept-dns=false" ];
+    # Route only *.ts.net through Tailscale's resolver.
+    extraSetFlags =
+      lib.optionals (!forServer) [ "--operator=${user}" ]
+      ++ lib.optionals (!isRaspberryPi) [ "--accept-dns=false" ];
   };
 
-  systemd.services.tailscale-split-dns = lib.mkIf (!isRaspberryPi && config.services.resolved.enable) {
-    description = "Route *.ts.net DNS to Tailscale via systemd-resolved";
-    wantedBy = [ "sys-subsystem-net-devices-tailscale0.device" ];
-    bindsTo = [ "sys-subsystem-net-devices-tailscale0.device" ];
-    after = [
-      "sys-subsystem-net-devices-tailscale0.device"
-      "systemd-resolved.service"
-      "tailscaled.service"
-    ];
-    wants = [ "systemd-resolved.service" "tailscaled.service" ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-    };
-
-    path = [ pkgs.systemd ];
-    script = ''
-      resolvectl dns tailscale0 100.100.100.100
-      resolvectl domain tailscale0 '~ts.net'
-    '';
-  };
 
   virtualisation = {
     podman = lib.mkIf (!isRaspberryPi) {
