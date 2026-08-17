@@ -54,6 +54,11 @@
     };
   };
 
+  services.tailscale = {
+    openFirewall = true;
+    extraSetFlags = [ "--advertise-exit-node" ];
+  };
+
   services.syncthing.enable = true;
   virtualisation.docker.enable = true;
 }

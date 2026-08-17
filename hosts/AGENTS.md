@@ -30,7 +30,7 @@ hosts/
 | minf | x86 | Desktop | Full GUI |
 | x360 | x86 | Laptop | HP convertible |
 | tp | x86 | Server | ThinkPad headless |
-| spi | aarch64 | RPi | Raspberry Pi, cross-compiled |
+| spi | aarch64 | RPi | Raspberry Pi, cross-compiled; production `spi` advertises a Tailscale exit node, while `spi_first` builds the initial SD image |
 | usb | x86 | Portable | Bootable USB |
 
 ## Conventions
