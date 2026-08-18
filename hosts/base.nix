@@ -30,6 +30,7 @@ in
     zfs.forceImportRoot = false;
     # Required for Dagger engine to work (uses iptables inside container)
     kernelModules = [ "ip_tables" "iptable_nat" "iptable_filter" ];
+    kernel.sysctl = lib.mkIf forServer { "kernel.sysrq" = 80; };
     loader = {
       systemd-boot = {
         enable = lib.mkIf (!isRaspberryPi && host != "tp") true;
