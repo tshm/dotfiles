@@ -473,7 +473,7 @@ in
             {
               on = [
                 "m"
-                "s"
+                "S"
               ];
               run = "plugin archive-edit flush";
               desc = "Save editable archive";
