@@ -406,7 +406,7 @@ binds {
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   // Mod+Comma hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "combi"; }
   Mod+Comma hotkey-overlay-title="Run an Application: vicinae" { spawn "vicinae" "toggle"; }
-  Ctrl+Alt+G repeat=false hotkey-overlay-title="Toggle SpeakoFlow Dictation" { spawn "speakoflow" "--toggle-transcription"; }
+  Ctrl+Alt+G repeat=false hotkey-overlay-title="Toggle SpeakoFlow Dictation" { spawn "speakoflow" "--toggle-post-process"; }
   // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
   Mod+T { spawn "~/.dotfiles/x/info.sh"; }
   Mod+P { spawn "~/.dotfiles/x/util.sh"; }
