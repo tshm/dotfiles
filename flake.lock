@@ -88,6 +88,22 @@
         "type": "github"
       }
     },
+    "emoji-cli": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1580289510,
+        "narHash": "sha256-ii7RDTK/m+IqK7N+Xb6cEbziLPUQh7ZsbvQiX56F0sE=",
+        "owner": "babarot",
+        "repo": "emoji-cli",
+        "rev": "0fbb2e48e07218c5a2776100a4c708b21cb06688",
+        "type": "github"
+      },
+      "original": {
+        "owner": "babarot",
+        "repo": "emoji-cli",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -516,6 +532,7 @@
       "inputs": {
         "agenix": "agenix",
         "catppuccin": "catppuccin",
+        "emoji-cli": "emoji-cli",
         "home-manager": "home-manager_2",
         "hunk": "hunk",
         "localias": "localias",
@@ -523,7 +540,9 @@
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
-        "vicinae": "vicinae"
+        "vicinae": "vicinae",
+        "zsh-more-completions": "zsh-more-completions",
+        "zsh-ssh": "zsh-ssh"
       }
     },
     "scenefx": {
@@ -698,6 +717,38 @@
       "original": {
         "owner": "vicinaehq",
         "repo": "vicinae",
+        "type": "github"
+      }
+    },
+    "zsh-more-completions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787376281,
+        "narHash": "sha256-j448D4GhMFAy2xLM3Ge4RQ2gT8j+K6IbLIn4/fgjTn0=",
+        "owner": "MenkeTechnologies",
+        "repo": "zsh-more-completions",
+        "rev": "94ded3926c3144e287cfcdb04193cbb02796ae7e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MenkeTechnologies",
+        "repo": "zsh-more-completions",
+        "type": "github"
+      }
+    },
+    "zsh-ssh": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780076268,
+        "narHash": "sha256-1yJasYai4+T8j76lCvIhSFh4fm7VUoF4F4E+v8WSr2I=",
+        "owner": "sunlei",
+        "repo": "zsh-ssh",
+        "rev": "cee8c2a119dd53f01dc6aef1ce79faa783aa2e3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sunlei",
+        "repo": "zsh-ssh",
         "type": "github"
       }
     }

@@ -9,24 +9,9 @@
 let
   configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   platformSystem = pkgs.stdenv.hostPlatform.system;
-  emojiCli = pkgs.fetchFromGitHub {
-    owner = "babarot";
-    repo = "emoji-cli";
-    rev = "0fbb2e48e07218c5a2776100a4c708b21cb06688";
-    sha256 = "1hfjhng5y8pldrnbd1qhylnf5g0ikjz5szmk5cmf56xz686x2bla";
-  };
-  zshMoreCompletions = pkgs.fetchFromGitHub {
-    owner = "MenkeTechnologies";
-    repo = "zsh-more-completions";
-    rev = "cf16fbfdfc9d920078a08f42570c2fea4abdfab6";
-    sha256 = "12vc0mqlk845cy0wcxf3y3z7y2dykhkgf39alm78k1kc60nhhyv9";
-  };
-  zshSsh = pkgs.fetchFromGitHub {
-    owner = "sunlei";
-    repo = "zsh-ssh";
-    rev = "cee8c2a119dd53f01dc6aef1ce79faa783aa2e3f";
-    sha256 = "0qmgjb2vygl12xw82lnmdrz7hn2847r0m9dyizyf9qx2hsqml8np";
-  };
+  emojiCli = inputs.emoji-cli;
+  zshMoreCompletions = inputs.zsh-more-completions;
+  zshSsh = inputs.zsh-ssh;
   compiledZshPlugins = pkgs.runCommand "compiled-zsh-plugins" { nativeBuildInputs = [ pkgs.zsh ]; } ''
     mkdir -p $out
     cp -r ${pkgs.zsh-autosuggestions} $out/autosuggestions

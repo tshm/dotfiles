@@ -32,6 +32,10 @@ herdr:
 ponytail:
 	omp install git:github.com/DietrichGebert/ponytail
 
+.PHONY: diagram-design
+diagram-design:
+	omp install https://github.com/cathrynlavery/diagram-design
+
 .PHONY: graphify
 graphify:
 	uv tool install graphifyy
