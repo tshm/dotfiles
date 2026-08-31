@@ -32,6 +32,10 @@ herdr:
 ponytail:
 	omp install git:github.com/DietrichGebert/ponytail
 
+.PHONY: archify
+archify:
+	npx skills add tt-a1i/archify -g
+
 .PHONY: diagram-design
 diagram-design:
 	omp install https://github.com/cathrynlavery/diagram-design
