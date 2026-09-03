@@ -1,14 +1,22 @@
-{ user, config, pkgs, ... }@args:
+{
+  user,
+  config,
+  pkgs,
+  ...
+}@args:
 
 let
-  configPath = pathStr:
-    config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+  configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   tailscaleVicinaeExtension = pkgs.buildNpmPackage {
     pname = "vicinae-tailscale-control";
     version = "1.0.0";
     src = ../../x/vicinae/extensions/tailscale;
     npmDepsHash = "sha256-8In9NQ1StAzn2VSP3naNeymXzjkx/rPL0iBw4fAFops=";
-    npmBuildFlags = [ "--" "--out" "dist" ];
+    npmBuildFlags = [
+      "--"
+      "--out"
+      "dist"
+    ];
     doCheck = true;
     checkPhase = "npm test";
     installPhase = ''
@@ -19,28 +27,29 @@ let
     '';
   };
   /*
-  platformSystem = pkgs.stdenv.hostPlatform.system;
-  hyprlandGuiutils =
-    args.hyprland.inputs."hyprland-guiutils".packages.${platformSystem}.hyprland-guiutils.overrideAttrs
-      (old: {
-        buildInputs = old.buildInputs ++ [ pkgs.pango ];
-        postPatch = (old.postPatch or "") + ''
-          substituteInPlace CMakeLists.txt \
-            --replace-fail "  libdrm)" "  libdrm
-          pango)"
-        '';
-      });
-  hyprlandPackage =
-    args.hyprland.packages.${platformSystem}.hyprland.override {
-      hyprland-guiutils = hyprlandGuiutils;
-    };
-  hyprlandPortal =
-    args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland.override
-      {
-        hyprland = hyprlandPackage;
+    platformSystem = pkgs.stdenv.hostPlatform.system;
+    hyprlandGuiutils =
+      args.hyprland.inputs."hyprland-guiutils".packages.${platformSystem}.hyprland-guiutils.overrideAttrs
+        (old: {
+          buildInputs = old.buildInputs ++ [ pkgs.pango ];
+          postPatch = (old.postPatch or "") + ''
+            substituteInPlace CMakeLists.txt \
+              --replace-fail "  libdrm)" "  libdrm
+            pango)"
+          '';
+        });
+    hyprlandPackage =
+      args.hyprland.packages.${platformSystem}.hyprland.override {
+        hyprland-guiutils = hyprlandGuiutils;
       };
+    hyprlandPortal =
+      args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland.override
+        {
+          hyprland = hyprlandPackage;
+        };
   */
-in {
+in
+{
   imports = [
     # args.noctalia.homeModules.default
     args.mango.hmModules.mango
@@ -78,14 +87,28 @@ in {
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
         };
         /*
-        hyprland = {
-          default = [ "hyprland" "gnome" "gtk" ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-          "org.freedesktop.impl.portal.Settings" = [ "gnome" ];
-        };
+          hyprland = {
+            default = [ "hyprland" "gnome" "gtk" ];
+            "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+            "org.freedesktop.impl.portal.Settings" = [ "gnome" ];
+          };
         */
+        mango = {
+          default = [
+            "gnome"
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.Access" = [ "gtk" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+          "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+        };
         niri = {
-          default = [ "gnome" "gtk" ];
+          default = [
+            "gnome"
+            "gtk"
+          ];
           "org.freedesktop.impl.portal.Access" = [ "gtk" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
           "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
@@ -100,8 +123,7 @@ in {
         configPath "/x/vicinae/scripts/cloudflare-warp-connect.sh";
       "vicinae/scripts/cloudflare-warp-disconnect.sh".source =
         configPath "/x/vicinae/scripts/cloudflare-warp-disconnect.sh";
-      "vicinae/extensions/tailscale-control".source =
-        tailscaleVicinaeExtension;
+      "vicinae/extensions/tailscale-control".source = tailscaleVicinaeExtension;
     };
 
     mimeApps = {
@@ -151,7 +173,7 @@ in {
       # pkgs.deskflow
       # pkgs.input-leap
       pkgs.bluetuith
-      pkgs.waybar
+      args.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar
       pkgs.mpv
       pkgs.mediainfo
       pkgs.swaynotificationcenter
@@ -168,8 +190,7 @@ in {
       pkgs.brave
     ];
     file = {
-      "${config.xdg.configHome}/wezterm/wezterm.lua".source =
-        configPath "/wezterm/wezterm.lua";
+      "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
       "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
       "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
       # "${config.xdg.configHome}/niri/config.kdl".text = "include \"/home/${user}/.dotfiles/x/niri.kdl\"";
@@ -216,53 +237,56 @@ in {
   };
   wayland.windowManager.mango = {
     enable = true;
-    settings = { };
-    extraConfig = ''
-      # config.conf
-    '';
+    settings = {
+      "source-optional" = [
+        "~/.dotfiles/x/mango/vars.conf"
+        "~/.dotfiles/x/mango/general.conf"
+      ];
+    };
+    topPrefixes = [ "source" ];
     autostart_sh = ''
-      # autostart.sh
+      exec bash ~/.dotfiles/x/wayland-startup-order.sh
     '';
   };
   /*
-  wayland.windowManager.hyprland = {
-    enable = true;
-    configType = "hyprlang";
-    package = hyprlandPackage;
-    portalPackage = hyprlandPortal;
-    plugins = [
-      # args.hyprland-plugins.packages.${platformSystem}.hyprscrolling  # FIXME: requires Hyprland source headers
-      # args.hyprland-plugins.packages.${platformSystem}.hyprexpo  # FIXME: incompatible with current Hyprland
-    ];
-    settings = {
-      source = [
-        "~/.dotfiles/x/hyprland/vars.conf"
-        "~/.dotfiles/x/hyprland/general.conf"
+    wayland.windowManager.hyprland = {
+      enable = true;
+      configType = "hyprlang";
+      package = hyprlandPackage;
+      portalPackage = hyprlandPortal;
+      plugins = [
+        # args.hyprland-plugins.packages.${platformSystem}.hyprscrolling  # FIXME: requires Hyprland source headers
+        # args.hyprland-plugins.packages.${platformSystem}.hyprexpo  # FIXME: incompatible with current Hyprland
       ];
-      device = [
-        {
-          name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-1";
-          sensitivity = 1.0;
-        }
-        {
-          name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3";
-          sensitivity = 1.0;
-        }
-        {
-          name = "elecom-trackball-mouse-huge-trackball-1";
-          sensitivity = 1.0;
-        }
-        {
-          name = "syna3290:01-06cb:cd4f-touchpad";
-          sensitivity = 0.0;
-        }
-      ];
-      exec-once = [
-        "[workspace 2] zen"
-        "[workspace 1 silent] beeper"
-        "[workspace 2 silent] $terminal"
-      ];
+      settings = {
+        source = [
+          "~/.dotfiles/x/hyprland/vars.conf"
+          "~/.dotfiles/x/hyprland/general.conf"
+        ];
+        device = [
+          {
+            name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-1";
+            sensitivity = 1.0;
+          }
+          {
+            name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3";
+            sensitivity = 1.0;
+          }
+          {
+            name = "elecom-trackball-mouse-huge-trackball-1";
+            sensitivity = 1.0;
+          }
+          {
+            name = "syna3290:01-06cb:cd4f-touchpad";
+            sensitivity = 0.0;
+          }
+        ];
+        exec-once = [
+          "[workspace 2] zen"
+          "[workspace 1 silent] beeper"
+          "[workspace 2 silent] $terminal"
+        ];
+      };
     };
-  };
   */
 }

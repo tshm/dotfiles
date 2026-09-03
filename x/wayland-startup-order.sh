@@ -5,7 +5,15 @@ readonly WAIT_TIMEOUT_SECONDS=45
 readonly WAIT_INTERVAL_SECONDS=0.2
 
 log() {
-  printf 'niri-startup-order: %s\n' "$*" >&2
+  printf 'wayland-startup-order: %s\n' "$*" >&2
+}
+
+list_windows() {
+  if [[ -n ${MANGO_INSTANCE_SIGNATURE:-} ]]; then
+    mmsg get all-clients
+  else
+    niri msg --json windows
+  fi
 }
 
 matching_window_count() {
@@ -13,7 +21,7 @@ matching_window_count() {
   local title_pattern="$2"
   local windows_json
 
-  if ! windows_json=$(niri msg --json windows); then
+  if ! windows_json=$(list_windows); then
     printf '0\n'
     return 1
   fi
@@ -27,10 +35,12 @@ app_pattern, title_pattern = sys.argv[1:3]
 app_re = re.compile(app_pattern) if app_pattern else None
 title_re = re.compile(title_pattern) if title_pattern else None
 windows = json.load(sys.stdin)
+if isinstance(windows, dict):
+    windows = windows["clients"]
 
 count = 0
 for window in windows:
-    app_id = str(window.get("app_id") or "")
+    app_id = str(window.get("app_id") or window.get("appid") or "")
     title = str(window.get("title") or "")
     if (app_re and app_re.search(app_id)) or (title_re and title_re.search(title)):
         count += 1
@@ -78,7 +88,9 @@ spawn_and_wait "Zen Browser" '(?i)(^zen$|app\.zen_browser\.zen)' '(?i)zen browse
 spawn_and_wait "WezTerm" '^org\.wezfurlong\.wezterm$' '(?i)wezterm' wezterm
 spawn_and_wait "Beeper" '(?i)(beepertexts|beeper|com\.automattic\.beeper)' '(?i)beeper' beeper
 
-nirius &
+if [[ -z ${MANGO_INSTANCE_SIGNATURE:-} && -n ${NIRI_SOCKET:-} ]]; then
+  nirius &
+fi
 fcitx5 -d --replace &
 
 speakoflow --start-hidden &

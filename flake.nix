@@ -47,13 +47,17 @@
     localias.url = "github:peterldowns/localias";
     # mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
     vicinae.url = "github:vicinaehq/vicinae";
-    /*
-    hyprland.url = "github:hyprwm/Hyprland";
-    # hyprshell.url = "github:h3rmt/hyprswitch?ref=hyprshell";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
+    waybar = {
+      url = "github:Alexays/Waybar";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    /*
+      hyprland.url = "github:hyprwm/Hyprland";
+      # hyprshell.url = "github:h3rmt/hyprswitch?ref=hyprshell";
+      hyprland-plugins = {
+        url = "github:hyprwm/hyprland-plugins";
+        inputs.hyprland.follows = "hyprland";
+      };
     */
     mango = {
       url = "github:DreamMaoMao/mangowc";
@@ -62,13 +66,17 @@
     # flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     let
       user = "tshm";
       nixsettings = {
         keep-derivations = true;
         keep-outputs = true;
-        trusted-users = [ "root" user ];
+        trusted-users = [
+          "root"
+          user
+        ];
         substituters = [
           "https://cache.nixos.org"
           "https://tshmcache.cachix.org"
@@ -97,9 +105,11 @@
         user = user;
         nixsettings = nixsettings;
         crossPkgs = crossPkgs;
-      } // inputs;
+      }
+      // inputs;
 
-    in {
+    in
+    {
       nixosConfigurations = import ./hosts flakeInputs;
       homeConfigurations = import ./homes flakeInputs;
 

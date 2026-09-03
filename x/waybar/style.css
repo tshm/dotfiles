@@ -77,9 +77,8 @@ button:hover {
   background: rgba(0, 0, 0, 0.2);
 }
 
-#workspaces button.focused {
-  background-color: #64727d;
-  box-shadow: inset 0 -3px #ffffff;
+#workspaces button.empty {
+  opacity: 0.5;
 }
 
 #workspaces button.urgent {
@@ -92,10 +91,10 @@ button:hover {
   transition: all 0.3s ease-in-out;
 }
 
-#mode {
-  background-color: #64727d;
-  box-shadow: inset 0 -3px #ffffff;
+#workspaces button.overview {
+  background-color: #eb4d4b;
 }
+
 
 #clock,
 #battery,
@@ -109,15 +108,14 @@ button:hover {
 #wireplumber,
 #custom-media,
 #custom-separator #group-info-stuff #tray,
-#mode,
 #idle_inhibitor,
-#scratchpad,
 #power-profiles-daemon,
 #mpd {
   padding: 0 10px;
   color: #ffffff;
 }
 
+#layout,
 #window,
 #workspaces {
   margin: 0 4px;
@@ -369,6 +367,7 @@ label:focus {
   background-color: #51a37a;
 }
 
+#layout,
 #language {
   border-radius: 20px;
   padding-left: 10px;
@@ -391,13 +390,6 @@ label:focus {
   background: rgba(0, 0, 0, 0.2);
 }
 
-#scratchpad {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad.empty {
-  background-color: transparent;
-}
 
 #privacy {
   padding: 0;

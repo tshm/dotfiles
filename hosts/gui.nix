@@ -1,9 +1,12 @@
 { pkgs, ... }@args:
 let
   speakoflow = pkgs.callPackage ../homes/apps/speakoflow.nix { };
-in {
-  imports =
-    [ args.mango.nixosModules.mango args.catppuccin.nixosModules.catppuccin ];
+in
+{
+  imports = [
+    args.mango.nixosModules.mango
+    args.catppuccin.nixosModules.catppuccin
+  ];
   hardware.graphics.enable = true;
 
   # Bluetooth
@@ -14,7 +17,10 @@ in {
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = [ pkgs.fcitx5-mozc pkgs.fcitx5-gtk ];
+    fcitx5.addons = [
+      pkgs.fcitx5-mozc
+      pkgs.fcitx5-gtk
+    ];
   };
   services.xserver.xkb = {
     # Configure keymap in X11
@@ -30,8 +36,7 @@ in {
     after = [ "graphical-session.target" ];
     serviceConfig = {
       #Type = "Simple";
-      ExecStart =
-        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       Restart = "on-failure";
       RestartSec = 5;
       TimeoutStopSec = 10;
@@ -43,9 +48,14 @@ in {
     accent = "green";
   };
 
-  programs.dconf = { enable = true; };
+  programs.dconf = {
+    enable = true;
+  };
   programs.ydotool.enable = true;
-  users.users.${args.user}.extraGroups = [ "ydotool" "input" ];
+  users.users.${args.user}.extraGroups = [
+    "ydotool"
+    "input"
+  ];
   # programs.hyprland = { enable = true; };
   programs.mango = {
     enable = true;
@@ -120,26 +130,25 @@ in {
             }
           ];
         };
-         "10-alsa-devices" = {
-           "monitor.alsa.rules" = [
-             {
-               matches = [
-                 { "device.name" = "~alsa_card.*"; }
-               ];
-               actions = {
-                 update-props = {
-                   "api.alsa.use-acp" = true;
-                   "api.acp.auto-profile" = "off";
-                   "api.acp.auto-port" = true;
-                 };
-               };
-             }
-           ];
-         };
+        "10-alsa-devices" = {
+          "monitor.alsa.rules" = [
+            {
+              matches = [
+                { "device.name" = "~alsa_card.*"; }
+              ];
+              actions = {
+                update-props = {
+                  "api.alsa.use-acp" = true;
+                  "api.acp.auto-profile" = "off";
+                  "api.acp.auto-port" = true;
+                };
+              };
+            }
+          ];
+        };
       };
     };
   };
-
 
   environment.systemPackages = [
     pkgs.mesa
@@ -159,7 +168,7 @@ in {
     pkgs.alsa-tools
     pkgs.alsa-utils
     pkgs.pulseaudio
-    pkgs.waybar
+    args.waybar.packages.${args.system}.waybar
     pkgs.kitty
     pkgs.polkit_gnome
     #pkgs.lxqt.lxqt-policykit

@@ -1,10 +1,7 @@
-{ host
-, forServer ? false
-, user ? "tshm"
-, baselocale ? "en_US.UTF-8"
-, locale ? "ja_JP.UTF-8"
-}:
-{ config, lib, nixsettings, agenix, home-manager, homeConfigurations, pkgs ? config.nixpkgs.pkgs, ... }:
+{ host, forServer ? false, user ? "tshm", baselocale ? "en_US.UTF-8"
+, locale ? "ja_JP.UTF-8" }:
+{ config, lib, nixsettings, agenix, home-manager, homeConfigurations
+, pkgs ? config.nixpkgs.pkgs, ... }:
 
 let
   userHome = "/home/${user}";
@@ -16,13 +13,13 @@ let
       <string>tunnelonly</string>
     </dict>
   '';
-in
-{
-   imports = [
-     agenix.nixosModules.default
-     # home-manager.nixosModules.default
-   ];
-  age.secrets.user-password-hash.file = "/home/${user}/.dotfiles/secrets/user-password-hash.age";
+in {
+  imports = [
+    agenix.nixosModules.default
+    # home-manager.nixosModules.default
+  ];
+  age.secrets.user-password-hash.file =
+    "/home/${user}/.dotfiles/secrets/user-password-hash.age";
   age.identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
 
   boot = {
@@ -42,7 +39,8 @@ in
       timeout = 3;
     };
     kernelParams = lib.mkIf useHibernation [ "mem_sleep_default=deep" ];
-    resumeDevice = lib.mkIf useHibernation (builtins.head config.swapDevices).device;
+    resumeDevice =
+      lib.mkIf useHibernation (builtins.head config.swapDevices).device;
     # initrd.prepend = [ "./acpi_override" ];
   };
   nix.settings = nixsettings // {
@@ -66,9 +64,7 @@ in
   };
   console.useXkbConfig = true;
 
-  services.auto-cpufreq = lib.mkIf (!forServer) {
-    enable = true;
-  };
+  services.auto-cpufreq = lib.mkIf (!forServer) { enable = true; };
   services.tlp.enable = false;
   services.logind.settings = lib.mkIf (!forServer) {
     Login = {
@@ -82,7 +78,7 @@ in
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd ${pkgs.niri}/bin/niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember";
         user = "greeter";
       };
     };
@@ -118,7 +114,6 @@ in
     libraries = [ ];
   };
 
-
   programs.appimage = {
     enable = !forServer;
     binfmt = !forServer;
@@ -130,22 +125,24 @@ in
 
   # cloudflare-warp
   systemd.packages = lib.mkIf (!forServer) [ pkgs.cloudflare-warp ];
-  systemd.targets.multi-user.wants = lib.mkIf (!forServer) [ "warp-svc.service" ];
+  systemd.targets.multi-user.wants =
+    lib.mkIf (!forServer) [ "warp-svc.service" ];
   systemd.tmpfiles.rules = lib.mkIf (!forServer) [
     "d /var/lib/cloudflare-warp 0755 root root -"
     "L+ /var/lib/cloudflare-warp/mdm.xml - - - - ${warpMdm}"
   ];
 
-  system.activationScripts.removeLegacyNonNixosGpu = lib.stringAfter [ "etc" ] ''
-    unit=/etc/systemd/system/non-nixos-gpu.service
-    wants=/etc/systemd/system/multi-user.target.wants/non-nixos-gpu.service
+  system.activationScripts.removeLegacyNonNixosGpu =
+    lib.stringAfter [ "etc" ] ''
+      unit=/etc/systemd/system/non-nixos-gpu.service
+      wants=/etc/systemd/system/multi-user.target.wants/non-nixos-gpu.service
 
-    if [ -L "$unit" ] || [ -e "$unit" ] || [ -L "$wants" ] || [ -e "$wants" ]; then
-      ${pkgs.systemd}/bin/systemctl disable --now non-nixos-gpu.service || true
-      ${pkgs.systemd}/bin/systemctl reset-failed non-nixos-gpu.service || true
-      ${pkgs.coreutils}/bin/rm -f "$unit" "$wants"
-    fi
-  '';
+      if [ -L "$unit" ] || [ -e "$unit" ] || [ -L "$wants" ] || [ -e "$wants" ]; then
+        ${pkgs.systemd}/bin/systemctl disable --now non-nixos-gpu.service || true
+        ${pkgs.systemd}/bin/systemctl reset-failed non-nixos-gpu.service || true
+        ${pkgs.coreutils}/bin/rm -f "$unit" "$wants"
+      fi
+    '';
   system.activationScripts.ensureUsrLocalBin = lib.stringAfter [ "etc" ] ''
     ${pkgs.coreutils}/bin/mkdir -p /usr/local/bin
   '';
@@ -165,7 +162,8 @@ in
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOe16XtRvMF6S+1Z0tkk3R7jV211Ff2ynmoL+BinKmwW"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF1GtASZbx/L6Nm348S7peM7yQbLcg7xH+wqkWBtD6Y7"
         ];
-        extraGroups = [ "networkmanager" "wheel" "syncthing" "podman" "docker" ];
+        extraGroups =
+          [ "networkmanager" "wheel" "syncthing" "podman" "docker" ];
       };
     };
   };
@@ -184,11 +182,9 @@ in
     useRoutingFeatures = lib.mkDefault (if forServer then "server" else "both");
     # Keep normal DNS resolution pointed at the active network (e.g. corporate DNS).
     # Route only *.ts.net through Tailscale's resolver.
-    extraSetFlags =
-      lib.optionals (!forServer) [ "--operator=${user}" ]
+    extraSetFlags = lib.optionals (!forServer) [ "--operator=${user}" ]
       ++ lib.optionals (!isRaspberryPi) [ "--accept-dns=false" ];
   };
-
 
   virtualisation = {
     podman = lib.mkIf (!isRaspberryPi) {
@@ -213,11 +209,11 @@ in
     };
   };
 
-   # home-manager = {
-   #   useGlobalPkgs = true;
-   #   useUserPackages = true;
-   #   users.${user} = homeConfigurations."${user}@${host}";
-   # };
+  # home-manager = {
+  #   useGlobalPkgs = true;
+  #   useUserPackages = true;
+  #   users.${user} = homeConfigurations."${user}@${host}";
+  # };
   services.kanata = lib.mkIf (!forServer) {
     enable = true;
     keyboards = {
@@ -239,9 +235,7 @@ in
     configDir = "/home/${user}/.config/syncthing";
     overrideDevices = false;
     overrideFolders = false;
-    settings.gui = {
-      user = user;
-    };
+    settings.gui = { user = user; };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -259,16 +253,12 @@ in
     pkgs.podman-tui
     pkgs.podman-compose
     # desktop environment related
-  ] ++
-    lib.optionals (!isRaspberryPi) [
-      pkgs.cloudflare-warp
-      pkgs.p7zip
-      pkgs.imagemagick
-      pkgs.ffmpegthumbnailer
-    ] ++ lib.optionals (host == "tp") [
-      pkgs.ethtool
-      pkgs.wakeonlan
-    ];
+  ] ++ lib.optionals (!isRaspberryPi) [
+    pkgs.cloudflare-warp
+    pkgs.p7zip
+    pkgs.imagemagick
+    pkgs.ffmpegthumbnailer
+  ] ++ lib.optionals (host == "tp") [ pkgs.ethtool pkgs.wakeonlan ];
 
   services.openssh = {
     enable = true;
@@ -278,7 +268,6 @@ in
       X11UseLocalhost = true;
     };
   };
-
 
   # services.flatpak.enable = true;
   # system.fsPackages = [ pkgs.bindfs ];
@@ -295,7 +284,6 @@ in
   #     "/usr/local/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
   #   };
 
-
   # ===== Wake-on-LAN Configuration =====
   # Enable WoL tools and service when services.wol-enabled is true
 
@@ -307,7 +295,9 @@ in
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStart = "${pkgs.ethtool}/bin/ethtool -s ${config.services.wol-interface or "enp0s25"} wol g";
+      ExecStart = "${pkgs.ethtool}/bin/ethtool -s ${
+          config.services.wol-interface or "enp0s25"
+        } wol g";
       StandardOutput = "journal";
       StandardError = "journal";
     };

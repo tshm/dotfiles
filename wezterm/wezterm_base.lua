@@ -16,7 +16,22 @@ config.audible_bell = "SystemBeep"
 config.adjust_window_size_when_changing_font_size = false
 
 wezterm.on("bell", function(window, pane)
-	window:toast_notification("WezTerm", "Bell triggered in pane " .. pane:pane_id())
+	local pane_id = pane:pane_id()
+	-- ponytail: rank matching assumes one WezTerm GUI process; use native toplevel IDs if exposed.
+	local command = string.format(
+		[[
+action="$(notify-send -a WezTerm -i org.wezfurlong.wezterm -A default=Focus WezTerm "Bell triggered in pane %d")"
+test "$action" = default || exit
+wezterm cli activate-pane --pane-id %d
+index="$(wezterm cli list --format json | yq '[.[].window_id] | unique | sort | index(%d)')"
+client="$(mmsg get all-clients | yq -r --argjson index "$index" '[.clients[] | select(.appid == "org.wezfurlong.wezterm")] | sort_by(.id) | .[$index].id // empty')"
+test -n "$client" && exec mmsg dispatch focusid client,"$client"
+]],
+		pane_id,
+		pane_id,
+		window:window_id()
+	)
+	wezterm.background_child_process({ "sh", "-c", command })
 end)
 
 config.font = wezterm.font_with_fallback({

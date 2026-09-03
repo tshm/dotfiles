@@ -13,13 +13,31 @@
     "format-icons": ["󰁻", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
   },
 
-  "hyprland/workspaces": {
+  "mango/workspaces": {
     "format": "{icon}",
     "format-icons": {
       "active": "",
       "default": "",
       "empty": "",
+      "urgent": "",
     },
+    "hide-empty": true,
+    "on-click": "activate",
+    "on-click-right": "toggle",
+    "overview-label": "OVERVIEW",
+  },
+
+  "mango/layout": {
+    "format": "{}",
+  },
+
+  "mango/window": {
+    "format": "{}",
+    "icon-size": 20,
+  },
+
+  "mango/language": {
+    "format": "{short}",
   },
 
   "network": {
@@ -109,6 +127,12 @@
     "format": "|",
     "interval": "once",
     "tooltip": false,
+  },
+
+  "custom/beeper": {
+    "format": "  ",
+    "tooltip-format": "Focus Beeper",
+    "on-click": "mmsg get all-clients | jq -r 'first(.clients[] | select(.appid | test(\"beeper\"; \"i\")) | .id) // empty' | xargs -r -I{} mmsg dispatch focusid client,{}",
   },
 
   "group/system-stuff": {

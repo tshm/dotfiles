@@ -294,7 +294,7 @@ workspace "beeper"
 // See the binds section below for more spawn examples.
 
 // Keep startup windows deterministic from left to right.
-spawn-sh-at-startup "bash ~/.dotfiles/x/niri-startup-order.sh"
+spawn-sh-at-startup "bash ~/.dotfiles/x/wayland-startup-order.sh"
 
 recent-windows {
   debounce-ms 0

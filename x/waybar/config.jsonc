@@ -4,18 +4,19 @@
   "position": "top",
 
   "modules-left": [
-    "hyprland/workspaces",
-    "hyprland/mode",
-    "hyprland/scratchpad",
+    "mango/workspaces",
+    "mango/layout",
     "custom/separator",
-    "hyprland/window",
+    "mango/window",
   ],
 
   "modules-center": [],
 
   "modules-right": [
+    "mango/language",
     "group/info-stuff",
     "group/expand",
+    "custom/beeper",
     "tray",
     "group/system-stuff",
   ],
