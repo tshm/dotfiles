@@ -33,6 +33,6 @@
     "@vicinae/api": "0.24.0"
   },
   "devDependencies": {
-    "@types/node": "24.3.0"
+    "@types/node": "24.13.3"
   }
 }
