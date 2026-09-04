@@ -15,12 +15,16 @@ function detectNotificationSequence(message: string): string {
 		return `\x1b]99;;${sanitized}\x1b\\`;
 	}
 
+	if (process.env.WEZTERM_PANE || termProgram === "wezterm") {
+		const encoded = Buffer.from(sanitized).toString("base64");
+		const sequence = `\x1b]1337;SetUserVar=OMP_NOTIFICATION=${encoded}\x07`;
+		return process.env.TMUX ? `\x1bPtmux;\x1b${sequence}\x1b\\` : sequence;
+	}
+
 	if (
 		process.env.GHOSTTY_RESOURCES_DIR ||
-		process.env.WEZTERM_PANE ||
 		process.env.ITERM_SESSION_ID ||
 		termProgram === "ghostty" ||
-		termProgram === "wezterm" ||
 		termProgram === "iterm.app"
 	) {
 		return `\x1b]9;${sanitized}\x1b\\`;

@@ -132,7 +132,7 @@
   "custom/beeper": {
     "format": "  ",
     "tooltip-format": "Focus Beeper",
-    "on-click": "mmsg get all-clients | jq -r 'first(.clients[] | select(.appid | test(\"beeper\"; \"i\")) | .id) // empty' | xargs -r -I{} mmsg dispatch focusid client,{}",
+    "on-click": "mmsg get all-clients | yq -r 'first(.clients[] | select(.appid | test(\"beeper\"; \"i\")) | .id) // empty' | xargs -r -I{} mmsg dispatch focusid client,{}",
   },
 
   "group/system-stuff": {

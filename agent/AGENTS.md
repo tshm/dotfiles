@@ -19,6 +19,7 @@ Local agent and assistant tooling: OpenCode configuration, Pi extensions, Claude
 - Do not commit API keys, provider credentials, LiteLLM keys, or host-local secrets; pass them through environment variables or ignored runtime config.
 - Install targets may mutate user-level state under `~/.config`, `~/.local`, `~/.npm-globals`, and systemd user units; do not run them casually during verification.
 - Preserve symlink-based install behavior unless intentionally changing the user's live config layout.
+- `extensions/notify.ts` sends WezTerm notifications through the `OMP_NOTIFICATION` user var; `wezterm/wezterm_base.lua` owns its clickable Mango focus action.
 
 ## Work Guidance
 
@@ -29,7 +30,7 @@ Local agent and assistant tooling: OpenCode configuration, Pi extensions, Claude
 ## Verification
 
 - For config merge changes, run `make merge-config OUTPUT_FILE=/tmp/opencode.jsonc` from `agent/`.
-- For TypeScript extension changes, run the repository's available TypeScript or formatter check if one is added; none is currently recorded here.
+- For TypeScript extension changes, run `bun build extensions/notify.ts --target=bun --outfile=/tmp/notify-extension.js` from `agent/`.
 
 ## Child DOX Index
 

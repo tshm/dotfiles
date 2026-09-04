@@ -15,23 +15,32 @@ config.color_scheme = "Bamboo"
 config.audible_bell = "SystemBeep"
 config.adjust_window_size_when_changing_font_size = false
 
-wezterm.on("bell", function(window, pane)
+local function notify(window, pane, message)
 	local pane_id = pane:pane_id()
 	-- ponytail: rank matching assumes one WezTerm GUI process; use native toplevel IDs if exposed.
 	local command = string.format(
 		[[
-action="$(notify-send -a WezTerm -i org.wezfurlong.wezterm -A default=Focus WezTerm "Bell triggered in pane %d")"
+action="$(notify-send -a WezTerm -i org.wezfurlong.wezterm -A default=Focus WezTerm "$1")"
 test "$action" = default || exit
 wezterm cli activate-pane --pane-id %d
-index="$(wezterm cli list --format json | yq '[.[].window_id] | unique | sort | index(%d)')"
-client="$(mmsg get all-clients | yq -r --argjson index "$index" '[.clients[] | select(.appid == "org.wezfurlong.wezterm")] | sort_by(.id) | .[$index].id // empty')"
+index="$(wezterm cli list --format json | jq '[.[].window_id] | unique | sort | index(%d) // 0')"
+client="$(mmsg get all-clients | jq -r --argjson pid "$PPID" --argjson index "$index" '[.clients[] | select(.pid == $pid)] | sort_by(.id) | .[$index].id // empty')"
 test -n "$client" && exec mmsg dispatch focusid client,"$client"
 ]],
 		pane_id,
-		pane_id,
 		window:window_id()
 	)
-	wezterm.background_child_process({ "sh", "-c", command })
+	wezterm.background_child_process({ "sh", "-c", command, "wezterm-notify", message })
+end
+
+wezterm.on("bell", function(window, pane)
+	notify(window, pane, string.format("Bell triggered in pane %d", pane:pane_id()))
+end)
+
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	if name == "OMP_NOTIFICATION" then
+		notify(window, pane, value)
+	end
 end)
 
 config.font = wezterm.font_with_fallback({
