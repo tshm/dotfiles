@@ -28,6 +28,7 @@
 
   networking = {
     hostName = "spi";
+    hosts."192.168.84.11" = [ "multica-api.hq.empathy.co.jp" ];
     interfaces.eth0.useDHCP = true;
 
     # useNetworkd = false;
@@ -56,7 +57,7 @@
 
   services.tailscale = {
     openFirewall = true;
-    extraSetFlags = [ "--advertise-exit-node" ];
+    extraSetFlags = [ "--advertise-exit-node" "--accept-routes" ];
   };
 
   services.syncthing.enable = true;
