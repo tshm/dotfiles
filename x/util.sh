@@ -13,14 +13,23 @@ btdevice=$(bluetoothctl devices Connected)
   btcmd="📶 Reconnect BluetoothDevice $name: bluetoothctl disconnect $addr; bluetoothctl connect $addr"
   options+=("$btcmd")
 }
-echo "$btcmd"
 
 capture() {
   grim -g "$(slurp -w 0)" - | wl-copy
 }
 
 keyboard_layout_name() {
-  local line
+  local layout line
+
+  if [[ -n ${MANGO_INSTANCE_SIGNATURE:-} ]]; then
+    layout=$(mmsg get keyboardlayout 2>/dev/null | head -n 1)
+    case $layout in
+      *'"layout":"'*) layout=${layout#*'"layout":"'}; layout=${layout%%'"'*} ;;
+    esac
+    [[ -n $layout ]] || return 1
+    printf '%s\n' "$layout"
+    return
+  fi
 
   while IFS= read -r line; do
     [[ $line =~ ^[[:space:]]*\*[[:space:]]*[0-9]+[[:space:]]+(.+) ]] && {
@@ -33,6 +42,11 @@ keyboard_layout_name() {
 }
 
 keyboard_layout() {
+  if [[ -n ${MANGO_INSTANCE_SIGNATURE:-} ]]; then
+    mmsg dispatch switch_keyboard_layout
+    return
+  fi
+
   niri msg action switch-layout next
 }
 

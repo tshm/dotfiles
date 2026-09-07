@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly WAIT_TIMEOUT_SECONDS=45
+readonly WAIT_TIMEOUT_SECONDS=${WAYLAND_STARTUP_WAIT:-45}
 readonly WAIT_INTERVAL_SECONDS=0.2
 
 log() {
@@ -83,7 +83,7 @@ spawn_and_wait() {
   wait_for_new_window "$description" "$app_pattern" "$title_pattern" "$previous_count" || true
 }
 
-waybar &
+pgrep -x waybar >/dev/null || waybar &
 spawn_and_wait "Zen Browser" '(?i)(^zen$|app\.zen_browser\.zen)' '(?i)zen browser' zen
 spawn_and_wait "WezTerm" '^org\.wezfurlong\.wezterm$' '(?i)wezterm' wezterm
 spawn_and_wait "Beeper" '(?i)(beepertexts|beeper|com\.automattic\.beeper)' '(?i)beeper' beeper

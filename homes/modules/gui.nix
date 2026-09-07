@@ -247,7 +247,7 @@ in
     };
     topPrefixes = [ "source" ];
     autostart_sh = ''
-      exec bash ~/.dotfiles/x/wayland-startup-order.sh
+      exec env WAYLAND_STARTUP_WAIT=15 bash ~/.dotfiles/x/wayland-startup-order.sh
     '';
   };
   /*
