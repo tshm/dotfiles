@@ -123,6 +123,8 @@ in
         configPath "/x/vicinae/scripts/cloudflare-warp-connect.sh";
       "vicinae/scripts/cloudflare-warp-disconnect.sh".source =
         configPath "/x/vicinae/scripts/cloudflare-warp-disconnect.sh";
+      "vicinae/scripts/reconnect-bluetooth-audio-device.sh".source =
+        configPath "/x/connect-bluetooth-audio.sh";
       "vicinae/extensions/tailscale-control".source = tailscaleVicinaeExtension;
     };
 
