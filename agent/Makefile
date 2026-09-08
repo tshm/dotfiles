@@ -24,6 +24,9 @@ dev: opencode
 
 skills: agent-browser
 
+.PHONYY: omfm
+	npm install -g oh-my-free-models
+
 .PHONY: herdr
 herdr:
 	curl -fsSL https://herdr.dev/install.sh | sh
