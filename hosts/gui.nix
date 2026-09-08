@@ -110,6 +110,7 @@ in
             "bluez5.enable-sbc-xq" = true;
             "bluez5.enable-msbc" = true;
             "bluez5.enable-hw-volume" = true;
+            "bluez5.codecs" = [ "sbc_xq" "sbc" ];
           };
         };
         "15-bluetooth-default-output" = {
@@ -117,7 +118,6 @@ in
             {
               matches = [
                 {
-                  "media.class" = "Audio/Sink";
                   "node.name" = "~bluez_output.*";
                 }
               ];
@@ -125,6 +125,16 @@ in
                 update-props = {
                   "priority.driver" = 25000;
                   "priority.session" = 25000;
+                };
+              };
+            }
+            {
+              matches = [
+                { "device.name" = "~bluez_card.*"; }
+              ];
+              actions = {
+                update-props = {
+                  "bluez5.auto-connect" = [ "a2dp_sink" ];
                 };
               };
             }

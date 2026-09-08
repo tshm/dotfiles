@@ -25,6 +25,7 @@ dev: opencode
 skills: agent-browser
 
 .PHONYY: omfm
+omfm:
 	npm install -g oh-my-free-models
 
 .PHONY: herdr

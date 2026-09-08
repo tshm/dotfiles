@@ -10,7 +10,8 @@ profile=0000110b-0000-1000-8000-00805f9b34fb
 
 while read -r _ address _; do
   bluetoothctl info "$address" | grep -q "$profile" || continue
-  bluetoothctl connect "$address"
+  bluetoothctl info "$address" | grep -q 'Connected: yes' && bluetoothctl disconnect "$address" "$profile"
+  bluetoothctl connect "$address" "$profile"
   exit
 done < <(bluetoothctl devices Paired)
 
