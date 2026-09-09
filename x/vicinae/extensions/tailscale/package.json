@@ -30,7 +30,7 @@
     "test": "node --test test/*.test.mts"
   },
   "dependencies": {
-    "@vicinae/api": "0.24.0"
+    "@vicinae/api": "0.28.1"
   },
   "devDependencies": {
     "@types/node": "24.3.0"
