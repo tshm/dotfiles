@@ -71,6 +71,10 @@ agent-browser:
 	npm install ${NPM_OPT} agent-browser
 # 	npx -g --prefix ~/.npm-globals/ skills add vercel-labs/agent-browser
 
+.PHONY: graft
+graft:
+	npm install -g @nanonets/graft
+
 .PHONY: understand
 understand:
 	curl -fsSL https://raw.githubusercontent.com/Lum1104/understand-Anything/main/install.sh | bash
@@ -89,8 +93,8 @@ agents:
 pi:
 	npm install -f ${NPM_OPT} @mariozechner/pi-coding-agent
 
-.PHONY: pi-ext pi-local-extensions pi-rtk-optimizer pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
-pi-ext: pi-rtk-optimizer pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
+.PHONY: pi-ext pi-local-extensions pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
+pi-ext: pi-codemapper pi-fork pi-observational-memory pi-minimal-subagent
 
 pi-observational-memory:
 	pi install npm:pi-observational-memory
@@ -104,9 +108,6 @@ pi-fork:
 pi-codemapper:
 	pipx install git+https://github.com/MikeyBeez/codemapper.git
 	pi install git:git@github.com:elpapi42/pi-codemapper.git
-
-pi-rtk-optimizer:
-	pi install npm:pi-rtk-optimizer
 
 .PHONY: task-factory
 task-factory:
