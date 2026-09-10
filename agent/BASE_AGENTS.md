@@ -91,6 +91,12 @@ Before marking any task as complete, **ALWAYS** run the following if available:
 - Use Context7 to validate current documentation about software libraries
 - Use ddg-search when looking for code examples or explanations
 
+### Graft
+
+- When a repository contains `graft/`, use the native `graft_*` MCP tools before broad searches or source reads.
+- Start unfamiliar repositories with `graft_repo_map`; use `graft_find_code` for ranked context, `graft_find_all` for exhaustive matches, `graft_file_api` for file structure, and `graft_trace_calls` for blast radius.
+- Read source only when Graft lacks the needed detail, and refresh large changes with `graft build`.
+
 ## Important Reminders
 
 **NEVER**:
