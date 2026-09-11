@@ -50,6 +50,7 @@ precmd() {
 }
 
 autoload -Uz vcs_info
+unset 'FAST_HIGHLIGHT[chroma-make]' # It runs make while highlighting targets.
 
 bindkey '^[;' autosuggest-execute
 # accept auto completion
