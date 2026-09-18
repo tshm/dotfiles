@@ -24,9 +24,9 @@ dev: opencode
 
 skills: agent-browser
 
-.PHONY: 9router
-9router:
-	npm install -g 9router
+.PHONY: omniroute
+omniroute:
+	npm install -g omniroute
 
 .PHONYY: omfm
 omfm:

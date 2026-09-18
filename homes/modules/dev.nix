@@ -31,7 +31,7 @@ in
     pkgs.uv
     pkgs.cargo
     pkgs.go
-    pkgs.nodejs
+    pkgs.nodejs_22
     pkgs.sqlite
     # git extras
     pkgs.gh
