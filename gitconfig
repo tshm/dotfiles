@@ -41,6 +41,7 @@
   fpull = !git fetch && git reset --hard origin/$(git current-branch-name)
   staash = stash --all
   stashu = stash push --keep-index
+  sync = !git fetch --all --prune && git merge --ff-only @{upstream} && git push
   wait = reset HEAD
   amend = commit --amend --no-edit
   dt = difftool -d
@@ -90,7 +91,8 @@
   autoStash = true
 [pull]
   rebase = true
-# [fetch]
+[fetch]
+  all = true
 #   prune = true
 #   pruneTags = true
 #   followTags = true
