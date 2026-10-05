@@ -1,11 +1,11 @@
 { pkgs, ... }:
 let
   pname = "beeper";
-  version = "4.3.152";
+  version = "4.3.160";
   download = pkgs.fetchurl {
     url = "https://beeper-desktop.download.beeper.com/builds/Beeper-${version}-x86_64.AppImage";
     # sha256 = pkgs.lib.fakeSha256;
-    sha256 = "sha256-geFtZKWuQl0x6s3G5CCo7Akj2B8lhID4ROikCYucd+w=";
+    sha256 = "sha256-by07u75l8YjMnuL8VZWkAUjTkGmP/qwJoopIMtJX7Tc=";
   };
   # Beeper 4.2.985 ships without the AppImage type marker.
   src = pkgs.runCommand "${pname}-${version}.AppImage" { } ''
