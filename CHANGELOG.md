@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Features
+
+- *(wezterm)* Load optional `~/.wezterm.local.lua` overrides after shared and platform defaults.
+
 ## [1.2.0] - 2025-02-27
 
 ### 🚀 Features

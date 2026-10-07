@@ -71,6 +71,12 @@ Default section order:
 
 - Keep organization-specific private network configuration out of tracked dotfiles; manage it through an external private flake/module instead.
 
+## WezTerm
+
+- `wezterm/wezterm.lua` loads shared and platform defaults, then applies the table returned by `~/.wezterm.local.lua` if present (`USERPROFILE` is used when `HOME` is unset).
+- Local settings replace matching top-level config keys; for example, `return { font_size = 14 }`. Invalid Lua is not silently ignored.
+- Verify with `lua wezterm/test_local_config.lua` from the repository root; this exercises the real config loader with a stubbed WezTerm API.
+
 ## Graft — repo context graph
 
 This repo is indexed in `graft/`. See `docs/graft/AGENTS.md` for full documentation.
