@@ -75,6 +75,9 @@ Default section order:
 
 - `wezterm/wezterm.lua` loads shared and platform defaults, then applies the table returned by `~/.wezterm.local.lua` if present (`USERPROFILE` is used when `HOME` is unset).
 - Local settings replace matching top-level config keys; for example, `return { font_size = 14 }`. Invalid Lua is not silently ignored.
+- WSL spawn `args` must use an absolute executable path when the shell is outside WSL's initial `PATH` (for example, a Nix-profile zsh).
+- Commands launched by a local `gui-startup` handler must not also run unconditionally in shell startup files; otherwise startup and post-command shells launch them again.
+- `gui-startup` runs only for a fresh GUI process; use `wezterm.exe start --always-new-process` to verify local startup changes.
 - Verify with `lua wezterm/test_local_config.lua` from the repository root; this exercises the real config loader with a stubbed WezTerm API.
 
 ## Graft — repo context graph
