@@ -5,7 +5,7 @@ let
   src = pkgs.fetchurl {
     url = "https://github.com/zen-browser/desktop/releases/latest/download/zen-x86_64.AppImage";
     # sha256 = pkgs.lib.fakeSha256;
-    sha256 = "sha256-qDpovvc43OtTquHwLHL+ovO22R1LhZHs9RiODV90Bcw=";
+    sha256 = "sha256-6UyS5b9HPGCWltfmQ7xqxSz7aKNYd8uju/sJTrXWpcw=";
   };
   appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
 in pkgs.appimageTools.wrapType2 {
