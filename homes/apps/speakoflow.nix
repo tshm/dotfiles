@@ -1,10 +1,10 @@
 { pkgs, ... }:
 let
   pname = "speakoflow";
-  version = "2.0.0";
+  version = "2.0.1";
   src = pkgs.fetchurl {
     url = "https://github.com/AbhishekBarali/SpeakoFlow/releases/download/v${version}/SpeakoFlow_${version}_amd64.AppImage";
-    hash = "sha256-SeXCBYJrA7nMZmV2G2y7J2dwjLOC2yS6H3it41IxInY=";
+    hash = "sha256-0FvxsWYtw2lgmaFRTt8HqscHSbYq6Qgrja6RjIjkwUU=";
   };
   appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
 in pkgs.appimageTools.wrapType2 {
