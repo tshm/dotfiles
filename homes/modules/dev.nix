@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}@inputs:
+{ pkgs, lib, ... }@inputs:
 
 let
   platformSystem = pkgs.stdenv.hostPlatform.system;
@@ -11,8 +7,7 @@ let
   #   system = platformSystem;
   #   nodejs = pkgs.nodejs_20;
   # };
-in
-{
+in {
   # home.file."${config.xdg.configHome}/mcp/mcp.json".source = mcp-servers-nix.lib.mkConfig pkgs {
   #   programs = {
   #     context7.enable = true;
@@ -23,6 +18,7 @@ in
   # };
   home.packages = [
     pkgs.lima
+    pkgs.android-tools
     pkgs.scrcpy
     pkgs.zed-editor
     # langs
@@ -49,13 +45,8 @@ in
     # pkgs.gemini-cli
     # pkgs.radicle-node
     # pkgs.oils-for-unix
-  ]
-  ++ (
-    if (lib.hasInfix "x86" platformSystem) then
-      [
-        inputs.localias.packages."${platformSystem}".default
-      ]
-    else
-      [ ]
-  );
+  ] ++ (if (lib.hasInfix "x86" platformSystem) then
+    [ inputs.localias.packages."${platformSystem}".default ]
+  else
+    [ ]);
 }

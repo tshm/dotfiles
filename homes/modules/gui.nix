@@ -219,8 +219,8 @@ in
     # };
     rofi = {
       enable = true;
-      terminal = "${pkgs.kitty}/bin/kitty";
-      extraConfig = {
+      settings = {
+        terminal = "${pkgs.kitty}/bin/kitty";
         modi = "drun";
         show-icons = true;
         drun-display-format = "{icon} {name}";
