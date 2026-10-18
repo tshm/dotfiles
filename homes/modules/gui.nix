@@ -240,7 +240,7 @@ in
   wayland.windowManager.mango = {
     enable = true;
     settings = {
-      "source-optional" = [
+      source_optional = [
         "~/.dotfiles/x/mango/vars.conf"
         "~/.dotfiles/x/mango/general.conf"
       ];
