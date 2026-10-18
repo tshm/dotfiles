@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - *(speakoflow)* Bump SpeakoFlow from 2.0.0 to 2.0.1 with the matching AppImage hash
+- *(minf)* Restrict fingerprint authentication to local login and restore passwordless sudo; disable fingerprint prompts for desktop authorization and screen lockers.
 ## [1.2.0] - 2025-02-27
 
 ### 🚀 Features

@@ -52,9 +52,9 @@ hosts/
 - `minf/test-ft9201-identify.c` runs in the library's install-check phase against the patched driver with a substitute vendor matcher: covers either gallery entry, no match, consumed probes, frame rejection and malformed/empty templates. It does not measure biometric accuracy.
 - Firmware and the Windows matcher DLL are proprietary, hash-pinned build inputs; do not publish the resulting packages to public binary caches without redistribution permission.
 - The matcher runs inside fprintd, not a sandbox. Keep the daemon's upstream hardening enabled.
-- Local fingerprint authentication is enabled for `login` (inherited by greetd), `sudo`, `polkit-1`, `swaylock`, `i3lock` and `i3lock-color`; other PAM services, including SSH, default off. `sudo` requires authentication instead of passwordless wheel access. Password fallback remains enabled.
+- Fingerprint authentication is only for local `login` (inherited by greetd), with password fallback. All other PAM services, including sudo, Polkit, screen lockers and SSH, default off. Preserve passwordless sudo from `base.nix`; do not require fingerprints for privilege escalation.
 - Build: `nix build .#nixosConfigurations.minf.config.system.build.toplevel`. Driver/library and daemon retain their upstream install checks.
-- After activating the identification patch, `fprintd-verify` without `-f` must request any finger. Check each enrolled finger and a non-enrolled finger, then run `sudo -k id -u`; a matching enrolled finger prints `0`. Without a touch, verification times out and PAM requests the password. These checks do not establish false-accept rates.
+- `fprintd-verify` without `-f` must request any finger. Check each enrolled finger and a non-enrolled finger. After activating configuration changes, `sudo -k -n id -u` must print `0` without a fingerprint/password prompt; only `/etc/pam.d/login` should contain `pam_fprintd.so`. These checks do not establish false-accept rates.
 - Enroll interactively with `fprintd-enroll -f right-index-finger`; verify with `fprintd-verify -f right-index-finger`. Fingerprint data lives in `/var/lib/fprint`; remove enrollment with `fprintd-delete "$USER"`.
 - Fingerprint login cannot supply the password needed to unlock an encrypted GNOME keyring; unlock it separately when required.
 

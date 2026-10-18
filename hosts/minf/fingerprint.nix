@@ -66,7 +66,7 @@ let
     };
   });
 in {
-  # Keep biometrics off outside the explicitly selected local PAM services.
+  # Fingerprints are only for local login, not privilege escalation or locking.
   options.security.pam.services = lib.mkOption {
     type = lib.types.attrsOf (lib.types.submodule {
       fprintAuth = lib.mkDefault false;
@@ -78,15 +78,7 @@ in {
       enable = true;
       package = pkgs.fprintd.override { inherit libfprint; };
     };
-    security.sudo.wheelNeedsPassword = true;
-    security.pam.services = lib.genAttrs [
-      "login" # greetd includes this stack.
-      "sudo"
-      "polkit-1"
-      "swaylock"
-      "i3lock"
-      "i3lock-color"
-    ] (_: { fprintAuth = true; });
+    security.pam.services.login.fprintAuth = true; # greetd includes this stack.
     systemd.services.fprintd.environment.FT9201_ENGINE_DLL =
       "${matcher}/ftWbioEngineAdapter.dll";
     services.udev.extraRules = builtins.readFile "${driver}/packaging/60-ft9201.rules";
