@@ -58,6 +58,13 @@ hosts/
 - Enroll interactively with `fprintd-enroll -f right-index-finger`; verify with `fprintd-verify -f right-index-finger`. Fingerprint data lives in `/var/lib/fprint`; remove enrollment with `fprintd-delete "$USER"`.
 - Fingerprint login cannot supply the password needed to unlock an encrypted GNOME keyring; unlock it separately when required.
 
+## x360 Fingerprint Reader
+
+- `x360/default.nix` packages the experimental `synatlsmoc` driver for the built-in Synaptics `06cb:00c9` reader. The driver is pinned to hardware-tested commit `28d391839b9d9f71e2952528894d730c28d3ec4b`; fprintd's persistent-pairing patch is pinned to `b700a346e735e429f757828bffe7fbbdaf9f9415`.
+- Authentication is enabled only for local `login` (inherited by greetd), with password fallback. Do not enable it for sudo, Polkit, screen lockers, or SSH without an explicit request.
+- Enroll with `sudo fprintd-enroll -f right-index-finger tshm`; verify with `fprintd-verify -f right-index-finger tshm`. Pairing and enrollment data are stored below root-only `/var/lib/fprint`.
+- Build with `nix build .#nixosConfigurations.x360.config.system.build.toplevel`. Verify the actual path with `nix shell nixpkgs#pamtester -c pamtester login tshm authenticate`.
+
 ## Child DOX Index
 
 No child DOX files.
