@@ -80,6 +80,11 @@ Default section order:
 - `gui-startup` runs only for a fresh GUI process; use `wezterm.exe start --always-new-process` to verify local startup changes.
 - Verify with `lua wezterm/test_local_config.lua` from the repository root; this exercises the real config loader with a stubbed WezTerm API.
 
+## Yazi
+
+- `yazi/plugins/archive-edit.yazi/main.lua` handles Enter for archive editing in ordinary browsing. With `rt.args.chooser_file` set, Enter on files must emit `open` to return the selected path without inspecting or extracting the archive; directories still use `enter`.
+- Verify with `lua yazi/test_archive_chooser.lua` from the repository root.
+
 ## Graft — repo context graph
 
 This repo is indexed in `graft/`. See `docs/graft/AGENTS.md` for full documentation.

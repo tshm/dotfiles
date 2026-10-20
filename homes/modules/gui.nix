@@ -199,6 +199,17 @@ in
     };
   };
   programs = {
+    yazi.settings = {
+      opener.mpv = [{
+        run = "mpv -- %s";
+        orphan = true;
+        desc = "mpv";
+      }];
+      open.prepend_rules = [{
+        url = "*.{mkv,mp4}";
+        use = "mpv";
+      }];
+    };
     # noctalia-shell = { enable = true; };
     # hyprshell = {
     #   enable = true;
