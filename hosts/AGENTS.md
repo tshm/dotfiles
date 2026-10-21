@@ -45,6 +45,13 @@ hosts/
 - `specialArgs`: Pass flake inputs to modules
 - `imports`: Hardware config + shared modules
 
+## Bluetooth Resume
+
+- `gui.nix` uses `powerManagement.resumeCommands` to reconnect paired, trusted keyboards that BlueZ reports as disconnected. Device addresses come from BlueZ; no re-pairing, automatic trust changes, adapter power cycling, or Bluetooth daemon restart.
+- Each connection attempt has a 15-second timeout. Failures are logged by `sleep-actions.service` and do not prevent attempts for other keyboards.
+- Check selection and failure handling with `python3 hosts/test-bluetooth-resume.py` (requires Nix and Bash).
+- Build the hook with `nix build --no-link '.#nixosConfigurations.minf.config.systemd.units."sleep-actions.service".unit'`. After activating the system configuration, verify keyboard input after a real suspend/resume; inspect `journalctl -b -u sleep-actions.service` on failure.
+
 ## minf Fingerprint Reader
 
 - `minf/fingerprint.nix` installs the experimental FT9201 (`2808:93a9`) driver, pinned to Deetss PR #1 commit `da599b389f41827617df8c1836926eff580f3733` on libfprint 1.94.10.
