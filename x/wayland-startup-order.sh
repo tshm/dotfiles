@@ -93,4 +93,7 @@ if [[ -z ${MANGO_INSTANCE_SIGNATURE:-} && -n ${NIRI_SOCKET:-} ]]; then
 fi
 fcitx5 -d --replace &
 
+if ! pgrep -u "$(id -u)" -x speakoflow >/dev/null; then
+  python3 "$(dirname "${BASH_SOURCE[0]}")/speakoflow-cleanup.py"
+fi
 speakoflow --start-hidden &

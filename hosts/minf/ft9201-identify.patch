@@ -1,0 +1,132 @@
+--- a/libfprint/drivers/ft9201.c
++++ b/libfprint/drivers/ft9201.c
+@@ -870,6 +870,46 @@
+
+ static void start_scan (FpDevice *dev);  /* forward declaration */
+
++/* Re-feed each candidate: the opaque vendor Verify call may consume its probe. */
++static FpPrint *
++identify_match (FpiDeviceFt9201 *self, GPtrArray *gallery, GError **error)
++{
++  for (guint i = 0; i < gallery->len; i++)
++    {
++      FpPrint *print = g_ptr_array_index (gallery, i);
++      g_autoptr(GVariant) data = NULL;
++      g_autoptr(GVariant) arr = NULL;
++      gsize len;
++      const guint8 *blob;
++
++      g_object_get (print, "fpi-data", &data, NULL);
++      if (!data || !g_variant_is_of_type (data, G_VARIANT_TYPE ("(ay)")))
++        {
++          g_set_error_literal (error, FP_DEVICE_ERROR, FP_DEVICE_ERROR_DATA_INVALID,
++                               "ft9201: stored template invalid");
++          return NULL;
++        }
++      arr = g_variant_get_child_value (data, 0);
++      blob = g_variant_get_fixed_array (arr, &len, 1);
++      if (!len)
++        {
++          g_set_error_literal (error, FP_DEVICE_ERROR, FP_DEVICE_ERROR_DATA_INVALID,
++                               "ft9201: stored template empty");
++          return NULL;
++        }
++      if (ft_engine_accept (self->image_buf, self->sensor_width,
++                            self->sensor_height, 1) != 0)
++        {
++          g_set_error_literal (error, FP_DEVICE_RETRY, FP_DEVICE_RETRY_CENTER_FINGER,
++                               "ft9201: vendor engine rejected frame");
++          return NULL;
++        }
++      if (ft_engine_verify (blob, len))
++        return print;
++    }
++  return NULL;
++}
++
+ static void
+ scan_ssm_complete (FpiSsm *ssm, FpDevice *dev, GError *error)
+ {
+@@ -878,10 +918,7 @@
+
+   if (error)
+     {
+-      if (self->is_verify)
+-        fpi_device_verify_complete (dev, error);
+-      else
+-        fpi_device_enroll_complete (dev, NULL, error);
++      fpi_device_action_error (dev, error);
+       return;
+     }
+
+@@ -906,12 +943,31 @@
+     {
+       GError *e = fpi_device_error_new_msg (FP_DEVICE_ERROR_GENERAL,
+                                             "ft9201: vendor engine not loaded");
+-      if (self->is_verify)
+-        fpi_device_verify_complete (dev, e);
+-      else
+-        fpi_device_enroll_complete (dev, NULL, e);
+-      return;
+-    }
++      fpi_device_action_error (dev, e);
++      return;
++    }
++  if (fpi_device_get_current_action (dev) == FPI_DEVICE_ACTION_IDENTIFY)
++    {
++      GPtrArray *gallery;
++      GError *identify_error = NULL;
++      fpi_device_get_identify_data (dev, &gallery);
++      FpPrint *match = identify_match (self, gallery, &identify_error);
++      if (identify_error)
++        {
++          if (identify_error->domain == FP_DEVICE_RETRY)
++            {
++              g_error_free (identify_error);
++              start_scan (dev);
++            }
++          else
++            fpi_device_identify_complete (dev, identify_error);
++          return;
++        }
++      fpi_device_identify_report (dev, match, NULL, NULL);
++      fpi_device_identify_complete (dev, NULL);
++      return;
++    }
++
+
+   /* Feed the raw captured frame to the vendor engine (it resizes internally). */
+   uint32_t ahr = ft_engine_accept (self->image_buf, w, h,
+@@ -1002,7 +1058,7 @@
+ {
+   /* USB transfers already hold fpi_device_get_cancellable(), so they abort
+    * automatically.  The scan SSM will complete with a cancellation error and
+-   * fpi_device_{enroll,verify}_complete will propagate it upstream. */
++   * fpi_device_action_error will propagate it upstream. */
+ }
+
+ static void
+@@ -1094,6 +1150,15 @@
+   self->has_background = FALSE;
+   start_scan (dev);
+ }
++static void
++dev_identify (FpDevice *dev)
++{
++  FpiDeviceFt9201 *self = FPI_DEVICE_FT9201 (dev);
++  self->is_verify = TRUE;
++  self->has_background = FALSE;
++  start_scan (dev);
++}
++
+
+ /* ================================================================== */
+ /* Driver registration                                                 */
+@@ -1126,6 +1191,7 @@
+   dev_class->close   = dev_close;
+   dev_class->enroll  = dev_enroll;
+   dev_class->verify  = dev_verify;
++  dev_class->identify = dev_identify;
+   dev_class->cancel  = dev_cancel;
+
+   fpi_device_class_auto_initialize_features (dev_class);

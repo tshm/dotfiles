@@ -1,18 +1,15 @@
-{
-  user,
-  config,
-  pkgs,
-  lib,
-  ...
-}@inputs:
+{ user, config, pkgs, lib, ... }@inputs:
 
 let
-  configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+  configPath = pathStr:
+    config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   platformSystem = pkgs.stdenv.hostPlatform.system;
   emojiCli = inputs.emoji-cli;
   zshMoreCompletions = inputs.zsh-more-completions;
   zshSsh = inputs.zsh-ssh;
-  compiledZshPlugins = pkgs.runCommand "compiled-zsh-plugins" { nativeBuildInputs = [ pkgs.zsh ]; } ''
+  compiledZshPlugins = pkgs.runCommand "compiled-zsh-plugins" {
+    nativeBuildInputs = [ pkgs.zsh ];
+  } ''
     mkdir -p $out
     cp -r ${pkgs.zsh-autosuggestions} $out/autosuggestions
     cp -r ${pkgs.zsh-history-search-multi-word} $out/history-search-multi-word
@@ -47,8 +44,7 @@ let
     zcompile $out/zsh-ssh/zsh-ssh.zsh
     '
   '';
-in
-{
+in {
   imports = [
     inputs.agenix.homeManagerModules.default
     inputs.nix-index-database.homeModules.nix-index
@@ -95,7 +91,6 @@ in
       pkgs.python3Packages.markitdown
       pkgs.pandoc
       pkgs.trashy
-      pkgs.trashy
       pkgs.file
       pkgs.psmisc
       pkgs.neovim
@@ -134,15 +129,16 @@ in
       #pkgs.chawan
     ];
     file = {
-      "${config.xdg.configHome}/k9s/hotkeys.yaml".source = configPath "/k8s/k9s/hotkeys.yaml";
-      "${config.xdg.configHome}/k9s/plugins.yaml".source = configPath "/k8s/k9s/plugins.yaml";
+      "${config.xdg.configHome}/k9s/hotkeys.yaml".source =
+        configPath "/k8s/k9s/hotkeys.yaml";
+      "${config.xdg.configHome}/k9s/plugins.yaml".source =
+        configPath "/k8s/k9s/plugins.yaml";
       "${config.xdg.configHome}/nvim/".source = configPath "/vim/nvim";
-      "${config.xdg.configHome}/yazi/run.zsh".source = configPath "/yazi/run.zsh";
+      "${config.xdg.configHome}/yazi/run.zsh".source =
+        configPath "/yazi/run.zsh";
     };
   };
-  home.sessionVariables = {
-    TMUX_TMPDIR = lib.mkForce "/tmp";
-  };
+  home.sessionVariables = { TMUX_TMPDIR = lib.mkForce "/tmp"; };
   programs = {
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
@@ -231,9 +227,7 @@ in
         invert = true;
       };
     };
-    nushell = {
-      enable = true;
-    };
+    nushell = { enable = true; };
     carapace = {
       enable = false; # it breaks other completions
       enableZshIntegration = true;
@@ -278,9 +272,7 @@ in
       enableZshIntegration = true;
       enableNushellIntegration = true;
       enableFishIntegration = false;
-      config = {
-        global.hide_env_diff = true;
-      };
+      config = { global.hide_env_diff = true; };
       # https://github.com/direnv/direnv/issues/73
       stdlib = ''
         # vim: ft=sh
@@ -335,15 +327,9 @@ in
         require("archive-edit"):setup({ max_size = 100 * 1024 * 1024, max_files = 100 })
       '';
       settings = {
-        log = {
-          enabled = true;
-        };
+        log = { enabled = true; };
         mgr = {
-          ratio = [
-            0
-            3
-            7
-          ];
+          ratio = [ 0 3 7 ];
           sort_by = "natural";
           sort_dir_first = true;
         };
@@ -351,7 +337,8 @@ in
           prepend_previewers = [
             {
               url = "*.{docx,xlsx,pptx}";
-              run = ''piper -- PYTHONWARNINGS=ignore::RuntimeWarning:pydub.utils markitdown "$1"'';
+              run = ''
+                piper -- PYTHONWARNINGS=ignore::RuntimeWarning:pydub.utils markitdown "$1"'';
             }
             {
               url = "*.epub";
@@ -368,20 +355,16 @@ in
           ];
         };
         opener = {
-          less = [
-            {
-              run = ''less "$@"'';
-              block = true;
-              desc = "less";
-            }
-          ];
-          jless = [
-            {
-              run = ''jless "$@"'';
-              block = true;
-              desc = "jless";
-            }
-          ];
+          less = [{
+            run = ''less "$@"'';
+            block = true;
+            desc = "less";
+          }];
+          jless = [{
+            run = ''jless "$@"'';
+            block = true;
+            desc = "jless";
+          }];
         };
         open.prepend_rules = [
           {
@@ -408,7 +391,7 @@ in
         mgr = {
           prepend_keymap = [
             {
-              on = ["R" "b"];
+              on = [ "R" "b" ];
               run = "plugin recycle-bin";
               desc = "Open Recycle Bin";
             }
@@ -447,27 +430,18 @@ in
               desc = "drag and drop";
             }
             {
-              on = [
-                "g"
-                "u"
-              ];
+              on = [ "g" "u" ];
               run = ''
                 shell 'ya pub dds-cd --str "$(git rev-parse --show-toplevel)"' --confirm
               '';
             }
             {
-              on = [
-                "m"
-                "S"
-              ];
+              on = [ "m" "S" ];
               run = "plugin archive-edit flush";
               desc = "Save editable archive";
             }
             {
-              on = [
-                "c"
-                "m"
-              ];
+              on = [ "c" "m" ];
               run = "plugin chmod";
             }
           ];

@@ -14,6 +14,20 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  powerManagement.resumeCommands = ''
+    # ponytail: use BlueZ's saved devices; no machine-specific Bluetooth addresses.
+    while read -r _ address _; do
+      info=$(${pkgs.bluez}/bin/bluetoothctl info "$address")
+      [[ $info == *"Icon: input-keyboard"* &&
+         $info == *"Trusted: yes"* &&
+         $info != *"Connected: yes"* ]] || continue
+
+      if ! ${pkgs.bluez}/bin/bluetoothctl --timeout 15 connect "$address"; then
+        echo "Bluetooth keyboard reconnect failed: $address" >&2
+      fi
+    done < <(${pkgs.bluez}/bin/bluetoothctl devices Paired)
+  '';
+
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";

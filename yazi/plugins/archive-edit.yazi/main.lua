@@ -130,6 +130,7 @@ local current_hovered = ya.sync(function(state)
 		name = tostring(h.name or h.url.name),
 		size = h.cha and h.cha.len,
 		is_dir = h.cha and h.cha.is_dir or false,
+		chooser = rt.args.chooser_file ~= nil,
 		max_size = state.max_size or DEFAULT_MAX_SIZE,
 		max_files = state.max_files or DEFAULT_MAX_FILES,
 	}
@@ -283,6 +284,9 @@ function M:entry(job)
 		return
 	elseif h.is_dir then
 		ya.emit("enter", { hovered = true })
+		return
+	elseif h.chooser then
+		ya.emit("open", { hovered = true })
 		return
 	end
 

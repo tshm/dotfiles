@@ -199,6 +199,17 @@ in
     };
   };
   programs = {
+    yazi.settings = {
+      opener.mpv = [{
+        run = "mpv -- %s";
+        orphan = true;
+        desc = "mpv";
+      }];
+      open.prepend_rules = [{
+        url = "*.{mkv,mp4}";
+        use = "mpv";
+      }];
+    };
     # noctalia-shell = { enable = true; };
     # hyprshell = {
     #   enable = true;
@@ -219,8 +230,8 @@ in
     # };
     rofi = {
       enable = true;
-      terminal = "${pkgs.kitty}/bin/kitty";
-      extraConfig = {
+      settings = {
+        terminal = "${pkgs.kitty}/bin/kitty";
         modi = "drun";
         show-icons = true;
         drun-display-format = "{icon} {name}";
@@ -240,7 +251,7 @@ in
   wayland.windowManager.mango = {
     enable = true;
     settings = {
-      "source-optional" = [
+      source_optional = [
         "~/.dotfiles/x/mango/vars.conf"
         "~/.dotfiles/x/mango/general.conf"
       ];

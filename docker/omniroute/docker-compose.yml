@@ -1,0 +1,20 @@
+services:
+
+  omniroute:
+    container_name: omniroute
+    image: diegosouzapw/omniroute:latest
+    user: "1000:1000"
+    restart: unless-stopped
+    volumes:
+      - omniroute-data:/app/data
+    environment:
+      - PORT=20128
+      - OMNIROUTE_MAX_PENDING_MIGRATIONS=0
+      # - NEXT_PUBLIC_BASE_URL=https://your-domain.com
+    ports:
+      - "20128:20128"
+
+volumes:
+  omniroute-data:
+    name: omniroute-data
+    external: true

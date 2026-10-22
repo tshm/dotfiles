@@ -46,6 +46,7 @@ Import order matters - later modules can override earlier.
 - `programs.<name>.enable`: Declarative program config
 - `xdg.configHome`: XDG base directory integration
 - WSL yazi: `modules/wsl.nix` sends Office/PDF-style GUI files to Windows via `cmd.exe /C start`
+- Desktop yazi: `modules/gui.nix` opens MKV/MP4 directly with mpv, bypassing XDG MIME associations.
 - spi Hermes backend: `spi/default.nix` runs `hermes serve` on the runtime-resolved Tailscale IPv4 address and couples its lifecycle to `hermes-gateway.service`
 
 ## Child DOX Index

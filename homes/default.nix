@@ -21,6 +21,7 @@ let
 in
 builtins.foldl' (s: i: s // i) { } [
   (import ./spi arm_inputs)
+  (import ./ubuntu-arm arm_inputs)
   (import ./minf x86_inputs)
   (import ./PD0056 x86_inputs)
   (import ./PN0093 x86_inputs)

@@ -1,0 +1,35 @@
+services:
+  dagu:
+    image: ghcr.io/dagucloud/dagu:latest
+    container_name: dagu-dev
+    hostname: dagu-dev
+
+    # Expose the web UI on localhost:8080
+    ports:
+      - "8080:8080"
+
+    entrypoint: ["/usr/local/bin/tini", "-g", "--"]
+
+    # Default command: run all-in-one (server + scheduler + coordinator in-process)
+    command: ["dagu", "start-all"]
+
+    # Recommended dev environment variables
+    environment:
+      # Frontend server
+      - DAGU_HOST=0.0.0.0
+      - DAGU_PORT=8080
+      - DAGU_DEBUG=true
+      # Paths
+      - DAGU_DAGS_DIR=/var/lib/dagu/dags
+      # Builtin authentication (RBAC)
+      - DAGU_AUTH_MODE=builtin
+
+    # Dev-friendly mounts (persistent data + writable DAGs)
+    volumes:
+      - dagu-data:/var/lib/dagu
+      - ./dags:/var/lib/dagu/dags
+      # For Docker in Docker (DinD) support, mount the host Docker socket:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  dagu-data:

@@ -1,5 +1,29 @@
-{ nixos-hardware, ... }:
-{
+{ lib, nixos-hardware, pkgs, ... }:
+let
+  libfprint = pkgs.libfprint.overrideAttrs (old: {
+    version = "1.94.9-synatlsmoc";
+    src = pkgs.fetchurl {
+      url = "https://github.com/vojtapl/libfprint/archive/28d391839b9d9f71e2952528894d730c28d3ec4b.tar.gz";
+      hash = "sha256-8rZUiQAmPFMRHhnwYu5mRQKVmT2LK3Q3vn0hJJD2uE4=";
+    };
+    postPatch = old.postPatch + ''
+      for id in 00c9 00d8 00e7 00ff; do
+        substituteInPlace libfprint/fprint-list-udev-hwdb.c --replace-fail \
+          "  { .vid = 0x06cb, .pid = 0x$id }," ""
+      done
+    '';
+    mesonFlags = (lib.filter (flag: !(lib.hasPrefix "-Ddrivers=" flag)) old.mesonFlags)
+      ++ [ "-Ddrivers=synatlsmoc,virtual_image,virtual_device,virtual_device_storage" ];
+  });
+  fprintd = (pkgs.fprintd.override { inherit libfprint; }).overrideAttrs (old: {
+    patches = old.patches ++ [
+      (pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/vojtapl/synaTudorMiS/b700a346e735e429f757828bffe7fbbdaf9f9415/libfprint/fprintd-load-store-persistent-data-from-device.patch";
+        hash = "sha256-Oo3++qxm+w/7wynfFuy1EdXAE8xl716a7SrjPLhQFQA=";
+      })
+    ];
+  });
+in {
   imports = [
     ./hardware-configuration.nix
     nixos-hardware.nixosModules.common-pc-laptop
@@ -7,6 +31,19 @@
     nixos-hardware.nixosModules.common-cpu-amd
     nixos-hardware.nixosModules.common-gpu-amd
   ];
+  # Fingerprints are only for local login, not privilege escalation or locking.
+  options.security.pam.services = lib.mkOption {
+    type = lib.types.attrsOf (lib.types.submodule {
+      fprintAuth = lib.mkDefault false;
+    });
+  };
+  config = {
+  services.fprintd = {
+    enable = true;
+    package = fprintd;
+  };
+  security.pam.services.login.fprintAuth = true; # greetd includes this stack.
+
   hardware.sensor.iio.enable = true;
 
   # Audio configuration for PC speakers
@@ -68,4 +105,5 @@
   };
 
 
+  };
 }
