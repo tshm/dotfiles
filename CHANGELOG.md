@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Changed
+- *(speakoflow)* Manage the Japanese editing cleanup prompt from a tracked text file, applying it before desktop startup with a 30-second cleanup timeout.
 - *(speakoflow)* Bump SpeakoFlow from 2.0.0 to 2.0.1 with the matching AppImage hash
 - *(minf)* Restrict fingerprint authentication to local login and restore passwordless sudo; disable fingerprint prompts for desktop authorization and screen lockers.
 - *(bluetooth)* Reconnect paired, trusted keyboards after desktop suspend/resume without restarting Bluetooth or disturbing connected devices.
