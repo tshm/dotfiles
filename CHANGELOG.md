@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### 🐛 Bug Fixes
+
+- *(zsh)* Handle top-level remote source paths in `scptar`
+
 ## [1.2.0] - 2025-02-27
 
 ### 🚀 Features
