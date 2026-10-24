@@ -34,9 +34,9 @@ function scptar() {
     if [ -z "$src_host" ] && [ -n "$dst_host" ]; then # 1. Local to Remote
       tar czf - "$src_path" | pv | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
     elif [ -n "$src_host" ] && [ -z "$dst_host" ]; then # 2. Remote to Local
-      ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | pv | tar xzf - -C "${dst_path}"
+      ssh "$src_host" "cd \"${src_path:h}\" && tar czf - \"${src_path:t}\"" | pv | tar xzf - -C "${dst_path}"
     elif [ -n "$src_host" ] && [ -n "$dst_host" ]; then # 3. Remote to Remote
-      ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | pv | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
+      ssh "$src_host" "cd \"${src_path:h}\" && tar czf - \"${src_path:t}\"" | pv | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
     else # 4. Local to Local
       tar czf - "$src_path" | pv | tar xzf - -C "${dst_path%/*}"
     fi
@@ -45,9 +45,9 @@ function scptar() {
     if [ -z "$src_host" ] && [ -n "$dst_host" ]; then # 1. Local to Remote
       tar czf - "$src_path" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
     elif [ -n "$src_host" ] && [ -z "$dst_host" ]; then # 2. Remote to Local
-      ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | tar xzf - -C "${dst_path}"
+      ssh "$src_host" "cd \"${src_path:h}\" && tar czf - \"${src_path:t}\"" | tar xzf - -C "${dst_path}"
     elif [ -n "$src_host" ] && [ -n "$dst_host" ]; then # 3. Remote to Remote
-      ssh "$src_host" "cd \"${src_path%/*}\" && tar czf - \"${src_path##*/}\"" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
+      ssh "$src_host" "cd \"${src_path:h}\" && tar czf - \"${src_path:t}\"" | ssh "$dst_host" "cd \"${dst_path%/*}\" && tar xzf -"
     else # 4. Local to Local
       tar czf - "$src_path" | tar xzf - -C "${dst_path%/*}"
     fi
