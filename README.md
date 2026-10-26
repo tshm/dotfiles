@@ -39,6 +39,27 @@ The `Makefile` provides other useful targets:
 - `make update`: Update all flake inputs.
 - `make clean`: Clean up old Nix generations.
 
+## Home backup (`tp`)
+
+`hosts/t440p/default.nix` backs up all of `/home/tshm` to
+`sftp:dmz:/tank/bkup` daily at 03:00, with up to 30 minutes of jitter
+and catch-up after downtime. No snapshots are automatically deleted.
+The root service uses `tshm`'s existing SSH configuration and keys.
+Live databases and containers are not quiesced; this is a file-level backup.
+
+The repository password is stored outside Nix at
+`/var/lib/restic/home-password` (root-only). Keep a separate secure copy:
+losing this file makes the encrypted backups unrecoverable.
+
+```bash
+sudo systemctl start restic-backups-home.service
+sudo journalctl -u restic-backups-home.service
+sudo restic-home snapshots
+sudo restic-home check
+sudo restic-home restore latest --path /home/tshm --target /tmp/home-restore
+```
+
+
 ## Dependencies
 
 This project uses [Nix Flakes](https://nixos.wiki/wiki/Flakes) to manage dependencies.
