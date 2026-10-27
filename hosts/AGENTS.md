@@ -38,6 +38,7 @@ hosts/
 - **forServer**: `base.nix` accepts `{ host, forServer ? false }` for server mode
 - **Hardware modules**: Use `nixos-hardware` flake for device-specific fixes
 - **Cross-compilation**: aarch64 builds use `crossPkgs` from flake
+- **Nix free-space guard**: `base.nix` starts automatic store GC below 3 GiB and targets 5 GiB free so local system builds have working space.
 
 ## Key Patterns
 

@@ -47,6 +47,8 @@ in {
     keep-derivations = true;
     keep-outputs = true;
     experimental-features = [ "nix-command" "flakes" ];
+    min-free = 3 * 1024 * 1024 * 1024;
+    max-free = 5 * 1024 * 1024 * 1024;
   };
 
   networking.hostName = host;

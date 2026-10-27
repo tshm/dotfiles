@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### 🐛 Bug Fixes
 
 - *(zsh)* Handle top-level remote source paths in `scptar`
+- *(nix)* Trigger automatic store garbage collection below 3 GiB and reclaim toward 5 GiB before builds exhaust the root filesystem.
 
 ### Changed
 - *(t440p)* Remove the Orca system user and group declarations.
