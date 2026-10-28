@@ -32,6 +32,7 @@ hosts/
 | tp | x86 | Server | ThinkPad headless |
 | spi | aarch64 | RPi | Raspberry Pi, cross-compiled; production `spi` advertises a Tailscale exit node, while `spi_first` builds the initial SD image |
 | usb | x86 | Portable | Bootable USB |
+| installer | x86 | Live ISO | Minimal installation environment; no host base module, secrets, or automatic disk operations |
 
 ## Conventions
 
@@ -45,6 +46,13 @@ hosts/
 - `lib.mkIf (!forServer)`: Skip GUI services on servers
 - `specialArgs`: Pass flake inputs to modules
 - `imports`: Hardware config + shared modules
+
+## Installation Media
+
+- `default.nix` defines the standalone `installer` configuration using the official minimal CD module.
+- Build with `make installer-iso`; output is `result-installer/iso/*.iso`. This target does not publish to Cachix.
+- Follow `docs/nixos-install-iso.md` for USB creation, host-specific disk/hardware setup, first-boot secrets, and Home Manager activation.
+- Keep target-host services and private settings out of the live installer. Raspberry Pi continues to use `make result-spi`.
 
 ## Bluetooth Resume
 

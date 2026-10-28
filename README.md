@@ -21,6 +21,7 @@ The repository is organized as follows:
 ## Installation
 
 These dotfiles are managed using Nix and Home Manager.
+For a complete manual installation from the repository's x86_64 installer ISO, see [`docs/nixos-install-iso.md`](docs/nixos-install-iso.md).
 
 - For NixOS:
 
@@ -35,6 +36,8 @@ These dotfiles are managed using Nix and Home Manager.
   ```
 
 The `Makefile` provides other useful targets:
+
+- `make installer-iso`: Build the shared x86_64 installation ISO in `result-installer/iso/`.
 
 - `make update`: Update all flake inputs.
 - `make clean`: Clean up old Nix generations.
