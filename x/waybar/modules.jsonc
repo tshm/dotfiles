@@ -141,12 +141,6 @@
     "tooltip": false,
   },
 
-  "custom/beeper": {
-    "format": "  ",
-    "tooltip-format": "Focus Beeper",
-    "on-click": "mmsg get all-clients | yq -r 'first(.clients[] | select(.appid | test(\"beeper\"; \"i\")) | .id) // empty' | xargs -r -I{} mmsg dispatch focusid client,{}",
-  },
-
   "group/system-stuff": {
     "orientation": "horizontal",
     "modules": [
@@ -157,9 +151,7 @@
       "pulseaudio",
       "custom/separator",
       "battery",
-      "custom/separator",
       "custom/lock",
-      "custom/separator",
       "custom/shutdown",
     ],
   },

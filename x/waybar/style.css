@@ -95,7 +95,6 @@ button:hover {
   background-color: #eb4d4b;
 }
 
-
 #clock,
 #battery,
 #cpu,
@@ -122,7 +121,7 @@ button:hover {
 }
 
 #custom-separator {
-  color: #1b5e20;
+  color: #fb8e20;
   margin: 0 5px;
 }
 
@@ -389,7 +388,6 @@ label:focus {
 #keyboard-state > label.locked {
   background: rgba(0, 0, 0, 0.2);
 }
-
 
 #privacy {
   padding: 0;
