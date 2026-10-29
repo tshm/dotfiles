@@ -5,13 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
-
 - *(nix)* Add the shared x86_64 minimal installer, `make installer-iso`, and a README-linked manual installation guide covering disk selection, host hardware configuration, first-boot secrets, and Home Manager.
-
-### 🐛 Bug Fixes
-
-- *(zsh)* Handle top-level remote source paths in `scptar`
-- *(nix)* Trigger automatic store garbage collection below 3 GiB and reclaim toward 5 GiB before builds exhaust the root filesystem.
 
 ### Changed
 - *(t440p)* Remove the Orca system user and group declarations.
@@ -20,6 +14,8 @@ All notable changes to this project will be documented in this file.
 - *(minf)* Restrict fingerprint authentication to local login and restore passwordless sudo; disable fingerprint prompts for desktop authorization and screen lockers.
 - *(bluetooth)* Reconnect paired, trusted keyboards after desktop suspend/resume without restarting Bluetooth or disturbing connected devices.
 
+### Fixed
+- *(mango)* Allow Beeper notification activation requests to focus its window on tag 2 while preserving silent startup and other applications' focus protection
 ## [1.2.0] - 2025-02-27
 
 ### 🚀 Features
