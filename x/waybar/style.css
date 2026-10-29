@@ -115,7 +115,7 @@ button:hover {
   color: #ffffff;
 }
 
-#layout,
+#custom-layout,
 #window,
 #workspaces {
   margin: 0 4px;
@@ -367,7 +367,7 @@ label:focus {
   background-color: #51a37a;
 }
 
-#layout,
+#custom-layout,
 #language {
   border-radius: 20px;
   padding-left: 10px;

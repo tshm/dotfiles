@@ -222,6 +222,7 @@ in {
       enableNushellIntegration = true;
       flags = [ "--disable-up-arrow" ];
       settings = {
+        wokspaces = true;
         update_check = false;
         filter_model = "host";
         invert = true;

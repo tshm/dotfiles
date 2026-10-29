@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- *(waybar)* Show the current Mango layout's full name and `Super+Space` cycle shortcut in the layout indicator tooltip.
 - *(nix)* Add the shared x86_64 minimal installer, `make installer-iso`, and a README-linked manual installation guide covering disk selection, host hardware configuration, first-boot secrets, and Home Manager.
 
 ### Changed

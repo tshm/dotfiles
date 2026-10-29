@@ -27,6 +27,7 @@ X11 and Wayland desktop session configuration: Niri, Hyprland, i3, XMonad, Wayba
 - Prefer small, direct config edits over introducing shared abstractions across compositors.
 - For shell helpers, keep scripts POSIX-compatible unless the shebang explicitly requires another shell.
 - For JSONC and KDL files, preserve comments and existing formatting style around the edited block.
+- Waybar's Mango layout indicator cycles layouts on left-click using the same `switch_layout` action as Super+Space.
 
 ## Verification
 
