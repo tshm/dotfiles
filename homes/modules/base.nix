@@ -164,8 +164,6 @@ in {
         };
         commands = {
           "omp" = "omp update";
-          "opencode" = "opencode upgrade";
-          "hermes" = "hermes update";
           "devbox" = "devbox global update";
         };
       };

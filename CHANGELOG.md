@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - *(nix)* Add the shared x86_64 minimal installer, `make installer-iso`, and a README-linked manual installation guide covering disk selection, host hardware configuration, first-boot secrets, and Home Manager.
 
 ### Changed
+- *(topgrade)* Remove custom OpenCode and Hermes update commands already covered by built-in steps; retain the omp and Devbox commands.
 - *(t440p)* Remove the Orca system user and group declarations.
 - *(speakoflow)* Manage the Japanese editing cleanup prompt from a tracked text file, applying it before desktop startup with a 30-second cleanup timeout.
 - *(speakoflow)* Bump SpeakoFlow from 2.0.0 to 2.0.1 with the matching AppImage hash
