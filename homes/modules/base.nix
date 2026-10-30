@@ -70,7 +70,6 @@ in {
     autoEnable = true;
     accent = "green";
   };
-  targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
   home = {
     stateVersion = "22.11";
@@ -227,7 +226,10 @@ in {
         invert = true;
       };
     };
-    nushell = { enable = true; };
+    nushell = {
+      enable = true;
+      loadSessionVariables = false;
+    };
     carapace = {
       enable = false; # it breaks other completions
       enableZshIntegration = true;
