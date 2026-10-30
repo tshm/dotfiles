@@ -494,6 +494,7 @@
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
+        "twindesk": "twindesk",
         "vicinae": "vicinae",
         "waybar": "waybar",
         "zsh-more-completions": "zsh-more-completions",
@@ -639,6 +640,26 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "twindesk": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793328327,
+        "narHash": "sha256-4LN1gHqh80t06txM+s2amri/ueaCpzmlvk4UWFBXSKU=",
+        "owner": "InukaAsith",
+        "repo": "TwinDesk",
+        "rev": "7c57646fa146108f5d0b000ef08893c9c5ebbc4e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "InukaAsith",
+        "repo": "TwinDesk",
         "type": "github"
       }
     },
