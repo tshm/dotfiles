@@ -35,6 +35,12 @@ For a complete manual installation from the repository's x86_64 installer ISO, s
   make home-manager
   ```
 
+After Home Manager activation (`switch`, not just `build`), every home configuration
+manages `~/.config/home-manager/flake.nix` as a symlink to
+`~/.dotfiles/flake.nix`. Plain `home-manager news`, `build`, and `switch` then
+discover this repository and select the configuration by username and hostname;
+`--flake` still overrides that default. Keep the checkout at `~/.dotfiles`.
+
 The `Makefile` provides other useful targets:
 
 - `make installer-iso`: Build the shared x86_64 installation ISO in `result-installer/iso/`.

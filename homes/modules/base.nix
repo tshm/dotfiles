@@ -138,6 +138,7 @@ in {
         configPath "/yazi/run.zsh";
     };
   };
+  xdg.configFile."home-manager/flake.nix".source = configPath "/flake.nix";
   home.sessionVariables = { TMUX_TMPDIR = lib.mkForce "/tmp"; };
   programs = {
     home-manager.enable = true;

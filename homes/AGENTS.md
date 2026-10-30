@@ -45,6 +45,7 @@ Import order matters - later modules can override earlier.
 - `home.packages`: User-level packages
 - `programs.<name>.enable`: Declarative program config
 - `xdg.configHome`: XDG base directory integration
+- `modules/base.nix` manages `home-manager/flake.nix` through `xdg.configFile` and the existing out-of-store `configPath` helper. After activation, Home Manager discovers the live `~/.dotfiles` checkout and selects by username/hostname without `--flake`; a build alone does not install the symlink.
 - WSL yazi: `modules/wsl.nix` sends Office/PDF-style GUI files to Windows via `cmd.exe /C start`
 - Desktop yazi: `modules/gui.nix` opens MKV/MP4 directly with mpv, bypassing XDG MIME associations.
 - Desktop Fcitx5: `modules/gui.nix` manages `fcitx5/config` and `fcitx5/profile` through `xdg.configFile`; edit these declarations rather than the generated files. Packages and service remain in `hosts/gui.nix`.
