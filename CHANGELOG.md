@@ -20,9 +20,11 @@ All notable changes to this project will be documented in this file.
 - *(bluetooth)* Reconnect paired, trusted keyboards after desktop suspend/resume without restarting Bluetooth or disturbing connected devices.
 
 ### Fixed
+- *(x360)* Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend.
 - *(home-manager)* Keep non-NixOS GPU integration off on NixOS hosts and explicitly preserve Nushell's existing session-variable behavior, removing activation and evaluation warnings from `make`.
 - *(mango)* Make `Super+R` leave maximized/fullscreen mode before cycling the scroller width preset.
 - *(mango)* Allow Beeper notification activation requests to focus its window on tag 2 while preserving silent startup and other applications' focus protection
+- * (x360) Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend
 ## [1.2.0] - 2025-02-27
 
 ### 🚀 Features

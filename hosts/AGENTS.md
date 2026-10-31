@@ -74,6 +74,12 @@ hosts/
 - Enroll interactively with `fprintd-enroll -f right-index-finger`; verify with `fprintd-verify -f right-index-finger`. Fingerprint data lives in `/var/lib/fprint`; remove enrollment with `fprintd-delete "$USER"`.
 - Fingerprint login cannot supply the password needed to unlock an encrypted GNOME keyring; unlock it separately when required.
 
+## x360 Power Button
+
+- `x360/default.nix` blacklists `tiny_power_button`; that driver sends signal 38 directly to PID 1 on ACPI power-button notifications, bypassing logind and causing poweroff on wake. Keep the normal `button` driver enabled.
+- Verify after activation: `test ! -d /sys/module/tiny_power_button`, `modprobe --dry-run --verbose --use-blacklist tiny_power_button` (no load), and `readlink -f /sys/bus/platform/devices/PNP0C0C:00/driver` (ends in `acpi-button`). Blacklisting does not unload an already-loaded module; use `sudo modprobe -r tiny_power_button` once.
+- A real suspend/power-button wake remains a manual hardware check after saving work. Awake short presses retain logind's configured hibernate action.
+
 ## x360 Fingerprint Reader
 
 - `x360/default.nix` packages the experimental `synatlsmoc` driver for the built-in Synaptics `06cb:00c9` reader. The driver is pinned to hardware-tested commit `28d391839b9d9f71e2952528894d730c28d3ec4b`; fprintd's persistent-pairing patch is pinned to `b700a346e735e429f757828bffe7fbbdaf9f9415`.
