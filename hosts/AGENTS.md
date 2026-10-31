@@ -32,18 +32,27 @@ hosts/
 | tp | x86 | Server | ThinkPad headless |
 | spi | aarch64 | RPi | Raspberry Pi, cross-compiled; production `spi` advertises a Tailscale exit node, while `spi_first` builds the initial SD image |
 | usb | x86 | Portable | Bootable USB |
+| installer | x86 | Live ISO | Minimal installation environment; no host base module, secrets, or automatic disk operations |
 
 ## Conventions
 
 - **forServer**: `base.nix` accepts `{ host, forServer ? false }` for server mode
 - **Hardware modules**: Use `nixos-hardware` flake for device-specific fixes
 - **Cross-compilation**: aarch64 builds use `crossPkgs` from flake
+- **Nix free-space guard**: `base.nix` starts automatic store GC below 3 GiB and targets 5 GiB free so local system builds have working space.
 
 ## Key Patterns
 
 - `lib.mkIf (!forServer)`: Skip GUI services on servers
 - `specialArgs`: Pass flake inputs to modules
 - `imports`: Hardware config + shared modules
+
+## Installation Media
+
+- `default.nix` defines the standalone `installer` configuration using the official minimal CD module.
+- Build with `make installer-iso`; output is `result-installer/iso/*.iso`. This target does not publish to Cachix.
+- Follow `docs/nixos-install-iso.md` for USB creation, host-specific disk/hardware setup, first-boot secrets, and Home Manager activation.
+- Keep target-host services and private settings out of the live installer. Raspberry Pi continues to use `make result-spi`.
 
 ## Bluetooth Resume
 
@@ -64,6 +73,12 @@ hosts/
 - `fprintd-verify` without `-f` must request any finger. Check each enrolled finger and a non-enrolled finger. After activating configuration changes, `sudo -k -n id -u` must print `0` without a fingerprint/password prompt; only `/etc/pam.d/login` should contain `pam_fprintd.so`. These checks do not establish false-accept rates.
 - Enroll interactively with `fprintd-enroll -f right-index-finger`; verify with `fprintd-verify -f right-index-finger`. Fingerprint data lives in `/var/lib/fprint`; remove enrollment with `fprintd-delete "$USER"`.
 - Fingerprint login cannot supply the password needed to unlock an encrypted GNOME keyring; unlock it separately when required.
+
+## x360 Power Button
+
+- `x360/default.nix` blacklists `tiny_power_button`; that driver sends signal 38 directly to PID 1 on ACPI power-button notifications, bypassing logind and causing poweroff on wake. Keep the normal `button` driver enabled.
+- Verify after activation: `test ! -d /sys/module/tiny_power_button`, `modprobe --dry-run --verbose --use-blacklist tiny_power_button` (no load), and `readlink -f /sys/bus/platform/devices/PNP0C0C:00/driver` (ends in `acpi-button`). Blacklisting does not unload an already-loaded module; use `sudo modprobe -r tiny_power_button` once.
+- A real suspend/power-button wake remains a manual hardware check after saving work. Awake short presses retain logind's configured hibernate action.
 
 ## x360 Fingerprint Reader
 

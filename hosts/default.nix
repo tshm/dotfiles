@@ -6,6 +6,19 @@ let
   system = "x86_64-linux";
   specialArgs = args // { inherit system; };
 in {
+  "installer" = nixpkgs.lib.nixosSystem {
+    inherit system;
+    modules = [
+      ({ modulesPath, pkgs, ... }: {
+        imports = [
+          (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
+        ];
+        nix.settings.experimental-features = [ "nix-command" "flakes" ];
+        environment.systemPackages = [ pkgs.git ];
+      })
+    ];
+  };
+
   "tp" = nixpkgs.lib.nixosSystem {
     inherit system;
     inherit specialArgs;

@@ -4,11 +4,27 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- *(minf)* Install TwinDesk through its official Nix flake and NixOS module, with Wayland mouse/keyboard input permissions and connection/discovery firewall ports; keep Wi-Fi Direct privileges disabled.
+- *(home-manager)* Manage the default flake symlink on every home configuration so commands discover the repository without `--flake` after activation.
+- *(waybar)* Show the current Mango layout's full name and `Super+Space` cycle shortcut in the layout indicator tooltip.
+- *(nix)* Add the shared x86_64 minimal installer, `make installer-iso`, and a README-linked manual installation guide covering disk selection, host hardware configuration, first-boot secrets, and Home Manager.
+
 ### Changed
+- *(twindesk)* Follow the upstream default branch on `nix flake update` instead of pinning a release tag; `flake.lock` still records the exact revision for reproducible builds.
+- *(topgrade)* Remove custom OpenCode and Hermes update commands already covered by built-in steps; retain the omp and Devbox commands.
+- *(t440p)* Remove the Orca system user and group declarations.
 - *(speakoflow)* Manage the Japanese editing cleanup prompt from a tracked text file, applying it before desktop startup with a 30-second cleanup timeout.
 - *(speakoflow)* Bump SpeakoFlow from 2.0.0 to 2.0.1 with the matching AppImage hash
 - *(minf)* Restrict fingerprint authentication to local login and restore passwordless sudo; disable fingerprint prompts for desktop authorization and screen lockers.
 - *(bluetooth)* Reconnect paired, trusted keyboards after desktop suspend/resume without restarting Bluetooth or disturbing connected devices.
+
+### Fixed
+- *(x360)* Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend.
+- *(home-manager)* Keep non-NixOS GPU integration off on NixOS hosts and explicitly preserve Nushell's existing session-variable behavior, removing activation and evaluation warnings from `make`.
+- *(mango)* Make `Super+R` leave maximized/fullscreen mode before cycling the scroller width preset.
+- *(mango)* Allow Beeper notification activation requests to focus its window on tag 2 while preserving silent startup and other applications' focus protection
+- * (x360) Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend
 ## [1.2.0] - 2025-02-27
 
 ### 🚀 Features

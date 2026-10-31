@@ -18,6 +18,7 @@ X11 and Wayland desktop session configuration: Niri, Hyprland, i3, XMonad, Wayba
 - Preserve command names and paths referenced by keybindings, startup hooks, and Waybar modules.
 - Do not embed credentials, access tokens, or host-private values in desktop scripts or configs.
 - Treat generated runtime state and local per-machine overrides as out of scope for tracked files unless explicitly documented.
+- `mango/general.conf` keeps Beeper on tag 2 with silent startup and an app-scoped `activation_bypass:1`, accepting SwayNC notification activation tokens that omit input-seat metadata. Reload Mango and reopen Beeper after changing this window rule.
 - `speakoflow-cleanup.txt` is the exact Japanese cleanup prompt. `speakoflow-cleanup.py` merges it into existing user settings only while SpeakoFlow is stopped; startup applies it before launch. It selects `dotfiles_japanese_cleanup`, enables cleanup with no writing style and a 30-second timeout, and preserves the model selection and unrelated settings.
 - The first apply saves a private `settings_store.json.before-dotfiles` backup beside the live settings. Run SpeakoFlow once on a new installation to initialize settings; the prompt applies on the next session start. For immediate updates, quit SpeakoFlow, run `python3 x/speakoflow-cleanup.py`, and reopen it.
 
@@ -26,12 +27,14 @@ X11 and Wayland desktop session configuration: Niri, Hyprland, i3, XMonad, Wayba
 - Prefer small, direct config edits over introducing shared abstractions across compositors.
 - For shell helpers, keep scripts POSIX-compatible unless the shebang explicitly requires another shell.
 - For JSONC and KDL files, preserve comments and existing formatting style around the edited block.
+- Waybar's Mango layout indicator cycles layouts on left-click using the same `switch_layout` action as Super+Space.
 
 ## Verification
 
 - For shell script changes, run `bash -n` on each affected script.
 - Verify cleanup settings preservation and safe replacement with `python3 x/test-speakoflow-cleanup.py`.
-- For compositor, Waybar, or launcher config changes, run the nearest tool-specific validator if available in the environment; none is currently recorded here.
+- Validate Mango configuration with `mango -c ~/.config/mango/config.conf -p`, then verify the affected interaction in the running session.
+- For other compositor, Waybar, or launcher config changes, run the nearest tool-specific validator if available in the environment.
 
 ## Child DOX Index
 

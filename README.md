@@ -21,6 +21,7 @@ The repository is organized as follows:
 ## Installation
 
 These dotfiles are managed using Nix and Home Manager.
+For a complete manual installation from the repository's x86_64 installer ISO, see [`docs/nixos-install-iso.md`](docs/nixos-install-iso.md).
 
 - For NixOS:
 
@@ -34,10 +35,39 @@ These dotfiles are managed using Nix and Home Manager.
   make home-manager
   ```
 
+After Home Manager activation (`switch`, not just `build`), every home configuration
+manages `~/.config/home-manager/flake.nix` as a symlink to
+`~/.dotfiles/flake.nix`. Plain `home-manager news`, `build`, and `switch` then
+discover this repository and select the configuration by username and hostname;
+`--flake` still overrides that default. Keep the checkout at `~/.dotfiles`.
+
 The `Makefile` provides other useful targets:
+
+- `make installer-iso`: Build the shared x86_64 installation ISO in `result-installer/iso/`.
 
 - `make update`: Update all flake inputs.
 - `make clean`: Clean up old Nix generations.
+
+## Home backup (`tp`)
+
+`hosts/t440p/default.nix` backs up all of `/home/tshm` to
+`sftp:dmz:/tank/bkup` daily at 03:00, with up to 30 minutes of jitter
+and catch-up after downtime. No snapshots are automatically deleted.
+The root service uses `tshm`'s existing SSH configuration and keys.
+Live databases and containers are not quiesced; this is a file-level backup.
+
+The repository password is stored outside Nix at
+`/var/lib/restic/home-password` (root-only). Keep a separate secure copy:
+losing this file makes the encrypted backups unrecoverable.
+
+```bash
+sudo systemctl start restic-backups-home.service
+sudo journalctl -u restic-backups-home.service
+sudo restic-home snapshots
+sudo restic-home check
+sudo restic-home restore latest --path /home/tshm --target /tmp/home-restore
+```
+
 
 ## Dependencies
 

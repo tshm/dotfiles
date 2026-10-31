@@ -45,9 +45,14 @@ Import order matters - later modules can override earlier.
 - `home.packages`: User-level packages
 - `programs.<name>.enable`: Declarative program config
 - `xdg.configHome`: XDG base directory integration
+- `modules/base.nix` manages `home-manager/flake.nix` through `xdg.configFile` and the existing out-of-store `configPath` helper. After activation, Home Manager discovers the live `~/.dotfiles` checkout and selects by username/hostname without `--flake`; a build alone does not install the symlink.
+- Enable `targets.genericLinux` only in non-NixOS host modules; NixOS hosts use system-managed GPU drivers.
+- `modules/base.nix` explicitly keeps `programs.nushell.loadSessionVariables = false` to preserve the existing shell environment behavior across Home Manager default changes.
 - WSL yazi: `modules/wsl.nix` sends Office/PDF-style GUI files to Windows via `cmd.exe /C start`
 - Desktop yazi: `modules/gui.nix` opens MKV/MP4 directly with mpv, bypassing XDG MIME associations.
+- Desktop Fcitx5: `modules/gui.nix` manages `fcitx5/config` and `fcitx5/profile` through `xdg.configFile`; edit these declarations rather than the generated files. Packages and service remain in `hosts/gui.nix`.
 - spi Hermes backend: `spi/default.nix` runs `hermes serve` on the runtime-resolved Tailscale IPv4 address and couples its lifecycle to `hermes-gateway.service`
+- Topgrade: `modules/base.nix` relies on built-in OpenCode and Hermes Agent steps; custom commands cover only `omp update` and `devbox global update`.
 
 ## Child DOX Index
 

@@ -95,7 +95,6 @@ button:hover {
   background-color: #eb4d4b;
 }
 
-
 #clock,
 #battery,
 #cpu,
@@ -115,14 +114,14 @@ button:hover {
   color: #ffffff;
 }
 
-#layout,
+#custom-layout,
 #window,
 #workspaces {
   margin: 0 4px;
 }
 
 #custom-separator {
-  color: #1b5e20;
+  color: #fb8e20;
   margin: 0 5px;
 }
 
@@ -367,7 +366,7 @@ label:focus {
   background-color: #51a37a;
 }
 
-#layout,
+#custom-layout,
 #language {
   border-radius: 20px;
   padding-left: 10px;
@@ -389,7 +388,6 @@ label:focus {
 #keyboard-state > label.locked {
   background: rgba(0, 0, 0, 0.2);
 }
-
 
 #privacy {
   padding: 0;
