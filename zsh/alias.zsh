@@ -6,6 +6,7 @@ uname=$(uname -a)
 alias tokscale='bunx tokscale@latest'
 alias opencode='~/.opencode/bin/opencode'
 alias op=opencode
+alias iclear='printf "\033Ptmux;\033\033_Ga=d\033\\\033\\"; clear'
 
 function scptar() {
   [ $# -ne 2 ] && echo "Usage: $1 <source> <destination>" && return 1
