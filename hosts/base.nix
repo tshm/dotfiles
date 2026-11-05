@@ -66,6 +66,23 @@ in {
   };
   console.useXkbConfig = true;
 
+  # 全ホストで週次 TRIM を既定にする。変更は hosts/<host>/default.nix に記述する。
+  # enable / interval は通常の代入で上書き可能（例: services.fstrim.enable = false;）。
+  # 14日間隔にする場合は、ホスト側のモジュール引数に lib を含めて次を追加する:
+  # systemd.timers.fstrim.timerConfig = {
+  #   OnCalendar = lib.mkForce [ "" ];
+  #   OnStartupSec = "10min";
+  #   OnUnitActiveSec = "14d";
+  # };
+  # [ "" ] は既存の週次指定を解除する。[ ] では解除されない。
+  # OnCalendar= は先行するタイマー指定も消すため、後に出力される OnStartupSec を使う。
+  # 起動後10分を基準に初回実行し、以後14日間隔（再起動で初回実行、サスペンド中は計時停止）。
+  # util-linux のランダム遅延・精度設定も適用されるため、実行時刻は厳密ではない。
+  services.fstrim = {
+    enable = lib.mkDefault true;
+    interval = lib.mkDefault "weekly";
+  };
+
   services.auto-cpufreq = lib.mkIf (!forServer) { enable = true; };
   services.tlp.enable = false;
   services.logind.settings = lib.mkIf (!forServer) {
