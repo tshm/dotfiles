@@ -269,7 +269,6 @@ in {
       pkgs.swaynotificationcenter
       # pkgs.copyq
       pkgs.ripdrag
-      pkgs.ags
       pkgs.vscode
       pkgs.neovide
       pkgs.brightnessctl

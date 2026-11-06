@@ -79,7 +79,11 @@ spawn_and_wait() {
   shift 3
 
   previous_count=$(matching_window_count "$app_pattern" "$title_pattern") || previous_count=0
-  "$@" &
+  if [[ -n ${MANGO_INSTANCE_SIGNATURE:-} ]]; then
+    mmsg dispatch "spawn,$*"
+  else
+    "$@" &
+  fi
   wait_for_new_window "$description" "$app_pattern" "$title_pattern" "$previous_count" || true
 }
 
@@ -97,3 +101,6 @@ if ! pgrep -u "$(id -u)" -x speakoflow >/dev/null; then
   python3 "$(dirname "${BASH_SOURCE[0]}")/speakoflow-cleanup.py"
 fi
 speakoflow --start-hidden &
+
+# Keep shell-launched Nix FHS apps alive: their wrappers use --die-with-parent.
+wait
