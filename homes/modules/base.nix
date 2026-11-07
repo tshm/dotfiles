@@ -70,7 +70,6 @@ in {
     autoEnable = true;
     accent = "green";
   };
-  targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
   home = {
     stateVersion = "22.11";
@@ -138,6 +137,7 @@ in {
         configPath "/yazi/run.zsh";
     };
   };
+  xdg.configFile."home-manager/flake.nix".source = configPath "/flake.nix";
   home.sessionVariables = { TMUX_TMPDIR = lib.mkForce "/tmp"; };
   programs = {
     home-manager.enable = true;
@@ -164,8 +164,6 @@ in {
         };
         commands = {
           "omp" = "omp update";
-          "opencode" = "opencode upgrade";
-          "hermes" = "hermes update";
           "devbox" = "devbox global update";
         };
       };
@@ -222,12 +220,16 @@ in {
       enableNushellIntegration = true;
       flags = [ "--disable-up-arrow" ];
       settings = {
+        wokspaces = true;
         update_check = false;
         filter_model = "host";
         invert = true;
       };
     };
-    nushell = { enable = true; };
+    nushell = {
+      enable = true;
+      loadSessionVariables = false;
+    };
     carapace = {
       enable = false; # it breaks other completions
       enableZshIntegration = true;

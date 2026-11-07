@@ -56,7 +56,10 @@ in {
     # Enable internal speakers and jack detection
     options snd-hda-intel enable_msi=1 jackpoll_ms=5000
   '';
-  boot.blacklistedKernelModules = [ "snd_sof" "snd_sof_amd_acp" "snd_sof_pci" ];
+  # tiny_power_button bypasses logind and powers off when the button wakes us.
+  boot.blacklistedKernelModules = [
+    "snd_sof" "snd_sof_amd_acp" "snd_sof_pci" "tiny_power_button"
+  ];
 
   # Audio device configuration
   services.pulseaudio.enable = false;

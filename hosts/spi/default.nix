@@ -27,6 +27,7 @@
 
   networking.hostName = "spi";
 
+  services.fstrim.interval = "monthly";
   services.logind.settings.Login = {
     HandlePowerKey = "suspend";
     HandleLidSwitch = "ignore"; # No lid on Raspberry Pi
