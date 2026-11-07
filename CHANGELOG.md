@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file.
 - *(bluetooth)* Reconnect paired, trusted keyboards after desktop suspend/resume without restarting Bluetooth or disturbing connected devices.
 
 ### Fixed
+- *(speakoflow)* Include `libgpg-error` in the AppImage runtime so SpeakoFlow 2.2.0 launches instead of exiting with a missing shared library.
+- *(x360)* Restore the saved WirePlumber sound-card profile to Analog Stereo Duplex; output-only mode disabled the internal microphone and caused SpeakoFlow dictation to stop immediately.
 - *(wayland)* Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`.
 - *(home-manager)* Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating.
 - *(x360)* Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend.
