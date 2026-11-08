@@ -2,75 +2,405 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.3.0] - 2026-11-08
 
-### Added
+### 🚀 Features
 
-- _(t440p)_ Add encrypted, on-access USB archive storage with protected unlock-key backups and verified symlink migration of inactive backups.
-- _(nix)_ Add a manually started Btrfs migration USB with encrypted SMB-backed restic backups, pre-erase verification, stable disk identity checks, offline NixOS installation, and non-formatting recovery.
-- _(minf)_ Install TwinDesk through its official Nix flake and NixOS module, with Wayland mouse/keyboard input permissions and connection/discovery firewall ports; keep Wi-Fi Direct privileges disabled.
-- _(home-manager)_ Manage the default flake symlink on every home configuration so commands discover the repository without `--flake` after activation.
-- _(waybar)_ Show the current Mango layout's full name and `Super+Space` cycle shortcut in the layout indicator tooltip.
-- _(nix)_ Add the shared x86_64 minimal installer, `make installer-iso`, and a README-linked manual installation guide covering disk selection, host hardware configuration, first-boot secrets, and Home Manager.
+- Add automated app updater workflow and update Makefile for app hash management
+- *(yazi)* Handle plugins in nix
+- *(nix)* Add gemini-cli
+- Use node2nix
+- Add mcp definition
+- Trying to get crosscompilation for arm arch
+- Use yq
+- Add niri
+- Add rclone/restic
+- Add mango
+- *(vim)* Add opencode
+- *(nvim)* Add wsl clipboard support via win32yank.exe
+- Refactor makefile
+- Add environment variable configuration for hostnames
+- Update n8n hostname to n8n.tshm.dpdns.org
+- Update Authentik hostname to authentik.tshm.dpdns.org
+- Skill installer
+- *(yazi)* Add run.zsh script and update keymap configuration
+- *(yazi)* Added spot keybinding
+- *(makefile)* Streamline dev target and add new pi setup commands
+- Update agent Makefile for Oh My Pi integration and add notification extension
+- *(nixos)* Added bun and removed global LD_LIBRARY_PATH
+- Add task-factory installation to Makefile
+- *(warp)* Added Cloudflare WARP connection management scripts
+- Vocalinux
+- *(hosts)* Added Tailscale subnet routing and conditional useRoutingFeatures
+- *(yazi)* Added smart tab behavior
+- *(gptcomplete)* Added configurable LLM shell completions
+- *(gptcomplete)* Added provider-aware fast model selection
+- *(homes)* Enabled hunk in home profile
+- *(yazi)* Add archive-edit plugin
+- *(x)* Added Hibernate option to system action menu
+- *(homes)* Added document previews to Yazi
+- Remove zinit
+- *(gui)* Replaced Vocalinux with OpenTypeless
+- *(homes)* Added Pandoc EPUB previews
+- *(homes-spi)* Added hermes backend service
+- Add speakoflow
+- *(tailscale)* Added Vicinae controls for Tailscale
+- *(hosts)* Configured tunnel-only Cloudflare WARP
+- *(hosts)* Enabled restricted Magic SysRq controls on servers
+- Use mangowm
+- Add bluetooth audio reconnect script
+- *(nix)* Added shared x86_64 installer ISO workflow
+- *(nixos)* Configure overridable weekly SSD TRIM
 
-### Changed
+### 🐛 Bug Fixes
 
-- _(nixos)_ Default to weekly SSD TRIM in the shared host configuration with `lib.mkDefault`, allowing per-host overrides.
-- _(twindesk)_ Follow the upstream default branch on `nix flake update` instead of pinning a release tag; `flake.lock` still records the exact revision for reproducible builds.
-- _(topgrade)_ Remove custom OpenCode and Hermes update commands already covered by built-in steps; retain the omp and Devbox commands.
-- _(t440p)_ Remove the Orca system user and group declarations.
-- _(speakoflow)_ Manage the Japanese editing cleanup prompt from a tracked text file, applying it before desktop startup with a 30-second cleanup timeout.
-- _(speakoflow)_ Bump SpeakoFlow from 2.0.0 to 2.0.1 with the matching AppImage hash
-- _(minf)_ Restrict fingerprint authentication to local login and restore passwordless sudo; disable fingerprint prompts for desktop authorization and screen lockers.
-- _(bluetooth)_ Reconnect paired, trusted keyboards after desktop suspend/resume without restarting Bluetooth or disturbing connected devices.
+- *(nix)* Exclude nix in topgrade
+- *(nvim)* Adjust extras
+- *(gui)* Remove wofi
+- *(git)* Adjust pwd
+- *(gui)* Run beeper without option
+- *(devbox)* Fix alias to support quotes
+- *(gui)* Use wezterm
+- *(gui)* Use wezterm
+- *(git)* Sensible default
+- *(git)* Bump
+- *(catppucin)* Remove cursor option from base
+- *(gui)* Integrate catppuccin into gui.nix
+- *(hm)* Support arm
+- *(hm)* Add obsidian
+- *(podman)* Socket path
+- *(k8s)* Use cloudflared
+- *(k8s)* Flux
+- *(k8s)* Update manifests
+- Use beeper appimage
+- *(flake)* Use appimage for beeper/zen
+- Change base branch from main to master in app-update workflow
+- *(k8s)* Use litestream for n8n
+- *(k8s)* N8n secret should persist
+- *(vim)* Disable smooth scrolling
+- *(zsh)* Use tmux when login
+- *(hyprland)* Switch app
+- *(hyprland)* Make mpv not to change content-type
+- *(k8s)* Use longhorn
+- *(yazi)* Disable yazi-git plugin
+- *(vim)* Rmeove markview
+- *(k9s)* Keybind
+- *(zsh)* Support symlinks in scptar
+- Add clean command
+- Use lima and scrcpy
+- *(waybar)* Add module
+- Use jujutsu
+- *(waybar)* Show blightness ctrl
+- *(git)* Add fpull alias
+- *(nix)* Add upgrade target
+- *(yazi)* Use projects plugin
+- *(nh)* Update envrc
+- *(gh)* Use ubuntu images
+- *(kanata)* Download winIOv2 ver
+- Enable gemini-cli
+- Enable opencode
+- *(node2nix)* Lots of errors.  avoid using it for now
+- Avoid building opencode
+- Remove agent cli tools
+- Install uv
+- *(raindrio)* Reload article array
+- Use kitty for now
+- Update
+- Use vicinea
+- *(spi)* Syntax error
+- Remove commitzen for hash error
+- *(hyprland)* Disable vicinae for now
+- *(spi)* Image buildable
+- Use age
+- Adjust server config
+- Add tp and secret
+- *(spi)* Fix username
+- Add atuin config
+- Aling spi builds
+- *(spi)* Add rpi tools
+- *(spi)* Define cron
+- Cronjobs
+- *(nvim)* Use tmux clipboard
+- Use hyprland-plugin
+- Use hyprland-plugins
+- Disable P binding
+- Use noctalia
+- Disable noctaliza
+- Adjust window overwrap
+- Use nerd-fonts
+- Enable vicinae
+- Use litestream:0.3.13 as 0.5.x breaks
+- *(k8s)* Fix kustomization path
+- *(x)* Use gamma step
+- Update apps
+- *(k8s)* Update
+- Zsh update caching
+- Spc to mod
+- Add ast-grep
+- *(nvim)* Prioritize wsl clipboard over tmux
+- Hostname
+- *(tmux)* Failed to startup due to permission
+- Disable redundant mcp
+- *(yazi)* Adapt API change
+- *(yazi)* Adapt API change
+- Script error
+- Agent installer
+- Warnings
+- Backup only changes
+- *(kanata)* Prefer Windows release zip and copy extracted files into kanata/
+- *(kanata)* Select Windows x86/x64 zip and remove ARM binaries after extraction
+- Enable iptables
+- Remove trailing whitespace
+- Track .app.env for GitOps hostname configuration
+- Add .app.env file for hostname configuration
+- Update Traefik HelmRelease for chart v39 schema compatibility
+- Add namespace to deletefailedpods CronJob
+- Add namespace manifest for Authentik
+- Enhance dotfile security guidelines and update .gitignore patterns
+- Add existingSecret.secretName structure for Authentik chart
+- Add secret_key to Authentik configuration
+- Enable ServiceAccount creation for Traefik
+- Remove serviceAccount config to use chart defaults
+- Use existingSecret for Authentik credentials
+- *(x360)* Improve audio jack detection and headphone switching
+- *(sshd)* Enable X11 forwarding
+- Add NPM_CONFIG_PREFIX
+- Dns for tailscale
+- Update greeter command to use niri-session
+- Multi-monitor span bind
+- Enable wol
+- Update Tailscale DNS routing to include DHCP for specific domains
+- Auto devbox
+- Topgrade
+- Add devbox integration and source local environment if exists
+- Update platform system references in configuration files
+- Adjust path
+- Adjust t440p config
+- Enable beep in wezterm
+- Wezterm bell
+- Remove context7 mcp
+- Nodejs is removed
+- *(homes)* Fixed shell variable quoting
+- Update
+- *(hosts/t440p)* Replaced deprecated extraUpFlags with extraSetFlags for tailscale
+- Remove old deps
+- Use wezterm
+- *(topgrade)* Disable system update
+- Add pipx
+- Add multica and hermes
+- Add usr/local/bin
+- Remove omp alias
+- *(wezterm)* Support c-v for typeless pasting
+- *(agent)* Add understand
+- *(tmux)* Add passthough
+- *(hosts)* Launched Multica from runtime PATH
+- *(wsl)* Use winapps from wsl
+- *(agent)* Install omp as binary
+- Update app hash mechanism
+- Wheel on tmux
+- Add aup func
+- *(zsh)* Added dox AGENTS merge step
+- Add ponytail
+- Wezterm
+- User hunk instead of delta
+- *(homes)* Refreshed desktop app pins and Hyprland inputs
+- Include private inclusion
+- Put agents into topgrade
+- Ci
+- Topgrade
+- Remove multica service def
+- Memory management
+- Wezterm keylayout
+- *(backup)* Src lists folders
+- Make tp a mutica runtime
+- *(yazi)* Archive keymap
+- *(niri)* Set speakoflow shortcut
+- *(niri)* Speakoflow binding
+- Notification
+- *(spi)* Route Multica traffic over Tailscale
+- Adjust mtu for github access
+- *(mango)* Allowed Beeper activation requests to focus on tag 2
+- *(mango)* Leave maximized mode before resizing
+- *(topgrade)* Remove redundant custom upgrade commands
 
-### Fixed
+### 💼 Other
 
-- _(speakoflow)_ Include `libgpg-error` in the AppImage runtime so SpeakoFlow 2.2.0 launches instead of exiting with a missing shared library.
-- _(x360)_ Restore the saved WirePlumber sound-card profile to Analog Stereo Duplex; output-only mode disabled the internal microphone and caused SpeakoFlow dictation to stop immediately.
-- _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`.
-- _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating.
-- _(x360)_ Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend.
-- _(home-manager)_ Keep non-NixOS GPU integration off on NixOS hosts and explicitly preserve Nushell's existing session-variable behavior, removing activation and evaluation warnings from `make`.
-- _(mango)_ Make `Super+R` leave maximized/fullscreen mode before cycling the scroller width preset.
-- _(mango)_ Allow Beeper notification activation requests to focus its window on tag 2 while preserving silent startup and other applications' focus protection
-- - (x360) Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend
-- _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`
-- _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating
-- _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`.
-- _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating.
-- _(x360)_ Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend.
-- _(home-manager)_ Keep non-NixOS GPU integration off on NixOS hosts and explicitly preserve Nushell's existing session-variable behavior, removing activation and evaluation warnings from `make`.
-- _(mango)_ Make `Super+R` leave maximized/fullscreen mode before cycling the scroller width preset.
-- _(mango)_ Allow Beeper notification activation requests to focus its window on tag 2 while preserving silent startup and other applications' focus protection
-- - (x360) Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend
-- _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`
+- Update (#36)
+- Update (#48)
+- Update (#54)
+- Update (#60)
+- Update (#62)
+- Update (#66)
+- Update (#76)
+- Update (#128)
+- Fix completion function
+- Update (#231)
+- *(agent)* Added herdr install target
+- Include zsh extensions into flake
+- Prefix indicator
 
-- # _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating
+### 🚜 Refactor
 
-- _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`.
-- _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating.
-- _(t440p)_ Preserve the existing TS3 backup-share automount's boot enablement when rebuilding the private host configuration.
-- _(x360)_ Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend.
-- _(home-manager)_ Keep non-NixOS GPU integration off on NixOS hosts and explicitly preserve Nushell's existing session-variable behavior, removing activation and evaluation warnings from `make`.
-- _(mango)_ Make `Super+R` leave maximized/fullscreen mode before cycling the scroller width preset.
-- _(mango)_ Allow Beeper notification activation requests to focus its window on tag 2 while preserving silent startup and other applications' focus protection
-- - (x360) Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend
-- _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`
-- _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating
+- Refactored .gitignore and 1 other
+- Refactored gui.nix
+- Refactored niri-startup-order.sh and 1 other
+- Refactored vocalinux.nix
+- Refactored niri.kdl and 1 other
+
+### 📚 Documentation
+
+- Template for {GEMINI,CLAUDE}.md
+- Add readme
+- Add AGENTS.md
+- Add quick start guide for environment variables
+- Document two-phase deployment strategy (manual secrets + GitOps)
+- Add verification steps for task completion in development guidelines
+- *(agent)* Added behavior guidelines
+- *(agent-skills)* Documented markitdown skill and added pi-skills symlink
+- Update
+- *(omniroute)* Added omniroute free combos skill documentation
+
+### ⚙️ Miscellaneous Tasks
+
+- Update
+- *(renovate)* Add nix support
+- Add github actions
+- Use cachix
+- Use auto update flake
+- Worker title
+- *(nix)* Cleanup
+- *(flake)* Update
+- Limit flake build only nix file changes
+- Update flake
+- Cleanup nvim plugins
+- Flake update
+- Update deps
+- Update deps
+- Cleanup
+- Update
+- Update
+- Update
+- Update
+- Update
+- Revert flake as commitzen cannot be built
+- Use yazi
+- Update deps
+- Update zen
+- Update deps
+- Update deps
+- Add N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE to .values.env
+- Update
+- Update
+- Yazi conf update
+- Update deps
+- Update deps
+- Add cliboard
+- Update
+- Update
+- Update
+- Update
+- Use arm image for pi
+- Update
+- Update
+- Update
+- Update
+- Update
+- Create AGENT.md
+- Remove temporary files
+- Update
+- Update
+- Update
+- Cleanup ime
+- Update
+- Update
+- Update
+- Layzvim update
+- Update zen
+- Cleanup
+- Add pub key
+- Adjust spi builder
+- Add t440p
+- Update
+- Update
+- Use niri
+- Format
+- Cleanup
+- Update
+- Update
+- Update
+- Update
+- Enable exit node for tp
+- Update
+- Update
+- Update AGENT.md
+- Add new host
+- Update
+- Update flake inputs and app hashes
+- *(kanata)* Ignore linux binaries in kanata/
+- Update
+- Remove beads dep
+- Update
+- Adjust path
+- Disable home-manager in base configuration
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- *(x)* Replaced startup programs and removed keybindings
+- *(ci)* Cleanup Makefile/scripts
+- Update
+- Add chorus
+- Update
+- *(pre-commit)* Added nix syntax check hook
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Add understand-anything
+- *(agent)* Added LiteLLM Claude Code setup
+- Introduce docx
+- *(hosts)* Removed private split DNS routing from base hosts
+- Update
+- Update
+- Update
+- Fix
+- Update
+- Update
+- Update
+- *(homes)* Removed archivemount settings from base module
+- Add opentypeless
+- Cleanup
+- *(apps)* Updated packaged desktop applications and hash updater
+- Update
+- Update
+- Update
+- Update
+- Cleanup
+- Add graft
+- Add graft
+- Add graft
+- Add 9router
 
 ## [1.2.0] - 2025-02-27
 
 ### 🚀 Features
 
-- _(gitconfigf)_ Auto update refs in rebase
+- *(gitconfigf)* Auto update refs in rebase
 
 ### 🐛 Bug Fixes
 
-- _(git)_ Bump explicitly fail when dirty
-- _(kanata)_ Remove shift map
-- _(nix)_ Use localias
-- _(tmux)_ Disable mouse
+- *(git)* Bump explicitly fail when dirty
+- *(kanata)* Remove shift map
+- *(nix)* Use localias
+- *(tmux)* Disable mouse
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -79,46 +409,47 @@ All notable changes to this project will be documented in this file.
 - Bump version
 - Use git-cliff
 - Bump version
+- Bump version
 
 ## [1.1.0] - 2025-02-14
 
 ### 🚀 Features
 
-- _(util)_ Add utility rofi script
-- _(k8s)_ Add proxmox sample
+- *(util)* Add utility rofi script
+- *(k8s)* Add proxmox sample
 
 ### 🐛 Bug Fixes
 
-- _(zsh)_ Add neovide
-- _(nix)_ Enable iio
-- _(direnv)_ Add alias hack
-- _(gui)_ Add sleep cmd
-- _(nh)_ Broken beeper use x11 mode
-- _(hm)_ Alias hack
-- _(git)_ Keep gitignore for windows usage
-- _(nh)_ Disable nh service
-- _(kanata)_ Setup for wsl setup
+- *(zsh)* Add neovide
+- *(nix)* Enable iio
+- *(direnv)* Add alias hack
+- *(gui)* Add sleep cmd
+- *(nh)* Broken beeper use x11 mode
+- *(hm)* Alias hack
+- *(git)* Keep gitignore for windows usage
+- *(nh)* Disable nh service
+- *(kanata)* Setup for wsl setup
 - Lazyvim use fzf
 - Missed sudo rule
-- _(gui)_ Support hyprshade
-- _(git)_ Install pre-commit hook via envrc
-- _(gui)_ Allow overwrap
-- _(kanata)_ Add caps keymap
-- _(kanata)_ Experiment space -> alt mapping
-- _(yazi)_ Allow kj to warp
-- _(yaxi)_ Update new plugin
-- _(git)_ Verbump support
+- *(gui)* Support hyprshade
+- *(git)* Install pre-commit hook via envrc
+- *(gui)* Allow overwrap
+- *(kanata)* Add caps keymap
+- *(kanata)* Experiment space -> alt mapping
+- *(yazi)* Allow kj to warp
+- *(yaxi)* Update new plugin
+- *(git)* Verbump support
 
 ### ⚙️ Miscellaneous Tasks
 
-- _(nh)_ Update
+- *(nh)* Update
 - Update flake
 - Flake update
 - Add kanata
 - Update
 - Add pre-commit hook
-- _(nix)_ Update
-- _(nix)_ Update
+- *(nix)* Update
+- *(nix)* Update
 - Update
 - Update
 - Update flake
@@ -131,190 +462,36 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Tmux nested session
-- _(lf)_ Add lfrc
-- _(tmux)_ Session switcher
-- _(backup)_ Backup script
-- _(nvim)_ Autochdir for telescope relative
-- _(neovim)_ Use Neogit
-- _(neovim)_ Add yanky
-- _(k9s)_ Add shortcuts
-- _(nix)_ Use flake for hm
-
-### 🐛 Bug Fixes
-
-- _(k8s)_ Update version
-- Remove bin/e
-- _(nix)_ Fix path
-- _(nix)_ Add default direnv
-- Use nix-installer
-- Use resh
-- Add zt cmd
-- Nnn pager
-- _(zsh)_ Add zz compl
-- Disable leap
-- _(git)_ Remove git abort
-- Add scr alias
-- Wezterm
-- _(wezterm)_ Mkdir config dir
-- Colorscheme
-- _(nnn)_ Use nnn
-- _(nvim)_ Disable flash
-- _(tig)_ Add diff shortcut
-- _(nnn)_ Use plugins
-- Remove nix-env --install
-- Fzf completion
-- _(nix)_ Installation
-- _(wsl)_ Add config
-- _(wsl)_ Add swap=0
-- Ff better line handling
-- _(git)_ Fix search alias
-- _(zsh)_ Expand aliases
-- _(zsh)_ Use whence instead of which
-- _(topgrade)_ Add zinit updater
-- _(git)_ Add rerere
-- _(git)_ Use explicit option
-- _(tmux)_ Splitw uses -h flag now
-- _(terraform)_ Update
-- _(git)_ Adjust config
-- _(nix)_ Use flake installer
-- _(git)_ Makefile
-- _(nix)_ Use yazi
-- Add mpv conf
-- _(nix)_ Use ctpv
-- _(nix)_ Handle tmux from home-manager
-- Remove tmux.conf
-- _(zsh)_ Escape fix
-- _(tmux)_ Mark sessions
-- Home manager switch
-- _(git)_ Nuke
-- Suport waylant
-- _(nix)_ Typo
-- Use atuin
-- Sshconfig
-- _(zsh)_ Adjust path of clip
-- Mpv conf
-- _(wezterm)_ Add mouse binding
-- Add hyprland config
-- _(zsh)_ Use mcfly for now
-- _(hyprland)_ Master switch
-- _(nix)_ Enable unfree apps
-- _(tmux)_ Bind C-k for popup
-- _(home-manager)_ Use topgrade
-- _(hyprland)_ Add waybar
-- _(zsh)_ Use atuin
-- _(hyprland)_ Add media keys
-- _(tmux)_ Bind g
-- _(yazi)_ Use yazi plugins
-- _(home-manager)_ Configure git
-- Use git cliff
-- _(nix)_ Remove mime type
-- Cleanup
-- _(zsh)_ Scptar
-- _(nix)_ Manage more conf files in hm
-- _(hyprland)_ Manage config via homemanager
-- Adjust for nixos
-- Add waybar into hm
-- _(yazi)_ Handle custom plugin in hm
-- Add beeper
-- _(waybar)_ Power menu
-- _(nix)_ IME support
-- _(nix)_ Integrate with nix-index-database
-- _(hypr)_ Adjust icons
-- _(nix)_ Symlink fonts for flatpak apps
-- _(hypr)_ Adjust layout
-- _(nix)_ Powerbutton
-- _(hyprland)_ Fix low contrast theme
-- _(nix)_ Use nixos-hardware
-- _(nixos)_ Enable flake
-- _(home-manager)_ Split host based config
-- _(nix)_ Add pi
-- _(gui)_ Waybar toggling
-- _(hm)_ Use symlink
-- _(x)_ Adjust IME config
-- _(x)_ Use zen-browser via flake
-- _(home)_ Add nh
-- _(hm)_ Split dev dependency
-- _(nix)_ Support hibernation
-- _(hm)_ Add gui tools
-- _(nix)_ Use flake
-- _(hyprland)_ Add screenshot
-- _(tmux)_ Use sensible plugin
-- _(nixos)_ Split gui out of base
-- _(hm)_ Add carapace
-- _(nix)_ Cleanup
-- _(nix)_ Use realpath for avoiding symlinks
-- _(nix)_ Update hw
-- _(nvim)_ Update
-- _(gui)_ Use cursor for now
-- _(hm)_ Update flake
-- _(hm)_ Add onefetch
-- _(vim)_ Update
-- _(zsh)_ Completion problem
-- _(nix)_ Refactor
-- _(hyprland)_ Add hyprswitch
-- _(fzf)_ Add zsh binding
-- _(nix)_ Cleanup
-- _(mpv)_ Put config in nix
-- _(gui)_ Use swaync
-- _(hm)_ Add info
-- Update info.sh
-- Update aliases
-- _(nix)_ Restruct
-- Update aliases
-- _(nix)_ Use db
-- _(nix)_ Mime
-- _(hm)_ Integrate atuin
-- _(nix)_ Install feh
-- _(nix)_ Update flake
-- _(tmux)_ Use mouse input
-- _(nix)_ Update flake
-- _(hypr)_ Adjust sensitivity
-- _(hm)_ Theming up
-- _(tmux)_ Adjust color
-- _(hm)_ Simplify Makefile
-- _(nixos)_ Add terminal login session
-- _(hm)_ Add PN0093
-
-### 💼 Other
-
-- Use git-absorb
-- Use loginExtra
-- Manage nixos config here
-
-### ⚙️ Miscellaneous Tasks
-
-- Remove old aliases
-- Use mcfly
-- Use fzf for interactive grep
-- Update lazy.nvim
-- Update nvim
-
-## [1.0] - 2023-10-24
-
-### 🚀 Features
-
 - Add alias for git flow
 - Add rebasex alias
 - Use tmux plugins
-- _(zsh)_ Use fasd
+- *(zsh)* Use fasd
 - Add rakuten search shortcut
 - Allow env to set editor
 - Use smug
-- _(direnv)_ Context sensitive history
-- _(direnv)_ Custom script support
+- *(direnv)* Context sensitive history
+- *(direnv)* Custom script support
 - Use zdhama-continuum
 - Add lunarvim config
-- _(git)_ Add vimdiff rules
+- *(git)* Add vimdiff rules
 - Add awesome task
 - Use mcfly
-- _(k8s)_ Add base scripts and manifests
-- _(nvim)_ Use astronvim
-- _(devbox)_ Use devbox
-- _(zsh)_ Paste clipb into buffer
+- *(k8s)* Add base scripts and manifests
+- *(nvim)* Use astronvim
+- *(devbox)* Use devbox
+- *(zsh)* Paste clipb into buffer
 - Add zz cmd
-- _(zsh)_ Define zz alias
-- _(zsh)_ Reuse original \_files comp
+- *(zsh)* Define zz alias
+- *(zsh)* Reuse original _files comp
+- Tmux nested session
+- *(lf)* Add lfrc
+- *(tmux)* Session switcher
+- *(backup)* Backup script
+- *(nvim)* Autochdir for telescope relative
+- *(neovim)* Use Neogit
+- *(neovim)* Add yanky
+- *(k9s)* Add shortcuts
+- *(nix)* Use flake for hm
 
 ### 🐛 Bug Fixes
 
@@ -334,39 +511,39 @@ All notable changes to this project will be documented in this file.
 - Remove nvm
 - Bit loading
 - Remove undo alias
-- _(zsh)_ Use zlogin
-- _(zsh)_ Avoid overwrite
-- _(tmux)_ Style
-- _(git)_ Use gitignore explicitly
-- _(tmux)_ Rename within precmd
-- _(zsh)_ Nix gc
+- *(zsh)* Use zlogin
+- *(zsh)* Avoid overwrite
+- *(tmux)* Style
+- *(git)* Use gitignore explicitly
+- *(tmux)* Rename within precmd
+- *(zsh)* Nix gc
 - Escape for feedly.com
-- _(tridactyl)_ Hint for google
-- _(git)_ Add nuke alias
+- *(tridactyl)* Hint for google
+- *(git)* Add nuke alias
 - Google search result binding
 - Use rebasex alias
-- _(tridactyl)_ Reset every config load
+- *(tridactyl)* Reset every config load
 - Remap
 - Cleanup aliases
 - Remove youtube shortcut
 - Adapt google page change
 - Path to exa
 - Adjust for using neovim / vscode
-- _(apt)_ Autoclean
+- *(apt)* Autoclean
 - Add nnn
 - Use ugit
 - Add vscode integration
-- _(git)_ Add message templates
-- _(wsl)_ Use wsl-open if needed
-- _(i3)_ Update config
+- *(git)* Add message templates
+- *(wsl)* Use wsl-open if needed
+- *(i3)* Update config
 - Split makefile tasks
 - Adjust key bindgins
 - Add memory viz tool
-- _(i3/awesome)_ Update config
-- _(zinit)_ Make sure to get right file
+- *(i3/awesome)* Update config
+- *(zinit)* Make sure to get right file
 - Use fuzzy mcfly search
-- _(awesome)_ Add applets
-- _(zinit)_ Pick right watchexec archive
+- *(awesome)* Add applets
+- *(zinit)* Pick right watchexec archive
 - Better google links handling
 - Escape s for feedly
 - Use alt-space for marking
@@ -391,77 +568,209 @@ All notable changes to this project will be documented in this file.
 - Use asdf/direnv plugins
 - Use tmxu-resurrect
 - Add tmux-thumbs
-- _(zsh)_ Use zdharma-continuum for now
+- *(zsh)* Use zdharma-continuum for now
 - Add broot execution cmd
-- _(tmux)_ Add switch-client bindings
+- *(tmux)* Add switch-client bindings
 - Add smug shortcut
-- _(zinit)_ Initialization
+- *(zinit)* Initialization
 - Installer
 - Zsh alias
 - Disable autocrlf
 - Update aliases
 - Circumvent smug crash
 - Cleanup dotbot
-- _(zsh)_ Add nix profile
-- _(fzf)_ Add keybinding
-- _(fzf-tab)_ Add key binding
-- _(nix)_ Use home-manager 20.05
+- *(zsh)* Add nix profile
+- *(fzf)* Add keybinding
+- *(fzf-tab)* Add key binding
+- *(nix)* Use home-manager 20.05
 - Use simple makefile for initialization
 - Add sample tmux script
 - Use custom tmux scripts
 - Update sample.sh
 - Adjust Makefile
 - Attach proj_tmux after creation
-- _(zsh)_ Use atuin
-- _(zsh)_ Remove atuin integration
-- _(nvim)_ Use astronvim for now
-- _(vim)_ Link
-- _(git)_ Enable followTags
-- _(zsh)_ Use lessfilter
-- _(nvim)_ Sync with upstream userconfig
-- _(nvim)_ Sync with upstream userconfig
+- *(zsh)* Use atuin
+- *(zsh)* Remove atuin integration
+- *(nvim)* Use astronvim for now
+- *(vim)* Link
+- *(git)* Enable followTags
+- *(zsh)* Use lessfilter
+- *(nvim)* Sync with upstream userconfig
+- *(nvim)* Sync with upstream userconfig
 - +x lessfilter
-- _(nvim)_ Awesome bindings lua
-- _(awesome)_ Switch master
-- _(awesome)_ S+Return
-- _(zsh)_ Tm autocomplete
-- _(vim)_ Use fugitive
-- _(vim)_ Use leap
-- _(vim)_ Use tabnine in x86
-- _(awesome)_ Use quakedd
-- _(nix)_ Homemanager verup
-- _(nix)_ Use devenv
-- _(alias)_ Maintain
-- _(nvim)_ Use stable channel
-- _(tmux)_ Configure extracto
-- _(zsh)_ Cleanup aliases
-- _(neovim)_ Use Codeium
-- _(tmux)_ Use extrakto
-- _(zsh)_ Performance tweak
+- *(nvim)* Awesome bindings lua
+- *(awesome)* Switch master
+- *(awesome)* S+Return
+- *(zsh)* Tm autocomplete
+- *(vim)* Use fugitive
+- *(vim)* Use leap
+- *(vim)* Use tabnine in x86
+- *(awesome)* Use quakedd
+- *(nix)* Homemanager verup
+- *(nix)* Use devenv
+- *(alias)* Maintain
+- *(nvim)* Use stable channel
+- *(tmux)* Configure extracto
+- *(zsh)* Cleanup aliases
+- *(neovim)* Use Codeium
+- *(tmux)* Use extrakto
+- *(zsh)* Performance tweak
 - Use zoxide
-- _(vim)_ Use appimage neovim
-- _(home-manager)_ Templating home.nix
-- _(zshrc)_ Silence setup
-- _(direnv)_ Remove debvox integn
-- _(zsh)_ Add recursive completion
-- _(zsh)_ Hightlight plugin before compinit
+- *(vim)* Use appimage neovim
+- *(home-manager)* Templating home.nix
+- *(zshrc)* Silence setup
+- *(direnv)* Remove debvox integn
+- *(zsh)* Add recursive completion
+- *(zsh)* Hightlight plugin before compinit
 - Add tig config
-- _(zsh)_ Improve file completion
-- _(zsh)_ Bind fzf key
-- _(zsh)_ Zz completion
-- _(zsh)_ Set batman
-- _(nix)_ Generation cleanup
-- _(nix)_ Use new installer
-- _(nix)_ Use nix topgrade
-- _(tmux)_ Disable mouse
-- _(zsh)_ Remove recursive file complete
-- _(zsh)_ Use deer
-- _(nix)_ Refactor
-- _(tmux)_ Default layout
-- _(nix)_ Load home-manager sessionvars
-- _(git)_ Use renormalize strategy
-- _(nix)_ Fix nix installation
-- _(vim)_ Disable autoformat
+- *(zsh)* Improve file completion
+- *(zsh)* Bind fzf key
+- *(zsh)* Zz completion
+- *(zsh)* Set batman
+- *(nix)* Generation cleanup
+- *(nix)* Use new installer
+- *(nix)* Use nix topgrade
+- *(tmux)* Disable mouse
+- *(zsh)* Remove recursive file complete
+- *(zsh)* Use deer
+- *(nix)* Refactor
+- *(tmux)* Default layout
+- *(nix)* Load home-manager sessionvars
+- *(git)* Use renormalize strategy
+- *(nix)* Fix nix installation
+- *(vim)* Disable autoformat
+- *(k8s)* Update version
+- Remove bin/e
+- *(nix)* Fix path
+- *(nix)* Add default direnv
+- Use nix-installer
+- Use resh
+- Add zt cmd
+- Nnn pager
+- *(zsh)* Add zz compl
+- Disable leap
+- *(git)* Remove git abort
+- Add scr alias
+- Wezterm
+- *(wezterm)* Mkdir config dir
+- Colorscheme
+- *(nnn)* Use nnn
+- *(nvim)* Disable flash
+- *(tig)* Add diff shortcut
+- *(nnn)* Use plugins
+- Remove nix-env --install
+- Fzf completion
+- *(nix)* Installation
+- *(wsl)* Add config
+- *(wsl)* Add swap=0
+- Ff better line handling
+- *(git)* Fix search alias
+- *(zsh)* Expand aliases
+- *(zsh)* Use whence instead of which
+- *(topgrade)* Add zinit updater
+- *(git)* Add rerere
+- *(git)* Use explicit option
+- *(tmux)* Splitw uses -h flag now
+- *(terraform)* Update
+- *(git)* Adjust config
+- *(nix)* Use flake installer
+- *(git)* Makefile
+- *(nix)* Use yazi
+- Add mpv conf
+- *(nix)* Use ctpv
+- *(nix)* Handle tmux from home-manager
+- Remove tmux.conf
+- *(zsh)* Escape fix
+- *(tmux)* Mark sessions
+- Home manager switch
+- *(git)* Nuke
+- Suport waylant
+- *(nix)* Typo
+- Use atuin
+- Sshconfig
+- *(zsh)* Adjust path of clip
+- Mpv conf
+- *(wezterm)* Add mouse binding
+- Add hyprland config
+- *(zsh)* Use mcfly for now
+- *(hyprland)* Master switch
+- *(nix)* Enable unfree apps
+- *(tmux)* Bind C-k for popup
+- *(home-manager)* Use topgrade
+- *(hyprland)* Add waybar
+- *(zsh)* Use atuin
+- *(hyprland)* Add media keys
+- *(tmux)* Bind g
+- *(yazi)* Use yazi plugins
+- *(home-manager)* Configure git
+- Use git cliff
+- *(nix)* Remove mime type
+- Cleanup
+- *(zsh)* Scptar
+- *(nix)* Manage more conf files in hm
+- *(hyprland)* Manage config via homemanager
+- Adjust for nixos
+- Add waybar into hm
+- *(yazi)* Handle custom plugin in hm
+- Add beeper
+- *(waybar)* Power menu
+- *(nix)* IME support
+- *(nix)* Integrate with nix-index-database
+- *(hypr)* Adjust icons
+- *(nix)* Symlink fonts for flatpak apps
+- *(hypr)* Adjust layout
+- *(nix)* Powerbutton
+- *(hyprland)* Fix low contrast theme
+- *(nix)* Use nixos-hardware
+- *(nixos)* Enable flake
+- *(home-manager)* Split host based config
+- *(nix)* Add pi
+- *(gui)* Waybar toggling
+- *(hm)* Use symlink
+- *(x)* Adjust IME config
+- *(x)* Use zen-browser via flake
+- *(home)* Add nh
+- *(hm)* Split dev dependency
+- *(nix)* Support hibernation
+- *(hm)* Add gui tools
+- *(nix)* Use flake
+- *(hyprland)* Add screenshot
+- *(tmux)* Use sensible plugin
+- *(nixos)* Split gui out of base
+- *(hm)* Add carapace
+- *(nix)* Cleanup
+- *(nix)* Use realpath for avoiding symlinks
+- *(nix)* Update hw
+- *(nvim)* Update
+- *(gui)* Use cursor for now
+- *(hm)* Update flake
+- *(hm)* Add onefetch
+- *(vim)* Update
+- *(zsh)* Completion problem
+- *(nix)* Refactor
+- *(hyprland)* Add hyprswitch
+- *(fzf)* Add zsh binding
+- *(nix)* Cleanup
+- *(mpv)* Put config in nix
+- *(gui)* Use swaync
+- *(hm)* Add info
+- Update info.sh
+- Update aliases
+- *(nix)* Restruct
+- Update aliases
+- *(nix)* Use db
+- *(nix)* Mime
+- *(hm)* Integrate atuin
+- *(nix)* Install feh
+- *(nix)* Update flake
+- *(tmux)* Use mouse input
+- *(nix)* Update flake
+- *(hypr)* Adjust sensitivity
+- *(hm)* Theming up
+- *(tmux)* Adjust color
+- *(hm)* Simplify Makefile
+- *(nixos)* Add terminal login session
+- *(hm)* Add PN0093
 
 ### 💼 Other
 
@@ -488,10 +797,13 @@ All notable changes to this project will be documented in this file.
 - Adjust hint mode for google
 - Use bit
 - Put installer
+- Use git-absorb
+- Use loginExtra
+- Manage nixos config here
 
 ### 🚜 Refactor
 
-- _(zsh)_ Cleanup
+- *(zsh)* Cleanup
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -502,6 +814,11 @@ All notable changes to this project will be documented in this file.
 - Cleanup
 - Refactor
 - Update home-manager
-- _(nvim)_ Use codeium.nvim
+- *(nvim)* Use codeium.nvim
+- Remove old aliases
+- Use mcfly
+- Use fzf for interactive grep
+- Update lazy.nvim
+- Update nvim
 
 <!-- generated by git-cliff -->
