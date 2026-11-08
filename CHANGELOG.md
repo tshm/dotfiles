@@ -37,7 +37,6 @@ All notable changes to this project will be documented in this file.
 - - (x360) Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend
 - _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`
 - _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating
-  ||||||| Stash base
 - _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`.
 - _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating.
 - _(x360)_ Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend.
@@ -59,8 +58,6 @@ All notable changes to this project will be documented in this file.
 - - (x360) Blacklist the tiny ACPI power-button driver, which bypassed logind and triggered immediate shutdown when waking from suspend
 - _(wayland)_ Launch ordered startup applications as Mango children through IPC, keeping Beeper alive after the startup script exits; retain shell waiting for Niri and other background applications using Nix FHS wrappers with `--die-with-parent`
 - _(home-manager)_ Remove the unused AGS package, which is no longer available in nixpkgs and prevented GUI home configurations from evaluating
-
-> > > > > > > Stashed changes
 
 ## [1.2.0] - 2025-02-27
 
