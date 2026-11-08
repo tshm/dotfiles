@@ -211,6 +211,50 @@ nix run --inputs-from . home-manager -- switch --flake ".#tshm@$HOST"
 
 kernel 直接起動のため ISO の UEFI/BIOS ブートローダー経由は未確認です。USB 書き込み、実ディスクへの導入、各 PC の hardware UUID、再起動後ログイン、Home Manager の switch も未実施です。対象 PC ごとに確認し、失敗した場合は disk を再消去せず原因を切り分けます。
 
+## Btrfs 移行用 USB（手動開始）
+
+通常の新規インストールとは別に、`make migration-iso` で `result-migration/iso/*.iso` を作れます。USB 起動だけではバックアップ・フォーマットを開始しません。設定なしの ISO は対象ディスクを持たず、安全に停止します。
+
+専用 ISO は `nixosConfigurations.migration-installer.extendModules` に `services.btrfsMigration.config` を渡して作ります。実機の識別情報・共有名は公開リポジトリ外で管理し、SMB パスワードと restic パスワードは ISO・Nix store・設定 JSON に保存しません。private 構成を含むイメージや OS closure は公開キャッシュに upload しません。
+
+設定に必要な値:
+
+| フィールド | 内容 |
+| --- | --- |
+| `disk`, `serial`, `disk_size` | `/dev/disk/by-id/` のディスクパス、シリアル、バイト単位の容量 |
+| `source_uuid`, `source_size` | 既存 ext4 root の UUID とパーティション容量 |
+| `server`, `share`, `username`, `domain`, `repository` | SMB サーバ IP、UNC 共有名、アカウント、ドメイン、専用保存ディレクトリ名 |
+| `system` | private 設定も含む、移行後の起動構成を事前ビルドした NixOS closure |
+| `hardware_file`, `hardware_sha256`, `hardware_replacement` | root 相対の hardware ファイルパス、元ファイルの SHA-256、置換内容を持つ store ファイル |
+
+`system` と `hardware_replacement` は ISO に同梱されます。JSON から読み込んだ store パスには Nix の参照 context がないため、専用ビルド式で `builtins.storePath` を使って復元します（`--impure` が必要）。移行後の root は `/dev/disk/by-label/nixos-root`、Btrfs、`compress=zstd:3` とし、GRUB の対象も実機の安定したディスクパスに合わせます。元の稼働 OS にこの設定を activation してはいけません。
+
+### 後日、移行を開始する場合
+
+**以下のコマンドは実データのバックアップを開始します。USB の起動確認だけが目的なら実行しません。**
+
+1. 有線 LAN を接続し、USB を Legacy BIOS モードで起動します。
+2. `sudo migrate-btrfs` を実行し、SMB パスワードとバックアップ用パスワードを入力します。新しいバックアップ用パスワードは再入力し、別媒体にも安全に記録します。
+3. SSD のオフライン検査・読み取り専用マウント・暗号化バックアップ・全データ検査・hardware ファイルの試験復元を待ちます。バックアップは共有内の専用ディレクトリの `repo/`、再開情報は `state.json` に保存されます。
+4. 表示された対象を照合し、消去してよい場合だけ `ERASE <シリアル>` を入力します。既存パーティションを Btrfs に作り直し、検証付き復元、hardware ファイル更新、事前ビルド済み OS と GRUB の導入を行います。
+5. `COMPLETE` を確認後、USB を外して手動で再起動します。バックアップは起動・ログイン・サービス・データを確認するまで保持します。
+
+MBR と root 1 パーティションの構成だけが対象です。USB/リムーバブルディスク、マウント中の SSD、識別情報の不一致、他ディスクとの root ラベル重複は拒否します。パーティションテーブルは作り直しません。SMB は暗号化接続（`seal`）、バックアップは restic の暗号化形式なので、SMB 側で Linux の所有者・権限を直接表現できる必要はありません。サーバ空き容量は SSD 使用量の 110% 以上を要求し、書き込み・読み戻しも消去前に確認します。
+
+フォーマット後に中断した場合は、原因を確認してから `sudo migrate-btrfs --resume` を使います。保存したバックアップと Btrfs UUID が一致する場合だけ、`RESTORE <シリアル>` の確認後に復元を再実行し、再フォーマットはしません。完了済みの移行は再開できません。ロック・検査エラーを無視したり、`state.json` を手動で書き換えたりしないでください。
+
+### 仮想ディスクでの検証
+
+ホストの実ディスクを渡さず、独立した Samba サーバと空の仮想ディスクで検証します。
+
+```sh
+nix build --impure --expr 'let f = builtins.getFlake ("path:" + toString ./.); in import ./scripts/test-migrate-btrfs.nix { pkgs = f.nixosConfigurations.installer.pkgs; }' --no-link -L
+```
+
+仮想ディスクでは、暗号化 SMB バックアップ・全データ検査・Btrfs 復元・OS/GRUB 導入・復元ディスクからの BIOS 起動まで確認しました。ファイル内容、所有者・権限、ハードリンク、シンボリックリンク、拡張属性、実際の zstd 圧縮も検証しています。中断後の状態を再現した `--resume` では、データの修復と、ファイルシステム UUID・追加ファイルの保持（再フォーマットしないこと）を確認しました。
+
+専用 ISO を USB に書き込み、イメージ全体の読み戻し SHA-256 が一致することを確認しました。書き込み済み USB を読み取り専用で QEMU の BIOS から起動し、自動バックアップがなくログイン待機することと、対象 SSD 不在時の停止も確認しました。実機 BIOS での起動確認や本番バックアップとは別の検証です。
+
 ## 公式資料
 
 - [NixOS Wiki — Creating a NixOS live CD](https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD)

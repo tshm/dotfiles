@@ -50,7 +50,8 @@ The `Makefile` provides other useful targets:
 
 ## Home backup (`tp`)
 
-`hosts/t440p/default.nix` backs up all of `/home/tshm` to
+`hosts/t440p/default.nix` backs up `/home/tshm` and the root-only USB
+key/header directory `/var/lib/usb-cold` to
 `sftp:dmz:/tank/bkup` daily at 03:00, with up to 30 minutes of jitter
 and catch-up after downtime. No snapshots are automatically deleted.
 The root service uses `tshm`'s existing SSH configuration and keys.
@@ -66,6 +67,51 @@ sudo journalctl -u restic-backups-home.service
 sudo restic-home snapshots
 sudo restic-home check
 sudo restic-home restore latest --path /home/tshm --target /tmp/home-restore
+```
+
+## Cold USB storage (`tp`)
+
+The USB partition with LUKS UUID `ff5c12c7-d770-4f2d-8a39-0799bd4d0499`
+unlocks with `/var/lib/usb-cold/key` and mounts ext4 at `/mnt/cold` on access.
+The automount does not require the USB at boot. Its underlying mountpoint
+has mode `0000` to prevent user writes to the SSD when unmounted.
+
+Cold data under `/mnt/cold/tshm` retains its original directory paths through
+symlinks:
+
+- Hermes snapshot `20260716-215739-pre-update` and Multica backup
+  `omp-rollback-dV07cK`: restic snapshot `7b4406d7`, including the LUKS key/header.
+- OpenCode's legacy JSON `storage` directory at `opencode-legacy-storage`,
+  and Hermes checkpoint `legacy-20260508-192942` under `hermes-checkpoints`:
+  restic snapshot `01aebb61`, retaining the original SSD paths.
+- `/home/tshm/work/emplus` and `/home/tshm/work/platform` now point to
+  `work/emplus` and `work/platform` on USB. Snapshot `0c598ebe` preserves both
+  pre-migration trees, including uncommitted and untracked files. After editing
+  these projects, explicitly back up their USB paths; the home backup does not
+  follow the symlinks.
+
+Keep active work, databases, and application runtimes on SSD. In particular,
+OpenCode's current SQLite database remains local. Ordinary home backups do not
+follow archive symlinks; these cold archives must remain immutable or receive
+an explicit new backup. The regular home job continues backing up the key/header.
+Keep the restic repository password separately; losing both the local key
+and access to its backup makes the USB unreadable.
+
+Unused SQL Server, Azurite, Memcached, and Alpine image tags are saved in
+`container-images/registry-runtimes-20261106.tar`, with every layer digest
+verified and a second copy in restic snapshot `366e068d`. No container volumes
+were removed. Restore the image tags when needed:
+```bash
+podman load -i /mnt/cold/tshm/container-images/registry-runtimes-20261106.tar
+```
+
+Before unplugging:
+```bash
+sudo systemctl stop mnt-cold.automount mnt-cold.mount systemd-cryptsetup@cold.service
+```
+After reconnecting, re-enable on-access mounting:
+```bash
+sudo systemctl start mnt-cold.automount
 ```
 
 

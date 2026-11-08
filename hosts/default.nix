@@ -19,6 +19,11 @@ in {
     ];
   };
 
+  "migration-installer" = nixpkgs.lib.nixosSystem {
+    inherit system;
+    modules = [ ./migration-installer.nix ];
+  };
+
   "tp" = nixpkgs.lib.nixosSystem {
     inherit system;
     inherit specialArgs;
