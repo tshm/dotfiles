@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Features
+
+- *(x360)* Enable TwinDesk with LAN pairing and Wayland input support.
+
 ## [1.3.0] - 2026-11-08
 
 ### 🚀 Features
