@@ -13,6 +13,8 @@
     inherit user;
     enableWifiDirect = false;
   };
+  # Keep local pairing traffic on the LAN while an Exit Node is active.
+  services.tailscale.extraSetFlags = [ "--exit-node-allow-lan-access=true" ];
   # Keep TwinDesk's input-group access after hardware.uinput's default rule.
   services.udev.extraRules = lib.mkAfter ''
     KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
