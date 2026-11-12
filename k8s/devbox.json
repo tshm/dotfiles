@@ -5,7 +5,7 @@
     "kustomize@latest",
     "k9s@0.51.0",
     "cloudflared@latest",
-    "kubernetes-helm@4.2.2",
+    "kubernetes-helm@4.3.1",
     "github:NixOS/nixpkgs/3d46470bb3030020f7e1361f33514854f5bfa86d#oci-cli",
     "fluxcd@2.8.8"
   ],
