@@ -124,6 +124,11 @@ The main dependencies are:
 - [home-manager](https://github.com/nix-community/home-manager)
 - [catppuccin](https://github.com/catppuccin/nix)
 
+The shared Home Manager module patches SpeechRecognition's OpenAI tests to use
+the `httpx` client intercepted by `respx`; the SDK now defaults to `httpx2`.
+The upstream test selection is unchanged. Remove the override once upstream fixes the tests.
+The shared module also supplies `viddy`'s missing SQLite build dependency.
+
 Development dependencies are managed by [pre-commit](https://pre-commit.com/):
 
 - [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks)
