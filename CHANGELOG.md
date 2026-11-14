@@ -4,11 +4,401 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### Changed
-- *(speakoflow)* Manage the Japanese editing cleanup prompt from a tracked text file, applying it before desktop startup with a 30-second cleanup timeout.
-- *(speakoflow)* Bump SpeakoFlow from 2.0.0 to 2.0.1 with the matching AppImage hash
-- *(minf)* Restrict fingerprint authentication to local login and restore passwordless sudo; disable fingerprint prompts for desktop authorization and screen lockers.
-- *(bluetooth)* Reconnect paired, trusted keyboards after desktop suspend/resume without restarting Bluetooth or disturbing connected devices.
+### Features
+
+- *(x360)* Enable TwinDesk with LAN pairing and Wayland input support.
+
+### Bug Fixes
+
+- *(yazi)* Enable Word, Excel, and PowerPoint converter dependencies and pin previews to the Nix-packaged MarkItDown.
+
+## [1.3.0] - 2026-11-08
+
+### 🚀 Features
+
+- Add automated app updater workflow and update Makefile for app hash management
+- *(yazi)* Handle plugins in nix
+- *(nix)* Add gemini-cli
+- Use node2nix
+- Add mcp definition
+- Trying to get crosscompilation for arm arch
+- Use yq
+- Add niri
+- Add rclone/restic
+- Add mango
+- *(vim)* Add opencode
+- *(nvim)* Add wsl clipboard support via win32yank.exe
+- Refactor makefile
+- Add environment variable configuration for hostnames
+- Update n8n hostname to n8n.tshm.dpdns.org
+- Update Authentik hostname to authentik.tshm.dpdns.org
+- Skill installer
+- *(yazi)* Add run.zsh script and update keymap configuration
+- *(yazi)* Added spot keybinding
+- *(makefile)* Streamline dev target and add new pi setup commands
+- Update agent Makefile for Oh My Pi integration and add notification extension
+- *(nixos)* Added bun and removed global LD_LIBRARY_PATH
+- Add task-factory installation to Makefile
+- *(warp)* Added Cloudflare WARP connection management scripts
+- Vocalinux
+- *(hosts)* Added Tailscale subnet routing and conditional useRoutingFeatures
+- *(yazi)* Added smart tab behavior
+- *(gptcomplete)* Added configurable LLM shell completions
+- *(gptcomplete)* Added provider-aware fast model selection
+- *(homes)* Enabled hunk in home profile
+- *(yazi)* Add archive-edit plugin
+- *(x)* Added Hibernate option to system action menu
+- *(homes)* Added document previews to Yazi
+- Remove zinit
+- *(gui)* Replaced Vocalinux with OpenTypeless
+- *(homes)* Added Pandoc EPUB previews
+- *(homes-spi)* Added hermes backend service
+- Add speakoflow
+- *(tailscale)* Added Vicinae controls for Tailscale
+- *(hosts)* Configured tunnel-only Cloudflare WARP
+- *(hosts)* Enabled restricted Magic SysRq controls on servers
+- Use mangowm
+- Add bluetooth audio reconnect script
+- *(nix)* Added shared x86_64 installer ISO workflow
+- *(nixos)* Configure overridable weekly SSD TRIM
+
+### 🐛 Bug Fixes
+
+- *(nix)* Exclude nix in topgrade
+- *(nvim)* Adjust extras
+- *(gui)* Remove wofi
+- *(git)* Adjust pwd
+- *(gui)* Run beeper without option
+- *(devbox)* Fix alias to support quotes
+- *(gui)* Use wezterm
+- *(gui)* Use wezterm
+- *(git)* Sensible default
+- *(git)* Bump
+- *(catppucin)* Remove cursor option from base
+- *(gui)* Integrate catppuccin into gui.nix
+- *(hm)* Support arm
+- *(hm)* Add obsidian
+- *(podman)* Socket path
+- *(k8s)* Use cloudflared
+- *(k8s)* Flux
+- *(k8s)* Update manifests
+- Use beeper appimage
+- *(flake)* Use appimage for beeper/zen
+- Change base branch from main to master in app-update workflow
+- *(k8s)* Use litestream for n8n
+- *(k8s)* N8n secret should persist
+- *(vim)* Disable smooth scrolling
+- *(zsh)* Use tmux when login
+- *(hyprland)* Switch app
+- *(hyprland)* Make mpv not to change content-type
+- *(k8s)* Use longhorn
+- *(yazi)* Disable yazi-git plugin
+- *(vim)* Rmeove markview
+- *(k9s)* Keybind
+- *(zsh)* Support symlinks in scptar
+- Add clean command
+- Use lima and scrcpy
+- *(waybar)* Add module
+- Use jujutsu
+- *(waybar)* Show blightness ctrl
+- *(git)* Add fpull alias
+- *(nix)* Add upgrade target
+- *(yazi)* Use projects plugin
+- *(nh)* Update envrc
+- *(gh)* Use ubuntu images
+- *(kanata)* Download winIOv2 ver
+- Enable gemini-cli
+- Enable opencode
+- *(node2nix)* Lots of errors.  avoid using it for now
+- Avoid building opencode
+- Remove agent cli tools
+- Install uv
+- *(raindrio)* Reload article array
+- Use kitty for now
+- Update
+- Use vicinea
+- *(spi)* Syntax error
+- Remove commitzen for hash error
+- *(hyprland)* Disable vicinae for now
+- *(spi)* Image buildable
+- Use age
+- Adjust server config
+- Add tp and secret
+- *(spi)* Fix username
+- Add atuin config
+- Aling spi builds
+- *(spi)* Add rpi tools
+- *(spi)* Define cron
+- Cronjobs
+- *(nvim)* Use tmux clipboard
+- Use hyprland-plugin
+- Use hyprland-plugins
+- Disable P binding
+- Use noctalia
+- Disable noctaliza
+- Adjust window overwrap
+- Use nerd-fonts
+- Enable vicinae
+- Use litestream:0.3.13 as 0.5.x breaks
+- *(k8s)* Fix kustomization path
+- *(x)* Use gamma step
+- Update apps
+- *(k8s)* Update
+- Zsh update caching
+- Spc to mod
+- Add ast-grep
+- *(nvim)* Prioritize wsl clipboard over tmux
+- Hostname
+- *(tmux)* Failed to startup due to permission
+- Disable redundant mcp
+- *(yazi)* Adapt API change
+- *(yazi)* Adapt API change
+- Script error
+- Agent installer
+- Warnings
+- Backup only changes
+- *(kanata)* Prefer Windows release zip and copy extracted files into kanata/
+- *(kanata)* Select Windows x86/x64 zip and remove ARM binaries after extraction
+- Enable iptables
+- Remove trailing whitespace
+- Track .app.env for GitOps hostname configuration
+- Add .app.env file for hostname configuration
+- Update Traefik HelmRelease for chart v39 schema compatibility
+- Add namespace to deletefailedpods CronJob
+- Add namespace manifest for Authentik
+- Enhance dotfile security guidelines and update .gitignore patterns
+- Add existingSecret.secretName structure for Authentik chart
+- Add secret_key to Authentik configuration
+- Enable ServiceAccount creation for Traefik
+- Remove serviceAccount config to use chart defaults
+- Use existingSecret for Authentik credentials
+- *(x360)* Improve audio jack detection and headphone switching
+- *(sshd)* Enable X11 forwarding
+- Add NPM_CONFIG_PREFIX
+- Dns for tailscale
+- Update greeter command to use niri-session
+- Multi-monitor span bind
+- Enable wol
+- Update Tailscale DNS routing to include DHCP for specific domains
+- Auto devbox
+- Topgrade
+- Add devbox integration and source local environment if exists
+- Update platform system references in configuration files
+- Adjust path
+- Adjust t440p config
+- Enable beep in wezterm
+- Wezterm bell
+- Remove context7 mcp
+- Nodejs is removed
+- *(homes)* Fixed shell variable quoting
+- Update
+- *(hosts/t440p)* Replaced deprecated extraUpFlags with extraSetFlags for tailscale
+- Remove old deps
+- Use wezterm
+- *(topgrade)* Disable system update
+- Add pipx
+- Add multica and hermes
+- Add usr/local/bin
+- Remove omp alias
+- *(wezterm)* Support c-v for typeless pasting
+- *(agent)* Add understand
+- *(tmux)* Add passthough
+- *(hosts)* Launched Multica from runtime PATH
+- *(wsl)* Use winapps from wsl
+- *(agent)* Install omp as binary
+- Update app hash mechanism
+- Wheel on tmux
+- Add aup func
+- *(zsh)* Added dox AGENTS merge step
+- Add ponytail
+- Wezterm
+- User hunk instead of delta
+- *(homes)* Refreshed desktop app pins and Hyprland inputs
+- Include private inclusion
+- Put agents into topgrade
+- Ci
+- Topgrade
+- Remove multica service def
+- Memory management
+- Wezterm keylayout
+- *(backup)* Src lists folders
+- Make tp a mutica runtime
+- *(yazi)* Archive keymap
+- *(niri)* Set speakoflow shortcut
+- *(niri)* Speakoflow binding
+- Notification
+- *(spi)* Route Multica traffic over Tailscale
+- Adjust mtu for github access
+- *(mango)* Allowed Beeper activation requests to focus on tag 2
+- *(mango)* Leave maximized mode before resizing
+- *(topgrade)* Remove redundant custom upgrade commands
+
+### 💼 Other
+
+- Update (#36)
+- Update (#48)
+- Update (#54)
+- Update (#60)
+- Update (#62)
+- Update (#66)
+- Update (#76)
+- Update (#128)
+- Fix completion function
+- Update (#231)
+- *(agent)* Added herdr install target
+- Include zsh extensions into flake
+- Prefix indicator
+
+### 🚜 Refactor
+
+- Refactored .gitignore and 1 other
+- Refactored gui.nix
+- Refactored niri-startup-order.sh and 1 other
+- Refactored vocalinux.nix
+- Refactored niri.kdl and 1 other
+
+### 📚 Documentation
+
+- Template for {GEMINI,CLAUDE}.md
+- Add readme
+- Add AGENTS.md
+- Add quick start guide for environment variables
+- Document two-phase deployment strategy (manual secrets + GitOps)
+- Add verification steps for task completion in development guidelines
+- *(agent)* Added behavior guidelines
+- *(agent-skills)* Documented markitdown skill and added pi-skills symlink
+- Update
+- *(omniroute)* Added omniroute free combos skill documentation
+
+### ⚙️ Miscellaneous Tasks
+
+- Update
+- *(renovate)* Add nix support
+- Add github actions
+- Use cachix
+- Use auto update flake
+- Worker title
+- *(nix)* Cleanup
+- *(flake)* Update
+- Limit flake build only nix file changes
+- Update flake
+- Cleanup nvim plugins
+- Flake update
+- Update deps
+- Update deps
+- Cleanup
+- Update
+- Update
+- Update
+- Update
+- Update
+- Revert flake as commitzen cannot be built
+- Use yazi
+- Update deps
+- Update zen
+- Update deps
+- Update deps
+- Add N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE to .values.env
+- Update
+- Update
+- Yazi conf update
+- Update deps
+- Update deps
+- Add cliboard
+- Update
+- Update
+- Update
+- Update
+- Use arm image for pi
+- Update
+- Update
+- Update
+- Update
+- Update
+- Create AGENT.md
+- Remove temporary files
+- Update
+- Update
+- Update
+- Cleanup ime
+- Update
+- Update
+- Update
+- Layzvim update
+- Update zen
+- Cleanup
+- Add pub key
+- Adjust spi builder
+- Add t440p
+- Update
+- Update
+- Use niri
+- Format
+- Cleanup
+- Update
+- Update
+- Update
+- Update
+- Enable exit node for tp
+- Update
+- Update
+- Update AGENT.md
+- Add new host
+- Update
+- Update flake inputs and app hashes
+- *(kanata)* Ignore linux binaries in kanata/
+- Update
+- Remove beads dep
+- Update
+- Adjust path
+- Disable home-manager in base configuration
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- *(x)* Replaced startup programs and removed keybindings
+- *(ci)* Cleanup Makefile/scripts
+- Update
+- Add chorus
+- Update
+- *(pre-commit)* Added nix syntax check hook
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Update
+- Add understand-anything
+- *(agent)* Added LiteLLM Claude Code setup
+- Introduce docx
+- *(hosts)* Removed private split DNS routing from base hosts
+- Update
+- Update
+- Update
+- Fix
+- Update
+- Update
+- Update
+- *(homes)* Removed archivemount settings from base module
+- Add opentypeless
+- Cleanup
+- *(apps)* Updated packaged desktop applications and hash updater
+- Update
+- Update
+- Update
+- Update
+- Cleanup
+- Add graft
+- Add graft
+- Add graft
+- Add 9router
+
 ## [1.2.0] - 2025-02-27
 
 ### 🚀 Features
@@ -28,6 +418,7 @@ All notable changes to this project will be documented in this file.
 - Update
 - Bump version
 - Use git-cliff
+- Bump version
 - Bump version
 
 ## [1.1.0] - 2025-02-14
@@ -81,169 +472,6 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Tmux nested session
-- *(lf)* Add lfrc
-- *(tmux)* Session switcher
-- *(backup)* Backup script
-- *(nvim)* Autochdir for telescope relative
-- *(neovim)* Use Neogit
-- *(neovim)* Add yanky
-- *(k9s)* Add shortcuts
-- *(nix)* Use flake for hm
-
-### 🐛 Bug Fixes
-
-- *(k8s)* Update version
-- Remove bin/e
-- *(nix)* Fix path
-- *(nix)* Add default direnv
-- Use nix-installer
-- Use resh
-- Add zt cmd
-- Nnn pager
-- *(zsh)* Add zz compl
-- Disable leap
-- *(git)* Remove git abort
-- Add scr alias
-- Wezterm
-- *(wezterm)* Mkdir config dir
-- Colorscheme
-- *(nnn)* Use nnn
-- *(nvim)* Disable flash
-- *(tig)* Add diff shortcut
-- *(nnn)* Use plugins
-- Remove nix-env --install
-- Fzf completion
-- *(nix)* Installation
-- *(wsl)* Add config
-- *(wsl)* Add swap=0
-- Ff better line handling
-- *(git)* Fix search alias
-- *(zsh)* Expand aliases
-- *(zsh)* Use whence instead of which
-- *(topgrade)* Add zinit updater
-- *(git)* Add rerere
-- *(git)* Use explicit option
-- *(tmux)* Splitw uses -h flag now
-- *(terraform)* Update
-- *(git)* Adjust config
-- *(nix)* Use flake installer
-- *(git)* Makefile
-- *(nix)* Use yazi
-- Add mpv conf
-- *(nix)* Use ctpv
-- *(nix)* Handle tmux from home-manager
-- Remove tmux.conf
-- *(zsh)* Escape fix
-- *(tmux)* Mark sessions
-- Home manager switch
-- *(git)* Nuke
-- Suport waylant
-- *(nix)* Typo
-- Use atuin
-- Sshconfig
-- *(zsh)* Adjust path of clip
-- Mpv conf
-- *(wezterm)* Add mouse binding
-- Add hyprland config
-- *(zsh)* Use mcfly for now
-- *(hyprland)* Master switch
-- *(nix)* Enable unfree apps
-- *(tmux)* Bind C-k for popup
-- *(home-manager)* Use topgrade
-- *(hyprland)* Add waybar
-- *(zsh)* Use atuin
-- *(hyprland)* Add media keys
-- *(tmux)* Bind g
-- *(yazi)* Use yazi plugins
-- *(home-manager)* Configure git
-- Use git cliff
-- *(nix)* Remove mime type
-- Cleanup
-- *(zsh)* Scptar
-- *(nix)* Manage more conf files in hm
-- *(hyprland)* Manage config via homemanager
-- Adjust for nixos
-- Add waybar into hm
-- *(yazi)* Handle custom plugin in hm
-- Add beeper
-- *(waybar)* Power menu
-- *(nix)* IME support
-- *(nix)* Integrate with nix-index-database
-- *(hypr)* Adjust icons
-- *(nix)* Symlink fonts for flatpak apps
-- *(hypr)* Adjust layout
-- *(nix)* Powerbutton
-- *(hyprland)* Fix low contrast theme
-- *(nix)* Use nixos-hardware
-- *(nixos)* Enable flake
-- *(home-manager)* Split host based config
-- *(nix)* Add pi
-- *(gui)* Waybar toggling
-- *(hm)* Use symlink
-- *(x)* Adjust IME config
-- *(x)* Use zen-browser via flake
-- *(home)* Add nh
-- *(hm)* Split dev dependency
-- *(nix)* Support hibernation
-- *(hm)* Add gui tools
-- *(nix)* Use flake
-- *(hyprland)* Add screenshot
-- *(tmux)* Use sensible plugin
-- *(nixos)* Split gui out of base
-- *(hm)* Add carapace
-- *(nix)* Cleanup
-- *(nix)* Use realpath for avoiding symlinks
-- *(nix)* Update hw
-- *(nvim)* Update
-- *(gui)* Use cursor for now
-- *(hm)* Update flake
-- *(hm)* Add onefetch
-- *(vim)* Update
-- *(zsh)* Completion problem
-- *(nix)* Refactor
-- *(hyprland)* Add hyprswitch
-- *(fzf)* Add zsh binding
-- *(nix)* Cleanup
-- *(mpv)* Put config in nix
-- *(gui)* Use swaync
-- *(hm)* Add info
-- Update info.sh
-- Update aliases
-- *(nix)* Restruct
-- Update aliases
-- *(nix)* Use db
-- *(nix)* Mime
-- *(hm)* Integrate atuin
-- *(nix)* Install feh
-- *(nix)* Update flake
-- *(tmux)* Use mouse input
-- *(nix)* Update flake
-- *(hypr)* Adjust sensitivity
-- *(hm)* Theming up
-- *(tmux)* Adjust color
-- *(hm)* Simplify Makefile
-- *(nixos)* Add terminal login session
-- *(hm)* Add PN0093
-
-### 💼 Other
-
-- Use git-absorb
-- Use loginExtra
-- Manage nixos config here
-
-### ⚙️ Miscellaneous Tasks
-
-- Remove old aliases
-- Use mcfly
-- Use fzf for interactive grep
-- Update lazy.nvim
-- Update nvim
-
-## [1.0] - 2023-10-24
-
-### 🚀 Features
-
 - Add alias for git flow
 - Add rebasex alias
 - Use tmux plugins
@@ -265,6 +493,15 @@ All notable changes to this project will be documented in this file.
 - Add zz cmd
 - *(zsh)* Define zz alias
 - *(zsh)* Reuse original _files comp
+- Tmux nested session
+- *(lf)* Add lfrc
+- *(tmux)* Session switcher
+- *(backup)* Backup script
+- *(nvim)* Autochdir for telescope relative
+- *(neovim)* Use Neogit
+- *(neovim)* Add yanky
+- *(k9s)* Add shortcuts
+- *(nix)* Use flake for hm
 
 ### 🐛 Bug Fixes
 
@@ -412,6 +649,138 @@ All notable changes to this project will be documented in this file.
 - *(git)* Use renormalize strategy
 - *(nix)* Fix nix installation
 - *(vim)* Disable autoformat
+- *(k8s)* Update version
+- Remove bin/e
+- *(nix)* Fix path
+- *(nix)* Add default direnv
+- Use nix-installer
+- Use resh
+- Add zt cmd
+- Nnn pager
+- *(zsh)* Add zz compl
+- Disable leap
+- *(git)* Remove git abort
+- Add scr alias
+- Wezterm
+- *(wezterm)* Mkdir config dir
+- Colorscheme
+- *(nnn)* Use nnn
+- *(nvim)* Disable flash
+- *(tig)* Add diff shortcut
+- *(nnn)* Use plugins
+- Remove nix-env --install
+- Fzf completion
+- *(nix)* Installation
+- *(wsl)* Add config
+- *(wsl)* Add swap=0
+- Ff better line handling
+- *(git)* Fix search alias
+- *(zsh)* Expand aliases
+- *(zsh)* Use whence instead of which
+- *(topgrade)* Add zinit updater
+- *(git)* Add rerere
+- *(git)* Use explicit option
+- *(tmux)* Splitw uses -h flag now
+- *(terraform)* Update
+- *(git)* Adjust config
+- *(nix)* Use flake installer
+- *(git)* Makefile
+- *(nix)* Use yazi
+- Add mpv conf
+- *(nix)* Use ctpv
+- *(nix)* Handle tmux from home-manager
+- Remove tmux.conf
+- *(zsh)* Escape fix
+- *(tmux)* Mark sessions
+- Home manager switch
+- *(git)* Nuke
+- Suport waylant
+- *(nix)* Typo
+- Use atuin
+- Sshconfig
+- *(zsh)* Adjust path of clip
+- Mpv conf
+- *(wezterm)* Add mouse binding
+- Add hyprland config
+- *(zsh)* Use mcfly for now
+- *(hyprland)* Master switch
+- *(nix)* Enable unfree apps
+- *(tmux)* Bind C-k for popup
+- *(home-manager)* Use topgrade
+- *(hyprland)* Add waybar
+- *(zsh)* Use atuin
+- *(hyprland)* Add media keys
+- *(tmux)* Bind g
+- *(yazi)* Use yazi plugins
+- *(home-manager)* Configure git
+- Use git cliff
+- *(nix)* Remove mime type
+- Cleanup
+- *(zsh)* Scptar
+- *(nix)* Manage more conf files in hm
+- *(hyprland)* Manage config via homemanager
+- Adjust for nixos
+- Add waybar into hm
+- *(yazi)* Handle custom plugin in hm
+- Add beeper
+- *(waybar)* Power menu
+- *(nix)* IME support
+- *(nix)* Integrate with nix-index-database
+- *(hypr)* Adjust icons
+- *(nix)* Symlink fonts for flatpak apps
+- *(hypr)* Adjust layout
+- *(nix)* Powerbutton
+- *(hyprland)* Fix low contrast theme
+- *(nix)* Use nixos-hardware
+- *(nixos)* Enable flake
+- *(home-manager)* Split host based config
+- *(nix)* Add pi
+- *(gui)* Waybar toggling
+- *(hm)* Use symlink
+- *(x)* Adjust IME config
+- *(x)* Use zen-browser via flake
+- *(home)* Add nh
+- *(hm)* Split dev dependency
+- *(nix)* Support hibernation
+- *(hm)* Add gui tools
+- *(nix)* Use flake
+- *(hyprland)* Add screenshot
+- *(tmux)* Use sensible plugin
+- *(nixos)* Split gui out of base
+- *(hm)* Add carapace
+- *(nix)* Cleanup
+- *(nix)* Use realpath for avoiding symlinks
+- *(nix)* Update hw
+- *(nvim)* Update
+- *(gui)* Use cursor for now
+- *(hm)* Update flake
+- *(hm)* Add onefetch
+- *(vim)* Update
+- *(zsh)* Completion problem
+- *(nix)* Refactor
+- *(hyprland)* Add hyprswitch
+- *(fzf)* Add zsh binding
+- *(nix)* Cleanup
+- *(mpv)* Put config in nix
+- *(gui)* Use swaync
+- *(hm)* Add info
+- Update info.sh
+- Update aliases
+- *(nix)* Restruct
+- Update aliases
+- *(nix)* Use db
+- *(nix)* Mime
+- *(hm)* Integrate atuin
+- *(nix)* Install feh
+- *(nix)* Update flake
+- *(tmux)* Use mouse input
+- *(nix)* Update flake
+- *(hypr)* Adjust sensitivity
+- *(hm)* Theming up
+- *(tmux)* Adjust color
+- *(hm)* Simplify Makefile
+- *(nixos)* Add terminal login session
+- *(hm)* Add PN0093
 
 ### 💼 Other
 
@@ -438,6 +807,9 @@ All notable changes to this project will be documented in this file.
 - Adjust hint mode for google
 - Use bit
 - Put installer
+- Use git-absorb
+- Use loginExtra
+- Manage nixos config here
 
 ### 🚜 Refactor
 
@@ -453,5 +825,10 @@ All notable changes to this project will be documented in this file.
 - Refactor
 - Update home-manager
 - *(nvim)* Use codeium.nvim
+- Remove old aliases
+- Use mcfly
+- Use fzf for interactive grep
+- Update lazy.nvim
+- Update nvim
 
 <!-- generated by git-cliff -->

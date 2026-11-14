@@ -166,6 +166,18 @@ You can create different environments by:
 
 ## Troubleshooting
 
+### Issue: Devbox update fails
+
+- **GitHub `401 Bad credentials`**: `.envrc` loads `.env`, including any
+  `GITHUB_TOKEN`. Remove an expired token from the gitignored `.env`, then run
+  `unset GITHUB_TOKEN` and `direnv reload` in the current shell. Public Nixpkgs
+  downloads do not require a token. Revoke any token exposed in command logs.
+- **OCI CLI setuptools mismatch**: `devbox.json` pins OCI CLI 3.88.0 to its
+  previously locked Nixpkgs revision. Updating the version-only package reference
+  selected a revision with setuptools 82, but OCI CLI requires setuptools `<81`.
+  Keep the revision pin until a compatible package is verified.
+
+
 ### Issue: Hostnames not being replaced
 
 1. **Check ConfigMap generation**:

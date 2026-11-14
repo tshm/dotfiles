@@ -4,6 +4,7 @@ stty -ixon
 bindkey -e # emacs key bindings
 export PATH=~/.local/bin:~/.opencode/bin:~/.npm-globals/bin:~/.bun/bin:$PATH
 export NPM_CONFIG_PREFIX=~/.npm-globals
+export SSL_CERT_FILE="${SSL_CERT_FILE:-${NIX_SSL_CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}}"
 
 export RSYNC_RSH='ssh'
 export EDITOR=nvim

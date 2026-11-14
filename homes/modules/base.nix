@@ -7,6 +7,11 @@ let
   emojiCli = inputs.emoji-cli;
   zshMoreCompletions = inputs.zsh-more-completions;
   zshSsh = inputs.zsh-ssh;
+  markitdown = pkgs.python3Packages.markitdown.overridePythonAttrs (old: {
+    dependencies = old.dependencies ++ lib.concatMap
+      (format: pkgs.python3Packages.markitdown.optional-dependencies.${format})
+      [ "docx" "xlsx" "pptx" ];
+  });
   compiledZshPlugins = pkgs.runCommand "compiled-zsh-plugins" {
     nativeBuildInputs = [ pkgs.zsh ];
   } ''
@@ -70,7 +75,6 @@ in {
     autoEnable = true;
     accent = "green";
   };
-  targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
   home = {
     stateVersion = "22.11";
@@ -88,7 +92,7 @@ in {
       # shelltools
       pkgs.python3
       pkgs.pipx
-      pkgs.python3Packages.markitdown
+      markitdown
       pkgs.pandoc
       pkgs.trashy
       pkgs.file
@@ -138,6 +142,7 @@ in {
         configPath "/yazi/run.zsh";
     };
   };
+  xdg.configFile."home-manager/flake.nix".source = configPath "/flake.nix";
   home.sessionVariables = { TMUX_TMPDIR = lib.mkForce "/tmp"; };
   programs = {
     home-manager.enable = true;
@@ -164,8 +169,6 @@ in {
         };
         commands = {
           "omp" = "omp update";
-          "opencode" = "opencode upgrade";
-          "hermes" = "hermes update";
           "devbox" = "devbox global update";
         };
       };
@@ -222,12 +225,16 @@ in {
       enableNushellIntegration = true;
       flags = [ "--disable-up-arrow" ];
       settings = {
+        wokspaces = true;
         update_check = false;
         filter_model = "host";
         invert = true;
       };
     };
-    nushell = { enable = true; };
+    nushell = {
+      enable = true;
+      loadSessionVariables = false;
+    };
     carapace = {
       enable = false; # it breaks other completions
       enableZshIntegration = true;
@@ -338,7 +345,7 @@ in {
             {
               url = "*.{docx,xlsx,pptx}";
               run = ''
-                piper -- PYTHONWARNINGS=ignore::RuntimeWarning:pydub.utils markitdown "$1"'';
+                piper -- ${lib.getExe' markitdown "markitdown"} "$1"'';
             }
             {
               url = "*.epub";
