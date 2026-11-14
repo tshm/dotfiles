@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - *(x360)* Enable TwinDesk with LAN pairing and Wayland input support.
 
+### Bug Fixes
+
+- *(yazi)* Enable Word, Excel, and PowerPoint converter dependencies and pin previews to the Nix-packaged MarkItDown.
+
 ## [1.3.0] - 2026-11-08
 
 ### 🚀 Features

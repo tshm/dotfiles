@@ -7,6 +7,11 @@ let
   emojiCli = inputs.emoji-cli;
   zshMoreCompletions = inputs.zsh-more-completions;
   zshSsh = inputs.zsh-ssh;
+  markitdown = pkgs.python3Packages.markitdown.overridePythonAttrs (old: {
+    dependencies = old.dependencies ++ lib.concatMap
+      (format: pkgs.python3Packages.markitdown.optional-dependencies.${format})
+      [ "docx" "xlsx" "pptx" ];
+  });
   compiledZshPlugins = pkgs.runCommand "compiled-zsh-plugins" {
     nativeBuildInputs = [ pkgs.zsh ];
   } ''
@@ -87,7 +92,7 @@ in {
       # shelltools
       pkgs.python3
       pkgs.pipx
-      pkgs.python3Packages.markitdown
+      markitdown
       pkgs.pandoc
       pkgs.trashy
       pkgs.file
@@ -340,7 +345,7 @@ in {
             {
               url = "*.{docx,xlsx,pptx}";
               run = ''
-                piper -- PYTHONWARNINGS=ignore::RuntimeWarning:pydub.utils markitdown "$1"'';
+                piper -- ${lib.getExe' markitdown "markitdown"} "$1"'';
             }
             {
               url = "*.epub";
