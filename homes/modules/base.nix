@@ -432,7 +432,7 @@ in {
             {
               on = "<C-n>";
               run = ''
-                shell 'ripdrag -x "$@"' --confirm
+                shell -- ripdrag -x -- %s
               '';
               desc = "drag and drop";
             }
