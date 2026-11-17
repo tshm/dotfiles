@@ -142,6 +142,7 @@ clean:
 update:
 	nix flake update
 	# cd ./homes/modules/node2nix; make
+	cd k8s && devbox update
 
 nvim: ~/.local/bin/nvim ~/.config/nvim
 ~/.local/bin/nvim:
