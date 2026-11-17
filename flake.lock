@@ -497,7 +497,6 @@
         "twindesk": "twindesk",
         "vicinae": "vicinae",
         "waybar": "waybar",
-        "zsh-more-completions": "zsh-more-completions",
         "zsh-ssh": "zsh-ssh"
       }
     },
@@ -702,22 +701,6 @@
       "original": {
         "owner": "Alexays",
         "repo": "Waybar",
-        "type": "github"
-      }
-    },
-    "zsh-more-completions": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1793167032,
-        "narHash": "sha256-Su1YxSzWsN0NFlHVU75AbcQa8a9hjeI8J1mrBsoLSwE=",
-        "owner": "MenkeTechnologies",
-        "repo": "zsh-more-completions",
-        "rev": "c66e5683dd324eb8dd44aeb600eabafba3ef96a2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MenkeTechnologies",
-        "repo": "zsh-more-completions",
         "type": "github"
       }
     },

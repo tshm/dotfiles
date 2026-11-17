@@ -5,7 +5,6 @@ let
     config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   platformSystem = pkgs.stdenv.hostPlatform.system;
   emojiCli = inputs.emoji-cli;
-  zshMoreCompletions = inputs.zsh-more-completions;
   zshSsh = inputs.zsh-ssh;
   markitdown = pkgs.python3Packages.markitdown.overridePythonAttrs (old: {
     dependencies = old.dependencies ++ lib.concatMap
@@ -477,7 +476,6 @@ in {
         source ${compiledZshPlugins}/history-substring-search/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
 
         fpath+=(${pkgs.zsh-completions}/share/zsh/site-functions)
-        source ${zshMoreCompletions}/zsh-more-completions.plugin.zsh
         source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/completion.zsh
         source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/compfix.zsh
 
@@ -486,13 +484,8 @@ in {
         source ${compiledZshPlugins}/clipboard/share/zsh/plugins/clipboard/clipboard.plugin.zsh
 
         autoload -U compinit
-        zmodload zsh/stat
-        ZCOMPDUMP=${config.home.homeDirectory}/.zcompdump
-        if [[ ! -f $ZCOMPDUMP ]] || (( $(date +%s) - $(zstat +mtime $ZCOMPDUMP 2>/dev/null || echo 0) > 86400 )); then
-          compinit
-        else
-          compinit -C
-        fi
+        # Keep the Home Manager cache separate from NixOS's earlier compinit.
+        compinit -d "${config.home.homeDirectory}/.zcompdump-home-manager"
 
         source ${compiledZshPlugins}/fzf-tab/share/fzf-tab/fzf-tab.plugin.zsh
         [ -n "$TMUX" ] && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup

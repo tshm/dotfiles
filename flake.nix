@@ -29,10 +29,6 @@
       url = "github:babarot/emoji-cli";
       flake = false;
     };
-    zsh-more-completions = {
-      url = "github:MenkeTechnologies/zsh-more-completions";
-      flake = false;
-    };
     zsh-ssh = {
       url = "github:sunlei/zsh-ssh";
       flake = false;

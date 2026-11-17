@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- *(zsh)* Remove bulk-generated supplemental completions that caused multi-minute logins; retain standard and zsh-completions definitions and separate the Home Manager completion cache from NixOS.
 - *(yazi)* Enable Word, Excel, and PowerPoint converter dependencies and pin previews to the Nix-packaged MarkItDown.
 - *(yazi)* Fix Ctrl+N ripdrag integration with current file-selection placeholders.
 
