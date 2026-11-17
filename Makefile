@@ -41,6 +41,54 @@ update.%: ./homes/apps/%.nix
 .PHONY: all clean dev home-manager kanata nix nix-upgrade os resh sd-burn sudo up update xx .git/hooks/pre-commit
 .PHONY: spi.img result-spi installer-iso migration-iso
 
+.PHONY: check-config
+check-config:
+	@status=0; \
+	compare() { \
+		actual=$$(readlink -e "$$2" 2>/dev/null) || actual=; \
+		if [ "$$actual" = "$$3" ]; then \
+			printf '[OK] %s\n' "$$1"; \
+		else \
+			printf '[DIFF] %s\n  expected: %s\n  actual:   %s\n' \
+				"$$1" "$$3" "$${actual:-<missing>}"; \
+			status=1; \
+		fi; \
+	}; \
+	host=$$(hostname); \
+	user=$$(id -un); \
+	if [ -n "$(ISNIXOS)" ]; then \
+		printf 'Evaluating NixOS (%s)...\n' "$$host"; \
+		if expected=$$(nix eval --raw --no-write-lock-file \
+			'$(NIXOS_FLAKE)#nixosConfigurations.'"\"$$host\""'.config.system.build.toplevel.outPath' \
+			$(NIXOS_FLAKE_ARGS)); then \
+			compare 'NixOS: running' /run/current-system "$$expected"; \
+			compare 'NixOS: booted' /run/booted-system "$$expected"; \
+			compare 'NixOS: next boot' /nix/var/nix/profiles/system "$$expected"; \
+		else \
+			printf '[ERROR] NixOS evaluation failed\n'; \
+			status=1; \
+		fi; \
+	else \
+		printf '[SKIP] NixOS: not a NixOS host\n'; \
+	fi; \
+	printf 'Evaluating Home Manager (%s@%s)...\n' "$$user" "$$host"; \
+	if expected=$$(nix eval --raw --no-write-lock-file \
+		'.#homeConfigurations.'"\"$$user@$$host\""'.activationPackage.outPath'); then \
+		state=$${XDG_STATE_HOME:-$$HOME/.local/state}; \
+		profile="$$state/nix/profiles/home-manager"; \
+		legacy="/nix/var/nix/profiles/per-user/$$user/home-manager"; \
+		if [ ! -L "$$profile" ] && [ -L "$$legacy" ]; then profile=$$legacy; fi; \
+		active="$$state/home-manager/gcroots/current-home"; \
+		legacy="$${XDG_CACHE_HOME:-$$HOME/.cache}/.gcroots/current-home"; \
+		if [ ! -L "$$active" ] && [ -L "$$legacy" ]; then active=$$legacy; fi; \
+		compare 'Home Manager: profile' "$$profile" "$$expected"; \
+		compare 'Home Manager: activated' "$$active" "$$expected"; \
+	else \
+		printf '[ERROR] Home Manager evaluation failed\n'; \
+		status=1; \
+	fi; \
+	exit "$$status"
+
 migration-iso:
 	nix build path:.#nixosConfigurations.migration-installer.config.system.build.isoImage --out-link result-migration-installer
 up: update apphash_update

@@ -44,6 +44,15 @@ discover this repository and select the configuration by username and hostname;
 The `Makefile` provides other useful targets:
 
 - `make installer-iso`: Build the shared x86_64 installation ISO in `result-installer/iso/`.
+- `make check-config`: Compare the current flake's evaluated store paths with
+  the running, booted, and next-boot NixOS generations, plus the Home Manager
+  profile and activated generation. Reports `[OK]`, `[DIFF]` (including missing
+  paths), or `[ERROR]`; exits nonzero for differences or evaluation failures.
+  Skips NixOS on other systems. Uses the same private flake and local dotfiles
+  override as `make os`, when present. Does not build or activate configurations
+  or rewrite lock files; evaluation may download dependencies.
+  Matching paths establish equivalent build outputs, not historical Git provenance.
+  Regression check: `sh scripts/test-check-config.sh`.
 
 - `make update`: Update all flake inputs.
 - `make clean`: Clean up old Nix generations.
