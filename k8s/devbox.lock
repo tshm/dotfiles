@@ -91,6 +91,10 @@
       "last_modified": "2026-06-27T07:37:20Z",
       "resolved": "github:NixOS/nixpkgs/3d46470bb3030020f7e1361f33514854f5bfa86d?lastModified=1782545840&narHash=sha256-PkBPmP5ofNtunCU7%2Ftfn6wi9OLlzFGcHAqqmY%2B%2FmwUI%3D#oci-cli"
     },
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "last_modified": "2026-11-16T14:48:49Z",
+      "resolved": "github:NixOS/nixpkgs/e21fec321d73511849707a7585e4ea155ee4bf40?lastModified=1794840529&narHash=sha256-ySrWnmZB5UsZTYGHHnBjllT05O5iFjElCRS%2BmabtfP0%3D"
+    },
     "k9s@0.51.0": {
       "last_modified": "2026-11-11T14:42:58Z",
       "resolved": "github:NixOS/nixpkgs/9397dcb09c9598a33509fbc0cce699bd4e6c84d5#k9s",
