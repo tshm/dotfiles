@@ -14,6 +14,16 @@
       ../modules/gui.nix
       ../modules/dev.nix
       {
+        xdg.configFile."niri/config.kdl".text = ''
+          include "/home/tshm/.dotfiles/x/niri.kdl"
+          input {
+            keyboard {
+              xkb {
+                layout "jp,us"
+              }
+            }
+          }
+        '';
         home.packages = [
           pkgs.deno
           pkgs.libreoffice
