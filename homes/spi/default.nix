@@ -29,7 +29,6 @@ in
       ../modules/base.nix
       ../modules/dev.nix
       {
-        targets.genericLinux.enable = true;
         home.packages = [
           pkgs.deno
         ];

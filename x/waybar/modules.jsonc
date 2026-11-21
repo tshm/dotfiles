@@ -16,6 +16,15 @@
   "mango/workspaces": {
     "format": "{icon}",
     "format-icons": {
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六",
+      "7": "七",
+      "8": "八",
+      "9": "九",
       "active": "",
       "default": "",
       "empty": "",
@@ -27,8 +36,11 @@
     "overview-label": "OVERVIEW",
   },
 
-  "mango/layout": {
+  "custom/layout": {
     "format": "{}",
+    "exec": "python3 ~/.config/waybar/scripts/layout.py",
+    "return-type": "json",
+    "on-click": "mmsg dispatch switch_layout",
   },
 
   "mango/window": {
@@ -129,12 +141,6 @@
     "tooltip": false,
   },
 
-  "custom/beeper": {
-    "format": "  ",
-    "tooltip-format": "Focus Beeper",
-    "on-click": "mmsg get all-clients | yq -r 'first(.clients[] | select(.appid | test(\"beeper\"; \"i\")) | .id) // empty' | xargs -r -I{} mmsg dispatch focusid client,{}",
-  },
-
   "group/system-stuff": {
     "orientation": "horizontal",
     "modules": [
@@ -145,9 +151,7 @@
       "pulseaudio",
       "custom/separator",
       "battery",
-      "custom/separator",
       "custom/lock",
-      "custom/separator",
       "custom/shutdown",
     ],
   },

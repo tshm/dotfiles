@@ -18,7 +18,6 @@ _gptcomplete_fast_model_for_api_url() {
 
   local api_url="${(L)1}"
   case "$api_url" in
-    (*://bifrost.hq.empathy.co.jp/*|bifrost.hq.empathy.co.jp/*) print -r -- "codex/gpt-5.4-mini" ;;
     (*://api.openai.com/*|api.openai.com/*) print -r -- "gpt-5-nano" ;;
     (*://api.groq.com/*|api.groq.com/*) print -r -- "openai/gpt-oss-20b" ;;
   esac

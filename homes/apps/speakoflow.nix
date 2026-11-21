@@ -10,6 +10,8 @@ let
 in pkgs.appimageTools.wrapType2 {
   inherit pname version src;
 
+  extraPkgs = pkgs: [ pkgs.libgpg-error ];
+
   extraInstallCommands = ''
     install -m 444 -D ${appimageContents}/usr/share/applications/SpeakoFlow.desktop -t $out/share/applications
     cp -r ${appimageContents}/usr/share/icons $out/share/

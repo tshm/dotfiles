@@ -7,6 +7,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    twindesk = {
+      url = "github:InukaAsith/TwinDesk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hunk = {
       url = "github:modem-dev/hunk";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,10 +27,6 @@
     catppuccin.url = "github:catppuccin/nix";
     emoji-cli = {
       url = "github:babarot/emoji-cli";
-      flake = false;
-    };
-    zsh-more-completions = {
-      url = "github:MenkeTechnologies/zsh-more-completions";
       flake = false;
     };
     zsh-ssh = {

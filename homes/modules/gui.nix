@@ -1,22 +1,14 @@
-{
-  user,
-  config,
-  pkgs,
-  ...
-}@args:
+{ user, config, pkgs, ... }@args:
 
 let
-  configPath = pathStr: config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
+  configPath = pathStr:
+    config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   tailscaleVicinaeExtension = pkgs.buildNpmPackage {
     pname = "vicinae-tailscale-control";
     version = "1.0.0";
     src = ../../x/vicinae/extensions/tailscale;
     npmDepsHash = "sha256-8In9NQ1StAzn2VSP3naNeymXzjkx/rPL0iBw4fAFops=";
-    npmBuildFlags = [
-      "--"
-      "--out"
-      "dist"
-    ];
+    npmBuildFlags = [ "--" "--out" "dist" ];
     doCheck = true;
     checkPhase = "npm test";
     installPhase = ''
@@ -26,30 +18,28 @@ let
       runHook postInstall
     '';
   };
-  /*
-    platformSystem = pkgs.stdenv.hostPlatform.system;
-    hyprlandGuiutils =
-      args.hyprland.inputs."hyprland-guiutils".packages.${platformSystem}.hyprland-guiutils.overrideAttrs
-        (old: {
-          buildInputs = old.buildInputs ++ [ pkgs.pango ];
-          postPatch = (old.postPatch or "") + ''
-            substituteInPlace CMakeLists.txt \
-              --replace-fail "  libdrm)" "  libdrm
-            pango)"
-          '';
-        });
-    hyprlandPackage =
-      args.hyprland.packages.${platformSystem}.hyprland.override {
-        hyprland-guiutils = hyprlandGuiutils;
-      };
-    hyprlandPortal =
-      args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland.override
-        {
-          hyprland = hyprlandPackage;
-        };
+  /* platformSystem = pkgs.stdenv.hostPlatform.system;
+     hyprlandGuiutils =
+       args.hyprland.inputs."hyprland-guiutils".packages.${platformSystem}.hyprland-guiutils.overrideAttrs
+         (old: {
+           buildInputs = old.buildInputs ++ [ pkgs.pango ];
+           postPatch = (old.postPatch or "") + ''
+             substituteInPlace CMakeLists.txt \
+               --replace-fail "  libdrm)" "  libdrm
+             pango)"
+           '';
+         });
+     hyprlandPackage =
+       args.hyprland.packages.${platformSystem}.hyprland.override {
+         hyprland-guiutils = hyprlandGuiutils;
+       };
+     hyprlandPortal =
+       args.hyprland.packages.${platformSystem}.xdg-desktop-portal-hyprland.override
+         {
+           hyprland = hyprlandPackage;
+         };
   */
-in
-{
+in {
   imports = [
     # args.noctalia.homeModules.default
     args.mango.hmModules.mango
@@ -86,18 +76,14 @@ in
           default = [ "gtk" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
         };
-        /*
-          hyprland = {
-            default = [ "hyprland" "gnome" "gtk" ];
-            "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-            "org.freedesktop.impl.portal.Settings" = [ "gnome" ];
-          };
+        /* hyprland = {
+             default = [ "hyprland" "gnome" "gtk" ];
+             "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+             "org.freedesktop.impl.portal.Settings" = [ "gnome" ];
+           };
         */
         mango = {
-          default = [
-            "gnome"
-            "gtk"
-          ];
+          default = [ "gnome" "gtk" ];
           "org.freedesktop.impl.portal.Access" = [ "gtk" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
           "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
@@ -105,15 +91,117 @@ in
           "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
         };
         niri = {
-          default = [
-            "gnome"
-            "gtk"
-          ];
+          default = [ "gnome" "gtk" ];
           "org.freedesktop.impl.portal.Access" = [ "gtk" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
           "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
         };
       };
+    };
+
+    configFile = {
+      "fcitx5/config".text = ''
+        [Hotkey]
+        # Enumerate when holding modifier of Toggle key
+        EnumerateWithTriggerKeys=False
+        # Enumerate Input Method Forward
+        EnumerateForwardKeys=
+        # Enumerate Input Method Backward
+        EnumerateBackwardKeys=
+        # Skip first input method while enumerating
+        EnumerateSkipFirst=False
+        # Time limit in milliseconds for triggering modifier key shortcuts
+        ModifierOnlyKeyTimeout=250
+
+        [Hotkey/TriggerKeys]
+        0=Zenkaku_Hankaku
+
+        [Hotkey/ActivateKeys]
+        0=Hangul
+
+        [Hotkey/DeactivateKeys]
+        0=Hangul_Hanja
+
+        [Hotkey/AltTriggerKeys]
+        0=Shift_L
+
+        [Hotkey/EnumerateGroupForwardKeys]
+        0=Super+space
+
+        [Hotkey/EnumerateGroupBackwardKeys]
+        0=Shift+Super+space
+
+        [Hotkey/PrevPage]
+        0=Up
+
+        [Hotkey/NextPage]
+        0=Down
+
+        [Hotkey/PrevCandidate]
+        0=Shift+Tab
+
+        [Hotkey/NextCandidate]
+        0=Tab
+
+        [Hotkey/TogglePreedit]
+        0=Control+Alt+P
+
+        [Behavior]
+        # Active By Default
+        ActiveByDefault=False
+        # Reset state on Focus In
+        resetStateWhenFocusIn=No
+        # Share Input State
+        ShareInputState=No
+        # Show preedit in application
+        PreeditEnabledByDefault=True
+        # Show Input Method Information when switch input method
+        ShowInputMethodInformation=True
+        # Show Input Method Information when changing focus
+        showInputMethodInformationWhenFocusIn=False
+        # Show compact input method information
+        CompactInputMethodInformation=True
+        # Show first input method information
+        ShowFirstInputMethodInformation=True
+        # Default page size
+        DefaultPageSize=5
+        # Override XKB Option
+        OverrideXkbOption=False
+        # Custom XKB Option
+        CustomXkbOption=
+        # Force Enabled Addons
+        EnabledAddons=
+        # Force Disabled Addons
+        DisabledAddons=
+        # Preload input method to be used by default
+        PreloadInputMethod=True
+        # Allow input method in the password field
+        AllowInputMethodForPassword=False
+        # Show preedit text when typing password
+        ShowPreeditForPassword=False
+        # Interval of saving user data in minutes
+        AutoSavePeriod=30
+
+      '';
+      "fcitx5/profile".text = ''
+        [Groups/0]
+        # Group Name
+        Name=Default
+        # Layout
+        Default Layout=jp
+        # Default Input Method
+        DefaultIM=mozc
+
+        [Groups/0/Items/0]
+        # Name
+        Name=mozc
+        # Layout
+        # Layout=
+
+        [GroupOrder]
+        0=Default
+
+      '';
     };
 
     dataFile = {
@@ -165,7 +253,7 @@ in
     pointerCursor.enable = true;
     packages = [
       (pkgs.callPackage ../apps/zen.nix { inherit pkgs; })
-      (pkgs.callPackage ../apps/beeper.nix { inherit pkgs; })
+      pkgs.beeper
       pkgs.wezterm
       pkgs.appimage-run
       pkgs.catppuccin-gtk
@@ -181,7 +269,6 @@ in
       pkgs.swaynotificationcenter
       # pkgs.copyq
       pkgs.ripdrag
-      pkgs.ags
       pkgs.vscode
       pkgs.neovide
       pkgs.brightnessctl
@@ -192,7 +279,8 @@ in
       pkgs.brave
     ];
     file = {
-      "${config.xdg.configHome}/wezterm/wezterm.lua".source = configPath "/wezterm/wezterm.lua";
+      "${config.xdg.configHome}/wezterm/wezterm.lua".source =
+        configPath "/wezterm/wezterm.lua";
       "${config.xdg.configHome}/waybar/".source = configPath "/x/waybar";
       "${config.xdg.configHome}/mpv/mpv.conf".source = configPath "/mpv.conf";
       # "${config.xdg.configHome}/niri/config.kdl".text = "include \"/home/${user}/.dotfiles/x/niri.kdl\"";
@@ -251,55 +339,52 @@ in
   wayland.windowManager.mango = {
     enable = true;
     settings = {
-      source_optional = [
-        "~/.dotfiles/x/mango/vars.conf"
-        "~/.dotfiles/x/mango/general.conf"
-      ];
+      source_optional =
+        [ "~/.dotfiles/x/mango/vars.conf" "~/.dotfiles/x/mango/general.conf" ];
     };
     topPrefixes = [ "source" ];
     autostart_sh = ''
       exec env WAYLAND_STARTUP_WAIT=15 bash ~/.dotfiles/x/wayland-startup-order.sh
     '';
   };
-  /*
-    wayland.windowManager.hyprland = {
-      enable = true;
-      configType = "hyprlang";
-      package = hyprlandPackage;
-      portalPackage = hyprlandPortal;
-      plugins = [
-        # args.hyprland-plugins.packages.${platformSystem}.hyprscrolling  # FIXME: requires Hyprland source headers
-        # args.hyprland-plugins.packages.${platformSystem}.hyprexpo  # FIXME: incompatible with current Hyprland
-      ];
-      settings = {
-        source = [
-          "~/.dotfiles/x/hyprland/vars.conf"
-          "~/.dotfiles/x/hyprland/general.conf"
-        ];
-        device = [
-          {
-            name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-1";
-            sensitivity = 1.0;
-          }
-          {
-            name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3";
-            sensitivity = 1.0;
-          }
-          {
-            name = "elecom-trackball-mouse-huge-trackball-1";
-            sensitivity = 1.0;
-          }
-          {
-            name = "syna3290:01-06cb:cd4f-touchpad";
-            sensitivity = 0.0;
-          }
-        ];
-        exec-once = [
-          "[workspace 2] zen"
-          "[workspace 1 silent] beeper"
-          "[workspace 2 silent] $terminal"
-        ];
-      };
-    };
+  /* wayland.windowManager.hyprland = {
+       enable = true;
+       configType = "hyprlang";
+       package = hyprlandPackage;
+       portalPackage = hyprlandPortal;
+       plugins = [
+         # args.hyprland-plugins.packages.${platformSystem}.hyprscrolling  # FIXME: requires Hyprland source headers
+         # args.hyprland-plugins.packages.${platformSystem}.hyprexpo  # FIXME: incompatible with current Hyprland
+       ];
+       settings = {
+         source = [
+           "~/.dotfiles/x/hyprland/vars.conf"
+           "~/.dotfiles/x/hyprland/general.conf"
+         ];
+         device = [
+           {
+             name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-1";
+             sensitivity = 1.0;
+           }
+           {
+             name = "lenovo-thinkpad-compact-usb-keyboard-with-trackpoint-3";
+             sensitivity = 1.0;
+           }
+           {
+             name = "elecom-trackball-mouse-huge-trackball-1";
+             sensitivity = 1.0;
+           }
+           {
+             name = "syna3290:01-06cb:cd4f-touchpad";
+             sensitivity = 0.0;
+           }
+         ];
+         exec-once = [
+           "[workspace 2] zen"
+           "[workspace 1 silent] beeper"
+           "[workspace 2 silent] $terminal"
+         ];
+       };
+     };
   */
 }

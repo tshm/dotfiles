@@ -1,4 +1,4 @@
-{ lib, nixos-hardware, pkgs, ... }:
+{ lib, nixos-hardware, pkgs, twindesk, ... }:
 let
   libfprint = pkgs.libfprint.overrideAttrs (old: {
     version = "1.94.9-synatlsmoc";
@@ -26,6 +26,7 @@ let
 in {
   imports = [
     ./hardware-configuration.nix
+    twindesk.nixosModules.default
     nixos-hardware.nixosModules.common-pc-laptop
     nixos-hardware.nixosModules.common-pc-laptop-ssd
     nixos-hardware.nixosModules.common-cpu-amd
@@ -38,6 +39,17 @@ in {
     });
   };
   config = {
+  programs.twindesk = {
+    enable = true;
+    enableWifiDirect = false;
+  };
+  # Keep local pairing traffic on the LAN while an Exit Node is active.
+  services.tailscale.extraSetFlags = [ "--exit-node-allow-lan-access=true" ];
+  # Keep TwinDesk's input-group access after hardware.uinput's default rule.
+  services.udev.extraRules = lib.mkAfter ''
+    KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
+  '';
+
   services.fprintd = {
     enable = true;
     package = fprintd;
@@ -56,7 +68,10 @@ in {
     # Enable internal speakers and jack detection
     options snd-hda-intel enable_msi=1 jackpoll_ms=5000
   '';
-  boot.blacklistedKernelModules = [ "snd_sof" "snd_sof_amd_acp" "snd_sof_pci" ];
+  # tiny_power_button bypasses logind and powers off when the button wakes us.
+  boot.blacklistedKernelModules = [
+    "snd_sof" "snd_sof_amd_acp" "snd_sof_pci" "tiny_power_button"
+  ];
 
   # Audio device configuration
   services.pulseaudio.enable = false;

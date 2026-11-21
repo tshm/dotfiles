@@ -5,8 +5,12 @@ let
     config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles${pathStr}";
   platformSystem = pkgs.stdenv.hostPlatform.system;
   emojiCli = inputs.emoji-cli;
-  zshMoreCompletions = inputs.zsh-more-completions;
   zshSsh = inputs.zsh-ssh;
+  markitdown = pkgs.python3Packages.markitdown.overridePythonAttrs (old: {
+    dependencies = old.dependencies ++ lib.concatMap
+      (format: pkgs.python3Packages.markitdown.optional-dependencies.${format})
+      [ "docx" "xlsx" "pptx" ];
+  });
   compiledZshPlugins = pkgs.runCommand "compiled-zsh-plugins" {
     nativeBuildInputs = [ pkgs.zsh ];
   } ''
@@ -70,7 +74,6 @@ in {
     autoEnable = true;
     accent = "green";
   };
-  targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
   home = {
     stateVersion = "22.11";
@@ -88,7 +91,7 @@ in {
       # shelltools
       pkgs.python3
       pkgs.pipx
-      pkgs.python3Packages.markitdown
+      markitdown
       pkgs.pandoc
       pkgs.trashy
       pkgs.file
@@ -138,6 +141,7 @@ in {
         configPath "/yazi/run.zsh";
     };
   };
+  xdg.configFile."home-manager/flake.nix".source = configPath "/flake.nix";
   home.sessionVariables = { TMUX_TMPDIR = lib.mkForce "/tmp"; };
   programs = {
     home-manager.enable = true;
@@ -164,8 +168,6 @@ in {
         };
         commands = {
           "omp" = "omp update";
-          "opencode" = "opencode upgrade";
-          "hermes" = "hermes update";
           "devbox" = "devbox global update";
         };
       };
@@ -222,12 +224,16 @@ in {
       enableNushellIntegration = true;
       flags = [ "--disable-up-arrow" ];
       settings = {
+        wokspaces = true;
         update_check = false;
         filter_model = "host";
         invert = true;
       };
     };
-    nushell = { enable = true; };
+    nushell = {
+      enable = true;
+      loadSessionVariables = false;
+    };
     carapace = {
       enable = false; # it breaks other completions
       enableZshIntegration = true;
@@ -338,7 +344,7 @@ in {
             {
               url = "*.{docx,xlsx,pptx}";
               run = ''
-                piper -- PYTHONWARNINGS=ignore::RuntimeWarning:pydub.utils markitdown "$1"'';
+                piper -- ${lib.getExe' markitdown "markitdown"} "$1"'';
             }
             {
               url = "*.epub";
@@ -425,7 +431,7 @@ in {
             {
               on = "<C-n>";
               run = ''
-                shell 'ripdrag -x "$@"' --confirm
+                shell -- ripdrag -x -- %s
               '';
               desc = "drag and drop";
             }
@@ -470,7 +476,6 @@ in {
         source ${compiledZshPlugins}/history-substring-search/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
 
         fpath+=(${pkgs.zsh-completions}/share/zsh/site-functions)
-        source ${zshMoreCompletions}/zsh-more-completions.plugin.zsh
         source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/completion.zsh
         source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/compfix.zsh
 
@@ -479,13 +484,8 @@ in {
         source ${compiledZshPlugins}/clipboard/share/zsh/plugins/clipboard/clipboard.plugin.zsh
 
         autoload -U compinit
-        zmodload zsh/stat
-        ZCOMPDUMP=${config.home.homeDirectory}/.zcompdump
-        if [[ ! -f $ZCOMPDUMP ]] || (( $(date +%s) - $(zstat +mtime $ZCOMPDUMP 2>/dev/null || echo 0) > 86400 )); then
-          compinit
-        else
-          compinit -C
-        fi
+        # Keep the Home Manager cache separate from NixOS's earlier compinit.
+        compinit -d "${config.home.homeDirectory}/.zcompdump-home-manager"
 
         source ${compiledZshPlugins}/fzf-tab/share/fzf-tab/fzf-tab.plugin.zsh
         [ -n "$TMUX" ] && zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup

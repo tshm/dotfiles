@@ -6,7 +6,7 @@
     "k9s@0.51.0",
     "cloudflared@latest",
     "kubernetes-helm@4.2.2",
-    "oci-cli@3.88.0",
+    "github:NixOS/nixpkgs/3d46470bb3030020f7e1361f33514854f5bfa86d#oci-cli",
     "fluxcd@2.8.8"
   ],
   "shell": {

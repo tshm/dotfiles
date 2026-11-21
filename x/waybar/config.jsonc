@@ -5,7 +5,7 @@
 
   "modules-left": [
     "mango/workspaces",
-    "mango/layout",
+    "custom/layout",
     "custom/separator",
     "mango/window",
   ],
