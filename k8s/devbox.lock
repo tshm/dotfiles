@@ -1,43 +1,11 @@
 {
   "lockfile_version": "1",
   "packages": {
-    "cloudflared@latest": {
-      "last_modified": "2026-11-11T14:42:58Z",
-      "resolved": "github:NixOS/nixpkgs/9397dcb09c9598a33509fbc0cce699bd4e6c84d5#cloudflared",
+    "cloudflared@2020.11.11": {
+      "last_modified": "2021-01-18T12:47:57Z",
+      "resolved": "github:NixOS/nixpkgs/4eccd6f731627ba5ad9915bcf600c9329a34ca78#cloudflared",
       "source": "devbox-search",
-      "version": "2026.10.7",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/j333bm1dh4xlaapwzknamwnrdiac0r5r-cloudflared-2026.10.7",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/j333bm1dh4xlaapwzknamwnrdiac0r5r-cloudflared-2026.10.7"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/1s4pk429qgfhjxm80y8613rxgi4zgfmh-cloudflared-2026.10.7",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/1s4pk429qgfhjxm80y8613rxgi4zgfmh-cloudflared-2026.10.7"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/zcqwfjsajxy3lgpq6pnf6k6dhww1qy6l-cloudflared-2026.10.7",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/zcqwfjsajxy3lgpq6pnf6k6dhww1qy6l-cloudflared-2026.10.7"
-        }
-      }
+      "version": "2020.11.11"
     },
     "fluxcd@2.8.8": {
       "last_modified": "2026-06-27T07:37:20Z",
