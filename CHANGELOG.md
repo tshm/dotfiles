@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - *(x360)* Default niri to the Japanese keyboard layout, retaining US as an alternative without changing other hosts
+- *(vicinae)* Make the reconnected Bluetooth headset the default audio output and move current playback to it.
 ## [1.3.0] - 2026-11-08
 
 ### 🚀 Features
