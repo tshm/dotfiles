@@ -15,6 +15,7 @@ let
       coreutils
       systemd
       nixos-install-tools
+      rsync
     ];
     text = ''
       exec ${pkgs.python3}/bin/python3 ${migrationSource} "$@"
@@ -33,6 +34,7 @@ in {
   };
 
   config = {
+    boot.supportedFilesystems = [ "exfat" ];
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     environment.systemPackages = [ migrationCli ];
     environment.etc."btrfs-migration.json".source =

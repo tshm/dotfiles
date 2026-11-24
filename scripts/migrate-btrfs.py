@@ -45,6 +45,13 @@ def load_config(path):
             raise ValueError(f"Invalid configuration: {key}")
     if not config["disk"].startswith("/dev/disk/by-id/"):
         raise ValueError("disk must use a stable /dev/disk/by-id/ identifier")
+    if ("fit_device" in config) != ("fit_uuid" in config):
+        raise ValueError("fit_device and fit_uuid must be configured together")
+    if "fit_device" in config:
+        if not isinstance(config["fit_device"], str) or not config["fit_device"].startswith("/dev/disk/by-id/"):
+            raise ValueError("fit_device must use a stable /dev/disk/by-id/ partition identifier")
+        if not isinstance(config["fit_uuid"], str) or not config["fit_uuid"]:
+            raise ValueError("Invalid fit_uuid")
     for key in ("disk_size", "source_size"):
         if type(config.get(key)) is not int or config[key] <= 0:
             raise ValueError(f"Invalid size: {key}")
@@ -63,6 +70,65 @@ def load_config(path):
     if not Path(config["hardware_replacement"]).is_file():
         raise ValueError("The replacement hardware configuration is missing")
     return config
+
+
+def fit_partition(config, target_partition):
+    fit = Path(config["fit_device"]).resolve()
+    if not fit.exists():
+        raise ValueError("Configured FIT partition is absent")
+    target = Path(target_partition).resolve()
+    if fit == target:
+        raise ValueError("FIT and migration target must be different partitions")
+    info = json.loads(run(
+        "lsblk", "--json", "--paths", "--output", "NAME,TYPE,PKNAME,MOUNTPOINTS",
+        str(fit), capture=True,
+    ))["blockdevices"][0]
+    if info["type"] != "part" or any(info.get("mountpoints", [])):
+        raise ValueError("FIT must be a separate, unmounted partition")
+    target_info = json.loads(run(
+        "lsblk", "--json", "--paths", "--output", "PKNAME", str(target), capture=True,
+    ))["blockdevices"][0]
+    if Path(info["pkname"]).resolve() == Path(target_info["pkname"]).resolve():
+        raise ValueError("FIT and migration target must be on separate disks")
+    filesystem = json.loads(run(
+        "blkid", "--probe", "--output", "json", str(fit), capture=True,
+    ))["blkid"][0]
+    if filesystem.get("type") != "exfat" or filesystem.get("uuid") != config["fit_uuid"]:
+        raise ValueError("FIT partition must match configured exFAT filesystem and UUID")
+    return str(fit)
+
+
+def reject_locks(repository):
+    locks = Path(repository) / "locks"
+    if locks.exists() and any(locks.iterdir()):
+        raise ValueError(f"Repository contains lock files: {locks}")
+
+
+def fit_command(stack, config, target_partition, repository, secret):
+    partition = fit_partition(config, target_partition)
+    root = BASE / "fit"
+    mount(stack, partition, root, "ro,nosuid,nodev,noexec", "exfat")
+    replica = root / config["repository"] / "repo"
+    if (replica / "config").read_bytes() != (repository / "config").read_bytes():
+        raise ValueError("Preseeded FIT repository config differs from NAS")
+    reject_locks(replica)
+    return restic_base(replica, secret, no_lock=True)
+
+
+def sync_fit(config, repository):
+    root = BASE / "fit"
+    replica = root / config["repository"] / "repo"
+    reject_locks(repository)
+    run("mount", "-o", "remount,rw,nosuid,nodev,noexec", root)
+    # Restic object names are content-addressed. Ignore exFAT timestamps;
+    # check --read-data detects corruption even when the size hasn't changed.
+    run("rsync", "-r", "--size-only", "--exclude=/locks/", str(repository) + "/", str(replica) + "/")
+    run("sync", "-f", root)
+    run("mount", "-o", "remount,ro,nosuid,nodev,noexec", root)
+    reject_locks(repository)
+    reject_locks(replica)
+    if (replica / "config").read_bytes() != (repository / "config").read_bytes():
+        raise ValueError("FIT repository config changed during sync")
 
 
 def disk_partition(config, *, resume=False, expected_uuid=None):
@@ -140,8 +206,9 @@ def password_file(stack, name, password):
     return path
 
 
-def restic_base(repository, password):
-    return ["restic", "--repo", str(repository), "--password-file", str(password), "--no-cache"]
+def restic_base(repository, password, *, no_lock=False):
+    command = ["restic", "--repo", str(repository), "--password-file", str(password), "--no-cache"]
+    return command + (["--no-lock"] if no_lock else [])
 
 
 def backup(command):
@@ -205,7 +272,7 @@ def install(command, snapshot, partition, config, state, state_path):
           "Remove the USB and reboot manually. Do not run the migration again.", flush=True)
 
 
-def migrate(config, resume):
+def migrate(config, resume, from_nas=False):
     # Check before requesting credentials, mounting SMB, or changing any disk.
     if not resume:
         partition = disk_partition(config)
@@ -231,8 +298,8 @@ def migrate(config, resume):
         if not password or any(char in password for char in "\n\r\0"):
             raise ValueError("A nonempty, single-line backup password is required")
         new_repository = not (repository / "config").exists()
-        if new_repository and resume:
-            raise ValueError("No backup repository exists; refusing resume")
+        if new_repository and (resume or "fit_device" in config):
+            raise ValueError("Existing NAS backup repository required")
         if new_repository and password != getpass.getpass("Repeat backup password: "):
             raise ValueError("Backup passwords do not match")
         secret = password_file(stack, "restic-password", password + "\n")
@@ -245,11 +312,16 @@ def migrate(config, resume):
             partition = disk_partition(config, resume=True, expected_uuid=state["btrfs_uuid"])
             if input(f"Resume restoring ONLY {config['serial']}? Type RESTORE {config['serial']}: ") != f"RESTORE {config['serial']}":
                 raise ValueError("Resume not confirmed; no SSD changes made")
+            if "fit_device" in config and not from_nas:
+                command = fit_command(stack, config, partition, repository, secret)
             verify_backup(command, state["snapshot"], config)
             install(command, state["snapshot"], partition, config, state, state_path)
             return
         if state_path.exists() and json.loads(state_path.read_text()).get("phase") == "complete":
             raise ValueError("This migration already completed; refusing another erase")
+        restore_command = command
+        if "fit_device" in config:
+            restore_command = fit_command(stack, config, partition, repository, secret)
         run("e2fsck", "-f", "-n", partition)
         with ExitStack() as source_stack:
             mount(source_stack, partition, SOURCE, "ro,noload", "ext4")
@@ -275,7 +347,9 @@ def migrate(config, resume):
             if new_repository:
                 run(*command, "init", "--repository-version", "2")
             snapshot = backup(command)
-            verify_backup(command, snapshot, config)
+            if "fit_device" in config:
+                sync_fit(config, repository)
+            verify_backup(restore_command, snapshot, config)
             state = {"fingerprint": fingerprint, "snapshot": snapshot,
                      "btrfs_uuid": str(uuid.uuid4()), "phase": "verified"}
             write_state(state_path, state)
@@ -288,6 +362,10 @@ def migrate(config, resume):
                 raise ValueError("Erase not confirmed; SSD is unchanged and backup remains available")
         # Recheck identity and mount state after the source mount is gone.
         partition = disk_partition(config)
+        if "fit_device" in config:
+            # The verified read-only mount stays pinned until restore finishes.
+            if not Path(config["fit_device"]).is_block_device():
+                raise ValueError("FIT disconnected before erase")
         state["phase"] = "formatting"
         write_state(state_path, state)
         run("wipefs", "--all", partition)
@@ -297,14 +375,18 @@ def migrate(config, resume):
         partition = disk_partition(config, resume=True, expected_uuid=state["btrfs_uuid"])
         state["phase"] = "restoring"
         write_state(state_path, state)
-        install(command, snapshot, partition, config, state, state_path)
+        install(restore_command, snapshot, partition, config, state, state_path)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="/etc/btrfs-migration.json")
     parser.add_argument("--resume", action="store_true", help="restore saved snapshot without formatting again")
+    parser.add_argument("--from-nas", action="store_true",
+                        help="with --resume, verify from NAS instead of the FIT copy")
     args = parser.parse_args()
+    if args.from_nas and not args.resume:
+        parser.error("--from-nas requires --resume")
     if os.geteuid() != 0:
         parser.error("Run as root from the dedicated USB")
     os.umask(0o077)
@@ -316,7 +398,7 @@ def main():
             if key.startswith("RESTIC_"):
                 del os.environ[key]
         try:
-            migrate(load_config(args.config), args.resume)
+            migrate(load_config(args.config), args.resume, args.from_nas)
         except (OSError, ValueError, KeyError, RuntimeError, EOFError, subprocess.CalledProcessError) as error:
             print(f"STOPPED: {error}\nNo automatic retry, reformat, or reboot. "
                   "Keep the server backup and inspect the failure before proceeding.", file=sys.stderr)
