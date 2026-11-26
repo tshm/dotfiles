@@ -28,7 +28,6 @@
 
   networking = {
     hostName = "spi";
-    hosts."192.168.84.11" = [ "multica-api.hq.empathy.co.jp" ];
     interfaces.eth0.useDHCP = true;
 
     # useNetworkd = false;

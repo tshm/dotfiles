@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - *(vicinae)* Show live Bluetooth reconnect progress and the final result in the command window.
 - *(vicinae)* Try connecting the headset’s stereo service directly before falling back to a full reconnect. Check PipeWire for an active A2DP stereo output after either attempt, even when BlueZ reports a connection error
 - *(vicinae)* Show live Bluetooth reconnect progress and the final result in the command window
+- *(spi)* Keep private host mappings out of the public flake and skip public cache uploads for private NixOS builds.
 ## [1.3.0] - 2026-11-08
 
 ### 🚀 Features

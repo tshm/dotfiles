@@ -12,6 +12,7 @@ CACHIX:=cachix watch-exec tshmcache --
 else
 CACHIX:=
 endif
+NIXOS_CACHIX:=$(if $(PRIVATE_FLAKE),,$(CACHIX))
 
 ifndef NONH
 HAS_NH:=$(shell which nh)
@@ -28,7 +29,7 @@ APPSRC := $(shell find ./homes/apps/ -name '*.nix')
 APPS := $(patsubst ./homes/apps/%.nix, update.%, $(APPSRC))
 
 xx:
-	${CACHIX} nixos-rebuild build --flake ${NIXOS_FLAKE}${TARGET} ${NIXOS_FLAKE_ARGS}
+	${NIXOS_CACHIX} nixos-rebuild build --flake ${NIXOS_FLAKE}${TARGET} ${NIXOS_FLAKE_ARGS}
 
 apphash_update: $(APPS)
 
@@ -129,9 +130,9 @@ sudo:; sudo echo sudo
 
 os: sudo
 ifdef HAS_NH
-	${CACHIX} nh os boot ${NIXOS_FLAKE} ${NIXOS_FLAKE_ARGS}
+	${NIXOS_CACHIX} nh os boot ${NIXOS_FLAKE} ${NIXOS_FLAKE_ARGS}
 else
-	${CACHIX} sudo nixos-rebuild boot --flake ${NIXOS_FLAKE} ${NIXOS_FLAKE_ARGS}
+	${NIXOS_CACHIX} sudo nixos-rebuild boot --flake ${NIXOS_FLAKE} ${NIXOS_FLAKE_ARGS}
 endif
 
 clean:
