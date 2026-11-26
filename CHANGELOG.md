@@ -6,7 +6,10 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - *(x360)* Default niri to the Japanese keyboard layout, retaining US as an alternative without changing other hosts
-- *(vicinae)* Make the reconnected Bluetooth headset the default audio output and move current playback to it.
+- *(vicinae)* Try connecting the headset’s stereo service directly before falling back to a full reconnect. Check PipeWire for an active A2DP stereo output after either attempt, even when BlueZ reports a connection error.
+- *(vicinae)* Show live Bluetooth reconnect progress and the final result in the command window.
+- *(vicinae)* Try connecting the headset’s stereo service directly before falling back to a full reconnect. Check PipeWire for an active A2DP stereo output after either attempt, even when BlueZ reports a connection error
+- *(vicinae)* Show live Bluetooth reconnect progress and the final result in the command window
 ## [1.3.0] - 2026-11-08
 
 ### 🚀 Features
